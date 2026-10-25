@@ -1,0 +1,55 @@
+# MVP plan
+
+Target: usable, paid MVP in ~8 weeks of evenings/weekends (≈10–12 h/week), i.e. late December 2026 — before the January–May exam-prep season. Content authoring runs in parallel every week.
+
+Each milestone has a **definition of done**; a milestone is not finished until it is deployed.
+
+## M1 — Foundation (week 1)
+- Repo skeleton: uv workspace, `content_schema` package, `api` service, Astro `web`, `infra/`.
+- Content schema + `content-build validate|build`; public/private split with a no-leak test.
+- `exam.yaml` with EGE task structure (points marked *to verify* until the approved 2027 spec).
+- Answer checker (pure function) with table-driven tests.
+- Astro: roadmap list + theory pages with build-time KaTeX, mobile-first layout.
+- docker-compose + Caddy; CI (lint, types, tests, content validation, web build).
+- **Done:** 3 theory pages + 30 tasks validate; site deployed over HTTPS on a RU VM.
+
+## M2 — Practice (week 2)
+- Task pages (statement from public build, answer input island).
+- Postgres + Alembic; content loader (`task_private`); `POST /api/tasks/{id}/check`; `attempts`.
+- Anonymous attempts in `localStorage`.
+- **Done:** a student can solve Part 1 tasks on a phone and see verdicts.
+
+## M3 — Accounts and progress (week 3)
+- Email one-time code + Yandex ID; sessions; anonymous → account merge.
+- Attempt history; `topic_mastery` update rule.
+- **Done:** progress persists across devices.
+
+## M4 — Tutor v0 (week 4)
+- Provider adapter(s); context assembly; SSE streaming; chat island with incremental KaTeX.
+- Server-side hint ladder; leak filter; `llm_calls` tracing.
+- **Done:** own students use the tutor on task and theory pages (beta starts).
+
+## M5 — Tutor quality (week 5)
+- Eval harness in CI (leak rate, hint adherence, language; LLM judge calibrated on ~50 labelled cases).
+- Model routing; per-call cost recording; prompt iteration driven by evals.
+- **Done:** leak rate ≈ 0 on eval set; measured ₽ per active student within budget.
+
+## M6 — Roadmap and guidance (week 6)
+- Roadmap graph page (prerequisites, EGE task numbers per topic).
+- "What to practise next" (weakest mastered-enough prerequisites first).
+- Part 2 self-assessment against criteria.
+- **Done:** a student can navigate by roadmap and gets a next-step suggestion.
+
+## M7 — Money and compliance (week 7)
+- Payment provider integration (webhooks, idempotency), entitlements, plans.
+- Daily caps (free), fair-use token budget (paid), "messages left" UI.
+- Legal pages (offer, privacy policy, consent incl. parental), Roskomnadzor notification.
+- **Done:** a real payment unlocks the paid tier; limits enforced.
+
+## M8 — Launch hardening (week 8)
+- Error tracking, uptime, Metabase dashboard; backup + restore drill.
+- Content push: ~150 tasks, ~15 topics.
+- **Done:** paid launch to the beta cohort.
+
+## Post-MVP backlog
+AI feedback on Part 2 (typed first, photos later) · parametric task generators · Telegram login · season analytics · teacher view · AP Physics content.
