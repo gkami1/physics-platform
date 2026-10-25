@@ -103,12 +103,13 @@ hints:
 
 | Table | Key fields |
 |---|---|
-| `users` | id, email, display_name, birth_year, consent flags, created_at |
-| `auth_identities` | user_id, provider (email/yandex/vk/telegram), subject |
-| `sessions` | id (opaque token hash), user_id, expires_at |
+| `users` | id, email (normalised, unique), consented_at, created_at; more consent flags and birth year in M7 |
+| `auth_identities` | user_id, provider (yandex/vk/telegram), subject — *added with the first OAuth provider; email sign-in uses `users.email`* |
+| `sessions` | id (sha256 of the cookie token), user_id, expires_at |
+| `login_codes` | email, code_hash, ip, tries, expires_at, used_at (also the rate-limit ledger) |
 | `tasks` | public metadata mirrored from content on API start; `active=false` when removed |
 | `attempts` | anon_id (M2) / user_id (M3), task_id, outcome (correct/partial/wrong/revealed), raw_answer, points, max_points, content_version, created_at |
-| `topic_mastery` | user_id, topic_id, score, n_evidence, updated_at |
+| `topic_mastery` | *not a table yet:* computed on read from `attempts` (see §7). Materialise if `/api/progress` gets slow |
 | `tutor_threads` | user_id, context_kind (theory/task), context_id, hint_level, created_at |
 | `tutor_messages` | thread_id, role, content, model, tokens_in/out, cost_kop, flags |
 | `plans`, `entitlements` | user_id, plan, valid_until |
@@ -125,7 +126,8 @@ A pure function `check(spec, scoring, raw) -> Verdict(correct, points, max_point
 - Numeric: accepts `,`/`.` decimal separators, spaces, `e`/`·10^n` notation. The student's value must equal the reference value rounded to `precision` (EGE convention), with a float-epsilon guard. No unit parsing — the unit is displayed.
 - Sequence: digits only, whitespace and separators stripped. `ordered` decides positional vs multiset comparison. Two-point tasks give 1 point for exactly one error (per `exam.yaml` rule).
 - Invalid input (unparseable) returns `invalid` and is not stored — a typo never costs points.
-- Solution reveal (`policy.can_reveal_solution`): Part 1 after at least one graded attempt; Part 2 always. A reveal is stored once as an `revealed` attempt so mastery can discount later correct answers.
+- Solution reveal (`policy.can_reveal_solution`): Part 1 after at least one graded attempt; Part 2 always. A reveal is stored once as a `revealed` attempt (analytics).
+- Mastery (`mastery.compute_mastery`, pure): evidence is the **first graded attempt per task** (points / max); retries and reveals are practice, not evidence. Per topic, an EMA with α = max(1/n, 0.3): early results average equally, later ones weigh more so the score follows improvement. Computed on read (`GET /api/progress`) for both anonymous visitors and users.
 - Part 2 (MVP): no auto-grading. Student self-assesses against the reference solution and the FIPI criteria; recorded as an attempt with `verdict=self_assessed`. AI feedback on Part 2 is post-MVP.
 
 ## 8. AI tutor
@@ -159,7 +161,15 @@ SSE from FastAPI. Client renders Markdown + KaTeX incrementally, deferring unclo
 
 ## 9. Auth
 
-Email one-time code + Yandex ID + VK ID (OAuth), optional Telegram Login. Opaque session token in an `HttpOnly; Secure; SameSite=Lax` cookie; only its hash stored. No SMS. Anonymous practice allowed: an opaque random `pp_anon` cookie (HttpOnly, `path=/api`) keys server-side attempts; on sign-up those rows get the user_id. *(Changed in M2 from localStorage: one code path for history, nothing to merge client-side.)* Before auth lands (M3), add an Origin check on state-changing requests (CSRF).
+Email one-time code now (M3); Yandex ID / VK ID (OAuth) and optional Telegram Login later, as `auth_identities`. No SMS, no passwords.
+
+- **Codes:** 6 digits, 10 min, single use, 5 wrong tries per code; at most 1/min and 5/hour per address and 20/hour per IP. The same response for new and existing addresses (no enumeration). Stored as sha256(email:code).
+- **Mail:** plain SMTP via a Russian provider (e.g. Yandex 360). Without `API_SMTP_HOST` the code is written to the API log (local runs).
+- **Sessions:** opaque token in an `HttpOnly; SameSite=Lax` cookie (`Secure` in prod), `path=/api`; only its sha256 stored; 60 days, renewed when used in the second half.
+- **Anonymous practice:** an opaque `pp_anon` cookie (HttpOnly, `path=/api`) keys server-side attempts. On sign-in those rows get the user_id and the cookie is cleared; anonymous queries exclude merged rows, so signing out on a shared device hides the account's history. *(Changed in M2 from localStorage: one code path for history, nothing to merge client-side.)*
+- **Consent:** sign-in requires the personal-data consent checkbox; `users.consented_at` records it. Legal texts and the parental path come in M7.
+- **CSRF:** state-changing requests with an `Origin` that doesn't match `Host` are rejected (on top of SameSite=Lax). Requires the proxy to keep `Host` (Caddy does; the Vite dev proxy is set to).
+- **Abuse:** 30 graded attempts per minute per actor.
 
 ## 10. Payments and metering
 
