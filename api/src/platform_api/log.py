@@ -1,5 +1,6 @@
 """One-line JSON logs on stdout; docker collects them."""
 
+import io
 import json
 import logging
 import sys
@@ -24,6 +25,8 @@ class JsonFormatter(logging.Formatter):
 
 
 def configure(level: str) -> None:
+    if isinstance(sys.stdout, io.TextIOWrapper):
+        sys.stdout.reconfigure(encoding="utf-8")  # Windows consoles default to a code page
     handler = logging.StreamHandler(sys.stdout)
     handler.setFormatter(JsonFormatter())
     root = logging.getLogger()

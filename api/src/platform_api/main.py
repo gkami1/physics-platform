@@ -14,7 +14,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from content_schema.checking import NotAutoCheckableError, Outcome, check, format_answer
 from content_schema.models import AnswerKind
 from platform_api import auth, log
-from platform_api.actor import Actor, CurrentActor, now
+from platform_api.actor import Actor, CurrentActor, as_utc, now
 from platform_api.content import ContentStore, PrivateTask, sync_tasks
 from platform_api.db import Attempt, Task, make_engine, make_sessionmaker
 from platform_api.deps import Db, Store
@@ -192,7 +192,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                     points=a.points,
                     max_points=a.max_points,
                     answer=a.raw_answer,
-                    created_at=a.created_at,
+                    created_at=as_utc(a.created_at),
                 )
                 for a in history
             ],
