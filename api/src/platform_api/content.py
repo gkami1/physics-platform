@@ -1,6 +1,7 @@
-"""Private content store, loaded once from content-build output.
+"""Private content store, loaded once from content-build output baked into the image.
 
-M2 moves this into Postgres (`task_private`); the interface stays the same.
+Answers, solutions and hints are served from memory; the `tasks` table only mirrors
+public metadata so attempts have something to reference.
 """
 
 from __future__ import annotations
@@ -10,8 +11,11 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from pydantic import TypeAdapter
+from sqlalchemy import select, update
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from content_schema.models import AnswerSpec, ExamSpec, TaskNumberSpec
+from platform_api.db import Task
 
 _answer = TypeAdapter[AnswerSpec](AnswerSpec)
 
@@ -20,8 +24,14 @@ _answer = TypeAdapter[AnswerSpec](AnswerSpec)
 class PrivateTask:
     id: str
     exam_id: str
+    ege_task: int
+    topics: tuple[str, ...]
     answer: AnswerSpec
     scoring: TaskNumberSpec
+    solution: str
+    hints: tuple[str, ...]
+    tutor_notes: str | None
+    content_version: str
 
 
 class ContentStore:
@@ -31,6 +41,9 @@ class ContentStore:
 
     def task(self, task_id: str) -> PrivateTask | None:
         return self._tasks.get(task_id)
+
+    def all(self) -> list[PrivateTask]:
+        return list(self._tasks.values())
 
     def __len__(self) -> int:
         return len(self._tasks)
@@ -42,14 +55,40 @@ class ContentStore:
         for f in sorted(private_dir.glob("*.json")):
             data = json.loads(f.read_text("utf-8"))
             exam = ExamSpec.model_validate(data["exam"])
-            versions[exam.id] = data["content_version"]
+            version = data["content_version"]
+            versions[exam.id] = version
             for t in data["tasks"]:
                 if t["id"] in tasks:
                     raise ValueError(f"task id {t['id']} appears in more than one exam")
                 tasks[t["id"]] = PrivateTask(
                     id=t["id"],
                     exam_id=exam.id,
+                    ege_task=t["ege_task"],
+                    topics=tuple(t["topics"]),
                     answer=_answer.validate_python(t["answer"]),
                     scoring=exam.tasks[t["ege_task"]],
+                    solution=t["solution"],
+                    hints=tuple(t["hints"]),
+                    tutor_notes=t["tutor_notes"],
+                    content_version=version,
                 )
         return cls(tasks, versions)
+
+
+async def sync_tasks(session: AsyncSession, store: ContentStore) -> None:
+    """Upsert task metadata; deactivate tasks removed from content (attempts keep their FK)."""
+    existing = {t.id: t for t in (await session.scalars(select(Task))).all()}
+    for p in store.all():
+        row = existing.get(p.id) or Task(id=p.id)
+        row.exam_id = p.exam_id
+        row.ege_task = p.ege_task
+        row.max_points = p.scoring.max_points
+        row.answer_type = p.answer.type
+        row.topics = list(p.topics)
+        row.content_version = p.content_version
+        row.active = True
+        session.add(row)
+    gone = set(existing) - {p.id for p in store.all()}
+    if gone:
+        await session.execute(update(Task).where(Task.id.in_(gone)).values(active=False))
+    await session.commit()
