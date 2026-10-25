@@ -35,7 +35,7 @@ Future exams (AP Physics), languages and subjects must be *additions* (new conte
              │  /api/*    → api (FastAPI, uvicorn)           │
              └───────────────────────────┬──────────────────┘
                                          │
-                         Postgres 16 ◄───┤───► LLM providers (RU)
+                         Postgres 17 ◄───┤───► LLM providers (RU)
                                          │
                                   S3 (RU) backups, images
 ```
