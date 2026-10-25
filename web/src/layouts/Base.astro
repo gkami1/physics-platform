@@ -27,6 +27,10 @@ const { title, description = 'Подготовка к ЕГЭ по физике: 
         <nav class="nav">
           <a href="/">Роадмап</a>
           <a href="/ege-physics/tasks/">Задачи</a>
+          <site-account>
+            <a href="/login/" class="login">Войти</a>
+            <span class="who" hidden><span class="email"></span><button type="button">Выйти</button></span>
+          </site-account>
         </nav>
       </div>
     </header>
@@ -35,6 +39,36 @@ const { title, description = 'Подготовка к ЕГЭ по физике: 
     </main>
   </body>
 </html>
+
+<script>
+  import { api } from '../lib/api';
+
+  // Static pages can't know who is signed in; ask the API once per page load.
+  class SiteAccount extends HTMLElement {
+    connectedCallback() {
+      const login = this.querySelector('.login') as HTMLAnchorElement;
+      if (!location.pathname.startsWith('/login')) {
+        login.href = `/login/?next=${encodeURIComponent(location.pathname)}`;
+      }
+      this.querySelector('button')?.addEventListener('click', () => {
+        void api.logout().finally(() => location.reload());
+      });
+      void api.me().then(
+        ({ user }) => {
+          if (!user) return;
+          const email = this.querySelector('.email') as HTMLElement;
+          email.textContent = user.email;
+          email.title = user.email;
+          login.hidden = true;
+          (this.querySelector('.who') as HTMLElement).hidden = false;
+        },
+        () => {}, // API down: keep the «Войти» link.
+      );
+    }
+  }
+
+  customElements.define('site-account', SiteAccount);
+</script>
 
 <style>
   .site-header {
@@ -59,6 +93,37 @@ const { title, description = 'Подготовка к ЕГЭ по физике: 
   }
   .nav a {
     text-decoration: none;
+  }
+  .nav,
+  site-account,
+  .who {
+    align-items: center;
+  }
+  site-account,
+  .who:not([hidden]) {
+    display: inline-flex;
+    gap: 0.5rem;
+  }
+  .email {
+    max-width: 9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--muted);
+  }
+  /* Phones: brand + three nav items already fill the row. */
+  @media (max-width: 30rem) {
+    .email {
+      display: none;
+    }
+  }
+  .who button {
+    font: inherit;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--accent);
+    cursor: pointer;
   }
   main {
     padding-bottom: 3rem;
