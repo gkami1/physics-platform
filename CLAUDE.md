@@ -46,6 +46,14 @@ Full stack: `docker compose -f infra/compose.yaml up --build`.
 - Keep dependencies few; justify new ones in the commit message.
 - Frontend: static-first. Ship JS only in islands that need interactivity. Mobile-first; math must not overflow narrow screens.
 
+## Gotchas
+
+- **LaTeX in YAML frontmatter must be single-quoted** (`'$\frac{a}{2}$'`). In double quotes `\f`, `\t`, `\n` become control characters silently; the validator rejects them.
+- The Python API package is `platform_api` (not `api`): the repo's `api/` folder would shadow it as a namespace package.
+- Astro 7 defaults to the Sätteri Markdown processor; we set `markdown.processor: unified(...)` for remark-math/rehype-katex. Don't add `markdown.remarkPlugins` at the top level.
+- `katex` is pinned via npm `overrides` so the HTML from rehype-katex and the CSS we import come from one version.
+- With `from __future__ import annotations`, FastAPI dependency aliases (`Annotated[..., Depends(...)]`) must be module-level, or params silently become body/query fields.
+
 ## Workflow
 
 - Commit small and often, Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`, `test:`, `refactor:`). Run lint + tests before committing.
