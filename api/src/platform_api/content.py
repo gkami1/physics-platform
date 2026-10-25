@@ -26,6 +26,7 @@ class PrivateTask:
     exam_id: str
     ege_task: int
     topics: tuple[str, ...]
+    statement: str
     answer: AnswerSpec
     scoring: TaskNumberSpec
     solution: str
@@ -34,13 +35,30 @@ class PrivateTask:
     content_version: str
 
 
+@dataclass(frozen=True)
+class Theory:
+    exam_id: str
+    topic: str
+    title: str
+    body: str
+
+
 class ContentStore:
-    def __init__(self, tasks: dict[str, PrivateTask], versions: dict[str, str]) -> None:
+    def __init__(
+        self,
+        tasks: dict[str, PrivateTask],
+        versions: dict[str, str],
+        theory: dict[str, Theory] | None = None,
+    ) -> None:
         self._tasks = tasks
+        self._theory = theory or {}
         self.versions = versions
 
     def task(self, task_id: str) -> PrivateTask | None:
         return self._tasks.get(task_id)
+
+    def theory(self, topic: str) -> Theory | None:
+        return self._theory.get(topic)
 
     def all(self) -> list[PrivateTask]:
         return list(self._tasks.values())
@@ -51,6 +69,7 @@ class ContentStore:
     @classmethod
     def load(cls, private_dir: Path) -> ContentStore:
         tasks: dict[str, PrivateTask] = {}
+        theory: dict[str, Theory] = {}
         versions: dict[str, str] = {}
         for f in sorted(private_dir.glob("*.json")):
             data = json.loads(f.read_text("utf-8"))
@@ -65,6 +84,7 @@ class ContentStore:
                     exam_id=exam.id,
                     ege_task=t["ege_task"],
                     topics=tuple(t["topics"]),
+                    statement=t["statement"],
                     answer=_answer.validate_python(t["answer"]),
                     scoring=exam.tasks[t["ege_task"]],
                     solution=t["solution"],
@@ -72,7 +92,9 @@ class ContentStore:
                     tutor_notes=t["tutor_notes"],
                     content_version=version,
                 )
-        return cls(tasks, versions)
+            for page in data.get("theory", []):
+                theory[page["topic"]] = Theory(exam.id, page["topic"], page["title"], page["body"])
+        return cls(tasks, versions, theory)
 
 
 async def sync_tasks(session: AsyncSession, store: ContentStore) -> None:

@@ -41,6 +41,7 @@ known-first-party = ["content_schema", "platform_api"]
 
 [tool.ruff.lint.per-file-ignores]
 "**/tests/**" = ["S101"]
+"api/src/platform_api/prompt.py" = ["E501"]  # prompt prose
 
 [tool.mypy]
 strict = true

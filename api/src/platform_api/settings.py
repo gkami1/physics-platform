@@ -21,6 +21,21 @@ class Settings(BaseSettings):
     smtp_password: str = ""
     mail_from: str = ""
 
+    # Tutor models (OpenAI-compatible). Primary: self-hosted vLLM, e.g. http://gpu:8000/v1.
+    # Fallback: DeepSeek, https://api.deepseek.com. Neither set: a scripted model (dev only).
+    llm_base_url: str = ""
+    llm_api_key: str = ""
+    llm_model: str = "Qwen/Qwen3-8B"
+    llm_thinking: bool = False
+    llm_fallback_base_url: str = ""
+    llm_fallback_api_key: str = ""
+    llm_fallback_model: str = "deepseek-chat"
+    # Kopecks per million tokens, for cost tracking.
+    llm_fallback_price_in: int = 0
+    llm_fallback_price_out: int = 0
+    # Messages per signed-in user per 24 h (free tier; plans come in M7).
+    tutor_daily_messages: int = 50
+
     @property
     def secure_cookies(self) -> bool:
         return self.env == "prod"

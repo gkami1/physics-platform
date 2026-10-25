@@ -42,6 +42,7 @@ def private_task(t: Task) -> dict[str, Any]:
         "id": t.meta.id,
         "ege_task": t.meta.ege_task,
         "topics": t.meta.topics,
+        "statement": t.statement,
         "answer": t.meta.answer.model_dump(mode="json"),
         "solution": t.solution,
         "hints": t.meta.hints,
@@ -81,6 +82,8 @@ def build(bundle: ContentBundle, out: Path) -> str:
         "content_version": version,
         "exam": exam_public,
         "tasks": [private_task(t) for t in bundle.tasks],
+        # Tutor context for theory pages (the text itself is public).
+        "theory": [{"topic": p.topic, "title": p.title, "body": p.body} for p in bundle.theory],
     }
 
     public_text = json.dumps(public, ensure_ascii=False, indent=1)

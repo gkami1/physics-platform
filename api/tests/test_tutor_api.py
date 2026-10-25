@@ -1,0 +1,138 @@
+import asyncio
+import json
+
+import pytest
+from fastapi.testclient import TestClient
+from sqlalchemy import select
+
+from platform_api.db import LlmCall, make_engine
+from platform_api.llm import FailingModel, ScriptedModel
+from platform_api.tutor import LEAK_NOTE
+
+
+def events(body: str) -> list[tuple[str, dict[str, object]]]:
+    out = []
+    for block in body.strip().split("\n\n"):
+        lines = dict(line.split(": ", 1) for line in block.splitlines())
+        out.append((lines["event"], json.loads(lines["data"])))
+    return out
+
+
+def ask(
+    client: TestClient, text: str = "С чего начать?", intent: str = "message", **kw: str
+) -> list[tuple[str, dict[str, object]]]:
+    body = {"kind": kw.get("kind", "task"), "id": kw.get("id", "kin-0001"), "text": text}
+    r = client.post("/api/tutor/messages", json={**body, "intent": intent})
+    assert r.status_code == 200, r.text
+    assert r.headers["content-type"].startswith("text/event-stream")
+    return events(r.text)
+
+
+def reply_text(evs: list[tuple[str, dict[str, object]]]) -> str:
+    return "".join(str(d["text"]) for e, d in evs if e == "delta")
+
+
+def use_model(client: TestClient, *models: object) -> None:
+    client.app.state.llm = list(models)  # type: ignore[attr-defined]
+
+
+def llm_calls(db_url: str) -> list[tuple[str, str | None, int | None]]:
+    async def run() -> list[tuple[str, str | None, int | None]]:
+        engine = make_engine(db_url)
+        async with engine.connect() as conn:
+            rows = await conn.execute(
+                select(LlmCall.provider, LlmCall.error, LlmCall.message_id).order_by(LlmCall.id)
+            )
+            result = [(p, e, m) for p, e, m in rows]
+        await engine.dispose()
+        return result
+
+    return asyncio.run(run())
+
+
+def test_tutor_requires_sign_in(client: TestClient) -> None:
+    r = client.post("/api/tutor/messages", json={"kind": "task", "id": "kin-0001", "text": "?"})
+    assert r.status_code == 401
+    assert client.get("/api/tutor/thread?kind=task&id=kin-0001").status_code == 401
+
+
+def test_conversation_is_streamed_and_saved(signed_in: TestClient, migrated_db: str) -> None:
+    use_model(signed_in, ScriptedModel(replies=("Что известно? Что нужно найти?",)))
+    evs = ask(signed_in)
+    assert evs[0] == ("meta", {"hint_level": 0, "messages_left": 49})
+    assert reply_text(evs) == "Что известно? Что нужно найти?"
+    assert evs[-1][0] == "done"
+
+    thread = signed_in.get("/api/tutor/thread?kind=task&id=kin-0001").json()
+    assert [(m["role"], m["content"]) for m in thread["messages"]] == [
+        ("user", "С чего начать?"),
+        ("assistant", "Что известно? Что нужно найти?"),
+    ]
+    assert thread["messages_left"] == 49
+    assert llm_calls(migrated_db) == [("scripted", None, thread["messages"][1]["id"])]
+
+
+def test_answer_leak_is_cut(signed_in: TestClient) -> None:
+    use_model(signed_in, ScriptedModel(replies=("Хорошо. Тогда $v = 12{,}5$ м/с. Понятно?",)))
+    evs = ask(signed_in, "Скажи ответ")
+    text = reply_text(evs)
+    assert "12" not in text
+    assert text == "Хорошо." + LEAK_NOTE
+    assert evs[-1] == ("done", {"message_id": evs[-1][1]["message_id"], "leak": True})
+    saved = signed_in.get("/api/tutor/thread?kind=task&id=kin-0001").json()["messages"][-1]
+    assert saved["leak"] is True
+    assert "12" not in saved["content"]
+
+
+def test_hint_ladder_is_server_side(signed_in: TestClient) -> None:
+    use_model(signed_in, ScriptedModel(replies=("v = 12,5 м/с.",)))
+    levels = [ask(signed_in, intent="hint")[0][1]["hint_level"] for _ in range(3)]
+    assert levels == [1, 2, 2]  # level 3 is closed until the student tries
+    signed_in.post("/api/tasks/kin-0001/attempts", json={"answer": "10"})
+    evs = ask(signed_in, intent="hint")
+    assert evs[0][1]["hint_level"] == 3
+    assert reply_text(evs) == "v = 12,5 м/с."  # full solution allowed now
+
+
+def test_hint_request_needs_no_text(signed_in: TestClient) -> None:
+    use_model(signed_in, ScriptedModel())
+    ask(signed_in, "", intent="hint")
+    r = signed_in.post("/api/tutor/messages", json={"kind": "task", "id": "kin-0001", "text": " "})
+    assert r.status_code == 422
+
+
+def test_theory_thread(signed_in: TestClient) -> None:
+    model = ScriptedModel(replies=("Сила — мера взаимодействия.",))
+    use_model(signed_in, model)
+    evs = ask(signed_in, "Что такое сила?", kind="theory", id="mech.dynamics.newton")
+    assert evs[0][1]["hint_level"] is None
+    assert reply_text(evs) == "Сила — мера взаимодействия."
+    r = signed_in.post("/api/tutor/messages", json={"kind": "theory", "id": "nope", "text": "?"})
+    assert r.status_code == 404
+
+
+def test_fallback_is_traced(signed_in: TestClient, migrated_db: str) -> None:
+    use_model(signed_in, FailingModel(), ScriptedModel(replies=("Подумай.",)))
+    assert reply_text(ask(signed_in)) == "Подумай."
+    calls = llm_calls(migrated_db)
+    assert [(p, e is not None) for p, e, _ in calls] == [("failing", True), ("scripted", False)]
+    assert calls[0][2] == calls[1][2] is not None  # both attempts linked to the message
+
+
+def test_all_models_down(signed_in: TestClient) -> None:
+    use_model(signed_in, FailingModel())
+    evs = ask(signed_in)
+    assert evs[-1] == ("error", {"detail": "tutor_unavailable"})
+    use_model(signed_in)
+    r = signed_in.post("/api/tutor/messages", json={"kind": "task", "id": "kin-0001", "text": "?"})
+    assert r.status_code == 503
+
+
+def test_daily_limit(signed_in: TestClient, monkeypatch: pytest.MonkeyPatch) -> None:
+    use_model(signed_in, ScriptedModel())
+    monkeypatch.setattr(signed_in.app.state.settings, "tutor_daily_messages", 2)  # type: ignore[attr-defined]
+    ask(signed_in)
+    ask(signed_in)
+    r = signed_in.post("/api/tutor/messages", json={"kind": "task", "id": "kin-0001", "text": "?"})
+    assert r.status_code == 429
+    assert r.json()["detail"] == "daily_limit"
