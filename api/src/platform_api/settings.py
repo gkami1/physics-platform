@@ -13,6 +13,14 @@ class Settings(BaseSettings):
     private_content_dir: Path = Path("build/private")
     database_url: str = "postgresql+asyncpg://physics:physics@localhost:5432/physics"
 
+    # Outgoing mail for login codes. Empty host = write emails to the log instead (dev).
+    # Use a Russian provider (152-FZ), e.g. Yandex 360: smtp.yandex.ru, port 465.
+    smtp_host: str = ""
+    smtp_port: int = 465
+    smtp_user: str = ""
+    smtp_password: str = ""
+    mail_from: str = ""
+
     @property
     def secure_cookies(self) -> bool:
         return self.env == "prod"

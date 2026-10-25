@@ -11,7 +11,9 @@ export default defineConfig({
   vite: {
     server: {
       // Dev only: the API runs separately (`uv run uvicorn platform_api.main:app`).
-      proxy: { '/api': 'http://127.0.0.1:8000' },
+      // changeOrigin: false keeps the browser's Host header, which the API's CSRF Origin
+      // check compares against (the string shorthand would rewrite it, like Caddy doesn't).
+      proxy: { '/api': { target: 'http://127.0.0.1:8000', changeOrigin: false } },
     },
   },
 });

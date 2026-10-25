@@ -1,0 +1,228 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Вход — Физика ЕГЭ" description="Вход по коду из письма">
+  <h1>Вход</h1>
+  <p class="muted">
+    Войдите, чтобы прогресс сохранялся и был виден на всех ваших устройствах. Пароль не нужен —
+    пришлём код на почту.
+  </p>
+
+  <login-form>
+    <form class="step email-step" novalidate>
+      <label for="email">Электронная почта</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        inputmode="email"
+        maxlength="254"
+        placeholder="name@example.ru"
+        required
+      />
+      <label class="consent">
+        <input type="checkbox" name="consent" required />
+        <span>Я согласен(а) на обработку моего адреса электронной почты для входа на сайт</span>
+      </label>
+      <button type="submit">Получить код</button>
+    </form>
+
+    <form class="step code-step" novalidate hidden>
+      <p class="sent"></p>
+      <label for="code">Код из письма</label>
+      <input
+        id="code"
+        name="code"
+        autocomplete="one-time-code"
+        inputmode="numeric"
+        pattern="[0-9]*"
+        maxlength="6"
+        placeholder="123456"
+        required
+      />
+      <button type="submit">Войти</button>
+      <button type="button" class="link back">Изменить адрес или отправить код ещё раз</button>
+    </form>
+
+    <p class="message" role="status" aria-live="polite" hidden></p>
+  </login-form>
+</Base>
+
+<script>
+  import { ApiError, api } from '../lib/api';
+
+  const ERRORS: Record<string, string> = {
+    invalid_email: 'Проверьте адрес почты',
+    consent_required: 'Нужно согласие на обработку адреса почты',
+    too_many_codes: 'Код уже отправлен. Подождите минуту и попробуйте снова',
+    mail_failed: 'Не получилось отправить письмо. Попробуйте позже',
+    wrong_code: 'Неверный код',
+    code_expired: 'Код устарел. Запросите новый',
+    too_many_tries: 'Слишком много попыток. Запросите новый код',
+  };
+
+  /** Only same-site paths: never redirect to another origin after sign-in. */
+  function nextUrl(): string {
+    const next = new URLSearchParams(location.search).get('next') ?? '/';
+    return next.startsWith('/') && !next.startsWith('//') ? next : '/';
+  }
+
+  class LoginForm extends HTMLElement {
+    private email = '';
+
+    connectedCallback() {
+      this.form('.email-step').addEventListener('submit', (e) => {
+        e.preventDefault();
+        void this.requestCode();
+      });
+      this.form('.code-step').addEventListener('submit', (e) => {
+        e.preventDefault();
+        void this.verify();
+      });
+      this.querySelector('.back')?.addEventListener('click', () => this.showStep('email'));
+      void api.me().then(
+        (m) => m.user && location.replace(nextUrl()),
+        () => {},
+      );
+    }
+
+    private form(sel: string): HTMLFormElement {
+      return this.querySelector(sel) as HTMLFormElement;
+    }
+
+    private showStep(step: 'email' | 'code') {
+      this.form('.email-step').hidden = step !== 'email';
+      this.form('.code-step').hidden = step !== 'code';
+      this.message('');
+      (this.querySelector(step === 'email' ? '#email' : '#code') as HTMLInputElement).focus();
+    }
+
+    private async requestCode() {
+      const f = this.form('.email-step');
+      const email = (f.elements.namedItem('email') as HTMLInputElement).value.trim();
+      const consent = (f.elements.namedItem('consent') as HTMLInputElement).checked;
+      if (!email.includes('@')) return this.message(ERRORS.invalid_email, true);
+      if (!consent) return this.message(ERRORS.consent_required, true);
+      await this.busy(f, async () => {
+        await api.requestCode(email, consent);
+        this.email = email;
+        (this.querySelector('.sent') as HTMLElement).textContent =
+          `Отправили код на ${email}. Если письма нет, проверьте «Спам».`;
+        (this.querySelector('#code') as HTMLInputElement).value = '';
+        this.showStep('code');
+      });
+    }
+
+    private async verify() {
+      const f = this.form('.code-step');
+      const code = (f.elements.namedItem('code') as HTMLInputElement).value.replace(/\D/g, '');
+      if (code.length !== 6) return this.message('Код — 6 цифр', true);
+      await this.busy(f, async () => {
+        await api.verifyCode(this.email, code);
+        location.replace(nextUrl());
+      });
+    }
+
+    private async busy(f: HTMLFormElement, fn: () => Promise<void>) {
+      const button = f.querySelector('button[type=submit]') as HTMLButtonElement;
+      button.disabled = true;
+      try {
+        await fn();
+      } catch (e) {
+        const text = e instanceof ApiError ? ERRORS[e.detail] : undefined;
+        this.message(text ?? 'Нет связи с сервером. Попробуйте ещё раз', true);
+      } finally {
+        button.disabled = false;
+      }
+    }
+
+    private message(text: string, error = false) {
+      const m = this.querySelector('.message') as HTMLElement;
+      m.textContent = text;
+      m.dataset.kind = error ? 'error' : '';
+      m.hidden = !text;
+    }
+  }
+
+  customElements.define('login-form', LoginForm);
+</script>
+
+<style>
+  login-form {
+    display: block;
+    max-width: 26rem;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .step {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  label {
+    font-weight: 600;
+  }
+  input:not([type='checkbox']) {
+    font: inherit;
+    font-size: 1.1rem; /* ≥16px stops iOS zooming on focus */
+    padding: 0.55rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+  }
+  #code {
+    letter-spacing: 0.3em;
+    font-variant-numeric: tabular-nums;
+  }
+  .consent {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    font-weight: 400;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+  .consent input {
+    margin-top: 0.2rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    flex: none;
+  }
+  button {
+    font: inherit;
+    font-weight: 600;
+    padding: 0.6rem 1rem;
+    border: 0;
+    border-radius: 8px;
+    background: var(--accent);
+    color: var(--surface);
+    cursor: pointer;
+  }
+  button:disabled {
+    opacity: 0.6;
+  }
+  button.link {
+    background: none;
+    color: var(--accent);
+    font-weight: 400;
+    font-size: 0.875rem;
+    padding: 0.25rem 0;
+    text-align: left;
+  }
+  .sent {
+    margin: 0;
+    font-size: 0.925rem;
+  }
+  .message {
+    margin: 0.75rem 0 0;
+    font-weight: 600;
+  }
+  .message[data-kind='error'] {
+    color: var(--bad);
+  }
+</style>

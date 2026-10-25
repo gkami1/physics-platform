@@ -27,12 +27,21 @@ export interface Solution {
   solution: string;
 }
 
+export interface Me {
+  user: { email: string } | null;
+}
+
+export interface Progress {
+  topics: { exam_id: string; topic_id: string; score: number; n: number }[];
+}
+
 export class ApiError extends Error {
   constructor(
     readonly status: number,
-    message: string,
+    /** Machine-readable reason from the API, e.g. "wrong_code". */
+    readonly detail: string,
   ) {
-    super(message);
+    super(`${status} ${detail}`);
   }
 }
 
@@ -42,18 +51,29 @@ async function call<T>(path: string, init?: RequestInit): Promise<T> {
     headers: { 'Content-Type': 'application/json' },
     ...init,
   });
-  if (!r.ok) throw new ApiError(r.status, await r.text());
-  return (await r.json()) as T;
+  if (!r.ok) {
+    const body = (await r.json().catch(() => ({}))) as { detail?: unknown };
+    throw new ApiError(r.status, typeof body.detail === 'string' ? body.detail : '');
+  }
+  return (r.status === 204 ? undefined : await r.json()) as T;
 }
+
+const post = (body?: unknown): RequestInit => ({
+  method: 'POST',
+  body: body === undefined ? undefined : JSON.stringify(body),
+});
 
 const task = (id: string) => `/tasks/${encodeURIComponent(id)}`;
 
 export const api = {
   submit: (id: string, answer: string) =>
-    call<AttemptResponse>(`${task(id)}/attempts`, {
-      method: 'POST',
-      body: JSON.stringify({ answer }),
-    }),
+    call<AttemptResponse>(`${task(id)}/attempts`, post({ answer })),
   state: (id: string) => call<TaskState>(`${task(id)}/state`),
-  reveal: (id: string) => call<Solution>(`${task(id)}/reveal`, { method: 'POST' }),
+  reveal: (id: string) => call<Solution>(`${task(id)}/reveal`, post()),
+  progress: () => call<Progress>('/progress'),
+  me: () => call<Me>('/me'),
+  requestCode: (email: string, consent: boolean) =>
+    call<{ expires_in: number }>('/auth/code', post({ email, consent })),
+  verifyCode: (email: string, code: string) => call<Me>('/auth/verify', post({ email, code })),
+  logout: () => call<void>('/auth/logout', post()),
 };

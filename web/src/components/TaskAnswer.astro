@@ -148,6 +148,7 @@ const inputMode = kind === 'sequence' ? 'numeric' : kind === 'numeric' ? 'decima
 
     private errorText(e: unknown): string {
       if (e instanceof ApiError && e.status === 403) return 'Сначала попробуйте решить задачу';
+      if (e instanceof ApiError && e.status === 429) return 'Слишком много попыток. Подождите минуту';
       return 'Нет связи с сервером. Попробуйте ещё раз';
     }
   }

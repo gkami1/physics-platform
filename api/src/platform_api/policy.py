@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Sequence
+from urllib.parse import urlsplit
 
 from content_schema.models import AnswerKind
 
@@ -15,3 +16,14 @@ def can_reveal_solution(answer_kind: AnswerKind, outcomes: Sequence[str]) -> boo
     if answer_kind is AnswerKind.EXTENDED:
         return True
     return any(o in GRADED or o == "revealed" for o in outcomes)
+
+
+def same_origin(origin: str | None, host: str | None) -> bool:
+    """CSRF check for state-changing requests. Browsers always send Origin on cross-origin
+    POSTs, so a missing header means a non-browser client (curl, tests), which is allowed.
+    Caddy and the Vite dev proxy both pass the browser's Host through unchanged."""
+    if origin is None:
+        return True
+    if origin == "null" or not host:
+        return False
+    return urlsplit(origin).netloc.lower() == host.lower()

@@ -28,6 +28,12 @@ services:
       API_ENV: ${API_ENV:-prod}
       API_LOG_LEVEL: ${API_LOG_LEVEL:-INFO}
       API_DATABASE_URL: postgresql+asyncpg://physics:${POSTGRES_PASSWORD:-physics}@db:5432/physics
+      # Login-code email. Unset host: codes are printed in `docker compose logs api`.
+      API_SMTP_HOST: ${SMTP_HOST:-}
+      API_SMTP_PORT: ${SMTP_PORT:-465}
+      API_SMTP_USER: ${SMTP_USER:-}
+      API_SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      API_MAIL_FROM: ${MAIL_FROM:-}
     depends_on:
       db:
         condition: service_healthy

@@ -23,13 +23,14 @@ const exams = bundles();
                 {s.topics.map((t) => {
                   const has = theory.has(`${b.exam.id}/${t.id}`);
                   return (
-                    <li>
+                    <li data-topic={`${b.exam.id}/${t.id}`}>
                       {has ? <a href={theoryUrl(b.exam.id, t.id)}>{t.title}</a> : <span>{t.title}</span>}
                       <span class="meta">
                         {t.ege_tasks.length > 0 && (
                           <span class="badge">№ {t.ege_tasks.join(', ')}</span>
                         )}
                         <span class="muted">задач: {tasksByTopic.get(t.id) ?? 0}</span>
+                        <span class="badge mastery" hidden />
                       </span>
                     </li>
                   );
@@ -42,6 +43,28 @@ const exams = bundles();
     })
   }
 </Base>
+
+<script>
+  import { api } from '../lib/api';
+
+  // Mastery is per visitor, so it is filled in on the client.
+  void api.progress().then(
+    ({ topics }) => {
+      for (const t of topics) {
+        const badge = document.querySelector<HTMLElement>(
+          `[data-topic="${CSS.escape(`${t.exam_id}/${t.topic_id}`)}"] .mastery`,
+        );
+        if (!badge) continue;
+        const pct = Math.round(t.score * 100);
+        badge.textContent = `освоено ${pct}%`;
+        badge.title = `По первым попыткам в ${t.n} задачах`;
+        badge.dataset.level = pct >= 80 ? 'high' : pct >= 50 ? 'mid' : 'low';
+        badge.hidden = false;
+      }
+    },
+    () => {},
+  );
+</script>
 
 <style>
   .topics {
@@ -61,6 +84,18 @@ const exams = bundles();
   }
   .topics li + li {
     border-top: 1px solid var(--border);
+  }
+  .mastery[data-level='high'] {
+    background: color-mix(in srgb, var(--ok) 15%, transparent);
+    color: var(--ok);
+  }
+  .mastery[data-level='mid'] {
+    background: var(--warn-soft);
+    color: var(--warn-text);
+  }
+  .mastery[data-level='low'] {
+    background: color-mix(in srgb, var(--bad) 12%, transparent);
+    color: var(--bad);
   }
   .meta {
     display: flex;

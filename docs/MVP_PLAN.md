@@ -19,9 +19,10 @@ Each milestone has a **definition of done**; a milestone is not finished until i
 - Anonymous attempts in `localStorage`.
 - **Done:** a student can solve Part 1 tasks on a phone and see verdicts.
 
-## M3 — Accounts and progress (week 3)
-- Email one-time code + Yandex ID; sessions; anonymous → account merge.
-- Attempt history; `topic_mastery` update rule.
+## M3 — Accounts and progress (week 3) — code done 2026-10-25; pending: SMTP mailbox, deploy
+- Email one-time code; sessions; anonymous → account merge. *Yandex ID deferred until an OAuth client is registered.*
+- Attempt history; mastery rule (computed on read, no `topic_mastery` table yet); mastery badges on the roadmap.
+- CSRF Origin check; rate limits on codes and attempts.
 - **Done:** progress persists across devices.
 
 ## M4 — Tutor v0 (week 4)
