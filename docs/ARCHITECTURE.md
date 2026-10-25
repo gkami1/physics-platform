@@ -67,7 +67,7 @@ Python is a **uv workspace** (root `pyproject.toml`; members `packages/content_s
 2. `content-build validate` (CI and pre-commit): schema validation, referential integrity (topic ids, prerequisites form a DAG, task topics exist, task numbers exist in `exam.yaml`), answer spec consistent with the task number's answer kind, referenced assets exist.
 3. `content-build build` emits:
    - `build/public/` — topics, roadmap, task statements and metadata. Consumed by Astro. **Contains no answers, solutions or hints.**
-   - `build/private/` — answers, solutions, hint ladders, tutor notes. Loaded into Postgres by the API on deploy (keyed by `content_version` = git SHA of `content/`).
+   - `build/private/` — answers, solutions, hint ladders, tutor notes. Baked into the API image and served from memory (`ContentStore`); on start the API mirrors public task metadata into the `tasks` table so attempts have a foreign key. `content_version` is a SHA-256 of the `content/` tree. *(Changed in M2: no `task_private` table — the content is immutable per deploy, so a DB copy only adds sync work.)*
 4. Astro reads theory Markdown directly (no secrets there) and tasks only from `build/public/`.
 
 **Invariant: answers never reach the browser before the server decides to reveal them.** A test asserts that no private field appears in `build/public/` or in the built site.
@@ -106,8 +106,8 @@ hints:
 | `users` | id, email, display_name, birth_year, consent flags, created_at |
 | `auth_identities` | user_id, provider (email/yandex/vk/telegram), subject |
 | `sessions` | id (opaque token hash), user_id, expires_at |
-| `topics`, `tasks`, `task_private` | loaded from content; `content_version` |
-| `attempts` | user_id, task_id, raw_answer, verdict, points, hints_used, duration_ms, created_at |
+| `tasks` | public metadata mirrored from content on API start; `active=false` when removed |
+| `attempts` | anon_id (M2) / user_id (M3), task_id, outcome (correct/partial/wrong/revealed), raw_answer, points, max_points, content_version, created_at |
 | `topic_mastery` | user_id, topic_id, score, n_evidence, updated_at |
 | `tutor_threads` | user_id, context_kind (theory/task), context_id, hint_level, created_at |
 | `tutor_messages` | thread_id, role, content, model, tokens_in/out, cost_kop, flags |
@@ -124,6 +124,8 @@ A pure function `check(spec, scoring, raw) -> Verdict(correct, points, max_point
 
 - Numeric: accepts `,`/`.` decimal separators, spaces, `e`/`·10^n` notation. The student's value must equal the reference value rounded to `precision` (EGE convention), with a float-epsilon guard. No unit parsing — the unit is displayed.
 - Sequence: digits only, whitespace and separators stripped. `ordered` decides positional vs multiset comparison. Two-point tasks give 1 point for exactly one error (per `exam.yaml` rule).
+- Invalid input (unparseable) returns `invalid` and is not stored — a typo never costs points.
+- Solution reveal (`policy.can_reveal_solution`): Part 1 after at least one graded attempt; Part 2 always. A reveal is stored once as an `revealed` attempt so mastery can discount later correct answers.
 - Part 2 (MVP): no auto-grading. Student self-assesses against the reference solution and the FIPI criteria; recorded as an attempt with `verdict=self_assessed`. AI feedback on Part 2 is post-MVP.
 
 ## 8. AI tutor
@@ -157,7 +159,7 @@ SSE from FastAPI. Client renders Markdown + KaTeX incrementally, deferring unclo
 
 ## 9. Auth
 
-Email one-time code + Yandex ID + VK ID (OAuth), optional Telegram Login. Opaque session token in an `HttpOnly; Secure; SameSite=Lax` cookie; only its hash stored. No SMS. Anonymous practice allowed (attempts in `localStorage`, merged on sign-up).
+Email one-time code + Yandex ID + VK ID (OAuth), optional Telegram Login. Opaque session token in an `HttpOnly; Secure; SameSite=Lax` cookie; only its hash stored. No SMS. Anonymous practice allowed: an opaque random `pp_anon` cookie (HttpOnly, `path=/api`) keys server-side attempts; on sign-up those rows get the user_id. *(Changed in M2 from localStorage: one code path for history, nothing to merge client-side.)* Before auth lands (M3), add an Origin check on state-changing requests (CSRF).
 
 ## 10. Payments and metering
 
