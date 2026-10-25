@@ -1,0 +1,64 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.7"
+          enable-cache: true
+      - run: uv sync --frozen
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run mypy
+      - run: uv run content-build validate
+      - run: uv run pytest
+
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.7"
+          enable-cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: uv sync --frozen
+      - run: npm ci
+        working-directory: web
+      - run: npm run check
+        working-directory: web
+      - run: npm run build
+        working-directory: web
+      - name: No private content in the built site
+        run: |
+          uv run python - <<'EOF'
+          import json, pathlib, sys
+          priv = json.loads(pathlib.Path("build/private/ege-physics.json").read_text("utf-8"))
+          site = "".join(p.read_text("utf-8", errors="ignore") for p in pathlib.Path("web/dist").rglob("*") if p.is_file())
+          leaks = [t["id"] for t in priv["tasks"] if t["solution"].strip() and t["solution"].strip() in site]
+          if leaks:
+              sys.exit(f"solutions leaked into web/dist: {leaks}")
+          EOF
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: [python, web]
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -f infra/compose.yaml build
