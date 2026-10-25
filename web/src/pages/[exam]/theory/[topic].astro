@@ -2,7 +2,7 @@
 import type { GetStaticPaths } from 'astro';
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
-import { bundle, theoryUrl, topicsById } from '../../../lib/content';
+import { bundle, taskUrl, theoryUrl, topicsById } from '../../../lib/content';
 
 export const getStaticPaths = (async () => {
   const pages = await getCollection('theory');
@@ -25,7 +25,9 @@ if (!topic) throw new Error(`Theory page ${entry.id} references unknown topic`);
 
 const { Content } = await render(entry);
 const prereqs = topic.prereqs.map((id) => topics.get(id)).filter((t) => t !== undefined);
-const taskCount = b.tasks.filter((t) => t.topics.includes(topic.id)).length;
+const tasks = b.tasks
+  .filter((t) => t.topics.includes(topic.id))
+  .sort((x, y) => x.ege_task - y.ege_task || x.difficulty - y.difficulty);
 ---
 
 <Base title={`${entry.data.title} — ${b.exam.title}`}>
@@ -56,12 +58,28 @@ const taskCount = b.tasks.filter((t) => t.topics.includes(topic.id)).length;
         </p>
       )
     }
-    <p class="muted">Задач по теме: {taskCount}</p>
   </aside>
 
   <article class="prose">
     <Content />
   </article>
+
+  {
+    tasks.length > 0 && (
+      <section class="practice">
+        <h2>Практика</h2>
+        <ol>
+          {tasks.map((t, i) => (
+            <li>
+              <a href={taskUrl(exam, t.id)}>
+                Задача {i + 1} · задание № {t.ege_task}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )
+  }
 </Base>
 
 <style>

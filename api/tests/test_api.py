@@ -1,26 +1,14 @@
-from collections.abc import Iterator
-from pathlib import Path
-
 import pytest
 from fastapi.testclient import TestClient
 
-from content_schema.build import build
-from content_schema.loader import load_exam_dir
-from platform_api.main import create_app
-from platform_api.settings import Settings
-
-REPO = Path(__file__).resolve().parents[2]
+from platform_api.actor import ANON_COOKIE
 
 
-@pytest.fixture(scope="module")
-def client(tmp_path_factory: pytest.TempPathFactory) -> Iterator[TestClient]:
-    out = tmp_path_factory.mktemp("build")
-    res = load_exam_dir(REPO / "content" / "ege-physics")
-    assert res.bundle is not None
-    build(res.bundle, out)
-    app = create_app(Settings(env="test", private_content_dir=out / "private"))
-    with TestClient(app) as c:
-        yield c
+def attempt(client: TestClient, task_id: str, answer: str) -> dict[str, object]:
+    r = client.post(f"/api/tasks/{task_id}/attempts", json={"answer": answer})
+    assert r.status_code == 200, r.text
+    body: dict[str, object] = r.json()
+    return body
 
 
 def test_health(client: TestClient) -> None:
@@ -40,21 +28,89 @@ def test_health(client: TestClient) -> None:
         ("kin-0001", "двенадцать", "invalid", 0),
     ],
 )
-def test_check(client: TestClient, task_id: str, answer: str, outcome: str, points: int) -> None:
-    r = client.post(f"/api/tasks/{task_id}/check", json={"answer": answer})
-    assert r.status_code == 200
-    body = r.json()
+def test_attempt_verdicts(
+    client: TestClient, task_id: str, answer: str, outcome: str, points: int
+) -> None:
+    body = attempt(client, task_id, answer)
     assert (body["outcome"], body["points"]) == (outcome, points)
-    assert "value" not in body  # never echo the reference answer
 
 
-def test_check_unknown_task(client: TestClient) -> None:
-    assert client.post("/api/tasks/nope/check", json={"answer": "1"}).status_code == 404
+def test_wrong_attempt_does_not_leak_answer(client: TestClient) -> None:
+    body = attempt(client, "kin-0001", "12")
+    assert "12,5" not in str(body)
+    assert "12.5" not in str(body)
 
 
-def test_check_extended_task(client: TestClient) -> None:
-    assert client.post("/api/tasks/dyn-0002/check", json={"answer": "4,1"}).status_code == 422
+def test_anon_cookie_is_set_once(client: TestClient) -> None:
+    r = client.post("/api/tasks/kin-0001/attempts", json={"answer": "1"})
+    cookie = r.cookies.get(ANON_COOKIE)
+    assert cookie
+    assert len(cookie) == 32
+    assert "httponly" in r.headers["set-cookie"].lower()
+    r2 = client.post("/api/tasks/kin-0001/attempts", json={"answer": "2"})
+    assert ANON_COOKIE not in r2.cookies  # reused, not reissued
 
 
-def test_check_rejects_long_input(client: TestClient) -> None:
-    assert client.post("/api/tasks/kin-0001/check", json={"answer": "1" * 65}).status_code == 422
+def test_forged_cookie_is_replaced(client: TestClient) -> None:
+    client.cookies.set(ANON_COOKIE, "../../etc/passwd")
+    r = client.post("/api/tasks/kin-0001/attempts", json={"answer": "1"})
+    assert len(r.cookies.get(ANON_COOKIE) or "") == 32
+
+
+def test_state_tracks_history_per_actor(client: TestClient) -> None:
+    attempt(client, "kin-0002", "45")
+    attempt(client, "kin-0002", "не число")  # invalid input is not stored
+    attempt(client, "kin-0002", "14")
+    s = client.get("/api/tasks/kin-0002/state").json()
+    assert [a["outcome"] for a in s["attempts"]] == ["partial", "wrong"]
+    assert (s["best_points"], s["max_points"]) == (1, 2)
+    assert s["solution_available"] is True
+
+    client.cookies.clear()  # a different anonymous visitor sees nothing
+    s2 = client.get("/api/tasks/kin-0002/state").json()
+    assert s2["attempts"] == []
+    assert s2["solution_available"] is False
+
+
+def test_solution_requires_an_attempt(client: TestClient) -> None:
+    assert client.post("/api/tasks/kin-0001/reveal").status_code == 403
+    invalid = attempt(client, "kin-0001", "abc")
+    assert invalid["solution_available"] is False
+    assert client.post("/api/tasks/kin-0001/reveal").status_code == 403
+
+    wrong = attempt(client, "kin-0001", "10")
+    assert wrong["solution_available"] is True
+    r = client.post("/api/tasks/kin-0001/reveal")
+    assert r.status_code == 200
+    assert r.json()["answer"] == "12,5 м/с"
+    assert "v_0 + at" in r.json()["solution"]
+
+    client.post("/api/tasks/kin-0001/reveal")  # revealing twice is recorded once
+    state = client.get("/api/tasks/kin-0001/state").json()
+    assert [a["outcome"] for a in state["attempts"]] == ["revealed", "wrong"]
+
+
+def test_extended_task(client: TestClient) -> None:
+    r = client.post("/api/tasks/dyn-0002/attempts", json={"answer": "4,1"})
+    assert r.status_code == 422
+    r = client.post("/api/tasks/dyn-0002/reveal")
+    assert r.status_code == 200
+    assert r.json()["answer"] == "≈ 4,1 м/с"
+
+
+@pytest.mark.parametrize(
+    ("method", "path", "body"),
+    [
+        ("POST", "/api/tasks/nope/attempts", {"answer": "1"}),
+        ("GET", "/api/tasks/nope/state", None),
+        ("POST", "/api/tasks/nope/reveal", None),
+    ],
+)
+def test_unknown_task(client: TestClient, method: str, path: str, body: object) -> None:
+    assert client.request(method, path, json=body).status_code == 404
+
+
+@pytest.mark.parametrize("answer", ["", "1" * 65])
+def test_answer_length_limits(client: TestClient, answer: str) -> None:
+    r = client.post("/api/tasks/kin-0001/attempts", json={"answer": answer})
+    assert r.status_code == 422

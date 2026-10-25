@@ -41,6 +41,7 @@ def private_task(t: Task) -> dict[str, Any]:
     return {
         "id": t.meta.id,
         "ege_task": t.meta.ege_task,
+        "topics": t.meta.topics,
         "answer": t.meta.answer.model_dump(mode="json"),
         "solution": t.solution,
         "hints": t.meta.hints,

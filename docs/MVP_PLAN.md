@@ -13,7 +13,7 @@ Each milestone has a **definition of done**; a milestone is not finished until i
 - docker-compose + Caddy; CI (lint, types, tests, content validation, web build).
 - **Done:** 3 theory pages + 30 tasks validate; site deployed over HTTPS on a RU VM.
 
-## M2 — Practice (week 2)
+## M2 — Practice (week 2) — code done 2026-10-25; pending: deploy
 - Task pages (statement from public build, answer input island).
 - Postgres + Alembic; content loader (`task_private`); `POST /api/tasks/{id}/check`; `attempts`.
 - Anonymous attempts in `localStorage`.

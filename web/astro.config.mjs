@@ -1,21 +1,13 @@
 // @ts-check
-import { unified } from '@astrojs/markdown-remark';
 import { defineConfig } from 'astro/config';
-import rehypeKatex from 'rehype-katex';
-import remarkMath from 'remark-math';
+import { markdownProcessor } from './markdown.config.mjs';
 
 export default defineConfig({
   site: process.env.SITE_URL ?? 'http://localhost:4321',
-  trailingSlash: 'always',
-  markdown: {
-    // unified rather than Astro 7's default Sätteri: remark-math + rehype-katex is the proven
-    // path for LaTeX. Math is rendered to HTML at build time, so pages ship no math JavaScript.
-    processor: unified({
-      remarkPlugins: [remarkMath],
-      rehypePlugins: [rehypeKatex],
-      smartypants: false, // English curly quotes are wrong for Russian text
-    }),
-  },
+  // 'always' would make `astro dev` 404 /api/* before the proxy sees it. Generated links
+  // all end in "/" anyway, and Caddy serves both forms in production.
+  trailingSlash: 'ignore',
+  markdown: { processor: markdownProcessor },
   vite: {
     server: {
       // Dev only: the API runs separately (`uv run uvicorn platform_api.main:app`).

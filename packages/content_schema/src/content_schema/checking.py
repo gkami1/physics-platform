@@ -65,10 +65,33 @@ def _plain(d: Decimal) -> str:
     return format(d.normalize(), "f")
 
 
+def _rounded(reference: Decimal, precision: Decimal | None) -> Decimal:
+    if precision is None:
+        return reference
+    return reference.quantize(precision.normalize(), rounding=ROUND_HALF_UP)
+
+
 def _num_equal(student: Decimal, reference: Decimal, precision: Decimal | None) -> bool:
-    if precision is not None:
-        reference = reference.quantize(precision.normalize(), rounding=ROUND_HALF_UP)
-    return student == reference
+    return student == _rounded(reference, precision)
+
+
+def _ru(d: Decimal) -> str:
+    return _plain(d).replace(".", ",")
+
+
+def format_answer(spec: AnswerSpec) -> str | None:
+    """The reference answer as a student would write it (Russian decimal comma)."""
+    match spec:
+        case NumericAnswer():
+            s = _ru(_rounded(spec.value, spec.precision))
+            return f"{s} {spec.unit}" if spec.unit else s
+        case SequenceAnswer():
+            return spec.value
+        case MeasurementAnswer():
+            s = f"({_ru(spec.value)} ± {_ru(spec.error)})"
+            return f"{s} {spec.unit}" if spec.unit else s
+        case ExtendedAnswer():
+            return spec.final
 
 
 def sequence_errors(student: str, reference: str, *, ordered: bool) -> int:

@@ -139,3 +139,24 @@ def test_measurement(raw: str, outcome: Outcome) -> None:
 def test_extended_is_not_auto_checkable() -> None:
     with pytest.raises(NotAutoCheckableError):
         check(ExtendedAnswer(type="extended"), EXACT, "anything")
+
+
+@pytest.mark.parametrize(
+    ("spec", "expected"),
+    [
+        ({"type": "numeric", "value": 12.5, "unit": "м/с"}, "12,5 м/с"),
+        ({"type": "numeric", "value": 4.134, "precision": 0.1}, "4,1"),
+        ({"type": "numeric", "value": 1234, "precision": 10}, "1230"),
+        ({"type": "sequence", "value": "13", "ordered": False}, "13"),
+        ({"type": "measurement", "value": 2.4, "error": 0.2, "unit": "Н"}, "(2,4 ± 0,2) Н"),
+        ({"type": "extended", "final": "≈ 4,1 м/с"}, "≈ 4,1 м/с"),
+        ({"type": "extended"}, None),
+    ],
+)
+def test_format_answer(spec: dict[str, object], expected: str | None) -> None:
+    from pydantic import TypeAdapter
+
+    from content_schema.checking import format_answer
+    from content_schema.models import AnswerSpec
+
+    assert format_answer(TypeAdapter(AnswerSpec).validate_python(spec)) == expected
