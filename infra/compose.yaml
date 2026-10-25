@@ -9,7 +9,6 @@ services:
       dockerfile: web/Dockerfile
     environment:
       SITE_ADDRESS: ${SITE_ADDRESS:-:80}
-      ACME_EMAIL: ${ACME_EMAIL:-}
     ports:
       - "${HTTP_PORT:-8080}:80"
       - "${HTTPS_PORT:-8443}:443"
