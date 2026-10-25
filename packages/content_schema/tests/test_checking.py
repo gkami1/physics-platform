@@ -1,6 +1,7 @@
 from decimal import Decimal
 
 import pytest
+
 from content_schema.checking import (
     NotAutoCheckableError,
     Outcome,

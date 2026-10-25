@@ -35,6 +35,9 @@ target-version = "py313"
 select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF", "N", "S", "PT"]
 ignore = ["RUF001", "RUF002", "RUF003"]  # Cyrillic text is intentional
 
+[tool.ruff.lint.isort]
+known-first-party = ["content_schema", "platform_api"]
+
 [tool.ruff.lint.per-file-ignores]
 "**/tests/**" = ["S101"]
 

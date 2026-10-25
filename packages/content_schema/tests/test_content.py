@@ -5,6 +5,7 @@ import shutil
 from pathlib import Path
 
 import pytest
+
 from content_schema.build import build, leak_needles
 from content_schema.cli import main
 from content_schema.loader import load_exam_dir, split_frontmatter

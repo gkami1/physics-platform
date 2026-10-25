@@ -78,7 +78,7 @@ def build(bundle: ContentBundle, out: Path) -> str:
     }
     private = {
         "content_version": version,
-        "exam_id": bundle.exam.id,
+        "exam": exam_public,
         "tasks": [private_task(t) for t in bundle.tasks],
     }
 

@@ -22,7 +22,7 @@ Python (uv workspace, run from repo root):
 - `uv run mypy` — type-check
 - `uv run content-build validate` — validate `content/`
 - `uv run content-build build` — emit `build/public` and `build/private`
-- `uv run uvicorn api.main:app --reload` — run API locally
+- `uv run uvicorn platform_api.main:app --reload` — run API locally
 
 Web (`cd web`):
 - `npm ci`, `npm run dev`, `npm run build` (runs `content-build build` first), `npm run check`
