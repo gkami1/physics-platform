@@ -1,0 +1,37 @@
+# EGE physics task structure. Single source of truth for per-task answer kinds and scoring.
+# verified: set to true only after checking every line against the APPROVED FIPI specification
+# for the season (ФИ-11 ЕГЭ <year> СПЕЦ, fipi.ru). Totals below: Part 1 = 28, Part 2 = 17, sum 45.
+id: ege-physics
+title: ЕГЭ по физике
+locale: ru
+season: 2027
+verified: false
+source: "Reconstructed from 2025–2026 structure; 2027 draft reports thematic changes to 21 and 23 only"
+
+tasks:
+  1:  {part: 1, answer_kind: numeric,     max_points: 1, scoring: exact,             title: "Механика: расчёт"}
+  2:  {part: 1, answer_kind: numeric,     max_points: 1, scoring: exact,             title: "Механика: расчёт"}
+  3:  {part: 1, answer_kind: numeric,     max_points: 1, scoring: exact,             title: "Механика: расчёт"}
+  4:  {part: 1, answer_kind: numeric,     max_points: 1, scoring: exact,             title: "Механика: расчёт"}
+  5:  {part: 1, answer_kind: sequence,    max_points: 2, scoring: one_error_partial, title: "Механика: выбор верных утверждений"}
+  6:  {part: 1, answer_kind: sequence,    max_points: 2, scoring: one_error_partial, title: "Механика: изменение величин / соответствие"}
+  7:  {part: 1, answer_kind: numeric,     max_points: 1, scoring: exact,             title: "МКТ и термодинамика: расчёт"}
+  8:  {part: 1, answer_kind: numeric,     max_points: 1, scoring: exact,             title: "МКТ и термодинамика: расчёт"}
+  9:  {part: 1, answer_kind: sequence,    max_points: 2, scoring: one_error_partial, title: "МКТ и термодинамика: выбор верных утверждений"}
+  10: {part: 1, answer_kind: sequence,    max_points: 2, scoring: one_error_partial, title: "МКТ и термодинамика: изменение величин / соответствие"}
+  11: {part: 1, answer_kind: numeric,     max_points: 1, scoring: exact,             title: "Электродинамика: расчёт"}
+  12: {part: 1, answer_kind: numeric,     max_points: 1, scoring: exact,             title: "Электродинамика: расчёт"}
+  13: {part: 1, answer_kind: numeric,     max_points: 1, scoring: exact,             title: "Электродинамика: расчёт"}
+  14: {part: 1, answer_kind: sequence,    max_points: 2, scoring: one_error_partial, title: "Электродинамика: выбор верных утверждений"}
+  15: {part: 1, answer_kind: sequence,    max_points: 2, scoring: one_error_partial, title: "Электродинамика: изменение величин / соответствие"}
+  16: {part: 1, answer_kind: numeric,     max_points: 1, scoring: exact,             title: "Квантовая физика: расчёт"}
+  17: {part: 1, answer_kind: sequence,    max_points: 2, scoring: one_error_partial, title: "Квантовая физика: изменение величин / соответствие"}
+  18: {part: 1, answer_kind: sequence,    max_points: 2, scoring: one_error_partial, title: "Выбор верных утверждений (весь курс)"}
+  19: {part: 1, answer_kind: measurement, max_points: 1, scoring: exact,             title: "Показания прибора с учётом погрешности"}
+  20: {part: 1, answer_kind: sequence,    max_points: 1, scoring: exact,             title: "Планирование опыта"}
+  21: {part: 2, answer_kind: extended,    max_points: 3, scoring: manual,            title: "Качественная задача"}
+  22: {part: 2, answer_kind: extended,    max_points: 2, scoring: manual,            title: "Расчётная задача"}
+  23: {part: 2, answer_kind: extended,    max_points: 2, scoring: manual,            title: "Расчётная задача"}
+  24: {part: 2, answer_kind: extended,    max_points: 3, scoring: manual,            title: "Расчётная задача"}
+  25: {part: 2, answer_kind: extended,    max_points: 3, scoring: manual,            title: "Расчётная задача"}
+  26: {part: 2, answer_kind: extended,    max_points: 4, scoring: manual,            title: "Расчётная задача с обоснованием"}

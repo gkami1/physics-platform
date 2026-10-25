@@ -22,7 +22,7 @@ Python (uv workspace, run from repo root):
 - `uv run mypy` — type-check
 - `uv run content-build validate` — validate `content/`
 - `uv run content-build build` — emit `build/public` and `build/private`
-- `uv run uvicorn api.main:app --reload` — run API locally
+- `uv run uvicorn platform_api.main:app --reload` — run API locally
 
 Web (`cd web`):
 - `npm ci`, `npm run dev`, `npm run build` (runs `content-build build` first), `npm run check`
@@ -45,6 +45,14 @@ Full stack: `docker compose -f infra/compose.yaml up --build`.
 - UI text is Russian; code, comments, commits and docs are English.
 - Keep dependencies few; justify new ones in the commit message.
 - Frontend: static-first. Ship JS only in islands that need interactivity. Mobile-first; math must not overflow narrow screens.
+
+## Gotchas
+
+- **LaTeX in YAML frontmatter must be single-quoted** (`'$\frac{a}{2}$'`). In double quotes `\f`, `\t`, `\n` become control characters silently; the validator rejects them.
+- The Python API package is `platform_api` (not `api`): the repo's `api/` folder would shadow it as a namespace package.
+- Astro 7 defaults to the Sätteri Markdown processor; we set `markdown.processor: unified(...)` for remark-math/rehype-katex. Don't add `markdown.remarkPlugins` at the top level.
+- `katex` is pinned via npm `overrides` so the HTML from rehype-katex and the CSS we import come from one version.
+- With `from __future__ import annotations`, FastAPI dependency aliases (`Annotated[..., Depends(...)]`) must be module-level, or params silently become body/query fields.
 
 ## Workflow
 

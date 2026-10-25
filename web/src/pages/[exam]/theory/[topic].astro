@@ -1,0 +1,89 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import { bundle, theoryUrl, topicsById } from '../../../lib/content';
+
+export const getStaticPaths = (async () => {
+  const pages = await getCollection('theory');
+  return pages.map((entry) => {
+    const [exam, topic] = entry.id.split('/');
+    return { params: { exam, topic }, props: { entry } };
+  });
+}) satisfies GetStaticPaths;
+
+interface Props {
+  entry: CollectionEntry<'theory'>;
+}
+
+const { entry } = Astro.props;
+const { exam } = Astro.params;
+const b = bundle(exam);
+const topics = topicsById(b);
+const topic = topics.get(entry.data.topic);
+if (!topic) throw new Error(`Theory page ${entry.id} references unknown topic`);
+
+const { Content } = await render(entry);
+const prereqs = topic.prereqs.map((id) => topics.get(id)).filter((t) => t !== undefined);
+const taskCount = b.tasks.filter((t) => t.topics.includes(topic.id)).length;
+---
+
+<Base title={`${entry.data.title} — ${b.exam.title}`}>
+  <nav class="crumbs"><a href="/">Роадмап</a></nav>
+  <h1>
+    {entry.data.title}
+    {entry.data.status === 'draft' && <span class="badge draft">черновик</span>}
+  </h1>
+
+  <aside class="facts">
+    {
+      topic.ege_tasks.length > 0 && (
+        <p>
+          Задания ЕГЭ: <span class="badge">№ {topic.ege_tasks.join(', ')}</span>
+        </p>
+      )
+    }
+    {
+      prereqs.length > 0 && (
+        <p>
+          Сначала изучите:{' '}
+          {prereqs.map((p, i) => (
+            <>
+              {i > 0 && ', '}
+              <a href={theoryUrl(exam, p.id)}>{p.title}</a>
+            </>
+          ))}
+        </p>
+      )
+    }
+    <p class="muted">Задач по теме: {taskCount}</p>
+  </aside>
+
+  <article class="prose">
+    <Content />
+  </article>
+</Base>
+
+<style>
+  .crumbs {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+  }
+  h1 .badge {
+    vertical-align: middle;
+    margin-left: 0.5rem;
+  }
+  .facts {
+    font-size: 0.925rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .facts p {
+    margin: 0.4rem 0;
+  }
+  .prose :global(h2) {
+    margin-top: 2rem;
+  }
+</style>

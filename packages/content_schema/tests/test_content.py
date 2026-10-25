@@ -1,0 +1,141 @@
+"""Loader validation, the real content tree, and the no-leak invariant."""
+
+import json
+import shutil
+from pathlib import Path
+
+import pytest
+
+from content_schema.build import build, leak_needles
+from content_schema.cli import main
+from content_schema.loader import load_exam_dir, split_frontmatter
+
+REPO = Path(__file__).resolve().parents[3]
+CONTENT = REPO / "content"
+
+
+def exam_dirs() -> list[Path]:
+    return sorted(p.parent for p in CONTENT.glob("*/exam.yaml"))
+
+
+@pytest.mark.parametrize("exam_dir", exam_dirs(), ids=lambda p: p.name)
+def test_repo_content_is_valid(exam_dir: Path) -> None:
+    res = load_exam_dir(exam_dir)
+    assert res.errors == []
+
+
+@pytest.mark.parametrize("exam_dir", exam_dirs(), ids=lambda p: p.name)
+def test_exam_max_score(exam_dir: Path) -> None:
+    res = load_exam_dir(exam_dir)
+    assert res.bundle is not None
+    if res.bundle.exam.id == "ege-physics":
+        assert res.bundle.exam.max_score == 45
+
+
+@pytest.mark.parametrize("exam_dir", exam_dirs(), ids=lambda p: p.name)
+def test_public_build_has_no_private_fields(exam_dir: Path, tmp_path: Path) -> None:
+    res = load_exam_dir(exam_dir)
+    assert res.bundle is not None
+    build(res.bundle, tmp_path)
+    public = json.loads((tmp_path / "public" / f"{res.bundle.exam.id}.json").read_text("utf-8"))
+    text = json.dumps(public, ensure_ascii=False)
+
+    for task in public["tasks"]:
+        assert set(task) == {
+            "id",
+            "ege_task",
+            "topics",
+            "difficulty",
+            "status",
+            "statement",
+            "answer_input",
+            "hint_count",
+        }
+        assert set(task["answer_input"]) == {"type", "unit"}
+    for t in res.bundle.tasks:
+        for needle in leak_needles(t):
+            assert needle not in text
+
+
+# --- validation errors on a scratch copy -------------------------------------------------
+
+
+@pytest.fixture
+def scratch(tmp_path: Path) -> Path:
+    src = CONTENT / "ege-physics"
+    dst = tmp_path / "ege-physics"
+    shutil.copytree(src, dst)
+    return dst
+
+
+def _errors(root: Path) -> str:
+    return "\n".join(load_exam_dir(root).errors)
+
+
+def _edit(path: Path, old: str, new: str) -> None:
+    text = path.read_text("utf-8")
+    assert old in text
+    path.write_text(text.replace(old, new, 1), "utf-8")
+
+
+def test_wrong_answer_type_for_task_number(scratch: Path) -> None:
+    _edit(scratch / "tasks/1/kin-0001.md", "ege_task: 1", "ege_task: 5")
+    (scratch / "tasks/1/kin-0001.md").rename(scratch / "tasks/5/kin-0001.md")
+    assert "expects answer type 'sequence'" in _errors(scratch)
+
+
+def test_task_in_wrong_folder(scratch: Path) -> None:
+    (scratch / "tasks/1/kin-0001.md").rename(scratch / "tasks/2/kin-0001.md")
+    assert "must live in tasks/1/" in _errors(scratch)
+
+
+def test_unknown_topic(scratch: Path) -> None:
+    _edit(scratch / "tasks/1/kin-0001.md", "mech.kinematics.uniform-accel", "mech.nope")
+    assert "unknown topic 'mech.nope'" in _errors(scratch)
+
+
+def test_prereq_cycle(scratch: Path) -> None:
+    _edit(
+        scratch / "roadmap.yaml",
+        "prereqs: []\n        ege_tasks: [1]\n",
+        "prereqs: [mech.dynamics.newton]\n        ege_tasks: [1]\n",
+    )
+    assert "prerequisite cycle" in _errors(scratch)
+
+
+def test_missing_solution_heading(scratch: Path) -> None:
+    _edit(scratch / "tasks/1/kin-0001.md", "## Решение", "## Ответ")
+    assert "exactly one '## Решение'" in _errors(scratch)
+
+
+def test_latex_eaten_by_double_quotes(scratch: Path) -> None:
+    _edit(
+        scratch / "tasks/5/kin-0002.md",
+        "  - 'Сравните закон движения с общей формулой $x = x_0 + v_0 t + \\frac{a t^2}{2}$.'",
+        '  - "Сравните $\\frac{a}{2}$"',
+    )
+    assert "LaTeX backslash" in _errors(scratch)
+
+
+def test_missing_image(scratch: Path) -> None:
+    _edit(
+        scratch / "theory/mech.dynamics.newton.md", "## Второй", "![](../assets/x.png)\n\n## Второй"
+    )
+    assert "missing image" in _errors(scratch)
+
+
+def test_source_ref_required(scratch: Path) -> None:
+    _edit(scratch / "tasks/1/kin-0001.md", "source: {kind: original}", "source: {kind: book}")
+    assert "source.ref is required" in _errors(scratch)
+
+
+def test_split_frontmatter_requires_block() -> None:
+    with pytest.raises(ValueError, match="frontmatter"):
+        split_frontmatter("no frontmatter")
+
+
+def test_cli_validate_exit_codes(scratch: Path, tmp_path: Path) -> None:
+    assert main(["validate", "--content", str(scratch.parent)]) == 0
+    (scratch / "tasks/1/kin-0001.md").write_text("broken", "utf-8")
+    assert main(["validate", "--content", str(scratch.parent)]) == 1
+    assert main(["validate", "--content", str(tmp_path / "empty")]) == 2

@@ -1,0 +1,53 @@
+---
+import 'katex/dist/katex.min.css';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Подготовка к ЕГЭ по физике: теория, задачи и ИИ-репетитор' } =
+  Astro.props;
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a href="/" class="brand">Физика ЕГЭ</a>
+      </div>
+    </header>
+    <main class="wrap">
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .site-header .wrap {
+    display: flex;
+    align-items: center;
+    min-height: 3.25rem;
+  }
+  .brand {
+    font-weight: 650;
+    text-decoration: none;
+    color: var(--text);
+  }
+  main {
+    padding-bottom: 3rem;
+  }
+</style>
