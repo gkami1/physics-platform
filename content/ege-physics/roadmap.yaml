@@ -1,0 +1,28 @@
+# Topic graph. `codifier` holds FIPI codifier element codes — fill from the approved 2027 codifier.
+sections:
+  - id: mech
+    title: Механика
+    topics:
+      - id: mech.kinematics.basics
+        title: Основы кинематики
+        codifier: []
+        prereqs: []
+        ege_tasks: [1]
+      - id: mech.kinematics.uniform-accel
+        title: Равноускоренное движение
+        codifier: []
+        prereqs: [mech.kinematics.basics]
+        ege_tasks: [1, 5, 6]
+      - id: mech.dynamics.newton
+        title: Законы Ньютона
+        codifier: []
+        prereqs: [mech.kinematics.uniform-accel]
+        ege_tasks: [2, 5, 6, 24]
+  - id: method
+    title: Методология
+    topics:
+      - id: method.measurement-error
+        title: Измерения и погрешности
+        codifier: []
+        prereqs: []
+        ege_tasks: [19, 20]
