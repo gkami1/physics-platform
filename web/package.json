@@ -1,0 +1,28 @@
+{
+  "name": "physics-platform-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "content": "uv run --project .. content-build build --content ../content --out ../build",
+    "dev": "npm run content && astro dev",
+    "build": "npm run content && astro build",
+    "build:site": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "7.3.4",
+    "astro": "7.4.2",
+    "katex": "0.19.1",
+    "rehype-katex": "7.0.1",
+    "remark-math": "6.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@types/node": "24.19.2",
+    "typescript": "6.0.3"
+  },
+  "overrides": {
+    "katex": "$katex"
+  }
+}

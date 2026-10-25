@@ -1,0 +1,71 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { bundles, theoryUrl } from '../lib/content';
+
+const theory = new Set((await getCollection('theory')).map((e) => e.id));
+const exams = bundles();
+---
+
+<Base title="Физика ЕГЭ — роадмап">
+  {
+    exams.map((b) => {
+      const tasksByTopic = new Map<string, number>();
+      for (const t of b.tasks)
+        for (const tp of t.topics) tasksByTopic.set(tp, (tasksByTopic.get(tp) ?? 0) + 1);
+      return (
+        <section>
+          <h1>{b.exam.title}</h1>
+          {b.roadmap.sections.map((s) => (
+            <section class="section">
+              <h2>{s.title}</h2>
+              <ol class="topics">
+                {s.topics.map((t) => {
+                  const has = theory.has(`${b.exam.id}/${t.id}`);
+                  return (
+                    <li>
+                      {has ? <a href={theoryUrl(b.exam.id, t.id)}>{t.title}</a> : <span>{t.title}</span>}
+                      <span class="meta">
+                        {t.ege_tasks.length > 0 && (
+                          <span class="badge">№ {t.ege_tasks.join(', ')}</span>
+                        )}
+                        <span class="muted">задач: {tasksByTopic.get(t.id) ?? 0}</span>
+                      </span>
+                    </li>
+                  );
+                })}
+              </ol>
+            </section>
+          ))}
+        </section>
+      );
+    })
+  }
+</Base>
+
+<style>
+  .topics {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .topics li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.25rem 0.75rem;
+    padding: 0.75rem 1rem;
+  }
+  .topics li + li {
+    border-top: 1px solid var(--border);
+  }
+  .meta {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.875rem;
+  }
+</style>
