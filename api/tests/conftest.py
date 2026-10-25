@@ -9,6 +9,7 @@ from fastapi.testclient import TestClient
 
 from content_schema.build import build
 from content_schema.loader import load_exam_dir
+from platform_api.mail import MemoryMailer
 from platform_api.main import create_app
 from platform_api.settings import Settings
 
@@ -55,3 +56,10 @@ def client(private_dir: Path, migrated_db: str) -> Iterator[TestClient]:
     )
     with TestClient(app) as c:
         yield c
+
+
+@pytest.fixture
+def outbox(client: TestClient) -> MemoryMailer:
+    box = MemoryMailer()
+    client.app.state.mailer = box  # type: ignore[attr-defined]
+    return box

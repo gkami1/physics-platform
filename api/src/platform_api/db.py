@@ -71,13 +71,55 @@ class Task(Base):
     updated_at: Mapped[datetime] = mapped_column(server_default=func.now(), onupdate=func.now())
 
 
-class Attempt(Base):
-    __tablename__ = "attempts"
-    __table_args__ = (Index("ix_attempts_actor_task", "anon_id", "task_id", "created_at"),)
+class User(Base):
+    __tablename__ = "users"
 
     id: Mapped[int] = mapped_column(BigId, primary_key=True, autoincrement=True)
-    # Anonymous actor id from the pp_anon cookie. M3 adds user_id and merges on sign-up.
+    # Normalised (lower-cased) address; the only sign-in method until OAuth providers land.
+    email: Mapped[str] = mapped_column(String(254), unique=True)
+    # 152-FZ: when the user ticked the personal-data consent box.
+    consented_at: Mapped[datetime]
+    created_at: Mapped[datetime] = mapped_column(server_default=func.now())
+
+
+class AuthSession(Base):
+    __tablename__ = "sessions"
+
+    # sha256 of the cookie token; the token itself is never stored.
+    id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    expires_at: Mapped[datetime]
+    created_at: Mapped[datetime] = mapped_column(server_default=func.now())
+
+
+class LoginCode(Base):
+    __tablename__ = "login_codes"
+    __table_args__ = (
+        Index("ix_login_codes_email_created", "email", "created_at"),
+        Index("ix_login_codes_ip_created", "ip", "created_at"),
+    )
+
+    id: Mapped[int] = mapped_column(BigId, primary_key=True, autoincrement=True)
+    email: Mapped[str] = mapped_column(String(254))
+    code_hash: Mapped[str] = mapped_column(String(64))
+    ip: Mapped[str | None] = mapped_column(String(45))
+    tries: Mapped[int] = mapped_column(SmallInteger, default=0)
+    expires_at: Mapped[datetime]
+    used_at: Mapped[datetime | None]
+    created_at: Mapped[datetime] = mapped_column(server_default=func.now())
+
+
+class Attempt(Base):
+    __tablename__ = "attempts"
+    __table_args__ = (
+        Index("ix_attempts_actor_task", "anon_id", "task_id", "created_at"),
+        Index("ix_attempts_user_task", "user_id", "task_id", "created_at"),
+    )
+
+    id: Mapped[int] = mapped_column(BigId, primary_key=True, autoincrement=True)
+    # Anonymous actor id from the pp_anon cookie. Rows get user_id on sign-in.
     anon_id: Mapped[str | None] = mapped_column(String(32))
+    user_id: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
     task_id: Mapped[str] = mapped_column(ForeignKey("tasks.id"))
     # correct | partial | wrong | revealed  (invalid input is never stored)
     outcome: Mapped[str] = mapped_column(String(16))
