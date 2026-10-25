@@ -82,3 +82,20 @@ export function topicsById(b: PublicBundle): Map<string, Topic> {
 export function theoryUrl(examId: string, topicId: string): string {
   return `/${examId}/theory/${topicId}/`;
 }
+
+export function taskUrl(examId: string, taskId: string): string {
+  return `/${examId}/tasks/${taskId}/`;
+}
+
+export function tasksUrl(examId: string): string {
+  return `/${examId}/tasks/`;
+}
+
+/** First paragraph of a statement, used as a list preview. */
+export function firstParagraph(statement: string): string {
+  return statement.trim().split(/\n\s*\n/)[0] ?? '';
+}
+
+export function difficultyLabel(d: number): string {
+  return ['', 'очень лёгкая', 'лёгкая', 'средняя', 'сложная', 'олимпиадная'][d] ?? '';
+}

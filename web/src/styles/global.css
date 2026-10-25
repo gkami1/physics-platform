@@ -8,6 +8,8 @@
   --accent-soft: #e8eefb;
   --warn-soft: #fdf3dc;
   --warn-text: #7a5300;
+  --ok: #1d7a3e;
+  --bad: #b3261e;
   --radius: 10px;
   --gutter: 16px;
   --measure: 42rem;
@@ -25,6 +27,8 @@
     --accent-soft: #232b40;
     --warn-soft: #3a2f14;
     --warn-text: #f0cf7a;
+    --ok: #6fd18f;
+    --bad: #ff8a80;
     color-scheme: dark;
   }
 }

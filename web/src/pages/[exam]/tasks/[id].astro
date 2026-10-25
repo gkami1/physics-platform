@@ -1,0 +1,84 @@
+---
+import type { GetStaticPaths } from 'astro';
+import TaskAnswer from '../../../components/TaskAnswer.astro';
+import Base from '../../../layouts/Base.astro';
+import {
+  bundles,
+  difficultyLabel,
+  type PublicBundle,
+  type PublicTask,
+  tasksUrl,
+  theoryUrl,
+  topicsById,
+} from '../../../lib/content';
+import { renderMarkdown } from '../../../lib/markdown';
+
+export const getStaticPaths = (() =>
+  bundles().flatMap((b) =>
+    b.tasks.map((task) => ({ params: { exam: b.exam.id, id: task.id }, props: { b, task } })),
+  )) satisfies GetStaticPaths;
+
+interface Props {
+  b: PublicBundle;
+  task: PublicTask;
+}
+
+const { b, task } = Astro.props;
+const spec = b.exam.tasks[String(task.ege_task)];
+if (!spec) throw new Error(`Task ${task.id}: EGE task ${task.ege_task} missing from exam spec`);
+const topics = topicsById(b);
+const theoryTopics = new Set(b.theory.map((t) => t.topic));
+const statementHtml = await renderMarkdown(task.statement);
+---
+
+<Base title={`Задание ${task.ege_task} · ${task.id} — ${b.exam.title}`}>
+  <nav class="crumbs"><a href={tasksUrl(b.exam.id)}>Все задачи</a></nav>
+  <h1>Задание № {task.ege_task}</h1>
+  <p class="meta">
+    <span class="badge">{spec.title}</span>
+    <span class="muted"
+      >макс. {spec.max_points} балл{spec.max_points === 1 ? '' : 'а'} · {difficultyLabel(task.difficulty)}</span
+    >
+  </p>
+
+  <article class="statement" set:html={statementHtml} />
+
+  <TaskAnswer taskId={task.id} kind={task.answer_input.type} unit={task.answer_input.unit} />
+
+  <aside class="topics muted">
+    Темы:{' '}
+    {
+      task.topics.map((id, i) => {
+        const t = topics.get(id);
+        const title = t?.title ?? id;
+        return (
+          <>
+            {i > 0 && ', '}
+            {theoryTopics.has(id) ? <a href={theoryUrl(b.exam.id, id)}>{title}</a> : title}
+          </>
+        );
+      })
+    }
+  </aside>
+</Base>
+
+<style>
+  .crumbs {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+  }
+  h1 {
+    margin-bottom: 0.25rem;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.875rem;
+    margin-top: 0;
+  }
+  .topics {
+    font-size: 0.875rem;
+  }
+</style>

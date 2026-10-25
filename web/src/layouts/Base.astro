@@ -24,6 +24,10 @@ const { title, description = 'Подготовка к ЕГЭ по физике: 
     <header class="site-header">
       <div class="wrap">
         <a href="/" class="brand">Физика ЕГЭ</a>
+        <nav class="nav">
+          <a href="/">Роадмап</a>
+          <a href="/ege-physics/tasks/">Задачи</a>
+        </nav>
       </div>
     </header>
     <main class="wrap">
@@ -46,6 +50,15 @@ const { title, description = 'Подготовка к ЕГЭ по физике: 
     font-weight: 650;
     text-decoration: none;
     color: var(--text);
+  }
+  .nav {
+    margin-left: auto;
+    display: flex;
+    gap: 1rem;
+    font-size: 0.925rem;
+  }
+  .nav a {
+    text-decoration: none;
   }
   main {
     padding-bottom: 3rem;
