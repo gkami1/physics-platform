@@ -30,7 +30,7 @@ Each milestone has a **definition of done**; a milestone is not finished until i
 - Server-side hint ladder; leak filter; `llm_calls` tracing.
 - **Done:** own students use the tutor on task and theory pages (beta starts).
 
-## M5 — Tutor quality (week 5)
+## M5 — Tutor quality (week 5) — started 2026-10-28: deterministic evals + CI workflow; pending: model secrets, LLM judge, routing
 - Eval harness in CI (leak rate, hint adherence, language; LLM judge calibrated on ~50 labelled cases).
 - Model routing; per-call cost recording; prompt iteration driven by evals.
 - **Done:** leak rate ≈ 0 on eval set; measured ₽ per active student within budget.

@@ -164,6 +164,8 @@ SSE from FastAPI. Client renders Markdown + KaTeX incrementally, deferring unclo
 ### Evals (from day one)
 `evals/`: YAML cases (persona × task × scripted turns). Deterministic metrics: answer-leak rate, hint-level adherence, language, length. LLM-judge metrics: hint quality, physics correctness vs reference solution — judge calibrated on ~50 author-labelled cases. Runs in CI on prompt/model changes; weekly sample of anonymised real threads. Results stored per commit for comparison.
 
+*(M5 v0, `evals/`, `tutor-eval run`.)* Runs in-process through the same ladder/context/prompt/guard code as the API (`turn.py`), without HTTP or DB. `suite.yaml` holds personas (honest, impatient, injection, correct guess, wrong attempt → full solution, theory on-topic/off-topic/injection) played against every task and theory page. Leak rate is measured on the **raw** model output, before the guard: the guard keeps students safe either way, but each stop is a broken reply. Other deterministic checks: Russian share outside formulas, CJK characters, stray think tags, empty, length per page kind. Thresholds in `suite.yaml` gate the run. CI: `.github/workflows/evals.yml` on PRs touching tutor code or `evals/`, or by hand; needs `EVAL_LLM_*` secrets, otherwise skips; the JSON report is a 90-day artifact. LLM judge (hint quality, physics correctness, rule adherence) comes after ~50 author-labelled cases.
+
 ## 9. Auth
 
 Email one-time code now (M3); Yandex ID / VK ID (OAuth) and optional Telegram Login later, as `auth_identities`. No SMS, no passwords.

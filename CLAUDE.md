@@ -25,6 +25,7 @@ Python (uv workspace, run from repo root):
 - `uv run alembic -c api/alembic.ini upgrade head` — migrate (URL from `API_DATABASE_URL`)
 - `uv run alembic -c api/alembic.ini revision --autogenerate -m "..."` — new migration; review it and keep it dialect-neutral (`sa.func.now()`, not SQLite/PG literals)
 - `uv run uvicorn platform_api.main:app --reload` — run API locally
+- `uv run tutor-eval run` — tutor evals against the models in `API_LLM_*` (scripted dev model if none; `--provider`, `--persona`, `--repeats`, `--compare old.json`). Suite: `evals/suite.yaml`; reports in `evals/results/` (gitignored)
 
 Local dev without Docker: `export API_DATABASE_URL=sqlite+aiosqlite:///dev.db`, migrate, run the API, then `cd web && npm run dev -- --host 127.0.0.1` (the dev server proxies `/api` to :8000). Tests use SQLite unless `API_TEST_DATABASE_URL` points at Postgres (CI does). To sign in locally, request a code and read it from the API log (no SMTP configured → `email not sent` log line; in Docker: `docker compose -f infra/compose.yaml logs api`).
 
