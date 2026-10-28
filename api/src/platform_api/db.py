@@ -193,3 +193,31 @@ def make_engine(url: str) -> AsyncEngine:
 
 def make_sessionmaker(engine: AsyncEngine) -> async_sessionmaker[AsyncSession]:
     return async_sessionmaker(engine, expire_on_commit=False)
+
+
+class VariantRun(Base):
+    """One timed exam variant. Part 1 is checked on submit (each answer is also an attempt);
+    Part 2 is self-assessed afterwards against the reference solution."""
+
+    __tablename__ = "variant_runs"
+    __table_args__ = (
+        Index("ix_variant_runs_user", "user_id", "id"),
+        Index("ix_variant_runs_anon", "anon_id", "id"),
+    )
+
+    id: Mapped[int] = mapped_column(BigId, primary_key=True, autoincrement=True)
+    # Same ownership as attempts: anonymous rows get user_id on sign-in.
+    anon_id: Mapped[str | None] = mapped_column(String(32))
+    user_id: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    exam_id: Mapped[str] = mapped_column(String(40))
+    variant: Mapped[int] = mapped_column(SmallInteger)
+    content_version: Mapped[str] = mapped_column(String(32))
+    # Per task, in variant order: task_id, ege_task, outcome, points, max_points, answer.
+    results: Mapped[list[dict[str, Any]]] = mapped_column(JSON)
+    auto_points: Mapped[int] = mapped_column(SmallInteger)
+    # Part 2 self-assessment: task_id -> points.
+    self_points: Mapped[dict[str, Any]] = mapped_column(default=dict)
+    max_points: Mapped[int] = mapped_column(SmallInteger)
+    # Reported by the client (the timer runs there); informational only.
+    duration_s: Mapped[int | None] = mapped_column(Integer)
+    created_at: Mapped[datetime] = mapped_column(server_default=func.now())

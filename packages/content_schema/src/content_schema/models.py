@@ -73,6 +73,8 @@ class ExamSpec(Strict):
     season: int
     verified: bool  # True once points were checked against the approved FIPI specification
     source: str
+    # Exam length, for timed variants (to verify with `verified`).
+    duration_minutes: int = Field(gt=0)
     tasks: dict[int, TaskNumberSpec]
 
     @property

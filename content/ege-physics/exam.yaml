@@ -6,6 +6,7 @@ title: ЕГЭ по физике
 locale: ru
 season: 2027
 verified: false
+duration_minutes: 235  # 3 h 55 min in 2025–2026
 source: "Reconstructed from 2025–2026 structure; 2027 draft reports thematic changes to 21 and 23 only"
 
 tasks:
