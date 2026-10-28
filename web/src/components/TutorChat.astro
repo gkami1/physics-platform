@@ -1,0 +1,307 @@
+---
+import type { TutorKind } from '../lib/api';
+
+interface Props {
+  kind: TutorKind;
+  contextId: string;
+}
+
+const { kind, contextId } = Astro.props;
+---
+
+<tutor-chat data-kind={kind} data-id={contextId}>
+  <button type="button" class="open">
+    {kind === 'task' ? 'Спросить репетитора о задаче' : 'Задать вопрос по теме'}
+  </button>
+  <section class="panel" hidden aria-label="ИИ-репетитор">
+    <header>
+      <h2>Репетитор</h2>
+      <span class="level muted" hidden></span>
+    </header>
+    <p class="intro muted">
+      {
+        kind === 'task'
+          ? 'Репетитор не скажет ответ сразу — он поможет дойти до него самому.'
+          : 'Спросите, что непонятно на этой странице.'
+      }
+    </p>
+    <ol class="log" aria-live="polite"></ol>
+    <p class="notice" hidden></p>
+    <form class="compose" novalidate>
+      <textarea
+        name="text"
+        rows="2"
+        maxlength="2000"
+        placeholder="Ваш вопрос"
+        aria-label="Ваш вопрос"></textarea>
+      <div class="actions">
+        {kind === 'task' && <button type="button" class="hint secondary">Подсказка</button>}
+        <span class="left muted"></span>
+        <button type="submit">Отправить</button>
+      </div>
+    </form>
+  </section>
+</tutor-chat>
+
+<script>
+  import { ApiError, tutor, type TutorKind } from '../lib/api';
+
+  type Render = typeof import('../lib/client-markdown');
+
+  const ERRORS: Record<string, string> = {
+    daily_limit: 'На сегодня сообщения закончились. Возвращайтесь завтра.',
+    tutor_unavailable: 'Репетитор сейчас недоступен. Попробуйте чуть позже.',
+  };
+
+  class TutorChat extends HTMLElement {
+    private kind: TutorKind = 'task';
+    private contextId = '';
+    private md?: Render;
+    private busy = false;
+    private maxLevel = 3;
+
+    connectedCallback() {
+      this.kind = (this.dataset.kind as TutorKind) ?? 'task';
+      this.contextId = this.dataset.id ?? '';
+      this.q('.open').addEventListener('click', () => void this.open());
+      this.q<HTMLFormElement>('.compose').addEventListener('submit', (e) => {
+        e.preventDefault();
+        void this.send('message');
+      });
+      this.querySelector('.hint')?.addEventListener('click', () => void this.send('hint'));
+      this.q<HTMLTextAreaElement>('textarea').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+          e.preventDefault();
+          void this.send('message');
+        }
+      });
+    }
+
+    private q<T extends HTMLElement = HTMLElement>(sel: string): T {
+      return this.querySelector(sel) as T;
+    }
+
+    private async open() {
+      this.q('.open').hidden = true;
+      this.q('.panel').hidden = false;
+      try {
+        const [thread, md] = await Promise.all([
+          tutor.thread(this.kind, this.contextId),
+          import('../lib/client-markdown'),
+        ]);
+        this.md = md;
+        for (const m of thread.messages) this.addMessage(m.role, m.content);
+        this.maxLevel = thread.max_hint_level;
+        this.showLevel(thread.hint_level);
+        this.showLeft(thread.messages_left);
+        this.q<HTMLTextAreaElement>('textarea').focus();
+      } catch (e) {
+        if (e instanceof ApiError && e.status === 401) {
+          const next = encodeURIComponent(location.pathname);
+          this.q('.compose').hidden = true;
+          this.notice(`<a href="/login/?next=${next}">Войдите</a>, чтобы задать вопрос репетитору.`);
+        } else {
+          this.notice('Не удалось загрузить диалог. Обновите страницу.');
+        }
+      }
+    }
+
+    private addMessage(role: string, content: string): HTMLElement {
+      const li = document.createElement('li');
+      li.className = role;
+      const body = document.createElement('div');
+      body.className = 'prose';
+      if (role === 'user') body.textContent = content;
+      else body.innerHTML = this.md?.renderUntrusted(content) ?? '';
+      li.append(body);
+      this.q('.log').append(li);
+      return body;
+    }
+
+    private async send(intent: 'message' | 'hint') {
+      const input = this.q<HTMLTextAreaElement>('textarea');
+      const text = input.value.trim();
+      if (this.busy || !this.md || (intent === 'message' && !text)) return;
+      this.setBusy(true);
+      this.notice('');
+      this.addMessage('user', text || 'Дай, пожалуйста, подсказку.');
+      input.value = '';
+      const md = this.md;
+      const target = this.addMessage('assistant', '');
+      target.parentElement?.classList.add('streaming');
+      let reply = '';
+      let frame = 0;
+      const paint = () => {
+        frame = 0;
+        target.innerHTML = md.renderUntrusted(md.closedMathPrefix(reply));
+      };
+      try {
+        await tutor.send({ kind: this.kind, id: this.contextId, text, intent }, (ev) => {
+          if (ev.event === 'meta') {
+            this.showLevel(ev.data.hint_level);
+            this.showLeft(ev.data.messages_left);
+          } else if (ev.event === 'delta') {
+            reply += ev.data.text;
+            frame ||= requestAnimationFrame(paint);
+          } else if (ev.event === 'error') {
+            this.notice(ERRORS[ev.data.detail] ?? ERRORS.tutor_unavailable!);
+          }
+        });
+        if (frame) cancelAnimationFrame(frame);
+        target.innerHTML = md.renderUntrusted(reply);
+        if (!reply) target.parentElement?.remove();
+      } catch (e) {
+        target.parentElement?.remove();
+        const detail = e instanceof ApiError ? e.detail : '';
+        this.notice(ERRORS[detail] ?? 'Нет связи с сервером. Попробуйте ещё раз.');
+        if (!text) return;
+        input.value = text; // let the student resend
+      } finally {
+        target.parentElement?.classList.remove('streaming');
+        this.setBusy(false);
+        target.scrollIntoView({ block: 'nearest' });
+      }
+    }
+
+    private setBusy(busy: boolean) {
+      this.busy = busy;
+      this.querySelectorAll<HTMLButtonElement>('.compose button').forEach((b) => {
+        b.disabled = busy;
+      });
+    }
+
+    private showLevel(level: number | null) {
+      const max = this.maxLevel;
+      const el = this.q('.level');
+      el.hidden = level === null;
+      if (level !== null) el.textContent = `подсказка: ${level} из ${max}`;
+      const hint = this.querySelector<HTMLButtonElement>('.hint');
+      if (hint) hint.hidden = level !== null && level >= max;
+    }
+
+    private showLeft(left: number) {
+      this.q('.left').textContent = left <= 10 ? `осталось ${left}` : '';
+    }
+
+    /** Fixed HTML only (no model output). */
+    private notice(html: string) {
+      const n = this.q('.notice');
+      n.innerHTML = html;
+      n.hidden = !html;
+    }
+  }
+
+  customElements.define('tutor-chat', TutorChat);
+</script>
+
+<style>
+  tutor-chat {
+    display: block;
+    margin: 1.5rem 0;
+  }
+  button {
+    font: inherit;
+    font-weight: 600;
+    padding: 0.55rem 1rem;
+    border: 0;
+    border-radius: 8px;
+    background: var(--accent);
+    color: var(--surface);
+    cursor: pointer;
+  }
+  button:disabled {
+    opacity: 0.6;
+  }
+  .open,
+  .secondary {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+  .panel {
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  h2 {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+  .level,
+  .left {
+    font-size: 0.8rem;
+  }
+  .intro {
+    font-size: 0.875rem;
+    margin: 0.25rem 0 0.75rem;
+  }
+  .log {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .log li {
+    max-width: 92%;
+    padding: 0.5rem 0.75rem;
+    border-radius: 12px;
+    overflow-wrap: anywhere;
+  }
+  .log li.user {
+    align-self: flex-end;
+    background: var(--accent-soft);
+    white-space: pre-wrap;
+  }
+  .log li.assistant {
+    align-self: flex-start;
+    background: var(--bg);
+    border: 1px solid var(--border);
+  }
+  .log li.streaming:empty::after,
+  .log li.streaming .prose:empty::after {
+    content: '…';
+    color: var(--muted);
+  }
+  .log :global(p) {
+    margin: 0.25rem 0;
+  }
+  .log :global(.katex-display) {
+    margin: 0.4rem 0;
+  }
+  .notice {
+    font-size: 0.925rem;
+    margin: 0.75rem 0 0;
+  }
+  .compose {
+    margin-top: 0.75rem;
+  }
+  textarea {
+    width: 100%;
+    font: inherit;
+    font-size: 1rem; /* ≥16px stops iOS zooming on focus */
+    padding: 0.5rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    resize: vertical;
+  }
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  .actions .left {
+    margin-left: auto;
+  }
+</style>

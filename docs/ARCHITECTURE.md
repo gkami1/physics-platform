@@ -142,9 +142,10 @@ Budget ≈ 4–6k input / ≤400 output tokens per turn.
 
 ### Hint ladder — enforced by the server
 `hint_level`: 0 nudge → 1 key idea → 2 partial step → 3 full solution. Escalation is decided by server rules (exchanges since last escalation, wrong attempts, explicit request + ≥1 attempt for level 3), never by the model. Each turn states the ceiling.
+*(M4: `hints.py`. One level up per "hint" request, or after 3 turns once the student has attempted the task; level 3 only on explicit request and when the solution-reveal policy allows it. Theory threads have no level.)*
 
 ### Guardrails
-- Leak filter on the output stream (sentence-buffered): matches final answer (numeric within precision, unit variants) or sequence before level 3 → regenerate/mask.
+- Leak filter on the output stream (sentence-buffered): matches final answer (numeric within precision, unit variants) or sequence before level 3 → regenerate/mask. *(M4: `leak.py` strips `<think>` blocks, releases text sentence by sentence and stops before the leaking sentence with a fixed note; no regeneration yet. Given data and allowed hints are exempt.)*
 - Student text wrapped in delimiters and declared as data; pasted text cannot change rules.
 - Tutor coaches from the author's solution rather than solving from scratch (physics correctness).
 - Theory-page questions outside the page: say so and point to the roadmap.
@@ -152,6 +153,10 @@ Budget ≈ 4–6k input / ≤400 output tokens per turn.
 
 ### Model routing
 Cheap model by default; strong model for flagged-hard theory explanations, Part 2 "why is my solution wrong", and when a self-check fails. Provider adapters behind one interface (`complete`, `stream`), OpenAI-compatible where possible. Candidates: GigaChat (Lite/Pro/Max), YandexGPT (Lite/Pro), open models (Qwen, DeepSeek) on Yandex AI Studio / Cloud.ru. Final choice is made by eval results and ₽/1k tokens.
+*(M4: one OpenAI-compatible streaming client. Primary: self-hosted Qwen3-8B on vLLM, thinking off; fallback: DeepSeek, used only if the primary fails before the first token. No PII in prompts, so the foreign fallback receives only page content and dialogue. With neither configured the API uses a scripted dev model. Every provider attempt is a row in `llm_calls` with TTFT, latency, tokens, cost in kopecks and prompt version.)*
+
+### Access (M4)
+Signed-in users only; one thread per user and page (`tutor_threads`), 50 messages per 24 h (`API_TUTOR_DAILY_MESSAGES`) until plans arrive in M7. The chat island renders model output through DOMPurify (`renderUntrusted`).
 
 ### Streaming
 SSE from FastAPI. Client renders Markdown + KaTeX incrementally, deferring unclosed `$…$`.

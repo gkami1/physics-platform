@@ -77,3 +77,68 @@ export const api = {
   verifyCode: (email: string, code: string) => call<Me>('/auth/verify', post({ email, code })),
   logout: () => call<void>('/auth/logout', post()),
 };
+
+export type TutorKind = 'task' | 'theory';
+
+export interface TutorMessage {
+  id: number;
+  role: 'user' | 'assistant';
+  content: string;
+  hint_level: number | null;
+  leak: boolean;
+  created_at: string;
+}
+
+export interface TutorThread {
+  messages: TutorMessage[];
+  hint_level: number | null;
+  max_hint_level: number;
+  messages_left: number;
+}
+
+export type TutorEvent =
+  | { event: 'meta'; data: { hint_level: number | null; messages_left: number } }
+  | { event: 'delta'; data: { text: string } }
+  | { event: 'done'; data: { message_id: number | null; leak: boolean } }
+  | { event: 'error'; data: { detail: string } };
+
+export const tutor = {
+  thread: (kind: TutorKind, id: string) =>
+    call<TutorThread>(`/tutor/thread?kind=${kind}&id=${encodeURIComponent(id)}`),
+
+  /** POST a message and read the SSE reply (EventSource can't POST). */
+  async send(
+    body: { kind: TutorKind; id: string; text: string; intent: 'message' | 'hint' },
+    onEvent: (e: TutorEvent) => void,
+  ): Promise<void> {
+    const r = await fetch('/api/tutor/messages', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (!r.ok || !r.body) {
+      const err = (await r.json().catch(() => ({}))) as { detail?: unknown };
+      throw new ApiError(r.status, typeof err.detail === 'string' ? err.detail : '');
+    }
+    const reader = r.body.pipeThrough(new TextDecoderStream()).getReader();
+    let buf = '';
+    for (;;) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buf += value;
+      let end: number;
+      while ((end = buf.indexOf('\n\n')) !== -1) {
+        const block = buf.slice(0, end);
+        buf = buf.slice(end + 2);
+        let event = '';
+        let data = '';
+        for (const line of block.split('\n')) {
+          if (line.startsWith('event: ')) event = line.slice(7);
+          else if (line.startsWith('data: ')) data += line.slice(6);
+        }
+        if (event && data) onEvent({ event, data: JSON.parse(data) } as TutorEvent);
+      }
+    }
+  },
+};

@@ -20,6 +20,8 @@ from sqlalchemy import (
     MetaData,
     SmallInteger,
     String,
+    Text,
+    UniqueConstraint,
     func,
 )
 from sqlalchemy.ext.asyncio import (
@@ -127,6 +129,61 @@ class Attempt(Base):
     points: Mapped[int] = mapped_column(SmallInteger)
     max_points: Mapped[int] = mapped_column(SmallInteger)
     content_version: Mapped[str] = mapped_column(String(32))
+    created_at: Mapped[datetime] = mapped_column(server_default=func.now())
+
+
+class TutorThread(Base):
+    """One dialogue per user and page (a task or a theory topic)."""
+
+    __tablename__ = "tutor_threads"
+    __table_args__ = (
+        UniqueConstraint("user_id", "context_kind", "context_id", name="uq_tutor_threads_context"),
+    )
+
+    id: Mapped[int] = mapped_column(BigId, primary_key=True, autoincrement=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    context_kind: Mapped[str] = mapped_column(String(16))  # task | theory
+    context_id: Mapped[str] = mapped_column(String(80))
+    # Hint ladder (task threads): decided by the server, see hints.py.
+    hint_level: Mapped[int] = mapped_column(SmallInteger, default=0)
+    turns_at_level: Mapped[int] = mapped_column(SmallInteger, default=0)
+    created_at: Mapped[datetime] = mapped_column(server_default=func.now())
+
+
+class TutorMessage(Base):
+    __tablename__ = "tutor_messages"
+    __table_args__ = (Index("ix_tutor_messages_thread", "thread_id", "id"),)
+
+    id: Mapped[int] = mapped_column(BigId, primary_key=True, autoincrement=True)
+    thread_id: Mapped[int] = mapped_column(ForeignKey("tutor_threads.id", ondelete="CASCADE"))
+    # Denormalised for the daily cap query.
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    role: Mapped[str] = mapped_column(String(16))  # user | assistant
+    content: Mapped[str] = mapped_column(Text)
+    hint_level: Mapped[int | None] = mapped_column(SmallInteger)
+    # e.g. {"leak": true, "error": "…", "intent": "hint"}
+    flags: Mapped[dict[str, Any]] = mapped_column(default=dict)
+    created_at: Mapped[datetime] = mapped_column(server_default=func.now())
+
+
+class LlmCall(Base):
+    """Trace of every model call, one row per provider attempt (fallbacks included)."""
+
+    __tablename__ = "llm_calls"
+
+    id: Mapped[int] = mapped_column(BigId, primary_key=True, autoincrement=True)
+    message_id: Mapped[int | None] = mapped_column(
+        ForeignKey("tutor_messages.id", ondelete="SET NULL"), index=True
+    )
+    provider: Mapped[str] = mapped_column(String(32))
+    model: Mapped[str] = mapped_column(String(80))
+    prompt_version: Mapped[str] = mapped_column(String(32))
+    ttft_ms: Mapped[int | None]
+    latency_ms: Mapped[int | None]
+    tokens_in: Mapped[int | None]
+    tokens_out: Mapped[int | None]
+    cost_kop: Mapped[int] = mapped_column(default=0)
+    error: Mapped[str | None] = mapped_column(String(300))
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
 
 

@@ -1,6 +1,7 @@
 ---
 import type { GetStaticPaths } from 'astro';
 import TaskAnswer from '../../../components/TaskAnswer.astro';
+import TutorChat from '../../../components/TutorChat.astro';
 import Base from '../../../layouts/Base.astro';
 import {
   bundles,
@@ -44,6 +45,7 @@ const statementHtml = await renderMarkdown(task.statement);
   <article class="statement" set:html={statementHtml} />
 
   <TaskAnswer taskId={task.id} kind={task.answer_input.type} unit={task.answer_input.unit} />
+  <TutorChat kind="task" contextId={task.id} />
 
   <aside class="topics muted">
     Темы:{' '}

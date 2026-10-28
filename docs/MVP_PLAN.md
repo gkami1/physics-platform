@@ -25,7 +25,7 @@ Each milestone has a **definition of done**; a milestone is not finished until i
 - CSRF Origin check; rate limits on codes and attempts.
 - **Done:** progress persists across devices.
 
-## M4 — Tutor v0 (week 4)
+## M4 — Tutor v0 (week 4) — code done 2026-10-28; pending: GPU/vLLM or DeepSeek key, deploy, evals in CI (M5)
 - Provider adapter(s); context assembly; SSE streaming; chat island with incremental KaTeX.
 - Server-side hint ladder; leak filter; `llm_calls` tracing.
 - **Done:** own students use the tutor on task and theory pages (beta starts).

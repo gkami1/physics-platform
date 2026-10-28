@@ -1,4 +1,5 @@
 import os
+import re
 from collections.abc import Iterator
 from pathlib import Path
 
@@ -63,3 +64,16 @@ def outbox(client: TestClient) -> MemoryMailer:
     box = MemoryMailer()
     client.app.state.mailer = box  # type: ignore[attr-defined]
     return box
+
+
+@pytest.fixture
+def signed_in(client: TestClient, outbox: MemoryMailer) -> TestClient:
+    """`client` with a signed-in student session."""
+    email = "student@example.ru"
+    r = client.post("/api/auth/code", json={"email": email, "consent": True})
+    assert r.status_code == 202
+    code = re.search(r"\d{6}", outbox.sent[-1][1])
+    assert code
+    r = client.post("/api/auth/verify", json={"email": email, "code": code.group()})
+    assert r.status_code == 200
+    return client
