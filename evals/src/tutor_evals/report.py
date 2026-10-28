@@ -46,7 +46,9 @@ def summarize(results: Sequence[TurnResult]) -> dict[str, Any]:
         "empty_rate": _rate([r.checks.empty for r in ok]),
         "too_long_rate": _rate([r.checks.too_long for r in ok]),
         "error_rate": _rate([r.error is not None for r in results]),
-        "fallback_rate": _rate([len(r.calls) > 1 for r in results]),
+        # A second provider answered vs. the same provider was asked again (429/503 retries).
+        "fallback_rate": _rate([len({c["provider"] for c in r.calls}) > 1 for r in results]),
+        "retry_rate": _rate([len(r.calls) > len({c["provider"] for c in r.calls}) for r in results]),
         "question_rate": _rate([r.checks.ends_with_question for r in task]),
         "median_chars": median([r.checks.chars for r in ok]) if ok else None,
         "median_ttft_ms": median(ttft) if ttft else None,
