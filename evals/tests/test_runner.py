@@ -1,4 +1,6 @@
 import asyncio
+from collections.abc import AsyncIterator, Sequence
+from dataclasses import dataclass
 from pathlib import Path
 
 import pytest
@@ -6,7 +8,14 @@ import pytest
 from content_schema.build import build
 from content_schema.loader import load_exam_dir
 from platform_api.content import ContentStore
-from platform_api.llm import ChatModel, FailingModel, ScriptedModel
+from platform_api.llm import (
+    CallInfo,
+    ChatModel,
+    FailingModel,
+    LLMUnavailableError,
+    Message,
+    ScriptedModel,
+)
 from platform_api.tutor import LEAK_NOTE
 from tutor_evals.checks import Limits
 from tutor_evals.cli import EVALS
@@ -108,3 +117,36 @@ def test_suite_gate_and_report(store: ContentStore) -> None:
     md = markdown(summary, results, violations)
     assert "FAIL" in md
     assert "not_russian" in md
+
+
+@dataclass
+class RateLimitedOnce:
+    """Answers 429 on the first call, then streams a reply."""
+
+    name: str = "flaky"
+    model: str = "flaky"
+    calls: int = 0
+
+    async def stream(self, messages: Sequence[Message], info: CallInfo) -> AsyncIterator[str]:
+        self.calls += 1
+        if self.calls == 1:
+            raise LLMUnavailableError("HTTP 429: quota")
+        yield "Что дано в условии?"
+
+
+def test_rate_limited_turn_is_retried(store: ContentStore) -> None:
+    task = store.task("kin-0001")
+    assert task is not None
+    model = RateLimitedOnce()
+    [r] = asyncio.run(
+        run_conversation(
+            [model],
+            persona(StudentTurn(text="Помоги")),
+            limits=Limits(900, 6),
+            task=task,
+            rate_limit_waits=(0.0,),
+        )
+    )
+    assert r.error is None
+    assert r.raw == "Что дано в условии?"
+    assert [c["error"] for c in r.calls] == ["LLMUnavailableError: HTTP 429: quota", None]

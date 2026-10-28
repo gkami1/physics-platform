@@ -27,7 +27,7 @@ Python (uv workspace, run from repo root):
 - `uv run uvicorn platform_api.main:app --reload` — run API locally
 - `uv run tutor-eval run` — tutor evals against the models in `API_LLM_*` (scripted dev model if none; `--provider`, `--persona`, `--repeats`, `--compare old.json`). Suite: `evals/suite.yaml`; reports in `evals/results/` (gitignored)
 
-Local dev without Docker: `export API_DATABASE_URL=sqlite+aiosqlite:///dev.db`, migrate, run the API, then `cd web && npm run dev -- --host 127.0.0.1` (the dev server proxies `/api` to :8000). Tests use SQLite unless `API_TEST_DATABASE_URL` points at Postgres (CI does). To sign in locally, request a code and read it from the API log (no SMTP configured → `email not sent` log line; in Docker: `docker compose -f infra/compose.yaml logs api`).
+Local dev without Docker: copy `.env.example` to `.env` (SQLite + Google AI Studio free-tier key for the tutor; dev only, never for real students), migrate, run the API, then `cd web && npm run dev -- --host 127.0.0.1` (the dev server proxies `/api` to :8000). Tests use SQLite unless `API_TEST_DATABASE_URL` points at Postgres (CI does). To sign in locally, request a code and read it from the API log (no SMTP configured → `email not sent` log line; in Docker: `docker compose -f infra/compose.yaml logs api`).
 
 Web (`cd web`):
 - `npm ci`, `npm run dev`, `npm run build` (runs `content-build build` first), `npm run check`

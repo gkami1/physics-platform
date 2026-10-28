@@ -155,6 +155,9 @@ Budget ≈ 4–6k input / ≤400 output tokens per turn.
 Cheap model by default; strong model for flagged-hard theory explanations, Part 2 "why is my solution wrong", and when a self-check fails. Provider adapters behind one interface (`complete`, `stream`), OpenAI-compatible where possible. Candidates: GigaChat (Lite/Pro/Max), YandexGPT (Lite/Pro), open models (Qwen, DeepSeek) on Yandex AI Studio / Cloud.ru. Final choice is made by eval results and ₽/1k tokens.
 *(M4: one OpenAI-compatible streaming client. Primary: self-hosted Qwen3-8B on vLLM, thinking off; fallback: DeepSeek, used only if the primary fails before the first token. No PII in prompts, so the foreign fallback receives only page content and dialogue. With neither configured the API uses a scripted dev model. Every provider attempt is a row in `llm_calls` with TTFT, latency, tokens, cost in kopecks and prompt version.)*
 
+### Development model (decided 2026-10-28)
+While building, the tutor and the evals run on **Google AI Studio's free tier** (Gemini Flash via its OpenAI-compatible endpoint, `.env.example`). Allowed because prompts hold only content and the developer's own test messages; never configured for a deployment with real students (free-tier prompts may be used for training; servers outside Russia). Production stays vLLM/Qwen + DeepSeek fallback; the final choice still comes from evals. Provider-specific request fields go in `API_LLM_EXTRA_BODY` (JSON).
+
 ### Access (M4)
 Signed-in users only; one thread per user and page (`tutor_threads`), 50 messages per 24 h (`API_TUTOR_DAILY_MESSAGES`) until plans arrive in M7. The chat island renders model output through DOMPurify (`renderUntrusted`).
 

@@ -179,8 +179,7 @@ def make_models(settings: Settings) -> list[ChatModel]:
                 base_url=settings.llm_base_url,
                 model=settings.llm_model,
                 api_key=settings.llm_api_key,
-                # Qwen3: answer directly; hidden reasoning only adds latency for tutoring.
-                extra={"chat_template_kwargs": {"enable_thinking": settings.llm_thinking}},
+                extra=settings.llm_extra_body,
             )
         )
     if settings.llm_fallback_base_url:

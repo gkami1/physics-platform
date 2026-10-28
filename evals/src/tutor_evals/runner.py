@@ -85,6 +85,26 @@ async def _reply(
     return visible_text(raw), shown, guard.leaked, error, calls
 
 
+# Free tiers (Google AI Studio) answer 429 when over the per-minute quota: wait and retry.
+RATE_LIMIT_WAITS = (10.0, 30.0, 60.0)
+
+
+async def _reply_with_retry(
+    models: Sequence[ChatModel],
+    messages: list[dict[str, str]],
+    detector: LeakDetector | None,
+    waits: Sequence[float],
+) -> tuple[str, str, bool, str | None, list[CallInfo]]:
+    calls: list[CallInfo] = []
+    for wait in (*waits, None):
+        raw, shown, stopped, error, attempt_calls = await _reply(models, messages, detector)
+        calls += attempt_calls
+        if wait is None or raw or not error or "HTTP 429" not in error:
+            return raw, shown, stopped, error, calls
+        await asyncio.sleep(wait)
+    raise AssertionError("unreachable")  # pragma: no cover
+
+
 async def run_conversation(
     models: Sequence[ChatModel],
     persona: Persona,
@@ -93,6 +113,7 @@ async def run_conversation(
     task: PrivateTask | None = None,
     theory: tuple[str, str] | None = None,  # (topic, context)
     repeat: int = 0,
+    rate_limit_waits: Sequence[float] = RATE_LIMIT_WAITS,
 ) -> list[TurnResult]:
     target = task.id if task else theory[0] if theory else ""
     answer = (format_answer(task.answer) or "") if task else ""
@@ -118,7 +139,9 @@ async def run_conversation(
         else:
             raise ValueError("run_conversation needs a task or a theory page")
         messages = build_messages(context, history, text, level)
-        raw, shown, stopped, error, calls = await _reply(models, messages, detector)
+        raw, shown, stopped, error, calls = await _reply_with_retry(
+            models, messages, detector, rate_limit_waits
+        )
         leak = None if detector is None else stopped or detector.leaks(raw)
         results.append(
             TurnResult(

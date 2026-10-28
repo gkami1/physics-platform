@@ -35,6 +35,8 @@ jobs:
       API_LLM_BASE_URL: ${{ secrets.EVAL_LLM_BASE_URL }}
       API_LLM_API_KEY: ${{ secrets.EVAL_LLM_API_KEY }}
       API_LLM_MODEL: ${{ vars.EVAL_LLM_MODEL || 'Qwen/Qwen3-8B' }}
+      # Google AI Studio: set EVAL_LLM_EXTRA_BODY to {} (it rejects vLLM's chat_template_kwargs).
+      API_LLM_EXTRA_BODY: ${{ vars.EVAL_LLM_EXTRA_BODY || '{"chat_template_kwargs":{"enable_thinking":false}}' }}
       API_LLM_FALLBACK_BASE_URL: ${{ secrets.EVAL_LLM_FALLBACK_BASE_URL }}
       API_LLM_FALLBACK_API_KEY: ${{ secrets.EVAL_LLM_FALLBACK_API_KEY }}
       API_LLM_FALLBACK_MODEL: ${{ vars.EVAL_LLM_FALLBACK_MODEL || 'deepseek-chat' }}
