@@ -60,6 +60,9 @@ class ContentStore:
     def theory(self, topic: str) -> Theory | None:
         return self._theory.get(topic)
 
+    def theory_topics(self) -> list[str]:
+        return list(self._theory)
+
     def all(self) -> list[PrivateTask]:
         return list(self._tasks.values())
 
