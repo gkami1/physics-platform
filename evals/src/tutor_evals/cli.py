@@ -22,7 +22,7 @@ from platform_api.llm import ScriptedModel, make_models
 from platform_api.prompt import PROMPT_VERSION
 from platform_api.settings import Settings
 from tutor_evals.report import gate, markdown, summarize
-from tutor_evals.runner import run_suite
+from tutor_evals.runner import TurnResult, run_suite
 from tutor_evals.suite import load_suite
 
 EVALS = Path(__file__).resolve().parents[2]
@@ -41,6 +41,15 @@ def _git_sha() -> str:
     except (OSError, subprocess.CalledProcessError):
         return "unknown"
     return out.stdout.strip()
+
+
+def _progress(done: int, total: int, turns: list[TurnResult]) -> None:
+    first = turns[0] if turns else None
+    fails = sum(bool(t.failures()) for t in turns)
+    label = f"{first.persona} × {first.target}" if first else "?"
+    print(
+        f"[{done}/{total}] {label}: {len(turns)} turns, {fails} failed", file=sys.stderr, flush=True
+    )
 
 
 def _run(args: argparse.Namespace) -> int:
@@ -64,6 +73,7 @@ def _run(args: argparse.Namespace) -> int:
             repeats=args.repeats,
             concurrency=args.concurrency,
             personas=args.persona,
+            on_done=_progress,
         )
     )
     summary = summarize(results)

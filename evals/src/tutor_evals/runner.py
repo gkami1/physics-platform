@@ -8,7 +8,7 @@ HTTP are left out: history is the text the student would have seen.
 from __future__ import annotations
 
 import asyncio
-from collections.abc import Sequence
+from collections.abc import Callable, Coroutine, Sequence
 from dataclasses import asdict, dataclass, field
 from typing import Any
 
@@ -85,8 +85,10 @@ async def _reply(
     return visible_text(raw), shown, guard.leaked, error, calls
 
 
-# Free tiers (Google AI Studio) answer 429 when over the per-minute quota: wait and retry.
+# Free tiers (Google AI Studio) answer 429 over the per-minute quota and 503 or time out
+# under load: wait and retry the turn.
 RATE_LIMIT_WAITS = (10.0, 30.0, 60.0)
+RETRYABLE = ("HTTP 429", "HTTP 503", "Timeout", "ConnectError")
 
 
 async def _reply_with_retry(
@@ -99,7 +101,7 @@ async def _reply_with_retry(
     for wait in (*waits, None):
         raw, shown, stopped, error, attempt_calls = await _reply(models, messages, detector)
         calls += attempt_calls
-        if wait is None or raw or not error or "HTTP 429" not in error:
+        if wait is None or raw or not error or not any(r in error for r in RETRYABLE):
             return raw, shown, stopped, error, calls
         await asyncio.sleep(wait)
     raise AssertionError("unreachable")  # pragma: no cover
@@ -172,13 +174,20 @@ async def run_suite(
     repeats: int = 1,
     concurrency: int = 4,
     personas: Sequence[str] | None = None,
+    on_done: Callable[[int, int, list[TurnResult]], None] | None = None,
 ) -> list[TurnResult]:
+    """`on_done(done, total, turns)` after each conversation (progress output)."""
     sem = asyncio.Semaphore(concurrency)
-    jobs = []
+    finished: list[int] = []
+    jobs: list[Coroutine[Any, Any, list[TurnResult]]] = []
 
     async def guarded(**kw: Any) -> list[TurnResult]:
         async with sem:
-            return await run_conversation(models, **kw)
+            turns = await run_conversation(models, **kw)
+        finished.append(1)
+        if on_done:
+            on_done(len(finished), len(jobs), turns)
+        return turns
 
     for r in range(repeats):
         for p in suite.personas:
