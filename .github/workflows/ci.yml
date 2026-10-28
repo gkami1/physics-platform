@@ -80,3 +80,21 @@ jobs:
               caddy:2.10-alpine caddy validate --adapter caddyfile --config /etc/caddy/Caddyfile
           done
       - run: docker compose -f infra/compose.yaml build
+      - name: Start the stack (scripted tutor, no SMTP)
+        run: docker compose -p pp-check -f infra/compose.yaml up -d --wait
+        env:
+          API_ENV: dev
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.7"
+          enable-cache: true
+      - name: Smoke test through Caddy
+        run: |
+          uv sync --frozen
+          uv run python infra/smoke.py http://localhost:8080 pp-check
+      - name: Stack logs on failure
+        if: failure()
+        run: docker compose -p pp-check -f infra/compose.yaml logs --tail 200
+      - name: Stop the stack
+        if: always()
+        run: docker compose -p pp-check -f infra/compose.yaml down -v

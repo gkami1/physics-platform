@@ -4,7 +4,7 @@ Target: usable, paid MVP in ~8 weeks of evenings/weekends (≈10–12 h/week), i
 
 Each milestone has a **definition of done**; a milestone is not finished until it is deployed.
 
-## M1 — Foundation (week 1) — code done 2026-10-25; pending: Docker build verified, VM deploy, 30 tasks
+## M1 — Foundation (week 1) — code done 2026-10-25; Docker stack verified 2026-10-28 (smoke test in CI); pending: VM deploy, 30 tasks
 - Repo skeleton: uv workspace, `content_schema` package, `api` service, Astro `web`, `infra/`.
 - Content schema + `content-build validate|build`; public/private split with a no-leak test.
 - `exam.yaml` with EGE task structure (points marked *to verify* until the approved 2027 spec).

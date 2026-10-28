@@ -34,6 +34,8 @@ Web (`cd web`):
 
 Full stack: `docker compose -f infra/compose.yaml up --build`.
 
+Smoke test (CI runs it in the docker job): `API_ENV=dev HTTP_PORT=8180 docker compose -p pp-check -f infra/compose.yaml up --build -d --wait`, then `uv run python infra/smoke.py http://localhost:8180 pp-check`, then `docker compose -p pp-check -f infra/compose.yaml down -v`. A separate project name keeps it away from your own running stack.
+
 ## Invariants (do not break)
 
 1. **Answers, solutions and hints never ship to the browser** unless the server decides to reveal them. Astro reads tasks only from `build/public/`. A test enforces this — keep it passing and extend it when adding fields.
@@ -61,6 +63,7 @@ Full stack: `docker compose -f infra/compose.yaml up --build`.
 - Client-side `renderMarkdown` does not sanitize. Fine for author content; LLM output must be sanitized first.
 - State-changing API requests must carry an `Origin` matching `Host` (CSRF check). Any proxy in front of the API must keep `Host`: Caddy does by default; the Vite dev proxy needs `changeOrigin: false` (its string shorthand rewrites it).
 - SQLite returns naive datetimes. Compare times in SQL, or wrap with `actor.as_utc` before Python arithmetic or JSON output.
+- On Windows, httpx picks up the system proxy from the registry: local test clients need `trust_env=False`, or localhost requests come back 503.
 - With `from __future__ import annotations`, FastAPI dependency aliases (`Annotated[..., Depends(...)]`) must be module-level, or params silently become body/query fields.
 
 ## Workflow
