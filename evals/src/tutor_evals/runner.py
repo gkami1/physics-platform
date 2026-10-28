@@ -88,7 +88,7 @@ async def _reply(
 # Free tiers (Google AI Studio) answer 429 over the per-minute quota and 503 or time out
 # under load: wait and retry the turn.
 RATE_LIMIT_WAITS = (10.0, 30.0, 60.0)
-RETRYABLE = ("HTTP 429", "HTTP 503", "Timeout", "ConnectError")
+RETRYABLE = ("HTTP 429", "HTTP 503", "Timeout", "ConnectError", "RemoteProtocolError")
 
 
 async def _reply_with_retry(
