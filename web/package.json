@@ -13,6 +13,7 @@
   "dependencies": {
     "@astrojs/markdown-remark": "7.3.4",
     "astro": "7.4.2",
+    "dompurify": "3.4.17",
     "katex": "0.19.1",
     "marked": "18.1.1",
     "rehype-katex": "7.0.1",

@@ -2,6 +2,7 @@
 import type { GetStaticPaths } from 'astro';
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
+import TutorChat from '../../../components/TutorChat.astro';
 import { bundle, taskUrl, theoryUrl, topicsById } from '../../../lib/content';
 
 export const getStaticPaths = (async () => {
@@ -63,6 +64,8 @@ const tasks = b.tasks
   <article class="prose">
     <Content />
   </article>
+
+  <TutorChat kind="theory" contextId={topic.id} />
 
   {
     tasks.length > 0 && (
