@@ -2,7 +2,7 @@
 
 AI-powered EGE physics learning platform (Russian). Solo developer; optimise for simplicity, low ops burden and low running cost over scale-out elegance.
 
-Read `docs/ARCHITECTURE.md` (decisions) and `docs/MVP_PLAN.md` (milestones) before non-trivial work. Update them when a decision changes — they are the source of truth, not chat history.
+Read `docs/ARCHITECTURE.md` (decisions), `docs/MVP_PLAN.md` (milestones) and, for anything server-side, `docs/DEPLOY.md` (runbook) before non-trivial work. Update them when a decision changes — they are the source of truth, not chat history.
 
 ## Layout
 
