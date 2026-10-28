@@ -35,6 +35,10 @@ Each milestone has a **definition of done**; a milestone is not finished until i
 - Model routing; per-call cost recording; prompt iteration driven by evals.
 - **Done:** leak rate ≈ 0 on eval set; measured ₽ per active student within budget.
 
+## Web redesign + variants (2026-10-28, pulled forward) — code done; pending: browser QA, deploy
+- Dark app shell; roadmap path; practice table with random task; timed synthetic variants with Part 2 self-assessment (see ARCHITECTURE §5 «Site structure»).
+- Covers M6's «roadmap page» and the Part 2 self-assessment for variants.
+
 ## M6 — Roadmap and guidance (week 6)
 - Roadmap graph page (prerequisites, EGE task numbers per topic).
 - "What to practise next" (weakest mastered-enough prerequisites first).

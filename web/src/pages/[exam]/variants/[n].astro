@@ -1,0 +1,814 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '../../../layouts/Base.astro';
+import {
+  bundles,
+  formatDuration,
+  taskUrl,
+  type Variant,
+  variants,
+  variantsUrl,
+} from '../../../lib/content';
+import { renderMarkdown } from '../../../lib/markdown';
+
+export const getStaticPaths = (() =>
+  bundles().flatMap((b) =>
+    variants(b).map((v) => ({
+      params: { exam: b.exam.id, n: String(v.n) },
+      props: { examId: b.exam.id, examTitle: b.exam.title, duration: b.exam.duration_minutes, v },
+    })),
+  )) satisfies GetStaticPaths;
+
+interface Props {
+  examId: string;
+  examTitle: string;
+  duration: number;
+  v: Variant;
+}
+
+const { examId, examTitle, duration, v } = Astro.props;
+const slots = await Promise.all(
+  v.slots.map(async (s) => ({
+    ...s,
+    html: s.task ? await renderMarkdown(s.task.statement) : '',
+  })),
+);
+const tasks = slots.filter((s) => s.task).map((s) => s.task!.id);
+const part1 = slots.filter((s) => s.task && s.spec.part === 1).length;
+const part2 = slots.filter((s) => s.task && s.spec.part === 2).length;
+const placeholder: Record<string, string> = {
+  numeric: 'Число, например 12,5',
+  sequence: 'Цифры, например 13',
+  measurement: 'Значение и погрешность: 2,4 0,2',
+};
+---
+
+<Base title={`Вариант ${v.n} — ${examTitle}`}>
+  <variant-runner
+    data-exam={examId}
+    data-variant={v.n}
+    data-duration={duration}
+    data-tasks={JSON.stringify(tasks)}
+  >
+    <!-- 1. Intro -->
+    <section class="stage intro">
+      <nav class="crumbs"><a href={variantsUrl(examId)}>← Все варианты</a></nav>
+      <div class="card intro-card">
+        <div class="eyebrow">{examTitle}</div>
+        <h1>Вариант {v.n}</h1>
+        <ul class="facts">
+          <li><strong>{formatDuration(duration)}</strong><span class="muted">время</span></li>
+          <li><strong>{tasks.length}</strong><span class="muted">заданий</span></li>
+          <li><strong>{v.maxPoints}</strong><span class="muted">первичных баллов</span></li>
+        </ul>
+        {
+          !v.complete && (
+            <p class="warn">
+              В банке пока не на все номера есть задачи: в варианте {tasks.length} из{' '}
+              {v.slots.length} заданий.
+            </p>
+          )
+        }
+        <ul class="rules">
+          <li>
+            Часть 1 ({part1}): впишите ответ — число или последовательность цифр, без единиц
+            измерения.
+          </li>
+          {
+            part2 > 0 && (
+              <li>
+                Часть 2 ({part2}): решите на бумаге. После завершения сравните с эталонным решением и
+                оцените себя.
+              </li>
+            )
+          }
+          <li>Таймер идёт, даже если закрыть вкладку. Когда время выйдет, ответы отправятся сами.</li>
+          <li>Подсказок и репетитора во время варианта нет — они будут на разборе.</li>
+        </ul>
+        <button type="button" class="btn start">Начать вариант</button>
+      </div>
+    </section>
+
+    <!-- 2. Running -->
+    <section class="stage run" hidden>
+      <div class="runbar">
+        <div class="clock" role="timer" aria-live="off">
+          <span class="clock-label muted">Осталось</span>
+          <span class="clock-value">--:--</span>
+        </div>
+        <span class="answered muted"></span>
+        <button type="button" class="btn finish">Завершить</button>
+      </div>
+      <nav class="jump" aria-label="Задания">
+        {
+          slots.map((s) =>
+            s.task ? (
+              <a href={`#t-${s.number}`} data-id={s.task.id} class:list={{ p2: s.spec.part === 2 }}>
+                {s.number}
+              </a>
+            ) : (
+              <span class="missing" title="Задания пока нет">
+                {s.number}
+              </span>
+            ),
+          )
+        }
+      </nav>
+      <ol class="vtasks">
+        {
+          slots.map((s) => (
+            <li id={`t-${s.number}`} class="card vtask" data-id={s.task?.id}>
+              <header>
+                <span class="num">{s.number}</span>
+                <span class="title">{s.spec.title}</span>
+                <span class="muted pts">
+                  {s.spec.max_points} балл{s.spec.max_points === 1 ? '' : 'а'}
+                </span>
+              </header>
+              {s.task ? (
+                <>
+                  <div class="reading statement" set:html={s.html} />
+                  {s.spec.part === 1 ? (
+                    <label class="answer">
+                      <span>Ответ</span>
+                      <input
+                        class="field"
+                        name={s.task.id}
+                        autocomplete="off"
+                        autocapitalize="off"
+                        spellcheck="false"
+                        maxlength="64"
+                        inputmode={s.spec.answer_kind === 'measurement' ? 'text' : 'decimal'}
+                        placeholder={placeholder[s.spec.answer_kind]}
+                      />
+                      {s.task.answer_input.unit && <span class="unit">{s.task.answer_input.unit}</span>}
+                    </label>
+                  ) : (
+                    <p class="paper muted">
+                      ✎ Решите на бумаге с полным обоснованием. После завершения вы сравните решение с
+                      эталоном.
+                    </p>
+                  )}
+                </>
+              ) : (
+                <p class="muted">Задачи для этого номера ещё нет в банке.</p>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+      <div class="run-end">
+        <button type="button" class="btn finish">Завершить и проверить</button>
+      </div>
+    </section>
+
+    <!-- 3. Result -->
+    <section class="stage result" hidden>
+      <nav class="crumbs"><a href={variantsUrl(examId)}>← Все варианты</a></nav>
+      <div class="card score">
+        <div>
+          <div class="eyebrow">Вариант {v.n} · результат</div>
+          <div class="total"><span class="pts-now">0</span> <span class="muted">из <span class="pts-max">0</span></span></div>
+          <p class="muted score-sub"></p>
+        </div>
+        <div class="ring" aria-hidden="true"><span></span></div>
+      </div>
+      <p class="notice" hidden></p>
+
+      <div class="card table-wrap">
+        <table class="review">
+          <thead>
+            <tr><th>№</th><th>Ваш ответ</th><th>Результат</th><th>Баллы</th><th></th></tr>
+          </thead>
+          <tbody>
+            {
+              slots
+                .filter((s) => s.task)
+                .map((s) => (
+                  <tr data-id={s.task!.id}>
+                    <td><span class="chip">№ {s.number}</span></td>
+                    <td class="given">—</td>
+                    <td class="verdict" />
+                    <td class="got" />
+                    <td>
+                      <a href={taskUrl(examId, s.task!.id)} class="small">
+                        Разобрать
+                      </a>
+                    </td>
+                  </tr>
+                ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      {
+        part2 > 0 && (
+          <section class="self">
+            <h2>Часть 2: самопроверка</h2>
+            <p class="muted">
+              Откройте эталонное решение, сравните со своим и поставьте себе баллы по критериям.
+            </p>
+            {slots
+              .filter((s) => s.task && s.spec.part === 2)
+              .map((s) => (
+                <article class="card self-task" data-id={s.task!.id} data-max={s.spec.max_points}>
+                  <header>
+                    <span class="chip">№ {s.number}</span>
+                    <strong>{s.spec.title}</strong>
+                    <span class="muted self-state">не оценено</span>
+                  </header>
+                  <button type="button" class="btn ghost small reveal">
+                    Показать эталонное решение
+                  </button>
+                  <div class="solution reading" hidden />
+                  <div class="points" role="group" aria-label="Мои баллы">
+                    <span class="muted">Мои баллы:</span>
+                    {Array.from({ length: s.spec.max_points + 1 }, (_, p) => (
+                      <button type="button" class="pt" data-points={p}>
+                        {p}
+                      </button>
+                    ))}
+                  </div>
+                </article>
+              ))}
+          </section>
+        )
+      }
+
+      <div class="result-actions">
+        <button type="button" class="btn ghost again">Решить заново</button>
+        <a class="btn" href={variantsUrl(examId)}>К вариантам</a>
+      </div>
+    </section>
+  </variant-runner>
+</Base>
+
+<script>
+  import { ApiError, api, type VariantRun } from '../../../lib/api';
+  import { clearState, formatClock, loadState, saveState, type VariantState } from '../../../lib/variant-state';
+
+  const VERDICT: Record<string, [string, string]> = {
+    correct: ['Верно', 'high'],
+    partial: ['Одна ошибка', 'mid'],
+    wrong: ['Неверно', 'low'],
+    invalid: ['Не распознан', 'low'],
+    skipped: ['Нет ответа', ''],
+    self: ['Самопроверка', ''],
+  };
+
+  class VariantRunner extends HTMLElement {
+    private exam = '';
+    private n = 0;
+    private minutes = 0;
+    private tasks: string[] = [];
+    private state: VariantState | null = null;
+    private timer = 0;
+    private submitting = false;
+    private run: VariantRun | null = null;
+
+    connectedCallback() {
+      this.exam = this.dataset.exam ?? '';
+      this.n = Number(this.dataset.variant);
+      this.minutes = Number(this.dataset.duration);
+      this.tasks = JSON.parse(this.dataset.tasks ?? '[]') as string[];
+
+      this.q('.start').addEventListener('click', () => this.start());
+      this.querySelectorAll('.finish').forEach((b) =>
+        b.addEventListener('click', () => {
+          const left = this.answeredCount();
+          const msg = `Завершить вариант? Ответов: ${left.done} из ${left.total}. Изменить их будет нельзя.`;
+          if (confirm(msg)) void this.submit();
+        }),
+      );
+      this.querySelectorAll<HTMLInputElement>('.vtask input').forEach((input) =>
+        input.addEventListener('input', () => this.saveAnswer(input)),
+      );
+      this.q('.again').addEventListener('click', () => {
+        clearState(this.exam, this.n);
+        location.href = location.pathname;
+      });
+      this.querySelectorAll<HTMLElement>('.self-task').forEach((card) => this.wireSelf(card));
+
+      const runId = Number(new URLSearchParams(location.search).get('run'));
+      if (runId) {
+        void api.variantRun(runId).then(
+          (run) => this.showResult(run),
+          () => this.resumeOrIntro(),
+        );
+      } else {
+        this.resumeOrIntro();
+      }
+    }
+
+    private q<T extends HTMLElement = HTMLElement>(sel: string): T {
+      return this.querySelector(sel) as T;
+    }
+
+    private stage(name: 'intro' | 'run' | 'result') {
+      this.querySelectorAll<HTMLElement>('.stage').forEach((s) => {
+        s.hidden = !s.classList.contains(name);
+      });
+      window.scrollTo({ top: 0 });
+    }
+
+    private resumeOrIntro() {
+      this.state = loadState(this.exam, this.n);
+      if (this.state) this.enterRun();
+      else this.stage('intro');
+    }
+
+    private start() {
+      const now = Date.now();
+      this.state = { startedAt: now, deadline: now + this.minutes * 60_000, answers: {} };
+      saveState(this.exam, this.n, this.state);
+      this.enterRun();
+    }
+
+    private enterRun() {
+      const s = this.state!;
+      this.querySelectorAll<HTMLInputElement>('.vtask input').forEach((input) => {
+        input.value = s.answers[input.name] ?? '';
+      });
+      this.paintAnswered();
+      this.stage('run');
+      this.tick();
+      this.timer = window.setInterval(() => this.tick(), 1000);
+    }
+
+    private tick() {
+      const left = ((this.state?.deadline ?? 0) - Date.now()) / 1000;
+      const clock = this.q('.clock');
+      this.q('.clock-value').textContent = formatClock(left);
+      clock.dataset.level = left <= 60 ? 'low' : left <= 600 ? 'mid' : '';
+      if (left <= 0) {
+        clearInterval(this.timer);
+        void this.submit();
+      }
+    }
+
+    private saveAnswer(input: HTMLInputElement) {
+      if (!this.state) return;
+      const v = input.value.trim();
+      if (v) this.state.answers[input.name] = input.value;
+      else delete this.state.answers[input.name];
+      saveState(this.exam, this.n, this.state);
+      this.paintAnswered();
+    }
+
+    private answeredCount() {
+      const inputs = [...this.querySelectorAll<HTMLInputElement>('.vtask input')];
+      return { done: inputs.filter((i) => i.value.trim()).length, total: inputs.length };
+    }
+
+    private paintAnswered() {
+      const { done, total } = this.answeredCount();
+      this.q('.answered').textContent = `Ответов: ${done} / ${total}`;
+      const answers = this.state?.answers ?? {};
+      this.querySelectorAll<HTMLElement>('.jump a').forEach((a) => {
+        a.classList.toggle('done', !!answers[a.dataset.id ?? '']?.trim());
+      });
+    }
+
+    private async submit() {
+      if (this.submitting || !this.state) return;
+      this.submitting = true;
+      this.querySelectorAll<HTMLButtonElement>('.finish').forEach((b) => (b.disabled = true));
+      const s = this.state;
+      const elapsed = Math.min(Date.now(), s.deadline) - s.startedAt;
+      try {
+        const run = await api.submitVariant({
+          exam_id: this.exam,
+          variant: this.n,
+          tasks: this.tasks,
+          answers: s.answers,
+          duration_s: Math.max(0, Math.round(elapsed / 1000)),
+        });
+        clearInterval(this.timer);
+        clearState(this.exam, this.n);
+        this.state = null;
+        history.replaceState(null, '', `?run=${run.id}`);
+        this.showResult(run);
+      } catch (e) {
+        // Answers stay in localStorage: retrying later loses nothing.
+        const why = e instanceof ApiError && e.status === 429 ? 'Слишком много вариантов за час.' : 'Нет связи с сервером.';
+        alert(`${why} Ответы сохранены — попробуйте завершить ещё раз.`);
+        this.querySelectorAll<HTMLButtonElement>('.finish').forEach((b) => (b.disabled = false));
+      } finally {
+        this.submitting = false;
+      }
+    }
+
+    private showResult(run: VariantRun) {
+      this.run = run;
+      for (const r of run.results) {
+        const tr = this.querySelector<HTMLElement>(`.review tr[data-id="${CSS.escape(r.task_id)}"]`);
+        if (!tr) continue;
+        tr.querySelector('.given')!.textContent = r.answer ?? '—';
+        const [label, level] = VERDICT[r.outcome] ?? [r.outcome, ''];
+        const verdict = tr.querySelector<HTMLElement>('.verdict')!;
+        verdict.innerHTML = '';
+        const badge = document.createElement('span');
+        badge.className = 'badge mastery';
+        if (level) badge.dataset.level = level;
+        else badge.classList.add('neutral');
+        badge.textContent = label;
+        verdict.append(badge);
+        const self = run.self_points[r.task_id];
+        tr.querySelector('.got')!.textContent =
+          r.outcome === 'self' ? (self === undefined ? `? / ${r.max_points}` : `${self} / ${r.max_points}`) : `${r.points} / ${r.max_points}`;
+      }
+      this.querySelectorAll<HTMLElement>('.self-task').forEach((card) => {
+        const p = run.self_points[card.dataset.id ?? ''];
+        this.paintSelf(card, p);
+      });
+      this.paintScore(run);
+      this.stage('result');
+    }
+
+    private paintScore(run: VariantRun) {
+      this.q('.pts-now').textContent = String(run.total_points);
+      this.q('.pts-max').textContent = String(run.max_points);
+      const parts = [`часть 1: ${run.auto_points}`];
+      if (run.pending) parts.push(`ждут самопроверки: ${run.pending}`);
+      if (run.duration_s !== null) parts.push(`время: ${formatClock(run.duration_s)}`);
+      this.q('.score-sub').textContent = parts.join(' · ');
+      const pct = Math.round((run.total_points / Math.max(run.max_points, 1)) * 100);
+      this.q('.ring').style.setProperty('--value', String(pct));
+      this.q('.ring span').textContent = `${pct}%`;
+    }
+
+    private wireSelf(card: HTMLElement) {
+      const id = card.dataset.id ?? '';
+      card.querySelector('.reveal')!.addEventListener('click', async (e) => {
+        const btn = e.currentTarget as HTMLButtonElement;
+        btn.disabled = true;
+        try {
+          const [sol, md] = await Promise.all([api.reveal(id), import('../../../lib/client-markdown')]);
+          const box = card.querySelector<HTMLElement>('.solution')!;
+          // Author content from our API: trusted.
+          box.innerHTML =
+            (sol.answer ? `<p><strong>Ответ:</strong> ${md.renderMarkdown(sol.answer)}</p>` : '') +
+            md.renderMarkdown(sol.solution);
+          box.hidden = false;
+          btn.hidden = true;
+        } catch {
+          btn.disabled = false;
+        }
+      });
+      card.querySelectorAll<HTMLButtonElement>('.pt').forEach((b) =>
+        b.addEventListener('click', async () => {
+          if (!this.run) return;
+          const points = Number(b.dataset.points);
+          try {
+            const run = await api.selfAssess(this.run.id, { [id]: points });
+            this.showResult(run);
+          } catch {
+            const n = this.q('.notice');
+            n.textContent = 'Не удалось сохранить оценку. Попробуйте ещё раз.';
+            n.hidden = false;
+          }
+        }),
+      );
+    }
+
+    private paintSelf(card: HTMLElement, points: number | undefined) {
+      card.querySelectorAll<HTMLButtonElement>('.pt').forEach((b) => {
+        b.setAttribute('aria-pressed', String(Number(b.dataset.points) === points));
+      });
+      card.querySelector('.self-state')!.textContent =
+        points === undefined ? 'не оценено' : `${points} из ${card.dataset.max}`;
+    }
+  }
+
+  customElements.define('variant-runner', VariantRunner);
+</script>
+
+<style>
+  .crumbs {
+    margin: 1.25rem 0 1rem;
+    font-size: 0.875rem;
+  }
+  .crumbs a {
+    text-decoration: none;
+  }
+  .intro-card {
+    max-width: 40rem;
+    padding: 1.5rem;
+  }
+  .intro-card h1 {
+    margin: 0.2rem 0 1rem;
+  }
+  .facts {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+  .facts li {
+    display: grid;
+    padding: 0.75rem;
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+  }
+  .facts strong {
+    font-size: 1.25rem;
+  }
+  .facts span {
+    font-size: 0.8rem;
+  }
+  .warn {
+    padding: 0.6rem 0.8rem;
+    border-radius: var(--radius-sm);
+    background: var(--warn-soft);
+    color: var(--warn);
+    font-size: 0.9rem;
+  }
+  .rules {
+    padding-left: 1.2rem;
+    color: var(--muted);
+    font-size: 0.925rem;
+    margin: 0 0 1.25rem;
+  }
+  .rules li + li {
+    margin-top: 0.35rem;
+  }
+
+  /* Running */
+  .runbar {
+    position: sticky;
+    top: 3.5rem;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0 0.75rem;
+    padding: 0.6rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--surface) 92%, transparent);
+    backdrop-filter: blur(8px);
+  }
+  @media (max-width: 44rem) {
+    .runbar {
+      top: 6rem;
+    }
+  }
+  .clock {
+    display: grid;
+    line-height: 1.1;
+  }
+  .clock-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .clock-value {
+    font-size: 1.35rem;
+    font-weight: 750;
+    font-variant-numeric: tabular-nums;
+  }
+  .clock[data-level='mid'] .clock-value {
+    color: var(--warn);
+  }
+  .clock[data-level='low'] .clock-value {
+    color: var(--bad);
+  }
+  .answered {
+    margin-left: auto;
+    font-size: 0.875rem;
+  }
+  .jump {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(2.3rem, 1fr));
+    gap: 0.35rem;
+    margin-bottom: 1rem;
+  }
+  .jump a,
+  .jump span {
+    display: grid;
+    place-items: center;
+    height: 2.3rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--text);
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+  }
+  .jump a.p2 {
+    border-style: dashed;
+  }
+  .jump a.done {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .jump .missing {
+    opacity: 0.35;
+  }
+  .vtasks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .vtask {
+    padding: 1rem 1.15rem;
+    scroll-margin-top: 9rem;
+  }
+  .vtask header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .vtask .num {
+    display: grid;
+    place-items: center;
+    min-width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-sm);
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 750;
+  }
+  .vtask .title {
+    font-weight: 600;
+  }
+  .vtask .pts {
+    margin-left: auto;
+    font-size: 0.85rem;
+  }
+  .statement {
+    max-width: var(--measure);
+  }
+  .answer {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    font-weight: 600;
+  }
+  .answer .field {
+    flex: 1;
+    min-width: 10rem;
+    max-width: 18rem;
+  }
+  .unit {
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .paper {
+    font-size: 0.925rem;
+  }
+  .run-end {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+
+  /* Result */
+  .score {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 1.4rem;
+    margin-bottom: 1rem;
+  }
+  .total {
+    font-size: 2.4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-top: 0.25rem;
+  }
+  .total .muted {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  .score-sub {
+    margin: 0.35rem 0 0;
+    font-size: 0.9rem;
+  }
+  .ring {
+    --value: 0;
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 5.5rem;
+    height: 5.5rem;
+    border-radius: 50%;
+    background:
+      radial-gradient(closest-side, var(--surface) 78%, transparent 80%),
+      conic-gradient(var(--ok) calc(var(--value) * 1%), var(--surface-2) 0);
+    font-weight: 750;
+  }
+  .notice {
+    color: var(--bad);
+  }
+  .table-wrap {
+    overflow-x: auto;
+  }
+  .review {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.925rem;
+  }
+  .review th,
+  .review td {
+    text-align: left;
+    padding: 0.6rem 0.85rem;
+    white-space: nowrap;
+  }
+  .review th {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    background: var(--surface-2);
+  }
+  .review td {
+    border-top: 1px solid var(--border);
+  }
+  .review .given {
+    max-width: 10rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  :global(.badge.neutral) {
+    background: var(--surface-2);
+    color: var(--muted);
+  }
+  .small {
+    font-size: 0.85rem;
+  }
+  .self {
+    margin-top: 2rem;
+  }
+  .self h2 {
+    font-size: 1.15rem;
+    margin-bottom: 0.25rem;
+  }
+  .self > p {
+    margin-top: 0;
+  }
+  .self-task {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1rem 1.15rem;
+    margin-top: 0.85rem;
+  }
+  .self-task header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .self-state {
+    margin-left: auto;
+    font-size: 0.875rem;
+  }
+  .reveal {
+    justify-self: start;
+  }
+  .solution {
+    padding: 0.25rem 1rem;
+    border-left: 3px solid var(--accent);
+    background: var(--surface-2);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+  .points {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .pt {
+    font: inherit;
+    font-weight: 700;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+  }
+  .pt[aria-pressed='true'] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+  }
+  .result-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    margin-top: 1.75rem;
+    flex-wrap: wrap;
+  }
+</style>

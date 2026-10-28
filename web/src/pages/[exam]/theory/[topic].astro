@@ -31,8 +31,8 @@ const tasks = b.tasks
   .sort((x, y) => x.ege_task - y.ege_task || x.difficulty - y.difficulty);
 ---
 
-<Base title={`${entry.data.title} — ${b.exam.title}`}>
-  <nav class="crumbs"><a href="/">Роадмап</a></nav>
+<Base title={`${entry.data.title} — ${b.exam.title}`} narrow>
+  <nav class="crumbs"><a href="/">← Роадмап</a></nav>
   <h1>
     {entry.data.title}
     {entry.data.status === 'draft' && <span class="badge draft">черновик</span>}
@@ -61,7 +61,7 @@ const tasks = b.tasks
     }
   </aside>
 
-  <article class="prose">
+  <article class="prose reading">
     <Content />
   </article>
 
@@ -93,6 +93,9 @@ const tasks = b.tasks
   h1 .badge {
     vertical-align: middle;
     margin-left: 0.5rem;
+  }
+  .crumbs a {
+    text-decoration: none;
   }
   .facts {
     font-size: 0.925rem;

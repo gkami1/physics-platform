@@ -7,6 +7,8 @@ export default defineConfig({
   // 'always' would make `astro dev` 404 /api/* before the proxy sees it. Generated links
   // all end in "/" anyway, and Caddy serves both forms in production.
   trailingSlash: 'ignore',
+  // The old task list became Practice.
+  redirects: { '/[exam]/tasks': '/[exam]/practice' },
   markdown: { processor: markdownProcessor },
   vite: {
     server: {

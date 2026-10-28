@@ -1,106 +1,346 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import { bundles, theoryUrl } from '../lib/content';
+import {
+  bundles,
+  formatDuration,
+  orderedTopics,
+  tasksUrl,
+  theoryUrl,
+  variants,
+  variantsUrl,
+} from '../lib/content';
 
 const theory = new Set((await getCollection('theory')).map((e) => e.id));
-const exams = bundles();
+const b = bundles()[0]!;
+const exam = b.exam.id;
+const topics = orderedTopics(b);
+const tasksByTopic = new Map<string, number>();
+for (const t of b.tasks)
+  for (const tp of t.topics) tasksByTopic.set(tp, (tasksByTopic.get(tp) ?? 0) + 1);
+const sections = b.roadmap.sections.map((s) => ({
+  ...s,
+  steps: topics
+    .map((t, i) => ({ ...t, step: i + 1 }))
+    .filter((t) => t.section.id === s.id),
+}));
+const titles = new Map(topics.map((t) => [t.id, t.title]));
+const variantCount = variants(b).length;
 ---
 
 <Base title="Физика ЕГЭ — роадмап">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">{b.exam.title} · {b.exam.season}</div>
+      <h1>Роадмап</h1>
+      <p class="muted">
+        Темы идут по порядку: каждая опирается на предыдущие. Прочитайте теорию, решите задачи —
+        прогресс появится здесь.
+      </p>
+    </div>
+    <road-summary class="card summary" data-total={topics.length}>
+      <div class="summary-row">
+        <span class="muted">Освоено</span>
+        <strong><span class="done">0</span> из {topics.length} тем</strong>
+      </div>
+      <div class="progress" aria-hidden="true"><span></span></div>
+      <a class="btn next" href={theoryUrl(exam, topics[0]!.id)}>
+        <span class="next-label">Начать: {topics[0]!.title}</span> →
+      </a>
+    </road-summary>
+  </header>
+
   {
-    exams.map((b) => {
-      const tasksByTopic = new Map<string, number>();
-      for (const t of b.tasks)
-        for (const tp of t.topics) tasksByTopic.set(tp, (tasksByTopic.get(tp) ?? 0) + 1);
-      return (
-        <section>
-          <h1>{b.exam.title}</h1>
-          {b.roadmap.sections.map((s) => (
-            <section class="section">
-              <h2>{s.title}</h2>
-              <ol class="topics">
-                {s.topics.map((t) => {
-                  const has = theory.has(`${b.exam.id}/${t.id}`);
-                  return (
-                    <li data-topic={`${b.exam.id}/${t.id}`}>
-                      {has ? <a href={theoryUrl(b.exam.id, t.id)}>{t.title}</a> : <span>{t.title}</span>}
-                      <span class="meta">
-                        {t.ege_tasks.length > 0 && (
-                          <span class="badge">№ {t.ege_tasks.join(', ')}</span>
-                        )}
-                        <span class="muted">задач: {tasksByTopic.get(t.id) ?? 0}</span>
-                        <span class="badge mastery" hidden />
-                      </span>
-                    </li>
-                  );
-                })}
-              </ol>
-            </section>
-          ))}
-        </section>
-      );
-    })
+    sections.map((s) => (
+      <section class="section">
+        <h2>
+          {s.title} <span class="muted count">{s.steps.length}</span>
+        </h2>
+        <ol class="path">
+          {s.steps.map((t) => {
+            const key = `${exam}/${t.id}`;
+            const hasTheory = theory.has(key);
+            const n = tasksByTopic.get(t.id) ?? 0;
+            const href = hasTheory ? theoryUrl(exam, t.id) : tasksUrl(exam, t.id);
+            const after = t.prereqs.map((p) => titles.get(p)).filter(Boolean);
+            return (
+              <li class="node" data-topic={key} data-href={href} data-title={t.title}>
+                <span class="dot" aria-hidden="true">
+                  <span class="num">{t.step}</span>
+                </span>
+                <article class="card step">
+                  <div class="step-head">
+                    <h3>
+                      <a href={href}>{t.title}</a>
+                    </h3>
+                    <span class="badge here" hidden>
+                      Следующая
+                    </span>
+                    <span class="badge mastery" hidden />
+                  </div>
+                  <div class="meta">
+                    {t.ege_tasks.length > 0 && <span class="chip">№ {t.ege_tasks.join(', ')}</span>}
+                    {after.length > 0 && <span class="muted">после: {after.join(', ')}</span>}
+                  </div>
+                  <div class="progress" aria-hidden="true">
+                    <span />
+                  </div>
+                  <div class="actions">
+                    {hasTheory ? (
+                      <a class="btn ghost small" href={theoryUrl(exam, t.id)}>
+                        Теория
+                      </a>
+                    ) : (
+                      <span class="muted small">Теория скоро</span>
+                    )}
+                    {n > 0 && (
+                      <a class="btn ghost small" href={tasksUrl(exam, t.id)}>
+                        Задачи · {n}
+                      </a>
+                    )}
+                  </div>
+                </article>
+              </li>
+            );
+          })}
+        </ol>
+      </section>
+    ))
   }
+
+  <section class="cta">
+    <a class="card cta-card" href={tasksUrl(exam)}>
+      <span class="eyebrow">Практика</span>
+      <strong>Случайная задача</strong>
+      <span class="muted">Задания по номерам и темам, с проверкой и репетитором.</span>
+    </a>
+    <a class="card cta-card" href={variantsUrl(exam)}>
+      <span class="eyebrow">Варианты</span>
+      <strong>Пробный ЕГЭ под таймер</strong>
+      <span class="muted">
+        {variantCount}
+        {variantCount === 1 ? 'вариант' : variantCount < 5 ? 'варианта' : 'вариантов'} · {
+          formatDuration(b.exam.duration_minutes)
+        }
+      </span>
+    </a>
+  </section>
 </Base>
 
 <script>
   import { api } from '../lib/api';
 
-  // Mastery is per visitor, so it is filled in on the client.
-  void api.progress().then(
-    ({ topics }) => {
-      for (const t of topics) {
-        const badge = document.querySelector<HTMLElement>(
-          `[data-topic="${CSS.escape(`${t.exam_id}/${t.topic_id}`)}"] .mastery`,
-        );
-        if (!badge) continue;
-        const pct = Math.round(t.score * 100);
-        badge.textContent = `освоено ${pct}%`;
-        badge.title = `По первым попыткам в ${t.n} задачах`;
-        badge.dataset.level = pct >= 80 ? 'high' : pct >= 50 ? 'mid' : 'low';
-        badge.hidden = false;
+  const DONE = 0.8;
+
+  class RoadSummary extends HTMLElement {
+    connectedCallback() {
+      // Mastery is per visitor, so it is filled in on the client.
+      void api.progress().then(
+        ({ topics }) => this.show(new Map(topics.map((t) => [`${t.exam_id}/${t.topic_id}`, t]))),
+        () => {},
+      );
+    }
+
+    private show(mastery: Map<string, { score: number; n: number }>) {
+      const nodes = [...document.querySelectorAll<HTMLElement>('.node')];
+      let done = 0;
+      let next: HTMLElement | undefined;
+      for (const node of nodes) {
+        const m = mastery.get(node.dataset.topic ?? '');
+        const pct = m ? Math.round(m.score * 100) : 0;
+        node.querySelector<HTMLElement>('.progress > span')?.style.setProperty('--value', `${pct}%`);
+        if (m) {
+          const badge = node.querySelector<HTMLElement>('.mastery')!;
+          badge.textContent = `${pct}%`;
+          badge.title = `Освоено по первым попыткам в ${m.n} задачах`;
+          badge.dataset.level = pct >= 80 ? 'high' : pct >= 50 ? 'mid' : 'low';
+          badge.hidden = false;
+        }
+        const isDone = !!m && m.score >= DONE;
+        node.dataset.state = isDone ? 'done' : m ? 'progress' : '';
+        if (isDone) done++;
+        else next ??= node;
       }
-    },
-    () => {},
-  );
+      this.querySelector('.done')!.textContent = String(done);
+      this.querySelector<HTMLElement>('.progress > span')!.style.setProperty(
+        '--value',
+        `${Math.round((done / Math.max(nodes.length, 1)) * 100)}%`,
+      );
+      const link = this.querySelector<HTMLAnchorElement>('.next')!;
+      if (next) {
+        next.dataset.next = '';
+        next.querySelector<HTMLElement>('.here')!.hidden = false;
+        link.href = next.dataset.href ?? link.href;
+        this.querySelector('.next-label')!.textContent =
+          `${done || mastery.size ? 'Продолжить' : 'Начать'}: ${next.dataset.title}`;
+      } else {
+        link.hidden = true;
+      }
+    }
+  }
+
+  customElements.define('road-summary', RoadSummary);
 </script>
 
 <style>
-  .topics {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--surface);
+  .summary {
+    display: grid;
+    gap: 0.6rem;
+    padding: 1rem 1.1rem;
+    min-width: min(100%, 20rem);
   }
-  .topics li {
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.925rem;
+  }
+  .next {
+    justify-content: space-between;
+    white-space: normal;
+    text-align: left;
+  }
+  .section {
+    margin-top: 2rem;
+  }
+  .section h2 {
+    font-size: 1.15rem;
+    margin: 0 0 0.9rem;
+  }
+  .count {
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+  .path {
+    --rail: 2.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.9rem;
+    position: relative;
+  }
+  /* The rail that links the steps. */
+  .path::before {
+    content: '';
+    position: absolute;
+    left: calc(var(--rail) / 2 - 1px);
+    top: 1.25rem;
+    bottom: 1.25rem;
+    width: 2px;
+    background: var(--border-strong);
+  }
+  .node {
+    display: grid;
+    grid-template-columns: var(--rail) 1fr;
+    gap: 0.9rem;
+    align-items: start;
+  }
+  .dot {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: var(--rail);
+    height: var(--rail);
+    margin-top: 0.6rem;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--border-strong);
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .node[data-state='progress'] .dot {
+    border-color: var(--warn);
+    color: var(--warn);
+  }
+  .node[data-state='done'] .dot {
+    border-color: var(--ok);
+    background: var(--ok);
+    color: var(--on-accent);
+  }
+  .node[data-state='done'] .num {
+    font-size: 0;
+  }
+  .node[data-state='done'] .num::after {
+    content: '✓';
+    font-size: 0.95rem;
+  }
+  .node[data-next] .dot {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 0 5px var(--accent-soft);
+  }
+  .node[data-next] .step {
+    border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+  }
+  .step {
+    display: grid;
+    gap: 0.6rem;
+    padding: 0.9rem 1rem;
+    transition: border-color 0.15s;
+  }
+  .step:hover {
+    border-color: var(--border-strong);
+  }
+  .step-head {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0.25rem 0.75rem;
-    padding: 0.75rem 1rem;
+    align-items: center;
+    gap: 0.4rem 0.6rem;
   }
-  .topics li + li {
-    border-top: 1px solid var(--border);
+  .step h3 {
+    margin: 0;
+    font-size: 1.02rem;
+    margin-right: auto;
   }
-  .mastery[data-level='high'] {
-    background: color-mix(in srgb, var(--ok) 15%, transparent);
-    color: var(--ok);
+  .step h3 a {
+    color: var(--text);
+    text-decoration: none;
   }
-  .mastery[data-level='mid'] {
-    background: var(--warn-soft);
-    color: var(--warn-text);
-  }
-  .mastery[data-level='low'] {
-    background: color-mix(in srgb, var(--bad) 12%, transparent);
-    color: var(--bad);
+  .step h3 a:hover {
+    color: var(--accent);
   }
   .meta {
     display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.6rem;
+    align-items: center;
+    font-size: 0.85rem;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
     align-items: center;
-    font-size: 0.875rem;
+  }
+  .small {
+    font-size: 0.85rem;
+  }
+  .cta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+  .cta-card {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1.1rem 1.2rem;
+    color: var(--text);
+    text-decoration: none;
+    transition:
+      border-color 0.15s,
+      transform 0.15s;
+  }
+  .cta-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+  .cta-card strong {
+    font-size: 1.1rem;
+  }
+  .cta-card .muted {
+    font-size: 0.9rem;
   }
 </style>
