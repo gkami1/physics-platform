@@ -32,6 +32,9 @@ class Settings(BaseSettings):
     # vLLM answers directly (hidden reasoning only adds latency). Other providers may reject
     # unknown fields: Gemini wants {} or {"reasoning_effort": "none"}.
     llm_extra_body: dict[str, Any] = {"chat_template_kwargs": {"enable_thinking": False}}
+    # Proxy for the primary's calls only, e.g. http://127.0.0.1:10809 from a local VPN client
+    # (Google refuses requests from Russia). Dev only.
+    llm_proxy: str = ""
     llm_fallback_base_url: str = ""
     llm_fallback_api_key: str = ""
     llm_fallback_model: str = "deepseek-chat"

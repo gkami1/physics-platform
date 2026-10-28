@@ -251,3 +251,13 @@ def test_primary_extra_body_defaults_to_qwen_without_thinking(
     [primary] = make_models(Settings(_env_file=None))  # type: ignore[call-arg]
     assert isinstance(primary, OpenAICompatible)
     assert primary.extra == {"chat_template_kwargs": {"enable_thinking": False}}
+
+
+def test_primary_proxy_comes_from_env(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv(
+        "API_LLM_BASE_URL", "https://generativelanguage.googleapis.com/v1beta/openai"
+    )
+    monkeypatch.setenv("API_LLM_PROXY", "http://127.0.0.1:10809")
+    [primary] = make_models(Settings(_env_file=None))  # type: ignore[call-arg]
+    assert isinstance(primary, OpenAICompatible)
+    assert primary.proxy == "http://127.0.0.1:10809"
