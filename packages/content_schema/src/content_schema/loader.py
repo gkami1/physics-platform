@@ -14,6 +14,7 @@ from typing import Any
 import yaml
 from pydantic import ValidationError
 
+from content_schema.figures import generate as generate_figures
 from content_schema.models import (
     SOLUTION_HEADING,
     AnswerKind,
@@ -99,6 +100,7 @@ def load_exam_dir(root: Path) -> LoadResult:
 
     bundle = ContentBundle(root=root, exam=exam, roadmap=roadmap, theory=theory, tasks=tasks)
     _cross_validate(bundle, res)
+    _check_figures(root, res)
     res.bundle = bundle
     return res
 
@@ -220,6 +222,19 @@ def _cross_validate(b: ContentBundle, res: LoadResult) -> None:
                 res.errors.append(f"{path}: external image '{ref}' — put it in assets/")
             elif not ((b.root / path).parent / ref).resolve().exists():
                 res.errors.append(f"{path}: missing image '{ref}'")
+
+
+def _check_figures(root: Path, res: LoadResult) -> None:
+    try:
+        stale = generate_figures(root, check=True)
+    except (ValidationError, yaml.YAMLError) as e:
+        msg = _fmt(e) if isinstance(e, ValidationError) else str(e)
+        res.errors.append(f"figures/: {msg}")
+        return
+    for name in stale:
+        res.errors.append(
+            f"assets/{name} is out of date with its spec in figures/ — run `content-build figures`"
+        )
 
 
 def _find_cycle(graph: dict[str, list[str]]) -> list[str] | None:

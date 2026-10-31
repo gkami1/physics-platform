@@ -22,6 +22,7 @@ Python (uv workspace, run from repo root):
 - `uv run mypy` — type-check
 - `uv run content-build validate` — validate `content/`
 - `uv run content-build build` — emit `build/public` and `build/private`
+- `uv run content-build figures` — regenerate `assets/*.svg` from `content/<exam>/figures/*.yaml` (validate fails on stale SVGs)
 - `uv run alembic -c api/alembic.ini upgrade head` — migrate (URL from `API_DATABASE_URL`)
 - `uv run alembic -c api/alembic.ini revision --autogenerate -m "..."` — new migration; review it and keep it dialect-neutral (`sa.func.now()`, not SQLite/PG literals)
 - `uv run uvicorn platform_api.main:app --reload` — run API locally
@@ -60,6 +61,7 @@ Smoke test (CI runs it in the docker job): `API_ENV=dev HTTP_PORT=8180 docker co
 - Astro 7 defaults to the Sätteri Markdown processor; we set `markdown.processor: unified(...)` for remark-math/rehype-katex. Don't add `markdown.remarkPlugins` at the top level.
 - `katex` is pinned via npm `overrides` so the HTML from rehype-katex and the CSS we import come from one version.
 - Keep Astro `trailingSlash: 'ignore'`: `'always'` makes `astro dev` 404 `/api/*` before the proxy.
+- Figures are inline SVG, not `<img>`, so they follow the theme: draw with `currentColor` / `fig-*` classes, never hard-coded colours. Generated ones come from `figures/*.yaml` — edit the spec, not the SVG. Interactive models are custom elements in `web/src/lib/sims/`, loaded by the theory page only when present.
 - Client-side `renderMarkdown` does not sanitize. Fine for author content; LLM output must be sanitized first.
 - State-changing API requests must carry an `Origin` matching `Host` (CSRF check). Any proxy in front of the API must keep `Host`: Caddy does by default; the Vite dev proxy needs `changeOrigin: false` (its string shorthand rewrites it).
 - SQLite returns naive datetimes. Compare times in SQL, or wrap with `actor.as_utc` before Python arithmetic or JSON output.

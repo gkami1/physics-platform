@@ -72,6 +72,12 @@ Python is a **uv workspace** (root `pyproject.toml`; members `packages/content_s
 
 **Invariant: answers never reach the browser before the server decides to reveal them.** A test asserts that no private field appears in `build/public/` or in the built site.
 
+### Figures and interactive models (decided 2026-10-31)
+Nothing is drawn by hand. Two mechanisms, no new dependencies:
+- **Generated SVG figures.** A YAML spec in `content/<exam>/figures/<name>.yaml` (pilot kind: `graph` — axes, grid, polylines, dashed guides) is rendered by `content_schema.figures` to `assets/<name>.svg` with `content-build figures`. The spec holds the same numbers the task's answer was computed from; `content-build validate` fails if a committed SVG is stale. SVGs use `currentColor` + `fig-*` classes and are **inlined** into the HTML (content-build for task statements/solutions, a remark plugin in `web/markdown.config.mjs` for theory), because an `<img>` cannot follow the light/dark theme. Markdown keeps the usual `![alt](../../assets/x.svg)` on its own line; `alt` becomes the figure's `aria-label`. One-off diagrams can be hand-written SVG in `assets/` with the same conventions.
+- **Interactive models** are vanilla custom elements (`<pp-projectile v0="20" angle="30">`, `web/src/lib/sims/`), written into theory Markdown as plain HTML with no-JS fallback text inside. The theory page imports a model's module only if the element is present, so other pages ship no extra JS. Light DOM, styled by `.sim*` rules in `global.css`. Physics uses the EGE convention g = 10 м/с².
+- Rejected: AI image generators (physically wrong diagrams), Manim/video (heavy, hard to update), Preact for sims (a dependency for what fits in plain DOM code). PhET HTML5 sims (CC-BY) may be **self-hosted** later for sandbox-style exploration; never embedded from their servers (152-ФЗ, no third-party requests).
+
 ### Task file format
 
 ```markdown
