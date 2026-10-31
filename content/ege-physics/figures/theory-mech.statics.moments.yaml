@@ -1,0 +1,45 @@
+# mech.statics.moments: lever in equilibrium, arms measured from the pivot
+kind: diagram
+size: [400, 250]
+items:
+- rect: [40, 104, 320, 10]
+  fill: surface
+- line: [[160, 114], [146, 140], [174, 140]]
+  closed: true
+  fill: surface
+- hatch: [[130, 140], [190, 140]]
+  side: 1
+- dots: [[160, 109]]
+  r: 3
+- arrow: [[60, 114], [60, 184]]
+  tone: force
+  label: '*F*_1'
+  label_at: [40, 182]
+- arrow: [[340, 114], [340, 153]]
+  tone: force
+  label: '*F*_2'
+  label_at: [362, 152]
+- arrow: [[110, 205], [60, 205]]
+  width: 1.2
+- arrow: [[110, 205], [160, 205]]
+  width: 1.2
+- arrow: [[250, 205], [160, 205]]
+  width: 1.2
+- arrow: [[250, 205], [340, 205]]
+  width: 1.2
+- text: '*d*_1'
+  at: [110, 225]
+- text: '*d*_2'
+  at: [250, 225]
+- line: [[60, 190], [60, 214]]
+  width: 1
+  dashed: true
+- line: [[160, 150], [160, 214]]
+  width: 1
+  dashed: true
+- line: [[340, 160], [340, 214]]
+  width: 1
+  dashed: true
+- text: '*F*_1*d*_1 = *F*_2*d*_2'
+  at: [200, 50]
+  size: 15

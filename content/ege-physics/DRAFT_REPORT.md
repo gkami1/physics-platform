@@ -76,6 +76,8 @@ The `ege_tasks` mapping per topic is also inferred from the 2025–2026 structur
 
 ### Figures
 
+Every theory page now has one generated figure (`figures/theory-<topic>.yaml` → `assets/`), placed at the end of the section it illustrates. They were reviewed as rendered PNGs, not yet in a browser. The hydrogen level diagram is schematic (marked «не в масштабе»).
+
 Pilot (branch `feat/figures-pilot`): `kin-0011` now uses a generated v(t) graph (statement 4 changed to «за первые 2 с прошло 8 м»; answer still 14), `thermo-0010` a heating curve, and the braking example in the uniform-acceleration theory page a v(t) graph; the free-fall page has an interactive throw model. Remaining candidates: `thermo-0021` (p–V cycle), the task-19 instrument readings (scale drawings), and `stat-0008` / `dyn-0016` (sketches of the setup). Real EGE tasks 5, 9, 14 and 19 use graphs and instrument photos much more often than this draft does.
 
 ### 2027 changes (tasks 21 and 23)

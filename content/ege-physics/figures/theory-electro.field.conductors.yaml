@@ -1,0 +1,65 @@
+# electro.field.conductors: induced charges on a metal sphere cancel the field inside
+kind: diagram
+size: [400, 230]
+items:
+- arrow: [[20, 60], [380, 60]]
+  tone: accent
+  width: 1.5
+- arrow: [[20, 95], [155.57, 95]]
+  tone: accent
+  width: 1.5
+- arrow: [[244.43, 95], [380, 95]]
+  tone: accent
+  width: 1.5
+- arrow: [[20, 130], [143.0, 130]]
+  tone: accent
+  width: 1.5
+- arrow: [[257.0, 130], [380, 130]]
+  tone: accent
+  width: 1.5
+- arrow: [[20, 165], [155.57, 165]]
+  tone: accent
+  width: 1.5
+- arrow: [[244.43, 165], [380, 165]]
+  tone: accent
+  width: 1.5
+- arrow: [[20, 200], [380, 200]]
+  tone: accent
+  width: 1.5
+- circle: [200, 130]
+  r: 55
+  fill: surface
+  width: 2
+- text: '*E* = 0'
+  at: [200, 135]
+  size: 15
+- text: −
+  at: [167.06, 108.36]
+  size: 18
+  tone: accent
+- text: −
+  at: [157.0, 136.0]
+  size: 18
+  tone: accent
+- text: −
+  at: [167.06, 163.64]
+  size: 18
+  tone: accent
+- text: +
+  at: [232.94, 108.36]
+  size: 18
+  tone: force
+- text: +
+  at: [243.0, 136.0]
+  size: 18
+  tone: force
+- text: +
+  at: [232.94, 163.64]
+  size: 18
+  tone: force
+- text: '*E*_внеш'
+  at: [40, 48]
+- text: металл
+  at: [200, 210]
+  size: 13
+  tone: muted

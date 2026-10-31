@@ -1,0 +1,36 @@
+# electro.oscillations.lc: capacitor discharges through the coil; energy goes back and forth
+kind: diagram
+size: [400, 240]
+items:
+- element: capacitor
+  at: [120, 120]
+  vertical: true
+  label: '*C*'
+  label_side: -1
+- element: coil
+  at: [280, 120]
+  vertical: true
+  label: '*L*'
+  label_side: 1
+- line: [[120, 100], [120, 50], [280, 50], [280, 100]]
+  width: 1.6
+- line: [[120, 140], [120, 190], [280, 190], [280, 140]]
+  width: 1.6
+- text: +
+  at: [138, 112]
+  size: 15
+  tone: force
+- text: −
+  at: [138, 140]
+  size: 15
+  tone: accent
+- arrow: [[170, 50], [230, 50]]
+  tone: accent
+  label: '*I*'
+  label_at: [200, 40]
+- text: '*T* = 2π√(*L**C*)'
+  at: [200, 125]
+  size: 16
+- text: '*q*^{2}/(2*C*) + *L**I*^{2}/2 = const'
+  at: [200, 228]
+  size: 13

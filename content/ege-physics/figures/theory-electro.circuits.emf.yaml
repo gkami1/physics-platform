@@ -1,0 +1,36 @@
+# electro.circuits.emf: source with EMF and internal resistance closed on a load
+kind: diagram
+size: [400, 240]
+items:
+- rect: [30, 92, 120, 76]
+  dashed: true
+  tone: muted
+  radius: 6
+- text: источник
+  at: [90, 186]
+  size: 12
+  tone: muted
+- element: battery
+  at: [62, 130]
+  label: ℰ
+  label_side: -1
+- element: resistor
+  at: [118, 130]
+  label: '*r*'
+  label_side: -1
+- line: [[42, 130], [20, 130], [20, 210], [380, 210], [380, 130], [138, 130]]
+  width: 1.6
+- element: resistor
+  at: [280, 130]
+  label: '*R*'
+  label_side: -1
+- arrow: [[170, 210], [230, 210]]
+  tone: accent
+  label: '*I*'
+  label_at: [200, 232]
+- text: '*I* = ℰ/(*R* + *r*)'
+  at: [270, 50]
+  size: 16
+- text: '*U* = ℰ − *I**r*'
+  at: [270, 78]
+  size: 14

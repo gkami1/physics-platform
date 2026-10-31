@@ -1,0 +1,69 @@
+# electro.field.coulomb: like charges repel, unlike attract; equal and opposite forces
+kind: diagram
+size: [400, 260]
+items:
+- text: одноимённые отталкиваются
+  at: [200, 26]
+  size: 13
+  tone: muted
+- circle: [140, 65]
+  r: 13
+  fill: surface
+  tone: force
+- text: +
+  at: [140, 71]
+  size: 18
+  tone: force
+- circle: [260, 65]
+  r: 13
+  fill: surface
+  tone: force
+- text: +
+  at: [260, 71]
+  size: 18
+  tone: force
+- arrow: [[124, 65], [74, 65]]
+  tone: force
+  label: '*F*'
+  label_at: [70, 55]
+- arrow: [[276, 65], [326, 65]]
+  tone: force
+  label: '*F*'
+  label_at: [330, 55]
+- text: разноимённые притягиваются
+  at: [200, 128]
+  size: 13
+  tone: muted
+- circle: [110, 168]
+  r: 13
+  fill: surface
+  tone: force
+- text: +
+  at: [110, 174]
+  size: 18
+  tone: force
+- circle: [290, 168]
+  r: 13
+  fill: surface
+  tone: accent
+- text: −
+  at: [290, 174]
+  size: 18
+  tone: accent
+- arrow: [[126, 168], [176, 168]]
+  tone: force
+  label: '*F*'
+  label_at: [170, 158]
+- arrow: [[274, 168], [224, 168]]
+  tone: force
+  label: '*F*'
+  label_at: [230, 158]
+- arrow: [[200, 200], [110, 200]]
+  width: 1.1
+- arrow: [[200, 200], [290, 200]]
+  width: 1.1
+- text: '*r*'
+  at: [200, 218]
+- text: '*F* = *k*|*q*_1||*q*_2|/*r*^{2}'
+  at: [200, 248]
+  size: 14

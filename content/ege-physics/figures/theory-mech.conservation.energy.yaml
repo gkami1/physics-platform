@@ -1,0 +1,38 @@
+# mech.conservation.energy: potential energy at the top turns into kinetic at the bottom
+kind: diagram
+size: [400, 250]
+items:
+- path: M20 60C110 60 150 200 250 200L385 200
+  width: 2
+- hatch: [[250, 200], [385, 200]]
+  side: 1
+- circle: [36, 50]
+  r: 9
+  fill: solid
+- text: '*v* = 0,  *E* = *m**g**h*'
+  at: [54, 42]
+  anchor: start
+  size: 13
+- circle: [300, 191]
+  r: 9
+  fill: solid
+- arrow: [[312, 191], [370, 191]]
+  tone: vel
+  label: '*v*'
+  label_at: [372, 176]
+- line: [[36, 60], [36, 200], [250, 200]]
+  dashed: true
+  width: 1
+  tone: muted
+- arrow: [[22, 130], [22, 62]]
+  width: 1.2
+- arrow: [[22, 130], [22, 198]]
+  width: 1.2
+- text: '*h*'
+  at: [10, 135]
+- text: '*E* = *m**v*^{2}/2'
+  at: [270, 162]
+  size: 13
+- text: 'без трения: *v* = √(2*g**h*)'
+  at: [200, 238]
+  size: 13

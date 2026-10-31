@@ -1,0 +1,36 @@
+# mech.kinematics.circular: velocity is tangent, centripetal acceleration points to the centre
+kind: diagram
+size: [400, 260]
+items:
+- circle: [200, 130]
+  r: 95
+  tone: muted
+  width: 1.5
+- dots: [[200, 130]]
+  r: 3
+- line: [[200, 130], [143.0, 206.0]]
+  dashed: true
+  width: 1.2
+- text: '*R*'
+  at: [178, 172]
+- line: [[200, 130], [277.82, 75.51]]
+  dashed: true
+  width: 1
+  tone: muted
+- arrow: [[277.82, 75.51], [234.8, 14.07]]
+  tone: vel
+  label: '*v*'
+- arrow: [[277.82, 75.51], [232.77, 107.06]]
+  tone: accent
+  label: '*a*_ц'
+  label_at: [236.77, 129.06]
+- dots: [[277.82, 75.51]]
+  r: 5
+- path: M88 170A120 120 0 0 0 125 215
+  tone: muted
+- arrow: [[118, 210], [126, 216]]
+  tone: muted
+  width: 1.5
+- text: '*v* — по касательной, *a*_ц — к центру'
+  at: [200, 252]
+  size: 13

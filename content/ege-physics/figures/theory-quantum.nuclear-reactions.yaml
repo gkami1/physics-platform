@@ -1,0 +1,59 @@
+# quantum.nuclear-reactions: a neutron splits uranium-235 into fragments and new neutrons
+kind: diagram
+size: [400, 240]
+items:
+- circle: [40, 120]
+  r: 7
+  fill: surface
+- text: '*n*'
+  at: [40, 102]
+  size: 13
+- arrow: [[50, 120], [105, 120]]
+  tone: vel
+- circle: [150, 120]
+  r: 40
+  fill: surface
+  width: 2
+- text: ^{235}U
+  at: [150, 126]
+  size: 16
+- arrow: [[195, 108], [250, 70]]
+  width: 1.5
+- arrow: [[195, 132], [250, 170]]
+  width: 1.5
+- circle: [285, 58]
+  r: 26
+  fill: surface
+  tone: force
+- circle: [285, 182]
+  r: 24
+  fill: surface
+  tone: force
+- text: осколок
+  at: [285, 63]
+  size: 11
+- text: осколок
+  at: [285, 187]
+  size: 11
+- arrow: [[200, 120], [262, 120]]
+  tone: vel
+- circle: [270, 120]
+  r: 7
+  fill: surface
+- arrow: [[318, 80], [360, 100]]
+  tone: vel
+- circle: [367, 103]
+  r: 7
+  fill: surface
+- arrow: [[318, 160], [360, 140]]
+  tone: vel
+- circle: [367, 137]
+  r: 7
+  fill: surface
+- text: 2–3 нейтрона → цепная реакция
+  at: [200, 226]
+  size: 13
+- text: ≈ 200 МэВ
+  at: [150, 186]
+  size: 13
+  tone: force

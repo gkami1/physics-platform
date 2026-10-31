@@ -1,0 +1,70 @@
+# quantum.atom: hydrogen energy levels (schematic); emission when the atom drops a level
+kind: diagram
+size: [400, 260]
+items:
+- line: [[90, 40], [300, 40]]
+  dashed: true
+  width: 1
+  tone: muted
+- text: 0 (ионизация)
+  at: [306, 44]
+  size: 11
+  anchor: start
+  tone: muted
+- line: [[90, 220], [300, 220]]
+  width: 1.6
+- text: '*n* = 1'
+  at: [82, 224]
+  size: 12
+  anchor: end
+- text: −13,6 эВ
+  at: [306, 224]
+  size: 11
+  anchor: start
+- line: [[90, 125], [300, 125]]
+  width: 1.6
+- text: '*n* = 2'
+  at: [82, 129]
+  size: 12
+  anchor: end
+- text: −3,4 эВ
+  at: [306, 129]
+  size: 11
+  anchor: start
+- line: [[90, 88], [300, 88]]
+  width: 1.6
+- text: '*n* = 3'
+  at: [82, 92]
+  size: 12
+  anchor: end
+- text: −1,51 эВ
+  at: [306, 92]
+  size: 11
+  anchor: start
+- line: [[90, 64], [300, 64]]
+  width: 1.6
+- text: '*n* = 4'
+  at: [82, 68]
+  size: 12
+  anchor: end
+- text: −0,85 эВ
+  at: [306, 68]
+  size: 11
+  anchor: start
+- arrow: [[130, 125], [130, 220]]
+  tone: accent
+  label: УФ
+  label_at: [150, 178]
+- arrow: [[195, 88], [195, 220]]
+  tone: accent
+- arrow: [[255, 88], [255, 125]]
+  tone: force
+  label: красная
+  label_at: [262, 112]
+- text: '*hν* = *E*_n − *E*_m'
+  at: [200, 250]
+  size: 14
+- text: (не в масштабе)
+  at: [44, 250]
+  size: 10
+  tone: muted

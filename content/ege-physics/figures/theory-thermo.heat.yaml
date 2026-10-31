@@ -1,0 +1,33 @@
+# thermo.heat: heating curve of ice; flat parts are phase transitions
+kind: graph
+x:
+  var: τ
+  min: 0
+  max: 10
+  step: 1
+  numbers: false
+y:
+  var: t
+  unit: °C
+  min: -40
+  max: 120
+  step: 20
+  label_every: 1
+series:
+- points: [[0, -30], [1.2, 0], [4, 0], [6.5, 100], [9.6, 100]]
+notes:
+- at: [1.05, -28]
+  text: лёд
+- at: [1.6, 8]
+  text: плавление
+- at: [5.5, 45]
+  text: вода
+  anchor: end
+- at: [7, 108]
+  text: кипение
+- at: [2.6, -14]
+  text: '*Q* = *λm*'
+  anchor: middle
+- at: [8, 80]
+  text: '*Q* = *Lm*'
+  anchor: middle

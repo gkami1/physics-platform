@@ -1,0 +1,31 @@
+# mech.dynamics.newton: forces on a block pulled along a rough table
+kind: diagram
+size: [400, 240]
+items:
+- hatch: [[30, 160], [370, 160]]
+  side: 1
+- rect: [150, 115, 80, 45]
+  fill: surface
+- text: '*m*'
+  at: [190, 143]
+- arrow: [[190, 137], [190, 70]]
+  tone: force
+  label: '*N*'
+- arrow: [[190, 137], [190, 212]]
+  tone: force
+  label: '*m**g*'
+  label_at: [212, 210]
+- arrow: [[230, 137], [310, 137]]
+  tone: force
+  label: '*F*'
+- arrow: [[150, 155], [100, 155]]
+  tone: force
+  label: '*F*_тр'
+  label_at: [96, 145]
+- arrow: [[250, 100], [310, 100]]
+  tone: accent
+  label: '*a*'
+  label_at: [326, 104]
+- text: '*m**a* = *F* − *F*_тр'
+  at: [300, 40]
+  size: 15

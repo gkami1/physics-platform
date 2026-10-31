@@ -1,0 +1,36 @@
+# mech.oscillations.waves: wavelength between neighbouring crests, amplitude, wave speed
+kind: diagram
+size: [400, 230]
+items:
+- line: [[30, 120], [380, 120]]
+  width: 1
+  tone: muted
+- sine: [40, 120]
+  length: 320
+  amplitude: 50
+  periods: 2
+  tone: accent
+  width: 2.5
+- line: [[80, 70], [80, 40]]
+  width: 1
+  dashed: true
+- line: [[240, 70], [240, 40]]
+  width: 1
+  dashed: true
+- arrow: [[160, 48], [80, 48]]
+  width: 1.2
+- arrow: [[160, 48], [240, 48]]
+  width: 1.2
+- text: '*λ*'
+  at: [160, 38]
+- arrow: [[320, 120], [320, 168]]
+  width: 1.2
+- text: '*A*'
+  at: [334, 150]
+- arrow: [[300, 205], [375, 205]]
+  tone: vel
+  label: '*v*'
+  label_at: [388, 210]
+- text: '*λ* = *v**T* = *v*/*ν*'
+  at: [130, 210]
+  size: 14

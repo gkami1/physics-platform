@@ -1,0 +1,48 @@
+# quantum.nucleus: nucleons in a helium-4 nucleus
+kind: diagram
+size: [400, 220]
+items:
+- circle: [110, 95]
+  r: 18
+  fill: solid
+  tone: force
+- circle: [146, 95]
+  r: 18
+  fill: surface
+- circle: [110, 131]
+  r: 18
+  fill: surface
+- circle: [146, 131]
+  r: 18
+  fill: solid
+  tone: force
+- text: +
+  at: [110, 101]
+  size: 16
+- text: +
+  at: [146, 137]
+  size: 16
+- circle: [225, 70]
+  r: 9
+  fill: solid
+  tone: force
+- text: протон, заряд +*e*
+  at: [243, 75]
+  anchor: start
+  size: 13
+- circle: [225, 104]
+  r: 9
+  fill: surface
+- text: нейтрон, без заряда
+  at: [243, 109]
+  anchor: start
+  size: 13
+- text: 'ядро гелия ^{4}He: *Z* = 2, *A* = 4'
+  at: [128, 190]
+  size: 14
+- text: нейтронов *N* = *A* − *Z*
+  at: [300, 160]
+  size: 13
+- text: '*E*_св = Δ*m**c*^{2}'
+  at: [300, 190]
+  size: 14

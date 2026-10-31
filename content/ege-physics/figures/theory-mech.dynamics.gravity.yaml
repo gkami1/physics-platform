@@ -1,0 +1,35 @@
+# mech.dynamics.gravity: satellite on a circular orbit; gravity is the centripetal force
+kind: diagram
+size: [400, 260]
+items:
+- circle: [150, 130]
+  r: 115
+  dashed: true
+  tone: muted
+- circle: [150, 130]
+  r: 55
+  fill: surface
+- text: Земля
+  at: [150, 135]
+  size: 13
+- line: [[150, 130], [117.0, 86.0]]
+  width: 1.2
+- text: '*R*'
+  at: [120, 112]
+- arrow: [[265, 130], [265, 60]]
+  tone: vel
+  label: '*v*'
+- arrow: [[265, 130], [210, 130]]
+  tone: force
+  label: '*F*'
+  label_at: [210, 152]
+- dots: [[265, 130]]
+  r: 6
+- text: '*r* = *R* + *h*'
+  at: [277, 156]
+  anchor: start
+  size: 13
+- text: '*v* = √(*G**M*/*r*)'
+  at: [277, 176]
+  anchor: start
+  size: 13

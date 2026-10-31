@@ -1,0 +1,34 @@
+# mech.statics.hydrostatics: floating block, buoyant force, pressure at depth h
+kind: diagram
+size: [400, 250]
+items:
+- rect: [61, 92, 278, 127]
+  fill: accent
+  width: 0
+- line: [[60, 40], [60, 220], [340, 220], [340, 40]]
+  width: 2
+- line: [[60, 92], [340, 92]]
+  tone: accent
+  width: 1.5
+- rect: [120, 62, 70, 60]
+  fill: surface
+- arrow: [[155, 92], [155, 30]]
+  tone: force
+  label: '*F*_A'
+  label_at: [178, 36]
+- arrow: [[155, 92], [155, 160]]
+  tone: force
+  label: '*m**g*'
+  label_at: [178, 160]
+- arrow: [[285, 92], [285, 180]]
+  width: 1.2
+  label: '*h*'
+  label_at: [298, 140]
+- dots: [[285, 180]]
+  r: 3.5
+- text: '*p* = *ρ**g**h*'
+  at: [285, 206]
+  size: 13
+- text: '*F*_A = *ρ*_ж*g**V*_погр'
+  at: [200, 244]
+  size: 13
