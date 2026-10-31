@@ -65,7 +65,7 @@ The `ege_tasks` mapping per topic is also inferred from the 2025–2026 structur
 ### Physics and wording I'd like a second look at
 
 - `mkt-0011` (task 9), statement 4: after halving the volume the vapour is *exactly* saturated (φ = 100 %). It is correct but borderline; consider a factor that leaves no doubt.
-- `thermo-0010` (task 9): the end of melting (4 min) is inferred from the table; the statement says losses are neglected. A heating graph (SVG) would read more like the real exam.
+- `thermo-0010` (task 9): now uses a generated heating-curve graph instead of a table; check that the grid (0,5 min × 20 °C) is readable on a phone.
 - `mag-0011` (task 14), statement 5: relies on aluminium being practically non-magnetic. True at EGE level, but a pedantic reader could object.
 - `el-0019` (task 25): fringe fields of the capacitor are neglected (stated in the task).
 - `stat-0008` (task 26): standard ladder problem; check that the expected justification matches FIPI criteria.
@@ -76,7 +76,7 @@ The `ege_tasks` mapping per topic is also inferred from the 2025–2026 structur
 
 ### Figures
 
-No SVG figures were made; all tasks are text- or table-based. Candidates that would benefit from a figure: `thermo-0021` (p–V cycle), `thermo-0010` (heating curve), `kin-0011` (x(t) table → graph), the task-19 instrument readings (scale drawings), and `stat-0008` / `dyn-0016` (sketches of the setup). Real EGE tasks 5, 9, 14 and 19 use graphs and instrument photos much more often than this draft does.
+Pilot (branch `feat/figures-pilot`): `kin-0011` now uses a generated v(t) graph (statement 4 changed to «за первые 2 с прошло 8 м»; answer still 14), `thermo-0010` a heating curve, and the braking example in the uniform-acceleration theory page a v(t) graph; the free-fall page has an interactive throw model. Remaining candidates: `thermo-0021` (p–V cycle), the task-19 instrument readings (scale drawings), and `stat-0008` / `dyn-0016` (sketches of the setup). Real EGE tasks 5, 9, 14 and 19 use graphs and instrument photos much more often than this draft does.
 
 ### 2027 changes (tasks 21 and 23)
 

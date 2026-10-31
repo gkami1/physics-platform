@@ -1,0 +1,6 @@
+# mech.kinematics.uniform-accel, «Как это выглядит на ЕГЭ»: 72 км/ч, a = 4 м/с², stop at 5 s.
+kind: graph
+x: {var: t, unit: с, min: 0, max: 6, step: 1}
+y: {var: v, unit: м/с, min: 0, max: 20, step: 4}
+series:
+  - points: [[0, 20], [5, 0], [6, 0]]

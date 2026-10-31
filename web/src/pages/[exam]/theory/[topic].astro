@@ -85,6 +85,12 @@ const tasks = b.tasks
   }
 </Base>
 
+<script>
+  // Interactive models are written into theory Markdown as custom elements. Fetch a model's
+  // code only on pages that use it, so most theory pages stay JavaScript-free.
+  if (document.querySelector('pp-projectile')) void import('../../../lib/sims/projectile');
+</script>
+
 <style>
   .crumbs {
     margin-top: 1rem;

@@ -1,0 +1,7 @@
+# thermo-0010: 0,5 kg, heater 1 kW. Solid 20→80 °C in 1 min (c = 2000), melting 1–4 min
+# (λ = 360 кДж/кг), liquid 80→120 °C in 1 min (c = 3000). Answer «12» depends on these numbers.
+kind: graph
+x: {var: τ, unit: мин, min: 0, max: 5, step: 0.5, label_every: 2}
+y: {var: t, unit: °C, min: 0, max: 140, step: 20}
+series:
+  - points: [[0, 20], [1, 80], [4, 80], [5, 120]]
