@@ -1,6 +1,7 @@
 """Figure specs → SVG, and inlining SVG images into Markdown."""
 
 import json
+import re
 import shutil
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -10,12 +11,15 @@ from pydantic import ValidationError
 
 from content_schema.build import build
 from content_schema.figures import (
+    DiagramSpec,
     GraphSpec,
     _num,
     figure_html,
     generate,
     inline_svg_images,
+    render_diagram,
     render_graph,
+    rich_text,
 )
 from content_schema.loader import load_exam_dir
 
@@ -124,3 +128,77 @@ def test_public_build_inlines_task_figures(tmp_path: Path) -> None:
     (task,) = [t for t in public["tasks"] if t["id"] == "kin-0011"]
     assert '<figure class="fig"' in task["statement"]
     assert "assets/kin-0011.svg" not in task["statement"]
+
+
+# --- diagrams -------------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("markup", "expected"),
+    [
+        ("*v*", '<tspan font-style="italic">v</tspan>'),
+        ("F_тр", 'F<tspan dy="4.2" font-size="10.1">тр</tspan>'),
+        ("v^{2}", 'v<tspan dy="-4.2" font-size="10.1">2</tspan>'),
+        ("a < b", "a &lt; b"),
+    ],
+)
+def test_rich_text(markup: str, expected: str) -> None:
+    assert expected in rich_text(markup, 14)
+
+
+def diagram(*items: dict[str, object]) -> DiagramSpec:
+    return DiagramSpec.model_validate({"kind": "diagram", "items": list(items)})
+
+
+ALL_ITEMS: list[dict[str, object]] = [
+    {"line": [[0, 0], [10, 10]], "fill": "surface"},
+    {"arrow": [[0, 0], [50, 0]], "tone": "force", "label": "*F*"},
+    {"circle": [20, 20], "r": 5, "label": "+"},
+    {"rect": [0, 0, 10, 10], "rotate": 30},
+    {"text": "*m*", "at": [5, 5]},
+    {"hatch": [[0, 100], [100, 100]]},
+    {"spring": [[0, 50], [100, 50]]},
+    {"angle": [0, 0], "start": 0, "end": 30, "label": "*α*"},
+    {"sine": [0, 50], "length": 100, "amplitude": 10},
+    {"dots": [[1, 1], [2, 2]]},
+    *(
+        {"element": e, "at": [50, 50], "label": "*R*"}
+        for e in (
+            "resistor",
+            "battery",
+            "capacitor",
+            "lamp",
+            "ammeter",
+            "voltmeter",
+            "galvanometer",
+            "switch",
+            "coil",
+            "rheostat",
+        )
+    ),
+    {"path": "M0 0L10 10", "tone": "vel"},
+]
+
+
+@pytest.mark.parametrize("item", ALL_ITEMS, ids=lambda i: next(iter(i)))
+def test_every_diagram_item_renders_valid_svg(item: dict[str, object]) -> None:
+    svg = render_diagram(diagram(item))
+    ET.fromstring(svg)  # noqa: S314 — our own generator output
+
+
+def test_tones_are_classes_with_fallback_colour() -> None:
+    svg = render_diagram(diagram({"arrow": [[0, 0], [50, 0]], "tone": "force"}))
+    assert '<g class="fig-force" color="crimson">' in svg
+
+
+def test_unknown_item_is_rejected() -> None:
+    with pytest.raises(ValidationError):
+        diagram({"blob": [0, 0]})
+
+
+def test_floor_hatch_strokes_go_below_the_line() -> None:
+    svg = render_diagram(diagram({"hatch": [[0, 100], [100, 100]]}))
+    stroke_path = svg.split('stroke-width="1" d="', 1)[1]
+    strokes = re.findall(r"M[\d.]+ 100L[\d.]+ ([\d.]+)", stroke_path)
+    assert strokes
+    assert all(float(y) > 100 for y in strokes)

@@ -312,6 +312,32 @@ blockquote {
   stroke: var(--accent);
 }
 
+/* Diagram tones: groups set `color`, shapes inside draw with currentColor. */
+.fig .fig-force {
+  color: var(--bad);
+}
+
+.fig .fig-vel {
+  color: var(--ok);
+}
+
+.fig .fig-accent {
+  color: var(--accent);
+}
+
+.fig .fig-muted {
+  color: var(--muted);
+}
+
+.fig .fig-fill {
+  fill: var(--surface-2);
+}
+
+.fig .fig-area {
+  fill: currentColor;
+  fill-opacity: 0.16;
+}
+
 /* Interactive models (<pp-projectile> etc., src/lib/sims/). */
 .sim {
   display: block;
