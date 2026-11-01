@@ -41,8 +41,8 @@ Each milestone has a **definition of done**; a milestone is not finished until i
 
 ## Theory ladders (2026-11-01) — mechanics and thermo done
 - Theory pages rewritten as steps from 7th grade to EGE level, each tagged with a grade badge and followed by an embedded step task (see ARCHITECTURE «Theory as a ladder»).
-- Done: kinematics (4 topics, 32 step tasks), dynamics (Newton, forces, gravity — 22 step tasks), statics (moments, hydrostatics — 15 step tasks), conservation laws (momentum, work and power, energy — 23 step tasks), oscillations and waves (15 step tasks), molecular physics (MKT basics, ideal gas, gas laws, humidity — 25 step tasks), thermodynamics (heat, internal energy, first law, heat engines — 26 step tasks), electrostatics (Coulomb, field, conductors, capacitors — 25 step tasks), DC circuits (Ohm, EMF, power — 20 step tasks), magnetism (Ampère, Lorentz — 12 step tasks).
-- **Next:** author review → rest of electrodynamics (induction, EM oscillations, optics).
+- Done: kinematics (4 topics, 32 step tasks), dynamics (Newton, forces, gravity — 22 step tasks), statics (moments, hydrostatics — 15 step tasks), conservation laws (momentum, work and power, energy — 23 step tasks), oscillations and waves (15 step tasks), molecular physics (MKT basics, ideal gas, gas laws, humidity — 25 step tasks), thermodynamics (heat, internal energy, first law, heat engines — 26 step tasks), electrostatics (Coulomb, field, conductors, capacitors — 25 step tasks), DC circuits (Ohm, EMF, power — 20 step tasks), magnetism (Ampère, Lorentz — 12 step tasks), induction (Faraday, self-induction — 11 step tasks).
+- **Next:** author review → rest of electrodynamics ( EM oscillations, optics).
 
 ## M6 — Roadmap and guidance (week 6)
 - Roadmap graph page (prerequisites, EGE task numbers per topic).
