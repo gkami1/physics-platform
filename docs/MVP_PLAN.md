@@ -39,10 +39,10 @@ Each milestone has a **definition of done**; a milestone is not finished until i
 - Dark app shell; roadmap path; practice table with random task; timed synthetic variants with Part 2 self-assessment (see ARCHITECTURE §5 «Site structure»).
 - Covers M6's «roadmap page» and the Part 2 self-assessment for variants.
 
-## Theory ladders (2026-11-01) — mechanics and molecular physics done
+## Theory ladders (2026-11-01) — mechanics and thermo done
 - Theory pages rewritten as steps from 7th grade to EGE level, each tagged with a grade badge and followed by an embedded step task (see ARCHITECTURE «Theory as a ladder»).
-- Done: kinematics (4 topics, 32 step tasks), dynamics (Newton, forces, gravity — 22 step tasks), statics (moments, hydrostatics — 15 step tasks), conservation laws (momentum, work and power, energy — 23 step tasks), oscillations and waves (15 step tasks), molecular physics (MKT basics, ideal gas, gas laws, humidity — 25 step tasks).
-- **Next:** author review → thermodynamics (heat, internal energy, first law, heat engines).
+- Done: kinematics (4 topics, 32 step tasks), dynamics (Newton, forces, gravity — 22 step tasks), statics (moments, hydrostatics — 15 step tasks), conservation laws (momentum, work and power, energy — 23 step tasks), oscillations and waves (15 step tasks), molecular physics (MKT basics, ideal gas, gas laws, humidity — 25 step tasks), thermodynamics (heat, internal energy, first law, heat engines — 26 step tasks).
+- **Next:** author review → electrodynamics.
 
 ## M6 — Roadmap and guidance (week 6)
 - Roadmap graph page (prerequisites, EGE task numbers per topic).
