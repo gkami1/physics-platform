@@ -17,6 +17,7 @@ from pydantic import ValidationError
 from content_schema.figures import generate as generate_figures
 from content_schema.models import (
     SOLUTION_HEADING,
+    STEP_HEADING,
     STEPS_DIR,
     TASK_EMBED_LOOSE,
     AnswerKind,
@@ -220,6 +221,7 @@ def _cross_validate(b: ContentBundle, res: LoadResult) -> None:
             )
 
     _check_embeds(b, res)
+    _check_steps(b, res)
 
     for doc, path in [(p.body, p.path) for p in b.theory] + [
         (t.statement + t.solution, t.path) for t in b.tasks
@@ -257,6 +259,26 @@ def _check_embeds(b: ContentBundle, res: LoadResult) -> None:
     for t in b.tasks:
         if t.meta.ege_task is None and t.meta.id not in where:
             res.errors.append(f"{t.path}: step task is not embedded in any theory page")
+
+
+def _check_steps(b: ContentBundle, res: LoadResult) -> None:
+    """Ladder pages: steps numbered 1..N, each with a grade 7–11 that never goes down."""
+    for page in b.theory:
+        steps = STEP_HEADING.findall(page.body)
+        last = 0
+        for i, (n, lo, hi) in enumerate(steps, start=1):
+            where = f"{page.path}: «Шаг {n}»"
+            if int(n) != i:
+                res.errors.append(f"{where} should be «Шаг {i}» (steps are numbered in order)")
+            if not lo:
+                res.errors.append(f"{where} needs a grade, e.g. «(9 класс)», at the end")
+                continue
+            low, high = int(lo), int(hi or lo)
+            if not 7 <= low <= high <= 11:
+                res.errors.append(f"{where}: grade must be within 7–11")
+            if low < last:
+                res.errors.append(f"{where}: grade goes down from {last} to {low}")
+            last = low
 
 
 def _check_figures(root: Path, res: LoadResult) -> None:

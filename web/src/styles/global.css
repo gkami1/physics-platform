@@ -568,3 +568,18 @@ task-answer .final {
   margin: 0.5rem 0 0.25rem;
   font-size: 0.875rem;
 }
+
+/* Grade of a theory ladder step (remarkGradeBadges in markdown.config.mjs). */
+.grade-badge {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.1rem 0.5rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--accent);
+  vertical-align: middle;
+  white-space: nowrap;
+}

@@ -204,6 +204,12 @@ SOLUTION_HEADING = re.compile(r"^##\s+Решение\s*$", re.MULTILINE)
 TASK_EMBED = re.compile(r'^<pp-task id="([^"]+)"></pp-task>$', re.MULTILINE)
 TASK_EMBED_LOOSE = re.compile(r"<pp-task\b")
 
+# A ladder step heading: `## Шаг 3. Ускорение — вектор (9 класс)` or `(9–10 класс)`.
+# The site turns the grade into a badge (web/markdown.config.mjs).
+STEP_HEADING = re.compile(
+    r"^## Шаг (\d+)\.\s.*?(?:\s\((\d{1,2})(?:–(\d{1,2}))? класс\))?\s*$", re.M
+)
+
 STEPS_DIR = "steps"  # tasks/steps/: step tasks without an EGE number
 
 

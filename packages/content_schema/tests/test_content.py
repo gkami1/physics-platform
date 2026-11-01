@@ -169,6 +169,38 @@ def test_malformed_embed(scratch: Path) -> None:
     assert "write task embeds alone on a line" in _errors(scratch)
 
 
+@pytest.mark.parametrize(
+    ("old", "new", "message"),
+    [
+        (
+            "## Шаг 2. Равномерное движение: $s = vt$ (7 класс)",
+            "## Шаг 2. Равномерное движение: $s = vt$",
+            "needs a grade",
+        ),
+        (
+            "## Шаг 2. Равномерное движение: $s = vt$ (7 класс)",
+            "## Шаг 5. Равномерное движение: $s = vt$ (7 класс)",
+            "should be «Шаг 2»",
+        ),
+        ("## Шаг 5. Система отсчёта (9 класс)", "## Шаг 5. Система отсчёта (8–9 класс)", ""),
+        (
+            "## Шаг 6. Перемещение — это вектор (9 класс)",
+            "## Шаг 6. Перемещение — это вектор (7 класс)",
+            "grade goes down from 9 to 7",
+        ),
+        (
+            "## Шаг 1. Путь, время и единицы (7 класс)",
+            "## Шаг 1. Путь, время и единицы (5 класс)",
+            "within 7–11",
+        ),
+    ],
+)
+def test_step_grades(scratch: Path, old: str, new: str, message: str) -> None:
+    _edit(scratch / BASICS, old, new)
+    errors = _errors(scratch)
+    assert message in errors if message else errors == ""
+
+
 def test_public_theory_lists_embedded_tasks(tmp_path: Path) -> None:
     res = load_exam_dir(CONTENT / "ege-physics")
     assert res.bundle is not None

@@ -110,8 +110,27 @@ function remarkTaskEmbeds() {
   };
 }
 
+const GRADE = / \((\d{1,2}(?:–\d{1,2})?) класс\)\s*$/;
+
+/**
+ * Ladder steps: `## Шаг 3. Ускорение — вектор (9 класс)` → the grade becomes a badge after
+ * the heading text. `content-build validate` checks the numbering and that grades only rise.
+ */
+function remarkGradeBadges() {
+  return (tree) => {
+    for (const node of tree.children) {
+      if (node.type !== 'heading' || node.depth !== 2) continue;
+      const last = node.children.at(-1);
+      const m = last?.type === 'text' && GRADE.exec(last.value);
+      if (!m) continue;
+      last.value = last.value.slice(0, m.index);
+      node.children.push({ type: 'html', value: ` <span class="grade-badge">${escapeAttr(m[1])} класс</span>` });
+    }
+  };
+}
+
 export const markdownProcessor = unified({
-  remarkPlugins: [remarkMath, remarkInlineSvg, remarkTaskEmbeds],
+  remarkPlugins: [remarkMath, remarkInlineSvg, remarkTaskEmbeds, remarkGradeBadges],
   rehypePlugins: [rehypeKatex],
   smartypants: false, // English curly quotes are wrong for Russian text
 });
