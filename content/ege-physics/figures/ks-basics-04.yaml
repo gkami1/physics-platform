@@ -1,0 +1,12 @@
+# ks-basics-04: v1 = 5 м/с, v2 = 2 м/с. Answer «24» (40 − 16 m at 8 s) depends on these numbers.
+kind: graph
+x: {var: t, unit: с, min: 0, max: 10, step: 1, label_every: 2}
+y: {var: s, unit: м, min: 0, max: 50, step: 10}
+series:
+  - points: [[0, 0], [10, 50]]
+  - points: [[0, 0], [10, 20]]
+    dashed: true
+    tone: vel
+notes:
+  - {at: [6.4, 36], text: "1", anchor: end}
+  - {at: [8.6, 21], text: "2", anchor: middle}
