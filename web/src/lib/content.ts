@@ -27,7 +27,8 @@ export interface TaskNumberSpec {
 
 export interface PublicTask {
   id: string;
-  ege_task: number;
+  /** null: a step task embedded in a theory page, scored by `exam.practice`. */
+  ege_task: number | null;
   topics: string[];
   difficulty: number;
   status: 'draft' | 'published';
@@ -46,9 +47,11 @@ export interface PublicBundle {
     verified: boolean;
     duration_minutes: number;
     tasks: Record<string, TaskNumberSpec>;
+    practice: TaskNumberSpec | null;
   };
   roadmap: { sections: Section[] };
-  theory: { topic: string; title: string; status: string; path: string }[];
+  /** `tasks`: ids embedded in the page as step tasks, in page order. */
+  theory: { topic: string; title: string; status: string; path: string; tasks: string[] }[];
   tasks: PublicTask[];
 }
 
@@ -78,6 +81,23 @@ export function bundle(examId: string): PublicBundle {
 
 export function topicsById(b: PublicBundle): Map<string, Topic> {
   return new Map(b.roadmap.sections.flatMap((s) => s.topics).map((t) => [t.id, t]));
+}
+
+/** Scoring spec of a task: its EGE number's, or `practice` for step tasks. */
+export function specFor(b: PublicBundle, t: PublicTask): TaskNumberSpec {
+  const spec = t.ege_task === null ? b.exam.practice : b.exam.tasks[String(t.ege_task)];
+  if (!spec) throw new Error(`Task ${t.id}: no scoring spec for ege_task=${t.ege_task}`);
+  return spec;
+}
+
+/** Sort key: numbered tasks by number, step tasks first (they are the easiest). */
+export function taskOrder(t: PublicTask): number {
+  return t.ege_task ?? 0;
+}
+
+/** The theory page that embeds a task as a step, if any. */
+export function embeddingTopic(b: PublicBundle, taskId: string): string | undefined {
+  return b.theory.find((p) => p.tasks.includes(taskId))?.topic;
 }
 
 export function theoryUrl(examId: string, topicId: string): string {

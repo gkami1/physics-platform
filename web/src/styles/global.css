@@ -455,3 +455,116 @@ blockquote {
   min-height: 1.5em;
   font-variant-numeric: tabular-nums;
 }
+
+/* <task-answer> (src/lib/task-answer.ts): task pages and theory step tasks. */
+task-answer {
+  display: block;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+task-answer label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+task-answer .row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+task-answer input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  font-size: 1.1rem; /* ≥16px stops iOS zooming on focus */
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+}
+task-answer .unit {
+  color: var(--muted);
+  white-space: nowrap;
+}
+task-answer button {
+  font: inherit;
+  font-weight: 600;
+  padding: 0.55rem 1rem;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--surface);
+  cursor: pointer;
+}
+task-answer button:disabled {
+  opacity: 0.6;
+}
+task-answer .reveal {
+  margin-top: 0.5rem;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+task-answer .verdict {
+  font-weight: 600;
+  margin: 0.75rem 0 0.25rem;
+}
+task-answer .verdict[data-kind='correct'] {
+  color: var(--ok);
+}
+task-answer .verdict[data-kind='partial'] {
+  color: var(--warn-text);
+}
+task-answer .verdict[data-kind='wrong'],
+task-answer .verdict[data-kind='error'] {
+  color: var(--bad);
+}
+task-answer .history {
+  font-size: 0.875rem;
+  margin: 0.25rem 0;
+}
+task-answer .hint {
+  margin: 0;
+}
+task-answer .solution {
+  margin-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+task-answer .final {
+  font-weight: 600;
+}
+
+/* Step tasks embedded in theory pages (remarkTaskEmbeds in markdown.config.mjs). */
+.step-task {
+  margin: 1.5rem 0;
+  padding: 0.75rem 1rem 0.5rem;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.step-task-label {
+  margin: 0 0 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.step-task-statement > :first-child {
+  margin-top: 0;
+}
+.step-task task-answer {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+.step-task-more {
+  margin: 0.5rem 0 0.25rem;
+  font-size: 0.875rem;
+}

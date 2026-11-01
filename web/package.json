@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "content": "uv run --project .. content-build build --content ../content --out ../build",
+    "content": "uv run --project .. content-build build --content ../content --out ../build && node -e \"require('fs').rmSync('.astro/data-store.json',{force:true})\"",
     "dev": "npm run content && astro dev",
     "build": "npm run content && astro build",
     "build:site": "astro build",

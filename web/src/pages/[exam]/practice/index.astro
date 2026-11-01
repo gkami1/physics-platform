@@ -8,6 +8,8 @@ import {
   formatDuration,
   orderedTopics,
   type PublicBundle,
+  specFor,
+  taskOrder,
   taskUrl,
   variantsUrl,
 } from '../../../lib/content';
@@ -30,10 +32,10 @@ const numbers = Object.keys(b.exam.tasks)
   .filter((n) => b.tasks.some((t) => t.ege_task === n));
 const rows = await Promise.all(
   [...b.tasks]
-    .sort((x, y) => x.ege_task - y.ege_task || x.difficulty - y.difficulty)
+    .sort((x, y) => taskOrder(x) - taskOrder(y) || x.difficulty - y.difficulty)
     .map(async (t) => ({
       t,
-      spec: b.exam.tasks[String(t.ege_task)]!,
+      spec: specFor(b, t),
       preview: await renderMarkdown(firstParagraph(t.statement)),
     })),
 );
@@ -66,6 +68,11 @@ const rows = await Promise.all(
             <span>Номер</span>
             <select class="field" name="number">
               <option value="">Все номера</option>
+              {
+                b.exam.practice && b.tasks.some((t) => t.ege_task === null) && (
+                  <option value="steps">{b.exam.practice.title}</option>
+                )
+              }
               {
                 numbers.map((n) => (
                   <option value={n}>
@@ -114,14 +121,20 @@ const rows = await Promise.all(
                     data-id={t.id}
                     data-href={taskUrl(exam, t.id)}
                     data-part={spec.part}
-                    data-number={t.ege_task}
+                    data-number={t.ege_task ?? 'steps'}
                     data-topics={t.topics.join(' ')}
                   >
                     <td class="c-status">
                       <span class="status" title="Не решена" />
                     </td>
                     <td class="c-num">
-                      <span class="chip">№ {t.ege_task}</span>
+                      {t.ege_task === null ? (
+                        <span class="chip" title={spec.title}>
+                          Т
+                        </span>
+                      ) : (
+                        <span class="chip">№ {t.ege_task}</span>
+                      )}
                     </td>
                     <td class="c-task">
                       <a href={taskUrl(exam, t.id)} class="preview" set:html={preview} />

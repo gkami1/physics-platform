@@ -3,7 +3,7 @@ import type { GetStaticPaths } from 'astro';
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
 import TutorChat from '../../../components/TutorChat.astro';
-import { bundle, taskUrl, theoryUrl, topicsById } from '../../../lib/content';
+import { bundle, taskOrder, taskUrl, theoryUrl, topicsById } from '../../../lib/content';
 
 export const getStaticPaths = (async () => {
   const pages = await getCollection('theory');
@@ -26,9 +26,11 @@ if (!topic) throw new Error(`Theory page ${entry.id} references unknown topic`);
 
 const { Content } = await render(entry);
 const prereqs = topic.prereqs.map((id) => topics.get(id)).filter((t) => t !== undefined);
+// Step tasks are already inside the text; the list below is for everything else.
+const embedded = new Set(b.theory.find((p) => p.topic === topic.id)?.tasks ?? []);
 const tasks = b.tasks
-  .filter((t) => t.topics.includes(topic.id))
-  .sort((x, y) => x.ege_task - y.ege_task || x.difficulty - y.difficulty);
+  .filter((t) => t.topics.includes(topic.id) && !embedded.has(t.id))
+  .sort((x, y) => taskOrder(x) - taskOrder(y) || x.difficulty - y.difficulty);
 ---
 
 <Base title={`${entry.data.title} — ${b.exam.title}`} narrow>
@@ -75,7 +77,8 @@ const tasks = b.tasks
           {tasks.map((t, i) => (
             <li>
               <a href={taskUrl(exam, t.id)}>
-                Задача {i + 1} · задание № {t.ege_task}
+                Задача {i + 1}
+                {t.ege_task === null ? ' · к теории' : ` · задание № ${t.ege_task}`}
               </a>
             </li>
           ))}
@@ -89,6 +92,8 @@ const tasks = b.tasks
   // Interactive models are written into theory Markdown as custom elements. Fetch a model's
   // code only on pages that use it, so most theory pages stay JavaScript-free.
   if (document.querySelector('pp-projectile')) void import('../../../lib/sims/projectile');
+  // Step tasks: the answer form is static HTML; checking needs the element's code.
+  if (document.querySelector('task-answer')) void import('../../../lib/task-answer');
 </script>
 
 <style>

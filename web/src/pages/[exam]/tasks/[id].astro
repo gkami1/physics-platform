@@ -6,8 +6,10 @@ import Base from '../../../layouts/Base.astro';
 import {
   bundles,
   difficultyLabel,
+  embeddingTopic,
   type PublicBundle,
   type PublicTask,
+  specFor,
   tasksUrl,
   theoryUrl,
   topicsById,
@@ -25,19 +27,30 @@ interface Props {
 }
 
 const { b, task } = Astro.props;
-const spec = b.exam.tasks[String(task.ege_task)];
-if (!spec) throw new Error(`Task ${task.id}: EGE task ${task.ege_task} missing from exam spec`);
+const spec = specFor(b, task);
 const topics = topicsById(b);
+const stepOf = embeddingTopic(b, task.id);
+const heading = task.ege_task === null ? spec.title : `Задание № ${task.ege_task}`;
 const theoryTopics = new Set(b.theory.map((t) => t.topic));
 const statementHtml = await renderMarkdown(task.statement);
 ---
 
-<Base title={`Задание ${task.ege_task} · ${task.id} — ${b.exam.title}`} narrow>
+<Base title={`${heading} · ${task.id} — ${b.exam.title}`} narrow>
   <nav class="crumbs">
-    <a href={tasksUrl(b.exam.id)} class="back">← Практика</a>
+    {
+      stepOf ? (
+        <a href={theoryUrl(b.exam.id, stepOf)} class="back">
+          ← {topics.get(stepOf)?.title ?? 'К теории'}
+        </a>
+      ) : (
+        <a href={tasksUrl(b.exam.id)} class="back">
+          ← Практика
+        </a>
+      )
+    }
     <a href="#" class="btn ghost small more" hidden>Ещё задача 🎲</a>
   </nav>
-  <h1>Задание № {task.ege_task}</h1>
+  <h1>{heading}</h1>
   <p class="meta">
     <span class="badge">{spec.title}</span>
     <span class="muted"
