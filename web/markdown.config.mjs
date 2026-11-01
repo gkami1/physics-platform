@@ -124,7 +124,15 @@ function remarkGradeBadges() {
       const m = last?.type === 'text' && GRADE.exec(last.value);
       if (!m) continue;
       last.value = last.value.slice(0, m.index);
-      node.children.push({ type: 'html', value: ` <span class="grade-badge">${escapeAttr(m[1])} класс</span>` });
+      // A real element (not raw HTML), so heading ids stay clean: «шаг-4-…-9-класс».
+      node.children.push(
+        { type: 'text', value: ' ' },
+        {
+          type: 'grade',
+          data: { hName: 'span', hProperties: { className: ['grade-badge'] } },
+          children: [{ type: 'text', value: `${m[1]} класс` }],
+        },
+      );
     }
   };
 }
