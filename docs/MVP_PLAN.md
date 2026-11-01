@@ -39,9 +39,10 @@ Each milestone has a **definition of done**; a milestone is not finished until i
 - Dark app shell; roadmap path; practice table with random task; timed synthetic variants with Part 2 self-assessment (see ARCHITECTURE §5 «Site structure»).
 - Covers M6's «roadmap page» and the Part 2 self-assessment for variants.
 
-## Theory ladders (2026-11-01) — pilot: kinematics
-- Theory pages rewritten as steps from 7th grade to EGE level, each followed by an embedded step task (see ARCHITECTURE «Theory as a ladder»). Pilot: the four kinematics topics, 32 step tasks.
-- **Next:** author review of style and pacing → roll out section by section (dynamics, conservation, thermo first).
+## Theory ladders (2026-11-01) — kinematics and dynamics done
+- Theory pages rewritten as steps from 7th grade to EGE level, each tagged with a grade badge and followed by an embedded step task (see ARCHITECTURE «Theory as a ladder»).
+- Done: kinematics (4 topics, 32 step tasks), dynamics (Newton, forces, gravity — 22 step tasks).
+- **Next:** author review → statics, conservation laws, then thermo.
 
 ## M6 — Roadmap and guidance (week 6)
 - Roadmap graph page (prerequisites, EGE task numbers per topic).

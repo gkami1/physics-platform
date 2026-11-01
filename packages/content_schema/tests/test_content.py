@@ -119,7 +119,9 @@ def test_latex_eaten_by_double_quotes(scratch: Path) -> None:
 
 def test_missing_image(scratch: Path) -> None:
     _edit(
-        scratch / "theory/mech.dynamics.newton.md", "## Второй", "![](../assets/x.png)\n\n## Второй"
+        scratch / "theory/mech.dynamics.newton.md",
+        "## Частые ловушки",
+        "![](../assets/x.png)\n\n## Частые ловушки",
     )
     assert "missing image" in _errors(scratch)
 
