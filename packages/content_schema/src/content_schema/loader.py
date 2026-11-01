@@ -17,12 +17,15 @@ from pydantic import ValidationError
 from content_schema.figures import generate as generate_figures
 from content_schema.models import (
     SOLUTION_HEADING,
+    STEPS_DIR,
+    TASK_EMBED_LOOSE,
     AnswerKind,
     ExamSpec,
     Roadmap,
     Task,
     TaskMeta,
     TheoryPage,
+    embedded_task_ids,
 )
 
 # "\frac" in double-quoted YAML becomes a form feed, "\theta" a tab, "\nu" a newline.
@@ -146,10 +149,9 @@ def _load_task(path: Path, root: Path, res: LoadResult) -> Task | None:
 
     if path.stem != meta.id:
         res.errors.append(f"{rel}: file name must equal task id '{meta.id}'")
-    if path.parent.name != str(meta.ege_task):
-        res.errors.append(
-            f"{rel}: task with ege_task={meta.ege_task} must live in tasks/{meta.ege_task}/"
-        )
+    folder = STEPS_DIR if meta.ege_task is None else str(meta.ege_task)
+    if path.parent.name != folder:
+        res.errors.append(f"{rel}: task with ege_task={meta.ege_task} must live in tasks/{folder}/")
 
     found = list(SOLUTION_HEADING.finditer(body))
     if len(found) != 1:
@@ -204,15 +206,20 @@ def _cross_validate(b: ContentBundle, res: LoadResult) -> None:
         for tp in m.topics:
             if tp not in seen:
                 res.errors.append(f"{task.path}: unknown topic '{tp}'")
-        spec = b.exam.tasks.get(m.ege_task)
+        spec = b.exam.spec_for(m.ege_task)
+        what = (
+            "step tasks (exam.yaml: practice)" if m.ege_task is None else f"EGE task {m.ege_task}"
+        )
         if spec is None:
-            res.errors.append(f"{task.path}: EGE task {m.ege_task} is not in exam.yaml")
+            res.errors.append(f"{task.path}: {what} not in exam.yaml")
             continue
         if AnswerKind(m.answer.type) is not spec.answer_kind:
             res.errors.append(
-                f"{task.path}: EGE task {m.ege_task} expects answer type "
+                f"{task.path}: {what} expects answer type "
                 f"'{spec.answer_kind}', got '{m.answer.type}'"
             )
+
+    _check_embeds(b, res)
 
     for doc, path in [(p.body, p.path) for p in b.theory] + [
         (t.statement + t.solution, t.path) for t in b.tasks
@@ -222,6 +229,34 @@ def _cross_validate(b: ContentBundle, res: LoadResult) -> None:
                 res.errors.append(f"{path}: external image '{ref}' — put it in assets/")
             elif not ((b.root / path).parent / ref).resolve().exists():
                 res.errors.append(f"{path}: missing image '{ref}'")
+
+
+def _check_embeds(b: ContentBundle, res: LoadResult) -> None:
+    """Tasks embedded in theory pages exist, belong to the page's topic, appear once;
+    every step task is embedded somewhere (it has no other way in from the roadmap)."""
+    tasks = {t.meta.id: t for t in b.tasks}
+    where: dict[str, str] = {}
+    for page in b.theory:
+        ids = embedded_task_ids(page.body)
+        if len(TASK_EMBED_LOOSE.findall(page.body)) != len(ids):
+            res.errors.append(
+                f'{page.path}: write task embeds alone on a line as <pp-task id="..."></pp-task>'
+            )
+        for tid in ids:
+            task = tasks.get(tid)
+            if task is None:
+                res.errors.append(f"{page.path}: embeds unknown task '{tid}'")
+                continue
+            if tid in where:
+                res.errors.append(f"{page.path}: task '{tid}' is already embedded in {where[tid]}")
+            where[tid] = page.path
+            if page.topic not in task.meta.topics:
+                res.errors.append(
+                    f"{page.path}: embedded task '{tid}' is not tagged with topic '{page.topic}'"
+                )
+    for t in b.tasks:
+        if t.meta.ege_task is None and t.meta.id not in where:
+            res.errors.append(f"{t.path}: step task is not embedded in any theory page")
 
 
 def _check_figures(root: Path, res: LoadResult) -> None:

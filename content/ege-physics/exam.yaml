@@ -36,3 +36,7 @@ tasks:
   24: {part: 2, answer_kind: extended,    max_points: 3, scoring: manual,            title: "Расчётная задача"}
   25: {part: 2, answer_kind: extended,    max_points: 3, scoring: manual,            title: "Расчётная задача"}
   26: {part: 2, answer_kind: extended,    max_points: 4, scoring: manual,            title: "Расчётная задача с обоснованием"}
+
+# Step tasks embedded in theory pages (tasks/steps/): no EGE number, never in variants.
+# They count toward topic mastery like any other attempt.
+practice: {part: 1, answer_kind: numeric, max_points: 1, scoring: exact, title: "Задача к теории"}

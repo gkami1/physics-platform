@@ -129,6 +129,57 @@ def test_source_ref_required(scratch: Path) -> None:
     assert "source.ref is required" in _errors(scratch)
 
 
+# --- step tasks embedded in theory -------------------------------------------------------
+
+BASICS = "theory/mech.kinematics.basics.md"
+STEP = "tasks/steps/ks-basics-01.md"
+
+
+def test_step_task_outside_steps_folder(scratch: Path) -> None:
+    (scratch / STEP).rename(scratch / "tasks/1/ks-basics-01.md")
+    assert "must live in tasks/steps/" in _errors(scratch)
+
+
+def test_step_task_needs_practice_spec(scratch: Path) -> None:
+    exam = scratch / "exam.yaml"
+    text = exam.read_text("utf-8")
+    exam.write_text(text[: text.index("\npractice:")] + "\n", "utf-8")
+    assert "step tasks (exam.yaml: practice) not in exam.yaml" in _errors(scratch)
+
+
+def test_embed_of_unknown_task(scratch: Path) -> None:
+    _edit(scratch / BASICS, 'id="ks-basics-01"', 'id="ks-nope"')
+    errors = _errors(scratch)
+    assert "embeds unknown task 'ks-nope'" in errors
+    assert "ks-basics-01.md: step task is not embedded" in errors
+
+
+def test_embed_twice(scratch: Path) -> None:
+    _edit(scratch / BASICS, 'id="ks-basics-02"', 'id="ks-basics-01"')
+    assert "'ks-basics-01' is already embedded" in _errors(scratch)
+
+
+def test_embed_of_task_from_another_topic(scratch: Path) -> None:
+    _edit(scratch / BASICS, "## Шаг 2.", '<pp-task id="kin-0001"></pp-task>\n\n## Шаг 2.')
+    assert "'kin-0001' is not tagged with topic 'mech.kinematics.basics'" in _errors(scratch)
+
+
+def test_malformed_embed(scratch: Path) -> None:
+    _edit(scratch / BASICS, "## Шаг 2.", "Текст <pp-task id='x'></pp-task>\n\n## Шаг 2.")
+    assert "write task embeds alone on a line" in _errors(scratch)
+
+
+def test_public_theory_lists_embedded_tasks(tmp_path: Path) -> None:
+    res = load_exam_dir(CONTENT / "ege-physics")
+    assert res.bundle is not None
+    build(res.bundle, tmp_path)
+    public = json.loads((tmp_path / "public/ege-physics.json").read_text("utf-8"))
+    page = next(p for p in public["theory"] if p["topic"] == "mech.kinematics.basics")
+    assert page["tasks"][:2] == ["ks-basics-01", "ks-basics-02"]
+    step = next(t for t in public["tasks"] if t["id"] == "ks-basics-01")
+    assert step["ege_task"] is None
+
+
 def test_split_frontmatter_requires_block() -> None:
     with pytest.raises(ValueError, match="frontmatter"):
         split_frontmatter("no frontmatter")

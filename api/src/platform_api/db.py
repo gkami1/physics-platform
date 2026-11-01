@@ -64,7 +64,7 @@ class Task(Base):
 
     id: Mapped[str] = mapped_column(String(80), primary_key=True)
     exam_id: Mapped[str] = mapped_column(String(80))
-    ege_task: Mapped[int] = mapped_column(SmallInteger)
+    ege_task: Mapped[int | None] = mapped_column(SmallInteger)  # None: theory step task
     max_points: Mapped[int] = mapped_column(SmallInteger)
     answer_type: Mapped[str] = mapped_column(String(16))
     topics: Mapped[list[str]] = mapped_column(JSON)

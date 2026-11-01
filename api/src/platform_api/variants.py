@@ -51,6 +51,8 @@ def score_variant(tasks: Sequence[PrivateTask], answers: Mapping[str, str]) -> l
     """Pure: check every Part 1 answer; Part 2 waits for self-assessment."""
     out = []
     for t in tasks:
+        if t.ege_task is None:
+            raise ValueError(f"step task {t.id} cannot be part of a variant")
         answer = (answers.get(t.id) or "").strip() or None
         if t.scoring.answer_kind is AnswerKind.EXTENDED:
             outcome, points, answer = SELF, 0, None
@@ -158,7 +160,8 @@ def _tasks_or_422(store: ContentStore, exam_id: str, ids: Sequence[str]) -> list
     tasks = []
     for i in ids:
         t = store.task(i)
-        if t is None or t.exam_id != exam_id:
+        # Step tasks (no EGE number) belong to theory pages, never to a variant.
+        if t is None or t.exam_id != exam_id or t.ege_task is None:
             raise HTTPException(422, "unknown_task")
         tasks.append(t)
     return tasks

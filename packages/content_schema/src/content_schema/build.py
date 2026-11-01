@@ -11,7 +11,13 @@ from typing import Any
 
 from content_schema.figures import inline_svg_images
 from content_schema.loader import ContentBundle
-from content_schema.models import ExtendedAnswer, MeasurementAnswer, NumericAnswer, Task
+from content_schema.models import (
+    ExtendedAnswer,
+    MeasurementAnswer,
+    NumericAnswer,
+    Task,
+    embedded_task_ids,
+)
 
 
 def content_version(root: Path) -> str:
@@ -80,7 +86,13 @@ def build(bundle: ContentBundle, out: Path) -> str:
     exam_public = bundle.exam.model_dump(mode="json")
     roadmap = bundle.roadmap.model_dump(mode="json")
     theory_index = [
-        {"topic": p.topic, "title": p.title, "status": p.status, "path": p.path}
+        {
+            "topic": p.topic,
+            "title": p.title,
+            "status": p.status,
+            "path": p.path,
+            "tasks": embedded_task_ids(p.body),
+        }
         for p in bundle.theory
     ]
 

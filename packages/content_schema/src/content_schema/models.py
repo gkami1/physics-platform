@@ -76,10 +76,16 @@ class ExamSpec(Strict):
     # Exam length, for timed variants (to verify with `verified`).
     duration_minutes: int = Field(gt=0)
     tasks: dict[int, TaskNumberSpec]
+    # Step tasks embedded in theory pages: not an exam task number, never in variants.
+    practice: TaskNumberSpec | None = None
 
     @property
     def max_score(self) -> int:
         return sum(t.max_points for t in self.tasks.values())
+
+    def spec_for(self, ege_task: int | None) -> TaskNumberSpec | None:
+        """Scoring for a task: its EGE number's spec, or `practice` for step tasks."""
+        return self.practice if ege_task is None else self.tasks.get(ege_task)
 
 
 # --- roadmap --------------------------------------------------------------------------------
@@ -180,7 +186,8 @@ class TaskMeta(Strict):
     """Frontmatter of a task file."""
 
     id: Id
-    ege_task: int
+    # None = a step task for a theory page (lives in tasks/steps/, scored by exam.practice).
+    ege_task: int | None = None
     topics: list[Id] = Field(min_length=1)
     difficulty: int = Field(ge=1, le=5)
     answer: AnswerSpec
@@ -191,6 +198,17 @@ class TaskMeta(Strict):
 
 
 SOLUTION_HEADING = re.compile(r"^##\s+Решение\s*$", re.MULTILINE)
+
+# A task embedded in a theory page, on its own line: `<pp-task id="kin-s-0001"></pp-task>`.
+# The site renders the statement and an answer form in its place (web/markdown.config.mjs).
+TASK_EMBED = re.compile(r'^<pp-task id="([^"]+)"></pp-task>$', re.MULTILINE)
+TASK_EMBED_LOOSE = re.compile(r"<pp-task\b")
+
+STEPS_DIR = "steps"  # tasks/steps/: step tasks without an EGE number
+
+
+def embedded_task_ids(markdown: str) -> list[str]:
+    return TASK_EMBED.findall(markdown)
 
 
 class Task(Strict):

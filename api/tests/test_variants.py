@@ -65,6 +65,7 @@ def test_self_assessment_completes_the_score(client: TestClient) -> None:
     [
         (["kin-0001", "kin-0001"], "duplicate_tasks"),
         (["kin-0001", "nope"], "unknown_task"),
+        (["kin-0001", "ks-basics-01"], "unknown_task"),  # step tasks are not exam tasks
     ],
 )
 def test_bad_task_lists_are_rejected(client: TestClient, tasks: list[str], detail: str) -> None:
