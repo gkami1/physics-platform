@@ -802,6 +802,56 @@ blockquote {
   font-size: 0.875rem;
 }
 
+/* <pp-uniform> (src/lib/sims/uniform.ts): a car on a road and its s(t) graph. */
+.unf-road line,
+.unf-axes line {
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.unf-road text,
+.unf-axes text {
+  fill: var(--muted);
+}
+
+.unf-marks line {
+  stroke: var(--muted);
+  stroke-width: 1.5;
+}
+
+.unf-marks text {
+  fill: var(--muted);
+  font-size: 9px;
+}
+
+.unf-car {
+  fill: var(--accent);
+}
+
+.unf-car .unf-wheel {
+  fill: var(--text);
+}
+
+.unf-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+
+.unf-dot {
+  fill: var(--accent);
+}
+
+.unf-previous line {
+  stroke: var(--muted);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+}
+
+.unf-previous text {
+  fill: var(--muted);
+}
+
 /* <task-answer> (src/lib/task-answer.ts): task pages and theory step tasks. */
 task-answer {
   display: block;
