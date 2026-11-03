@@ -1,3 +1,4 @@
+import asyncio
 import os
 import re
 from collections.abc import Iterator
@@ -10,6 +11,7 @@ from fastapi.testclient import TestClient
 
 from content_schema.build import build
 from content_schema.loader import load_exam_dir
+from platform_api.db import Base, make_engine
 from platform_api.mail import MemoryMailer
 from platform_api.main import create_app
 from platform_api.settings import Settings
@@ -42,12 +44,32 @@ def alembic_config(url: str) -> Config:
     return cfg
 
 
-@pytest.fixture
-def migrated_db(database_url: str) -> str:
+@pytest.fixture(scope="session")
+def _schema(database_url: str) -> str:
+    # Full down/up round trip once, on an empty schema: exercises every downgrade without
+    # tripping the ones that refuse to destroy data (step-task rows referenced by attempts).
     cfg = alembic_config(database_url)
     command.downgrade(cfg, "base")
     command.upgrade(cfg, "head")
     return database_url
+
+
+def _clear_rows(url: str) -> None:
+    async def run() -> None:
+        engine = make_engine(url)
+        async with engine.begin() as conn:
+            for table in reversed(Base.metadata.sorted_tables):
+                await conn.execute(table.delete())
+        await engine.dispose()
+
+    asyncio.run(run())
+
+
+@pytest.fixture
+def migrated_db(_schema: str) -> str:
+    """A migrated database with no rows left over from earlier tests."""
+    _clear_rows(_schema)
+    return _schema
 
 
 @pytest.fixture
