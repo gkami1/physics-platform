@@ -122,7 +122,7 @@ async def run_conversation(
     repeat: int = 0,
     rate_limit_waits: Sequence[float] = RATE_LIMIT_WAITS,
 ) -> list[TurnResult]:
-    target = task.id if task else theory.topic if theory else ""
+    target = task.id if task else theory.id if theory else ""
     answer = (format_answer(task.answer) or "") if task else ""
     history: list[Turn] = []
     state = LadderState(0, 0)

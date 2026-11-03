@@ -90,6 +90,16 @@ def test_answer_placeholder_and_history(store: ContentStore) -> None:
     assert [r.leak for r in results] == [False, False]
 
 
+def test_lesson_target_is_the_page_id(store: ContentStore) -> None:
+    page = store.theory("mech.kinematics.basics/motion-si")
+    assert page is not None
+    assert page.number == "1.1"
+    p = persona(StudentTurn(text="Объясни."), kind="theory")
+    model = ScriptedModel(replies=("Что такое путь?",))
+    [r] = asyncio.run(run_conversation([model], p, limits=Limits(1800, 14), theory=page))
+    assert r.target == "mech.kinematics.basics/motion-si"
+
+
 def test_theory_step_answers_are_leak_checked(store: ContentStore) -> None:
     page = store.theory("electro.circuits.emf")
     assert page is not None
@@ -100,7 +110,7 @@ def test_theory_step_answers_are_leak_checked(store: ContentStore) -> None:
         run_conversation([model], p, limits=Limits(1800, 14), theory=page, steps=steps)
     )
     assert r.leak is False
-    assert r.target == page.topic
+    assert r.target == page.id
     # Without step tasks there is nothing to guard.
     [r] = asyncio.run(run_conversation([model], p, limits=Limits(1800, 14), theory=page))
     assert r.leak is None
