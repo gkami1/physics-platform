@@ -1,0 +1,10 @@
+# mech.kinematics.basics 1.2: v(t) for uniform motion; the area under it is the path
+kind: graph
+x: {var: t, unit: с, min: 0, max: 6, step: 1}
+y: {var: v, unit: м/с, min: 0, max: 12, step: 2}
+series:
+  - points: [[0, 10], [5, 10]]
+    fill: true
+guides: [[5, 10]]
+notes:
+  - {at: [2.5, 5], text: "s = v · t = 10 · 5 = 50 м", anchor: middle}

@@ -1,0 +1,70 @@
+# mech.kinematics.basics 1.2: positions every second, uniform vs speeding up
+kind: diagram
+size: [400, 190]
+items:
+- line: [[24, 40], [384, 40]]
+  tone: muted
+  width: 1
+- dots: [[40, 40], [104, 40], [168, 40], [232, 40], [296, 40], [360, 40]]
+  r: 5
+  tone: accent
+- text: 0 с
+  at: [40, 28]
+  size: 11
+  tone: muted
+- text: 1 с
+  at: [104, 28]
+  size: 11
+  tone: muted
+- text: 2 с
+  at: [168, 28]
+  size: 11
+  tone: muted
+- text: 3 с
+  at: [232, 28]
+  size: 11
+  tone: muted
+- text: 4 с
+  at: [296, 28]
+  size: 11
+  tone: muted
+- text: 5 с
+  at: [360, 28]
+  size: 11
+  tone: muted
+- text: 'равномерно: за каждую секунду одинаковый путь'
+  at: [200, 66]
+  size: 13
+- line: [[24, 122], [384, 122]]
+  tone: muted
+  width: 1
+- dots: [[40, 122], [53, 122], [92, 122], [157, 122], [248, 122], [365, 122]]
+  r: 5
+  tone: vel
+- text: 0 с
+  at: [40, 110]
+  size: 11
+  tone: muted
+- text: 1 с
+  at: [53, 110]
+  size: 11
+  tone: muted
+- text: 2 с
+  at: [92, 110]
+  size: 11
+  tone: muted
+- text: 3 с
+  at: [157, 110]
+  size: 11
+  tone: muted
+- text: 4 с
+  at: [248, 110]
+  size: 11
+  tone: muted
+- text: 5 с
+  at: [365, 110]
+  size: 11
+  tone: muted
+- text: 'неравномерно: за секунду — каждый раз разный путь'
+  at: [200, 148]
+  size: 13
