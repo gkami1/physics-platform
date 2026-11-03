@@ -24,6 +24,7 @@ const { contextId } = Astro.props;
     'pp-projectile': () => import('../../lib/sims/projectile'),
     'pp-prefix': () => import('../../lib/sims/prefix'),
     'pp-uniform': () => import('../../lib/sims/uniform'),
+    'pp-path': () => import('../../lib/sims/path'),
   };
   for (const [tag, load] of Object.entries(sims)) if (document.querySelector(tag)) void load();
   // Step tasks: the answer form is static HTML; checking needs the element's code.
