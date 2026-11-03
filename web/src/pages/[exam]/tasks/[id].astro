@@ -6,7 +6,7 @@ import Base from '../../../layouts/Base.astro';
 import {
   bundles,
   difficultyLabel,
-  embeddingTopic,
+  embeddingPage,
   type PublicBundle,
   type PublicTask,
   specFor,
@@ -29,7 +29,7 @@ interface Props {
 const { b, task } = Astro.props;
 const spec = specFor(b, task);
 const topics = topicsById(b);
-const stepOf = embeddingTopic(b, task.id);
+const stepOf = embeddingPage(b, task.id);
 const heading = task.ege_task === null ? spec.title : `Задание № ${task.ege_task}`;
 const theoryTopics = new Set(b.theory.map((t) => t.topic));
 const statementHtml = await renderMarkdown(task.statement);
@@ -39,8 +39,8 @@ const statementHtml = await renderMarkdown(task.statement);
   <nav class="crumbs">
     {
       stepOf ? (
-        <a href={theoryUrl(b.exam.id, stepOf)} class="back">
-          ← {topics.get(stepOf)?.title ?? 'К теории'}
+        <a href={theoryUrl(b.exam.id, stepOf.id)} class="back">
+          ← {stepOf.number ? `${stepOf.number} ${stepOf.title}` : stepOf.title}
         </a>
       ) : (
         <a href={tasksUrl(b.exam.id)} class="back">

@@ -50,9 +50,28 @@ export interface PublicBundle {
     practice: TaskNumberSpec | null;
   };
   roadmap: { sections: Section[] };
-  /** `tasks`: ids embedded in the page as step tasks, in page order. */
-  theory: { topic: string; title: string; status: string; path: string; tasks: string[] }[];
+  theory: TheoryEntry[];
   tasks: PublicTask[];
+}
+
+/**
+ * A theory page. `page`: a whole topic in one file; `intro`: the page of a topic split into
+ * lessons (its id is the topic id); `lesson`: one lesson, id `<topic>/<slug>`, number «1.2».
+ * Sorted by topic, then intro before its lessons in lesson order.
+ */
+export interface TheoryEntry {
+  id: string;
+  topic: string;
+  kind: 'page' | 'intro' | 'lesson';
+  lesson: string | null;
+  number: string | null;
+  title: string;
+  summary: string | null;
+  grade: string | null;
+  status: string;
+  path: string;
+  /** Ids embedded as step tasks, in page order. */
+  tasks: string[];
 }
 
 const DIR = path.resolve(process.cwd(), process.env.PUBLIC_CONTENT_DIR ?? '../build/public');
@@ -95,13 +114,28 @@ export function taskOrder(t: PublicTask): number {
   return t.ege_task ?? 0;
 }
 
-/** The theory page that embeds a task as a step, if any. */
-export function embeddingTopic(b: PublicBundle, taskId: string): string | undefined {
-  return b.theory.find((p) => p.tasks.includes(taskId))?.topic;
+/** The theory page (lesson or whole page) that embeds a task as a step, if any. */
+export function embeddingPage(b: PublicBundle, taskId: string): TheoryEntry | undefined {
+  return b.theory.find((p) => p.tasks.includes(taskId));
 }
 
-export function theoryUrl(examId: string, topicId: string): string {
-  return `/${examId}/theory/${topicId}/`;
+export function theoryPage(b: PublicBundle, pageId: string): TheoryEntry | undefined {
+  return b.theory.find((p) => p.id === pageId);
+}
+
+/** A topic's lessons in order (empty for a whole-page topic). */
+export function lessonsOf(b: PublicBundle, topicId: string): TheoryEntry[] {
+  return b.theory.filter((p) => p.topic === topicId && p.kind === 'lesson');
+}
+
+/** Step tasks embedded anywhere in a topic's theory (all its lessons). */
+export function topicStepTasks(b: PublicBundle, topicId: string): Set<string> {
+  return new Set(b.theory.filter((p) => p.topic === topicId).flatMap((p) => p.tasks));
+}
+
+/** A theory page by id: a topic id (topic page) or `<topic>/<lesson>`. */
+export function theoryUrl(examId: string, pageId: string): string {
+  return `/${examId}/theory/${pageId}/`;
 }
 
 export function taskUrl(examId: string, taskId: string): string {

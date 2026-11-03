@@ -1,0 +1,50 @@
+---
+// EGE task numbers and prerequisites of a roadmap topic.
+import { type PublicBundle, theoryUrl, topicsById } from '../../lib/content';
+
+interface Props {
+  b: PublicBundle;
+  topicId: string;
+}
+const { b, topicId } = Astro.props;
+const topics = topicsById(b);
+const topic = topics.get(topicId);
+if (!topic) throw new Error(`Unknown topic ${topicId}`);
+const prereqs = topic.prereqs.map((id) => topics.get(id)).filter((t) => t !== undefined);
+---
+
+<aside class="facts">
+  {
+    topic.ege_tasks.length > 0 && (
+      <p>
+        Задания ЕГЭ: <span class="badge">№ {topic.ege_tasks.join(', ')}</span>
+      </p>
+    )
+  }
+  {
+    prereqs.length > 0 && (
+      <p>
+        Сначала изучите:{' '}
+        {prereqs.map((p, i) => (
+          <>
+            {i > 0 && ', '}
+            <a href={theoryUrl(b.exam.id, p.id)}>{p.title}</a>
+          </>
+        ))}
+      </p>
+    )
+  }
+</aside>
+
+<style>
+  .facts {
+    font-size: 0.925rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .facts p {
+    margin: 0.4rem 0;
+  }
+</style>

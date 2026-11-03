@@ -1,0 +1,32 @@
+---
+// A topic's tasks that are not already inside its theory as step tasks.
+import { type PublicBundle, taskOrder, taskUrl, topicStepTasks } from '../../lib/content';
+
+interface Props {
+  b: PublicBundle;
+  topicId: string;
+}
+const { b, topicId } = Astro.props;
+const embedded = topicStepTasks(b, topicId);
+const tasks = b.tasks
+  .filter((t) => t.topics.includes(topicId) && !embedded.has(t.id))
+  .sort((x, y) => taskOrder(x) - taskOrder(y) || x.difficulty - y.difficulty);
+---
+
+{
+  tasks.length > 0 && (
+    <section class="practice">
+      <h2>Практика</h2>
+      <ol>
+        {tasks.map((t, i) => (
+          <li>
+            <a href={taskUrl(b.exam.id, t.id)}>
+              Задача {i + 1}
+              {t.ege_task === null ? ' · к теории' : ` · задание № ${t.ege_task}`}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </section>
+  )
+}
