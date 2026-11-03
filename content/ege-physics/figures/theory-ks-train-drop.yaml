@@ -1,0 +1,47 @@
+# mech.kinematics.basics 1.4: one fall, two trajectories (train frame vs platform frame)
+kind: diagram
+size: [400, 250]
+items:
+- rect: [20, 20, 160, 180]
+  radius: 6
+  tone: muted
+- text: в вагоне
+  at: [100, 14]
+  size: 12
+  tone: muted
+- line: [[20, 200], [180, 200]]
+  width: 2
+- path: M100 46L100 196
+  tone: accent
+  width: 3
+  animate: draw
+  mover: true
+- text: для пассажира —
+  at: [100, 222]
+  size: 12
+- text: прямая вниз
+  at: [100, 238]
+  size: 12
+  tone: accent
+- text: на платформе
+  at: [300, 14]
+  size: 12
+  tone: muted
+- line: [[214, 200], [386, 200]]
+  width: 2
+- path: M224 46Q300 46 376 196
+  tone: accent
+  width: 3
+  animate: draw
+  mover: true
+- arrow: [[230, 120], [290, 120]]
+  tone: vel
+  label: поезд едет
+  label_at: [258, 110]
+- text: для человека на платформе —
+  at: [300, 222]
+  size: 12
+- text: кривая линия
+  at: [300, 238]
+  size: 12
+  tone: accent
