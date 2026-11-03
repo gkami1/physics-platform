@@ -15,7 +15,7 @@ from content_schema.checking import format_answer
 from content_schema.models import STEP_HEADING, TASK_EMBED
 from platform_api.content import PrivateTask, Theory
 
-PROMPT_VERSION = "tutor-v2"
+PROMPT_VERSION = "tutor-v3"
 HISTORY_TURNS = 12
 # Whole page with step statements inlined: the longest is ~10.3k chars (~3k tokens).
 MAX_THEORY_CHARS = 14000
@@ -41,6 +41,7 @@ LEVELS = {
 }
 
 _TAG = re.compile(r"</?\s*student\s*>", re.IGNORECASE)
+SECTION_HEADING = re.compile(r"^## (.+)$", re.MULTILINE)
 
 
 @dataclass(frozen=True)
@@ -70,7 +71,7 @@ def task_context(task: PrivateTask, level: int) -> str:
 
 
 THEORY_RULES = """На этой странице нет уровня подсказки: объясняй теорию свободно, с примерами.
-После некоторых шагов стоит задача для самопроверки («Задача к шагу N»). Ученик решает её сам и вводит ответ в поле под задачей. С такой задачей помогай только наводящими вопросами и идеями из текста страницы: не называй её окончательный ответ (ни числом, ни словами) и не решай её до конца, даже если ученик просит. Предложи сделать следующий шаг самому и проверить ответ в поле под задачей."""
+В тексте стоят задачи для самопроверки (помечены «Задача к шагу…» или «Задача к разделу…»). Ученик решает её сам и вводит ответ в поле под задачей. С такой задачей помогай только наводящими вопросами и идеями из текста страницы: не называй её окончательный ответ (ни числом, ни словами) и не решай её до конца, даже если ученик просит. Предложи сделать следующий шаг самому и проверить ответ в поле под задачей."""
 
 
 def inline_step_tasks(body: str, steps: Sequence[PrivateTask]) -> str:
@@ -78,29 +79,46 @@ def inline_step_tasks(body: str, steps: Sequence[PrivateTask]) -> str:
     answers, solutions and hints stay out of the theory context). Unknown ids vanish."""
     by_id = {t.id: t for t in steps}
 
-    def step_before(pos: int) -> str | None:
-        heads = [m.group(1) for m in STEP_HEADING.finditer(body, 0, pos)]
-        return heads[-1] if heads else None
+    def label_at(pos: int) -> str:
+        # Ladder pages have «Шаг N» headings; lessons have plain `##` sections.
+        if steps_above := [m.group(1) for m in STEP_HEADING.finditer(body, 0, pos)]:
+            return f"Задача к шагу {steps_above[-1]}"
+        if sections := [m.group(1) for m in SECTION_HEADING.finditer(body, 0, pos)]:
+            return f"Задача к разделу «{sections[-1].strip()}»"
+        return "Задача для самопроверки"
 
     def repl(m: re.Match[str]) -> str:
         task = by_id.get(m.group(1))
         if task is None:
             return ""
-        n = step_before(m.start())
-        label = f"Задача к шагу {n}" if n else "Задача для самопроверки"
+        label = label_at(m.start())
         return f"**{label}** (ответ ученик вводит в поле под задачей):\n\n{task.statement.strip()}"
 
     return TASK_EMBED.sub(repl, body)
 
 
+LESSON_RULES = """Тема разбита на уроки, и ученик сейчас читает один из них. Объясняй прежде всего материал этого урока. Если вопрос о материале другого урока этой темы, ответь коротко и назови урок, где это разобрано подробно."""
+
+
 def theory_context(page: Theory, steps: Sequence[PrivateTask] = ()) -> str:
-    """`steps`: the step tasks embedded in the page."""
+    """`steps`: the step tasks embedded in the page. A lesson also lists the topic's
+    lessons, so the tutor can send the student to the right one."""
+    text = inline_step_tasks(page.body.strip(), steps)[:MAX_THEORY_CHARS]
+    if page.number is None:
+        return "\n\n".join(
+            ["# Страница теории, которую читает ученик", f"## {page.title}", text, THEORY_RULES]
+        )
+    this = f"{page.number} "
+    lessons = [f"- {x}" + (" — этот урок" if x.startswith(this) else "") for x in page.lessons]
     return "\n\n".join(
         [
-            "# Страница теории, которую читает ученик",
-            f"## {page.title}",
-            inline_step_tasks(page.body.strip(), steps)[:MAX_THEORY_CHARS],
+            f"# Урок темы «{page.topic_title}», который читает ученик",
+            f"## Урок {page.number}. {page.title}",
+            text,
+            "# Уроки этой темы",
+            "\n".join(lessons),
             THEORY_RULES,
+            LESSON_RULES,
         ]
     )
 

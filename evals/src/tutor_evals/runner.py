@@ -61,7 +61,7 @@ def task_targets(suite: Suite, store: ContentStore, persona: Persona) -> list[Pr
 
 
 def theory_targets(suite: Suite, store: ContentStore) -> list[str]:
-    topics = store.theory_topics() if suite.theory == "all" else suite.theory
+    topics = store.theory_pages() if suite.theory == "all" else suite.theory
     return sorted(t for t in topics if store.theory(t) is not None)
 
 

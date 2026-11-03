@@ -29,6 +29,7 @@ from platform_api.llm import (
     stream_with_fallback,
 )
 from platform_api.prompt import (
+    LESSON_RULES,
     LEVELS,
     MAX_THEORY_CHARS,
     THEORY_RULES,
@@ -338,11 +339,63 @@ def test_theory_context_inlines_step_statements_only() -> None:
     [
         ('<pp-task id="s-01"></pp-task>\n', "Задача для самопроверки"),  # before any step
         ('## Шаг 7. Тема\n\n<pp-task id="s-01"></pp-task>\n', "Задача к шагу 7"),
+        # Lessons: plain sections; the nearest one above the task names it.
+        (
+            '## Приставки\n\nТ.\n\n## Перевод единиц \n\n<pp-task id="s-01"></pp-task>\n',
+            "Задача к разделу «Перевод единиц»",
+        ),
         ("Текст без задач.", "Текст без задач."),
     ],
 )
 def test_inline_step_tasks_labels(body: str, expected: str) -> None:
     assert expected in inline_step_tasks(body, [STEP_1])
+
+
+LESSONS = ("1.1 Движение и СИ", "1.2 Скорость", "1.11 Итоги")
+
+
+def lesson(number: str = "1.2") -> Theory:
+    body = '## Скорость\n\nСкорость — путь за секунду.\n\n<pp-task id="s-01"></pp-task>\n'
+    return Theory(
+        "ege-physics",
+        "mech.kinematics.basics",
+        "Скорость",
+        body,
+        ("s-01",),
+        page_id="mech.kinematics.basics/speed",
+        topic_title="Основы кинематики",
+        number=number,
+        lessons=LESSONS,
+    )
+
+
+@pytest.mark.parametrize(
+    ("number", "expected"),
+    [
+        # The current lesson is marked; «1.1» must not also mark «1.11».
+        ("1.2", ["- 1.1 Движение и СИ", "- 1.2 Скорость — этот урок", "- 1.11 Итоги"]),
+        ("1.1", ["- 1.1 Движение и СИ — этот урок", "- 1.2 Скорость", "- 1.11 Итоги"]),
+    ],
+)
+def test_lesson_context(number: str, expected: list[str]) -> None:
+    ctx = theory_context(lesson(number), [STEP_1])
+    assert ctx.startswith("# Урок темы «Основы кинематики», который читает ученик")
+    assert f"## Урок {number}. Скорость" in ctx
+    assert "\n".join(expected) in ctx
+    assert "Задача к разделу «Скорость»" in ctx
+    assert STEP_1.statement in ctx
+    assert "2.5" not in ctx
+    assert "СЕКРЕТН" not in ctx
+    assert ctx.index("Скорость — путь") < ctx.index("# Уроки этой темы") < ctx.index(THEORY_RULES)
+    assert ctx.endswith(LESSON_RULES)
+
+
+def test_whole_page_context_has_no_lesson_rules() -> None:
+    ctx = theory_context(page(), [STEP_1, STEP_2])
+    assert LESSON_RULES not in ctx
+    assert "# Уроки этой темы" not in ctx
+    assert page().id == "t"
+    assert lesson().id == "mech.kinematics.basics/speed"
 
 
 def test_theory_context_is_capped() -> None:
