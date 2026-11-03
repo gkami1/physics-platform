@@ -191,6 +191,35 @@ def test_tones_are_classes_with_fallback_colour() -> None:
     assert '<g class="fig-force" color="crimson">' in svg
 
 
+def test_drawn_path_with_mover() -> None:
+    svg = render_diagram(
+        diagram({"path": "M0 0L10 10", "animate": "draw", "mover": True, "tone": "accent"})
+    )
+    ET.fromstring(svg)  # noqa: S314 — our own generator output
+    assert '<path class="fig-draw" pathLength="1"' in svg
+    assert '<circle class="fig-mover"' in svg
+    assert 'path="M0 0L10 10"' in svg
+    assert 'dur="6s"' in svg
+
+
+def test_appear_wraps_any_item() -> None:
+    svg = render_diagram(diagram({"arrow": [[0, 0], [50, 0]], "animate": "appear"}))
+    assert '<g class="fig-appear"><' in svg
+
+
+@pytest.mark.parametrize(
+    ("item", "message"),
+    [
+        ({"path": "M0 0L1 1", "mover": True}, "mover needs animate: draw"),
+        ({"path": "M0 0L1 1", "animate": "draw", "dashed": True}, "cannot be dashed"),
+        ({"arrow": [[0, 0], [1, 0]], "animate": "draw"}, "appear"),
+    ],
+)
+def test_invalid_animation(item: dict[str, object], message: str) -> None:
+    with pytest.raises(ValidationError, match=message):
+        diagram(item)
+
+
 def test_unknown_item_is_rejected() -> None:
     with pytest.raises(ValidationError):
         diagram({"blob": [0, 0]})

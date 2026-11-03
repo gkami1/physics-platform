@@ -266,8 +266,17 @@ def render_graph(spec: GraphSpec) -> str:
 # --- diagram ----------------------------------------------------------------------------------
 
 
+# Animation without JavaScript, one shared loop (web/src/styles/global.css, .fig-draw etc.):
+# `draw` paths trace themselves in the first half, `appear` items fade in after that, and
+# a path's `mover` dot rides along it while it is drawn. CSS shows the final picture to
+# readers who prefer reduced motion; the mover (SMIL, which CSS cannot pause) is hidden.
+CYCLE_S = 6  # must match --fig-cycle in global.css
+Animate = Literal["draw", "appear"]
+
+
 class _Item(_Strict):
     tone: Tone = "default"
+    animate: Literal["appear"] | None = None
 
 
 class Line(_Item):
@@ -376,6 +385,16 @@ class PathItem(_Item):
     width: float = 1.5
     fill: Fill = "none"
     dashed: bool = False
+    animate: Animate | None = None  # type: ignore[assignment]  # paths can also be drawn
+    mover: bool = False  # with animate: draw, a dot travels the path as it is drawn
+
+    @model_validator(mode="after")
+    def _mover_needs_draw(self) -> PathItem:
+        if self.mover and self.animate != "draw":
+            raise ValueError("mover needs animate: draw")
+        if self.animate == "draw" and self.dashed:
+            raise ValueError("a drawn path cannot be dashed (the dash pattern draws it)")
+        return self
 
 
 Item = Annotated[
@@ -565,10 +584,20 @@ def _element(i: Element) -> str:
 
 
 def _path(i: PathItem) -> str:
-    return (
-        f'<path {_fill_attrs(i.fill)} stroke-width="{_f(i.width)}"{_dash(i.dashed)} '
-        f'stroke-linejoin="round" d="{html.escape(i.path)}"/>'
+    d = html.escape(i.path)
+    drawn = ' class="fig-draw" pathLength="1"' if i.animate == "draw" else ""
+    body = (
+        f'<path{drawn} {_fill_attrs(i.fill)} stroke-width="{_f(i.width)}"{_dash(i.dashed)} '
+        f'stroke-linejoin="round" d="{d}"/>'
     )
+    if i.mover:
+        # Along the path in the first half of the loop, then waits at the end.
+        body += (
+            f'<circle class="fig-mover" r="{_f(i.width + 4)}" fill="currentColor" stroke="none">'
+            f'<animateMotion dur="{CYCLE_S}s" repeatCount="indefinite" path="{d}" '
+            'keyPoints="0;1;1" keyTimes="0;0.5;1" calcMode="linear"/></circle>'
+        )
+    return body
 
 
 def _item(i: _Item) -> str:
@@ -599,6 +628,8 @@ def _item(i: _Item) -> str:
             body = _path(i)
         case _:
             raise TypeError(type(i).__name__)
+    if i.animate == "appear":
+        body = f'<g class="fig-appear">{body}</g>'
     return _tone(i.tone, body)
 
 

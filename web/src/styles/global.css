@@ -339,6 +339,51 @@ blockquote {
   fill-opacity: 0.16;
 }
 
+/* Animated figures (figures/*.yaml `animate:`), no JavaScript. One loop: drawn paths trace
+   themselves in the first half, `appear` items fade in after, then everything holds and
+   restarts. The resting state is the finished picture, which is what readers who prefer
+   reduced motion see; the travelling dot is SMIL, so it is hidden for them instead. */
+.fig {
+  --fig-cycle: 6s; /* = CYCLE_S in content_schema/figures.py (the dot's SMIL duration) */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fig .fig-draw {
+    stroke-dasharray: 1;
+    animation: fig-draw var(--fig-cycle) linear infinite;
+  }
+  .fig .fig-appear {
+    animation: fig-appear var(--fig-cycle) ease-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fig .fig-mover {
+    display: none;
+  }
+}
+
+@keyframes fig-draw {
+  0% {
+    stroke-dashoffset: 1;
+  }
+  50%,
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fig-appear {
+  0%,
+  52% {
+    opacity: 0;
+  }
+  62%,
+  100% {
+    opacity: 1;
+  }
+}
+
 /* Interactive models (<pp-projectile> etc., src/lib/sims/). */
 .sim {
   display: block;
