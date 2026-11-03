@@ -16,6 +16,7 @@ from content_schema.models import (
     MeasurementAnswer,
     NumericAnswer,
     Task,
+    TheoryPage,
     embedded_task_ids,
 )
 
@@ -80,21 +81,60 @@ def with_inline_figures(t: Task, root: Path) -> Task:
     )
 
 
+def lesson_number(page: TheoryPage, topic_numbers: dict[str, int]) -> str | None:
+    """«1.2»: the topic's place in its roadmap section, then the lesson's."""
+    if page.kind != "lesson":
+        return None
+    return f"{topic_numbers[page.topic]}.{page.order}"
+
+
+def theory_entries(bundle: ContentBundle) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Public index (no bodies: the site renders Markdown itself) and private tutor
+    context. Topic intros are not tutor pages: their chat lives in the lessons."""
+    numbers = bundle.roadmap.topic_numbers()
+    topic_titles = {t.id: t.title for t in bundle.roadmap.topics()}
+    pages = sorted(bundle.theory, key=lambda p: (p.topic, p.kind != "intro", p.order))
+    public = [
+        {
+            "id": p.id,
+            "topic": p.topic,
+            "kind": p.kind,
+            "lesson": p.lesson,
+            "number": lesson_number(p, numbers),
+            "title": p.title,
+            "summary": p.summary,
+            "grade": p.grade,
+            "status": p.status,
+            "path": p.path,
+            "tasks": embedded_task_ids(p.body),
+        }
+        for p in pages
+    ]
+    private = []
+    for p in pages:
+        if p.kind == "intro":
+            continue
+        siblings = [q for q in pages if q.topic == p.topic and q.kind == "lesson"]
+        private.append(
+            {
+                "id": p.id,
+                "topic": p.topic,
+                "topic_title": topic_titles.get(p.topic, p.title),
+                "number": lesson_number(p, numbers),
+                "title": p.title,
+                "body": p.body,
+                "lessons": [f"{lesson_number(q, numbers)} {q.title}" for q in siblings],
+            }
+        )
+    return public, private
+
+
 def build(bundle: ContentBundle, out: Path) -> str:
     version = content_version(bundle.root)
     tasks = [with_inline_figures(t, bundle.root) for t in bundle.tasks]
     exam_public = bundle.exam.model_dump(mode="json")
     roadmap = bundle.roadmap.model_dump(mode="json")
-    theory_index = [
-        {
-            "topic": p.topic,
-            "title": p.title,
-            "status": p.status,
-            "path": p.path,
-            "tasks": embedded_task_ids(p.body),
-        }
-        for p in bundle.theory
-    ]
+    theory_index, theory_private = theory_entries(bundle)
 
     public = {
         "content_version": version,
@@ -108,7 +148,7 @@ def build(bundle: ContentBundle, out: Path) -> str:
         "exam": exam_public,
         "tasks": [private_task(t) for t in tasks],
         # Tutor context for theory pages (the text itself is public).
-        "theory": [{"topic": p.topic, "title": p.title, "body": p.body} for p in bundle.theory],
+        "theory": theory_private,
     }
 
     public_text = json.dumps(public, ensure_ascii=False, indent=1)

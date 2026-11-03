@@ -111,6 +111,10 @@ class Roadmap(Strict):
     def topics(self) -> list[Topic]:
         return [t for s in self.sections for t in s.topics]
 
+    def topic_numbers(self) -> dict[str, int]:
+        """A topic's position within its section, from 1: lesson 1.2 is topic 1, lesson 2."""
+        return {t.id: i for s in self.sections for i, t in enumerate(s.topics, start=1)}
+
 
 # --- answers --------------------------------------------------------------------------------
 
@@ -224,9 +228,44 @@ class Task(Strict):
     path: str
 
 
+# A lesson file inside a topic folder: `theory/<topic>/01-motion-si.md` (order 1, slug
+# motion-si). The folder's `_topic.md` is the topic page: an intro above the lesson list.
+LESSON_FILE = re.compile(r"^(\d{2})-([a-z0-9]+(?:-[a-z0-9]+)*)$")
+TOPIC_INTRO = "_topic"
+
+Grade = Annotated[str, Field(pattern=r"^\d{1,2}(?:–\d{1,2})?$")]
+
+
 class TheoryPage(Strict):
+    """A theory page. `kind`: `page` — a whole topic in one file, written as a ladder of
+    «Шаг N» sections; `intro` — a topic split into lessons, shown above their list;
+    `lesson` — one lesson of such a topic. The loader fills kind, lesson and order."""
+
     topic: Id
     title: str
     status: Literal["draft", "published"] = "draft"
+    # Lessons only: school grade(s) the lesson's material belongs to, e.g. 7 or '7–8',
+    # and a one-line «what you'll learn» for the topic page's lesson list.
+    grade: Grade | None = None
+    summary: str | None = None
     body: str
     path: str
+    kind: Literal["page", "intro", "lesson"] = "page"
+    lesson: str | None = None  # slug
+    order: int = 0
+
+    @field_validator("grade", mode="before")
+    @classmethod
+    def _grade_str(cls, v: Any) -> Any:
+        return str(v) if isinstance(v, int) and not isinstance(v, bool) else v
+
+    @property
+    def id(self) -> str:
+        """`mech.kinematics.basics/motion-si` for a lesson; the topic id otherwise."""
+        return f"{self.topic}/{self.lesson}" if self.lesson else self.topic
+
+    def grades(self) -> tuple[int, int] | None:
+        if self.grade is None:
+            return None
+        lo, _, hi = self.grade.partition("–")
+        return int(lo), int(hi or lo)

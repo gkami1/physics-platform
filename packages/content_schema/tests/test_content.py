@@ -1,7 +1,9 @@
 """Loader validation, the real content tree, and the no-leak invariant."""
 
 import json
+import re
 import shutil
+from collections.abc import Callable
 from pathlib import Path
 
 import pytest
@@ -212,6 +214,112 @@ def test_public_theory_lists_embedded_tasks(tmp_path: Path) -> None:
     assert page["tasks"][:2] == ["ks-basics-01", "ks-basics-02"]
     step = next(t for t in public["tasks"] if t["id"] == "ks-basics-01")
     assert step["ege_task"] is None
+
+
+# --- topics split into lessons ----------------------------------------------------------
+
+LESSONS = "theory/mech.kinematics.basics"
+INTRO = "---\ntopic: mech.kinematics.basics\ntitle: Основы кинематики\n---\nВведение.\n"
+
+
+def _lesson(n: int, slug: str, grade: str, body: str) -> tuple[str, str]:
+    meta = f"topic: mech.kinematics.basics\ntitle: {slug}\ngrade: {grade}\nsummary: Кратко.\n"
+    return f"{n:02d}-{slug}.md", f"---\n{meta}---\n{body}\n"
+
+
+def _write(d: Path, name: str, text: str) -> None:
+    (d / name).write_text(text, "utf-8")
+
+
+def _split_into_lessons(root: Path) -> Path:
+    """The scratch copy's kinematics page as an intro and two lessons, same step tasks."""
+    page = root / BASICS
+    embeds = re.findall(r'^<pp-task id="[^"]+"></pp-task>$', page.read_text("utf-8"), re.M)
+    page.unlink()
+    d = root / LESSONS
+    d.mkdir()
+    _write(d, "_topic.md", INTRO)
+    for n, slug, grade, part in (
+        (1, "motion-si", "7", embeds[:4]),
+        (2, "vectors", "9", embeds[4:]),
+    ):
+        _write(d, *_lesson(n, slug, grade, "## Раздел\n\nТекст.\n\n" + "\n\n".join(part)))
+    return d
+
+
+def test_lessons_layout_is_valid(scratch: Path) -> None:
+    _split_into_lessons(scratch)
+    assert _errors(scratch) == ""
+
+
+FIRST = "01-motion-si.md"
+
+
+@pytest.mark.parametrize(
+    ("change", "message"),
+    [
+        (lambda d: (d / FIRST).rename(d / "1-motion.md"), "named like 01-slug.md"),
+        (lambda d: (d / "_topic.md").unlink(), "needs _topic.md"),
+        (lambda d: (d / "02-vectors.md").rename(d / "03-vectors.md"), "should be numbered 02"),
+        (lambda d: _write(d, *_lesson(3, "motion-si", "9", "Т.")), "second lesson with slug"),
+        (lambda d: _write(d, *_lesson(3, "late", "8", "Т.")), "grade goes down from 9 to 8"),
+        (lambda d: _write(d, *_lesson(3, "late", "12", "Т.")), "within 7–11"),
+        (lambda d: _write(d, *_lesson(3, "late", "'9–10'", "Т.")), ""),
+        (lambda d: _write(d, *_lesson(3, "late", "9", "## Шаг 1. Т (9 класс)")), "not «Шаг N»"),
+        (lambda d: _edit(d / FIRST, "summary: Кратко.\n", ""), "needs a one-line summary"),
+        (lambda d: _edit(d / FIRST, "grade: 7\n", ""), "needs a grade"),
+        (lambda d: _edit(d / FIRST, "grade: 7\n", "grade: 7\norder: 3\n"), "come from the file"),
+        (lambda d: _edit(d / "_topic.md", "title:", "grade: 7\ntitle:"), "for lessons only"),
+        (
+            lambda d: _edit(d / "_topic.md", "Введение.", '<pp-task id="ks-basics-01"></pp-task>'),
+            "not the topic page",
+        ),
+        (
+            lambda d: shutil.copy(CONTENT / "ege-physics" / BASICS, d.parent),
+            "also has a folder theory/mech.kinematics.basics/",
+        ),
+        (
+            lambda d: _edit(d / FIRST, "topic: mech.kinematics.basics", "topic: sr.basics"),
+            "folder name must equal topic id 'sr.basics'",
+        ),
+    ],
+)
+def test_lesson_layout_errors(
+    scratch: Path, change: Callable[[Path], object], message: str
+) -> None:
+    change(_split_into_lessons(scratch))
+    errors = _errors(scratch)
+    assert message in errors if message else errors == ""
+
+
+def test_lessons_embed_every_step_task(scratch: Path) -> None:
+    d = _split_into_lessons(scratch)
+    _edit(d / "02-vectors.md", '<pp-task id="ks-basics-05"></pp-task>', "")
+    assert "ks-basics-05.md: step task is not embedded" in _errors(scratch)
+
+
+def test_lesson_build_entries(scratch: Path, tmp_path: Path) -> None:
+    _split_into_lessons(scratch)
+    res = load_exam_dir(scratch)
+    assert res.bundle is not None
+    build(res.bundle, tmp_path)
+    public = json.loads((tmp_path / "public/ege-physics.json").read_text("utf-8"))
+    private = json.loads((tmp_path / "private/ege-physics.json").read_text("utf-8"))
+    basics = [p for p in public["theory"] if p["topic"] == "mech.kinematics.basics"]
+    assert [(p["id"], p["kind"], p["number"], p["grade"]) for p in basics] == [
+        ("mech.kinematics.basics", "intro", None, None),
+        ("mech.kinematics.basics/motion-si", "lesson", "1.1", "7"),
+        ("mech.kinematics.basics/vectors", "lesson", "1.2", "9"),
+    ]
+    assert basics[1]["tasks"] == ["ks-basics-01", "ks-basics-02", "ks-basics-03", "ks-basics-04"]
+    assert all("body" not in p for p in public["theory"])
+    tutor = {p["id"]: p for p in private["theory"]}
+    assert "mech.kinematics.basics" not in tutor  # the topic page has no chat
+    lesson = tutor["mech.kinematics.basics/vectors"]
+    assert lesson["topic_title"] == "Основы кинематики"
+    assert lesson["lessons"] == ["1.1 motion-si", "1.2 vectors"]
+    assert tutor["sr.basics"]["number"] is None
+    assert tutor["sr.basics"]["lessons"] == []
 
 
 def test_split_frontmatter_requires_block() -> None:
