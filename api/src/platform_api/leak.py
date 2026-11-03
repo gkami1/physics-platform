@@ -12,7 +12,9 @@ from __future__ import annotations
 
 import itertools
 import re
+from collections.abc import Sequence
 from decimal import Decimal
+from typing import Protocol
 
 from content_schema.checking import parse_number
 from content_schema.models import (
@@ -92,14 +94,28 @@ class LeakDetector:
         return any(p.search(text) for p in self._sequences)
 
 
+class Detector(Protocol):
+    def leaks(self, text: str) -> bool: ...
+
+
+class AnyLeak:
+    """Leaks if any of its detectors does: a theory page guards every embedded step task."""
+
+    def __init__(self, detectors: Sequence[Detector]) -> None:
+        self._detectors = tuple(detectors)
+
+    def leaks(self, text: str) -> bool:
+        return any(d.leaks(text) for d in self._detectors)
+
+
 class OutputGuard:
     """Feed raw model chunks; get back text that is safe to send.
 
-    With `detector=None` (hint level 3, theory pages) text is still released by sentence,
-    and thinking blocks are still removed.
+    With `detector=None` (hint level 3, theory pages without step tasks) text is still
+    released by sentence, and thinking blocks are still removed.
     """
 
-    def __init__(self, detector: LeakDetector | None) -> None:
+    def __init__(self, detector: Detector | None) -> None:
         self._detector = detector
         self._raw = ""
         self._released = 0

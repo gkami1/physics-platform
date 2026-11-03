@@ -15,11 +15,11 @@ from typing import Any
 from content_schema.checking import format_answer
 from platform_api.content import ContentStore, PrivateTask, Theory
 from platform_api.hints import LadderState
-from platform_api.leak import LeakDetector, OutputGuard, visible_text
+from platform_api.leak import Detector, OutputGuard, visible_text
 from platform_api.llm import CallInfo, ChatModel, LLMUnavailableError, stream_with_fallback
 from platform_api.prompt import Turn, build_messages
 from platform_api.turn import HINT_REQUEST_TEXT, plan_task_turn, plan_theory_turn
-from platform_api.tutor import LEAK_NOTE
+from platform_api.tutor import leak_note
 from tutor_evals.checks import Limits, ReplyChecks, check_reply
 from tutor_evals.suite import Persona, Suite
 
@@ -66,7 +66,10 @@ def theory_targets(suite: Suite, store: ContentStore) -> list[str]:
 
 
 async def _reply(
-    models: Sequence[ChatModel], messages: list[dict[str, str]], detector: LeakDetector | None
+    models: Sequence[ChatModel],
+    messages: list[dict[str, str]],
+    detector: Detector | None,
+    note: str,
 ) -> tuple[str, str, bool, str | None, list[CallInfo]]:
     """Returns (raw visible, shown, guard stopped, error, calls). Reads the whole answer
     even after the guard stops, so the raw text can be inspected."""
@@ -81,7 +84,7 @@ async def _reply(
         guard.finish()
     except LLMUnavailableError as e:
         error = str(e)
-    shown = guard.text + (LEAK_NOTE if guard.leaked else "")
+    shown = guard.text + (note if guard.leaked else "")
     return visible_text(raw), shown, guard.leaked, error, calls
 
 
@@ -94,12 +97,13 @@ RETRYABLE = ("HTTP 429", "HTTP 503", "Timeout", "ConnectError", "RemoteProtocolE
 async def _reply_with_retry(
     models: Sequence[ChatModel],
     messages: list[dict[str, str]],
-    detector: LeakDetector | None,
+    detector: Detector | None,
+    note: str,
     waits: Sequence[float],
 ) -> tuple[str, str, bool, str | None, list[CallInfo]]:
     calls: list[CallInfo] = []
     for wait in (*waits, None):
-        raw, shown, stopped, error, attempt_calls = await _reply(models, messages, detector)
+        raw, shown, stopped, error, attempt_calls = await _reply(models, messages, detector, note)
         calls += attempt_calls
         if wait is None or raw or not error or not any(r in error for r in RETRYABLE):
             return raw, shown, stopped, error, calls
@@ -131,7 +135,7 @@ async def run_conversation(
         if st.attempt:
             outcomes.append(st.attempt)
         level: int | None = None
-        detector: LeakDetector | None = None
+        detector: Detector | None = None
         if task is not None:
             plan = plan_task_turn(
                 task, state, asked_for_hint=st.intent == "hint", outcomes=outcomes
@@ -144,7 +148,7 @@ async def run_conversation(
             raise ValueError("run_conversation needs a task or a theory page")
         messages = build_messages(context, history, text, level)
         raw, shown, stopped, error, calls = await _reply_with_retry(
-            models, messages, detector, rate_limit_waits
+            models, messages, detector, leak_note(persona.kind), rate_limit_waits
         )
         leak = None if detector is None else stopped or detector.leaks(raw)
         results.append(
