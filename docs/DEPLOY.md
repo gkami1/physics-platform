@@ -9,7 +9,7 @@ One VM in Russia runs everything with `infra/compose.yaml`: Caddy (static site +
 | VM | Ubuntu 24.04, 2 vCPU, 2–4 GB RAM, 30 GB SSD, public IPv4. Yandex Cloud, Selectel or Timeweb Cloud, Russian region. ≈ 1 000–1 500 ₽/month. |
 | Domain | Any `.ru` registrar. An `A` record for the domain → the VM's IP. |
 | Mail | A mailbox on the domain for login codes (Yandex 360: SMTP `smtp.yandex.ru:465`, app password). Without it sign-in codes only appear in the API log. |
-| Tutor model | Production: vLLM (GPU host) and/or DeepSeek key. **Never** Google AI Studio's free tier with real students. Without any model the tutor answers «Репетитор сейчас недоступен»; everything else works. |
+| Tutor model | Production: vLLM (GPU host) and/or DeepSeek key. **Never** a free dev tier (OpenRouter `:free`, Google AI Studio) with real students. Without any model the tutor answers «Репетитор сейчас недоступен»; everything else works. |
 
 ## 2. One-time server setup
 
