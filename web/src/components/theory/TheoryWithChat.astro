@@ -22,6 +22,7 @@ const { contextId } = Astro.props;
   // code only on pages that use it, so most theory pages stay JavaScript-free.
   const sims: Record<string, () => Promise<unknown>> = {
     'pp-projectile': () => import('../../lib/sims/projectile'),
+    'pp-prefix': () => import('../../lib/sims/prefix'),
   };
   for (const [tag, load] of Object.entries(sims)) if (document.querySelector(tag)) void load();
   // Step tasks: the answer form is static HTML; checking needs the element's code.
