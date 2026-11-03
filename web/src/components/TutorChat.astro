@@ -4,35 +4,83 @@ import type { TutorKind } from '../lib/api';
 interface Props {
   kind: TutorKind;
   contextId: string;
+  /**
+   * `inline` (task pages): a button under the content opens the panel.
+   * `docked` (theory pages): a sticky column beside the text on wide screens, a bottom
+   * sheet behind a floating button on narrow ones.
+   */
+  variant?: 'inline' | 'docked';
 }
 
-const { kind, contextId } = Astro.props;
+const { kind, contextId, variant = 'inline' } = Astro.props;
+const docked = variant === 'docked';
 ---
 
-<tutor-chat data-kind={kind} data-id={contextId}>
-  <button type="button" class="open">
-    {kind === 'task' ? 'Спросить репетитора о задаче' : 'Задать вопрос по теме'}
-  </button>
-  <section class="panel" hidden aria-label="ИИ-репетитор">
+<tutor-chat data-kind={kind} data-id={contextId} data-variant={variant}>
+  {
+    docked ? (
+      <button type="button" class="fab" aria-expanded="false" aria-controls="tutor-panel">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path
+            d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linejoin="round"
+          />
+        </svg>
+        Спросить
+      </button>
+    ) : (
+      <button type="button" class="open">
+        {kind === 'task' ? 'Спросить репетитора о задаче' : 'Задать вопрос по теме'}
+      </button>
+    )
+  }
+  <section
+    class="panel"
+    id={docked ? 'tutor-panel' : undefined}
+    hidden={!docked}
+    aria-label="ИИ-репетитор"
+  >
     <header>
       <h2>Репетитор</h2>
       <span class="level muted" hidden></span>
+      {
+        docked && (
+          <button type="button" class="close" aria-label="Закрыть">
+            ✕
+          </button>
+        )
+      }
     </header>
+    {docked && <p class="motto">Глупые вопросы рождают глубокое понимание.</p>}
     <p class="intro muted">
       {
         kind === 'task'
           ? 'Репетитор не скажет ответ сразу — он поможет дойти до него самому.'
-          : 'Спросите, что непонятно на этой странице.'
+          : docked
+            ? 'Спрашивайте прямо по ходу чтения: репетитор видит эту страницу.'
+            : 'Спросите, что непонятно на этой странице.'
       }
     </p>
     <ol class="log" aria-live="polite"></ol>
     <p class="notice" hidden></p>
+    {
+      docked && (
+        <p class="signin" hidden>
+          <a class="btn" href="/login/">
+            Войти, чтобы спросить
+          </a>
+        </p>
+      )
+    }
     <form class="compose" novalidate>
       <textarea
         name="text"
         rows="2"
         maxlength="2000"
-        placeholder="Ваш вопрос"
+        placeholder={docked ? 'Что здесь непонятно?' : 'Ваш вопрос'}
         aria-label="Ваш вопрос"></textarea>
       <div class="actions">
         {kind === 'task' && <button type="button" class="hint secondary">Подсказка</button>}
@@ -41,10 +89,11 @@ const { kind, contextId } = Astro.props;
       </div>
     </form>
   </section>
+  {docked && <div class="backdrop" hidden></div>}
 </tutor-chat>
 
 <script>
-  import { ApiError, tutor, type TutorKind } from '../lib/api';
+  import { ApiError, session, tutor, type TutorKind } from '../lib/api';
 
   type Render = typeof import('../lib/client-markdown');
 
@@ -53,37 +102,149 @@ const { kind, contextId } = Astro.props;
     tutor_unavailable: 'Репетитор сейчас недоступен. Попробуйте чуть позже.',
   };
 
+  /** Same breakpoint as the theory page grid: from here the chat is a column, not a sheet. */
+  const WIDE = '(min-width: 64rem)';
+
   class TutorChat extends HTMLElement {
     private kind: TutorKind = 'task';
     private contextId = '';
+    private docked = false;
     private md?: Render;
+    private loading?: Promise<boolean>;
     private busy = false;
     private maxLevel = 3;
 
     connectedCallback() {
       this.kind = (this.dataset.kind as TutorKind) ?? 'task';
       this.contextId = this.dataset.id ?? '';
-      this.q('.open').addEventListener('click', () => void this.open());
+      this.docked = this.dataset.variant === 'docked';
+      this.querySelector('.open')?.addEventListener('click', () => {
+        this.q('.open').hidden = true;
+        this.q('.panel').hidden = false;
+        void this.ensureLoaded().then((ok) => ok && this.input.focus());
+      });
       this.q<HTMLFormElement>('.compose').addEventListener('submit', (e) => {
         e.preventDefault();
         void this.send('message');
       });
       this.querySelector('.hint')?.addEventListener('click', () => void this.send('hint'));
-      this.q<HTMLTextAreaElement>('textarea').addEventListener('keydown', (e) => {
+      this.input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
           e.preventDefault();
           void this.send('message');
         }
       });
+      if (this.docked) this.setUpDocked();
     }
 
     private q<T extends HTMLElement = HTMLElement>(sel: string): T {
       return this.querySelector(sel) as T;
     }
 
-    private async open() {
-      this.q('.open').hidden = true;
-      this.q('.panel').hidden = false;
+    private get input(): HTMLTextAreaElement {
+      return this.q<HTMLTextAreaElement>('textarea');
+    }
+
+    private get storageKey(): string {
+      return `pp:tutor:${this.kind}:${this.contextId}`;
+    }
+
+    // --- docked variant (theory pages) -------------------------------------------------
+
+    private setUpDocked() {
+      // The thread costs a request: fetch it on the first focus, not on every page view.
+      this.input.addEventListener('focus', () => void this.ensureLoaded(), { once: true });
+      this.q('.fab').addEventListener('click', () => this.setSheet(true));
+      this.q('.close').addEventListener('click', () => this.setSheet(false));
+      this.q('.backdrop').addEventListener('click', () => this.setSheet(false));
+      this.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.hasAttribute('data-open')) this.setSheet(false);
+      });
+      matchMedia(WIDE).addEventListener('change', (e) => {
+        if (e.matches) this.setSheet(false);
+      });
+      // The header already asks who is signed in; reuse its answer. A student who has
+      // talked on this page before sees the thread straight away (wide screens only: on
+      // narrow ones it loads when the sheet opens).
+      session().then(
+        ({ user }) => {
+          if (!user) this.showSignIn();
+          else if (this.hadThread() && matchMedia(WIDE).matches) void this.ensureLoaded();
+        },
+        () => {}, // API down: sending will say so.
+      );
+    }
+
+    /** Bottom sheet on narrow screens. */
+    private setSheet(open: boolean) {
+      const fab = this.q('.fab');
+      const wasOpen = this.hasAttribute('data-open');
+      this.toggleAttribute('data-open', open);
+      fab.setAttribute('aria-expanded', String(open));
+      this.q('.backdrop').hidden = !open;
+      document.documentElement.classList.toggle('sheet-open', open);
+      const vv = window.visualViewport;
+      if (open) {
+        vv?.addEventListener('resize', this.fitViewport);
+        vv?.addEventListener('scroll', this.fitViewport);
+        this.fitViewport();
+        void this.ensureLoaded().then((ok) => {
+          if (ok) this.input.focus();
+          this.scrollLog();
+        });
+      } else {
+        vv?.removeEventListener('resize', this.fitViewport);
+        vv?.removeEventListener('scroll', this.fitViewport);
+        if (wasOpen && !matchMedia(WIDE).matches) fab.focus();
+      }
+    }
+
+    /** Keeps the sheet above the on-screen keyboard (iOS does not shrink the layout). */
+    private fitViewport = () => {
+      const vv = window.visualViewport;
+      if (!vv) return;
+      const below = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
+      this.style.setProperty('--kb', `${below}px`);
+      this.style.setProperty('--vvh', `${vv.height}px`);
+    };
+
+    private hadThread(): boolean {
+      try {
+        return localStorage.getItem(this.storageKey) !== null;
+      } catch {
+        return false;
+      }
+    }
+
+    private rememberThread() {
+      try {
+        localStorage.setItem(this.storageKey, '1');
+      } catch {
+        // Private mode: the thread still loads on focus.
+      }
+    }
+
+    private showSignIn() {
+      const next = encodeURIComponent(location.pathname);
+      this.q('.compose').hidden = true;
+      const signin = this.querySelector<HTMLElement>('.signin');
+      if (signin) {
+        signin.hidden = false;
+        this.q<HTMLAnchorElement>('.signin a').href = `/login/?next=${next}`;
+      } else {
+        this.notice(`<a href="/login/?next=${next}">Войдите</a>, чтобы задать вопрос репетитору.`);
+      }
+    }
+
+    // --- shared -----------------------------------------------------------------------
+
+    /** Loads the thread and the Markdown renderer once. False if the chat can't be used. */
+    private ensureLoaded(): Promise<boolean> {
+      this.loading ??= this.load();
+      return this.loading;
+    }
+
+    private async load(): Promise<boolean> {
       try {
         const [thread, md] = await Promise.all([
           tutor.thread(this.kind, this.contextId),
@@ -94,15 +255,16 @@ const { kind, contextId } = Astro.props;
         this.maxLevel = thread.max_hint_level;
         this.showLevel(thread.hint_level);
         this.showLeft(thread.messages_left);
-        this.q<HTMLTextAreaElement>('textarea').focus();
+        this.scrollLog();
+        return true;
       } catch (e) {
         if (e instanceof ApiError && e.status === 401) {
-          const next = encodeURIComponent(location.pathname);
-          this.q('.compose').hidden = true;
-          this.notice(`<a href="/login/?next=${next}">Войдите</a>, чтобы задать вопрос репетитору.`);
+          this.showSignIn();
         } else {
           this.notice('Не удалось загрузить диалог. Обновите страницу.');
+          this.loading = undefined; // let the next focus or send try again
         }
+        return false;
       }
     }
 
@@ -118,22 +280,42 @@ const { kind, contextId } = Astro.props;
       return body;
     }
 
+    /** Docked: the log scrolls on its own, keep its end in view. Inline: scroll the page. */
+    private scrollLog(target?: HTMLElement) {
+      const log = this.q('.log');
+      if (this.docked) log.scrollTop = log.scrollHeight;
+      else target?.scrollIntoView({ block: 'nearest' });
+    }
+
+    private nearLogEnd(): boolean {
+      const log = this.q('.log');
+      return log.scrollHeight - log.scrollTop - log.clientHeight < 48;
+    }
+
     private async send(intent: 'message' | 'hint') {
-      const input = this.q<HTMLTextAreaElement>('textarea');
+      const input = this.input;
       const text = input.value.trim();
-      if (this.busy || !this.md || (intent === 'message' && !text)) return;
+      if (this.busy || (intent === 'message' && !text)) return;
       this.setBusy(true);
+      if (!(await this.ensureLoaded()) || !this.md) {
+        this.setBusy(false);
+        return;
+      }
       this.notice('');
       this.addMessage('user', text || 'Дай, пожалуйста, подсказку.');
       input.value = '';
       const md = this.md;
       const target = this.addMessage('assistant', '');
       target.parentElement?.classList.add('streaming');
+      if (this.docked) this.scrollLog();
       let reply = '';
       let frame = 0;
       const paint = () => {
         frame = 0;
+        // Follow the reply, unless the student scrolled up to reread something.
+        const follow = this.docked && this.nearLogEnd();
         target.innerHTML = md.renderUntrusted(md.closedMathPrefix(reply));
+        if (follow) this.scrollLog();
       };
       try {
         await tutor.send({ kind: this.kind, id: this.contextId, text, intent }, (ev) => {
@@ -148,8 +330,11 @@ const { kind, contextId } = Astro.props;
           }
         });
         if (frame) cancelAnimationFrame(frame);
+        const follow = this.docked && this.nearLogEnd();
         target.innerHTML = md.renderUntrusted(reply);
+        if (follow) this.scrollLog();
         if (!reply) target.parentElement?.remove();
+        else this.rememberThread();
       } catch (e) {
         target.parentElement?.remove();
         const detail = e instanceof ApiError ? e.detail : '';
@@ -159,7 +344,7 @@ const { kind, contextId } = Astro.props;
       } finally {
         target.parentElement?.classList.remove('streaming');
         this.setBusy(false);
-        target.scrollIntoView({ block: 'nearest' });
+        if (!this.docked) target.scrollIntoView({ block: 'nearest' });
       }
     }
 
@@ -250,24 +435,24 @@ const { kind, contextId } = Astro.props;
     flex-direction: column;
     gap: 0.6rem;
   }
-  .log li {
+  .log :global(li) {
     max-width: 92%;
     padding: 0.5rem 0.75rem;
     border-radius: 12px;
     overflow-wrap: anywhere;
   }
-  .log li.user {
+  .log :global(li.user) {
     align-self: flex-end;
     background: var(--accent-soft);
     white-space: pre-wrap;
   }
-  .log li.assistant {
+  .log :global(li.assistant) {
     align-self: flex-start;
     background: var(--bg);
     border: 1px solid var(--border);
   }
-  .log li.streaming:empty::after,
-  .log li.streaming .prose:empty::after {
+  .log :global(li.streaming:empty)::after,
+  .log :global(li.streaming .prose:empty)::after {
     content: '…';
     color: var(--muted);
   }
@@ -276,6 +461,8 @@ const { kind, contextId } = Astro.props;
   }
   .log :global(.katex-display) {
     margin: 0.4rem 0;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
   .notice {
     font-size: 0.925rem;
@@ -303,5 +490,116 @@ const { kind, contextId } = Astro.props;
   }
   .actions .left {
     margin-left: auto;
+  }
+
+  /* --- docked (theory pages) ------------------------------------------------------- */
+  [data-variant='docked'] {
+    margin: 0;
+  }
+  [data-variant='docked'] .panel {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  [data-variant='docked'] .log {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 0.15rem;
+  }
+  /* Room to read the conversation once it starts. */
+  .panel:has(.log li) .intro {
+    display: none;
+  }
+  .motto {
+    margin: 0.5rem 0 0.25rem;
+    padding: 0.5rem 0.75rem;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    background: var(--accent-soft);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .signin {
+    margin: 0.75rem 0 0;
+  }
+  .signin .btn {
+    width: 100%;
+  }
+  [data-variant='docked'] textarea {
+    resize: none;
+  }
+  .close {
+    margin-left: auto;
+    padding: 0.2rem 0.55rem;
+    background: transparent;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1;
+  }
+  .fab {
+    position: fixed;
+    right: var(--gutter);
+    bottom: calc(var(--gutter) + env(safe-area-inset-bottom, 0px));
+    z-index: 25;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.75rem 1.1rem;
+    border-radius: 999px;
+    color: var(--on-accent);
+    box-shadow: var(--shadow);
+  }
+
+  /* Narrow screens: a bottom sheet behind the floating button. */
+  @media (max-width: 63.99rem) {
+    [data-variant='docked']:not([data-open]) .panel {
+      display: none;
+    }
+    [data-variant='docked'][data-open] .fab {
+      display: none;
+    }
+    [data-variant='docked'] .panel {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: var(--kb, 0px);
+      z-index: 31;
+      height: min(85dvh, calc(var(--vvh, 100dvh) - 0.5rem));
+      padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+      border-radius: var(--radius) var(--radius) 0 0;
+      border-bottom: 0;
+      box-shadow: var(--shadow);
+    }
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      background: rgb(0 0 0 / 0.45);
+    }
+    .backdrop[hidden] {
+      display: none;
+    }
+    :global(html.sheet-open) {
+      overflow: hidden;
+    }
+  }
+
+  /* Wide screens: a column of viewport height that stays put while the text scrolls. */
+  @media (min-width: 64rem) {
+    [data-variant='docked'] {
+      position: sticky;
+      top: calc(var(--header-h) + 1rem);
+      height: calc(100dvh - var(--header-h) - 2rem);
+    }
+    [data-variant='docked'] .panel {
+      height: 100%;
+    }
+    .fab,
+    .close,
+    .backdrop {
+      display: none;
+    }
   }
 </style>

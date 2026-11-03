@@ -33,59 +33,62 @@ const tasks = b.tasks
   .sort((x, y) => taskOrder(x) - taskOrder(y) || x.difficulty - y.difficulty);
 ---
 
-<Base title={`${entry.data.title} — ${b.exam.title}`} narrow>
-  <nav class="crumbs"><a href="/">← Роадмап</a></nav>
-  <h1>
-    {entry.data.title}
-    {entry.data.status === 'draft' && <span class="badge draft">черновик</span>}
-  </h1>
+<Base title={`${entry.data.title} — ${b.exam.title}`}>
+  <div class="theory-grid">
+    <div class="text-col">
+      <nav class="crumbs"><a href="/">← Роадмап</a></nav>
+      <h1>
+        {entry.data.title}
+        {entry.data.status === 'draft' && <span class="badge draft">черновик</span>}
+      </h1>
 
-  <aside class="facts">
-    {
-      topic.ege_tasks.length > 0 && (
-        <p>
-          Задания ЕГЭ: <span class="badge">№ {topic.ege_tasks.join(', ')}</span>
-        </p>
-      )
-    }
-    {
-      prereqs.length > 0 && (
-        <p>
-          Сначала изучите:{' '}
-          {prereqs.map((p, i) => (
-            <>
-              {i > 0 && ', '}
-              <a href={theoryUrl(exam, p.id)}>{p.title}</a>
-            </>
-          ))}
-        </p>
-      )
-    }
-  </aside>
+      <aside class="facts">
+        {
+          topic.ege_tasks.length > 0 && (
+            <p>
+              Задания ЕГЭ: <span class="badge">№ {topic.ege_tasks.join(', ')}</span>
+            </p>
+          )
+        }
+        {
+          prereqs.length > 0 && (
+            <p>
+              Сначала изучите:{' '}
+              {prereqs.map((p, i) => (
+                <>
+                  {i > 0 && ', '}
+                  <a href={theoryUrl(exam, p.id)}>{p.title}</a>
+                </>
+              ))}
+            </p>
+          )
+        }
+      </aside>
 
-  <article class="prose reading">
-    <Content />
-  </article>
+      <article class="prose reading">
+        <Content />
+      </article>
 
-  <TutorChat kind="theory" contextId={topic.id} />
-
-  {
-    tasks.length > 0 && (
-      <section class="practice">
-        <h2>Практика</h2>
-        <ol>
-          {tasks.map((t, i) => (
-            <li>
-              <a href={taskUrl(exam, t.id)}>
-                Задача {i + 1}
-                {t.ege_task === null ? ' · к теории' : ` · задание № ${t.ege_task}`}
-              </a>
-            </li>
-          ))}
-        </ol>
-      </section>
-    )
-  }
+      {
+        tasks.length > 0 && (
+          <section class="practice">
+            <h2>Практика</h2>
+            <ol>
+              {tasks.map((t, i) => (
+                <li>
+                  <a href={taskUrl(exam, t.id)}>
+                    Задача {i + 1}
+                    {t.ege_task === null ? ' · к теории' : ` · задание № ${t.ege_task}`}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )
+      }
+    </div>
+    <TutorChat kind="theory" contextId={topic.id} variant="docked" />
+  </div>
 </Base>
 
 <script>
@@ -97,6 +100,27 @@ const tasks = b.tasks
 </script>
 
 <style>
+  /* One column (text, then the floating tutor button) on phones and tablets; from 64rem
+     the tutor is a sticky column beside a ~70-character reading column. */
+  .theory-grid {
+    max-width: var(--measure);
+    margin: 0 auto;
+  }
+  @media (max-width: 63.99rem) {
+    .text-col {
+      padding-bottom: 4.5rem; /* keep the last «Проверить» clear of the floating button */
+    }
+  }
+  @media (min-width: 64rem) {
+    .theory-grid {
+      max-width: none;
+      display: grid;
+      grid-template-columns: minmax(0, 42rem) clamp(20rem, 30vw, 26rem);
+      justify-content: center;
+      align-items: start;
+      gap: 1.5rem;
+    }
+  }
   .crumbs {
     margin-top: 1rem;
     font-size: 0.875rem;

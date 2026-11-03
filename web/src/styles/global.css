@@ -25,6 +25,7 @@
   --gutter: 16px;
   --measure: 46rem;
   --app: 72rem;
+  --header-h: 3.6rem; /* sticky site header on wide screens (bar + border) */
   color-scheme: dark;
 }
 
