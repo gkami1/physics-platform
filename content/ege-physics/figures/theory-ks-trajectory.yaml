@@ -1,0 +1,24 @@
+# mech.kinematics.basics 1.1: a body traces its trajectory; path = the length of that line
+kind: diagram
+size: [400, 240]
+items:
+- path: M34 186C84 54 168 34 214 108S318 214 368 64
+  tone: accent
+  width: 3
+  animate: draw
+  mover: true
+- dots: [[34, 186]]
+  r: 4
+  tone: muted
+- text: старт
+  at: [34, 210]
+  size: 13
+  tone: muted
+- text: траектория — линия, по которой движется тело
+  at: [200, 232]
+  size: 13
+- text: путь *l* — длина этой линии
+  at: [250, 30]
+  size: 13
+  tone: accent
+  animate: appear

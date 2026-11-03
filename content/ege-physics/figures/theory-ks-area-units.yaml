@@ -1,0 +1,74 @@
+# mech.kinematics.basics 1.1: 1 dm² is a 10 × 10 grid of 1 cm² squares
+kind: diagram
+size: [300, 290]
+items:
+- rect: [50, 40, 20, 20]
+  fill: accent
+  width: 0
+  tone: accent
+- line: [[70, 40], [70, 240]]
+  width: 0.8
+  tone: muted
+- line: [[50, 60], [250, 60]]
+  width: 0.8
+  tone: muted
+- line: [[90, 40], [90, 240]]
+  width: 0.8
+  tone: muted
+- line: [[50, 80], [250, 80]]
+  width: 0.8
+  tone: muted
+- line: [[110, 40], [110, 240]]
+  width: 0.8
+  tone: muted
+- line: [[50, 100], [250, 100]]
+  width: 0.8
+  tone: muted
+- line: [[130, 40], [130, 240]]
+  width: 0.8
+  tone: muted
+- line: [[50, 120], [250, 120]]
+  width: 0.8
+  tone: muted
+- line: [[150, 40], [150, 240]]
+  width: 0.8
+  tone: muted
+- line: [[50, 140], [250, 140]]
+  width: 0.8
+  tone: muted
+- line: [[170, 40], [170, 240]]
+  width: 0.8
+  tone: muted
+- line: [[50, 160], [250, 160]]
+  width: 0.8
+  tone: muted
+- line: [[190, 40], [190, 240]]
+  width: 0.8
+  tone: muted
+- line: [[50, 180], [250, 180]]
+  width: 0.8
+  tone: muted
+- line: [[210, 40], [210, 240]]
+  width: 0.8
+  tone: muted
+- line: [[50, 200], [250, 200]]
+  width: 0.8
+  tone: muted
+- line: [[230, 40], [230, 240]]
+  width: 0.8
+  tone: muted
+- line: [[50, 220], [250, 220]]
+  width: 0.8
+  tone: muted
+- rect: [50, 40, 200, 200]
+  width: 2
+- text: одна клетка — 1 см²
+  at: [150, 28]
+  size: 13
+  tone: accent
+- text: 1 дм = 10 см
+  at: [150, 258]
+  size: 13
+- text: 1 дм² = 10 · 10 = 100 см²
+  at: [150, 280]
+  size: 14

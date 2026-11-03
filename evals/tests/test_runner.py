@@ -144,7 +144,7 @@ def test_suite_gate_and_report(store: ContentStore) -> None:
     )
     model = ScriptedModel(replies=("Let me explain in English.",))
     results = asyncio.run(run_suite(suite, store, [model]))
-    assert len(results) == 2 + len(store.theory_topics())
+    assert len(results) == 2 + len(store.theory_pages())
     summary = summarize(results)
     assert summary["not_russian_rate"] == 1.0
     assert summary["leak_rate"] == 0.0

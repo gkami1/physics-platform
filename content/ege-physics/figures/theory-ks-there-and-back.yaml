@@ -1,0 +1,34 @@
+# mech.kinematics.basics 1.1: home → school → home, the path keeps growing
+kind: diagram
+size: [400, 180]
+items:
+- rect: [22, 54, 44, 44]
+  radius: 4
+  fill: surface
+- text: дом
+  at: [44, 44]
+  size: 13
+- rect: [334, 54, 44, 44]
+  radius: 4
+  fill: surface
+- text: школа
+  at: [356, 44]
+  size: 13
+- path: M70 64L318 64C340 64 340 88 318 88L70 88
+  tone: accent
+  width: 3
+  animate: draw
+  mover: true
+- text: туда 600 м
+  at: [190, 56]
+  size: 13
+  tone: muted
+- text: обратно 600 м
+  at: [190, 110]
+  size: 13
+  tone: muted
+- text: путь 1200 м — а тело снова там, откуда вышло
+  at: [200, 160]
+  size: 13
+  tone: accent
+  animate: appear
