@@ -1,0 +1,57 @@
+# electro.field.strength: field lines of a positive charge and a test charge in the field
+kind: diagram
+size: [400, 260]
+items:
+- arrow: [[170.33, 121.58], [242.39, 91.73]]
+  tone: accent
+  width: 1.5
+- arrow: [[158.42, 109.67], [188.27, 37.61]]
+  tone: accent
+  width: 1.5
+- arrow: [[141.58, 109.67], [111.73, 37.61]]
+  tone: accent
+  width: 1.5
+- arrow: [[129.67, 121.58], [57.61, 91.73]]
+  tone: accent
+  width: 1.5
+- arrow: [[129.67, 138.42], [57.61, 168.27]]
+  tone: accent
+  width: 1.5
+- arrow: [[141.58, 150.33], [111.73, 222.39]]
+  tone: accent
+  width: 1.5
+- arrow: [[158.42, 150.33], [188.27, 222.39]]
+  tone: accent
+  width: 1.5
+- arrow: [[170.33, 138.42], [242.39, 168.27]]
+  tone: accent
+  width: 1.5
+- circle: [150, 130]
+  r: 13
+  fill: surface
+  tone: force
+- text: +
+  at: [150, 136]
+  size: 18
+  tone: force
+- line: [[165, 130], [292, 130]]
+  dashed: true
+  width: 1
+  tone: muted
+- text: '*r*'
+  at: [225, 148]
+- circle: [300, 130]
+  r: 6
+  fill: solid
+- text: '*q*'
+  at: [300, 154]
+- arrow: [[300, 130], [360, 130]]
+  tone: force
+  label: '*E*'
+  label_at: [364, 120]
+- text: '*E* = *k**Q*/*r*^{2}'
+  at: [300, 60]
+  size: 14
+- text: '*F* = *q**E*'
+  at: [300, 205]
+  size: 14

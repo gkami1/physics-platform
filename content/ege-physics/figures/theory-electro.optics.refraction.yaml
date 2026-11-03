@@ -1,0 +1,44 @@
+# electro.optics.refraction: incident, reflected and refracted rays; angles from the normal
+kind: diagram
+size: [400, 250]
+items:
+- rect: [10, 120, 380, 120]
+  fill: accent
+  width: 0
+- line: [[10, 120], [390, 120]]
+  tone: accent
+- line: [[200, 15], [200, 235]]
+  dashed: true
+  width: 1
+  tone: muted
+- arrow: [[111.9, 46.08], [200, 120]]
+  tone: force
+  width: 2.2
+- arrow: [[200, 120], [288.1, 46.08]]
+  tone: force
+  width: 1.5
+  dashed: true
+- arrow: [[200, 120], [266.24, 214.01]]
+  tone: force
+  width: 2.2
+- angle: [200, 120]
+  start: 90
+  end: 140
+  r: 40
+  label: '*α*'
+- angle: [200, 120]
+  start: 270
+  end: 305.17
+  r: 40
+  label: '*γ*'
+- text: воздух
+  at: [50, 105]
+  size: 13
+  tone: muted
+- text: вода
+  at: [50, 145]
+  size: 13
+  tone: muted
+- text: '*n*_1 sin *α* = *n*_2 sin *γ*'
+  at: [310, 175]
+  size: 13

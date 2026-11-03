@@ -1,0 +1,35 @@
+# quantum.photons: photon energy grows as the wavelength gets shorter
+kind: diagram
+size: [400, 230]
+items:
+- sine: [30, 70]
+  length: 210
+  amplitude: 22
+  periods: 3
+  tone: force
+  width: 2.2
+- text: красный свет
+  at: [260, 58]
+  anchor: start
+  tone: force
+- text: '*λ* ≈ 700 нм, *E* ≈ 1,8 эВ'
+  at: [260, 80]
+  anchor: start
+  size: 12
+- sine: [30, 160]
+  length: 210
+  amplitude: 22
+  periods: 5.25
+  tone: accent
+  width: 2.2
+- text: фиолетовый свет
+  at: [260, 148]
+  anchor: start
+  tone: accent
+- text: '*λ* ≈ 400 нм, *E* ≈ 3,1 эВ'
+  at: [260, 170]
+  anchor: start
+  size: 12
+- text: '*E* = *hν* = *hc*/*λ* — короче волна, больше энергия фотона'
+  at: [200, 222]
+  size: 13

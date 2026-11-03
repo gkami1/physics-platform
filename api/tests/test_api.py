@@ -26,6 +26,8 @@ def test_health(client: TestClient) -> None:
         ("kin-0002", "14", "partial", 1),
         ("meas-0001", "2,4 0,2", "correct", 1),
         ("kin-0001", "двенадцать", "invalid", 0),
+        ("ks-accel-03", "-4", "correct", 1),  # step task: scored by exam.yaml `practice`
+        ("ks-accel-03", "4", "wrong", 0),
     ],
 )
 def test_attempt_verdicts(
@@ -114,3 +116,9 @@ def test_unknown_task(client: TestClient, method: str, path: str, body: object) 
 def test_answer_length_limits(client: TestClient, answer: str) -> None:
     r = client.post("/api/tasks/kin-0001/attempts", json={"answer": answer})
     assert r.status_code == 422
+
+
+def test_step_task_counts_toward_topic_mastery(client: TestClient) -> None:
+    attempt(client, "ks-basics-05", "48")
+    topics = {t["topic_id"]: t for t in client.get("/api/progress").json()["topics"]}
+    assert topics["mech.kinematics.basics"]["score"] == 1.0

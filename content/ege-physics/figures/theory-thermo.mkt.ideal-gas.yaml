@@ -1,0 +1,48 @@
+# thermo.mkt.ideal-gas: molecules hit the wall; the impacts add up to pressure
+kind: diagram
+size: [400, 250]
+items:
+- rect: [40, 40, 260, 180]
+  width: 2
+- arrow: [[70, 70], [100, 88]]
+  tone: vel
+  width: 1.5
+- arrow: [[120, 150], [98, 175]]
+  tone: vel
+  width: 1.5
+- arrow: [[160, 95], [188, 75]]
+  tone: vel
+  width: 1.5
+- arrow: [[95, 190], [127, 184]]
+  tone: vel
+  width: 1.5
+- arrow: [[200, 175], [175, 153]]
+  tone: vel
+  width: 1.5
+- arrow: [[230, 60], [250, 88]]
+  tone: vel
+  width: 1.5
+- arrow: [[60, 140], [42, 114]]
+  tone: vel
+  width: 1.5
+- dots: [[70, 70], [120, 150], [160, 95], [95, 190], [200, 175], [230, 60], [60, 140]]
+  r: 5
+- dots: [[284, 120]]
+  r: 5
+- arrow: [[240, 90], [280, 118]]
+  tone: vel
+  width: 1.5
+  dashed: true
+- arrow: [[284, 124], [244, 152]]
+  tone: vel
+  width: 1.5
+- arrow: [[302, 120], [340, 120]]
+  tone: force
+  label: '*F*'
+  label_at: [354, 125]
+- text: удары молекул о стенку
+  at: [170, 240]
+  size: 13
+- text: '*p* = *n**k**T*'
+  at: [345, 60]
+  size: 15

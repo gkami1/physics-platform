@@ -1,0 +1,65 @@
+# mech.conservation.momentum: carts coupling — momentum before equals momentum after
+kind: diagram
+size: [400, 260]
+items:
+- text: до
+  at: [24, 34]
+  anchor: start
+  tone: muted
+- line: [[20, 108], [380, 108]]
+  width: 1.2
+- rect: [60, 66, 70, 28]
+  fill: surface
+- circle: [70, 100]
+  r: 6
+- circle: [120, 100]
+  r: 6
+- text: '*m*_1'
+  at: [95.0, 85]
+  size: 13
+- rect: [240, 66, 70, 28]
+  fill: surface
+- circle: [250, 100]
+  r: 6
+- circle: [300, 100]
+  r: 6
+- text: '*m*_2'
+  at: [275.0, 85]
+  size: 13
+- arrow: [[95, 56], [160, 56]]
+  tone: vel
+  label: '*v*_1'
+- text: покоится
+  at: [275, 56]
+  size: 12
+  tone: muted
+- text: после
+  at: [24, 150]
+  anchor: start
+  tone: muted
+- line: [[20, 224], [380, 224]]
+  width: 1.2
+- rect: [130, 182, 70, 28]
+  fill: surface
+- circle: [140, 216]
+  r: 6
+- circle: [190, 216]
+  r: 6
+- text: '*m*_1'
+  at: [165.0, 201]
+  size: 13
+- rect: [200, 182, 70, 28]
+  fill: surface
+- circle: [210, 216]
+  r: 6
+- circle: [260, 216]
+  r: 6
+- text: '*m*_2'
+  at: [235.0, 201]
+  size: 13
+- arrow: [[200, 172], [245, 172]]
+  tone: vel
+  label: '*u*'
+- text: '*m*_1*v*_1 = (*m*_1 + *m*_2)*u*'
+  at: [200, 252]
+  size: 13

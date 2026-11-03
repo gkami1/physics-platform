@@ -8,6 +8,8 @@ WORKDIR /app
 COPY pyproject.toml uv.lock ./
 COPY packages/content_schema/pyproject.toml packages/content_schema/
 COPY api/pyproject.toml api/
+# Workspace member, dev-only: uv needs its manifest to resolve the lock, not its code.
+COPY evals/pyproject.toml evals/
 RUN uv sync --no-dev --no-install-workspace
 
 COPY packages packages

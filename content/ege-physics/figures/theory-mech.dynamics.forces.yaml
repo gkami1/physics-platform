@@ -1,0 +1,36 @@
+# mech.dynamics.forces: block sliding down an incline, gravity, normal force, friction
+kind: diagram
+size: [400, 250]
+items:
+- line: [[50, 215], [360, 215], [50, 36.02]]
+  closed: true
+  fill: surface
+  width: 1.5
+- rect: [180.8, 92.07, 52, 32]
+  rotate: 30
+  fill: surface
+- arrow: [[206.8, 108.07], [206.8, 180.07]]
+  tone: force
+  label: '*m**g*'
+  label_at: [182.8, 178.07]
+- arrow: [[206.8, 108.07], [237.8, 54.38]]
+  tone: force
+  label: '*N*'
+- arrow: [[206.8, 108.07], [156.57, 79.07]]
+  tone: force
+  label: '*F*_тр'
+  label_at: [150.57, 69.07]
+- arrow: [[236.8, 148.07], [275.77, 170.57]]
+  tone: vel
+  label: '*v*'
+- angle: [360, 215]
+  start: 150
+  end: 180
+  r: 42
+  label: '*α*'
+- text: '*N* = *m**g* cos *α*'
+  at: [120, 245]
+  size: 13
+- text: '*F*_тр = *μN*'
+  at: [290, 245]
+  size: 13

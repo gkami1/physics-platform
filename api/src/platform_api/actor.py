@@ -13,7 +13,7 @@ from fastapi import Depends, Request, Response
 from sqlalchemy import ColumnElement, and_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from platform_api.db import Attempt, AuthSession, User
+from platform_api.db import Attempt, AuthSession, User, VariantRun
 from platform_api.deps import Db
 
 ANON_COOKIE = "pp_anon"
@@ -46,12 +46,13 @@ class Actor:
     def user_id(self) -> int | None:
         return self.user.id if self.user else None
 
-    def owns(self) -> ColumnElement[bool]:
-        """Filter for this actor's attempts. Anonymous rows already merged into an account
-        stay hidden from the cookie, so signing out on a shared device hides the history."""
+    def owns(self, model: type[Attempt | VariantRun] = Attempt) -> ColumnElement[bool]:
+        """Filter for this actor's rows (attempts, variant runs). Anonymous rows already merged
+        into an account stay hidden from the cookie, so signing out on a shared device hides
+        the history."""
         if self.user is not None:
-            return Attempt.user_id == self.user.id
-        return and_(Attempt.anon_id == self.anon_id, Attempt.user_id.is_(None))
+            return model.user_id == self.user.id
+        return and_(model.anon_id == self.anon_id, model.user_id.is_(None))
 
 
 def _set_cookie(request: Request, response: Response, name: str, value: str, max_age: int) -> None:

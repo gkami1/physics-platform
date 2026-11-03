@@ -1,23 +1,247 @@
 # Topic graph. `codifier` holds FIPI codifier element codes — fill from the approved 2027 codifier.
+# DRAFT: codes below were filled from the structure of the 2024–2026 codifiers without access to
+# fipi.ru; every code must be checked against the approved document (see DRAFT_REPORT.md).
 sections:
   - id: mech
     title: Механика
     topics:
       - id: mech.kinematics.basics
         title: Основы кинематики
-        codifier: []
+        codifier: ["1.1.1", "1.1.2", "1.1.3", "1.1.5"]
         prereqs: []
         ege_tasks: [1]
       - id: mech.kinematics.uniform-accel
         title: Равноускоренное движение
-        codifier: []
+        codifier: ["1.1.4", "1.1.6"]
+        prereqs: [mech.kinematics.basics]
+        ege_tasks: [1, 5, 6, 22]
+      - id: mech.kinematics.free-fall
+        title: Свободное падение и движение тела, брошенного под углом
+        codifier: ["1.1.7"]
+        prereqs: [mech.kinematics.uniform-accel]
+        ege_tasks: [1, 5, 6, 22, 26]
+      - id: mech.kinematics.circular
+        title: Движение по окружности
+        codifier: ["1.1.8"]
         prereqs: [mech.kinematics.basics]
         ege_tasks: [1, 5, 6]
       - id: mech.dynamics.newton
         title: Законы Ньютона
-        codifier: []
+        codifier: ["1.2.1", "1.2.2", "1.2.3", "1.2.4", "1.2.5"]
         prereqs: [mech.kinematics.uniform-accel]
-        ege_tasks: [2, 5, 6, 24]
+        ege_tasks: [2, 5, 6, 22, 24, 26]
+      - id: mech.dynamics.forces
+        title: Силы в механике — упругость, трение, вес
+        codifier: ["1.2.9", "1.2.10"]
+        prereqs: [mech.dynamics.newton]
+        ege_tasks: [2, 5, 6, 26]
+      - id: mech.dynamics.gravity
+        title: Всемирное тяготение и спутники
+        codifier: ["1.2.6", "1.2.7", "1.2.8"]
+        prereqs: [mech.dynamics.newton, mech.kinematics.circular]
+        ege_tasks: [2, 5, 6]
+      - id: mech.statics.moments
+        title: Момент силы и равновесие тела
+        codifier: ["1.3.1", "1.3.2"]
+        prereqs: [mech.dynamics.forces]
+        ege_tasks: [4, 5, 26]
+      - id: mech.statics.hydrostatics
+        title: Давление жидкости и закон Архимеда
+        codifier: ["1.3.3", "1.3.4", "1.3.5"]
+        prereqs: [mech.dynamics.forces]
+        ege_tasks: [4, 5, 6, 26]
+      - id: mech.conservation.momentum
+        title: Импульс и закон сохранения импульса
+        codifier: ["1.4.1", "1.4.2", "1.4.3"]
+        prereqs: [mech.dynamics.newton]
+        ege_tasks: [3, 5, 6, 22, 26]
+      - id: mech.conservation.work-power
+        title: Работа и мощность
+        codifier: ["1.4.4", "1.4.5"]
+        prereqs: [mech.dynamics.forces]
+        ege_tasks: [3, 5, 6]
+      - id: mech.conservation.energy
+        title: Механическая энергия и её сохранение
+        codifier: ["1.4.6", "1.4.7", "1.4.8"]
+        prereqs: [mech.conservation.work-power]
+        ege_tasks: [3, 5, 6, 22, 26]
+      - id: mech.oscillations.harmonic
+        title: Механические колебания
+        codifier: ["1.5.1", "1.5.2", "1.5.3"]
+        prereqs: [mech.conservation.energy, mech.kinematics.circular]
+        ege_tasks: [4, 5, 6]
+      - id: mech.oscillations.waves
+        title: Механические волны и звук
+        codifier: ["1.5.4", "1.5.5"]
+        prereqs: [mech.oscillations.harmonic]
+        ege_tasks: [4, 5]
+  - id: thermo
+    title: МКТ и термодинамика
+    topics:
+      - id: thermo.mkt.basics
+        title: Основы МКТ — молекулы и количество вещества
+        codifier: ["2.1.1", "2.1.2", "2.1.3"]
+        prereqs: []
+        ege_tasks: [7, 9, 21]
+      - id: thermo.mkt.ideal-gas
+        title: Идеальный газ — давление и температура
+        codifier: ["2.1.4", "2.1.5", "2.1.6", "2.1.7", "2.1.8"]
+        prereqs: [thermo.mkt.basics, mech.dynamics.newton]
+        ege_tasks: [7, 9, 10]
+      - id: thermo.gas-laws
+        title: Уравнение состояния и изопроцессы
+        codifier: ["2.1.9", "2.1.10", "2.1.11"]
+        prereqs: [thermo.mkt.ideal-gas]
+        ege_tasks: [7, 9, 10, 22, 24]
+      - id: thermo.humidity
+        title: Насыщенный пар и влажность
+        codifier: ["2.1.12", "2.1.13"]
+        prereqs: [thermo.gas-laws]
+        ege_tasks: [7, 9, 10, 21, 24]
+      - id: thermo.heat
+        title: Количество теплоты и фазовые переходы
+        codifier: []
+        prereqs: [thermo.mkt.basics]
+        ege_tasks: [8, 9, 10, 24]
+      - id: thermo.internal-energy
+        title: Внутренняя энергия и работа газа
+        codifier: ["2.2.2", "2.2.3", "2.2.7"]
+        prereqs: [thermo.gas-laws, mech.conservation.work-power]
+        ege_tasks: [8, 9, 10]
+      - id: thermo.first-law
+        title: Первый закон термодинамики
+        codifier: ["2.2.8"]
+        prereqs: [thermo.internal-energy, thermo.heat]
+        ege_tasks: [8, 9, 10, 21, 24]
+      - id: thermo.heat-engines
+        title: Тепловые машины и КПД
+        codifier: ["2.2.9", "2.2.10", "2.2.11"]
+        prereqs: [thermo.first-law]
+        ege_tasks: [8, 9, 10, 24]
+  - id: electro
+    title: Электродинамика
+    topics:
+      - id: electro.field.coulomb
+        title: Электрический заряд и закон Кулона
+        codifier: ["3.1.1", "3.1.2"]
+        prereqs: [mech.dynamics.newton]
+        ege_tasks: [11, 14, 15]
+      - id: electro.field.strength
+        title: Напряжённость и потенциал электрического поля
+        codifier: ["3.1.3", "3.1.4", "3.1.5", "3.1.6"]
+        prereqs: [electro.field.coulomb, mech.conservation.energy]
+        ege_tasks: [11, 14, 15, 25]
+      - id: electro.field.conductors
+        title: Проводники и диэлектрики в электрическом поле
+        codifier: ["3.1.7", "3.1.8"]
+        prereqs: [electro.field.strength]
+        ege_tasks: [14, 21]
+      - id: electro.field.capacitors
+        title: Конденсаторы
+        codifier: ["3.1.9", "3.1.10", "3.1.11"]
+        prereqs: [electro.field.strength]
+        ege_tasks: [11, 14, 15, 23, 25]
+      - id: electro.circuits.ohm
+        title: Ток, сопротивление и закон Ома для участка цепи
+        codifier: ["3.2.1", "3.2.3", "3.2.4", "3.2.7"]
+        prereqs: [electro.field.strength]
+        ege_tasks: [11, 14, 15]
+      - id: electro.circuits.emf
+        title: ЭДС и закон Ома для полной цепи
+        codifier: ["3.2.2", "3.2.5", "3.2.6"]
+        prereqs: [electro.circuits.ohm]
+        ege_tasks: [11, 14, 15, 23, 25]
+      - id: electro.circuits.power
+        title: Работа и мощность тока
+        codifier: ["3.2.8", "3.2.9"]
+        prereqs: [electro.circuits.ohm]
+        ege_tasks: [11, 14, 15, 23, 25]
+      - id: electro.magnetic.ampere
+        title: Магнитное поле и сила Ампера
+        codifier: ["3.3.1", "3.3.2", "3.3.3"]
+        prereqs: [electro.circuits.ohm]
+        ege_tasks: [12, 14, 15]
+      - id: electro.magnetic.lorentz
+        title: Сила Лоренца
+        codifier: ["3.3.4"]
+        prereqs: [electro.magnetic.ampere, mech.kinematics.circular]
+        ege_tasks: [12, 14, 15, 25]
+      - id: electro.induction.faraday
+        title: Электромагнитная индукция
+        codifier: ["3.4.1", "3.4.2", "3.4.3", "3.4.4", "3.4.5"]
+        prereqs: [electro.magnetic.ampere]
+        ege_tasks: [12, 14, 15, 21, 25]
+      - id: electro.induction.self
+        title: Самоиндукция и энергия магнитного поля
+        codifier: ["3.4.6", "3.4.7"]
+        prereqs: [electro.induction.faraday]
+        ege_tasks: [12, 14, 15]
+      - id: electro.oscillations.lc
+        title: Колебательный контур
+        codifier: ["3.5.1", "3.5.2"]
+        prereqs: [electro.induction.self, electro.field.capacitors, mech.oscillations.harmonic]
+        ege_tasks: [13, 14, 15]
+      - id: electro.oscillations.waves
+        title: Переменный ток и электромагнитные волны
+        codifier: ["3.5.3", "3.5.4", "3.5.5"]
+        prereqs: [electro.oscillations.lc, mech.oscillations.waves]
+        ege_tasks: [13, 14]
+      - id: electro.optics.refraction
+        title: Отражение и преломление света
+        codifier: ["3.6.1", "3.6.2", "3.6.3", "3.6.4", "3.6.5"]
+        prereqs: [mech.kinematics.basics]
+        ege_tasks: [13, 14, 15, 23]
+      - id: electro.optics.lenses
+        title: Линзы
+        codifier: []
+        prereqs: [electro.optics.refraction]
+        ege_tasks: [13, 14, 15, 23]
+      - id: electro.optics.wave
+        title: Волновая оптика — интерференция, дифракция, дисперсия
+        codifier: []
+        prereqs: [electro.optics.refraction, electro.oscillations.waves]
+        ege_tasks: [13, 14]
+  - id: sr
+    title: Основы СТО
+    topics:
+      - id: sr.basics
+        title: Основы специальной теории относительности
+        codifier: ["4.1", "4.2", "4.3"]
+        prereqs: [mech.conservation.energy, electro.oscillations.waves]
+        ege_tasks: [16, 18]
+  - id: quantum
+    title: Квантовая физика
+    topics:
+      - id: quantum.photons
+        title: Фотоны и волны де Бройля
+        codifier: ["5.1.1", "5.1.2", "5.1.5"]
+        prereqs: [electro.optics.wave, mech.conservation.momentum]
+        ege_tasks: [16, 17, 18]
+      - id: quantum.photoeffect
+        title: Фотоэффект
+        codifier: ["5.1.3", "5.1.4"]
+        prereqs: [quantum.photons, electro.field.strength]
+        ege_tasks: [16, 17, 23]
+      - id: quantum.atom
+        title: Строение атома и линейчатые спектры
+        codifier: ["5.2.1", "5.2.2", "5.2.3"]
+        prereqs: [quantum.photons]
+        ege_tasks: [16, 17, 18]
+      - id: quantum.nucleus
+        title: Состав ядра и энергия связи
+        codifier: ["5.3.1", "5.3.2", "5.3.3"]
+        prereqs: [quantum.atom, sr.basics]
+        ege_tasks: [16, 17]
+      - id: quantum.radioactivity
+        title: Радиоактивность и закон распада
+        codifier: ["5.3.4", "5.3.5"]
+        prereqs: [quantum.nucleus]
+        ege_tasks: [16, 17, 18]
+      - id: quantum.nuclear-reactions
+        title: Ядерные реакции
+        codifier: ["5.3.6"]
+        prereqs: [quantum.nucleus]
+        ege_tasks: [16, 17]
   - id: method
     title: Методология
     topics:
@@ -26,3 +250,8 @@ sections:
         codifier: []
         prereqs: []
         ege_tasks: [19, 20]
+      - id: method.experiment
+        title: Планирование опыта
+        codifier: []
+        prereqs: [method.measurement-error]
+        ege_tasks: [20]

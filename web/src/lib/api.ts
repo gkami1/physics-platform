@@ -35,6 +35,38 @@ export interface Progress {
   topics: { exam_id: string; topic_id: string; score: number; n: number }[];
 }
 
+export interface VariantTaskResult {
+  task_id: string;
+  ege_task: number;
+  part: number;
+  /** Checker outcome, or "self" (Part 2, to self-assess) / "skipped" (left empty). */
+  outcome: Outcome | 'self' | 'skipped';
+  points: number;
+  max_points: number;
+  answer: string | null;
+}
+
+export interface VariantRun {
+  id: number;
+  exam_id: string;
+  variant: number;
+  results: VariantTaskResult[];
+  auto_points: number;
+  self_points: Record<string, number>;
+  total_points: number;
+  max_points: number;
+  pending: number;
+  duration_s: number | null;
+  created_at: string;
+}
+
+export type VariantRunSummary = Pick<
+  VariantRun,
+  'id' | 'exam_id' | 'variant' | 'total_points' | 'max_points' | 'pending' | 'created_at'
+>;
+
+export type TaskStatus = 'solved' | 'attempted';
+
 export class ApiError extends Error {
   constructor(
     readonly status: number,
@@ -76,6 +108,22 @@ export const api = {
     call<{ expires_in: number }>('/auth/code', post({ email, consent })),
   verifyCode: (email: string, code: string) => call<Me>('/auth/verify', post({ email, code })),
   logout: () => call<void>('/auth/logout', post()),
+  taskStatuses: () => call<{ tasks: Record<string, TaskStatus> }>('/tasks/status'),
+  submitVariant: (body: {
+    exam_id: string;
+    variant: number;
+    tasks: string[];
+    answers: Record<string, string>;
+    duration_s: number;
+  }) => call<VariantRun>('/variants/runs', post(body)),
+  selfAssess: (runId: number, points: Record<string, number>) =>
+    call<VariantRun>(`/variants/runs/${runId}/self-assessment`, {
+      method: 'PUT',
+      body: JSON.stringify({ points }),
+    }),
+  variantRun: (runId: number) => call<VariantRun>(`/variants/runs/${runId}`),
+  variantRuns: (examId: string) =>
+    call<VariantRunSummary[]>(`/variants/runs?exam_id=${encodeURIComponent(examId)}`),
 };
 
 export type TutorKind = 'task' | 'theory';

@@ -1,0 +1,33 @@
+# thermo.internal-energy: work of a gas at constant pressure is the area under p(V)
+kind: graph
+x:
+  var: V
+  min: 0
+  max: 6
+  step: 1
+  numbers: false
+y:
+  var: p
+  min: 0
+  max: 5
+  step: 1
+  numbers: false
+series:
+- points: [[1.5, 3], [4.5, 3]]
+  fill: true
+guides: [[1.5, 3], [4.5, 3]]
+notes:
+- at: [3, 1.4]
+  text: '*A* = *p*Δ*V*'
+  anchor: middle
+- at: [1.5, -0.45]
+  text: '*V*_1'
+  anchor: middle
+- at: [4.5, -0.45]
+  text: '*V*_2'
+  anchor: middle
+- at: [0, 3.1]
+  text: '*p* '
+  anchor: end
+- at: [4.6, 3.25]
+  text: газ расширяется

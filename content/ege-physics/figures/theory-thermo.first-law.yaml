@@ -1,0 +1,47 @@
+# thermo.first-law: heat supplied to a gas under a piston
+kind: diagram
+size: [400, 260]
+items:
+- line: [[140, 40], [140, 190], [260, 190], [260, 40]]
+  width: 2
+- rect: [142, 92, 116, 14]
+  fill: surface
+- line: [[200, 92], [200, 50]]
+  width: 3
+- dots: [[158, 118], [240, 122], [172, 176], [232, 172], [205, 182], [150, 150], [250, 150], [188, 124]]
+  r: 4
+  tone: accent
+- text: Δ*U*
+  at: [200, 152]
+  size: 15
+- arrow: [[285, 112], [285, 62]]
+  tone: vel
+  label: '*A*'
+  label_at: [302, 92]
+- path: M178 238C170 222 186 214 182 200C196 212 200 222 192 238Z
+  tone: force
+  fill: solid
+  width: 1
+- path: M206 238C198 220 214 214 210 202C224 214 226 224 218 238Z
+  tone: force
+  fill: solid
+  width: 1
+- arrow: [[240, 240], [240, 196]]
+  tone: force
+  label: '*Q*'
+  label_at: [256, 226]
+- text: '*Q* = Δ*U* + *A*'
+  at: [60, 80]
+  size: 16
+- text: теплота идёт
+  at: [60, 110]
+  size: 12
+  tone: muted
+- text: на нагрев газа
+  at: [60, 126]
+  size: 12
+  tone: muted
+- text: и на работу
+  at: [60, 142]
+  size: 12
+  tone: muted

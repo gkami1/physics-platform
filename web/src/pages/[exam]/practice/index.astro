@@ -1,0 +1,469 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '../../../layouts/Base.astro';
+import {
+  bundles,
+  difficultyLabel,
+  firstParagraph,
+  formatDuration,
+  orderedTopics,
+  type PublicBundle,
+  specFor,
+  taskOrder,
+  taskUrl,
+  variantsUrl,
+} from '../../../lib/content';
+import { renderMarkdown } from '../../../lib/markdown';
+
+export const getStaticPaths = (() =>
+  bundles().map((b) => ({ params: { exam: b.exam.id }, props: { b } }))) satisfies GetStaticPaths;
+
+interface Props {
+  b: PublicBundle;
+}
+
+const { b } = Astro.props;
+const exam = b.exam.id;
+const topics = orderedTopics(b);
+const topicTitle = new Map(topics.map((t) => [t.id, t.title]));
+const numbers = Object.keys(b.exam.tasks)
+  .map(Number)
+  .sort((x, y) => x - y)
+  .filter((n) => b.tasks.some((t) => t.ege_task === n));
+const rows = await Promise.all(
+  [...b.tasks]
+    .sort((x, y) => taskOrder(x) - taskOrder(y) || x.difficulty - y.difficulty)
+    .map(async (t) => ({
+      t,
+      spec: specFor(b, t),
+      preview: await renderMarkdown(firstParagraph(t.statement)),
+    })),
+);
+---
+
+<Base title={`Практика — ${b.exam.title}`}>
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Практика</div>
+      <h1>Задачи</h1>
+      <p class="muted">
+        Выберите номер или тему — или возьмите случайную задачу. Ответы проверяются сразу.
+      </p>
+    </div>
+  </header>
+
+  <practice-board data-exam={exam}>
+    <div class="layout">
+      <div>
+        <form class="card filters" aria-label="Фильтры">
+          <label>
+            <span>Часть</span>
+            <select class="field" name="part">
+              <option value="">Все</option>
+              <option value="1">Часть 1</option>
+              <option value="2">Часть 2</option>
+            </select>
+          </label>
+          <label>
+            <span>Номер</span>
+            <select class="field" name="number">
+              <option value="">Все номера</option>
+              {
+                b.exam.practice && b.tasks.some((t) => t.ege_task === null) && (
+                  <option value="steps">{b.exam.practice.title}</option>
+                )
+              }
+              {
+                numbers.map((n) => (
+                  <option value={n}>
+                    № {n} · {b.exam.tasks[String(n)]!.title}
+                  </option>
+                ))
+              }
+            </select>
+          </label>
+          <label>
+            <span>Тема</span>
+            <select class="field" name="topic">
+              <option value="">Все темы</option>
+              {topics.map((t) => <option value={t.id}>{t.title}</option>)}
+            </select>
+          </label>
+          <label>
+            <span>Статус</span>
+            <select class="field" name="status">
+              <option value="">Любой</option>
+              <option value="todo">Не решены</option>
+              <option value="solved">Решены</option>
+            </select>
+          </label>
+          <div class="filter-actions">
+            <button type="button" class="btn random">🎲 Случайная задача</button>
+            <span class="found muted" aria-live="polite"></span>
+          </div>
+        </form>
+
+        <div class="card table-wrap">
+          <table class="tasks">
+            <thead>
+              <tr>
+                <th class="c-status"><span class="sr">Статус</span></th>
+                <th class="c-num">№</th>
+                <th>Задача</th>
+                <th class="c-topic">Тема</th>
+                <th class="c-diff">Сложность</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                rows.map(({ t, spec, preview }) => (
+                  <tr
+                    data-id={t.id}
+                    data-href={taskUrl(exam, t.id)}
+                    data-part={spec.part}
+                    data-number={t.ege_task ?? 'steps'}
+                    data-topics={t.topics.join(' ')}
+                  >
+                    <td class="c-status">
+                      <span class="status" title="Не решена" />
+                    </td>
+                    <td class="c-num">
+                      {t.ege_task === null ? (
+                        <span class="chip" title={spec.title}>
+                          Т
+                        </span>
+                      ) : (
+                        <span class="chip">№ {t.ege_task}</span>
+                      )}
+                    </td>
+                    <td class="c-task">
+                      <a href={taskUrl(exam, t.id)} class="preview" set:html={preview} />
+                      {t.status === 'draft' && <span class="badge draft">черновик</span>}
+                    </td>
+                    <td class="c-topic muted">
+                      {t.topics.map((id) => topicTitle.get(id) ?? id).join(', ')}
+                    </td>
+                    <td class={`c-diff diff-${t.difficulty}`}>{difficultyLabel(t.difficulty)}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+          <p class="empty muted" hidden>Под эти фильтры задач пока нет.</p>
+        </div>
+      </div>
+
+      <aside class="side">
+        <section class="card stat">
+          <div class="muted">Решено</div>
+          <div class="big"><span class="solved">0</span> / {b.tasks.length}</div>
+          <div class="progress" aria-hidden="true"><span></span></div>
+        </section>
+        <a class="card promo" href={variantsUrl(exam)}>
+          <span class="eyebrow">Варианты</span>
+          <strong>Полный вариант под таймер</strong>
+          <span class="muted">
+            {Object.keys(b.exam.tasks).length} заданий · {formatDuration(b.exam.duration_minutes)}
+          </span>
+        </a>
+      </aside>
+    </div>
+  </practice-board>
+</Base>
+
+<script>
+  import { api, type TaskStatus } from '../../../lib/api';
+
+  /** Read by the task page's «Ещё задача» button. */
+  const POOL_KEY = 'pp:practice-pool';
+
+  class PracticeBoard extends HTMLElement {
+    private form!: HTMLFormElement;
+    private rows: HTMLTableRowElement[] = [];
+    private statuses: Record<string, TaskStatus> = {};
+
+    connectedCallback() {
+      this.form = this.querySelector('form')!;
+      this.rows = [...this.querySelectorAll<HTMLTableRowElement>('tbody tr')];
+      const params = new URLSearchParams(location.search);
+      for (const name of ['part', 'number', 'topic', 'status']) {
+        const value = params.get(name);
+        const el = this.form.elements.namedItem(name) as HTMLSelectElement | null;
+        if (value && el) el.value = value;
+      }
+      this.form.addEventListener('change', () => this.apply(true));
+      this.querySelector('.random')!.addEventListener('click', () => this.random());
+      this.apply(false);
+      void api.taskStatuses().then(
+        ({ tasks }) => {
+          this.statuses = tasks;
+          this.paintStatuses();
+          this.apply(false);
+        },
+        () => {},
+      );
+    }
+
+    private value(name: string): string {
+      return (this.form.elements.namedItem(name) as HTMLSelectElement).value;
+    }
+
+    private fits(row: HTMLTableRowElement): boolean {
+      const [part, number, topic, status] = ['part', 'number', 'topic', 'status'].map((n) =>
+        this.value(n),
+      );
+      const s = this.statuses[row.dataset.id ?? ''];
+      return (
+        (!part || row.dataset.part === part) &&
+        (!number || row.dataset.number === number) &&
+        (!topic || (row.dataset.topics ?? '').split(' ').includes(topic)) &&
+        (!status || (status === 'solved' ? s === 'solved' : s !== 'solved'))
+      );
+    }
+
+    private visible(): HTMLTableRowElement[] {
+      return this.rows.filter((r) => !r.hidden);
+    }
+
+    private apply(updateUrl: boolean) {
+      for (const r of this.rows) r.hidden = !this.fits(r);
+      const n = this.visible().length;
+      this.querySelector('.found')!.textContent = `Найдено: ${n}`;
+      this.querySelector<HTMLElement>('.empty')!.hidden = n > 0;
+      this.querySelector<HTMLButtonElement>('.random')!.disabled = n === 0;
+      if (updateUrl) {
+        const params = new URLSearchParams();
+        for (const name of ['part', 'number', 'topic', 'status']) {
+          const v = this.value(name);
+          if (v) params.set(name, v);
+        }
+        const q = params.toString();
+        history.replaceState(null, '', q ? `?${q}` : location.pathname);
+      }
+    }
+
+    private paintStatuses() {
+      let solved = 0;
+      for (const r of this.rows) {
+        const s = this.statuses[r.dataset.id ?? ''];
+        const el = r.querySelector<HTMLElement>('.status')!;
+        el.dataset.status = s ?? '';
+        el.title = s === 'solved' ? 'Решена' : s === 'attempted' ? 'Есть попытки' : 'Не решена';
+        if (s === 'solved') solved++;
+      }
+      this.querySelector('.solved')!.textContent = String(solved);
+      this.querySelector<HTMLElement>('.stat .progress > span')!.style.setProperty(
+        '--value',
+        `${Math.round((solved / Math.max(this.rows.length, 1)) * 100)}%`,
+      );
+    }
+
+    private random() {
+      const pool = this.visible();
+      // Prefer what the student hasn't solved yet.
+      const fresh = pool.filter((r) => this.statuses[r.dataset.id ?? ''] !== 'solved');
+      const from = fresh.length > 0 ? fresh : pool;
+      const pick = from[Math.floor(Math.random() * from.length)];
+      if (!pick?.dataset.href) return;
+      try {
+        sessionStorage.setItem(
+          POOL_KEY,
+          JSON.stringify({
+            back: location.pathname + location.search,
+            hrefs: pool.map((r) => r.dataset.href),
+          }),
+        );
+      } catch {
+        // Storage off: «Ещё задача» just won't appear.
+      }
+      location.href = pick.dataset.href;
+    }
+  }
+
+  customElements.define('practice-board', PracticeBoard);
+</script>
+
+<style>
+  .layout {
+    display: grid;
+    gap: 1.25rem;
+  }
+  @media (min-width: 62rem) {
+    .layout {
+      grid-template-columns: 1fr 17rem;
+      align-items: start;
+    }
+    .side {
+      position: sticky;
+      top: 4.5rem;
+    }
+  }
+  .filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  .filters label {
+    display: grid;
+    gap: 0.3rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .filters .field {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+  .filter-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .found {
+    font-size: 0.875rem;
+  }
+  .table-wrap {
+    overflow: hidden;
+  }
+  .tasks {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.925rem;
+  }
+  .tasks th {
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0.7rem 0.8rem;
+    background: var(--surface-2);
+  }
+  .tasks td {
+    padding: 0.75rem 0.8rem;
+    border-top: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .tasks tbody tr:hover {
+    background: color-mix(in srgb, var(--surface-2) 60%, transparent);
+  }
+  .c-status {
+    width: 2.25rem;
+  }
+  .c-num {
+    width: 4.5rem;
+  }
+  .c-diff {
+    width: 7.5rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .c-topic {
+    width: 13rem;
+    font-size: 0.85rem;
+  }
+  .status {
+    display: inline-block;
+    width: 0.85rem;
+    height: 0.85rem;
+    margin-top: 0.3rem;
+    border-radius: 50%;
+    border: 2px solid var(--border-strong);
+  }
+  .status[data-status='attempted'] {
+    border-color: var(--warn);
+  }
+  .status[data-status='solved'] {
+    border-color: var(--ok);
+    background: var(--ok);
+  }
+  .preview {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .preview:hover {
+    color: var(--accent);
+  }
+  .preview :global(p) {
+    margin: 0;
+  }
+  .empty {
+    padding: 1.25rem;
+    margin: 0;
+    text-align: center;
+  }
+  .sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .side {
+    display: grid;
+    gap: 1rem;
+  }
+  .stat {
+    padding: 1rem 1.1rem;
+    display: grid;
+    gap: 0.4rem;
+  }
+  .big {
+    font-size: 1.6rem;
+    font-weight: 750;
+  }
+  .promo {
+    display: grid;
+    gap: 0.3rem;
+    padding: 1rem 1.1rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .promo:hover {
+    border-color: var(--accent);
+  }
+  .promo .muted {
+    font-size: 0.875rem;
+  }
+  /* Phones: rows become stacked cards. */
+  @media (max-width: 40rem) {
+    .tasks thead {
+      display: none;
+    }
+    .tasks tr {
+      display: grid;
+      grid-template-columns: auto auto 1fr;
+      gap: 0.35rem 0.6rem;
+      padding: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
+    .tasks tr[hidden] {
+      display: none;
+    }
+    .tasks td {
+      padding: 0;
+      border: 0;
+      width: auto;
+    }
+    .c-task,
+    .c-topic {
+      grid-column: 1 / -1;
+    }
+    .c-diff {
+      grid-row: 1;
+      grid-column: 3;
+      justify-self: end;
+      font-size: 0.85rem;
+    }
+  }
+</style>

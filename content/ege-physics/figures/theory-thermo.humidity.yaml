@@ -1,0 +1,44 @@
+# thermo.humidity: dynamic equilibrium of evaporation and condensation
+kind: diagram
+size: [400, 250]
+items:
+- rect: [61, 141, 178, 78]
+  fill: accent
+  width: 0
+- rect: [60, 50, 180, 170]
+  width: 2
+- line: [[60, 50], [240, 50]]
+  width: 4
+- line: [[60, 141], [240, 141]]
+  tone: accent
+- dots: [[90.21, 105.6], [209.01, 113.63], [186.02, 93.55], [125.88, 114.85], [217.92, 88.13], [182.37,
+      73.22], [96.29, 71.98], [153.83, 123.62], [114.26, 81.34], [150.24, 97.1], [153.38, 63.23], [178.69,
+      119.85]]
+  r: 4.5
+  tone: accent
+- arrow: [[100, 150], [100, 106]]
+  tone: vel
+  label: испарение
+  label_at: [100, 170]
+- arrow: [[200, 104], [200, 148]]
+  tone: force
+  label: конденсация
+  label_at: [200, 170]
+- text: вода
+  at: [150, 205]
+  tone: muted
+- text: 'насыщенный пар:'
+  at: [320, 110]
+  size: 13
+- text: сколько молекул
+  at: [320, 130]
+  size: 13
+- text: вылетает, столько
+  at: [320, 148]
+  size: 13
+- text: и возвращается
+  at: [320, 166]
+  size: 13
+- text: '*φ* = *p*/*p*_н · 100 %'
+  at: [150, 245]
+  size: 14

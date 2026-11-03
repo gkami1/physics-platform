@@ -4,7 +4,7 @@ Target: usable, paid MVP in ~8 weeks of evenings/weekends (≈10–12 h/week), i
 
 Each milestone has a **definition of done**; a milestone is not finished until it is deployed.
 
-## M1 — Foundation (week 1) — code done 2026-10-25; pending: Docker build verified, VM deploy, 30 tasks
+## M1 — Foundation (week 1) — code done 2026-10-25; Docker stack verified 2026-10-28 (smoke test in CI); pending: VM deploy, 30 tasks
 - Repo skeleton: uv workspace, `content_schema` package, `api` service, Astro `web`, `infra/`.
 - Content schema + `content-build validate|build`; public/private split with a no-leak test.
 - `exam.yaml` with EGE task structure (points marked *to verify* until the approved 2027 spec).
@@ -30,10 +30,19 @@ Each milestone has a **definition of done**; a milestone is not finished until i
 - Server-side hint ladder; leak filter; `llm_calls` tracing.
 - **Done:** own students use the tutor on task and theory pages (beta starts).
 
-## M5 — Tutor quality (week 5)
+## M5 — Tutor quality (week 5) — started 2026-10-28: deterministic evals + CI workflow; pending: model secrets, LLM judge, routing
 - Eval harness in CI (leak rate, hint adherence, language; LLM judge calibrated on ~50 labelled cases).
 - Model routing; per-call cost recording; prompt iteration driven by evals.
 - **Done:** leak rate ≈ 0 on eval set; measured ₽ per active student within budget.
+
+## Web redesign + variants (2026-10-28, pulled forward) — code done; pending: browser QA, deploy
+- Dark app shell; roadmap path; practice table with random task; timed synthetic variants with Part 2 self-assessment (see ARCHITECTURE §5 «Site structure»).
+- Covers M6's «roadmap page» and the Part 2 self-assessment for variants.
+
+## Theory ladders (2026-11-01) — mechanics, thermo and electrodynamics done
+- Theory pages rewritten as steps from 7th grade to EGE level, each tagged with a grade badge and followed by an embedded step task (see ARCHITECTURE «Theory as a ladder»).
+- Done: kinematics (4 topics, 32 step tasks), dynamics (Newton, forces, gravity — 22 step tasks), statics (moments, hydrostatics — 15 step tasks), conservation laws (momentum, work and power, energy — 23 step tasks), oscillations and waves (15 step tasks), molecular physics (MKT basics, ideal gas, gas laws, humidity — 25 step tasks), thermodynamics (heat, internal energy, first law, heat engines — 26 step tasks), electrostatics (Coulomb, field, conductors, capacitors — 25 step tasks), DC circuits (Ohm, EMF, power — 20 step tasks), magnetism (Ampère, Lorentz — 12 step tasks), induction (Faraday, self-induction — 11 step tasks), EM oscillations and waves (LC circuit, AC and EM waves — 13 step tasks), optics (refraction, lenses, wave optics — 18 step tasks), special relativity (6 step tasks).
+- **Next:** author review → quantum, method.
 
 ## M6 — Roadmap and guidance (week 6)
 - Roadmap graph page (prerequisites, EGE task numbers per topic).

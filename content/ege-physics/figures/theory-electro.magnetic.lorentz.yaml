@@ -1,0 +1,167 @@
+# electro.magnetic.lorentz: Lorentz force is perpendicular to velocity; circular orbit
+kind: diagram
+size: [400, 260]
+items:
+- circle: [40, 30]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [40, 80]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [40, 130]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [40, 180]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [40, 230]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [90, 30]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [90, 80]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [90, 130]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [90, 180]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [90, 230]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [140, 30]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [140, 80]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [140, 130]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [140, 180]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [140, 230]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [190, 30]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [190, 80]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [190, 130]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [190, 180]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [190, 230]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [240, 30]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [240, 80]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [240, 130]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [240, 180]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [240, 230]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [290, 30]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [290, 80]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [290, 130]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [290, 180]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [290, 230]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [340, 30]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [340, 80]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [340, 130]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [340, 180]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [340, 230]
+  r: 2.2
+  fill: solid
+  tone: muted
+- circle: [200, 135]
+  r: 80
+  dashed: true
+  tone: muted
+- arrow: [[200, 55], [262, 55]]
+  tone: vel
+  label: '*v*'
+- arrow: [[200, 55], [200, 105]]
+  tone: force
+  label: '*F*_Л'
+  label_at: [218, 105]
+- circle: [200, 55]
+  r: 8
+  fill: surface
+- text: +
+  at: [200, 60]
+  size: 13
+- text: '*B* — к нам (·)'
+  at: [320, 252]
+  size: 13
+- text: '*R* = *m**v*/(|*q*|*B*)'
+  at: [95, 252]
+  size: 13

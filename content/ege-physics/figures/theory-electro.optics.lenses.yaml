@@ -1,0 +1,40 @@
+# electro.optics.lenses: real inverted magnified image; two rays from the top of the object
+kind: diagram
+size: [400, 260]
+items:
+- line: [[10, 130], [395, 130]]
+  width: 1
+  tone: muted
+- arrow: [[200, 130], [200, 25]]
+  width: 2
+- arrow: [[200, 130], [200, 235]]
+  width: 2
+- dots: [[140, 130], [260, 130], [80, 130], [320, 130]]
+  r: 2.8
+- text: '*F*'
+  at: [140, 150]
+  size: 13
+- text: '*F*'
+  at: [260, 120]
+  size: 13
+- text: 2*F*
+  at: [80, 150]
+  size: 13
+- text: 2*F*
+  at: [320, 120]
+  size: 13
+- arrow: [[110, 130], [110, 80]]
+  tone: vel
+  width: 2.5
+- arrow: [[380, 130], [380, 230]]
+  tone: vel
+  width: 2.5
+- line: [[110, 80], [200, 80], [380, 230]]
+  tone: force
+  width: 1.4
+- line: [[110, 80], [380, 230]]
+  tone: force
+  width: 1.4
+- text: 1/*d* + 1/*f* = 1/*F*
+  at: [80, 230]
+  size: 14

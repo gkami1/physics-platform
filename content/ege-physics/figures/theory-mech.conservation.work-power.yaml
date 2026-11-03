@@ -1,0 +1,29 @@
+# mech.conservation.work-power: work of a force at angle α to the displacement
+kind: diagram
+size: [400, 230]
+items:
+- hatch: [[30, 150], [370, 150]]
+  side: 1
+- rect: [90, 110, 70, 40]
+  fill: surface
+- arrow: [[160, 120], [255, 65]]
+  tone: force
+  label: '*F*'
+- line: [[160, 120], [270, 120]]
+  dashed: true
+  width: 1
+- angle: [160, 120]
+  start: 0
+  end: 30
+  r: 40
+  label: '*α*'
+- arrow: [[90, 185], [300, 185]]
+  tone: vel
+  label: '*s*'
+  label_at: [316, 190]
+- rect: [230, 110, 70, 40]
+  dashed: true
+  tone: muted
+- text: '*A* = *F**s* cos *α*'
+  at: [200, 220]
+  size: 15

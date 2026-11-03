@@ -64,6 +64,8 @@ class OpenAICompatible:
     price_in: int = 0
     price_out: int = 0
     first_token_timeout: float = 20.0
+    # Outgoing proxy for this provider only, e.g. a local VPN client (dev).
+    proxy: str | None = None
     transport: httpx.AsyncBaseTransport | None = None  # tests
 
     async def stream(self, messages: Sequence[Message], info: CallInfo) -> AsyncIterator[str]:
@@ -81,7 +83,7 @@ class OpenAICompatible:
         timeout = httpx.Timeout(connect=5.0, read=self.first_token_timeout, write=10.0, pool=5.0)
         async with (
             httpx.AsyncClient(
-                base_url=self.base_url, timeout=timeout, transport=self.transport
+                base_url=self.base_url, timeout=timeout, transport=self.transport, proxy=self.proxy
             ) as client,
             client.stream("POST", "/chat/completions", json=body, headers=headers) as r,
         ):
@@ -179,8 +181,8 @@ def make_models(settings: Settings) -> list[ChatModel]:
                 base_url=settings.llm_base_url,
                 model=settings.llm_model,
                 api_key=settings.llm_api_key,
-                # Qwen3: answer directly; hidden reasoning only adds latency for tutoring.
-                extra={"chat_template_kwargs": {"enable_thinking": settings.llm_thinking}},
+                extra=settings.llm_extra_body,
+                proxy=settings.llm_proxy or None,
             )
         )
     if settings.llm_fallback_base_url:

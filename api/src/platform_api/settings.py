@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Literal
+from typing import Any, Literal
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -23,10 +23,18 @@ class Settings(BaseSettings):
 
     # Tutor models (OpenAI-compatible). Primary: self-hosted vLLM, e.g. http://gpu:8000/v1.
     # Fallback: DeepSeek, https://api.deepseek.com. Neither set: a scripted model (dev only).
+    # Development: Google AI Studio's free tier as primary (see .env.example). Never in prod:
+    # the free tier may use prompts for training and is outside Russia.
     llm_base_url: str = ""
     llm_api_key: str = ""
     llm_model: str = "Qwen/Qwen3-8B"
-    llm_thinking: bool = False
+    # Extra request fields for the primary, as JSON in API_LLM_EXTRA_BODY. Default: Qwen3 on
+    # vLLM answers directly (hidden reasoning only adds latency). Other providers may reject
+    # unknown fields: Gemini wants {} or {"reasoning_effort": "none"}.
+    llm_extra_body: dict[str, Any] = {"chat_template_kwargs": {"enable_thinking": False}}
+    # Proxy for the primary's calls only, e.g. http://127.0.0.1:10809 from a local VPN client
+    # (Google refuses requests from Russia). Dev only.
+    llm_proxy: str = ""
     llm_fallback_base_url: str = ""
     llm_fallback_api_key: str = ""
     llm_fallback_model: str = "deepseek-chat"

@@ -1,0 +1,37 @@
+# electro.induction.faraday: moving magnet changes the flux; the galvanometer shows a current
+kind: diagram
+size: [400, 260]
+items:
+- path: M200 85a10 40 0 1 0 0 80a10 40 0 1 0 0 -80M216 85a10 40 0 1 0 0 80a10 40 0 1 0 0 -80M232 85a10
+    40 0 1 0 0 80a10 40 0 1 0 0 -80M248 85a10 40 0 1 0 0 80a10 40 0 1 0 0 -80M264 85a10 40 0 1 0 0 80a10
+    40 0 1 0 0 -80M280 85a10 40 0 1 0 0 80a10 40 0 1 0 0 -80M296 85a10 40 0 1 0 0 80a10 40 0 1 0 0 -80M312
+    85a10 40 0 1 0 0 80a10 40 0 1 0 0 -80
+  width: 1.6
+- line: [[200, 165], [200, 220], [240, 220]]
+  width: 1.6
+- element: galvanometer
+  at: [260, 220]
+- line: [[280, 220], [312, 220], [312, 165]]
+  width: 1.6
+- rect: [40, 105, 50, 40]
+  fill: surface
+  tone: accent
+- rect: [90, 105, 50, 40]
+  fill: surface
+  tone: force
+- text: S
+  at: [65, 131]
+  tone: accent
+- text: N
+  at: [115, 131]
+  tone: force
+- arrow: [[60, 90], [130, 90]]
+  tone: vel
+  label: '*v*'
+  label_at: [146, 95]
+- text: поток меняется → ток в катушке
+  at: [200, 30]
+  size: 13
+- text: '|ℰ_i| = |ΔΦ|/Δ*t*'
+  at: [100, 220]
+  size: 14

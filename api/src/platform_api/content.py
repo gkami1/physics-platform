@@ -24,7 +24,7 @@ _answer = TypeAdapter[AnswerSpec](AnswerSpec)
 class PrivateTask:
     id: str
     exam_id: str
-    ege_task: int
+    ege_task: int | None  # None: step task embedded in a theory page
     topics: tuple[str, ...]
     statement: str
     answer: AnswerSpec
@@ -60,6 +60,9 @@ class ContentStore:
     def theory(self, topic: str) -> Theory | None:
         return self._theory.get(topic)
 
+    def theory_topics(self) -> list[str]:
+        return list(self._theory)
+
     def all(self) -> list[PrivateTask]:
         return list(self._tasks.values())
 
@@ -79,6 +82,9 @@ class ContentStore:
             for t in data["tasks"]:
                 if t["id"] in tasks:
                     raise ValueError(f"task id {t['id']} appears in more than one exam")
+                scoring = exam.spec_for(t["ege_task"])
+                if scoring is None:
+                    raise ValueError(f"task {t['id']}: no scoring spec in exam.yaml")
                 tasks[t["id"]] = PrivateTask(
                     id=t["id"],
                     exam_id=exam.id,
@@ -86,7 +92,7 @@ class ContentStore:
                     topics=tuple(t["topics"]),
                     statement=t["statement"],
                     answer=_answer.validate_python(t["answer"]),
-                    scoring=exam.tasks[t["ege_task"]],
+                    scoring=scoring,
                     solution=t["solution"],
                     hints=tuple(t["hints"]),
                     tutor_notes=t["tutor_notes"],

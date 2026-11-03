@@ -1,36 +1,53 @@
+/* Design tokens. Dark is the default; [data-theme='light'] is the alternative (toggle in
+   the header, remembered in localStorage). */
 :root {
-  --bg: #fbfaf8;
-  --surface: #ffffff;
-  --text: #1c1b1a;
-  --muted: #6b6762;
-  --border: #e4e0da;
-  --accent: #2856c7;
-  --accent-soft: #e8eefb;
-  --warn-soft: #fdf3dc;
-  --warn-text: #7a5300;
-  --ok: #1d7a3e;
-  --bad: #b3261e;
-  --radius: 10px;
+  --bg: #0d0f14;
+  --surface: #151821;
+  --surface-2: #1c2030;
+  --border: #262b3b;
+  --border-strong: #353b50;
+  --text: #e7e9f0;
+  --muted: #8f97ab;
+  --accent: #8ea6ff;
+  --accent-strong: #6f8cff;
+  --accent-soft: rgb(142 166 255 / 0.14);
+  --on-accent: #0d0f14;
+  --ok: #3ddc97;
+  --warn: #f5c04e;
+  --bad: #ff7a7a;
+  --ok-soft: rgb(61 220 151 / 0.14);
+  --warn-soft: rgb(245 192 78 / 0.14);
+  --bad-soft: rgb(255 122 122 / 0.14);
+  --warn-text: var(--warn);
+  --shadow: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 8px 24px rgb(0 0 0 / 0.25);
+  --radius: 12px;
+  --radius-sm: 8px;
   --gutter: 16px;
-  --measure: 42rem;
-  color-scheme: light;
+  --measure: 46rem;
+  --app: 72rem;
+  color-scheme: dark;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    --bg: #151514;
-    --surface: #1e1e1c;
-    --text: #ecebe8;
-    --muted: #a19d97;
-    --border: #34322f;
-    --accent: #8aa9ff;
-    --accent-soft: #232b40;
-    --warn-soft: #3a2f14;
-    --warn-text: #f0cf7a;
-    --ok: #6fd18f;
-    --bad: #ff8a80;
-    color-scheme: dark;
-  }
+:root[data-theme='light'] {
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --surface-2: #eef0f6;
+  --border: #e1e4ee;
+  --border-strong: #cdd2e0;
+  --text: #151a26;
+  --muted: #5c6478;
+  --accent: #3b5bdb;
+  --accent-strong: #2f4bc0;
+  --accent-soft: rgb(59 91 219 / 0.1);
+  --on-accent: #ffffff;
+  --ok: #148a57;
+  --warn: #a86b00;
+  --bad: #c92a2a;
+  --ok-soft: rgb(20 138 87 / 0.1);
+  --warn-soft: rgb(168 107 0 / 0.1);
+  --bad-soft: rgb(201 42 42 / 0.08);
+  --shadow: 0 1px 2px rgb(20 26 38 / 0.06), 0 6px 20px rgb(20 26 38 / 0.05);
+  color-scheme: light;
 }
 
 *,
@@ -48,7 +65,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font:
-    17px/1.6 system-ui,
+    16px/1.6 system-ui,
     -apple-system,
     'Segoe UI',
     Roboto,
@@ -60,15 +77,29 @@ a {
 }
 
 .wrap {
-  max-width: var(--measure);
+  max-width: var(--app);
   margin: 0 auto;
   padding: 0 var(--gutter);
+}
+
+.wrap.narrow {
+  max-width: var(--measure);
+}
+
+/* Long reading (theory, task statements). */
+.reading {
+  font-size: 1.0625rem;
 }
 
 h1,
 h2,
 h3 {
   line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
 }
 
 /* Long formulas scroll inside their own box instead of widening the page on phones. */
@@ -82,21 +113,6 @@ h3 {
   font-size: 1.05em;
 }
 
-.badge {
-  display: inline-block;
-  font-size: 0.75rem;
-  padding: 0.1rem 0.5rem;
-  border-radius: 999px;
-  background: var(--accent-soft);
-  color: var(--accent);
-  white-space: nowrap;
-}
-
-.badge.draft {
-  background: var(--warn-soft);
-  color: var(--warn-text);
-}
-
 .muted {
   color: var(--muted);
 }
@@ -104,6 +120,466 @@ h3 {
 blockquote {
   margin: 1rem 0;
   padding: 0.5rem 1rem;
-  border-left: 3px solid var(--border);
+  border-left: 3px solid var(--border-strong);
   color: var(--muted);
+}
+
+/* --- components ---------------------------------------------------------------------- */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: var(--accent);
+  color: var(--on-accent);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  background: var(--accent-strong);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.btn.ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.btn.ghost:hover {
+  background: var(--surface-2);
+}
+
+.btn.small {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.7rem;
+}
+
+.badge,
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  padding: 0.1rem 0.55rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.chip {
+  background: var(--surface-2);
+  color: var(--muted);
+}
+
+.badge.draft {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.diff-1,
+.diff-2 {
+  color: var(--ok);
+}
+.diff-3 {
+  color: var(--warn);
+}
+.diff-4,
+.diff-5 {
+  color: var(--bad);
+}
+
+.mastery[data-level='high'] {
+  background: var(--ok-soft);
+  color: var(--ok);
+}
+.mastery[data-level='mid'] {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+.mastery[data-level='low'] {
+  background: var(--bad-soft);
+  color: var(--bad);
+}
+
+.progress {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.progress > span {
+  display: block;
+  height: 100%;
+  width: var(--value, 0%);
+  border-radius: inherit;
+  background: var(--ok);
+  transition: width 0.4s ease;
+}
+
+.field {
+  font: inherit;
+  font-size: 1rem; /* ≥16px stops iOS zooming on focus */
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.field:focus,
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.page-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  margin: 1.75rem 0 1.25rem;
+}
+
+.page-head h1 {
+  margin: 0;
+}
+
+.page-head p {
+  margin: 0.35rem 0 0;
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* --- figures and simulations ---------------------------------------------------------- */
+
+/* Generated SVG figures, inlined into theory and task statements (content-build figures). */
+.fig {
+  margin: 1.25rem auto;
+  max-width: 28rem;
+  color: var(--text);
+}
+
+.fig-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: inherit;
+}
+
+.fig .fig-grid {
+  stroke: var(--border-strong);
+  opacity: 1;
+}
+
+.fig .fig-guide {
+  stroke: var(--muted);
+}
+
+.fig .fig-line {
+  stroke: var(--accent);
+}
+
+/* Diagram tones: groups set `color`, shapes inside draw with currentColor. */
+.fig .fig-force {
+  color: var(--bad);
+}
+
+.fig .fig-vel {
+  color: var(--ok);
+}
+
+.fig .fig-accent {
+  color: var(--accent);
+}
+
+.fig .fig-muted {
+  color: var(--muted);
+}
+
+.fig .fig-fill {
+  fill: var(--surface-2);
+}
+
+.fig .fig-area {
+  fill: currentColor;
+  fill-opacity: 0.16;
+}
+
+/* Interactive models (<pp-projectile> etc., src/lib/sims/). */
+.sim {
+  display: block;
+  margin: 1.5rem 0;
+  padding: 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.925rem;
+}
+
+.sim-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-size: 11px;
+}
+
+.sim-grid line {
+  stroke: var(--border);
+}
+
+.sim-grid text {
+  fill: var(--muted);
+}
+
+.sim-ground {
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.sim-tower {
+  fill: var(--surface-2);
+  stroke: var(--border-strong);
+}
+
+.sim-previous {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+}
+
+.sim-trail {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+
+.sim-ball {
+  fill: var(--text);
+}
+
+.sim-arrows line {
+  stroke-width: 2;
+}
+
+.sim-v line {
+  stroke: var(--bad);
+}
+
+.sim-v path {
+  fill: var(--bad);
+}
+
+.sim-vx line,
+.sim-vy line {
+  stroke: var(--ok);
+}
+
+.sim-vx path,
+.sim-vy path {
+  fill: var(--ok);
+}
+
+.sim-controls {
+  display: grid;
+  gap: 0.5rem 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  margin-top: 0.75rem;
+}
+
+.sim-slider {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.15rem 0.5rem;
+  align-items: baseline;
+}
+
+.sim-slider output {
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+
+.sim-slider input {
+  grid-column: 1 / -1;
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.sim-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin-top: 0.75rem;
+}
+
+.sim-check {
+  color: var(--muted);
+}
+
+.sim-readout {
+  margin: 0.5rem 0 0;
+  min-height: 1.5em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* <task-answer> (src/lib/task-answer.ts): task pages and theory step tasks. */
+task-answer {
+  display: block;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+task-answer label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+task-answer .row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+task-answer input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  font-size: 1.1rem; /* ≥16px stops iOS zooming on focus */
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+}
+task-answer .unit {
+  color: var(--muted);
+  white-space: nowrap;
+}
+task-answer button {
+  font: inherit;
+  font-weight: 600;
+  padding: 0.55rem 1rem;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--surface);
+  cursor: pointer;
+}
+task-answer button:disabled {
+  opacity: 0.6;
+}
+task-answer .reveal {
+  margin-top: 0.5rem;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+task-answer .verdict {
+  font-weight: 600;
+  margin: 0.75rem 0 0.25rem;
+}
+task-answer .verdict[data-kind='correct'] {
+  color: var(--ok);
+}
+task-answer .verdict[data-kind='partial'] {
+  color: var(--warn-text);
+}
+task-answer .verdict[data-kind='wrong'],
+task-answer .verdict[data-kind='error'] {
+  color: var(--bad);
+}
+task-answer .history {
+  font-size: 0.875rem;
+  margin: 0.25rem 0;
+}
+task-answer .hint {
+  margin: 0;
+}
+task-answer .solution {
+  margin-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+task-answer .final {
+  font-weight: 600;
+}
+
+/* Step tasks embedded in theory pages (remarkTaskEmbeds in markdown.config.mjs). */
+.step-task {
+  margin: 1.5rem 0;
+  padding: 0.75rem 1rem 0.5rem;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.step-task-label {
+  margin: 0 0 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.step-task-statement > :first-child {
+  margin-top: 0;
+}
+.step-task task-answer {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+.step-task-more {
+  margin: 0.5rem 0 0.25rem;
+  font-size: 0.875rem;
+}
+
+/* Grade of a theory ladder step (remarkGradeBadges in markdown.config.mjs). */
+.grade-badge {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.1rem 0.5rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--accent);
+  vertical-align: middle;
+  white-space: nowrap;
 }

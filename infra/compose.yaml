@@ -34,6 +34,17 @@ services:
       API_SMTP_USER: ${SMTP_USER:-}
       API_SMTP_PASSWORD: ${SMTP_PASSWORD:-}
       API_MAIL_FROM: ${MAIL_FROM:-}
+      # Tutor models. None set in prod: the tutor answers 503.
+      API_LLM_BASE_URL: ${LLM_BASE_URL:-}
+      API_LLM_API_KEY: ${LLM_API_KEY:-}
+      API_LLM_MODEL: ${LLM_MODEL:-Qwen/Qwen3-8B}
+      API_LLM_EXTRA_BODY: ${LLM_EXTRA_BODY:-{"chat_template_kwargs":{"enable_thinking":false}}}
+      API_LLM_FALLBACK_BASE_URL: ${LLM_FALLBACK_BASE_URL:-}
+      API_LLM_FALLBACK_API_KEY: ${LLM_FALLBACK_API_KEY:-}
+      API_LLM_FALLBACK_MODEL: ${LLM_FALLBACK_MODEL:-deepseek-chat}
+      API_LLM_FALLBACK_PRICE_IN: ${LLM_FALLBACK_PRICE_IN:-0}
+      API_LLM_FALLBACK_PRICE_OUT: ${LLM_FALLBACK_PRICE_OUT:-0}
+      API_TUTOR_DAILY_MESSAGES: ${TUTOR_DAILY_MESSAGES:-50}
     depends_on:
       db:
         condition: service_healthy

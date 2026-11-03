@@ -1,0 +1,141 @@
+# electro.magnetic.ampere: conductor with current in a field into the page; left-hand rule
+kind: diagram
+size: [400, 260]
+items:
+- text: ×
+  at: [70, 46]
+  size: 18
+  tone: muted
+- text: ×
+  at: [70, 91]
+  size: 18
+  tone: muted
+- text: ×
+  at: [70, 136]
+  size: 18
+  tone: muted
+- text: ×
+  at: [70, 181]
+  size: 18
+  tone: muted
+- text: ×
+  at: [70, 226]
+  size: 18
+  tone: muted
+- text: ×
+  at: [115, 46]
+  size: 18
+  tone: muted
+- text: ×
+  at: [115, 91]
+  size: 18
+  tone: muted
+- text: ×
+  at: [115, 136]
+  size: 18
+  tone: muted
+- text: ×
+  at: [115, 181]
+  size: 18
+  tone: muted
+- text: ×
+  at: [115, 226]
+  size: 18
+  tone: muted
+- text: ×
+  at: [160, 46]
+  size: 18
+  tone: muted
+- text: ×
+  at: [160, 91]
+  size: 18
+  tone: muted
+- text: ×
+  at: [160, 136]
+  size: 18
+  tone: muted
+- text: ×
+  at: [160, 181]
+  size: 18
+  tone: muted
+- text: ×
+  at: [160, 226]
+  size: 18
+  tone: muted
+- text: ×
+  at: [250, 46]
+  size: 18
+  tone: muted
+- text: ×
+  at: [250, 91]
+  size: 18
+  tone: muted
+- text: ×
+  at: [250, 136]
+  size: 18
+  tone: muted
+- text: ×
+  at: [250, 181]
+  size: 18
+  tone: muted
+- text: ×
+  at: [250, 226]
+  size: 18
+  tone: muted
+- text: ×
+  at: [295, 46]
+  size: 18
+  tone: muted
+- text: ×
+  at: [295, 91]
+  size: 18
+  tone: muted
+- text: ×
+  at: [295, 136]
+  size: 18
+  tone: muted
+- text: ×
+  at: [295, 181]
+  size: 18
+  tone: muted
+- text: ×
+  at: [295, 226]
+  size: 18
+  tone: muted
+- text: ×
+  at: [340, 46]
+  size: 18
+  tone: muted
+- text: ×
+  at: [340, 91]
+  size: 18
+  tone: muted
+- text: ×
+  at: [340, 136]
+  size: 18
+  tone: muted
+- text: ×
+  at: [340, 181]
+  size: 18
+  tone: muted
+- text: ×
+  at: [340, 226]
+  size: 18
+  tone: muted
+- line: [[205, 225], [205, 30]]
+  width: 4
+- arrow: [[222, 170], [222, 110]]
+  tone: accent
+  label: '*I*'
+  label_at: [236, 140]
+- arrow: [[205, 130], [130, 130]]
+  tone: force
+  width: 2.5
+  label: '*F*_A'
+  label_at: [124, 118]
+- text: '*B* — от нас (×)'
+  at: [310, 250]
+  size: 13
+- text: '*F*_A = *I**B**l* sin *α*'
+  at: [100, 250]
+  size: 13

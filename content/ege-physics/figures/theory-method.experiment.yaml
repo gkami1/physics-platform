@@ -1,0 +1,45 @@
+# method.experiment: change one parameter, keep the others the same
+kind: diagram
+size: [400, 255]
+items:
+- hatch: [[40, 30], [360, 30]]
+  side: -1
+- line: [[120, 30], [120, 139]]
+  dashed: true
+  width: 1
+  tone: muted
+- line: [[120, 30], [144.59, 121.76]]
+  width: 1.4
+- circle: [144.59, 121.76]
+  r: 10
+  fill: solid
+  tone: accent
+- angle: [120, 30]
+  start: 270
+  end: 285
+  r: 34
+- line: [[280, 30], [280, 204]]
+  dashed: true
+  width: 1
+  tone: muted
+- line: [[280, 30], [321.41, 184.55]]
+  width: 1.4
+- circle: [321.41, 184.55]
+  r: 10
+  fill: solid
+  tone: accent
+- angle: [280, 30]
+  start: 270
+  end: 285
+  r: 34
+- text: '*l*_1'
+  at: [140, 85]
+- text: '*l*_2'
+  at: [302, 120]
+- text: меняем только длину нити
+  at: [200, 226]
+  size: 13
+- text: масса груза и угол — одинаковые
+  at: [200, 246]
+  size: 12
+  tone: muted

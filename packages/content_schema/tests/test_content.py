@@ -119,7 +119,9 @@ def test_latex_eaten_by_double_quotes(scratch: Path) -> None:
 
 def test_missing_image(scratch: Path) -> None:
     _edit(
-        scratch / "theory/mech.dynamics.newton.md", "## Второй", "![](../assets/x.png)\n\n## Второй"
+        scratch / "theory/mech.dynamics.newton.md",
+        "## Частые ловушки",
+        "![](../assets/x.png)\n\n## Частые ловушки",
     )
     assert "missing image" in _errors(scratch)
 
@@ -127,6 +129,89 @@ def test_missing_image(scratch: Path) -> None:
 def test_source_ref_required(scratch: Path) -> None:
     _edit(scratch / "tasks/1/kin-0001.md", "source: {kind: original}", "source: {kind: book}")
     assert "source.ref is required" in _errors(scratch)
+
+
+# --- step tasks embedded in theory -------------------------------------------------------
+
+BASICS = "theory/mech.kinematics.basics.md"
+STEP = "tasks/steps/ks-basics-01.md"
+
+
+def test_step_task_outside_steps_folder(scratch: Path) -> None:
+    (scratch / STEP).rename(scratch / "tasks/1/ks-basics-01.md")
+    assert "must live in tasks/steps/" in _errors(scratch)
+
+
+def test_step_task_needs_practice_spec(scratch: Path) -> None:
+    exam = scratch / "exam.yaml"
+    text = exam.read_text("utf-8")
+    exam.write_text(text[: text.index("\npractice:")] + "\n", "utf-8")
+    assert "step tasks (exam.yaml: practice) not in exam.yaml" in _errors(scratch)
+
+
+def test_embed_of_unknown_task(scratch: Path) -> None:
+    _edit(scratch / BASICS, 'id="ks-basics-01"', 'id="ks-nope"')
+    errors = _errors(scratch)
+    assert "embeds unknown task 'ks-nope'" in errors
+    assert "ks-basics-01.md: step task is not embedded" in errors
+
+
+def test_embed_twice(scratch: Path) -> None:
+    _edit(scratch / BASICS, 'id="ks-basics-02"', 'id="ks-basics-01"')
+    assert "'ks-basics-01' is already embedded" in _errors(scratch)
+
+
+def test_embed_of_task_from_another_topic(scratch: Path) -> None:
+    _edit(scratch / BASICS, "## Шаг 2.", '<pp-task id="kin-0001"></pp-task>\n\n## Шаг 2.')
+    assert "'kin-0001' is not tagged with topic 'mech.kinematics.basics'" in _errors(scratch)
+
+
+def test_malformed_embed(scratch: Path) -> None:
+    _edit(scratch / BASICS, "## Шаг 2.", "Текст <pp-task id='x'></pp-task>\n\n## Шаг 2.")
+    assert "write task embeds alone on a line" in _errors(scratch)
+
+
+@pytest.mark.parametrize(
+    ("old", "new", "message"),
+    [
+        (
+            "## Шаг 2. Равномерное движение: $s = vt$ (7 класс)",
+            "## Шаг 2. Равномерное движение: $s = vt$",
+            "needs a grade",
+        ),
+        (
+            "## Шаг 2. Равномерное движение: $s = vt$ (7 класс)",
+            "## Шаг 5. Равномерное движение: $s = vt$ (7 класс)",
+            "should be «Шаг 2»",
+        ),
+        ("## Шаг 5. Система отсчёта (9 класс)", "## Шаг 5. Система отсчёта (8–9 класс)", ""),
+        (
+            "## Шаг 6. Перемещение — это вектор (9 класс)",
+            "## Шаг 6. Перемещение — это вектор (7 класс)",
+            "grade goes down from 9 to 7",
+        ),
+        (
+            "## Шаг 1. Путь, время и единицы (7 класс)",
+            "## Шаг 1. Путь, время и единицы (5 класс)",
+            "within 7–11",
+        ),
+    ],
+)
+def test_step_grades(scratch: Path, old: str, new: str, message: str) -> None:
+    _edit(scratch / BASICS, old, new)
+    errors = _errors(scratch)
+    assert message in errors if message else errors == ""
+
+
+def test_public_theory_lists_embedded_tasks(tmp_path: Path) -> None:
+    res = load_exam_dir(CONTENT / "ege-physics")
+    assert res.bundle is not None
+    build(res.bundle, tmp_path)
+    public = json.loads((tmp_path / "public/ege-physics.json").read_text("utf-8"))
+    page = next(p for p in public["theory"] if p["topic"] == "mech.kinematics.basics")
+    assert page["tasks"][:2] == ["ks-basics-01", "ks-basics-02"]
+    step = next(t for t in public["tasks"] if t["id"] == "ks-basics-01")
+    assert step["ege_task"] is None
 
 
 def test_split_frontmatter_requires_block() -> None:

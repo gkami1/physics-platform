@@ -22,7 +22,7 @@ from platform_api.actor import (
     start_session,
     token_hash,
 )
-from platform_api.db import Attempt, AuthSession, LoginCode, User
+from platform_api.db import Attempt, AuthSession, LoginCode, User, VariantRun
 from platform_api.deps import Db
 from platform_api.mail import Mailer, login_code_email
 
@@ -160,11 +160,12 @@ async def verify_code(
     anon = request.cookies.get(ANON_COOKIE)
     if anon:
         # Practice done before signing in moves into the account.
-        await db.execute(
-            update(Attempt)
-            .where(Attempt.anon_id == anon, Attempt.user_id.is_(None))
-            .values(user_id=user.id)
-        )
+        for model in (Attempt, VariantRun):
+            await db.execute(
+                update(model)
+                .where(model.anon_id == anon, model.user_id.is_(None))
+                .values(user_id=user.id)
+            )
         clear_cookie(response, ANON_COOKIE)
     await start_session(db, request, response, user)
     await db.commit()

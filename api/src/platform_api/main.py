@@ -13,7 +13,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from content_schema.checking import NotAutoCheckableError, Outcome, check, format_answer
 from content_schema.models import AnswerKind
-from platform_api import auth, log, tutor
+from platform_api import auth, log, tutor, variants
 from platform_api.actor import Actor, CurrentActor, as_utc, now
 from platform_api.content import ContentStore, PrivateTask, sync_tasks
 from platform_api.db import Attempt, Task, make_engine, make_sessionmaker
@@ -149,6 +149,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     app.include_router(auth.router)
     app.include_router(tutor.router)
+    app.include_router(variants.router)
 
     @app.get("/api/health")
     def health(store: Store) -> dict[str, object]:

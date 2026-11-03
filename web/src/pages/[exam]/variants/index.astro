@@ -1,0 +1,254 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '../../../layouts/Base.astro';
+import {
+  bundles,
+  formatDuration,
+  type PublicBundle,
+  variants,
+  variantUrl,
+} from '../../../lib/content';
+
+export const getStaticPaths = (() =>
+  bundles().map((b) => ({ params: { exam: b.exam.id }, props: { b } }))) satisfies GetStaticPaths;
+
+interface Props {
+  b: PublicBundle;
+}
+
+const { b } = Astro.props;
+const exam = b.exam.id;
+const list = variants(b);
+const totalNumbers = Object.keys(b.exam.tasks).length;
+const examMax = Object.values(b.exam.tasks).reduce((s, t) => s + t.max_points, 0);
+---
+
+<Base title={`Варианты — ${b.exam.title}`}>
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Варианты</div>
+      <h1>Пробный ЕГЭ под таймер</h1>
+      <p class="muted">
+        Полный вариант: {totalNumbers} заданий, {formatDuration(b.exam.duration_minutes)}, до {
+          examMax
+        } первичных баллов. Часть 1 проверяется автоматически, часть 2 вы оцениваете сами по эталонному
+        решению.
+      </p>
+    </div>
+  </header>
+
+  {
+    !b.exam.verified && (
+      <p class="card note">
+        Структура и баллы взяты из демоверсий прошлых лет и будут сверены со спецификацией ФИПИ на{' '}
+        {b.exam.season} год.
+      </p>
+    )
+  }
+
+  <variant-list data-exam={exam}>
+    <div class="grid">
+      {
+        list.map((v) => {
+          const have = v.slots.filter((s) => s.task).length;
+          return (
+            <article class="card variant" data-variant={v.n}>
+              <div class="v-head">
+                <h2>Вариант {v.n}</h2>
+                {!v.complete && <span class="badge draft">неполный</span>}
+                <span class="badge state" hidden />
+              </div>
+              <p class="muted">
+                {have} из {totalNumbers} заданий · {v.maxPoints} баллов
+              </p>
+              <div class="cells" aria-hidden="true">
+                {v.slots.map((s) => (
+                  <span
+                    class:list={['cell', { empty: !s.task, p2: s.spec.part === 2 }]}
+                    title={`№ ${s.number}`}
+                  />
+                ))}
+              </div>
+              <p class="last muted" hidden />
+              <a class="btn go" href={variantUrl(exam, v.n)}>
+                Начать
+              </a>
+            </article>
+          );
+        })
+      }
+    </div>
+
+    <section class="history" hidden>
+      <h2>Мои результаты</h2>
+      <div class="card">
+        <table>
+          <thead>
+            <tr><th>Вариант</th><th>Баллы</th><th>Дата</th><th></th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </variant-list>
+</Base>
+
+<script>
+  import { api } from '../../../lib/api';
+  import { loadState } from '../../../lib/variant-state';
+
+  class VariantList extends HTMLElement {
+    connectedCallback() {
+      const exam = this.dataset.exam ?? '';
+      // A run in progress lives in localStorage until it is submitted.
+      for (const card of this.querySelectorAll<HTMLElement>('.variant')) {
+        const n = Number(card.dataset.variant);
+        const s = loadState(exam, n);
+        if (s) {
+          const left = Math.max(0, Math.round((s.deadline - Date.now()) / 60000));
+          this.badge(card, left > 0 ? `идёт · ${left} мин` : 'время вышло', 'mid');
+          card.querySelector('.go')!.textContent = 'Продолжить';
+        }
+      }
+      void api.variantRuns(exam).then((runs) => this.showRuns(runs), () => {});
+    }
+
+    private badge(card: HTMLElement, text: string, level: string) {
+      const b = card.querySelector<HTMLElement>('.state')!;
+      b.textContent = text;
+      b.classList.add('mastery');
+      b.dataset.level = level;
+      b.hidden = false;
+    }
+
+    private showRuns(runs: Awaited<ReturnType<typeof api.variantRuns>>) {
+      if (runs.length === 0) return;
+      const best = new Map<number, (typeof runs)[number]>();
+      for (const r of runs) {
+        const prev = best.get(r.variant);
+        if (!prev || r.total_points > prev.total_points) best.set(r.variant, r);
+      }
+      for (const card of this.querySelectorAll<HTMLElement>('.variant')) {
+        const r = best.get(Number(card.dataset.variant));
+        if (!r) continue;
+        const last = card.querySelector<HTMLElement>('.last')!;
+        last.textContent = `Лучший результат: ${r.total_points} из ${r.max_points}`;
+        last.hidden = false;
+        if (card.querySelector('.state')!.hasAttribute('hidden')) {
+          const pct = r.total_points / Math.max(r.max_points, 1);
+          this.badge(card, 'решён', pct >= 0.8 ? 'high' : pct >= 0.5 ? 'mid' : 'low');
+          card.querySelector('.go')!.textContent = 'Решить ещё раз';
+        }
+      }
+      const tbody = this.querySelector('tbody')!;
+      const exam = this.dataset.exam ?? '';
+      for (const r of runs) {
+        const tr = document.createElement('tr');
+        const cells = [
+          `Вариант ${r.variant}`,
+          `${r.total_points} / ${r.max_points}${r.pending ? ` · ждёт самопроверки: ${r.pending}` : ''}`,
+          new Date(r.created_at).toLocaleString('ru-RU', { dateStyle: 'medium', timeStyle: 'short' }),
+        ];
+        for (const c of cells) {
+          const td = document.createElement('td');
+          td.textContent = c;
+          tr.append(td);
+        }
+        const td = document.createElement('td');
+        const a = document.createElement('a');
+        a.href = `/${exam}/variants/${r.variant}/?run=${r.id}`;
+        a.textContent = 'Разбор';
+        td.append(a);
+        tr.append(td);
+        tbody.append(tr);
+      }
+      this.querySelector<HTMLElement>('.history')!.hidden = false;
+    }
+  }
+
+  customElements.define('variant-list', VariantList);
+</script>
+
+<style>
+  .note {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+    gap: 1rem;
+  }
+  .variant {
+    display: grid;
+    gap: 0.6rem;
+    padding: 1rem 1.1rem;
+    align-content: start;
+  }
+  .variant p {
+    margin: 0;
+    font-size: 0.875rem;
+  }
+  .v-head {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .v-head h2 {
+    margin: 0 auto 0 0;
+    font-size: 1.1rem;
+  }
+  .cells {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    gap: 3px;
+  }
+  .cell {
+    height: 8px;
+    border-radius: 2px;
+    background: var(--accent);
+    opacity: 0.75;
+  }
+  .cell.p2 {
+    background: var(--ok);
+  }
+  .cell.empty {
+    background: var(--surface-2);
+    opacity: 1;
+  }
+  .go {
+    margin-top: 0.25rem;
+  }
+  .history {
+    margin-top: 2.5rem;
+  }
+  .history h2 {
+    font-size: 1.15rem;
+  }
+  .history .card {
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.925rem;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 0.65rem 0.9rem;
+    white-space: nowrap;
+  }
+  th {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    background: var(--surface-2);
+  }
+  td {
+    border-top: 1px solid var(--border);
+  }
+</style>

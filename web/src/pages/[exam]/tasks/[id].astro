@@ -6,8 +6,10 @@ import Base from '../../../layouts/Base.astro';
 import {
   bundles,
   difficultyLabel,
+  embeddingTopic,
   type PublicBundle,
   type PublicTask,
+  specFor,
   tasksUrl,
   theoryUrl,
   topicsById,
@@ -25,16 +27,30 @@ interface Props {
 }
 
 const { b, task } = Astro.props;
-const spec = b.exam.tasks[String(task.ege_task)];
-if (!spec) throw new Error(`Task ${task.id}: EGE task ${task.ege_task} missing from exam spec`);
+const spec = specFor(b, task);
 const topics = topicsById(b);
+const stepOf = embeddingTopic(b, task.id);
+const heading = task.ege_task === null ? spec.title : `Задание № ${task.ege_task}`;
 const theoryTopics = new Set(b.theory.map((t) => t.topic));
 const statementHtml = await renderMarkdown(task.statement);
 ---
 
-<Base title={`Задание ${task.ege_task} · ${task.id} — ${b.exam.title}`}>
-  <nav class="crumbs"><a href={tasksUrl(b.exam.id)}>Все задачи</a></nav>
-  <h1>Задание № {task.ege_task}</h1>
+<Base title={`${heading} · ${task.id} — ${b.exam.title}`} narrow>
+  <nav class="crumbs">
+    {
+      stepOf ? (
+        <a href={theoryUrl(b.exam.id, stepOf)} class="back">
+          ← {topics.get(stepOf)?.title ?? 'К теории'}
+        </a>
+      ) : (
+        <a href={tasksUrl(b.exam.id)} class="back">
+          ← Практика
+        </a>
+      )
+    }
+    <a href="#" class="btn ghost small more" hidden>Ещё задача 🎲</a>
+  </nav>
+  <h1>{heading}</h1>
   <p class="meta">
     <span class="badge">{spec.title}</span>
     <span class="muted"
@@ -42,7 +58,7 @@ const statementHtml = await renderMarkdown(task.statement);
     >
   </p>
 
-  <article class="statement" set:html={statementHtml} />
+  <article class="card statement reading" set:html={statementHtml} />
 
   <TaskAnswer taskId={task.id} kind={task.answer_input.type} unit={task.answer_input.unit} />
   <TutorChat kind="task" contextId={task.id} />
@@ -64,10 +80,41 @@ const statementHtml = await renderMarkdown(task.statement);
   </aside>
 </Base>
 
+<script>
+  // Came here through «Случайная задача»: offer another one from the same filtered pool.
+  try {
+    const raw = sessionStorage.getItem('pp:practice-pool');
+    const pool = raw ? (JSON.parse(raw) as { back: string; hrefs: string[] }) : null;
+    if (pool?.hrefs.includes(location.pathname)) {
+      const back = document.querySelector<HTMLAnchorElement>('.crumbs .back')!;
+      back.href = pool.back;
+      const others = pool.hrefs.filter((h) => h !== location.pathname);
+      const more = document.querySelector<HTMLAnchorElement>('.crumbs .more')!;
+      if (others.length > 0) {
+        more.href = others[Math.floor(Math.random() * others.length)]!;
+        more.hidden = false;
+      }
+    }
+  } catch {
+    // Storage off or malformed: plain page.
+  }
+</script>
+
 <style>
   .crumbs {
-    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.25rem;
     font-size: 0.875rem;
+  }
+  .back {
+    text-decoration: none;
+  }
+  .statement {
+    padding: 0.25rem 1.25rem;
+    margin: 1rem 0 1.25rem;
   }
   h1 {
     margin-bottom: 0.25rem;

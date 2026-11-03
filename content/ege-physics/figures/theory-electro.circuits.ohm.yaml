@@ -1,0 +1,37 @@
+# electro.circuits.ohm: ammeter in series, voltmeter in parallel with the resistor
+kind: diagram
+size: [400, 240]
+items:
+- element: battery
+  at: [60, 135]
+  vertical: true
+  label: '*U*'
+  label_side: -1
+- line: [[60, 115], [60, 80], [180, 80]]
+  width: 1.6
+- element: resistor
+  at: [200, 80]
+  label: '*R*'
+  label_side: 1
+- line: [[220, 80], [340, 80], [340, 115]]
+  width: 1.6
+- element: ammeter
+  at: [340, 135]
+  vertical: true
+- line: [[340, 155], [340, 200], [60, 200], [60, 155]]
+  width: 1.6
+- line: [[150, 80], [150, 30], [180, 30]]
+  width: 1.6
+- element: voltmeter
+  at: [200, 30]
+- line: [[220, 30], [250, 30], [250, 80]]
+  width: 1.6
+- dots: [[150, 80], [250, 80]]
+  r: 3
+- arrow: [[230, 200], [170, 200]]
+  tone: accent
+  label: '*I*'
+  label_at: [200, 222]
+- text: '*I* = *U*/*R*'
+  at: [200, 145]
+  size: 16

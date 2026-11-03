@@ -18,23 +18,20 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 from platform_api.actor import SessionUser, as_utc, now
 from platform_api.db import Attempt, LlmCall, TutorMessage, TutorThread, User
 from platform_api.deps import Db, Store
-from platform_api.hints import MAX_LEVEL, LadderState, next_level
+from platform_api.hints import MAX_LEVEL, LadderState
 from platform_api.leak import LeakDetector, OutputGuard
 from platform_api.llm import CallInfo, ChatModel, LLMUnavailableError, stream_with_fallback
-from platform_api.policy import can_reveal_solution
 from platform_api.prompt import (
     HISTORY_TURNS,
     PROMPT_VERSION,
     Turn,
     build_messages,
-    hints_for_level,
-    task_context,
     theory_context,
 )
+from platform_api.turn import HINT_REQUEST_TEXT, plan_task_turn
 
 logger = logging.getLogger("api.tutor")
 
-HINT_REQUEST_TEXT = "Дай, пожалуйста, подсказку."
 LEAK_NOTE = (
     "\n\n*Дальше я чуть не назвал ответ. Попробуй сделать этот шаг сам — или попроси подсказку.*"
 )
@@ -187,18 +184,14 @@ async def post_message(
                 select(Attempt.outcome).where(Attempt.user_id == u.id, Attempt.task_id == task.id)
             )
         )
-        state = next_level(
+        turn = plan_task_turn(
+            task,
             LadderState(thread.hint_level, thread.turns_at_level),
             asked_for_hint=body.intent == "hint",
-            wrong_attempts=sum(o in ("wrong", "partial") for o in outcomes),
-            solution_allowed=can_reveal_solution(task.scoring.answer_kind, outcomes),
+            outcomes=outcomes,
         )
-        thread.hint_level, thread.turns_at_level = state.level, state.turns_at_level
-        level = state.level
-        context = task_context(task, level)
-        if level < MAX_LEVEL:
-            allowed = "\n".join([task.statement, *hints_for_level(task, level)])
-            detector = LeakDetector(task.answer, allowed)
+        thread.hint_level, thread.turns_at_level = turn.state.level, turn.state.turns_at_level
+        level, context, detector = turn.level, turn.context, turn.detector
     else:
         page = store.theory(body.id)
         if page is None:

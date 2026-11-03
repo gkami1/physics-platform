@@ -1,0 +1,46 @@
+# mech.oscillations.harmonic: spring pendulum, equilibrium and amplitude
+kind: diagram
+size: [400, 230]
+items:
+- hatch: [[40, 50], [40, 150]]
+  side: 1
+- hatch: [[40, 150], [380, 150]]
+  side: 1
+- spring: [[40, 130], [262, 130]]
+  coils: 8
+- rect: [262, 110, 40, 40]
+  fill: surface
+- text: '*m*'
+  at: [282, 135]
+- line: [[202, 70], [202, 190]]
+  dashed: true
+  width: 1
+  tone: muted
+- line: [[142, 70], [142, 190]]
+  dashed: true
+  width: 1
+  tone: muted
+- line: [[262, 70], [262, 190]]
+  dashed: true
+  width: 1
+  tone: muted
+- text: −*A*
+  at: [142, 64]
+  size: 13
+- text: '0'
+  at: [202, 64]
+  size: 13
+- text: '*A*'
+  at: [262, 64]
+  size: 13
+- arrow: [[150, 175], [380, 175]]
+  width: 1.2
+  label: '*x*'
+  label_at: [372, 194]
+- arrow: [[262, 98], [218, 98]]
+  tone: force
+  label: '*F*_упр'
+  label_at: [228, 88]
+- text: '*T* = 2π√(*m*/*k*)'
+  at: [200, 222]
+  size: 14

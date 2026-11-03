@@ -9,8 +9,15 @@ import json
 from pathlib import Path
 from typing import Any
 
+from content_schema.figures import inline_svg_images
 from content_schema.loader import ContentBundle
-from content_schema.models import ExtendedAnswer, MeasurementAnswer, NumericAnswer, Task
+from content_schema.models import (
+    ExtendedAnswer,
+    MeasurementAnswer,
+    NumericAnswer,
+    Task,
+    embedded_task_ids,
+)
 
 
 def content_version(root: Path) -> str:
@@ -62,12 +69,30 @@ def leak_needles(t: Task) -> list[str]:
     return [n for n in needles if len(n) >= 8]  # short answers ("13") collide with statements
 
 
+def with_inline_figures(t: Task, root: Path) -> Task:
+    """Statement and solution with local SVG images inlined, so figures follow the theme."""
+    base = (root / t.path).parent
+    return t.model_copy(
+        update={
+            "statement": inline_svg_images(t.statement, base),
+            "solution": inline_svg_images(t.solution, base),
+        }
+    )
+
+
 def build(bundle: ContentBundle, out: Path) -> str:
     version = content_version(bundle.root)
+    tasks = [with_inline_figures(t, bundle.root) for t in bundle.tasks]
     exam_public = bundle.exam.model_dump(mode="json")
     roadmap = bundle.roadmap.model_dump(mode="json")
     theory_index = [
-        {"topic": p.topic, "title": p.title, "status": p.status, "path": p.path}
+        {
+            "topic": p.topic,
+            "title": p.title,
+            "status": p.status,
+            "path": p.path,
+            "tasks": embedded_task_ids(p.body),
+        }
         for p in bundle.theory
     ]
 
@@ -76,18 +101,18 @@ def build(bundle: ContentBundle, out: Path) -> str:
         "exam": exam_public,
         "roadmap": roadmap,
         "theory": theory_index,
-        "tasks": [public_task(t) for t in bundle.tasks],
+        "tasks": [public_task(t) for t in tasks],
     }
     private = {
         "content_version": version,
         "exam": exam_public,
-        "tasks": [private_task(t) for t in bundle.tasks],
+        "tasks": [private_task(t) for t in tasks],
         # Tutor context for theory pages (the text itself is public).
         "theory": [{"topic": p.topic, "title": p.title, "body": p.body} for p in bundle.theory],
     }
 
     public_text = json.dumps(public, ensure_ascii=False, indent=1)
-    for t in bundle.tasks:
+    for t in tasks:
         for needle in leak_needles(t):
             if needle in public_text:
                 raise AssertionError(

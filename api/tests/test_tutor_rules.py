@@ -21,9 +21,11 @@ from platform_api.llm import (
     LLMUnavailableError,
     OpenAICompatible,
     ScriptedModel,
+    make_models,
     stream_with_fallback,
 )
 from platform_api.prompt import LEVELS, Turn, build_messages, wrap_student
+from platform_api.settings import Settings
 
 NUM = NumericAnswer(type="numeric", value=Decimal("12.5"), unit="м/с", precision=Decimal("0.1"))
 STATEMENT = "Начальная скорость $2{,}5$ м/с, ускорение 2 м/с², время 5 с."
@@ -229,3 +231,33 @@ def test_all_models_failing() -> None:
 
     with pytest.raises(LLMUnavailableError):
         asyncio.run(run())
+
+
+def test_primary_extra_body_comes_from_env(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv(
+        "API_LLM_BASE_URL", "https://generativelanguage.googleapis.com/v1beta/openai"
+    )
+    monkeypatch.setenv("API_LLM_EXTRA_BODY", '{"reasoning_effort": "none"}')
+    [primary] = make_models(Settings(_env_file=None))  # type: ignore[call-arg]
+    assert isinstance(primary, OpenAICompatible)
+    assert primary.extra == {"reasoning_effort": "none"}
+
+
+def test_primary_extra_body_defaults_to_qwen_without_thinking(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("API_LLM_BASE_URL", "http://gpu:8000/v1")
+    monkeypatch.delenv("API_LLM_EXTRA_BODY", raising=False)
+    [primary] = make_models(Settings(_env_file=None))  # type: ignore[call-arg]
+    assert isinstance(primary, OpenAICompatible)
+    assert primary.extra == {"chat_template_kwargs": {"enable_thinking": False}}
+
+
+def test_primary_proxy_comes_from_env(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv(
+        "API_LLM_BASE_URL", "https://generativelanguage.googleapis.com/v1beta/openai"
+    )
+    monkeypatch.setenv("API_LLM_PROXY", "http://127.0.0.1:10809")
+    [primary] = make_models(Settings(_env_file=None))  # type: ignore[call-arg]
+    assert isinstance(primary, OpenAICompatible)
+    assert primary.proxy == "http://127.0.0.1:10809"
