@@ -1,7 +1,6 @@
 """Loader validation, the real content tree, and the no-leak invariant."""
 
 import json
-import re
 import shutil
 from collections.abc import Callable
 from pathlib import Path
@@ -135,12 +134,12 @@ def test_source_ref_required(scratch: Path) -> None:
 
 # --- step tasks embedded in theory -------------------------------------------------------
 
-BASICS = "theory/mech.kinematics.basics.md"
-STEP = "tasks/steps/ks-basics-01.md"
+LADDER = "theory/mech.kinematics.uniform-accel.md"  # a whole-topic page with «Шаг N»
+STEP = "tasks/steps/ks-accel-01.md"
 
 
 def test_step_task_outside_steps_folder(scratch: Path) -> None:
-    (scratch / STEP).rename(scratch / "tasks/1/ks-basics-01.md")
+    (scratch / STEP).rename(scratch / "tasks/1/ks-accel-01.md")
     assert "must live in tasks/steps/" in _errors(scratch)
 
 
@@ -152,55 +151,48 @@ def test_step_task_needs_practice_spec(scratch: Path) -> None:
 
 
 def test_embed_of_unknown_task(scratch: Path) -> None:
-    _edit(scratch / BASICS, 'id="ks-basics-01"', 'id="ks-nope"')
+    _edit(scratch / LADDER, 'id="ks-accel-01"', 'id="ks-nope"')
     errors = _errors(scratch)
     assert "embeds unknown task 'ks-nope'" in errors
-    assert "ks-basics-01.md: step task is not embedded" in errors
+    assert "ks-accel-01.md: step task is not embedded" in errors
 
 
 def test_embed_twice(scratch: Path) -> None:
-    _edit(scratch / BASICS, 'id="ks-basics-02"', 'id="ks-basics-01"')
-    assert "'ks-basics-01' is already embedded" in _errors(scratch)
+    _edit(scratch / LADDER, 'id="ks-accel-02"', 'id="ks-accel-01"')
+    assert "'ks-accel-01' is already embedded" in _errors(scratch)
 
 
 def test_embed_of_task_from_another_topic(scratch: Path) -> None:
-    _edit(scratch / BASICS, "## Шаг 2.", '<pp-task id="kin-0001"></pp-task>\n\n## Шаг 2.')
-    assert "'kin-0001' is not tagged with topic 'mech.kinematics.basics'" in _errors(scratch)
+    _edit(scratch / LADDER, "## Шаг 2.", '<pp-task id="dyn-0001"></pp-task>\n\n## Шаг 2.')
+    errors = _errors(scratch)
+    assert "'dyn-0001' is not tagged with topic 'mech.kinematics.uniform-accel'" in errors
 
 
 def test_malformed_embed(scratch: Path) -> None:
-    _edit(scratch / BASICS, "## Шаг 2.", "Текст <pp-task id='x'></pp-task>\n\n## Шаг 2.")
+    _edit(scratch / LADDER, "## Шаг 2.", "Текст <pp-task id='x'></pp-task>\n\n## Шаг 2.")
     assert "write task embeds alone on a line" in _errors(scratch)
+
+
+ACCEL_1 = "## Шаг 1. Ускорение: на сколько м/с за секунду (9 класс)"
+ACCEL_2 = "## Шаг 2. Скорость в любой момент (9 класс)"
 
 
 @pytest.mark.parametrize(
     ("old", "new", "message"),
     [
+        (ACCEL_2, "## Шаг 2. Скорость в любой момент", "needs a grade"),
+        (ACCEL_2, "## Шаг 5. Скорость в любой момент (9 класс)", "should be «Шаг 2»"),
+        (ACCEL_1, ACCEL_1.replace("(9 класс)", "(8–9 класс)"), ""),
         (
-            "## Шаг 2. Равномерное движение: $s = vt$ (7 класс)",
-            "## Шаг 2. Равномерное движение: $s = vt$",
-            "needs a grade",
+            "## Шаг 7. Уравнение координаты (10 класс)",
+            "## Шаг 7. Уравнение координаты (9 класс)",
+            "grade goes down from 10 to 9",
         ),
-        (
-            "## Шаг 2. Равномерное движение: $s = vt$ (7 класс)",
-            "## Шаг 5. Равномерное движение: $s = vt$ (7 класс)",
-            "should be «Шаг 2»",
-        ),
-        ("## Шаг 5. Система отсчёта (9 класс)", "## Шаг 5. Система отсчёта (8–9 класс)", ""),
-        (
-            "## Шаг 6. Перемещение — это вектор (9 класс)",
-            "## Шаг 6. Перемещение — это вектор (7 класс)",
-            "grade goes down from 9 to 7",
-        ),
-        (
-            "## Шаг 1. Путь, время и единицы (7 класс)",
-            "## Шаг 1. Путь, время и единицы (5 класс)",
-            "within 7–11",
-        ),
+        (ACCEL_1, ACCEL_1.replace("(9 класс)", "(5 класс)"), "within 7–11"),
     ],
 )
 def test_step_grades(scratch: Path, old: str, new: str, message: str) -> None:
-    _edit(scratch / BASICS, old, new)
+    _edit(scratch / LADDER, old, new)
     errors = _errors(scratch)
     assert message in errors if message else errors == ""
 
@@ -210,16 +202,18 @@ def test_public_theory_lists_embedded_tasks(tmp_path: Path) -> None:
     assert res.bundle is not None
     build(res.bundle, tmp_path)
     public = json.loads((tmp_path / "public/ege-physics.json").read_text("utf-8"))
-    page = next(p for p in public["theory"] if p["topic"] == "mech.kinematics.basics")
-    assert page["tasks"][:2] == ["ks-basics-01", "ks-basics-02"]
-    step = next(t for t in public["tasks"] if t["id"] == "ks-basics-01")
+    page = next(p for p in public["theory"] if p["topic"] == "mech.kinematics.uniform-accel")
+    assert page["kind"] == "page"
+    assert page["tasks"][:2] == ["ks-accel-01", "ks-accel-02"]
+    step = next(t for t in public["tasks"] if t["id"] == "ks-accel-01")
     assert step["ege_task"] is None
 
 
-# --- topics split into lessons ----------------------------------------------------------
+# --- topics split into lessons (the repo's mech.kinematics.basics) -----------------------
 
 LESSONS = "theory/mech.kinematics.basics"
-INTRO = "---\ntopic: mech.kinematics.basics\ntitle: Основы кинематики\n---\nВведение.\n"
+FIRST = "01-motion-si.md"
+LAST_GRADE = "9"  # of the last lesson, 06
 
 
 def _lesson(n: int, slug: str, grade: str, body: str) -> tuple[str, str]:
@@ -231,28 +225,12 @@ def _write(d: Path, name: str, text: str) -> None:
     (d / name).write_text(text, "utf-8")
 
 
-def _split_into_lessons(root: Path) -> Path:
-    """The scratch copy's kinematics page as an intro and two lessons, same step tasks."""
-    page = root / BASICS
-    embeds = re.findall(r'^<pp-task id="[^"]+"></pp-task>$', page.read_text("utf-8"), re.M)
-    page.unlink()
-    d = root / LESSONS
-    d.mkdir()
-    _write(d, "_topic.md", INTRO)
-    for n, slug, grade, part in (
-        (1, "motion-si", "7", embeds[:4]),
-        (2, "vectors", "9", embeds[4:]),
-    ):
-        _write(d, *_lesson(n, slug, grade, "## Раздел\n\nТекст.\n\n" + "\n\n".join(part)))
-    return d
+def _drop_line(path: Path, prefix: str) -> None:
+    lines = path.read_text("utf-8").splitlines(keepends=True)
+    path.write_text("".join(x for x in lines if not x.startswith(prefix)), "utf-8")
 
 
-def test_lessons_layout_is_valid(scratch: Path) -> None:
-    _split_into_lessons(scratch)
-    assert _errors(scratch) == ""
-
-
-FIRST = "01-motion-si.md"
+WHOLE_PAGE = "---\ntopic: mech.kinematics.basics\ntitle: Т\n---\nТ.\n"
 
 
 @pytest.mark.parametrize(
@@ -260,22 +238,27 @@ FIRST = "01-motion-si.md"
     [
         (lambda d: (d / FIRST).rename(d / "1-motion.md"), "named like 01-slug.md"),
         (lambda d: (d / "_topic.md").unlink(), "needs _topic.md"),
-        (lambda d: (d / "02-vectors.md").rename(d / "03-vectors.md"), "should be numbered 02"),
-        (lambda d: _write(d, *_lesson(3, "motion-si", "9", "Т.")), "second lesson with slug"),
-        (lambda d: _write(d, *_lesson(3, "late", "8", "Т.")), "grade goes down from 9 to 8"),
-        (lambda d: _write(d, *_lesson(3, "late", "12", "Т.")), "within 7–11"),
-        (lambda d: _write(d, *_lesson(3, "late", "'9–10'", "Т.")), ""),
-        (lambda d: _write(d, *_lesson(3, "late", "9", "## Шаг 1. Т (9 класс)")), "not «Шаг N»"),
-        (lambda d: _edit(d / FIRST, "summary: Кратко.\n", ""), "needs a one-line summary"),
-        (lambda d: _edit(d / FIRST, "grade: 7\n", ""), "needs a grade"),
+        (
+            lambda d: (d / "06-relative-motion.md").rename(d / "08-relative-motion.md"),
+            "should be numbered 06",
+        ),
+        (lambda d: _write(d, *_lesson(7, "motion-si", "9", "Т.")), "second lesson with slug"),
+        (lambda d: _write(d, *_lesson(7, "late", "8", "Т.")), "grade goes down from 9 to 8"),
+        (lambda d: _write(d, *_lesson(7, "late", "12", "Т.")), "within 7–11"),
+        (lambda d: _write(d, *_lesson(7, "late", "'9–10'", "Т.")), ""),
+        (lambda d: _write(d, *_lesson(7, "late", "9", "## Шаг 1. Т (9 класс)")), "not «Шаг N»"),
+        (lambda d: _drop_line(d / FIRST, "summary:"), "needs a one-line summary"),
+        (lambda d: _drop_line(d / FIRST, "grade:"), "needs a grade"),
         (lambda d: _edit(d / FIRST, "grade: 7\n", "grade: 7\norder: 3\n"), "come from the file"),
         (lambda d: _edit(d / "_topic.md", "title:", "grade: 7\ntitle:"), "for lessons only"),
         (
-            lambda d: _edit(d / "_topic.md", "Введение.", '<pp-task id="ks-basics-01"></pp-task>'),
+            lambda d: _write(
+                d, "_topic.md", WHOLE_PAGE + '\n<pp-task id="ks-basics-99"></pp-task>\n'
+            ),
             "not the topic page",
         ),
         (
-            lambda d: shutil.copy(CONTENT / "ege-physics" / BASICS, d.parent),
+            lambda d: _write(d.parent, "mech.kinematics.basics.md", WHOLE_PAGE),
             "also has a folder theory/mech.kinematics.basics/",
         ),
         (
@@ -287,37 +270,40 @@ FIRST = "01-motion-si.md"
 def test_lesson_layout_errors(
     scratch: Path, change: Callable[[Path], object], message: str
 ) -> None:
-    change(_split_into_lessons(scratch))
+    change(scratch / LESSONS)
     errors = _errors(scratch)
     assert message in errors if message else errors == ""
 
 
 def test_lessons_embed_every_step_task(scratch: Path) -> None:
-    d = _split_into_lessons(scratch)
-    _edit(d / "02-vectors.md", '<pp-task id="ks-basics-05"></pp-task>', "")
+    _edit(scratch / LESSONS / "03-average-speed.md", '<pp-task id="ks-basics-05"></pp-task>', "")
     assert "ks-basics-05.md: step task is not embedded" in _errors(scratch)
 
 
-def test_lesson_build_entries(scratch: Path, tmp_path: Path) -> None:
-    _split_into_lessons(scratch)
-    res = load_exam_dir(scratch)
+def test_lesson_build_entries(tmp_path: Path) -> None:
+    res = load_exam_dir(CONTENT / "ege-physics")
     assert res.bundle is not None
     build(res.bundle, tmp_path)
     public = json.loads((tmp_path / "public/ege-physics.json").read_text("utf-8"))
     private = json.loads((tmp_path / "private/ege-physics.json").read_text("utf-8"))
     basics = [p for p in public["theory"] if p["topic"] == "mech.kinematics.basics"]
-    assert [(p["id"], p["kind"], p["number"], p["grade"]) for p in basics] == [
-        ("mech.kinematics.basics", "intro", None, None),
-        ("mech.kinematics.basics/motion-si", "lesson", "1.1", "7"),
-        ("mech.kinematics.basics/vectors", "lesson", "1.2", "9"),
+    assert [(p["kind"], p["number"]) for p in basics[:3]] == [
+        ("intro", None),
+        ("lesson", "1.1"),
+        ("lesson", "1.2"),
     ]
-    assert basics[1]["tasks"] == ["ks-basics-01", "ks-basics-02", "ks-basics-03", "ks-basics-04"]
+    first = basics[1]
+    assert first["id"] == "mech.kinematics.basics/motion-si"
+    assert first["grade"] == "7"
+    assert first["tasks"] == ["ks-basics-10", "ks-basics-11", "ks-basics-12", "ks-basics-13"]
+    assert basics[-1]["grade"] == LAST_GRADE
     assert all("body" not in p for p in public["theory"])
     tutor = {p["id"]: p for p in private["theory"]}
     assert "mech.kinematics.basics" not in tutor  # the topic page has no chat
-    lesson = tutor["mech.kinematics.basics/vectors"]
+    lesson = tutor["mech.kinematics.basics/speed-uniform"]
     assert lesson["topic_title"] == "Основы кинематики"
-    assert lesson["lessons"] == ["1.1 motion-si", "1.2 vectors"]
+    assert lesson["lessons"][0] == "1.1 Механическое движение и система СИ"
+    assert len(lesson["lessons"]) == len(basics) - 1
     assert tutor["sr.basics"]["number"] is None
     assert tutor["sr.basics"]["lessons"] == []
 
