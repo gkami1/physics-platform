@@ -50,6 +50,12 @@ Each milestone has a **definition of done**; a milestone is not finished until i
 - Also fixed: chat bubble styles never applied (runtime `<li>` lacked Astro's scope attribute).
 - **Next:** «Спросить об этом» (quote a selection into the chat); unit-aware step-answer guard if evals show raw leaks.
 
+## Theory lessons (2026-11-03) — pilot in progress; pending: author review of 1.1, browser QA
+- Topics can be split into lessons that explain one idea each (see ARCHITECTURE «Topics as lessons»); topic page with a lesson list, lesson pages with the docked tutor, per-lesson tutor context (`tutor-v3`).
+- Animated figures without JavaScript; `<pp-prefix>` (SI prefixes: ladder of powers of ten, comma moving digit by digit).
+- Pilot «Основы кинематики»: 1.1 «Механическое движение и система СИ» written in full (4 new step tasks); 1.2–1.6 hold the old ladder text until 1.1 is approved, then get rewritten with `<pp-uniform>` and `<pp-path>`.
+- **Next:** the other 46 topics, one at a time, starting with the rest of mechanics.
+
 ## M6 — Roadmap and guidance (week 6)
 - Roadmap graph page (prerequisites, EGE task numbers per topic).
 - "What to practise next" (weakest mastered-enough prerequisites first).

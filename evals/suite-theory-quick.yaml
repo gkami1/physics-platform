@@ -1,11 +1,11 @@
-# Quick theory suite: the theory personas on three pages, for free-tier quotas
+# Quick theory suite: the theory personas on three pages (one a lesson), for free-tier quotas
 # (OpenRouter free: ~50 requests/day). Run with --suite evals/suite-theory-quick.yaml.
 # Full suite: evals/suite.yaml.
 # Student lines are scripted; the tutor's replies are real model output.
 # `{answer}` = the task's formatted answer. `attempt:` records an attempt before the turn.
 
 tasks: []
-theory: [electro.circuits.emf, mech.kinematics.basics, thermo.first-law]
+theory: [electro.circuits.emf, mech.kinematics.basics/motion-si, thermo.first-law]
 
 limits:
   task: { max_chars: 900, max_sentences: 6 }    # prompt asks for 2–5 sentences

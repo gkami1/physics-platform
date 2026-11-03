@@ -62,6 +62,7 @@ Smoke test (CI runs it in the docker job): `API_ENV=dev HTTP_PORT=8180 docker co
 - `katex` is pinned via npm `overrides` so the HTML from rehype-katex and the CSS we import come from one version.
 - Keep Astro `trailingSlash: 'ignore'`: `'always'` makes `astro dev` 404 `/api/*` before the proxy.
 - Figures are inline SVG, not `<img>`, so they follow the theme: draw with `currentColor` / `fig-*` classes, never hard-coded colours. Generated ones come from `figures/*.yaml` — edit the spec, not the SVG. Interactive models are custom elements in `web/src/lib/sims/`, loaded by the theory page only when present.
+- A topic's theory is either `theory/<topic>.md` (ladder of `## Шаг N. … (9 класс)`) or a folder `theory/<topic>/` with `_topic.md` and lessons `01-slug.md` (frontmatter `grade`, `summary`; plain `##` sections). Images in lessons are one level deeper: `../../assets/…`. A YAML `summary` with «: » must be quoted.
 - Theory step tasks: `<pp-task id="…"></pp-task>` alone on a line; the task lives in `tasks/steps/` without `ege_task`. Astro renders the statement from `build/public`, so run `npm run content` (not bare `astro dev`) after editing tasks — it also clears Astro's cached theory render.
 - Client-side `renderMarkdown` does not sanitize. Fine for author content; LLM output must be sanitized first.
 - State-changing API requests must carry an `Origin` matching `Host` (CSRF check). Any proxy in front of the API must keep `Host`: Caddy does by default; the Vite dev proxy needs `changeOrigin: false` (its string shorthand rewrites it).
