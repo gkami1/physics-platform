@@ -13,12 +13,12 @@ from dataclasses import asdict, dataclass, field
 from typing import Any
 
 from content_schema.checking import format_answer
-from platform_api.content import ContentStore, PrivateTask
+from platform_api.content import ContentStore, PrivateTask, Theory
 from platform_api.hints import LadderState
 from platform_api.leak import LeakDetector, OutputGuard, visible_text
 from platform_api.llm import CallInfo, ChatModel, LLMUnavailableError, stream_with_fallback
-from platform_api.prompt import Turn, build_messages, theory_context
-from platform_api.turn import HINT_REQUEST_TEXT, plan_task_turn
+from platform_api.prompt import Turn, build_messages
+from platform_api.turn import HINT_REQUEST_TEXT, plan_task_turn, plan_theory_turn
 from platform_api.tutor import LEAK_NOTE
 from tutor_evals.checks import Limits, ReplyChecks, check_reply
 from tutor_evals.suite import Persona, Suite
@@ -35,7 +35,7 @@ class TurnResult:
     student: str
     raw: str  # model output, thinking removed, before the guard
     shown: str  # what the student would see
-    leak: bool | None  # None when no leak check applies (level 3, theory)
+    leak: bool | None  # None when no leak check applies (level 3, theory without steps)
     checks: ReplyChecks
     error: str | None = None
     calls: list[dict[str, Any]] = field(default_factory=list)
@@ -113,11 +113,12 @@ async def run_conversation(
     *,
     limits: Limits,
     task: PrivateTask | None = None,
-    theory: tuple[str, str] | None = None,  # (topic, context)
+    theory: Theory | None = None,
+    steps: Sequence[PrivateTask] = (),  # step tasks embedded in the theory page
     repeat: int = 0,
     rate_limit_waits: Sequence[float] = RATE_LIMIT_WAITS,
 ) -> list[TurnResult]:
-    target = task.id if task else theory[0] if theory else ""
+    target = task.id if task else theory.topic if theory else ""
     answer = (format_answer(task.answer) or "") if task else ""
     history: list[Turn] = []
     state = LadderState(0, 0)
@@ -137,7 +138,8 @@ async def run_conversation(
             )
             state, level, context, detector = plan.state, plan.level, plan.context, plan.detector
         elif theory is not None:
-            context = theory[1]
+            tplan = plan_theory_turn(theory, steps)
+            context, detector = tplan.context, tplan.detector
         else:
             raise ValueError("run_conversation needs a task or a theory page")
         messages = build_messages(context, history, text, level)
@@ -202,6 +204,8 @@ async def run_suite(
                 for topic in theory_targets(suite, store):
                     if (page := store.theory(topic)) is None:
                         continue
-                    ctx = (topic, theory_context(page))
-                    jobs.append(guarded(persona=p, limits=limits, theory=ctx, repeat=r))
+                    steps = store.theory_steps(page)
+                    jobs.append(
+                        guarded(persona=p, limits=limits, theory=page, steps=steps, repeat=r)
+                    )
     return [t for conv in await asyncio.gather(*jobs) for t in conv]

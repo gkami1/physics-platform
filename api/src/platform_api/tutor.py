@@ -26,9 +26,8 @@ from platform_api.prompt import (
     PROMPT_VERSION,
     Turn,
     build_messages,
-    theory_context,
 )
-from platform_api.turn import HINT_REQUEST_TEXT, plan_task_turn
+from platform_api.turn import HINT_REQUEST_TEXT, plan_task_turn, plan_theory_turn
 
 logger = logging.getLogger("api.tutor")
 
@@ -196,7 +195,8 @@ async def post_message(
         page = store.theory(body.id)
         if page is None:
             raise HTTPException(404, "context not found")
-        context = theory_context(page)
+        theory_turn = plan_theory_turn(page, store.theory_steps(page))
+        context, detector = theory_turn.context, theory_turn.detector
 
     db.add(
         TutorMessage(

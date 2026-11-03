@@ -14,7 +14,7 @@ from pydantic import TypeAdapter
 from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from content_schema.models import AnswerSpec, ExamSpec, TaskNumberSpec
+from content_schema.models import AnswerSpec, ExamSpec, TaskNumberSpec, embedded_task_ids
 from platform_api.db import Task
 
 _answer = TypeAdapter[AnswerSpec](AnswerSpec)
@@ -41,6 +41,7 @@ class Theory:
     topic: str
     title: str
     body: str
+    steps: tuple[str, ...] = ()  # ids of step tasks embedded in the body, in order
 
 
 class ContentStore:
@@ -59,6 +60,9 @@ class ContentStore:
 
     def theory(self, topic: str) -> Theory | None:
         return self._theory.get(topic)
+
+    def theory_steps(self, page: Theory) -> list[PrivateTask]:
+        return [t for i in page.steps if (t := self._tasks.get(i)) is not None]
 
     def theory_topics(self) -> list[str]:
         return list(self._theory)
@@ -99,7 +103,13 @@ class ContentStore:
                     content_version=version,
                 )
             for page in data.get("theory", []):
-                theory[page["topic"]] = Theory(exam.id, page["topic"], page["title"], page["body"])
+                theory[page["topic"]] = Theory(
+                    exam.id,
+                    page["topic"],
+                    page["title"],
+                    page["body"],
+                    tuple(embedded_task_ids(page["body"])),
+                )
         return cls(tasks, versions, theory)
 
 
