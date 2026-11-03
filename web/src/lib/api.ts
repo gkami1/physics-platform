@@ -97,6 +97,17 @@ const post = (body?: unknown): RequestInit => ({
 
 const task = (id: string) => `/tasks/${encodeURIComponent(id)}`;
 
+let sessionOnce: Promise<Me> | undefined;
+
+/**
+ * Who is signed in, asked once per page load and shared by every island (header, tutor
+ * chat). Rejects when the API is unreachable.
+ */
+export function session(): Promise<Me> {
+  sessionOnce ??= api.me();
+  return sessionOnce;
+}
+
 export const api = {
   submit: (id: string, answer: string) =>
     call<AttemptResponse>(`${task(id)}/attempts`, post({ answer })),

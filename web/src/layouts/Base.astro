@@ -87,7 +87,7 @@ const tabs = [
 </html>
 
 <script>
-  import { api } from '../lib/api';
+  import { api, session } from '../lib/api';
 
   document.querySelector('.theme')?.addEventListener('click', () => {
     const root = document.documentElement;
@@ -111,7 +111,7 @@ const tabs = [
       this.querySelector('.logout')?.addEventListener('click', () => {
         void api.logout().finally(() => location.reload());
       });
-      void api.me().then(
+      void session().then(
         ({ user }) => {
           if (!user) return;
           const email = this.querySelector('.email') as HTMLElement;
