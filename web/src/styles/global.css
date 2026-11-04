@@ -852,7 +852,8 @@ blockquote {
   fill: var(--accent);
 }
 
-.unf-previous line {
+.unf-previous line,
+.unf-previous polyline {
   stroke: var(--muted);
   stroke-width: 1.5;
   stroke-dasharray: 4 4;
@@ -860,6 +861,13 @@ blockquote {
 
 .unf-previous text {
   fill: var(--muted);
+}
+
+/* <pp-accel> (src/lib/sims/accel.ts): reuses the unf-* road, car and graph. */
+.acc-area {
+  fill: var(--accent);
+  fill-opacity: 0.18;
+  stroke: none;
 }
 
 /* <pp-path> (src/lib/sims/path.ts): path vs displacement along a route. */
