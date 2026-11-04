@@ -1,0 +1,47 @@
+# mech.kinematics.circular 4.2: a stone whirled on a string; velocity along the tangent;
+# the string breaks at the bottom and the stone flies on in a straight line at the same speed
+kind: diagram
+size: [400, 250]
+items:
+- circle: [140, 130]
+  r: 80
+  tone: muted
+  width: 1
+  dashed: true
+- line: [[140, 130], [140, 210]]
+  width: 1.2
+- dots: [[140, 130]]
+  r: 3.5
+- path: M140 50A80 80 0 0 0 140 210L380 210
+  tone: accent
+  width: 2.5
+  animate: draw
+  mover: true
+- arrow: [[140.0, 50.0], [102.0, 50.0]]
+  tone: vel
+- arrow: [[83.4, 73.4], [56.5, 100.3]]
+  tone: vel
+- arrow: [[60.0, 130.0], [60.0, 168.0]]
+  tone: vel
+- arrow: [[83.4, 186.6], [110.3, 213.5]]
+  tone: vel
+- dots: [[140, 210]]
+  r: 4
+- text: нить оборвалась
+  at: [130, 234]
+  size: 12
+  anchor: middle
+- text: дальше — по прямой,
+  at: [290, 178]
+  size: 12
+  tone: accent
+  animate: appear
+- text: по касательной
+  at: [290, 194]
+  size: 12
+  tone: accent
+  animate: appear
+- text: скорость всё время — по касательной
+  at: [200, 22]
+  size: 13
+  tone: vel
