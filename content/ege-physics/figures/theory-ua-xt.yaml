@@ -1,0 +1,9 @@
+# mech.kinematics.uniform-accel 2.5: x = 2 + 6t − t², a parabola; the vertex is the turn at t = 3 s
+kind: graph
+x: {var: t, unit: с, min: 0, max: 6, step: 1}
+y: {var: x, unit: м, min: 0, max: 12, step: 2}
+series:
+  - points: [[0, 2], [0.5, 4.75], [1, 7], [1.5, 8.75], [2, 10], [2.5, 10.75], [3, 11], [3.5, 10.75], [4, 10], [4.5, 8.75], [5, 7], [5.5, 4.75], [6, 2]]
+guides: [[3, 11]]
+notes:
+  - {at: [3.15, 11.5], text: "разворот: vₓ = 0"}

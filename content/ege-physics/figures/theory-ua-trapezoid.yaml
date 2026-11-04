@@ -1,0 +1,14 @@
+# mech.kinematics.uniform-accel 2.3: v from 4 to 12 м/с in 4 s; area = rectangle v0·t + triangle at²/2
+kind: graph
+x: {var: t, unit: с, min: 0, max: 5, step: 1}
+y: {var: v, unit: м/с, min: 0, max: 14, step: 2}
+series:
+  - points: [[0, 4], [4, 12]]
+    fill: true
+  - points: [[0, 4], [4, 4]]
+    dashed: true
+    tone: muted
+guides: [[4, 12]]
+notes:
+  - {at: [2, 1.6], text: "v₀t = 4 · 4 = 16 м", anchor: middle}
+  - {at: [2.75, 5.6], text: "at²/2 = 16 м", anchor: middle}

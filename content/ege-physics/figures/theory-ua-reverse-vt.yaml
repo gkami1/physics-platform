@@ -1,0 +1,13 @@
+# mech.kinematics.uniform-accel 2.5: vx = 6 − 2t; +9 м before the turn at 3 s, −4 м after
+kind: graph
+x: {var: t, unit: с, min: 0, max: 5, step: 1}
+y: {var: v_x, unit: м/с, min: -6, max: 8, step: 2}
+series:
+  - points: [[0, 6], [3, 0]]
+    fill: true
+  - points: [[3, 0], [5, -4]]
+    fill: true
+    tone: vel
+notes:
+  - {at: [1, 1.6], text: "+9 м", anchor: middle}
+  - {at: [4.3, -1.6], text: "−4 м", anchor: middle}

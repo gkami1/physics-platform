@@ -1,0 +1,16 @@
+# mech.kinematics.uniform-accel 2.2: v(t) is a straight line, its slope is the acceleration
+kind: graph
+x: {var: t, unit: с, min: 0, max: 5, step: 1}
+y: {var: v, unit: м/с, min: 0, max: 12, step: 2}
+series:
+  - points: [[0, 2], [4, 10], [5, 12]]
+  - points: [[0, 2], [4, 2]]
+    dashed: true
+    tone: muted
+  - points: [[4, 2], [4, 10]]
+    dashed: true
+    tone: vel
+notes:
+  - {at: [2, 0.8], text: "Δt = 4 с", anchor: middle}
+  - {at: [4.15, 6], text: "Δv = 8 м/с"}
+  - {at: [0.3, 9.5], text: "a = 8 : 4 = 2 м/с²"}

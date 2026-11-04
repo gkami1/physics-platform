@@ -1,0 +1,18 @@
+# mech.kinematics.uniform-accel 2.2: acceleration along the velocity (speeding up) and against it (braking)
+kind: diagram
+size: [400, 200]
+items:
+- {text: разгон, at: [24, 30], size: 13, anchor: start}
+- {rect: [150, 44, 50, 22], radius: 4, fill: surface}
+- {circle: [162, 70], r: 5, fill: solid}
+- {circle: [188, 70], r: 5, fill: solid}
+- {arrow: [[200, 42], [290, 42]], tone: vel, label: '*v*', label_at: [298, 46]}
+- {arrow: [[200, 58], [250, 58]], tone: accent, label: '*a*', label_at: [258, 62], animate: appear}
+- {text: 'ускорение по скорости — скорость растёт', at: [200, 96], size: 12, tone: muted}
+- {text: торможение, at: [24, 128], size: 13, anchor: start}
+- {rect: [150, 142, 50, 22], radius: 4, fill: surface}
+- {circle: [162, 168], r: 5, fill: solid}
+- {circle: [188, 168], r: 5, fill: solid}
+- {arrow: [[200, 140], [290, 140]], tone: vel, label: '*v*', label_at: [298, 144]}
+- {arrow: [[150, 156], [100, 156]], tone: accent, label: '*a*', label_at: [84, 160], animate: appear}
+- {text: 'ускорение против скорости — скорость убывает', at: [200, 194], size: 12, tone: muted}
