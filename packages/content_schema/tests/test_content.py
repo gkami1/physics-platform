@@ -120,9 +120,9 @@ def test_latex_eaten_by_double_quotes(scratch: Path) -> None:
 
 def test_missing_image(scratch: Path) -> None:
     _edit(
-        scratch / "theory/mech.dynamics.newton.md",
+        scratch / "theory/mech.kinematics.basics/02-speed-uniform.md",
         "## Частые ловушки",
-        "![](../assets/x.png)\n\n## Частые ловушки",
+        "![](../../assets/x.png)\n\n## Частые ловушки",
     )
     assert "missing image" in _errors(scratch)
 
@@ -134,8 +134,33 @@ def test_source_ref_required(scratch: Path) -> None:
 
 # --- step tasks embedded in theory -------------------------------------------------------
 
-LADDER = "theory/mech.kinematics.uniform-accel.md"  # a whole-topic page with «Шаг N»
+# A whole-topic page with «Шаг N». The repo's topics move to lessons one by one, so these
+# tests write their own ladder: in the scratch copy the uniform-accel lessons become one page.
+LADDER = "theory/mech.kinematics.uniform-accel.md"
 STEP = "tasks/steps/ks-accel-01.md"
+_LADDER_STEPS = [
+    ("Ускорение: на сколько м/с за секунду", 9, [1, 9]),
+    ("Скорость в любой момент", 9, [2]),
+    ("Ускорение — вектор", 9, [3, 10]),
+    ("Перемещение — площадь под графиком скорости", 9, [4, 11]),
+    ("Средняя скорость при равноускоренном движении", 9, [5]),
+    ("Формула без времени", 10, [6, 12, 13]),
+    ("Уравнение координаты", 10, [7, 14]),
+    ("Графики и разгон из покоя", 10, [8]),
+]
+
+
+@pytest.fixture
+def ladder(scratch: Path) -> Path:
+    shutil.rmtree(scratch / "theory/mech.kinematics.uniform-accel")
+    parts = ["---\ntopic: mech.kinematics.uniform-accel\ntitle: Равноускоренное движение\n---\n"]
+    parts.append("Вступление.\n")
+    for n, (title, grade, tasks) in enumerate(_LADDER_STEPS, 1):
+        parts.append(f"## Шаг {n}. {title} ({grade} класс)\n\nТекст.\n")
+        parts += [f'<pp-task id="ks-accel-{t:02d}"></pp-task>\n' for t in tasks]
+    (scratch / LADDER).write_text("\n".join(parts), "utf-8")
+    assert _errors(scratch) == ""
+    return scratch
 
 
 def test_step_task_outside_steps_folder(scratch: Path) -> None:
@@ -150,27 +175,27 @@ def test_step_task_needs_practice_spec(scratch: Path) -> None:
     assert "step tasks (exam.yaml: practice) not in exam.yaml" in _errors(scratch)
 
 
-def test_embed_of_unknown_task(scratch: Path) -> None:
-    _edit(scratch / LADDER, 'id="ks-accel-01"', 'id="ks-nope"')
-    errors = _errors(scratch)
+def test_embed_of_unknown_task(ladder: Path) -> None:
+    _edit(ladder / LADDER, 'id="ks-accel-01"', 'id="ks-nope"')
+    errors = _errors(ladder)
     assert "embeds unknown task 'ks-nope'" in errors
     assert "ks-accel-01.md: step task is not embedded" in errors
 
 
-def test_embed_twice(scratch: Path) -> None:
-    _edit(scratch / LADDER, 'id="ks-accel-02"', 'id="ks-accel-01"')
-    assert "'ks-accel-01' is already embedded" in _errors(scratch)
+def test_embed_twice(ladder: Path) -> None:
+    _edit(ladder / LADDER, 'id="ks-accel-02"', 'id="ks-accel-01"')
+    assert "'ks-accel-01' is already embedded" in _errors(ladder)
 
 
-def test_embed_of_task_from_another_topic(scratch: Path) -> None:
-    _edit(scratch / LADDER, "## Шаг 2.", '<pp-task id="dyn-0001"></pp-task>\n\n## Шаг 2.')
-    errors = _errors(scratch)
+def test_embed_of_task_from_another_topic(ladder: Path) -> None:
+    _edit(ladder / LADDER, "## Шаг 2.", '<pp-task id="dyn-0001"></pp-task>\n\n## Шаг 2.')
+    errors = _errors(ladder)
     assert "'dyn-0001' is not tagged with topic 'mech.kinematics.uniform-accel'" in errors
 
 
-def test_malformed_embed(scratch: Path) -> None:
-    _edit(scratch / LADDER, "## Шаг 2.", "Текст <pp-task id='x'></pp-task>\n\n## Шаг 2.")
-    assert "write task embeds alone on a line" in _errors(scratch)
+def test_malformed_embed(ladder: Path) -> None:
+    _edit(ladder / LADDER, "## Шаг 2.", "Текст <pp-task id='x'></pp-task>\n\n## Шаг 2.")
+    assert "write task embeds alone on a line" in _errors(ladder)
 
 
 ACCEL_1 = "## Шаг 1. Ускорение: на сколько м/с за секунду (9 класс)"
@@ -191,20 +216,20 @@ ACCEL_2 = "## Шаг 2. Скорость в любой момент (9 клас�
         (ACCEL_1, ACCEL_1.replace("(9 класс)", "(5 класс)"), "within 7–11"),
     ],
 )
-def test_step_grades(scratch: Path, old: str, new: str, message: str) -> None:
-    _edit(scratch / LADDER, old, new)
-    errors = _errors(scratch)
+def test_step_grades(ladder: Path, old: str, new: str, message: str) -> None:
+    _edit(ladder / LADDER, old, new)
+    errors = _errors(ladder)
     assert message in errors if message else errors == ""
 
 
-def test_public_theory_lists_embedded_tasks(tmp_path: Path) -> None:
-    res = load_exam_dir(CONTENT / "ege-physics")
+def test_public_theory_lists_embedded_tasks(ladder: Path, tmp_path: Path) -> None:
+    res = load_exam_dir(ladder)
     assert res.bundle is not None
     build(res.bundle, tmp_path)
     public = json.loads((tmp_path / "public/ege-physics.json").read_text("utf-8"))
     page = next(p for p in public["theory"] if p["topic"] == "mech.kinematics.uniform-accel")
     assert page["kind"] == "page"
-    assert page["tasks"][:2] == ["ks-accel-01", "ks-accel-02"]
+    assert page["tasks"][:3] == ["ks-accel-01", "ks-accel-09", "ks-accel-02"]
     step = next(t for t in public["tasks"] if t["id"] == "ks-accel-01")
     assert step["ege_task"] is None
 
