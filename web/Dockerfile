@@ -16,7 +16,12 @@ RUN uv run --no-sync content-build build --content content --out build
 FROM node:24-slim AS site
 WORKDIR /app/web
 COPY web/package.json web/package-lock.json ./
-RUN npm ci
+# npm silently skips an optional dependency whose download fails, and Astro's native
+# compiler is one (@astrojs/compiler-binding-<platform>). Check it loads, so a flaky
+# registry fails here (and is not cached) instead of at `astro build`; retry once.
+RUN npm ci && node -e "require('@astrojs/compiler-binding')" \
+ || (echo "Astro native compiler missing after npm ci; retrying" \
+     && rm -rf node_modules && npm ci && node -e "require('@astrojs/compiler-binding')")
 COPY web .
 COPY content /app/content
 # Only the public bundle crosses into the site build.

@@ -1,0 +1,54 @@
+---
+// Theory text with the tutor docked beside it: one column (text, then the floating tutor
+// button) on phones and tablets; from 64rem a sticky tutor column beside a ~70-character
+// reading column. Used by whole-topic pages and lessons; topic pages with a lesson list
+// have no chat (it lives in the lessons).
+import TutorChat from '../TutorChat.astro';
+
+interface Props {
+  /** Theory page id: a topic id or `<topic>/<lesson>`. */
+  contextId: string;
+}
+const { contextId } = Astro.props;
+---
+
+<div class="theory-grid">
+  <div class="text-col"><slot /></div>
+  <TutorChat kind="theory" contextId={contextId} variant="docked" />
+</div>
+
+<script>
+  // Interactive models are written into theory Markdown as custom elements. Fetch a model's
+  // code only on pages that use it, so most theory pages stay JavaScript-free.
+  const sims: Record<string, () => Promise<unknown>> = {
+    'pp-projectile': () => import('../../lib/sims/projectile'),
+    'pp-prefix': () => import('../../lib/sims/prefix'),
+    'pp-uniform': () => import('../../lib/sims/uniform'),
+    'pp-path': () => import('../../lib/sims/path'),
+  };
+  for (const [tag, load] of Object.entries(sims)) if (document.querySelector(tag)) void load();
+  // Step tasks: the answer form is static HTML; checking needs the element's code.
+  if (document.querySelector('task-answer')) void import('../../lib/task-answer');
+</script>
+
+<style>
+  .theory-grid {
+    max-width: var(--measure);
+    margin: 0 auto;
+  }
+  @media (max-width: 63.99rem) {
+    .text-col {
+      padding-bottom: 4.5rem; /* keep the last «Проверить» clear of the floating button */
+    }
+  }
+  @media (min-width: 64rem) {
+    .theory-grid {
+      max-width: none;
+      display: grid;
+      grid-template-columns: minmax(0, 42rem) clamp(20rem, 30vw, 26rem);
+      justify-content: center;
+      align-items: start;
+      gap: 1.5rem;
+    }
+  }
+</style>

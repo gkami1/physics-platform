@@ -1,0 +1,59 @@
+# mech.kinematics.basics 1.6: boat heading across (1,2 м/с relative to water), current 0,5 м/с
+kind: diagram
+size: [400, 260]
+items:
+- line: [[16, 30], [236, 30]]
+  width: 2
+- line: [[16, 226], [236, 226]]
+  width: 2
+- text: берег
+  at: [40, 22]
+  size: 11
+  tone: muted
+- text: берег
+  at: [40, 246]
+  size: 11
+  tone: muted
+- arrow: [[150, 110], [190, 110]]
+  tone: muted
+  width: 1.4
+- arrow: [[150, 160], [190, 160]]
+  tone: muted
+  width: 1.4
+- text: течение
+  at: [170, 180]
+  size: 11
+  tone: muted
+- path: M60 222L60 34
+  tone: muted
+  width: 1.5
+- path: M60 222L138 34
+  tone: accent
+  width: 3
+  animate: draw
+  mover: true
+- text: куда направлен нос
+  at: [56, 130]
+  size: 11
+  tone: muted
+  anchor: end
+- text: куда плывёт
+  at: [124, 76]
+  size: 11
+  tone: accent
+  anchor: start
+- arrow: [[280, 210], [280, 114]]
+  width: 2.5
+  label: '*v*_отн'
+  label_at: [262, 166]
+- arrow: [[280, 114], [320, 114]]
+  tone: vel
+  width: 2.5
+  label: '*v*_пер'
+  label_at: [304, 102]
+- arrow: [[280, 210], [319, 117]]
+  tone: force
+  width: 3
+  label: '*v*'
+  label_at: [316, 170]
+  animate: appear

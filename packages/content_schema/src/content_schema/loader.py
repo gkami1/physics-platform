@@ -16,10 +16,12 @@ from pydantic import ValidationError
 
 from content_schema.figures import generate as generate_figures
 from content_schema.models import (
+    LESSON_FILE,
     SOLUTION_HEADING,
     STEP_HEADING,
     STEPS_DIR,
     TASK_EMBED_LOOSE,
+    TOPIC_INTRO,
     AnswerKind,
     ExamSpec,
     Roadmap,
@@ -113,19 +115,47 @@ def _md_files(d: Path) -> list[Path]:
     return sorted(d.rglob("*.md")) if d.exists() else []
 
 
+LOADER_FIELDS = {"kind", "lesson", "order"}  # derived from the file's place, not written
+
+
 def _load_theory(path: Path, root: Path, res: LoadResult) -> TheoryPage | None:
+    """`theory/<topic>.md` is a whole-topic page; `theory/<topic>/_topic.md` and
+    `theory/<topic>/NN-slug.md` are a topic split into lessons."""
     rel = _rel(path, root)
+    theory_dir = root / "theory"
+    derived: dict[str, Any]
+    if path.parent == theory_dir:
+        topic, derived = path.stem, {"kind": "page"}
+    elif path.parent.parent == theory_dir:
+        topic = path.parent.name
+        if path.stem == TOPIC_INTRO:
+            derived = {"kind": "intro"}
+        elif m := LESSON_FILE.match(path.stem):
+            derived = {"kind": "lesson", "lesson": m[2], "order": int(m[1])}
+        else:
+            res.errors.append(
+                f"{rel}: a lesson file is named like 01-slug.md (two digits, then a "
+                f"lowercase slug); the topic page is {TOPIC_INTRO}.md"
+            )
+            return None
+    else:
+        res.errors.append(f"{rel}: theory goes in theory/<topic>.md or theory/<topic>/")
+        return None
     try:
         meta, body = split_frontmatter(path.read_text(encoding="utf-8"))
-        page = TheoryPage.model_validate({**meta, "body": body, "path": rel})
+        if own := LOADER_FIELDS & set(meta):
+            res.errors.append(f"{rel}: {', '.join(sorted(own))} come from the file name")
+            return None
+        page = TheoryPage.model_validate({**meta, "body": body, "path": rel, **derived})
     except (FrontmatterError, yaml.YAMLError) as e:
         res.errors.append(f"{rel}: {e}")
         return None
     except ValidationError as e:
         res.errors.append(f"{rel}: {_fmt(e)}")
         return None
-    if path.stem != page.topic:
-        res.errors.append(f"{rel}: file name must equal topic id '{page.topic}'")
+    if topic != page.topic:
+        what = "file" if page.kind == "page" else "folder"
+        res.errors.append(f"{rel}: {what} name must equal topic id '{page.topic}'")
     return page
 
 
@@ -190,13 +220,10 @@ def _cross_validate(b: ContentBundle, res: LoadResult) -> None:
     if cycle := _find_cycle({t.id: t.prereqs for t in topics}):
         res.errors.append(f"roadmap.yaml: prerequisite cycle {' -> '.join(cycle)}")
 
-    theory_topics: set[str] = set()
     for page in b.theory:
         if page.topic not in seen:
             res.errors.append(f"{page.path}: unknown topic '{page.topic}'")
-        if page.topic in theory_topics:
-            res.errors.append(f"{page.path}: second theory page for topic '{page.topic}'")
-        theory_topics.add(page.topic)
+    _check_theory_layout(b, res)
 
     task_ids: set[str] = set()
     for task in b.tasks:
@@ -261,9 +288,57 @@ def _check_embeds(b: ContentBundle, res: LoadResult) -> None:
             res.errors.append(f"{t.path}: step task is not embedded in any theory page")
 
 
+def _check_theory_layout(b: ContentBundle, res: LoadResult) -> None:
+    """Per topic: one whole page, or a `_topic.md` with lessons 01..N whose grades never go
+    down. Lessons are plain `##` sections (no «Шаг N»: the lesson itself is the step)."""
+    by_topic: dict[str, list[TheoryPage]] = {}
+    for page in b.theory:
+        by_topic.setdefault(page.topic, []).append(page)
+    for topic, pages in by_topic.items():
+        whole = [p for p in pages if p.kind == "page"]
+        intros = [p for p in pages if p.kind == "intro"]
+        lessons = sorted((p for p in pages if p.kind == "lesson"), key=lambda p: p.order)
+        folder = f"theory/{topic}/"
+        if whole and (intros or lessons):
+            res.errors.append(f"{whole[0].path}: topic '{topic}' also has a folder {folder}")
+        if (intros or lessons) and not intros:
+            res.errors.append(f"{folder}: needs {TOPIC_INTRO}.md (the topic page)")
+        if intros and not lessons:
+            res.errors.append(f"{intros[0].path}: topic folder has no lessons")
+        for p in [*whole, *intros]:
+            if p.grade is not None or p.summary is not None:
+                res.errors.append(f"{p.path}: grade and summary are for lessons only")
+            if p.kind == "intro" and embedded_task_ids(p.body):
+                res.errors.append(f"{p.path}: put step tasks in lessons, not the topic page")
+        slugs: set[str] = set()
+        last = 0
+        for i, p in enumerate(lessons, start=1):
+            if p.order != i:
+                res.errors.append(f"{p.path}: should be numbered {i:02d} (lessons go 01..N)")
+            if p.lesson in slugs:
+                res.errors.append(f"{p.path}: second lesson with slug '{p.lesson}'")
+            slugs.add(p.lesson or "")
+            if p.summary is None:
+                res.errors.append(f"{p.path}: needs a one-line summary")
+            if STEP_HEADING.search(p.body):
+                res.errors.append(f"{p.path}: lessons use plain ## sections, not «Шаг N»")
+            grades = p.grades()
+            if grades is None:
+                res.errors.append(f"{p.path}: needs a grade, e.g. «grade: 7» or «grade: '7–8'»")
+                continue
+            low, high = grades
+            if not 7 <= low <= high <= 11:
+                res.errors.append(f"{p.path}: grade must be within 7–11")
+            if low < last:
+                res.errors.append(f"{p.path}: grade goes down from {last} to {low}")
+            last = low
+
+
 def _check_steps(b: ContentBundle, res: LoadResult) -> None:
     """Ladder pages: steps numbered 1..N, each with a grade 7–11 that never goes down."""
     for page in b.theory:
+        if page.kind != "page":
+            continue
         steps = STEP_HEADING.findall(page.body)
         last = 0
         for i, (n, lo, hi) in enumerate(steps, start=1):

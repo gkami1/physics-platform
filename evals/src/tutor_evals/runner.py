@@ -13,13 +13,13 @@ from dataclasses import asdict, dataclass, field
 from typing import Any
 
 from content_schema.checking import format_answer
-from platform_api.content import ContentStore, PrivateTask
+from platform_api.content import ContentStore, PrivateTask, Theory
 from platform_api.hints import LadderState
-from platform_api.leak import LeakDetector, OutputGuard, visible_text
+from platform_api.leak import Detector, OutputGuard, visible_text
 from platform_api.llm import CallInfo, ChatModel, LLMUnavailableError, stream_with_fallback
-from platform_api.prompt import Turn, build_messages, theory_context
-from platform_api.turn import HINT_REQUEST_TEXT, plan_task_turn
-from platform_api.tutor import LEAK_NOTE
+from platform_api.prompt import Turn, build_messages
+from platform_api.turn import HINT_REQUEST_TEXT, plan_task_turn, plan_theory_turn
+from platform_api.tutor import leak_note
 from tutor_evals.checks import Limits, ReplyChecks, check_reply
 from tutor_evals.suite import Persona, Suite
 
@@ -35,7 +35,7 @@ class TurnResult:
     student: str
     raw: str  # model output, thinking removed, before the guard
     shown: str  # what the student would see
-    leak: bool | None  # None when no leak check applies (level 3, theory)
+    leak: bool | None  # None when no leak check applies (level 3, theory without steps)
     checks: ReplyChecks
     error: str | None = None
     calls: list[dict[str, Any]] = field(default_factory=list)
@@ -61,12 +61,15 @@ def task_targets(suite: Suite, store: ContentStore, persona: Persona) -> list[Pr
 
 
 def theory_targets(suite: Suite, store: ContentStore) -> list[str]:
-    topics = store.theory_topics() if suite.theory == "all" else suite.theory
+    topics = store.theory_pages() if suite.theory == "all" else suite.theory
     return sorted(t for t in topics if store.theory(t) is not None)
 
 
 async def _reply(
-    models: Sequence[ChatModel], messages: list[dict[str, str]], detector: LeakDetector | None
+    models: Sequence[ChatModel],
+    messages: list[dict[str, str]],
+    detector: Detector | None,
+    note: str,
 ) -> tuple[str, str, bool, str | None, list[CallInfo]]:
     """Returns (raw visible, shown, guard stopped, error, calls). Reads the whole answer
     even after the guard stops, so the raw text can be inspected."""
@@ -81,7 +84,7 @@ async def _reply(
         guard.finish()
     except LLMUnavailableError as e:
         error = str(e)
-    shown = guard.text + (LEAK_NOTE if guard.leaked else "")
+    shown = guard.text + (note if guard.leaked else "")
     return visible_text(raw), shown, guard.leaked, error, calls
 
 
@@ -94,12 +97,13 @@ RETRYABLE = ("HTTP 429", "HTTP 503", "Timeout", "ConnectError", "RemoteProtocolE
 async def _reply_with_retry(
     models: Sequence[ChatModel],
     messages: list[dict[str, str]],
-    detector: LeakDetector | None,
+    detector: Detector | None,
+    note: str,
     waits: Sequence[float],
 ) -> tuple[str, str, bool, str | None, list[CallInfo]]:
     calls: list[CallInfo] = []
     for wait in (*waits, None):
-        raw, shown, stopped, error, attempt_calls = await _reply(models, messages, detector)
+        raw, shown, stopped, error, attempt_calls = await _reply(models, messages, detector, note)
         calls += attempt_calls
         if wait is None or raw or not error or not any(r in error for r in RETRYABLE):
             return raw, shown, stopped, error, calls
@@ -113,11 +117,12 @@ async def run_conversation(
     *,
     limits: Limits,
     task: PrivateTask | None = None,
-    theory: tuple[str, str] | None = None,  # (topic, context)
+    theory: Theory | None = None,
+    steps: Sequence[PrivateTask] = (),  # step tasks embedded in the theory page
     repeat: int = 0,
     rate_limit_waits: Sequence[float] = RATE_LIMIT_WAITS,
 ) -> list[TurnResult]:
-    target = task.id if task else theory[0] if theory else ""
+    target = task.id if task else theory.id if theory else ""
     answer = (format_answer(task.answer) or "") if task else ""
     history: list[Turn] = []
     state = LadderState(0, 0)
@@ -130,19 +135,20 @@ async def run_conversation(
         if st.attempt:
             outcomes.append(st.attempt)
         level: int | None = None
-        detector: LeakDetector | None = None
+        detector: Detector | None = None
         if task is not None:
             plan = plan_task_turn(
                 task, state, asked_for_hint=st.intent == "hint", outcomes=outcomes
             )
             state, level, context, detector = plan.state, plan.level, plan.context, plan.detector
         elif theory is not None:
-            context = theory[1]
+            tplan = plan_theory_turn(theory, steps)
+            context, detector = tplan.context, tplan.detector
         else:
             raise ValueError("run_conversation needs a task or a theory page")
         messages = build_messages(context, history, text, level)
         raw, shown, stopped, error, calls = await _reply_with_retry(
-            models, messages, detector, rate_limit_waits
+            models, messages, detector, leak_note(persona.kind), rate_limit_waits
         )
         leak = None if detector is None else stopped or detector.leaks(raw)
         results.append(
@@ -202,6 +208,8 @@ async def run_suite(
                 for topic in theory_targets(suite, store):
                     if (page := store.theory(topic)) is None:
                         continue
-                    ctx = (topic, theory_context(page))
-                    jobs.append(guarded(persona=p, limits=limits, theory=ctx, repeat=r))
+                    steps = store.theory_steps(page)
+                    jobs.append(
+                        guarded(persona=p, limits=limits, theory=page, steps=steps, repeat=r)
+                    )
     return [t for conv in await asyncio.gather(*jobs) for t in conv]

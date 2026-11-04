@@ -26,9 +26,9 @@ Python (uv workspace, run from repo root):
 - `uv run alembic -c api/alembic.ini upgrade head` — migrate (URL from `API_DATABASE_URL`)
 - `uv run alembic -c api/alembic.ini revision --autogenerate -m "..."` — new migration; review it and keep it dialect-neutral (`sa.func.now()`, not SQLite/PG literals)
 - `uv run uvicorn platform_api.main:app --reload` — run API locally
-- `uv run tutor-eval run` — tutor evals against the models in `API_LLM_*` (scripted dev model if none; `--provider`, `--persona`, `--repeats`, `--compare old.json`). Suite: `evals/suite.yaml`; reports in `evals/results/` (gitignored)
+- `uv run tutor-eval run` — tutor evals against the models in `API_LLM_*` (scripted dev model if none; `--provider`, `--persona`, `--repeats`, `--compare old.json`). Suite: `evals/suite.yaml` (free-tier quotas: `--suite evals/suite-theory-quick.yaml`); reports in `evals/results/` (gitignored)
 
-Local dev without Docker: copy `.env.example` to `.env` (SQLite + Google AI Studio free-tier key for the tutor; dev only, never for real students), migrate, run the API, then `cd web && npm run dev -- --host 127.0.0.1` (the dev server proxies `/api` to :8000). Tests use SQLite unless `API_TEST_DATABASE_URL` points at Postgres (CI does). To sign in locally, request a code and read it from the API log (no SMTP configured → `email not sent` log line; in Docker: `docker compose -f infra/compose.yaml logs api`).
+Local dev without Docker: copy `.env.example` to `.env` (SQLite + an OpenRouter free-model key for the tutor; dev only, never for real students), migrate, run the API, then `cd web && npm run dev -- --host 127.0.0.1` (the dev server proxies `/api` to :8000). Tests use SQLite unless `API_TEST_DATABASE_URL` points at Postgres (CI does). To sign in locally, request a code and read it from the API log (no SMTP configured → `email not sent` log line; in Docker: `docker compose -f infra/compose.yaml logs api`).
 
 Web (`cd web`):
 - `npm ci`, `npm run dev`, `npm run build` (runs `content-build build` first), `npm run check`
@@ -62,6 +62,7 @@ Smoke test (CI runs it in the docker job): `API_ENV=dev HTTP_PORT=8180 docker co
 - `katex` is pinned via npm `overrides` so the HTML from rehype-katex and the CSS we import come from one version.
 - Keep Astro `trailingSlash: 'ignore'`: `'always'` makes `astro dev` 404 `/api/*` before the proxy.
 - Figures are inline SVG, not `<img>`, so they follow the theme: draw with `currentColor` / `fig-*` classes, never hard-coded colours. Generated ones come from `figures/*.yaml` — edit the spec, not the SVG. Interactive models are custom elements in `web/src/lib/sims/`, loaded by the theory page only when present.
+- A topic's theory is either `theory/<topic>.md` (ladder of `## Шаг N. … (9 класс)`) or a folder `theory/<topic>/` with `_topic.md` and lessons `01-slug.md` (frontmatter `grade`, `summary`; plain `##` sections). Images in lessons are one level deeper: `../../assets/…`. A YAML `summary` with «: » must be quoted.
 - Theory step tasks: `<pp-task id="…"></pp-task>` alone on a line; the task lives in `tasks/steps/` without `ege_task`. Astro renders the statement from `build/public`, so run `npm run content` (not bare `astro dev`) after editing tasks — it also clears Astro's cached theory render.
 - Client-side `renderMarkdown` does not sanitize. Fine for author content; LLM output must be sanitized first.
 - State-changing API requests must carry an `Origin` matching `Host` (CSRF check). Any proxy in front of the API must keep `Host`: Caddy does by default; the Vite dev proxy needs `changeOrigin: false` (its string shorthand rewrites it).

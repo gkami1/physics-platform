@@ -1,13 +1,17 @@
 import asyncio
 import json
+from collections.abc import AsyncIterator, Sequence
 
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import select
 
+from content_schema.checking import format_answer
+from platform_api.content import ContentStore
 from platform_api.db import LlmCall, make_engine
-from platform_api.llm import FailingModel, ScriptedModel
-from platform_api.tutor import LEAK_NOTE
+from platform_api.llm import CallInfo, FailingModel, Message, ScriptedModel
+from platform_api.turn import plan_theory_turn
+from platform_api.tutor import LEAK_NOTE, THEORY_LEAK_NOTE
 
 
 def events(body: str) -> list[tuple[str, dict[str, object]]]:
@@ -109,6 +113,56 @@ def test_theory_thread(signed_in: TestClient) -> None:
     assert reply_text(evs) == "Сила — мера взаимодействия."
     r = signed_in.post("/api/tutor/messages", json={"kind": "theory", "id": "nope", "text": "?"})
     assert r.status_code == 404
+
+
+class RecordingModel(ScriptedModel):
+    """Scripted replies; keeps the system prompt of every call."""
+
+    def __init__(self, reply: str) -> None:
+        super().__init__(replies=(reply,))
+        self.systems: list[str] = []
+
+    def stream(self, messages: Sequence[Message], info: CallInfo) -> AsyncIterator[str]:
+        self.systems.append(messages[0]["content"])
+        return super().stream(messages, info)
+
+
+def test_lesson_has_its_own_thread_and_context(signed_in: TestClient) -> None:
+    model = RecordingModel("Путь — длина траектории.")
+    use_model(signed_in, model)
+    lesson = "mech.kinematics.basics/motion-si"
+    evs = ask(signed_in, "Что такое путь?", kind="theory", id=lesson)
+    assert reply_text(evs) == "Путь — длина траектории."
+    system = model.systems[-1]
+    assert "## Урок 1.1. Механическое движение и система СИ" in system
+    assert "1.2 Скорость и равномерное движение" in system
+    thread = signed_in.get(f"/api/tutor/thread?kind=theory&id={lesson}").json()
+    assert len(thread["messages"]) == 2
+    # The topic page lists the lessons and has no chat of its own.
+    r = signed_in.post(
+        "/api/tutor/messages",
+        json={"kind": "theory", "id": "mech.kinematics.basics", "text": "?"},
+    )
+    assert r.status_code == 404
+
+
+def test_theory_step_answer_is_cut(signed_in: TestClient) -> None:
+    store: ContentStore = signed_in.app.state.content  # type: ignore[attr-defined]
+    page = store.theory("electro.circuits.emf")
+    assert page is not None
+    steps = store.theory_steps(page)
+    assert steps, "the page should embed step tasks"
+    detector = plan_theory_turn(page, steps).detector
+    assert detector is not None
+    # A step answer that the page text does not already print.
+    answer = next(
+        a for t in steps if (a := format_answer(t.answer)) and detector.leaks(f"Ответ {a}.")
+    )
+    use_model(signed_in, ScriptedModel(replies=(f"Давай проверим. Получится {answer}. Ясно?",)))
+    evs = ask(signed_in, "Реши задачу", kind="theory", id=page.topic)
+    assert reply_text(evs) == "Давай проверим." + THEORY_LEAK_NOTE
+    thread = signed_in.get(f"/api/tutor/thread?kind=theory&id={page.topic}").json()
+    assert thread["messages"][-1]["leak"] is True
 
 
 def test_fallback_is_traced(signed_in: TestClient, migrated_db: str) -> None:

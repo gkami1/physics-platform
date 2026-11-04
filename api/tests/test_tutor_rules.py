@@ -8,13 +8,17 @@ import httpx
 import pytest
 
 from content_schema.models import (
+    AnswerKind,
     ExtendedAnswer,
     MeasurementAnswer,
     NumericAnswer,
+    ScoringRule,
     SequenceAnswer,
+    TaskNumberSpec,
 )
+from platform_api.content import PrivateTask, Theory
 from platform_api.hints import LadderState, next_level
-from platform_api.leak import LeakDetector, OutputGuard, visible_text
+from platform_api.leak import AnyLeak, LeakDetector, OutputGuard, visible_text
 from platform_api.llm import (
     CallInfo,
     FailingModel,
@@ -24,8 +28,19 @@ from platform_api.llm import (
     make_models,
     stream_with_fallback,
 )
-from platform_api.prompt import LEVELS, Turn, build_messages, wrap_student
+from platform_api.prompt import (
+    LESSON_RULES,
+    LEVELS,
+    MAX_THEORY_CHARS,
+    THEORY_RULES,
+    Turn,
+    build_messages,
+    inline_step_tasks,
+    theory_context,
+    wrap_student,
+)
 from platform_api.settings import Settings
+from platform_api.turn import plan_theory_turn
 
 NUM = NumericAnswer(type="numeric", value=Decimal("12.5"), unit="м/с", precision=Decimal("0.1"))
 STATEMENT = "Начальная скорость $2{,}5$ м/с, ускорение 2 м/с², время 5 с."
@@ -261,3 +276,164 @@ def test_primary_proxy_comes_from_env(monkeypatch: pytest.MonkeyPatch) -> None:
     [primary] = make_models(Settings(_env_file=None))  # type: ignore[call-arg]
     assert isinstance(primary, OpenAICompatible)
     assert primary.proxy == "http://127.0.0.1:10809"
+
+
+# --- theory pages: step tasks in the context, step-answer guard ---------------------------
+
+STEP_SCORING = TaskNumberSpec(
+    part=1, answer_kind=AnswerKind.NUMERIC, max_points=1, scoring=ScoringRule.EXACT, title="шаг"
+)
+
+
+def step_task(tid: str, statement: str, value: str) -> PrivateTask:
+    return PrivateTask(
+        id=tid,
+        exam_id="ege-physics",
+        ege_task=None,
+        topics=("t",),
+        statement=statement,
+        answer=NumericAnswer(type="numeric", value=Decimal(value), unit="м/с²"),
+        scoring=STEP_SCORING,
+        solution="СЕКРЕТНОЕ РЕШЕНИЕ a = 20/8",
+        hints=("СЕКРЕТНАЯ ПОДСКАЗКА",),
+        tutor_notes="СЕКРЕТНАЯ ЗАМЕТКА",
+        content_version="v",
+    )
+
+
+STEP_1 = step_task("s-01", "Машина за $8$ с разгоняется до $20$ м/с. Найди ускорение.", "2.5")
+STEP_2 = step_task("s-02", "За $4$ с скорость выросла на $12$ м/с. Найди ускорение.", "3")
+PAGE_BODY = """Вступление: ускорение показывает, как быстро меняется скорость.
+
+## Шаг 1. Ускорение (9 класс)
+
+Например, за $2$ с скорость выросла на $4$ м/с.
+
+<pp-task id="s-01"></pp-task>
+
+## Шаг 2. Знак ускорения (10 класс)
+
+<pp-task id="s-02"></pp-task>
+
+<pp-task id="nope"></pp-task>
+"""
+
+
+def page(body: str = PAGE_BODY, steps: tuple[str, ...] = ("s-01", "s-02", "nope")) -> Theory:
+    return Theory("ege-physics", "t", "Ускорение", body, steps)
+
+
+def test_theory_context_inlines_step_statements_only() -> None:
+    ctx = theory_context(page(), [STEP_1, STEP_2])
+    assert "<pp-task" not in ctx
+    assert ctx.index("Вступление") < ctx.index("Задача к шагу 1") < ctx.index(STEP_1.statement)
+    assert ctx.index(STEP_1.statement) < ctx.index("Задача к шагу 2") < ctx.index(STEP_2.statement)
+    assert ctx.removesuffix(THEORY_RULES).count("Задача к шагу") == 2  # unknown id dropped
+    for secret in ("СЕКРЕТН", "2.5", "2,5", "Ответ"):
+        assert secret not in ctx
+    assert ctx.endswith(THEORY_RULES)
+
+
+@pytest.mark.parametrize(
+    ("body", "expected"),
+    [
+        ('<pp-task id="s-01"></pp-task>\n', "Задача для самопроверки"),  # before any step
+        ('## Шаг 7. Тема\n\n<pp-task id="s-01"></pp-task>\n', "Задача к шагу 7"),
+        # Lessons: plain sections; the nearest one above the task names it.
+        (
+            '## Приставки\n\nТ.\n\n## Перевод единиц \n\n<pp-task id="s-01"></pp-task>\n',
+            "Задача к разделу «Перевод единиц»",
+        ),
+        ("Текст без задач.", "Текст без задач."),
+    ],
+)
+def test_inline_step_tasks_labels(body: str, expected: str) -> None:
+    assert expected in inline_step_tasks(body, [STEP_1])
+
+
+LESSONS = ("1.1 Движение и СИ", "1.2 Скорость", "1.11 Итоги")
+
+
+def lesson(number: str = "1.2") -> Theory:
+    body = '## Скорость\n\nСкорость — путь за секунду.\n\n<pp-task id="s-01"></pp-task>\n'
+    return Theory(
+        "ege-physics",
+        "mech.kinematics.basics",
+        "Скорость",
+        body,
+        ("s-01",),
+        page_id="mech.kinematics.basics/speed",
+        topic_title="Основы кинематики",
+        number=number,
+        lessons=LESSONS,
+    )
+
+
+@pytest.mark.parametrize(
+    ("number", "expected"),
+    [
+        # The current lesson is marked; «1.1» must not also mark «1.11».
+        ("1.2", ["- 1.1 Движение и СИ", "- 1.2 Скорость — этот урок", "- 1.11 Итоги"]),
+        ("1.1", ["- 1.1 Движение и СИ — этот урок", "- 1.2 Скорость", "- 1.11 Итоги"]),
+    ],
+)
+def test_lesson_context(number: str, expected: list[str]) -> None:
+    ctx = theory_context(lesson(number), [STEP_1])
+    assert ctx.startswith("# Урок темы «Основы кинематики», который читает ученик")
+    assert f"## Урок {number}. Скорость" in ctx
+    assert "\n".join(expected) in ctx
+    assert "Задача к разделу «Скорость»" in ctx
+    assert STEP_1.statement in ctx
+    assert "2.5" not in ctx
+    assert "СЕКРЕТН" not in ctx
+    assert ctx.index("Скорость — путь") < ctx.index("# Уроки этой темы") < ctx.index(THEORY_RULES)
+    assert ctx.endswith(LESSON_RULES)
+
+
+def test_whole_page_context_has_no_lesson_rules() -> None:
+    ctx = theory_context(page(), [STEP_1, STEP_2])
+    assert LESSON_RULES not in ctx
+    assert "# Уроки этой темы" not in ctx
+    assert page().id == "t"
+    assert lesson().id == "mech.kinematics.basics/speed"
+
+
+def test_theory_context_is_capped() -> None:
+    ctx = theory_context(page("Z" * (MAX_THEORY_CHARS + 500), ()), [])
+    assert ctx.count("Z") == MAX_THEORY_CHARS
+
+
+@pytest.mark.parametrize(
+    ("text", "leak"),
+    [
+        ("Ускорение равно $2{,}5$ м/с².", True),  # step 1's answer
+        ("Получится 3 м/с за каждую секунду.", True),  # step 2's answer
+        ("За $8$ с скорость стала $20$ м/с.", False),  # given in the statement
+        ("Скорость выросла на 4 м/с за 2 с.", False),  # printed on the page
+        ("Подумай, на сколько выросла скорость за одну секунду?", False),
+    ],
+)
+def test_theory_turn_guards_step_answers(text: str, leak: bool) -> None:
+    turn = plan_theory_turn(page(), [STEP_1, STEP_2])
+    assert turn.detector is not None
+    assert turn.detector.leaks(text) is leak
+
+
+def test_theory_turn_without_steps_has_no_detector() -> None:
+    turn = plan_theory_turn(page("Только текст, 2,5 и 3.", ()), [])
+    assert turn.detector is None
+    assert "Только текст" in turn.context
+
+
+@pytest.mark.parametrize(
+    ("flags", "expected"), [((), False), ((False,), False), ((False, True), True)]
+)
+def test_any_leak(flags: tuple[bool, ...], expected: bool) -> None:
+    class Fixed:
+        def __init__(self, value: bool) -> None:
+            self.value = value
+
+        def leaks(self, text: str) -> bool:
+            return self.value
+
+    assert AnyLeak([Fixed(f) for f in flags]).leaks("x") is expected

@@ -1,0 +1,207 @@
+---
+// A topic's theory: either the whole topic on one page (ladder of «Шаг N», tutor beside it)
+// or, for a topic split into lessons, its intro and the list of lessons.
+import type { GetStaticPaths } from 'astro';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import Base from '../../../../layouts/Base.astro';
+import TheoryWithChat from '../../../../components/theory/TheoryWithChat.astro';
+import TopicFacts from '../../../../components/theory/TopicFacts.astro';
+import TopicPractice from '../../../../components/theory/TopicPractice.astro';
+import { bundle, lessonsOf, theoryPage, theoryUrl } from '../../../../lib/content';
+
+export const getStaticPaths = (async () => {
+  const pages = await getCollection('theory');
+  return pages
+    .filter((entry) => entry.id.split('/').length === 2)
+    .map((entry) => {
+      const [exam, topic] = entry.id.split('/');
+      return { params: { exam, topic }, props: { entry } };
+    });
+}) satisfies GetStaticPaths;
+
+interface Props {
+  entry: CollectionEntry<'theory'>;
+}
+
+const { entry } = Astro.props;
+const { exam, topic } = Astro.params;
+const b = bundle(exam);
+const page = theoryPage(b, topic);
+if (!page) throw new Error(`Theory page ${entry.id} is not in build/public: run npm run content`);
+const lessons = lessonsOf(b, topic);
+const { Content } = await render(entry);
+---
+
+<Base title={`${entry.data.title} — ${b.exam.title}`} narrow={page.kind === 'intro'}>
+  {
+    page.kind === 'intro' ? (
+      <>
+        <nav class="crumbs">
+          <a href="/">← Роадмап</a>
+        </nav>
+        <h1>
+          {entry.data.title}
+          {entry.data.status === 'draft' && <span class="badge draft">черновик</span>}
+        </h1>
+        <TopicFacts b={b} topicId={topic} />
+        <article class="prose reading">
+          <Content />
+        </article>
+
+        <lesson-list>
+          <h2>Уроки</h2>
+          <ol class="lessons">
+            {lessons.map((l) => (
+              <li>
+                <a class="lesson" href={theoryUrl(exam, l.id)} data-tasks={l.tasks.join(' ')}>
+                  <span class="num">{l.number}</span>
+                  <span class="body">
+                    <span class="title">{l.title}</span>
+                    <span class="summary">{l.summary}</span>
+                    <span class="meta">
+                      <span class="grade-badge">{l.grade} класс</span>
+                      {l.tasks.length > 0 && (
+                        <span class="count">
+                          <span class="solved" hidden />
+                          {l.tasks.length} {l.tasks.length === 1 ? 'задача' : l.tasks.length < 5 ? 'задачи' : 'задач'}
+                        </span>
+                      )}
+                    </span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ol>
+          {lessons[0] && (
+            <a class="btn" href={theoryUrl(exam, lessons[0].id)}>
+              Начать с урока {lessons[0].number}
+            </a>
+          )}
+        </lesson-list>
+
+        <TopicPractice b={b} topicId={topic} />
+      </>
+    ) : (
+      <TheoryWithChat contextId={topic}>
+        <nav class="crumbs">
+          <a href="/">← Роадмап</a>
+        </nav>
+        <h1>
+          {entry.data.title}
+          {entry.data.status === 'draft' && <span class="badge draft">черновик</span>}
+        </h1>
+        <TopicFacts b={b} topicId={topic} />
+        <article class="prose reading">
+          <Content />
+        </article>
+        <TopicPractice b={b} topicId={topic} />
+      </TheoryWithChat>
+    )
+  }
+</Base>
+
+<script>
+  import { api } from '../../../../lib/api';
+
+  // «решено 2 из 4» on each lesson card; progress is per visitor, so it is filled in here.
+  class LessonList extends HTMLElement {
+    connectedCallback() {
+      void api.taskStatuses().then(
+        ({ tasks }) => {
+          for (const a of this.querySelectorAll<HTMLElement>('a.lesson')) {
+            const ids = (a.dataset.tasks ?? '').split(' ').filter(Boolean);
+            const solved = ids.filter((id) => tasks[id] === 'solved').length;
+            const badge = a.querySelector<HTMLElement>('.solved');
+            if (!badge || solved === 0) continue;
+            badge.textContent = solved === ids.length ? '✓ все решены · ' : `решено ${solved} из `;
+            badge.hidden = false;
+            if (solved === ids.length) a.dataset.done = '';
+          }
+        },
+        () => {},
+      );
+    }
+  }
+  customElements.define('lesson-list', LessonList);
+</script>
+
+<style>
+  .crumbs {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+  }
+  .crumbs a {
+    text-decoration: none;
+  }
+  h1 .badge {
+    vertical-align: middle;
+    margin-left: 0.5rem;
+  }
+  .prose :global(h2) {
+    margin-top: 2rem;
+  }
+  lesson-list {
+    display: block;
+    margin: 2rem 0;
+  }
+  .lessons {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem;
+    display: grid;
+    gap: 0.6rem;
+  }
+  .lesson {
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: inherit;
+    text-decoration: none;
+    transition: border-color 0.15s;
+  }
+  .lesson:hover,
+  .lesson:focus-visible {
+    border-color: var(--accent);
+  }
+  .lesson[data-done] {
+    border-color: var(--ok);
+  }
+  .num {
+    flex: none;
+    min-width: 2.6rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .body {
+    display: grid;
+    gap: 0.25rem;
+    min-width: 0;
+  }
+  .title {
+    font-weight: 600;
+  }
+  .summary {
+    color: var(--muted);
+    font-size: 0.925rem;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .meta .grade-badge {
+    margin-left: 0;
+  }
+  .lesson[data-done] .solved {
+    color: var(--ok);
+  }
+</style>

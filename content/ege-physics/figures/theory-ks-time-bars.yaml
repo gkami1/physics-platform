@@ -1,0 +1,57 @@
+# mech.kinematics.basics 1.3: equal halves of the path take unequal times (60 and 20 км/ч; not ks-basics-05's numbers)
+kind: diagram
+size: [400, 200]
+items:
+- text: путь
+  at: [20, 52]
+  size: 12
+  tone: muted
+  anchor: start
+- rect: [60, 34, 160, 28]
+  fill: accent
+  tone: accent
+- rect: [220, 34, 160, 28]
+  fill: accent
+  tone: vel
+- text: 60 км
+  at: [140, 53]
+  size: 13
+- text: 60 км
+  at: [300, 53]
+  size: 13
+- text: 'скорость 60 км/ч'
+  at: [140, 22]
+  size: 11
+  tone: accent
+- text: 'скорость 20 км/ч'
+  at: [300, 22]
+  size: 11
+  tone: vel
+- text: время
+  at: [20, 112]
+  size: 12
+  tone: muted
+  anchor: start
+- rect: [60, 94, 80, 28]
+  fill: accent
+  tone: accent
+  animate: appear
+- rect: [140, 94, 240, 28]
+  fill: accent
+  tone: vel
+  animate: appear
+- text: 1 ч
+  at: [100, 113]
+  size: 13
+  animate: appear
+- text: 3 ч
+  at: [260, 113]
+  size: 13
+  animate: appear
+- text: 'пути равны, а на медленном участке тело проводит больше времени'
+  at: [200, 152]
+  size: 12
+- text: 'v_{ср} = 120 км : 4 ч = 30 км/ч, а не 40'
+  at: [200, 180]
+  size: 14
+  tone: accent

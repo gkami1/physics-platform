@@ -1,0 +1,13 @@
+# mech.kinematics.basics 1.5: x(t) of the two cars above; the crossing is the meeting
+kind: graph
+x: {var: t, unit: с, min: 0, max: 40, step: 5, label_every: 2}
+y: {var: x, unit: м, min: 0, max: 400, step: 50, label_every: 2}
+series:
+  - points: [[0, 0], [40, 400]]
+  - points: [[0, 400], [40, 160]]
+    dashed: true
+    tone: vel
+guides: [[25, 250]]
+notes:
+  - {at: [36, 330], text: "1", anchor: middle}
+  - {at: [36, 210], text: "2", anchor: middle}

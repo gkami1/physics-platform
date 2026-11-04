@@ -1,0 +1,45 @@
+# mech.kinematics.basics 1.5: x1 = 10t, x2 = 400 − 6t meet at t = 25 с, x = 250 м (axis 0.8 px/м)
+kind: diagram
+size: [400, 150]
+items:
+- arrow: [[24, 100], [388, 100]]
+  width: 1.6
+- text: '*x*, м'
+  at: [376, 124]
+  size: 12
+- line: [[40, 96], [40, 104]]
+- text: '0'
+  at: [40, 122]
+  size: 12
+- line: [[360, 96], [360, 104]]
+- text: '400'
+  at: [360, 122]
+  size: 12
+- line: [[240, 96], [240, 104]]
+- text: '250'
+  at: [240, 122]
+  size: 12
+  tone: accent
+  animate: appear
+- path: M40 80L240 80
+  tone: accent
+  width: 3
+  animate: draw
+  mover: true
+- path: M360 64L240 64
+  tone: vel
+  width: 3
+  animate: draw
+  mover: true
+- text: '1: 10 м/с'
+  at: [70, 66]
+  size: 12
+  tone: accent
+- text: '2: 6 м/с'
+  at: [330, 50]
+  size: 12
+  tone: vel
+- text: встреча через 25 с
+  at: [240, 30]
+  size: 13
+  animate: appear

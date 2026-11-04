@@ -1,0 +1,39 @@
+# mech.kinematics.basics 1.4: 5 км east, then 12 км north; the sum is the hypotenuse
+kind: diagram
+size: [320, 260]
+items:
+- arrow: [[60, 220], [135, 220]]
+  width: 2.5
+  label: 5 км
+  label_at: [98, 242]
+- arrow: [[135, 220], [135, 40]]
+  width: 2.5
+  label: 12 км
+  label_at: [170, 134]
+- arrow: [[60, 220], [133, 44]]
+  tone: force
+  width: 3
+  label: '*s*'
+  label_at: [82, 124]
+  animate: appear
+- dots: [[60, 220]]
+  r: 4
+  tone: muted
+- text: старт
+  at: [40, 238]
+  size: 12
+  tone: muted
+- text: С
+  at: [250, 40]
+  size: 13
+  tone: muted
+- arrow: [[250, 90], [250, 54]]
+  tone: muted
+  width: 1.5
+- text: В
+  at: [292, 92]
+  size: 13
+  tone: muted
+- arrow: [[250, 90], [284, 90]]
+  tone: muted
+  width: 1.5

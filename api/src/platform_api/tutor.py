@@ -19,22 +19,32 @@ from platform_api.actor import SessionUser, as_utc, now
 from platform_api.db import Attempt, LlmCall, TutorMessage, TutorThread, User
 from platform_api.deps import Db, Store
 from platform_api.hints import MAX_LEVEL, LadderState
-from platform_api.leak import LeakDetector, OutputGuard
+from platform_api.leak import Detector, OutputGuard
 from platform_api.llm import CallInfo, ChatModel, LLMUnavailableError, stream_with_fallback
 from platform_api.prompt import (
     HISTORY_TURNS,
     PROMPT_VERSION,
     Turn,
     build_messages,
-    theory_context,
 )
-from platform_api.turn import HINT_REQUEST_TEXT, plan_task_turn
+from platform_api.turn import HINT_REQUEST_TEXT, plan_task_turn, plan_theory_turn
 
 logger = logging.getLogger("api.tutor")
 
 LEAK_NOTE = (
     "\n\n*Дальше я чуть не назвал ответ. Попробуй сделать этот шаг сам — или попроси подсказку.*"
 )
+# Theory pages have no hint button: send the student to the step task's answer field.
+THEORY_LEAK_NOTE = (
+    "\n\n*Дальше я чуть не назвал ответ задачи. Попробуй дойти до него сам"
+    " и проверь в поле ответа под задачей.*"
+)
+
+
+def leak_note(kind: str) -> str:
+    return THEORY_LEAK_NOTE if kind == "theory" else LEAK_NOTE
+
+
 ContextKind = Literal["task", "theory"]
 
 router = APIRouter(prefix="/api/tutor")
@@ -174,7 +184,7 @@ async def post_message(
     ]
 
     level: int | None = None
-    detector: LeakDetector | None = None
+    detector: Detector | None = None
     if body.kind == "task":
         task = store.task(body.id)
         if task is None:
@@ -196,7 +206,8 @@ async def post_message(
         page = store.theory(body.id)
         if page is None:
             raise HTTPException(404, "context not found")
-        context = theory_context(page)
+        theory_turn = plan_theory_turn(page, store.theory_steps(page))
+        context, detector = theory_turn.context, theory_turn.detector
 
     db.add(
         TutorMessage(
@@ -232,8 +243,9 @@ async def post_message(
             error = str(e)
         content = guard.text
         if guard.leaked:
-            content += LEAK_NOTE
-            yield _sse("delta", {"text": LEAK_NOTE})
+            note = leak_note(body.kind)
+            content += note
+            yield _sse("delta", {"text": note})
             logger.warning("tutor answer leak stopped", extra={"thread_id": thread.id})
 
         maker: async_sessionmaker[AsyncSession] = request.app.state.sessionmaker

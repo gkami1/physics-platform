@@ -1,0 +1,53 @@
+# mech.kinematics.basics 1.5: projections of three vectors on the x axis: +, −, 0
+kind: diagram
+size: [400, 250]
+items:
+- arrow: [[24, 200], [388, 200]]
+  width: 1.6
+- text: '*x*'
+  at: [384, 222]
+- arrow: [[50, 150], [150, 80]]
+  width: 2.5
+  label: '*a*'
+  label_at: [92, 104]
+- line: [[50, 150], [50, 200]]
+  dashed: true
+  tone: muted
+- line: [[150, 80], [150, 200]]
+  dashed: true
+  tone: muted
+- arrow: [[50, 200], [150, 200]]
+  tone: accent
+  width: 3.5
+- text: '*a*_x > 0'
+  at: [100, 228]
+  tone: accent
+- arrow: [[290, 80], [200, 140]]
+  width: 2.5
+  label: '*b*'
+  label_at: [258, 96]
+- line: [[290, 80], [290, 200]]
+  dashed: true
+  tone: muted
+- line: [[200, 140], [200, 200]]
+  dashed: true
+  tone: muted
+- arrow: [[290, 200], [200, 200]]
+  tone: force
+  width: 3.5
+- text: '*b*_x < 0'
+  at: [245, 228]
+  tone: force
+- arrow: [[345, 170], [345, 70]]
+  width: 2.5
+  label: '*c*'
+  label_at: [362, 112]
+- line: [[345, 170], [345, 200]]
+  dashed: true
+  tone: muted
+- dots: [[345, 200]]
+  r: 4
+  tone: accent
+- text: '*c*_x = 0'
+  at: [345, 246]
+  tone: accent

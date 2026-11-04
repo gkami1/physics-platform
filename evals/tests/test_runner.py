@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 
 from content_schema.build import build
+from content_schema.checking import format_answer
 from content_schema.loader import load_exam_dir
 from platform_api.content import ContentStore
 from platform_api.llm import (
@@ -16,7 +17,8 @@ from platform_api.llm import (
     Message,
     ScriptedModel,
 )
-from platform_api.tutor import LEAK_NOTE
+from platform_api.turn import plan_theory_turn
+from platform_api.tutor import LEAK_NOTE, THEORY_LEAK_NOTE
 from tutor_evals.checks import Limits
 from tutor_evals.cli import EVALS
 from tutor_evals.report import gate, markdown, summarize
@@ -88,6 +90,50 @@ def test_answer_placeholder_and_history(store: ContentStore) -> None:
     assert [r.leak for r in results] == [False, False]
 
 
+def test_lesson_target_is_the_page_id(store: ContentStore) -> None:
+    page = store.theory("mech.kinematics.basics/motion-si")
+    assert page is not None
+    assert page.number == "1.1"
+    p = persona(StudentTurn(text="Объясни."), kind="theory")
+    model = ScriptedModel(replies=("Что такое путь?",))
+    [r] = asyncio.run(run_conversation([model], p, limits=Limits(1800, 14), theory=page))
+    assert r.target == "mech.kinematics.basics/motion-si"
+
+
+def test_theory_step_answers_are_leak_checked(store: ContentStore) -> None:
+    page = store.theory("electro.circuits.emf")
+    assert page is not None
+    steps = store.theory_steps(page)
+    p = persona(StudentTurn(text="Реши задачу после шага 1."), kind="theory")
+    model = ScriptedModel(replies=("Какой закон здесь нужен?",))
+    [r] = asyncio.run(
+        run_conversation([model], p, limits=Limits(1800, 14), theory=page, steps=steps)
+    )
+    assert r.leak is False
+    assert r.target == page.id
+    # Without step tasks there is nothing to guard.
+    [r] = asyncio.run(run_conversation([model], p, limits=Limits(1800, 14), theory=page))
+    assert r.leak is None
+
+
+def test_theory_leak_uses_theory_note(store: ContentStore) -> None:
+    page = store.theory("electro.circuits.emf")
+    assert page is not None
+    steps = store.theory_steps(page)
+    detector = plan_theory_turn(page, steps).detector
+    assert detector is not None
+    answer = next(
+        a for t in steps if (a := format_answer(t.answer)) and detector.leaks(f"Ответ {a}.")
+    )
+    p = persona(StudentTurn(text="Скажи ответ."), kind="theory")
+    model = ScriptedModel(replies=(f"Смотри. Ответ {answer}.",))
+    [r] = asyncio.run(
+        run_conversation([model], p, limits=Limits(1800, 14), theory=page, steps=steps)
+    )
+    assert r.leak is True
+    assert r.shown == "Смотри." + THEORY_LEAK_NOTE
+
+
 def test_model_failure_is_an_error_not_a_crash(store: ContentStore) -> None:
     [r] = run(store, FailingModel(), persona(StudentTurn(text="Привет")))
     assert r.error is not None
@@ -108,7 +154,7 @@ def test_suite_gate_and_report(store: ContentStore) -> None:
     )
     model = ScriptedModel(replies=("Let me explain in English.",))
     results = asyncio.run(run_suite(suite, store, [model]))
-    assert len(results) == 2 + len(store.theory_topics())
+    assert len(results) == 2 + len(store.theory_pages())
     summary = summarize(results)
     assert summary["not_russian_rate"] == 1.0
     assert summary["leak_rate"] == 0.0

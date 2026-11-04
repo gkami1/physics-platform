@@ -44,6 +44,18 @@ Each milestone has a **definition of done**; a milestone is not finished until i
 - Done: kinematics (4 topics, 32 step tasks), dynamics (Newton, forces, gravity — 22 step tasks), statics (moments, hydrostatics — 15 step tasks), conservation laws (momentum, work and power, energy — 23 step tasks), oscillations and waves (15 step tasks), molecular physics (MKT basics, ideal gas, gas laws, humidity — 25 step tasks), thermodynamics (heat, internal energy, first law, heat engines — 26 step tasks), electrostatics (Coulomb, field, conductors, capacitors — 25 step tasks), DC circuits (Ohm, EMF, power — 20 step tasks), magnetism (Ampère, Lorentz — 12 step tasks), induction (Faraday, self-induction — 11 step tasks), EM oscillations and waves (LC circuit, AC and EM waves — 13 step tasks), optics (refraction, lenses, wave optics — 18 step tasks), special relativity (6 step tasks).
 - **Next:** author review → quantum, method.
 
+## Theory chat (2026-11-03) — code done; pending: browser QA, deploy
+- Tutor docked beside the theory text (sticky column from 64rem, bottom sheet on phones), always visible, with a line encouraging questions; zero tutor requests per page view (see ARCHITECTURE §8 «Theory chat»).
+- Theory context: whole page with step-task statements inlined (`tutor-v2`); step answers guarded server-side. Evals (quick theory suite, Nemotron 3 Ultra on OpenRouter free): 0 leaks in 23 checked turns, Russian 100%, length unchanged.
+- Also fixed: chat bubble styles never applied (runtime `<li>` lacked Astro's scope attribute).
+- **Next:** «Спросить об этом» (quote a selection into the chat); unit-aware step-answer guard if evals show raw leaks.
+
+## Theory lessons (2026-11-03) — pilot written; pending: author review, browser QA, evals of `tutor-v3`
+- Topics can be split into lessons that explain one idea each (see ARCHITECTURE «Topics as lessons»); topic page with a lesson list, lesson pages with the docked tutor, per-lesson tutor context (`tutor-v3`).
+- Animated figures without JavaScript; models `<pp-prefix>` (SI prefixes: ladder of powers of ten, comma moving digit by digit), `<pp-uniform>` (car and live s(t) graph), `<pp-path>` (path vs displacement on four routes).
+- Pilot «Основы кинематики», six lessons written in full: 1.1 motion and SI, 1.2 speed and uniform motion, 1.3 average speed, 1.4 frame of reference and displacement, 1.5 coordinates and the equation of motion, 1.6 relative motion; 12 new figures (7 animated), 9 new step tasks (ks-basics-10…18, 18 in all).
+- **Next:** the other 46 topics, one at a time, starting with the rest of mechanics.
+
 ## M6 — Roadmap and guidance (week 6)
 - Roadmap graph page (prerequisites, EGE task numbers per topic).
 - "What to practise next" (weakest mastered-enough prerequisites first).

@@ -14,7 +14,7 @@ from pydantic import TypeAdapter
 from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from content_schema.models import AnswerSpec, ExamSpec, TaskNumberSpec
+from content_schema.models import AnswerSpec, ExamSpec, TaskNumberSpec, embedded_task_ids
 from platform_api.db import Task
 
 _answer = TypeAdapter[AnswerSpec](AnswerSpec)
@@ -37,10 +37,21 @@ class PrivateTask:
 
 @dataclass(frozen=True)
 class Theory:
+    """A tutor page: a whole-topic page or one lesson of a topic split into lessons."""
+
     exam_id: str
     topic: str
     title: str
     body: str
+    steps: tuple[str, ...] = ()  # ids of step tasks embedded in the body, in order
+    page_id: str = ""  # `<topic>/<lesson>` for a lesson; empty means the topic id
+    topic_title: str = ""
+    number: str | None = None  # «1.2» for a lesson
+    lessons: tuple[str, ...] = ()  # the topic's lessons, «1.1 Title», for a lesson
+
+    @property
+    def id(self) -> str:
+        return self.page_id or self.topic
 
 
 class ContentStore:
@@ -57,10 +68,14 @@ class ContentStore:
     def task(self, task_id: str) -> PrivateTask | None:
         return self._tasks.get(task_id)
 
-    def theory(self, topic: str) -> Theory | None:
-        return self._theory.get(topic)
+    def theory(self, page_id: str) -> Theory | None:
+        """By page id: a topic id (whole-topic page) or `<topic>/<lesson>`."""
+        return self._theory.get(page_id)
 
-    def theory_topics(self) -> list[str]:
+    def theory_steps(self, page: Theory) -> list[PrivateTask]:
+        return [t for i in page.steps if (t := self._tasks.get(i)) is not None]
+
+    def theory_pages(self) -> list[str]:
         return list(self._theory)
 
     def all(self) -> list[PrivateTask]:
@@ -99,7 +114,17 @@ class ContentStore:
                     content_version=version,
                 )
             for page in data.get("theory", []):
-                theory[page["topic"]] = Theory(exam.id, page["topic"], page["title"], page["body"])
+                theory[page["id"]] = Theory(
+                    exam.id,
+                    page["topic"],
+                    page["title"],
+                    page["body"],
+                    tuple(embedded_task_ids(page["body"])),
+                    page_id=page["id"],
+                    topic_title=page["topic_title"],
+                    number=page["number"],
+                    lessons=tuple(page["lessons"]),
+                )
         return cls(tasks, versions, theory)
 
 
