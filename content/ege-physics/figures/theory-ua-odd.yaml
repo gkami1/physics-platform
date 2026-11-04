@@ -1,0 +1,20 @@
+# mech.kinematics.uniform-accel 2.3: from rest, paths in successive seconds go 1 : 3 : 5 : 7 (20 px/м)
+kind: diagram
+size: [400, 120]
+items:
+- line: [[24, 60], [384, 60]]
+  tone: muted
+  width: 1
+- dots: [[40, 60], [60, 60], [120, 60], [220, 60], [360, 60]]
+  r: 5
+  tone: accent
+- {text: 0 с, at: [40, 82], size: 11, tone: muted}
+- {text: 1 с, at: [62, 96], size: 11, tone: muted}
+- {text: 2 с, at: [120, 82], size: 11, tone: muted}
+- {text: 3 с, at: [220, 82], size: 11, tone: muted}
+- {text: 4 с, at: [360, 82], size: 11, tone: muted}
+- {text: '1', at: [50, 44], size: 13, tone: vel, animate: appear}
+- {text: '3', at: [90, 44], size: 13, tone: vel, animate: appear}
+- {text: '5', at: [170, 44], size: 13, tone: vel, animate: appear}
+- {text: '7', at: [290, 44], size: 13, tone: vel, animate: appear}
+- {text: 'пути за 1-ю, 2-ю, 3-ю, 4-ю секунды — как 1 : 3 : 5 : 7', at: [200, 18], size: 12}

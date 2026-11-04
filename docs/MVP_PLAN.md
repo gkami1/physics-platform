@@ -50,11 +50,15 @@ Each milestone has a **definition of done**; a milestone is not finished until i
 - Also fixed: chat bubble styles never applied (runtime `<li>` lacked Astro's scope attribute).
 - **Next:** «Спросить об этом» (quote a selection into the chat); unit-aware step-answer guard if evals show raw leaks.
 
-## Theory lessons (2026-11-03) — pilot written; pending: author review, browser QA, evals of `tutor-v3`
+## Theory lessons (2026-11-03) — pilot approved by the author (2026-11-04); rolling out to every topic; pending: evals of `tutor-v3`
 - Topics can be split into lessons that explain one idea each (see ARCHITECTURE «Topics as lessons»); topic page with a lesson list, lesson pages with the docked tutor, per-lesson tutor context (`tutor-v3`).
 - Animated figures without JavaScript; models `<pp-prefix>` (SI prefixes: ladder of powers of ten, comma moving digit by digit), `<pp-uniform>` (car and live s(t) graph), `<pp-path>` (path vs displacement on four routes).
 - Pilot «Основы кинематики», six lessons written in full: 1.1 motion and SI, 1.2 speed and uniform motion, 1.3 average speed, 1.4 frame of reference and displacement, 1.5 coordinates and the equation of motion, 1.6 relative motion; 12 new figures (7 animated), 9 new step tasks (ks-basics-10…18, 18 in all).
-- **Next:** the other 46 topics, one at a time, starting with the rest of mechanics.
+- Rollout (2026-11-04), one topic per batch of commits, on `feat/lessons-mechanics`:
+  - «Равноускоренное движение», five lessons: 2.1 acceleration, 2.2 acceleration as a vector, 2.3 path as the area under v(t), 2.4 braking distance and the timeless formula, 2.5 the coordinate equation and graphs; model `<pp-accel>` (v₀ and a sliders, strobe marks, live v(t) with shaded area; a braking car stops and stays); 7 new figures; step tasks ks-accel-09…14 (14 in all).
+  - Graph figures with negative values draw a zero line and shade areas from it (vₓ(t) below the axis).
+  - Content tests no longer lean on a real ladder page: they write one into the scratch copy.
+- **Next:** the remaining 45 topics in roadmap order: free fall, circular motion, then dynamics.
 
 ## M6 — Roadmap and guidance (week 6)
 - Roadmap graph page (prerequisites, EGE task numbers per topic).

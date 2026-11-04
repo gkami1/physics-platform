@@ -1,0 +1,23 @@
+# mech.kinematics.uniform-accel 2.1: a car from rest, a = 2 м/с², position every second (13 px/м)
+kind: diagram
+size: [400, 130]
+items:
+- line: [[24, 56], [384, 56]]
+  tone: muted
+  width: 1
+- dots: [[40, 56], [53, 56], [92, 56], [157, 56], [248, 56], [365, 56]]
+  r: 5
+  tone: accent
+- {text: 0 с, at: [40, 42], size: 11, tone: muted}
+- {text: 1 с, at: [56, 30], size: 11, tone: muted}
+- {text: 2 с, at: [92, 42], size: 11, tone: muted}
+- {text: 3 с, at: [157, 42], size: 11, tone: muted}
+- {text: 4 с, at: [248, 42], size: 11, tone: muted}
+- {text: 5 с, at: [365, 42], size: 11, tone: muted}
+- {text: '0', at: [40, 78], size: 12, tone: vel, animate: appear}
+- {text: '2', at: [58, 92], size: 12, tone: vel, animate: appear}
+- {text: '4', at: [92, 78], size: 12, tone: vel, animate: appear}
+- {text: '6', at: [157, 78], size: 12, tone: vel, animate: appear}
+- {text: '8', at: [248, 78], size: 12, tone: vel, animate: appear}
+- {text: '10 м/с', at: [365, 78], size: 12, tone: vel, animate: appear}
+- {text: 'скорость каждую секунду растёт на 2 м/с', at: [200, 118], size: 13}
