@@ -870,6 +870,52 @@ blockquote {
   stroke: none;
 }
 
+/* <pp-drop> (src/lib/sims/drop.ts): a dropped ball and a thrown one fall side by side. */
+.drp-dropped {
+  fill: var(--ok);
+}
+
+.drp-thrown {
+  fill: var(--accent);
+}
+
+.drp-mark-dropped,
+.drp-mark-thrown {
+  fill: var(--surface);
+  stroke-width: 1.5;
+}
+
+.drp-mark-dropped {
+  stroke: var(--ok);
+}
+
+.drp-mark-thrown {
+  stroke: var(--accent);
+}
+
+.drp-pair,
+.drp-level {
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.drp-key {
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  border-radius: 50%;
+  vertical-align: baseline;
+}
+
+.drp-key-dropped {
+  background: var(--ok);
+}
+
+.drp-key-thrown {
+  background: var(--accent);
+}
+
 /* <pp-path> (src/lib/sims/path.ts): path vs displacement along a route. */
 .pth-tracks {
   margin: 0 0 0.5rem;

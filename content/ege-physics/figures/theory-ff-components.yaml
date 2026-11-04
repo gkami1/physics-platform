@@ -1,0 +1,16 @@
+# mech.kinematics.free-fall 3.5: initial velocity at α = 40° split into horizontal and vertical parts
+kind: diagram
+size: [400, 240]
+items:
+- {arrow: [[40, 200], [380, 200]], tone: muted, width: 1, label: '*x*', label_at: [384, 218]}
+- {arrow: [[60, 220], [60, 20]], tone: muted, width: 1, label: '*y*', label_at: [48, 26]}
+- {line: [[182.6, 97.2], [182.6, 200]], tone: muted, width: 1, dashed: true}
+- {line: [[182.6, 97.2], [60, 97.2]], tone: muted, width: 1, dashed: true}
+- {arrow: [[60, 200], [182.6, 97.2]], tone: vel, width: 2.5, label: '*v*_0', label_at: [196, 92]}
+- {arrow: [[60, 200], [182.6, 200]], tone: accent, animate: appear}
+- {arrow: [[60, 200], [60, 97.2]], tone: accent, animate: appear}
+- {angle: [60, 200], start: 0, end: 40, r: 34, label: α}
+- {text: '*v*_{0x} = *v*_0 cos α', at: [124, 222], size: 13, tone: accent, animate: appear}
+- {text: '*v*_{0y} = *v*_0 sin α', at: [68, 84], size: 13, tone: accent, anchor: start, animate: appear}
+- {text: 'горизонталь — косинус,', at: [240, 150], size: 12, tone: muted, anchor: start}
+- {text: 'вертикаль — синус', at: [240, 166], size: 12, tone: muted, anchor: start}

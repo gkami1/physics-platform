@@ -58,7 +58,8 @@ Each milestone has a **definition of done**; a milestone is not finished until i
   - «Равноускоренное движение», five lessons: 2.1 acceleration, 2.2 acceleration as a vector, 2.3 path as the area under v(t), 2.4 braking distance and the timeless formula, 2.5 the coordinate equation and graphs; model `<pp-accel>` (v₀ and a sliders, strobe marks, live v(t) with shaded area; a braking car stops and stays); 7 new figures; step tasks ks-accel-09…14 (14 in all).
   - Graph figures with negative values draw a zero line and shade areas from it (vₓ(t) below the axis).
   - Content tests no longer lean on a real ladder page: they write one into the scratch copy.
-- **Next:** the remaining 45 topics in roadmap order: free fall, circular motion, then dynamics.
+  - «Свободное падение и движение тела, брошенного под углом», six lessons (`feat/lessons-mech.kinematics.free-fall`): 3.1 all bodies fall alike (tube without air, g, v = gt), 3.2 height and time of a fall (1 : 3 : 5 : 7, v = √(2gh)), 3.3 throw up (g down all the way, symmetry, path vs displacement), 3.4 horizontal throw (independence of motions, speed by Pythagoras), 3.5 throw at an angle (components, top point, height), 3.6 time of flight and range (45°, complementary angles, throws from a height via x(t), y(t)); model `<pp-drop>` (a dropped and a thrown ball stay level and land together), `<pp-projectile>` reused in 3.6; 7 new figures; step tasks ks-fall-09…17 (17 in all).
+- **Next:** the remaining 44 topics in roadmap order: circular motion, then dynamics (Newton's laws, forces, gravity).
 
 ## M6 — Roadmap and guidance (week 6)
 - Roadmap graph page (prerequisites, EGE task numbers per topic).
