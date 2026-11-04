@@ -1,0 +1,73 @@
+# mech.kinematics.circular 4.3: velocities at two close points, equal in length; moved to one
+# point, their difference Δv points to the centre of the circle
+kind: diagram
+size: [400, 260]
+items:
+- circle: [120, 160]
+  r: 85
+  tone: muted
+  width: 1
+  dashed: true
+- dots: [[120, 160]]
+  r: 3
+- dots: [[162.5, 86.4], [77.5, 86.4]]
+  r: 4.5
+- text: '1'
+  at: [174.5, 80.4]
+  size: 12
+  tone: muted
+- text: '2'
+  at: [87.5, 106.4]
+  size: 12
+  tone: muted
+- arrow: [[162.5, 86.4], [101.9, 51.4]]
+  tone: vel
+  label: '*v*_1'
+  label_at: [105.9, 43.4]
+- arrow: [[77.5, 86.4], [16.9, 121.4]]
+  tone: vel
+  label: '*v*_2'
+  label_at: [14.9, 141.4]
+- arrow: [[120, 85], [120, 130]]
+  tone: accent
+  dashed: true
+  animate: appear
+- text: к центру
+  at: [128, 124]
+  size: 12
+  tone: accent
+  anchor: start
+  animate: appear
+- text: перенесём стрелки
+  at: [300, 22]
+  size: 12
+  tone: muted
+- text: в одну точку
+  at: [300, 37]
+  size: 12
+  tone: muted
+- dots: [[330, 105]]
+  r: 3
+- arrow: [[330, 105], [269.4, 70.0]]
+  tone: vel
+  label: '*v*_1'
+  label_at: [291.4, 72.0]
+- arrow: [[330, 105], [269.4, 140.0]]
+  tone: vel
+  label: '*v*_2'
+  label_at: [291.4, 152.0]
+- arrow: [[269.4, 70.0], [269.4, 140.0]]
+  tone: accent
+  label: Δ*v*
+  label_at: [251.4, 110.0]
+  animate: appear
+- text: Δ*v* смотрит к центру —
+  at: [300, 205]
+  size: 13
+  tone: accent
+  animate: appear
+- text: туда же и ускорение
+  at: [300, 222]
+  size: 13
+  tone: accent
+  animate: appear

@@ -1,0 +1,64 @@
+# mech.kinematics.circular 4.5: a belt joins pulleys R and 2R; rim points go equal distances in
+# equal times (both movers trace the same length), so the small pulley turns twice as fast
+kind: diagram
+size: [400, 256]
+items:
+- circle: [105, 125]
+  r: 35
+  fill: surface
+  width: 1.5
+- circle: [285, 125]
+  r: 70
+  fill: surface
+  width: 1.5
+- line: [[98.2, 90.7], [271.4, 56.3]]
+  width: 2.5
+- line: [[98.2, 159.3], [271.4, 193.7]]
+  width: 2.5
+- dots: [[105, 125], [285, 125]]
+  r: 3
+- line: [[105, 125], [80.3, 149.7]]
+  tone: muted
+  width: 1
+- line: [[285, 125], [235.5, 174.5]]
+  tone: muted
+  width: 1
+- text: '*R*_1'
+  at: [71, 175]
+  size: 12
+  tone: muted
+- text: '*R*_2'
+  at: [235, 141]
+  size: 12
+  tone: muted
+- path: M105 90A35 35 0 1 1 105 160A35 35 0 1 1 105 90
+  tone: accent
+  width: 3
+  animate: draw
+  mover: true
+- path: M285 55A70 70 0 0 1 285 195
+  tone: accent
+  width: 3
+  animate: draw
+  mover: true
+- arrow: [[175, 82], [215, 74]]
+  tone: vel
+  label: '*v*'
+  label_at: [196, 66]
+- arrow: [[215, 178], [175, 170]]
+  tone: vel
+  label: '*v*'
+  label_at: [196, 194]
+- text: 'за одно время: малый — оборот,'
+  at: [200, 228]
+  size: 12
+  tone: accent
+  animate: appear
+- text: большой — пол-оборота
+  at: [200, 244]
+  size: 12
+  tone: accent
+  animate: appear
+- text: ремень один — скорость ободов одна
+  at: [200, 22]
+  size: 13

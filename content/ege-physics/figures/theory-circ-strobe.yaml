@@ -1,0 +1,76 @@
+# mech.kinematics.circular 4.1: uniform motion on a circle, T = 8 с, the point every second:
+# equal arcs in equal times (a mover at constant speed is exactly this motion)
+kind: diagram
+size: [400, 300]
+items:
+- circle: [200, 128]
+  r: 90
+  tone: muted
+  width: 1
+  dashed: true
+- dots: [[200, 128]]
+  r: 3
+  tone: muted
+- path: M290 128A90 90 0 1 0 110 128A90 90 0 1 0 290 128
+  tone: accent
+  width: 2.5
+  animate: draw
+  mover: true
+- dots: [[290.0, 128.0], [263.6, 64.4], [200.0, 38.0], [136.4, 64.4], [110.0, 128.0], [136.4, 191.6], [200.0, 218.0], [263.6, 191.6]]
+  r: 5
+  animate: appear
+- text: 0 с, 8 с
+  at: [300.0, 132.0]
+  size: 12
+  tone: muted
+  anchor: start
+  animate: appear
+- text: 1 с
+  at: [280.6, 51.4]
+  size: 12
+  tone: muted
+  anchor: start
+  animate: appear
+- text: 2 с
+  at: [200.0, 18.0]
+  size: 12
+  tone: muted
+  anchor: middle
+  animate: appear
+- text: 3 с
+  at: [119.4, 51.4]
+  size: 12
+  tone: muted
+  anchor: end
+  animate: appear
+- text: 4 с
+  at: [86.0, 132.0]
+  size: 12
+  tone: muted
+  anchor: end
+  animate: appear
+- text: 5 с
+  at: [119.4, 212.6]
+  size: 12
+  tone: muted
+  anchor: end
+  animate: appear
+- text: 6 с
+  at: [200.0, 246.0]
+  size: 12
+  tone: muted
+  anchor: middle
+  animate: appear
+- text: 7 с
+  at: [280.6, 212.6]
+  size: 12
+  tone: muted
+  anchor: start
+  animate: appear
+- text: за каждую секунду — одна и та же дуга
+  at: [200, 270]
+  size: 13
+- text: один оборот — период *T* = 8 с
+  at: [200, 290]
+  size: 13
+  tone: accent

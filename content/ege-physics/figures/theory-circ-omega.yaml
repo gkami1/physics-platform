@@ -1,0 +1,79 @@
+# mech.kinematics.circular 4.4: A at R/2 and B at R on one spoke turn by the same angle φ in
+# the same time; B's arc is twice as long. Both movers take the same time, so they stay on one
+# radius the whole way (same letters as the <pp-circle> model)
+kind: diagram
+size: [400, 270]
+items:
+- line: [[60, 240], [250.0, 240.0]]
+  tone: muted
+  width: 1.2
+  dashed: true
+- line: [[60, 240], [155.0, 75.5]]
+  width: 1.5
+  animate: appear
+- dots: [[60, 240]]
+  r: 3.5
+- path: M250.0 240.0A190 190 0 0 0 155.0 75.5
+  tone: accent
+  width: 2.5
+  animate: draw
+  mover: true
+- path: M155.0 240.0A95 95 0 0 0 107.5 157.7
+  tone: accent
+  width: 2.5
+  animate: draw
+  mover: true
+- dots: [[155.0, 240.0], [250.0, 240.0]]
+  r: 4
+  tone: muted
+- angle: [60, 240]
+  start: 0
+  end: 60
+  r: 34
+  label: '*φ*'
+- text: A
+  at: [155.0, 260.0]
+  size: 13
+- text: B
+  at: [250.0, 260.0]
+  size: 13
+- text: A
+  at: [93.5, 153.7]
+  size: 13
+  animate: appear
+- text: B
+  at: [141.0, 69.5]
+  size: 13
+  animate: appear
+- text: '*R*'
+  at: [195.0, 258]
+  size: 13
+  tone: muted
+- text: '*R*/2'
+  at: [117.5, 258]
+  size: 13
+  tone: muted
+- text: за одно время
+  at: [262, 40]
+  size: 12
+  anchor: start
+- text: A и B повернулись
+  at: [262, 56]
+  size: 12
+  anchor: start
+- text: на один угол *φ*
+  at: [262, 72]
+  size: 12
+  anchor: start
+- text: 'дуга B вдвое длиннее:'
+  at: [262, 110]
+  size: 12
+  tone: accent
+  anchor: start
+  animate: appear
+- text: '*v*_B = 2*v*_A'
+  at: [262, 128]
+  size: 13
+  tone: accent
+  anchor: start
+  animate: appear

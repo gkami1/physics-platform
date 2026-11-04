@@ -916,6 +916,84 @@ blockquote {
   background: var(--accent);
 }
 
+/* <pp-circle> (src/lib/sims/circle.ts): a turning disk, velocity and acceleration arrows.
+   Same colours as the circular-motion figures: velocity green, acceleration accent. */
+.crc-disk {
+  fill: var(--surface-2);
+  stroke: var(--border-strong);
+  stroke-width: 1.5;
+}
+
+.crc-spokes {
+  stroke: var(--border-strong);
+  stroke-width: 1;
+}
+
+.crc-track {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+}
+
+.crc-spoke {
+  stroke: var(--muted);
+  stroke-width: 1.5;
+}
+
+.crc-axis,
+.crc-point {
+  fill: var(--text);
+}
+
+.crc-label {
+  fill: var(--text);
+  font-size: 13px;
+  font-style: italic;
+}
+
+.crc-tail {
+  stroke: var(--muted);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+}
+
+.crc-arrows line {
+  stroke-width: 2;
+}
+
+.crc-v line {
+  stroke: var(--ok);
+}
+
+.crc-v path {
+  fill: var(--ok);
+}
+
+.crc-a line {
+  stroke: var(--accent);
+}
+
+.crc-a path {
+  fill: var(--accent);
+}
+
+.crc-key {
+  display: inline-block;
+  width: 1.2em;
+  height: 0.2em;
+  border-radius: 1px;
+  vertical-align: middle;
+}
+
+.crc-key-v {
+  background: var(--ok);
+}
+
+.crc-key-a {
+  background: var(--accent);
+}
+
 /* <pp-path> (src/lib/sims/path.ts): path vs displacement along a route. */
 .pth-tracks {
   margin: 0 0 0.5rem;

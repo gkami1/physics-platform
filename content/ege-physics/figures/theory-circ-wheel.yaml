@@ -1,0 +1,110 @@
+# mech.kinematics.circular 4.6: a wheel rolling without slipping = turning about the axis +
+# moving with the axis; velocities add: top 2v, centre v, bottom 0, sides v√2 slanted
+kind: diagram
+size: [400, 222]
+items:
+- circle: [60, 92]
+  r: 38
+  width: 1.8
+- dots: [[60, 92]]
+  r: 3
+- circle: [185, 92]
+  r: 38
+  width: 1.8
+- dots: [[185, 92]]
+  r: 3
+- circle: [322, 92]
+  r: 38
+  width: 1.8
+- dots: [[322, 92]]
+  r: 3
+- hatch: [[278, 130], [392, 130]]
+- text: +
+  at: [122, 98]
+  size: 22
+  tone: muted
+- text: '='
+  at: [266, 98]
+  size: 22
+  tone: muted
+- dots: [[60, 54]]
+  r: 3.5
+- arrow: [[60, 54], [84, 54]]
+  tone: vel
+- dots: [[98, 92]]
+  r: 3.5
+- arrow: [[98, 92], [98, 116]]
+  tone: vel
+- dots: [[60, 130]]
+  r: 3.5
+- arrow: [[60, 130], [36, 130]]
+  tone: vel
+- dots: [[22, 92]]
+  r: 3.5
+- arrow: [[22, 92], [22, 68]]
+  tone: vel
+- dots: [[185, 54]]
+  r: 3.5
+- arrow: [[185, 54], [209, 54]]
+  tone: vel
+- dots: [[223, 92]]
+  r: 3.5
+- arrow: [[223, 92], [247, 92]]
+  tone: vel
+- dots: [[185, 130]]
+  r: 3.5
+- arrow: [[185, 130], [209, 130]]
+  tone: vel
+- dots: [[147, 92]]
+  r: 3.5
+- arrow: [[147, 92], [171, 92]]
+  tone: vel
+- dots: [[185, 92]]
+  r: 3.5
+- arrow: [[185, 92], [209, 92]]
+  tone: vel
+- dots: [[322, 54], [360, 92], [322, 130], [284, 92]]
+  r: 3.5
+- arrow: [[322, 54], [370, 54]]
+  tone: vel
+  label: 2*v*
+  label_at: [386, 59]
+  animate: appear
+- arrow: [[322, 92], [346, 92]]
+  tone: vel
+  label: '*v*'
+  label_at: [340, 84]
+  animate: appear
+- arrow: [[360, 92], [384, 116]]
+  tone: vel
+  animate: appear
+- arrow: [[284, 92], [308, 68]]
+  tone: vel
+  animate: appear
+- text: '0'
+  at: [310, 124]
+  size: 13
+  tone: vel
+  animate: appear
+- text: вращение
+  at: [60, 168]
+  size: 12
+- text: вокруг оси
+  at: [60, 184]
+  size: 12
+- text: движение
+  at: [185, 168]
+  size: 12
+- text: вместе с осью
+  at: [185, 184]
+  size: 12
+- text: колесо
+  at: [334, 168]
+  size: 12
+- text: катится
+  at: [334, 184]
+  size: 12
+- text: все стрелки — по *v*
+  at: [200, 212]
+  size: 12
+  tone: muted
