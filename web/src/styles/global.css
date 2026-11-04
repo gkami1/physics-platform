@@ -872,7 +872,7 @@ blockquote {
 
 /* <pp-drop> (src/lib/sims/drop.ts): a dropped ball and a thrown one fall side by side. */
 .drp-dropped {
-  fill: var(--muted);
+  fill: var(--ok);
 }
 
 .drp-thrown {
@@ -886,7 +886,7 @@ blockquote {
 }
 
 .drp-mark-dropped {
-  stroke: var(--muted);
+  stroke: var(--ok);
 }
 
 .drp-mark-thrown {
@@ -909,7 +909,7 @@ blockquote {
 }
 
 .drp-key-dropped {
-  background: var(--muted);
+  background: var(--ok);
 }
 
 .drp-key-thrown {
