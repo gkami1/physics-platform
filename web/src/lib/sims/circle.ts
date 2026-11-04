@@ -10,15 +10,15 @@
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
-const T_RANGE = { min: 1, max: 4, step: 0.5 }; // period, с
+const T_RANGE = { min: 1.5, max: 4, step: 0.5 }; // period, с
 const R_RANGE = { min: 0.25, max: 1.75, step: 0.25 }; // distance of A from the axis, м
 const RIM = 2; // disk radius, м (point B)
 
 const VIEW = { w: 400, h: 320 };
 const C = { x: 200, y: 160 }; // axis on screen
 const PX = 50; // px per м
-const V_SCALE = 6; // px per м/с
-const A_SCALE = 1.2; // px per м/с²: the largest arrow (T = 1 с, rim) still fits inside the disk
+const V_SCALE = 10; // px per м/с
+const A_SCALE = 2.5; // px per м/с²: the largest arrow (T = 1,5 с, rim) still fits inside the disk
 const START = Math.PI / 6; // the spoke's angle when the page opens
 
 const ru = (n: number, digits = 2) =>
@@ -283,8 +283,10 @@ class CircleSim extends HTMLElement {
     if (this.flight) {
       this.flight = null;
     } else {
-      // Reduced motion: no flight to watch, so show where A is a second later.
-      this.flight = { phi: this.phi, r: this.r, period: this.period, t: this.still ? 1 : 0 };
+      const f = { phi: this.phi, r: this.r, period: this.period, t: 0 };
+      // Reduced motion: no flight to watch, so show A most of the way to the edge at once.
+      if (this.still) f.t = 0.8 * this.exitTime(f);
+      this.flight = f;
     }
     this.draw();
   }
@@ -311,28 +313,29 @@ class CircleSim extends HTMLElement {
       `a = ${ru(accel(this.period, RIM), 1)} м/с²`;
     if (f) {
       const from = position(f.r, f.phi);
-      const p = released(f.period, f.r, f.phi, f.t);
-      const away = Math.abs(sx(p) - C.x) > VIEW.w || Math.abs(sy(p) - C.y) > VIEW.h;
-      // Past the edge of the picture: stop drawing it further, keep the line to the edge.
-      const shown = away ? released(f.period, f.r, f.phi, this.exitTime(f)) : p;
+      // Past the edge of the picture the point is gone; the dashed line stays up to the edge.
+      const away = f.t >= this.exitTime(f);
+      const p = released(f.period, f.r, f.phi, Math.min(f.t, this.exitTime(f)));
       this.tail.setAttribute('x1', sx(from).toFixed(1));
       this.tail.setAttribute('y1', sy(from).toFixed(1));
-      this.tail.setAttribute('x2', sx(shown).toFixed(1));
-      this.tail.setAttribute('y2', sy(shown).toFixed(1));
+      this.tail.setAttribute('x2', sx(p).toFixed(1));
+      this.tail.setAttribute('y2', sy(p).toFixed(1));
       this.tail.style.display = '';
-      this.place(this.pointA, this.labelA, shown, Math.atan2(shown.y, shown.x));
+      this.show(!away);
       if (!away) {
+        this.place(this.pointA, this.labelA, p, Math.atan2(p.y, p.x));
         this.arrows.append(
           arrow(sx(p), sy(p), velocity(f.period, f.r, f.phi), V_SCALE, 'crc-v'),
         );
       }
       this.release.textContent = 'Вернуть точку A';
       this.readout.innerHTML =
-        `${head}<br>A отпустили: летит по прямой, по касательной, со скоростью ` +
-        `${ru(speed(f.period, f.r))} м/с. Ускорения больше нет.<br>${lineB}`;
+        `${head}<br>A отпустили: ${away ? 'улетела' : 'летит'} по прямой, по касательной, ` +
+        `со скоростью ${ru(speed(f.period, f.r))} м/с. Ускорения больше нет.<br>${lineB}`;
     } else {
       const a = position(this.r, this.phi);
       this.tail.style.display = 'none';
+      this.show(true);
       this.place(this.pointA, this.labelA, a, this.phi);
       this.arrows.append(
         arrow(sx(a), sy(a), acceleration(this.period, this.r, this.phi), A_SCALE, 'crc-a'),
@@ -343,6 +346,11 @@ class CircleSim extends HTMLElement {
         `${head}<br>A (${ru(this.r)} м от оси): v = ${ru(speed(this.period, this.r))} м/с, ` +
         `a = ${ru(accel(this.period, this.r), 1)} м/с²<br>${lineB}`;
     }
+  }
+
+  private show(visible: boolean): void {
+    this.pointA.style.display = visible ? '' : 'none';
+    this.labelA.style.display = visible ? '' : 'none';
   }
 
   /** When the released point leaves the picture (it moves in a straight line, so solve once). */
