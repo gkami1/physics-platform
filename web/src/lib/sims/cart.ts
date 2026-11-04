@@ -12,13 +12,14 @@ const SVG_NS = 'http://www.w3.org/2000/svg';
 
 const TRACK_M = 40; // track length, м
 const T_MAX = 8; // longest run, с
+const LEFT_STOP_M = 8; // a cart coming back stops here: room for its arrows
 const F = { min: -6, max: 6, step: 1 }; // Н, along the track (+ to the right)
 const M = { min: 1, max: 4, step: 0.5 }; // кг
 const V0 = { min: 0, max: 4, step: 1 }; // м/с
-const L = { w: 400, h: 172, left: 30, right: 30, aY: 30, vY: 52, trackY: 112, marksY: 136 };
+const L = { w: 400, h: 128, left: 30, right: 30, aY: 22, vY: 42, trackY: 84, marksY: 106 };
 const F_PX = 8; // px per Н
 const V_PX = 8; // px per м/с (capped)
-const A_PX = 8; // px per м/с²
+const A_PX = 12; // px per м/с²
 const ARROW_MAX = 64;
 const xTrack = (x: number) => L.left + (x / TRACK_M) * (L.w - L.left - L.right);
 
@@ -40,8 +41,8 @@ function el<K extends keyof SVGElementTagNameMap>(
   return node;
 }
 
-/** Horizontal arrow from (x, y) by dx px; empty if too short to see. */
-function hArrow(x: number, y: number, dx: number, cls: string): SVGGElement {
+/** Horizontal arrow from (x, y) by dx px, its letter past the tip; empty if too short to see. */
+function hArrow(x: number, y: number, dx: number, cls: string, letter: string): SVGGElement {
   const g = el('g', { class: cls });
   const len = Math.abs(dx);
   if (len < 3) return g;
@@ -53,6 +54,11 @@ function hArrow(x: number, y: number, dx: number, cls: string): SVGGElement {
     el('path', {
       d: `M${x2.toFixed(1)} ${y}L${(x2 - s * head).toFixed(1)} ${y - 4}L${(x2 - s * head).toFixed(1)} ${y + 4}Z`,
     }),
+    el(
+      'text',
+      { x: Math.min(L.w - 6, Math.max(6, x2 + s * 9)).toFixed(1), y: y + 4, 'text-anchor': 'middle' },
+      letter,
+    ),
   );
   return g;
 }
@@ -75,13 +81,14 @@ export function startX(f: number): number {
   return f < 0 ? TRACK_M / 2 : 0;
 }
 
-/** When the run ends: T_MAX, or earlier if the cart leaves the track at either end. Zero when
- * the cart stands and no force acts: there is nothing to watch. */
+/** When the run ends: T_MAX, or earlier if the cart reaches the right end of the track or,
+ * coming back, LEFT_STOP_M (so that arrows pointing left still fit). Zero when the cart stands
+ * and no force acts: there is nothing to watch. */
 export function runTime(x0: number, v0: number, a: number): number {
   if (v0 === 0 && a === 0) return 0;
   let end = T_MAX;
-  // Roots of x0 + v0·t + a·t²/2 = X for X = TRACK_M (right end) and X = 0 (left end).
-  for (const target of [TRACK_M, 0]) {
+  // Roots of x0 + v0·t + a·t²/2 = X for X = TRACK_M and, if the cart starts right of it, LEFT_STOP_M.
+  for (const target of x0 > LEFT_STOP_M ? [TRACK_M, LEFT_STOP_M] : [TRACK_M]) {
     const c = x0 - target;
     let t = Infinity;
     if (a === 0) {
@@ -161,7 +168,7 @@ class CartSim extends HTMLElement {
         track.append(el('text', { x: xTrack(s), y: L.trackY + 16, 'text-anchor': 'middle' }, `${s}`));
       }
     }
-    track.append(el('text', { x: xTrack(TRACK_M), y: L.trackY - 6, 'text-anchor': 'end' }, 'x, м'));
+    track.append(el('text', { x: 4, y: L.trackY + 16 }, 'x, м'));
     track.append(el('text', { x: 4, y: L.marksY + 13 }, 't, с'));
 
     this.previous = el('g', { class: 'crt-previous' });
@@ -338,9 +345,9 @@ class CartSim extends HTMLElement {
     const half = (26 + 6 * this.m) / 2;
     const fx = this.f >= 0 ? cx + half : cx - half; // a pull on the leading side
     this.arrows.replaceChildren(
-      hArrow(fx, L.trackY - 15, cap(this.f * F_PX), 'crt-f'),
-      hArrow(cx, L.vY, cap(v * V_PX), 'crt-v'),
-      hArrow(cx, L.aY, cap(a * A_PX), 'crt-a'),
+      hArrow(fx, L.trackY - 15, cap(this.f * F_PX), 'crt-f', 'F'),
+      hArrow(cx, L.vY, cap(v * V_PX), 'crt-v', 'v'),
+      hArrow(cx, L.aY, cap(a * A_PX), 'crt-a', 'a'),
     );
   }
 
