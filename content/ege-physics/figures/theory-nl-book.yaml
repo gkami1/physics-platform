@@ -1,0 +1,20 @@
+# mech.dynamics.newton 5.5: a book on a table. Left: the two forces on the book (N and mg)
+# balance (first law). Right, book lifted for clarity: N acts on the book and P on the table —
+# a third-law pair on different bodies
+kind: diagram
+size: [400, 260]
+items:
+- {text: силы на книгу, at: [100, 22], size: 13}
+- {hatch: [[30, 170], [170, 170]]}
+- {rect: [70, 150, 60, 20], fill: surface}
+- {arrow: [[100, 160], [100, 95]], tone: force, label: '*N*', label_at: [114, 92]}
+- {arrow: [[100, 160], [100, 225]], tone: force, label: '*m**g*', label_at: [124, 222]}
+- {text: уравновешены, at: [100, 250], size: 12, tone: muted}
+- {line: [[200, 40], [200, 240]], tone: muted, width: 1, dashed: true}
+- {text: пара по 3-му закону, at: [305, 22], size: 13}
+- {hatch: [[235, 185], [375, 185]]}
+- {rect: [275, 135, 60, 20], fill: surface}
+- {arrow: [[305, 155], [305, 95]], tone: force, label: '*N*', label_at: [319, 92]}
+- {arrow: [[305, 185], [305, 240]], tone: force, label: '*P*', label_at: [319, 238], animate: appear}
+- {text: на книгу, at: [345, 120], size: 12, anchor: start}
+- {text: на стол, at: [345, 220], size: 12, anchor: start, animate: appear}

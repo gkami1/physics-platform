@@ -1,0 +1,25 @@
+# mech.dynamics.newton 5.1: the same puck pushed at 4 м/с on asphalt (a = 4 м/с²), snow
+# (1 м/с²) and ice (0,1 м/с²); positions every 0,5 с, 20 px/м: the less braking, the longer it slides
+kind: diagram
+size: [400, 220]
+items:
+- {text: асфальт, at: [8, 54], size: 12, anchor: start}
+- {text: снег, at: [8, 114], size: 12, anchor: start}
+- {text: лёд, at: [8, 174], size: 12, anchor: start}
+- {line: [[64, 60], [392, 60]], tone: muted, width: 1}
+- {line: [[64, 120], [392, 120]], tone: muted, width: 1}
+- {line: [[64, 180], [392, 180]], tone: muted, width: 1}
+- {arrow: [[70, 34], [110, 34]], tone: vel, label: '*v*_0', label_at: [120, 38]}
+- dots: [[70, 52], [100, 52], [110, 52]]
+  r: 4.5
+  tone: accent
+- dots: [[70, 112], [107.5, 112], [140, 112], [167.5, 112], [190, 112], [207.5, 112], [220, 112], [227.5, 112], [230, 112]]
+  r: 4.5
+  tone: accent
+- dots: [[70, 172], [109.8, 172], [149, 172], [187.8, 172], [226, 172], [263.8, 172], [301, 172], [337.8, 172], [374, 172]]
+  r: 4.5
+  tone: accent
+- {text: стоп, at: [128, 56], size: 12, tone: force, anchor: start, animate: appear}
+- {text: стоп, at: [248, 116], size: 12, tone: force, anchor: start, animate: appear}
+- {text: едет дальше…, at: [392, 198], size: 12, tone: vel, anchor: end, animate: appear}
+- {text: 'одинаковый толчок; отметки через 0,5 с', at: [200, 214], size: 12, tone: muted}

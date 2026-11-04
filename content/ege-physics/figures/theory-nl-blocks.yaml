@@ -1,0 +1,17 @@
+# mech.dynamics.newton 5.6: two blocks on a smooth table joined by a thread; F pulls the front
+# block. The thread pulls the back block forward and the front block back with the same T
+kind: diagram
+size: [400, 220]
+items:
+- {hatch: [[20, 170], [380, 170]]}
+- {rect: [50, 120, 90, 50], fill: surface}
+- {text: '*m*_2', at: [95, 150], size: 14}
+- {rect: [250, 135, 40, 35], fill: surface}
+- {text: '*m*_1', at: [270, 157], size: 14}
+- {line: [[140, 152], [250, 152]], width: 1.2}
+- {arrow: [[140, 140], [184, 140]], tone: force, label: '*T*', label_at: [180, 128]}
+- {arrow: [[250, 140], [206, 140]], tone: force, label: '*T*', label_at: [214, 128]}
+- {arrow: [[290, 152], [370, 152]], tone: force, label: '*F*', label_at: [374, 140]}
+- {arrow: [[160, 80], [240, 80]], tone: accent, label: '*a*', label_at: [254, 84], animate: appear}
+- {text: одно ускорение на двоих, at: [200, 56], size: 12, tone: accent, animate: appear}
+- {text: нить тянет оба бруска — в разные стороны, at: [200, 204], size: 12, tone: muted}

@@ -1,0 +1,13 @@
+# mech.dynamics.newton 5.3: a car-like block moving at constant speed: thrust balances
+# resistance, the support force balances gravity, so the net force is zero
+kind: diagram
+size: [400, 250]
+items:
+- {hatch: [[30, 170], [370, 170]]}
+- {rect: [155, 125, 90, 45], fill: surface}
+- {arrow: [[236, 100], [286, 100]], tone: vel, label: '*v* = const', label_at: [328, 104]}
+- {arrow: [[200, 147], [200, 82]], tone: force, label: '*N*', label_at: [214, 74]}
+- {arrow: [[200, 147], [200, 212]], tone: force, label: '*m**g*', label_at: [222, 210]}
+- {arrow: [[245, 147], [315, 147]], tone: force, label: '*F*_тяги', label_at: [336, 138]}
+- {arrow: [[155, 147], [85, 147]], tone: force, label: '*F*_сопр', label_at: [64, 138]}
+- {text: 'стрелки попарно равны: Σ*F* = 0', at: [200, 240], size: 14, animate: appear}

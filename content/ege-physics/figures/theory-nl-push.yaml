@@ -1,0 +1,30 @@
+# mech.dynamics.newton 5.4: the same force 2 Н on an empty cart (1 кг, a = 2 м/с², s = t²) and a
+# loaded one (2 кг, a = 1 м/с², s = t²/2), from rest; positions every second, 18 px/м
+kind: diagram
+size: [400, 220]
+items:
+- {text: пустая, at: [60, 46], size: 12, anchor: start}
+- {rect: [36, 70, 24, 14], fill: surface, radius: 2}
+- {arrow: [[60, 77], [86, 77]], tone: force, label: '*F*', label_at: [96, 72]}
+- {line: [[30, 90], [392, 90]], tone: muted, width: 1}
+- dots: [[60, 90], [78, 90], [132, 90], [222, 90], [348, 90]]
+  r: 4.5
+  tone: accent
+- {text: 1 с, at: [78, 110], size: 11, tone: muted}
+- {text: 2 с, at: [132, 110], size: 11, tone: muted}
+- {text: 3 с, at: [222, 110], size: 11, tone: muted}
+- {text: 4 с, at: [348, 110], size: 11, tone: muted}
+- {text: с грузом — масса вдвое больше, at: [60, 136], size: 12, anchor: start}
+- {rect: [36, 156, 24, 14], fill: surface, radius: 2}
+- {rect: [40, 146, 16, 10], fill: solid}
+- {arrow: [[60, 163], [86, 163]], tone: force, label: '*F*', label_at: [96, 158]}
+- {line: [[30, 176], [392, 176]], tone: muted, width: 1}
+- dots: [[60, 176], [69, 176], [96, 176], [141, 176], [204, 176]]
+  r: 4.5
+  tone: accent
+- {text: 1 с, at: [72, 196], size: 11, tone: muted}
+- {text: 2 с, at: [96, 196], size: 11, tone: muted}
+- {text: 3 с, at: [141, 196], size: 11, tone: muted}
+- {text: 4 с, at: [204, 196], size: 11, tone: muted}
+- {text: ускорение вдвое меньше, at: [300, 172], size: 12, tone: accent, animate: appear}
+- {text: 'одна и та же сила, отметки через 1 с', at: [200, 18], size: 12, tone: muted}
