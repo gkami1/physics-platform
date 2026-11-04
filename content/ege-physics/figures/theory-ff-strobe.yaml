@@ -1,0 +1,32 @@
+# mech.kinematics.free-fall 3.2: a body falling from rest, position every second (2.5 px/м)
+kind: diagram
+size: [400, 270]
+items:
+- line: [[200, 30], [200, 230]]
+  tone: muted
+  width: 1
+  dashed: true
+- dots: [[200, 30], [200, 42.5], [200, 80], [200, 142.5], [200, 230]]
+  r: 5
+  tone: accent
+- {text: 0 с, at: [184, 30], size: 11, tone: muted, anchor: end}
+- {text: 1 с, at: [184, 47], size: 11, tone: muted, anchor: end}
+- {text: 2 с, at: [184, 84], size: 11, tone: muted, anchor: end}
+- {text: 3 с, at: [184, 146.5], size: 11, tone: muted, anchor: end}
+- {text: 4 с, at: [184, 234], size: 11, tone: muted, anchor: end}
+- {text: '0', at: [216, 30], size: 11, anchor: start}
+- {text: 5 м, at: [216, 47], size: 11, anchor: start}
+- {text: 20 м, at: [216, 84], size: 11, anchor: start}
+- {text: 45 м, at: [216, 146.5], size: 11, anchor: start}
+- {text: 80 м, at: [216, 234], size: 11, anchor: start}
+- {text: от начала, at: [216, 14], size: 11, tone: muted, anchor: start}
+- {text: за эту секунду, at: [300, 14], size: 11, tone: muted, anchor: start}
+- {line: [[290, 32], [290, 41]], tone: vel, width: 1.5, animate: appear}
+- {line: [[290, 45], [290, 78]], tone: vel, width: 1.5, animate: appear}
+- {line: [[290, 82], [290, 140]], tone: vel, width: 1.5, animate: appear}
+- {line: [[290, 145], [290, 228]], tone: vel, width: 1.5, animate: appear}
+- {text: 5 м, at: [300, 40], size: 12, tone: vel, anchor: start, animate: appear}
+- {text: 15 м, at: [300, 65], size: 12, tone: vel, anchor: start, animate: appear}
+- {text: 25 м, at: [300, 115], size: 12, tone: vel, anchor: start, animate: appear}
+- {text: 35 м, at: [300, 190], size: 12, tone: vel, anchor: start, animate: appear}
+- {text: 'за 1-ю, 2-ю, 3-ю, 4-ю секунды — как 1 : 3 : 5 : 7', at: [200, 262], size: 12}

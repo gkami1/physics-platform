@@ -1,0 +1,33 @@
+# mech.kinematics.free-fall 3.3: thrown up at 20 м/с, every second; up and down drawn side by side
+# (8 px/м, velocity 2 px per м/с); acceleration g points down the whole time
+kind: diagram
+size: [400, 280]
+items:
+- line: [[90, 228], [310, 228]]
+  tone: muted
+  width: 1
+  dashed: true
+- {text: уровень броска, at: [316, 232], size: 11, tone: muted, anchor: start}
+- {text: вверх, at: [140, 274], size: 12, tone: muted}
+- {text: вниз, at: [260, 274], size: 12, tone: muted}
+- dots: [[140, 220], [140, 100], [200, 60], [260, 100], [260, 220]]
+  r: 5
+- {arrow: [[140, 212], [140, 172]], tone: vel}
+- {arrow: [[140, 92], [140, 72]], tone: vel}
+- {arrow: [[260, 108], [260, 128]], tone: vel}
+- {arrow: [[260, 228], [260, 262]], tone: vel}
+- {text: 20 м/с, at: [130, 196], size: 11, tone: vel, anchor: end}
+- {text: 10 м/с, at: [130, 88], size: 11, tone: vel, anchor: end}
+- {text: 10 м/с, at: [270, 124], size: 11, tone: vel, anchor: start}
+- {text: 20 м/с, at: [270, 252], size: 11, tone: vel, anchor: start}
+- {text: 0 с, at: [130, 224], size: 11, tone: muted, anchor: end}
+- {text: 1 с, at: [130, 104], size: 11, tone: muted, anchor: end}
+- {text: 2 с, at: [214, 64], size: 11, tone: muted, anchor: start}
+- {text: 3 с, at: [270, 104], size: 11, tone: muted, anchor: start}
+- {text: 4 с, at: [270, 224], size: 11, tone: muted, anchor: start}
+- {arrow: [[156, 210], [156, 234]], tone: accent, label: '*g*', label_at: [168, 230], animate: appear}
+- {arrow: [[156, 92], [156, 116]], tone: accent, label: '*g*', label_at: [168, 112], animate: appear}
+- {arrow: [[200, 68], [200, 92]], tone: accent, label: '*g*', label_at: [212, 88], animate: appear}
+- {arrow: [[244, 92], [244, 116]], tone: accent, label: '*g*', label_at: [232, 112], animate: appear}
+- {arrow: [[244, 204], [244, 228]], tone: accent, label: '*g*', label_at: [232, 224], animate: appear}
+- {text: 'в верхней точке *v* = 0, а ускорение — *g*', at: [200, 36], size: 12}

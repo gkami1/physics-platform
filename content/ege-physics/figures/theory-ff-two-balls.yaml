@@ -1,0 +1,28 @@
+# mech.kinematics.free-fall 3.4: from a 1,25 м table, one ball dropped, one pushed at 2 м/с;
+# positions every 0,1 с (160 px/м): always at the same height, both land at 0,5 с
+kind: diagram
+size: [400, 250]
+items:
+- {rect: [20, 30, 80, 8], fill: surface}
+- line: [[34, 38], [34, 234]]
+- line: [[86, 38], [86, 234]]
+- {hatch: [[14, 234], [386, 234]]}
+- path: M106.0 30.0L114.0 30.5L122.0 32.0L130.0 34.5L138.0 38.0L146.0 42.5L154.0 48.0L162.0 54.5L170.0 62.0L178.0 70.5L186.0 80.0L194.0 90.5L202.0 102.0L210.0 114.5L218.0 128.0L226.0 142.5L234.0 158.0L242.0 174.5L250.0 192.0L258.0 210.5L266.0 230.0
+  tone: muted
+  dashed: true
+- {line: [[106, 38], [138, 38]], tone: muted, width: 1, dashed: true, animate: appear}
+- {line: [[106, 62], [170, 62]], tone: muted, width: 1, dashed: true, animate: appear}
+- {line: [[106, 102], [202, 102]], tone: muted, width: 1, dashed: true, animate: appear}
+- {line: [[106, 158], [234, 158]], tone: muted, width: 1, dashed: true, animate: appear}
+- {line: [[106, 230], [266, 230]], tone: muted, width: 1, dashed: true, animate: appear}
+- dots: [[106, 30], [106, 38], [106, 62], [106, 102], [106, 158], [106, 230]]
+  r: 4
+  tone: vel
+- dots: [[106, 30], [138, 38], [170, 62], [202, 102], [234, 158], [266, 230]]
+  r: 4
+  tone: accent
+- {arrow: [[112, 20], [150, 20]], tone: accent, label: '*v*_0', label_at: [162, 24]}
+- {text: отпустили, at: [114, 200], size: 12, tone: vel, anchor: start}
+- {text: толкнули, at: [250, 140], size: 12, tone: accent, anchor: start}
+- {text: на одной высоте, at: [290, 66], size: 12, tone: muted, anchor: start, animate: appear}
+- {text: в одни моменты, at: [290, 82], size: 12, tone: muted, anchor: start, animate: appear}
