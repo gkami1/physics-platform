@@ -193,12 +193,16 @@ def render_graph(spec: GraphSpec) -> str:
         f'height="{H}" class="fig-svg" font-size="13" fill="none" stroke="currentColor">'
     ]
 
+    # The value-zero line: the axes stay at (x.min, y.min), but with negative values a line
+    # at y = 0 is where vₓ(t) changes sign, and shaded areas (paths) are measured from it.
+    zero = _f(sy(min(max(0.0, spec.y.min), spec.y.max)))
+
     # shaded areas go under everything else
     for s in spec.series:
         if s.fill:
             pts = [(sx(px), sy(py)) for px, py in s.points]
-            d = f"M{_f(pts[0][0])} {y0}" + "".join(f"L{_pt(p)}" for p in pts)
-            d += f"L{_f(pts[-1][0])} {y0}Z"
+            d = f"M{_f(pts[0][0])} {zero}" + "".join(f"L{_pt(p)}" for p in pts)
+            d += f"L{_f(pts[-1][0])} {zero}Z"
             out.append(_tone(s.tone, f'<path {_fill_attrs("accent")} stroke="none" d="{d}"/>'))
 
     # grid
@@ -213,6 +217,9 @@ def render_graph(spec: GraphSpec) -> str:
         f'<path class="fig-axis" fill="currentColor" stroke="none" '
         f'd="M{W - 4} {y0}l-9 -4v8zM{x0} 4l-4 9h8z"/>'
     )
+
+    if spec.y.min < 0 < spec.y.max:
+        out.append(f'<path class="fig-axis" stroke-width="1.5" d="M{x0} {zero}H{x0 + pw}"/>')
 
     # tick labels
     labels: list[str] = []

@@ -74,6 +74,24 @@ def test_graph_is_valid_svg_with_ticks_and_data() -> None:
     assert "#" not in svg
 
 
+def _axis_paths(svg: str) -> list[str]:
+    root = ET.fromstring(svg)  # noqa: S314 — our own generator output
+    return [p.get("d", "") for p in root.iter(f"{SVG}path") if p.get("class") == "fig-axis"]
+
+
+def test_negative_values_fill_to_the_zero_line() -> None:
+    # y from −4 to 8: value 0 is at screen y = 26 + 194 · 8/12 ≈ 155.3
+    y = {"var": "v", "unit": "м/с", "min": -4, "max": 8, "step": 2}
+    svg = render_graph(graph(y=y, series=[{"points": [[0, 6], [5, -4]], "fill": True}]))
+    zero = "155.3"
+    assert any(d == f"M52 {zero}H372" for d in _axis_paths(svg))
+    (shade,) = re.findall(r'stroke="none" d="(M[^"]*Z)"', svg)
+    assert shade.startswith(f"M52 {zero}")
+    assert shade.endswith(f"{zero}Z")
+    # all values non-negative: no extra line, the area sits on the t axis
+    assert len(_axis_paths(render_graph(graph()))) == 2  # the axes and their arrowheads
+
+
 def test_inline_replaces_only_own_line_svg_images(tmp_path: Path) -> None:
     (tmp_path / "a.svg").write_text('<?xml version="1.0"?>\n<svg>\n  <g/>\n</svg>\n', "utf-8")
     md = (
