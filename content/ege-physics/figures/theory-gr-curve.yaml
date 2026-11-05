@@ -1,0 +1,19 @@
+# mech.dynamics.gravity 7.4: in 1 s a body at 8 km/s flies 8 km on and falls 5 m; over
+# 8 km the ground curves down by 8²/(2·6400) km = 5 m too, so the body stays at the same height.
+# Not to scale: the curvature is exaggerated
+kind: diagram
+size: [420, 152]
+items:
+- {path: 'M20 70.1A500 500 0 0 1 380 132.9', width: 2}
+- {line: [[120, 50], [360, 50]], width: 1.2, dashed: true, tone: muted}
+- {text: 'без тяготения — по прямой', at: [360, 40], size: 12, anchor: end, tone: muted}
+- {path: 'M120 50A510 510 0 0 1 330 95.2', width: 2.5, tone: accent, animate: draw}
+- {dots: [[120, 50]], r: 5}
+- {arrow: [[120, 50], [180, 50]], tone: vel, label: '*v*', label_at: [186, 42]}
+- {dots: [[330, 95.2]], r: 5, animate: appear}
+- {line: [[330, 50], [330, 88.2]], width: 1.5, tone: accent, animate: appear}
+- {text: '5 м', at: [338, 76.6], size: 13, anchor: start, tone: accent, animate: appear}
+- {text: 'за 1 с: 8 км вперёд', at: [225, 22], size: 12, tone: vel}
+- {text: 'и 5 м вниз', at: [338, 92.6], size: 12, anchor: start, tone: accent, animate: appear}
+- {text: 'поверхность Земли', at: [80, 85.6], size: 12, tone: muted}
+- {text: 'не в масштабе', at: [415, 146], size: 11, anchor: end, tone: muted}

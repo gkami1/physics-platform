@@ -1,0 +1,25 @@
+# mech.dynamics.gravity 7.2: bodies at five places on the globe; mg (42 px) always points to
+# the centre, so «down» is different in different places
+kind: diagram
+size: [400, 245]
+items:
+- {circle: [200, 140], r: 90, fill: surface}
+- {text: Земля, at: [200, 180], size: 13}
+- {dots: [[200, 140]], r: 3}
+- {line: [[200, 92], [200, 140]], width: 1, dashed: true, tone: muted}
+- {dots: [[200, 44]], r: 6}
+- {arrow: [[200, 44], [200, 86]], tone: force, label: '*m**g*', label_at: [222, 70]}
+- {line: [[243.5, 119.7], [200, 140]], width: 1, dashed: true, tone: muted}
+- {dots: [[287, 99.4]], r: 6}
+- {arrow: [[287, 99.4], [248.9, 117.2]], tone: force}
+- {line: [[156.5, 119.7], [200, 140]], width: 1, dashed: true, tone: muted}
+- {dots: [[113, 99.4]], r: 6}
+- {arrow: [[113, 99.4], [151.1, 117.2]], tone: force}
+- {line: [[169.1, 176.8], [200, 140]], width: 1, dashed: true, tone: muted}
+- {dots: [[138.3, 213.5]], r: 6}
+- {arrow: [[138.3, 213.5], [165.3, 181.4]], tone: force}
+- {line: [[236.8, 170.9], [200, 140]], width: 1, dashed: true, tone: muted}
+- {dots: [[273.5, 201.7]], r: 6}
+- {arrow: [[273.5, 201.7], [241.4, 174.7]], tone: force}
+- {text: 'сила тяжести везде направлена', at: [394, 22], size: 12, anchor: end}
+- {text: 'к центру Земли', at: [394, 38], size: 12, anchor: end}

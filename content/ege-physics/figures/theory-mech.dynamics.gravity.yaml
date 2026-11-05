@@ -10,7 +10,7 @@ items:
   r: 55
   fill: surface
 - text: Земля
-  at: [150, 135]
+  at: [150, 160]
   size: 13
 - line: [[150, 130], [117.0, 86.0]]
   width: 1.2
