@@ -1,0 +1,28 @@
+# mech.conservation.momentum 10.1: momentum is a vector. A 3 кг cart at 4 м/с to the right
+# and a 1 кг cart at 5 м/с to the left: the light cart has the longer velocity arrow (green,
+# 12 px per м/с) but the shorter momentum arrow (accent, 6 px per кг·м/с); total 12 − 5 = 7
+kind: diagram
+size: [400, 214]
+items:
+- {line: [[20, 112], [380, 112]], width: 1.5}
+- {rect: [80, 82, 60, 20], fill: 'surface', radius: 3}
+- {circle: [91, 107], r: 5, fill: 'solid'}
+- {circle: [129, 107], r: 5, fill: 'solid'}
+- {text: '3 кг', at: [110, 96], size: 11}
+- {rect: [268, 82, 44, 20], fill: 'surface', radius: 3}
+- {circle: [279, 107], r: 5, fill: 'solid'}
+- {circle: [301, 107], r: 5, fill: 'solid'}
+- {text: '1 кг', at: [290, 96], size: 11}
+- {arrow: [[110, 68], [158, 68]], tone: 'vel'}
+- {text: '4 м/с', at: [134, 60], size: 11, tone: 'vel'}
+- {arrow: [[290, 68], [230, 68]], tone: 'vel'}
+- {text: '5 м/с', at: [260, 60], size: 11, tone: 'vel'}
+- {arrow: [[110, 40], [182, 40]], tone: 'accent', width: 2.5}
+- {text: '*p*_1 = 12', at: [146, 28], size: 12, tone: 'accent'}
+- {arrow: [[290, 40], [260, 40]], tone: 'accent', width: 2.5}
+- {text: '*p*_2 = 5', at: [275, 28], size: 12, tone: 'accent'}
+- {arrow: [[30, 136], [366, 136]], width: 1.5}
+- {text: '*x*', at: [380, 141], size: 14}
+- {text: 'проекции на ось: *p*_{1x} = +12, *p*_{2x} = −5 кг·м/с', at: [200, 166], size: 12, tone: 'muted'}
+- {arrow: [[179, 180], [221, 180]], tone: 'accent', width: 3}
+- {text: 'импульс системы: *p* = 12 + (−5) = 7 кг·м/с', at: [200, 204], size: 13}
