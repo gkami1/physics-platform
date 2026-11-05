@@ -1,0 +1,27 @@
+# mech.dynamics.forces 6.7: two springs holding one load. Parallel: both stretch by the same
+# Δl, the forces add. In series: the same force in both, the extensions add
+kind: diagram
+size: [400, 260]
+items:
+- {text: параллельно, at: [100, 20], size: 13}
+- {hatch: [[40, 40], [160, 40]], side: -1}
+- {spring: [[75, 40], [75, 130]], coils: 6}
+- {spring: [[125, 40], [125, 130]], coils: 6}
+- {text: '*k*_1', at: [62, 90], size: 13, anchor: end}
+- {text: '*k*_2', at: [138, 90], size: 13, anchor: start}
+- {line: [[68, 130], [132, 130]], width: 2.5}
+- {line: [[100, 130], [100, 145]], width: 1.5}
+- {rect: [84, 145, 32, 26], fill: surface}
+- {text: '*k* = *k*_1 + *k*_2', at: [100, 205], size: 14, tone: accent}
+- {text: 'жёстче каждой', at: [100, 228], size: 12, tone: muted}
+- {line: [[200, 40], [200, 240]], tone: muted, width: 1, dashed: true}
+- {text: последовательно, at: [300, 20], size: 13}
+- {hatch: [[250, 40], [350, 40]], side: -1}
+- {spring: [[300, 40], [300, 100]], coils: 5}
+- {dots: [[300, 100]], r: 3}
+- {spring: [[300, 100], [300, 160]], coils: 5}
+- {text: '*k*_1', at: [314, 75], size: 13, anchor: start}
+- {text: '*k*_2', at: [314, 135], size: 13, anchor: start}
+- {rect: [284, 160, 32, 26], fill: surface}
+- {text: '1/*k* = 1/*k*_1 + 1/*k*_2', at: [300, 215], size: 14, tone: accent}
+- {text: 'мягче каждой', at: [300, 238], size: 12, tone: muted}

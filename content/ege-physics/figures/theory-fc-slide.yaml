@@ -1,0 +1,22 @@
+# mech.dynamics.forces 6.3: a block slides to the right; sliding friction points against the
+# velocity. The magnified contact (appears) shows the bumps of both surfaces catching
+kind: diagram
+size: [400, 250]
+items:
+- {hatch: [[20, 170], [380, 170]]}
+- {rect: [70, 125, 80, 45], fill: surface}
+- {text: '*m*', at: [110, 153]}
+- {arrow: [[110, 147], [110, 90]], tone: force, label: '*N*', label_at: [124, 88]}
+- {arrow: [[110, 147], [110, 215]], tone: force, label: '*m**g*', label_at: [134, 213]}
+- {arrow: [[70, 166], [25, 166]], tone: force, label: '*F*_тр', label_at: [36, 156]}
+- {arrow: [[90, 110], [150, 110]], tone: vel, label: '*v*', label_at: [162, 114]}
+- {text: '*F*_тр = *μN*', at: [110, 245], size: 14}
+- {circle: [300, 95], r: 62, dashed: true, tone: muted, animate: appear}
+- {line: [[150, 170], [244, 122]], dashed: true, tone: muted, width: 1, animate: appear}
+- path: 'M244 82L252 92L260 84L268 96L276 86L284 94L292 83L300 95L308 85L316 93L324 84L332 96L340 86L348 93L356 84'
+  animate: appear
+- path: 'M244 104L252 93L260 101L268 90L276 99L284 89L292 98L300 88L308 99L316 90L324 98L332 89L340 100L348 90L356 101'
+  animate: appear
+- {text: брусок, at: [300, 72], size: 11, tone: muted, animate: appear}
+- {text: стол, at: [300, 122], size: 11, tone: muted, animate: appear}
+- {text: неровности цепляются, at: [300, 22], size: 12, tone: muted, animate: appear}

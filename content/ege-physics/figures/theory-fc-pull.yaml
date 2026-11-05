@@ -1,0 +1,17 @@
+# mech.dynamics.forces 6.5: a sled pulled by a rope at α = 30° above the horizontal. F (60 px)
+# splits into F cos α forward and F sin α up (30 px); mg is 80 px, so N = mg − F sin α is 50 px
+kind: diagram
+size: [400, 200]
+items:
+- {hatch: [[20, 120], [380, 120]]}
+- {rect: [140, 85, 90, 35], fill: surface, radius: 4}
+- {text: '*m*', at: [185, 108]}
+- {line: [[230, 90], [330, 32.27]], width: 1.2, tone: muted}
+- {arrow: [[230, 90], [281.96, 60]], tone: force, label: '*F*', label_at: [290, 54]}
+- {arrow: [[230, 90], [281.96, 90]], tone: force, dashed: true, width: 1.5, label: '*F* cos *α*', label_at: [300, 108], animate: appear}
+- {arrow: [[230, 90], [230, 60]], tone: force, dashed: true, width: 1.5, label: '*F* sin *α*', label_at: [222, 56], animate: appear}
+- {angle: [230, 90], start: 0, end: 30, r: 34, label: '*α*'}
+- {arrow: [[185, 102], [185, 52]], tone: force, label: '*N*', label_at: [172, 50]}
+- {arrow: [[185, 102], [185, 182]], tone: force, label: '*m**g*', label_at: [209, 180]}
+- {arrow: [[140, 116], [92, 116]], tone: force, label: '*F*_тр', label_at: [100, 106]}
+- {text: '*N* = *m**g* − *F* sin *α*', at: [310, 162], size: 14}

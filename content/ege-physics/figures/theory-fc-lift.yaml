@@ -1,0 +1,28 @@
+# mech.dynamics.forces 6.6: a box on the floor of a lift in three cases. mg is 45 px in every
+# panel; N is 45 px (a = 0), 65 px (a up) and 25 px (a down). The weight P equals N
+kind: diagram
+size: [400, 260]
+items:
+- {text: '*a* = 0', at: [70, 20], size: 13}
+- {text: '*a* вверх', at: [200, 20], size: 13}
+- {text: '*a* вниз', at: [330, 20], size: 13}
+- {line: [[70, 28], [70, 50]], width: 1.2}
+- {rect: [20, 50, 100, 150], fill: surface}
+- {rect: [52, 150, 36, 50], fill: none}
+- {arrow: [[70, 175], [70, 130]], tone: force, label: '*N*', label_at: [58, 128]}
+- {arrow: [[70, 175], [70, 220]], tone: force, label: '*m**g*', label_at: [93, 222]}
+- {line: [[200, 28], [200, 50]], width: 1.2}
+- {rect: [150, 50, 100, 150], fill: surface}
+- {rect: [182, 150, 36, 50], fill: none}
+- {arrow: [[200, 175], [200, 110]], tone: force, label: '*N*', label_at: [188, 108]}
+- {arrow: [[200, 175], [200, 220]], tone: force, label: '*m**g*', label_at: [223, 222]}
+- {arrow: [[236, 120], [236, 70]], tone: accent, label: '*a*', label_at: [236, 64], animate: appear}
+- {line: [[330, 28], [330, 50]], width: 1.2}
+- {rect: [280, 50, 100, 150], fill: surface}
+- {rect: [312, 150, 36, 50], fill: none}
+- {arrow: [[330, 175], [330, 150]], tone: force, label: '*N*', label_at: [341, 165]}
+- {arrow: [[330, 175], [330, 220]], tone: force, label: '*m**g*', label_at: [353, 222]}
+- {arrow: [[366, 70], [366, 120]], tone: accent, label: '*a*', label_at: [366, 136], animate: appear}
+- {text: '*P* = *m**g*', at: [70, 250], size: 13}
+- {text: '*P* > *m**g*', at: [200, 250], size: 13}
+- {text: '*P* < *m**g*', at: [330, 250], size: 13}

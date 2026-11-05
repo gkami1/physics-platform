@@ -1,0 +1,13 @@
+# mech.dynamics.forces 6.1: F(Δl) for two springs. Spring 1: 5 Н at 5 см, k = 100 Н/м;
+# spring 2: 4 Н at 10 см, k = 40 Н/м. The steeper line is the stiffer spring
+kind: graph
+x: {var: Δl, unit: см, min: 0, max: 12, step: 2}
+y: {var: F, unit: Н, min: 0, max: 10, step: 2}
+series:
+- points: [[0, 0], [10, 10]]
+- points: [[0, 0], [12, 4.8]]
+  dashed: true
+guides: [[5, 5], [10, 4]]
+notes:
+- {at: [8.3, 9.2], text: '1 — жёсткая', anchor: end}
+- {at: [11.8, 5.6], text: '2 — мягкая', anchor: end}

@@ -1,0 +1,12 @@
+# mech.dynamics.forces 6.4: friction on a box (15 кг, μ = 0,4, μN = 60 Н) against the
+# horizontal push F. While the box stands, friction equals the push; from 60 Н on it slides
+# and friction stays μN
+kind: graph
+x: {var: F, unit: Н, min: 0, max: 100, step: 20}
+y: {var: F_тр, unit: Н, min: 0, max: 80, step: 20}
+series:
+- points: [[0, 0], [60, 60], [100, 60]]
+guides: [[60, 60]]
+notes:
+- {at: [40, 52], text: 'стоит: *F*_тр = *F*', anchor: end}
+- {at: [100, 67], text: 'скользит: *F*_тр = *μN*', anchor: end}

@@ -1,0 +1,25 @@
+# mech.dynamics.forces 6.2: a block on a plank that sags under it. Left: the forces on the
+# block (mg and N balance). Right, the same scene: the weight P acts on the plank, not on the
+# block. Same arrow style as theory-nl-book (lesson 5.5)
+kind: diagram
+size: [400, 255]
+items:
+- {text: силы на брусок, at: [100, 22], size: 13}
+- {hatch: [[20, 215], [180, 215]]}
+- {rect: [24, 152, 10, 63], fill: surface}
+- {rect: [166, 152, 10, 63], fill: surface}
+- {path: 'M24 150Q100 170 176 150', width: 3}
+- {rect: [80, 130, 40, 30], fill: surface}
+- {arrow: [[100, 145], [100, 85]], tone: force, label: '*N*', label_at: [114, 82]}
+- {arrow: [[100, 145], [100, 205]], tone: force, label: '*m**g*', label_at: [124, 203]}
+- {text: уравновешены, at: [100, 245], size: 12, tone: muted}
+- {line: [[200, 40], [200, 240]], tone: muted, width: 1, dashed: true}
+- {text: вес — сила на опору, at: [300, 22], size: 13}
+- {hatch: [[220, 215], [380, 215]]}
+- {rect: [224, 152, 10, 63], fill: surface}
+- {rect: [366, 152, 10, 63], fill: surface}
+- {path: 'M224 150Q300 170 376 150', width: 3}
+- {rect: [280, 130, 40, 30], fill: surface}
+- {arrow: [[300, 161], [300, 208]], tone: force, label: '*P*', label_at: [314, 206], animate: appear}
+- {text: доска прогнулась, at: [300, 110], size: 12, tone: muted}
+- {text: '*P* = *m**g*, если опора покоится', at: [300, 245], size: 12, tone: muted}
