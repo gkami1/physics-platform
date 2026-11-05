@@ -1,7 +1,8 @@
-# mech.dynamics.gravity 7.1: the same two balls at r, 2r and 3r; the pull on the right ball
-# is 90, 22.5 and 10 px (F, F/4, F/9). The equal pull on the left ball is not drawn
+# mech.dynamics.gravity 7.1: the same two balls at r and 2r; the pull on the right ball is
+# 90 and 22.5 px (F, F/4). The equal pull on the left ball is not drawn. No 3r row: that is
+# step task ks-gravity-01
 kind: diagram
-size: [420, 250]
+size: [320, 175]
 items:
 - {text: '*m*_1', at: [30, 28], size: 13}
 - {text: '*m*_2', at: [150, 28], size: 13}
@@ -19,10 +20,3 @@ items:
 - {line: [[30, 144], [30, 154]], width: 1, tone: muted, animate: appear}
 - {line: [[270, 144], [270, 154]], width: 1, tone: muted, animate: appear}
 - {text: '2*r*', at: [150, 165], size: 13, animate: appear}
-- {circle: [30, 200], r: 10, fill: surface, animate: appear}
-- {circle: [390, 200], r: 10, fill: surface, animate: appear}
-- {arrow: [[380, 200], [370, 200]], tone: force, label: '*F*/9', label_at: [376, 186], animate: appear}
-- {line: [[30, 224], [390, 224]], width: 1, tone: muted, animate: appear}
-- {line: [[30, 219], [30, 229]], width: 1, tone: muted, animate: appear}
-- {line: [[390, 219], [390, 229]], width: 1, tone: muted, animate: appear}
-- {text: '3*r*', at: [210, 240], size: 13, animate: appear}

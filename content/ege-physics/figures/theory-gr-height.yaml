@@ -1,23 +1,20 @@
-# mech.dynamics.gravity 7.3: g on the surface, at h = R (r = 2R) and at h = 2R (r = 3R):
-# arrows 72, 18 and 8 px, as 1 : 1/4 : 1/9. The height h is from the surface, r from the centre
+# mech.dynamics.gravity 7.3: g on the surface and at h = R (r = 2R): arrows 72 and 18 px,
+# as 1 : 1/4. The height h is from the surface, r from the centre. No h = 2R body: that is step
+# task ks-gravity-03
 kind: diagram
-size: [440, 300]
+size: [400, 250]
 items:
-- {circle: [175, 160], r: 92, dashed: true, tone: muted, width: 1}
-- {circle: [175, 160], r: 138, dashed: true, tone: muted, width: 1}
-- {circle: [175, 160], r: 46, fill: surface}
-- {text: Земля, at: [179, 186], size: 12}
-- {dots: [[175, 160]], r: 3}
-- {dots: [[130, 134]], r: 5}
-- {arrow: [[130, 134], [192.3, 170]], tone: force, label: '*g*', label_at: [114, 126]}
-- {dots: [[175, 68]], r: 5}
-- {arrow: [[175, 68], [175, 86]], tone: force, label: '*g*/4', label_at: [145, 72]}
-- {dots: [[294.5, 91]], r: 5}
-- {arrow: [[294.5, 91], [287.6, 95]], tone: force, label: '*g*/9', label_at: [320.5, 85]}
-- {line: [[183, 160], [183, 114]], width: 1.2}
-- {text: '*R*', at: [193, 142.0], size: 13}
-- {line: [[183, 114], [183, 74]], width: 2, tone: accent}
-- {text: '*h* = *R*', at: [189, 96.0], size: 13, anchor: start, tone: accent}
-- {text: 'расстояние до центра:', at: [434, 250], size: 12, anchor: end}
-- {text: '*r* = *R* + *h* = 2*R*', at: [434, 268], size: 13, anchor: end}
-- {text: 'на высоте 2*R*: *r* = 3*R*', at: [434, 286], size: 12, anchor: end, tone: muted}
+- {circle: [150, 125], r: 92, dashed: true, tone: muted, width: 1}
+- {circle: [150, 125], r: 46, fill: surface}
+- {text: Земля, at: [154, 151], size: 12}
+- {dots: [[150, 125]], r: 3}
+- {dots: [[105, 99]], r: 5}
+- {arrow: [[105, 99], [167.3, 135]], tone: force, label: '*g*', label_at: [89, 91]}
+- {dots: [[150, 33]], r: 5}
+- {arrow: [[150, 33], [150, 51]], tone: force, label: '*g*/4', label_at: [120, 37]}
+- {line: [[158, 125], [158, 79]], width: 1.2}
+- {text: '*R*', at: [168, 107.0], size: 13}
+- {line: [[158, 79], [158, 39]], width: 2, tone: accent}
+- {text: '*h* = *R*', at: [164, 61.0], size: 13, anchor: start, tone: accent}
+- {text: 'расстояние до центра:', at: [395, 196], size: 12, anchor: end}
+- {text: '*r* = *R* + *h* = 2*R*', at: [395, 214], size: 13, anchor: end}
