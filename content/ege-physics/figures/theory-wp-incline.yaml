@@ -1,0 +1,17 @@
+# mech.conservation.work-power 11.3: dragging a box up an incline of length l to height h.
+# Without friction the work along the slope equals the work of lifting: F·l = mg·h. Geometry
+# from the scratchpad generator (slope angle atan(110/300)).
+kind: diagram
+size: [400, 258]
+items:
+- {line: [[40, 200], [340, 200], [340, 90]], closed: true, width: 2, fill: 'surface'}
+- {angle: [40, 200], start: 0, end: 20.1, r: 46, label: '*α*'}
+- {rect: [141.5, 128.6, 40, 26], fill: 'surface', rotate: -20.1}
+- {arrow: [[180.3, 134.7], [229.1, 116.8]], tone: 'force', label: '*F*', label_at: [233.1, 106.8]}
+- {arrow: [[161.5, 141.6], [161.5, 199.6]], tone: 'force', label: '*m**g*', label_at: [137.5, 199.6]}
+- {text: '*l*', at: [274.5, 101]}
+- {arrow: [[362, 145], [362, 90]], width: 1.5}
+- {arrow: [[362, 145], [362, 200]], width: 1.5}
+- {text: '*h*', at: [374, 150], anchor: 'start'}
+- {text: 'без трения: *F* · *l* = *m**g* · *h*', at: [200, 230], size: 13}
+- {text: 'путь в *l*/*h* раз длиннее — сила во столько же раз меньше', at: [200, 250], size: 13}

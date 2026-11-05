@@ -1,0 +1,20 @@
+# mech.conservation.work-power 11.2: work against time for two lifts of the same load:
+# the same work A0 in t1 (solid) and in t2 (dashed). The steeper line is the bigger
+# power N = A/t. Qualitative axes: no numbers to collide with step-task answers.
+kind: diagram
+size: [400, 244]
+items:
+- {arrow: [[50, 190], [384, 190]], width: 1.5}
+- {text: '*t*', at: [376, 208]}
+- {arrow: [[50, 190], [50, 14]], width: 1.5}
+- {text: '*A*', at: [64, 24]}
+- {text: '0', at: [42, 206], size: 13, anchor: 'end'}
+- {path: 'M130 190V70M290 190V70', width: 1, dashed: true, tone: 'muted'}
+- {path: 'M50 190L130 70L360 70', tone: 'accent', width: 2.5}
+- {path: 'M50 190L290 70L360 70', tone: 'accent', width: 2.5, dashed: true}
+- {text: '*A*_0', at: [42, 75], size: 13, anchor: 'end'}
+- {text: '*t*_1', at: [130, 208], size: 13}
+- {text: '*t*_2', at: [290, 208], size: 13}
+- {text: 'быстро: *N*_1 = *A*_0 / *t*_1', at: [140, 58], size: 13, anchor: 'start'}
+- {text: 'медленно: *N*_2 = *A*_0 / *t*_2', at: [200, 166], size: 13, anchor: 'start'}
+- {text: 'работа одна, мощность больше у того, кто быстрее', at: [215, 236], size: 13}
