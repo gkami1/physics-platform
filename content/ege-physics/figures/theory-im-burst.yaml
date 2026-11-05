@@ -1,0 +1,21 @@
+# mech.conservation.momentum 10.6: a shell bursts at the top of its flight into two equal
+# halves; one stops and falls straight down, the other flies on at 2v (appear). Strobe dots
+# at equal time steps; the burst is short, so gravity does not spoil the momentum
+kind: diagram
+size: [400, 256]
+items:
+- {text: 'снаряд разорвался в верхней точке (урок 3.5)', at: [24, 22], size: 12, anchor: 'start', tone: 'muted'}
+- {hatch: [[20, 244], [380, 244]]}
+- {path: 'M30 244Q100 84 170 84', dashed: true, tone: 'muted'}
+- {dots: [[30, 244], [65, 174], [100, 124], [135, 94]], r: 3.5, tone: 'muted'}
+- {circle: [170, 84], r: 6, fill: 'solid'}
+- {arrow: [[170, 60], [210, 60]], tone: 'vel'}
+- {text: '*v*', at: [190, 52], size: 13, tone: 'vel'}
+- {line: [[170, 90], [170, 238]], dashed: true, tone: 'muted', animate: 'appear'}
+- {dots: [[170, 94], [170, 124], [170, 174]], r: 3.5, tone: 'muted', animate: 'appear'}
+- {text: 'стоит, потом падает', at: [178, 174], size: 11, anchor: 'start', tone: 'muted', animate: 'appear'}
+- {path: 'M170 84Q280 84 390 182.8', dashed: true, tone: 'muted', animate: 'appear'}
+- {dots: [[240, 94], [310, 124], [380, 174]], r: 3.5, tone: 'muted', animate: 'appear'}
+- {arrow: [[178, 84], [258, 84]], tone: 'vel', width: 2.5, animate: 'appear'}
+- {text: '2*v*', at: [244, 76], size: 13, tone: 'vel', animate: 'appear'}
+- {text: '*m**v* = (*m*/2)·0 + (*m*/2)·2*v*', at: [290, 226], size: 13, animate: 'appear'}

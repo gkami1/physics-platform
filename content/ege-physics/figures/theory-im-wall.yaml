@@ -1,0 +1,26 @@
+# mech.conservation.momentum 10.5: a ball bounces off a wall with the same speed. p1 and p2
+# are equally long (90 px) and opposite; Δp = p2 + (−p1) is twice as long and points away
+# from the wall, like the force of the wall on the ball
+kind: diagram
+size: [400, 238]
+items:
+- {hatch: [[330, 18], [330, 112]], side: -1}
+- {text: 'до', at: [24, 44], size: 12, anchor: 'start', tone: 'muted'}
+- {circle: [310, 40], r: 11, fill: 'surface'}
+- {arrow: [[200, 40], [290, 40]], tone: 'accent', width: 2.5}
+- {text: '*p*_1', at: [245, 30], size: 13, tone: 'accent'}
+- {text: 'после', at: [24, 94], size: 12, anchor: 'start', tone: 'muted'}
+- {circle: [310, 90], r: 11, fill: 'surface'}
+- {arrow: [[290, 90], [200, 90]], tone: 'accent', width: 2.5}
+- {text: '*p*_2', at: [245, 80], size: 13, tone: 'accent'}
+- {text: 'Δ*p* = *p*_2 − *p*_1:', at: [24, 142], size: 12, anchor: 'start', tone: 'muted'}
+- {arrow: [[300, 150], [210, 150]], tone: 'accent', width: 2}
+- {text: '*p*_2', at: [255, 142], size: 12, tone: 'accent'}
+- {arrow: [[210, 150], [120, 150]], tone: 'accent', width: 2, dashed: true}
+- {text: '−*p*_1', at: [165, 142], size: 12, tone: 'accent'}
+- {arrow: [[300, 170], [120, 170]], tone: 'accent', width: 3, animate: 'appear'}
+- {text: 'Δ*p*', at: [108, 175], size: 13, anchor: 'end', tone: 'accent', animate: 'appear'}
+- {text: 'сила стены на мяч:', at: [24, 202], size: 12, anchor: 'start', tone: 'muted'}
+- {arrow: [[300, 198], [220, 198]], tone: 'force'}
+- {text: '*F*', at: [208, 203], size: 13, anchor: 'end', tone: 'force'}
+- {text: '|Δ*p*| = 2*m**v* — вдвое больше импульса мяча, а не ноль', at: [200, 228], size: 13}

@@ -1,0 +1,27 @@
+# mech.conservation.momentum 10.4: a ball hits an equal ball at rest head-on, elastically.
+# Strobe outlines at equal time steps (40 px): before, ball 1 moves and ball 2 stands; after
+# (appear), ball 1 stands and ball 2 moves with the same spacing — they swap velocities
+kind: diagram
+size: [400, 210]
+items:
+- {text: 'до удара', at: [24, 22], size: 12, anchor: 'start', tone: 'muted'}
+- {line: [[20, 70], [380, 70]], width: 1.5}
+- {circle: [50, 58], r: 12, dashed: true, tone: 'muted'}
+- {circle: [90, 58], r: 12, dashed: true, tone: 'muted'}
+- {circle: [130, 58], r: 12, dashed: true, tone: 'muted'}
+- {circle: [170, 58], r: 12, fill: 'surface', label: '1'}
+- {circle: [194, 58], r: 12, fill: 'surface', label: '2'}
+- {arrow: [[158, 30], [198, 30]], tone: 'vel'}
+- {text: '*v*', at: [178, 22], size: 13, tone: 'vel'}
+- {text: 'стоит', at: [194, 86], size: 11, tone: 'muted'}
+- {text: 'после удара', at: [24, 112], size: 12, anchor: 'start', tone: 'muted', animate: 'appear'}
+- {line: [[20, 160], [380, 160]], width: 1.5, animate: 'appear'}
+- {circle: [170, 148], r: 12, fill: 'surface', label: '1', animate: 'appear'}
+- {text: 'стоит', at: [170, 176], size: 11, tone: 'muted', animate: 'appear'}
+- {circle: [194, 148], r: 12, dashed: true, tone: 'muted', animate: 'appear'}
+- {circle: [234, 148], r: 12, dashed: true, tone: 'muted', animate: 'appear'}
+- {circle: [274, 148], r: 12, dashed: true, tone: 'muted', animate: 'appear'}
+- {circle: [314, 148], r: 12, fill: 'surface', label: '2', animate: 'appear'}
+- {arrow: [[302, 120], [342, 120]], tone: 'vel', animate: 'appear'}
+- {text: '*v*', at: [322, 112], size: 13, tone: 'vel', animate: 'appear'}
+- {text: 'массы равны — шары обменялись скоростями', at: [200, 200], size: 13, animate: 'appear'}

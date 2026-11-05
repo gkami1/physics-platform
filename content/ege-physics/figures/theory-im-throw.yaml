@@ -1,0 +1,25 @@
+# mech.conservation.momentum 10.2: a skater throws a ball. During the push the forces on the
+# ball and on the skater are equal and opposite (third law, red); after it the momenta are
+# equal and opposite (accent, appear), so the total stays zero
+kind: diagram
+size: [400, 262]
+items:
+- {text: 'толчок: силы равны и противоположны (урок 5.5)', at: [24, 18], size: 12, anchor: 'start', tone: 'muted'}
+- {hatch: [[30, 120], [370, 120]]}
+- {circle: [165, 46], r: 11, fill: 'surface'}
+- {rect: [150, 57, 30, 63], fill: 'surface', radius: 5}
+- {line: [[180, 80], [194, 84]], width: 2}
+- {circle: [205, 85], r: 11, fill: 'surface'}
+- {arrow: [[216, 85], [262, 85]], tone: 'force'}
+- {text: '*F*', at: [239, 76], size: 13, tone: 'force'}
+- {arrow: [[150, 85], [104, 85]], tone: 'force'}
+- {text: '*F*', at: [127, 76], size: 13, tone: 'force'}
+- {text: 'после: *p*_1 + *p*_2 = 0 — как и до броска', at: [24, 150], size: 12, anchor: 'start', animate: 'appear'}
+- {hatch: [[30, 250], [370, 250]], animate: 'appear'}
+- {circle: [145, 176], r: 11, fill: 'surface', animate: 'appear'}
+- {rect: [130, 187, 30, 63], fill: 'surface', radius: 5, animate: 'appear'}
+- {circle: [290, 215], r: 11, fill: 'surface', animate: 'appear'}
+- {arrow: [[130, 215], [78, 215]], tone: 'accent', width: 2.5, animate: 'appear'}
+- {text: '*p*_1', at: [104, 205], size: 13, tone: 'accent', animate: 'appear'}
+- {arrow: [[301, 215], [353, 215]], tone: 'accent', width: 2.5, animate: 'appear'}
+- {text: '*p*_2', at: [327, 205], size: 13, tone: 'accent', animate: 'appear'}

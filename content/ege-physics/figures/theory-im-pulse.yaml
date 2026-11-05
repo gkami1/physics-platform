@@ -1,0 +1,16 @@
+# mech.conservation.momentum 10.5: the force on the feet during a landing, F(t). Stiff legs:
+# a short tall pulse (dashed); bent knees: five times longer and five times lower (appear).
+# Equal areas (2/3 · 50 · 150 = 2/3 · 250 · 30), so equal Δp
+kind: diagram
+size: [400, 200]
+items:
+- {arrow: [[40, 180], [384, 180]], width: 1.5}
+- {text: '*t*', at: [378, 198], size: 14}
+- {arrow: [[40, 180], [40, 12]], width: 1.5}
+- {text: '*F*', at: [54, 22], size: 14}
+- {path: 'M50 180Q75 -120 100 180', fill: 'accent', tone: 'force', width: 2, dashed: true}
+- {text: 'прямые ноги', at: [89, 40], size: 12, anchor: 'start', tone: 'force'}
+- {path: 'M50 180Q175 120 300 180', fill: 'accent', tone: 'force', width: 2.5, animate: 'appear'}
+- {text: 'колени согнуты', at: [215, 144], size: 12, anchor: 'start', tone: 'force', animate: 'appear'}
+- {text: 'площади равны: *F*Δ*t* = Δ*p*', at: [250, 60], size: 13}
+- {text: 'дольше — значит, слабее', at: [250, 80], size: 12, tone: 'muted'}

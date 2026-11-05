@@ -1,0 +1,25 @@
+# mech.conservation.momentum 10.6: a cannon on smooth rails fires a shell at angle α. Only the
+# horizontal projection is conserved: the rails push up (N) during the shot. Velocity green,
+# its horizontal component v cos α dashed; the recoil V to the left
+kind: diagram
+size: [400, 250]
+items:
+- {text: 'по горизонтали внешних сил нет:', at: [24, 24], size: 12, anchor: 'start', tone: 'muted'}
+- {text: '*M**V* = *m**v* cos α', at: [24, 46], size: 14, anchor: 'start'}
+- {hatch: [[20, 200], [380, 200]]}
+- {line: [[160, 166], [224.3, 112]], width: 11}
+- {rect: [100, 164, 110, 14], fill: 'surface', radius: 3}
+- {circle: [124, 188], r: 12, fill: 'surface'}
+- {circle: [186, 188], r: 12, fill: 'surface'}
+- {arrow: [[228.9, 108.1], [284.1, 61.9]], tone: 'vel'}
+- {text: '*v*', at: [294.1, 57.9], size: 14, tone: 'vel'}
+- {line: [[224.3, 112], [284.1, 112]], width: 1.2, dashed: true, tone: 'vel'}
+- {line: [[284.1, 112], [284.1, 61.9]], width: 1.2, dashed: true, tone: 'vel'}
+- {text: '*v* cos α', at: [254.2, 130], size: 12, tone: 'vel'}
+- {angle: [224.3, 112], start: 0, end: 40, r: 24, label: 'α'}
+- {arrow: [[100, 146], [56, 146]], tone: 'vel'}
+- {text: '*V*', at: [46, 151], size: 14, anchor: 'end', tone: 'vel'}
+- {arrow: [[155, 244], [155, 204]], tone: 'force'}
+- {text: '*N*', at: [166, 236], size: 14, anchor: 'start', tone: 'force'}
+- {text: 'по вертикали рельсы давят:', at: [214, 222], size: 11, anchor: 'start', tone: 'muted'}
+- {text: 'эта проекция не сохраняется', at: [214, 238], size: 11, anchor: 'start', tone: 'muted'}
