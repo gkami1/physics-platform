@@ -1,0 +1,20 @@
+# mech.statics.hydrostatics 9.2: water jets from three holes in a bottle; the deeper the
+# hole, the farther the jet (ranges 2·sqrt(d·y) to the floor, holes in the upper half)
+kind: diagram
+size: [400, 262]
+items:
+- {rect: [60, 22, 50, 118], fill: accent, tone: accent, width: 0}
+- {line: [[60, 12], [60, 140], [110, 140], [110, 12]], width: 2}
+- {line: [[60, 22], [110, 22]], tone: accent, width: 1.5}
+- {rect: [30, 140, 110, 6], fill: surface}
+- {line: [[40, 146], [40, 252]], width: 2}
+- {line: [[130, 146], [130, 252]], width: 2}
+- {hatch: [[16, 252], [392, 252]]}
+- {path: 'M110 52Q187.5 52 264.9 252', tone: accent, width: 2.5, animate: draw}
+- {dots: [[110, 52]], r: 2.5}
+- {path: 'M110 84Q212.1 84 314.1 252', tone: accent, width: 2.5, animate: draw}
+- {dots: [[110, 84]], r: 2.5}
+- {path: 'M110 116Q223.1 116 336.1 252', tone: accent, width: 2.5, animate: draw}
+- {dots: [[110, 116]], r: 2.5}
+- {text: 'чем глубже отверстие,', at: [290, 30], size: 12}
+- {text: тем сильнее бьёт струя, at: [290, 47], size: 12}

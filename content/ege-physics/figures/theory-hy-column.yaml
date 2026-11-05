@@ -1,0 +1,19 @@
+# mech.statics.hydrostatics 9.2: the column of water over an area S at depth h weighs
+# ρShg; divided by S that is p = ρgh
+kind: diagram
+size: [400, 236]
+items:
+- {rect: [30, 50, 220, 170], fill: accent, tone: accent, width: 0}
+- {line: [[30, 30], [30, 220], [250, 220], [250, 30]], width: 2}
+- {line: [[30, 50], [250, 50]], tone: accent, width: 1.5}
+- {rect: [110, 50, 50, 130], tone: muted, width: 1.2, dashed: true}
+- {line: [[110, 180], [160, 180]], width: 3}
+- {text: '*S*', at: [135, 198], size: 14}
+- {arrow: [[135, 92], [135, 150]], tone: force, label: '*m**g*', label_at: [179, 126], animate: appear}
+- {arrow: [[212, 50], [212, 180]], width: 1.2, label: '*h*', label_at: [225, 120]}
+- {arrow: [[212, 180], [212, 50]], width: 1.2}
+- {text: столб воды, at: [330, 70], size: 12, tone: muted}
+- {text: '*m* = *ρ**S**h*', at: [330, 92], size: 13}
+- {text: 'давит на *S* весом', at: [330, 124], size: 12, tone: muted}
+- {text: '*m**g* = *ρ**g**S**h*', at: [330, 146], size: 13}
+- {text: '*p* = *m**g* / *S* = *ρ**g**h*', at: [325, 186], size: 13, tone: accent, animate: appear}

@@ -4,6 +4,7 @@ size: [400, 250]
 items:
 - rect: [61, 92, 278, 127]
   fill: accent
+  tone: accent
   width: 0
 - line: [[60, 40], [60, 220], [340, 220], [340, 40]]
   width: 2

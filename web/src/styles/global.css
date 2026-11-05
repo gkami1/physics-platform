@@ -1295,6 +1295,104 @@ blockquote {
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
 }
 
+/* <pp-archimedes> (src/lib/sims/archimedes.ts): a block on a spring balance lowered into a
+   beaker on scales. Liquid accent, as in the hydrostatics figures; forces red; the body
+   chips reuse .pfx-chips and the legend the .crt-key swatches. */
+.arc-bodies legend {
+  width: auto;
+  margin-right: 0.4rem;
+}
+
+.arc-frame line,
+.arc-frame path {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 2;
+}
+
+.arc-box {
+  fill: var(--surface-2);
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.arc-frame .arc-spring {
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+
+.arc-frame .arc-pointer {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.arc-frame .arc-thread {
+  stroke-width: 1;
+}
+
+.arc-display {
+  fill: var(--text);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.arc-liquid {
+  fill: var(--accent);
+  fill-opacity: 0.16;
+}
+
+.arc-surface {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+.arc-beaker {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 2;
+}
+
+.arc-block {
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.arc-block-wood {
+  fill: var(--surface-2);
+}
+
+.arc-block-ice {
+  fill: color-mix(in srgb, var(--accent) 25%, var(--surface-2));
+}
+
+.arc-block-al {
+  fill: color-mix(in srgb, var(--muted) 45%, var(--surface-2));
+}
+
+.arc-arrows line {
+  stroke: var(--bad);
+  stroke-width: 2.5;
+}
+
+.arc-arrows path,
+.arc-arrows text {
+  fill: var(--bad);
+}
+
+.arc-arrows text {
+  font-size: 12px;
+  font-style: italic;
+}
+
+.arc-sub {
+  font-size: 9px;
+  font-style: normal;
+}
+
+.arc-legend {
+  margin: 0.5rem 0 0;
+}
+
 /* <pp-path> (src/lib/sims/path.ts): path vs displacement along a route. */
 .pth-tracks {
   margin: 0 0 0.5rem;

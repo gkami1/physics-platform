@@ -1,0 +1,24 @@
+# mech.statics.hydrostatics 9.4: U-tube, oil in the left limb over water. Heights counted up
+# from the oil-water boundary; at that level A and B have equal pressure. Oil 0.75 of water
+kind: diagram
+size: [400, 240]
+items:
+- {path: 'M110 150L146 150L146 200L230 200L230 82.5L266 82.5L266 228L110 228Z', fill: accent, tone: accent, width: 0}
+- {rect: [110, 60, 36, 90], fill: accent, tone: muted, width: 0}
+- {line: [[110, 60], [146, 60]], tone: muted, width: 1.5}
+- {line: [[230, 82.5], [266, 82.5]], tone: accent, width: 1.5}
+- {line: [[110, 150], [146, 150]], width: 1.2}
+- {line: [[110, 30], [110, 228], [266, 228], [266, 30]], width: 2}
+- {line: [[146, 30], [146, 200], [230, 200], [230, 30]], width: 2}
+- {line: [[80, 150], [300, 150]], tone: muted, width: 1, dashed: true}
+- {dots: [[128, 150], [248, 150]], r: 3.5}
+- {text: '*A*', at: [138, 166], size: 13}
+- {text: '*B*', at: [258, 166], size: 13}
+- {text: масло, at: [128, 96], size: 11}
+- {text: вода, at: [248, 118.5], size: 11}
+- {arrow: [[90, 150], [90, 60]], width: 1.2, label: '*h*_м', label_at: [70, 110]}
+- {arrow: [[90, 60], [90, 150]], width: 1.2}
+- {arrow: [[286, 150], [286, 82.5]], width: 1.2, label: '*h*_в', label_at: [306, 121.2]}
+- {arrow: [[286, 82.5], [286, 150]], width: 1.2}
+- {text: '*p*_A = *p*_B', at: [350, 154], size: 13, tone: accent, animate: appear}
+- {text: уровень границы, at: [60, 168], size: 11, tone: muted}

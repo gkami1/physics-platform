@@ -1,0 +1,20 @@
+# mech.statics.hydrostatics 9.1: the same load F on a boot (small area, sinks deep) and on a
+# ski (large area, barely sinks)
+kind: diagram
+size: [400, 252]
+items:
+- {path: M16 140L84 140L84 166L116 166L116 140L232 140L232 145L368 145L368 140L384 140L384 200L16 200Z, fill: surface, width: 0}
+- {line: [[16, 140], [84, 140], [84, 166], [116, 166], [116, 140], [232, 140], [232, 145], [368, 145], [368, 140], [384, 140]], width: 1.5}
+- {text: снег, at: [200, 192], size: 12, tone: muted}
+- {rect: [84, 132, 32, 34], fill: surface}
+- {rect: [78, 88, 44, 44], fill: surface}
+- {text: '*m*', at: [100, 115], size: 14}
+- {arrow: [[100, 40], [100, 82]], tone: force, label: '*F*', label_at: [116, 66]}
+- {rect: [232, 139, 136, 6], fill: surface}
+- {rect: [278, 95, 44, 44], fill: surface}
+- {text: '*m*', at: [300, 122], size: 14}
+- {arrow: [[300, 47], [300, 89]], tone: force, label: '*F*', label_at: [316, 73]}
+- {text: 'ботинок: *S* мала', at: [100, 222], size: 12}
+- {text: давление большое, at: [100, 240], size: 12, tone: accent, animate: appear}
+- {text: 'лыжа: *S* велика', at: [300, 222], size: 12}
+- {text: давление маленькое, at: [300, 240], size: 12, tone: accent, animate: appear}

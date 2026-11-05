@@ -1,0 +1,27 @@
+# mech.statics.hydrostatics 9.6: a box hull, centre of gravity low (0.15 H above the keel).
+# Heeled 18°: the submerged part (same area) moves to the low side, F_A goes with its centroid
+# and with mg turns the boat back. Geometry computed by clipping the rotated hull
+kind: diagram
+size: [400, 236]
+items:
+- {path: M40 148L160 148L160 92L40 92Z, fill: surface, width: 2}
+- {line: [[100, 92], [100, 42]], width: 2}
+- {rect: [5, 120, 190, 70], fill: accent, tone: accent, width: 0}
+- {line: [[5, 120], [195, 120]], tone: accent, width: 1.5}
+- {dots: [[100, 139.6]], r: 3.5}
+- {dots: [[100, 134]], r: 3.5, tone: accent}
+- {arrow: [[100, 139.6], [100, 191.6]], tone: force, label: '*m**g*', label_at: [80, 189.6]}
+- {arrow: [[100, 134], [100, 82]], tone: force, label: '*F*_A', label_at: [120, 88]}
+- {text: ровно, at: [100, 20], size: 13}
+- {path: 'M232.9 128.1L347.1 165.2L364.4 111.9L250.2 74.8Z', fill: surface, width: 2}
+- {line: [[307.3, 93.4], [322.8, 45.8]], width: 2}
+- {rect: [195, 120, 190, 70], fill: accent, tone: accent, width: 0}
+- {line: [[195, 120], [385, 120]], tone: accent, width: 1.5}
+- {dots: [[292.6, 138.6]], r: 3.5}
+- {dots: [[308.3, 135.5]], r: 3.5, tone: accent}
+- {arrow: [[292.6, 138.6], [292.6, 190.6]], tone: force, label: '*m**g*', label_at: [272.6, 188.6]}
+- {arrow: [[308.3, 135.5], [308.3, 83.5]], tone: force, label: '*F*_A', label_at: [332.3, 111.5]}
+- {text: накренилась, at: [290, 20], size: 13}
+- {text: '*F*_A и *m**g* поворачивают', at: [290, 210], size: 12, tone: accent, animate: appear}
+- {text: лодку обратно, at: [290, 226], size: 12, tone: accent, animate: appear}
+- {text: '*F*_A — в центре погружённой части', at: [100, 210], size: 12, tone: muted}

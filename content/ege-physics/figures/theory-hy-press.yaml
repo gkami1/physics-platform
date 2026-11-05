@@ -1,0 +1,17 @@
+# mech.statics.hydrostatics 9.3: hydraulic press; the same pressure under both pistons,
+# F1 on the small one, the liquid pushes the big one up with F2
+kind: diagram
+size: [400, 266]
+items:
+- {path: M50 110L80 110L80 196L210 196L210 110L350 110L350 220L50 220Z, fill: accent, tone: accent, width: 0}
+- {line: [[50, 40], [50, 220], [350, 220], [350, 40]], width: 2}
+- {line: [[80, 40], [80, 196], [210, 196], [210, 40]], width: 2}
+- {rect: [51, 100, 28, 10], fill: surface}
+- {rect: [211, 100, 138, 10], fill: surface}
+- {rect: [230, 60, 70, 40], fill: surface}
+- {arrow: [[65, 32], [65, 98]], tone: force, label: '*F*_1', label_at: [87, 50]}
+- {arrow: [[320, 116], [320, 64]], tone: force, label: '*F*_2', label_at: [338, 86]}
+- {text: '*S*_1', at: [65, 236], size: 13}
+- {text: '*S*_2', at: [280, 236], size: 13}
+- {text: '*p* одинаково', at: [145, 186], size: 12, tone: accent, animate: appear}
+- {text: '*F*_1 / *S*_1 = *F*_2 / *S*_2', at: [200, 256], size: 13}
