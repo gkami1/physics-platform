@@ -1,0 +1,28 @@
+# mech.statics.hydrostatics 9.4: four connected vessels of different shapes (straight,
+# funnel, slanted, narrow); the water stands at one level in all of them
+kind: diagram
+size: [400, 246]
+items:
+- {path: M40 186L40 74L74 74L74 186Z, fill: accent, tone: accent, width: 0}
+- {line: [[40, 36], [40, 186]], width: 2}
+- {line: [[74, 36], [74, 186]], width: 2}
+- {path: 'M124 186L106.1 74L165.9 74L148 186Z', fill: accent, tone: accent, width: 0}
+- {line: [[100, 36], [124, 186]], width: 2}
+- {line: [[172, 36], [148, 186]], width: 2}
+- {path: 'M204 186L238.3 74L262.3 74L228 186Z', fill: accent, tone: accent, width: 0}
+- {line: [[250, 36], [204, 186]], width: 2}
+- {line: [[274, 36], [228, 186]], width: 2}
+- {path: M318 186L318 74L330 74L330 186Z, fill: accent, tone: accent, width: 0}
+- {line: [[318, 36], [318, 186]], width: 2}
+- {line: [[330, 36], [330, 186]], width: 2}
+- {rect: [40, 186, 290, 22], fill: accent, tone: accent, width: 0}
+- {line: [[40, 186], [40, 208], [330, 208], [330, 186]], width: 2}
+- {line: [[74, 186], [124, 186]], width: 2}
+- {line: [[148, 186], [204, 186]], width: 2}
+- {line: [[228, 186], [318, 186]], width: 2}
+- {line: [[40, 74], [74, 74]], tone: accent, width: 1.5}
+- {line: [[106.1, 74], [165.9, 74]], tone: accent, width: 1.5}
+- {line: [[238.3, 74], [262.3, 74]], tone: accent, width: 1.5}
+- {line: [[318, 74], [330, 74]], tone: accent, width: 1.5}
+- {line: [[22, 74], [376, 74]], tone: muted, width: 1, dashed: true, animate: appear}
+- {text: 'один уровень, какой бы ни была форма сосуда', at: [185, 236], size: 12, tone: accent, animate: appear}

@@ -1,0 +1,27 @@
+# mech.statics.hydrostatics 9.5: a cube under water; pressure pushes on every face, arrows
+# ∝ depth (0.36 px per px). Sides cancel, the bottom is pushed harder than the top: F_A up
+kind: diagram
+size: [400, 262]
+items:
+- {rect: [20, 40, 240, 212], fill: accent, tone: accent, width: 0}
+- {line: [[20, 22], [20, 252], [260, 252], [260, 22]], width: 2}
+- {line: [[20, 40], [260, 40]], tone: accent, width: 1.5}
+- {rect: [100, 84, 80, 80], fill: surface}
+- {arrow: [[116, 66.2], [116, 82]], tone: force, width: 1.5}
+- {arrow: [[116, 210.6], [116, 166]], tone: force, width: 1.5}
+- {arrow: [[140, 66.2], [140, 82]], tone: force, width: 1.5}
+- {arrow: [[140, 210.6], [140, 166]], tone: force, width: 1.5}
+- {arrow: [[164, 66.2], [164, 82]], tone: force, width: 1.5}
+- {arrow: [[164, 210.6], [164, 166]], tone: force, width: 1.5}
+- {arrow: [[76.4, 100], [98, 100]], tone: force, width: 1.5}
+- {arrow: [[203.6, 100], [182, 100]], tone: force, width: 1.5}
+- {arrow: [[67.8, 124], [98, 124]], tone: force, width: 1.5}
+- {arrow: [[212.2, 124], [182, 124]], tone: force, width: 1.5}
+- {arrow: [[59.1, 148], [98, 148]], tone: force, width: 1.5}
+- {arrow: [[220.9, 148], [182, 148]], tone: force, width: 1.5}
+- {text: 'сверху — меньше', at: [330, 70], size: 12}
+- {text: 'снизу — больше', at: [330, 226], size: 12}
+- {text: 'с боков —', at: [330, 112], size: 12}
+- {text: уравновешены, at: [330, 128], size: 12}
+- {arrow: [[140, 140], [140, 104]], tone: force, width: 2.5, animate: appear}
+- {text: '*F*_A', at: [158, 124], size: 13, tone: force, animate: appear}

@@ -1,0 +1,30 @@
+# mech.statics.hydrostatics 9.7: a block on a spring balance, fully under water in a beaker on
+# scales. Forces on the block: T + F_A = mg; by the third law the block pushes the water down
+# with F_A, so the scales show P0 + F_A
+kind: diagram
+size: [400, 252]
+items:
+- {line: [[30, 240], [30, 14], [150, 14]], width: 2}
+- {rect: [134, 18, 32, 58], fill: surface, radius: 3}
+- {spring: [[150, 24], [150, 62]], coils: 6, amplitude: 6}
+- {line: [[150, 62], [150, 132]], width: 1.2}
+- {rect: [90, 112, 120, 106], fill: accent, tone: accent, width: 0}
+- {line: [[90, 96], [90, 218], [210, 218], [210, 96]], width: 2}
+- {line: [[90, 112], [210, 112]], tone: accent, width: 1.5}
+- {rect: [70, 218, 160, 12], fill: surface}
+- {rect: [80, 230, 140, 14], fill: surface}
+- {text: весы, at: [150, 241], size: 10}
+- {hatch: [[60, 244], [240, 244]]}
+- {rect: [130, 132, 40, 40], fill: surface}
+- {arrow: [[150, 152], [150, 212]], tone: force, label: '*m**g*', label_at: [172, 208]}
+- {arrow: [[142, 152], [142, 126]], tone: force}
+- {text: '*F*_A', at: [114, 140], size: 13, tone: force}
+- {arrow: [[158, 132], [158, 94]], tone: force}
+- {text: '*T*', at: [170, 106], size: 13, tone: force}
+- {text: 'на брусок:', at: [318, 40], size: 12, tone: muted}
+- {text: '*T* + *F*_A = *m**g*', at: [318, 60], size: 13}
+- {text: 'динамометр:', at: [318, 100], size: 12, tone: muted}
+- {text: '*T* = *m**g* − *F*_A', at: [318, 120], size: 13}
+- {text: брусок давит на воду, at: [318, 160], size: 12, tone: muted}
+- {text: 'вниз с силой *F*_A,', at: [318, 176], size: 12, tone: muted}
+- {text: 'весы: *P*_0 + *F*_A', at: [318, 200], size: 13, tone: accent, animate: appear}
