@@ -1240,6 +1240,61 @@ blockquote {
   fill: var(--ok);
 }
 
+/* <pp-lever> (src/lib/sims/lever.ts): a ruler on a pivot with hanging weights. Weight arrows
+   red, as forces in the figures. */
+.lev-stand line {
+  stroke: var(--text);
+  stroke-width: 2;
+}
+
+.lev-beam {
+  fill: var(--surface-2);
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.lev-hole {
+  fill: var(--muted);
+}
+
+.lev-axis {
+  fill: var(--text);
+}
+
+.lev-num {
+  fill: var(--muted);
+  font-size: 9px;
+}
+
+.lev-string {
+  stroke: var(--text);
+  stroke-width: 1;
+}
+
+.lev-weight {
+  fill: var(--surface-2);
+  stroke: var(--border-strong);
+  stroke-width: 1;
+}
+
+.lev-f {
+  stroke: var(--bad);
+  stroke-width: 2;
+}
+
+.lev-fh {
+  fill: var(--bad);
+}
+
+.lev-name {
+  fill: var(--text);
+  font-size: 11px;
+}
+
+.lev-controls {
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
 /* <pp-path> (src/lib/sims/path.ts): path vs displacement along a route. */
 .pth-tracks {
   margin: 0 0 0.5rem;
