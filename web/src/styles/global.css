@@ -1088,6 +1088,103 @@ blockquote {
   background: var(--accent);
 }
 
+/* <pp-friction> (src/lib/sims/friction.ts): static and sliding friction on a pulled block.
+   Colours as in <pp-cart>: forces red, velocity green, acceleration accent; the legend reuses
+   the .crt-key swatches. */
+.frc-table line {
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.frc-table .frc-hatch {
+  stroke-width: 1;
+}
+
+.frc-marks line {
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.frc-marks text {
+  fill: var(--muted);
+}
+
+.frc-body {
+  fill: var(--surface-2);
+  stroke: var(--border-strong);
+  stroke-width: 1.5;
+}
+
+.frc-mass {
+  fill: var(--text);
+  font-size: 10px;
+}
+
+.frc-arrows line {
+  stroke-width: 2.5;
+}
+
+.frc-arrows text {
+  font-size: 12px;
+  font-style: italic;
+}
+
+.frc-sub {
+  font-size: 9px;
+  font-style: normal;
+}
+
+.frc-f line {
+  stroke: var(--bad);
+}
+
+.frc-f path,
+.frc-f text {
+  fill: var(--bad);
+}
+
+.frc-v line {
+  stroke: var(--ok);
+}
+
+.frc-v path,
+.frc-v text {
+  fill: var(--ok);
+}
+
+.frc-a line {
+  stroke: var(--accent);
+}
+
+.frc-a path,
+.frc-a text {
+  fill: var(--accent);
+}
+
+.frc-curve {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+
+.frc-guide {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+}
+
+.frc-guide-label {
+  fill: var(--muted);
+}
+
+.frc-dot {
+  fill: var(--bad);
+  stroke: var(--surface);
+  stroke-width: 1.5;
+}
+
 /* <pp-path> (src/lib/sims/path.ts): path vs displacement along a route. */
 .pth-tracks {
   margin: 0 0 0.5rem;

@@ -1,0 +1,30 @@
+# mech.dynamics.forces 6.1: one spring with 0, 1, 2, 3 equal weights (1 Н each). The free end
+# drops by the same 25 px for every newton: the extension is proportional to the force
+kind: diagram
+size: [400, 260]
+items:
+- {hatch: [[25, 40], [385, 40]], side: -1}
+- {line: [[30, 100], [380, 100]], tone: muted, width: 1, dashed: true}
+- {text: без груза, at: [28, 114], size: 11, tone: muted, anchor: start}
+- {text: '*F* = 0', at: [70, 26], size: 13}
+- {text: '*F* = 1 Н', at: [160, 26], size: 13}
+- {text: '*F* = 2 Н', at: [250, 26], size: 13}
+- {text: '*F* = 3 Н', at: [340, 26], size: 13}
+- {spring: [[70, 40], [70, 100]], coils: 6, amplitude: 7}
+- {dots: [[70, 100]], r: 3}
+- {spring: [[160, 40], [160, 125]], coils: 6, amplitude: 7}
+- {rect: [148, 125, 24, 18], fill: surface}
+- {spring: [[250, 40], [250, 150]], coils: 6, amplitude: 7}
+- {rect: [238, 150, 24, 18], fill: surface}
+- {rect: [238, 168, 24, 18], fill: surface}
+- {spring: [[340, 40], [340, 175]], coils: 6, amplitude: 7}
+- {rect: [328, 175, 24, 18], fill: surface}
+- {rect: [328, 193, 24, 18], fill: surface}
+- {rect: [328, 211, 24, 18], fill: surface}
+- {line: [[178, 100], [178, 125]], tone: accent, width: 2, animate: appear}
+- {text: '*Δl*', at: [184, 117], size: 13, tone: accent, anchor: start, animate: appear}
+- {line: [[268, 100], [268, 150]], tone: accent, width: 2, animate: appear}
+- {text: '2*Δl*', at: [274, 130], size: 13, tone: accent, anchor: start, animate: appear}
+- {line: [[358, 100], [358, 175]], tone: accent, width: 2, animate: appear}
+- {text: '3*Δl*', at: [364, 142], size: 13, tone: accent, anchor: start, animate: appear}
+- {text: 'сила вдвое больше — удлинение вдвое больше', at: [200, 252], size: 12, tone: muted}

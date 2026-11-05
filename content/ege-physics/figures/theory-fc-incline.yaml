@@ -1,0 +1,32 @@
+# mech.dynamics.forces 6.5: a block on a smooth 30° incline (same slope and block as
+# theory-mech.dynamics.forces). Gravity mg (90 px) splits into mg sin α along the slope (45 px)
+# and mg cos α into the slope (77.9 px); N balances the second one
+kind: diagram
+size: [400, 250]
+items:
+- line: [[50, 215], [360, 215], [50, 36.02]]
+  closed: true
+  fill: surface
+  width: 1.5
+- {rect: [180.8, 92.07, 52, 32], rotate: 30, fill: surface}
+- {arrow: [[206.8, 108.07], [206.8, 198.07]], tone: force, label: '*m**g*', label_at: [234, 205]}
+- {arrow: [[206.8, 108.07], [245.77, 40.57]], tone: force, label: '*N*', label_at: [256, 40]}
+- arrow: [[206.8, 108.07], [245.77, 130.57]]
+  tone: force
+  dashed: true
+  width: 1.5
+  label: '*m**g* sin *α*'
+  label_at: [290, 140]
+  animate: appear
+- arrow: [[206.8, 108.07], [167.83, 175.57]]
+  tone: force
+  dashed: true
+  width: 1.5
+  label: '*m**g* cos *α*'
+  label_at: [122, 184]
+  animate: appear
+- {line: [[245.77, 130.57], [206.8, 198.07], [167.83, 175.57]], tone: muted, width: 1, dashed: true, animate: appear}
+- {angle: [206.8, 108.07], start: 240, end: 270, r: 34, label: '*α*', animate: appear}
+- {angle: [360, 215], start: 150, end: 180, r: 42, label: '*α*'}
+- {text: '*N* = *m**g* cos *α*', at: [110, 244], size: 13}
+- {text: 'без трения *a* = *g* sin *α*', at: [290, 244], size: 13}
