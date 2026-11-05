@@ -25,7 +25,7 @@ const CIRCLE_TOL = 0.05; // км/с: this close to the circular speed counts as 
 const KEEP = 5; // previous shots shown
 const STORE_EVERY = 0.015; // radii between stored points (under a pixel on screen)
 
-const VIEW = { w: 400, h: 300, cx: 200, cy: 100, r: 56 };
+const VIEW = { w: 400, h: 270, cx: 200, cy: 112, r: 58 };
 const F_PX = 34; // force arrow at the surface, px (falls as 1/r²)
 const V_PX = 6; // px per км/с
 
