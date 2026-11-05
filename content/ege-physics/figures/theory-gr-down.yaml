@@ -1,7 +1,7 @@
 # mech.dynamics.gravity 7.2: bodies at five places on the globe; mg (42 px) always points to
 # the centre, so «down» is different in different places
 kind: diagram
-size: [400, 270]
+size: [400, 245]
 items:
 - {circle: [200, 140], r: 90, fill: surface}
 - {text: Земля, at: [200, 180], size: 13}

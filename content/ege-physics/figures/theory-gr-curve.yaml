@@ -2,7 +2,7 @@
 # 8 km the ground curves down by 8²/(2·6400) km = 5 m too, so the body stays at the same height.
 # Not to scale: the curvature is exaggerated
 kind: diagram
-size: [420, 180]
+size: [420, 152]
 items:
 - {path: 'M20 70.1A500 500 0 0 1 380 132.9', width: 2}
 - {line: [[120, 50], [360, 50]], width: 1.2, dashed: true, tone: muted}
@@ -16,4 +16,4 @@ items:
 - {text: 'за 1 с: 8 км вперёд', at: [225, 22], size: 12, tone: vel}
 - {text: 'и 5 м вниз', at: [338, 92.6], size: 12, anchor: start, tone: accent, animate: appear}
 - {text: 'поверхность Земли', at: [80, 85.6], size: 12, tone: muted}
-- {text: 'не в масштабе', at: [415, 175], size: 11, anchor: end, tone: muted}
+- {text: 'не в масштабе', at: [415, 146], size: 11, anchor: end, tone: muted}
