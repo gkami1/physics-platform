@@ -1185,6 +1185,61 @@ blockquote {
   stroke-width: 1.5;
 }
 
+/* <pp-orbit> (src/lib/sims/orbit.ts): Newton's cannon. Path accent and earlier shots dashed,
+   as in <pp-projectile>; force red, velocity green, as in the dynamics figures. */
+.orb-earth {
+  fill: var(--surface-2);
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.orb-label {
+  fill: var(--muted);
+  font-size: 12px;
+}
+
+.orb-mountain {
+  fill: var(--surface-2);
+  stroke: var(--text);
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+
+.orb-cannon {
+  fill: var(--text);
+}
+
+.orb-shot {
+  stroke-width: 1.2;
+}
+
+.orb-arrows line {
+  stroke-width: 2.5;
+}
+
+.orb-arrows text {
+  font-size: 12px;
+  font-style: italic;
+}
+
+.orb-f line {
+  stroke: var(--bad);
+}
+
+.orb-f path,
+.orb-f text {
+  fill: var(--bad);
+}
+
+.orb-v line {
+  stroke: var(--ok);
+}
+
+.orb-v path,
+.orb-v text {
+  fill: var(--ok);
+}
+
 /* <pp-path> (src/lib/sims/path.ts): path vs displacement along a route. */
 .pth-tracks {
   margin: 0 0 0.5rem;

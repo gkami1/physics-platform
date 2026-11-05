@@ -30,6 +30,7 @@ const { contextId } = Astro.props;
     'pp-circle': () => import('../../lib/sims/circle'),
     'pp-cart': () => import('../../lib/sims/cart'),
     'pp-friction': () => import('../../lib/sims/friction'),
+    'pp-orbit': () => import('../../lib/sims/orbit'),
   };
   for (const [tag, load] of Object.entries(sims)) if (document.querySelector(tag)) void load();
   // Step tasks: the answer form is static HTML; checking needs the element's code.
