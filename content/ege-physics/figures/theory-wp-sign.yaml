@@ -1,0 +1,32 @@
+# mech.conservation.work-power 11.4: the sign of work is the sign of cos α, α between the
+# force (red) and the displacement s (text colour, below each box): 40°, 90°, 145°.
+kind: diagram
+size: [400, 196]
+items:
+- {hatch: [[15, 114], [125, 114]], side: 1}
+- {rect: [53, 90, 34, 24], fill: 'surface'}
+- {line: [[70, 102], [116, 102]], width: 1, dashed: true, tone: 'muted'}
+- {arrow: [[70, 102], [109.8, 68.6]], tone: 'force'}
+- {text: '*F*', at: [119, 65.9], tone: 'force'}
+- {angle: [70, 102], start: 0, end: 40, r: 20, label: '*α*'}
+- {arrow: [[40, 136], [100, 136]], width: 2, label: '*s*', label_at: [112, 141]}
+- {text: '*α* < 90°: *A* > 0', at: [70, 168], size: 13}
+- {hatch: [[145, 114], [255, 114]], side: 1}
+- {rect: [183, 90, 34, 24], fill: 'surface'}
+- {line: [[200, 102], [246, 102]], width: 1, dashed: true, tone: 'muted'}
+- {arrow: [[200, 102], [200, 50]], tone: 'force'}
+- {text: '*F*', at: [200, 43], tone: 'force'}
+- {angle: [200, 102], start: 0, end: 90, r: 20, label: '*α*'}
+- {arrow: [[170, 136], [230, 136]], width: 2, label: '*s*', label_at: [242, 141]}
+- {text: '*α* = 90°: *A* = 0', at: [200, 168], size: 13}
+- {hatch: [[275, 114], [385, 114]], side: 1}
+- {rect: [313, 90, 34, 24], fill: 'surface'}
+- {line: [[330, 102], [376, 102]], width: 1, dashed: true, tone: 'muted'}
+- {arrow: [[330, 102], [287.4, 72.2]], tone: 'force'}
+- {text: '*F*', at: [277.6, 70.3], tone: 'force'}
+- {angle: [330, 102], start: 0, end: 145, r: 18, label: '*α*'}
+- {arrow: [[300, 136], [360, 136]], width: 2, label: '*s*', label_at: [372, 141]}
+- {text: '*α* > 90°: *A* < 0', at: [330, 168], size: 13}
+- {text: 'помогает', at: [70, 188], size: 12, tone: 'muted'}
+- {text: 'ни помогает, ни мешает', at: [200, 188], size: 12, tone: 'muted'}
+- {text: 'мешает', at: [330, 188], size: 12, tone: 'muted'}

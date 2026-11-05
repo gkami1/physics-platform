@@ -1,0 +1,22 @@
+# mech.conservation.work-power 11.5: from point 1 down to point 2 along a straight slope
+# and a winding path; gravity (red) does the same work mg(h1 − h2) on both. Paths are drawn
+# with movers (timing does not matter here).
+kind: diagram
+size: [400, 256]
+items:
+- {hatch: [[20, 222], [390, 222]], side: 1}
+- {path: 'M300 180H330', width: 1, dashed: true, tone: 'muted'}
+- {line: [[60, 60], [330, 60]], width: 1, dashed: true, tone: 'muted'}
+- {path: 'M60 60L290 180', width: 2, animate: 'draw', mover: true}
+- {path: 'M60 60H117.5V90H175V120H232.5V150H290V180', width: 2, tone: 'muted', animate: 'draw', mover: true}
+- {path: 'M60 60C70 200 200 225 290 180', width: 2, tone: 'muted', animate: 'draw', mover: true}
+- {dots: [[60, 60], [290, 180]], r: 4}
+- {text: '1', at: [48, 54], size: 13}
+- {text: '2', at: [304, 176], size: 13}
+- {text: 'ступеньки', at: [196, 104], size: 12, tone: 'muted', anchor: 'start'}
+- {text: 'через низину', at: [120, 200], size: 12, tone: 'muted'}
+- {arrow: [[60, 60], [60, 104]], tone: 'force', label: '*m**g*', label_at: [38, 104]}
+- {arrow: [[330, 120], [330, 60]], width: 1.5}
+- {arrow: [[330, 120], [330, 180]], width: 1.5}
+- {text: '*h*_1 − *h*_2', at: [338, 125], size: 13, anchor: 'start'}
+- {text: 'по любому пути: *A* = *m**g*(*h*_1 − *h*_2)', at: [200, 246], size: 13}

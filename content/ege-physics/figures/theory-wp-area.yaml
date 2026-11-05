@@ -1,0 +1,37 @@
+# mech.conservation.work-power 11.6: work as the area under F(x) (accent, appear): a
+# rectangle Fs for a constant force, a triangle kx²/2 for a spring stretched from zero, a
+# trapezoid for a spring stretched further, from x1 to x2. Qualitative: no numbers.
+kind: diagram
+size: [400, 224]
+items:
+- {arrow: [[34, 160], [126, 160]], width: 1.5}
+- {arrow: [[34, 160], [34, 44]], width: 1.5}
+- {text: '*F*', at: [46, 52], size: 13}
+- {path: 'M34 160V100H100V160Z', fill: 'accent', tone: 'accent', width: 0.1, animate: 'appear'}
+- {line: [[34, 100], [116, 100]], width: 2.5, tone: 'accent'}
+- {line: [[100, 100], [100, 160]], width: 1, dashed: true, tone: 'muted'}
+- {text: '*F*', at: [29, 105], size: 13, anchor: 'end'}
+- {text: '*s*', at: [100, 176], size: 13}
+- {text: '*F**s*', at: [67, 136], size: 13, animate: 'appear'}
+- {text: 'постоянная сила', at: [80, 196], size: 12}
+- {text: '*A* = *F**s*', at: [80, 214], size: 13}
+- {arrow: [[166, 160], [258, 160]], width: 1.5}
+- {arrow: [[166, 160], [166, 44]], width: 1.5}
+- {text: '*F*', at: [178, 52], size: 13}
+- {line: [[166, 160], [252, 86.9]], width: 2.5, tone: 'accent'}
+- {path: 'M166 160L232 103.9V160Z', fill: 'accent', tone: 'accent', width: 0.1, animate: 'appear'}
+- {path: 'M232 160V103.9H166', width: 1, dashed: true, tone: 'muted'}
+- {text: '*k**x*', at: [162, 108.9], size: 13, anchor: 'end'}
+- {text: '*x*', at: [232, 176], size: 13}
+- {text: 'пружина', at: [212, 196], size: 12}
+- {text: '*A* = *k**x*^{2}/2', at: [212, 214], size: 13}
+- {arrow: [[298, 160], [390, 160]], width: 1.5}
+- {arrow: [[298, 160], [298, 44]], width: 1.5}
+- {text: '*F*', at: [310, 52], size: 13}
+- {line: [[298, 160], [384, 86.9]], width: 2.5, tone: 'accent'}
+- {path: 'M328 160V134.5L370 98.8V160Z', fill: 'accent', tone: 'accent', width: 0.1, animate: 'appear'}
+- {path: 'M328 160V134.5M370 160V98.8', width: 1, dashed: true, tone: 'muted'}
+- {text: '*x*_1', at: [328, 176], size: 13}
+- {text: '*x*_2', at: [370, 176], size: 13}
+- {text: 'растянутая дальше', at: [340, 196], size: 12}
+- {text: 'трапеция', at: [344, 214], size: 13}

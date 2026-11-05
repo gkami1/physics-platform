@@ -1,0 +1,26 @@
+# mech.conservation.work-power 11.1: a push along the motion does work A = Fs (the box
+# moves by s, appear); lifting a load at constant speed takes F = mg, so A = mgh; holding
+# a bag still: s = 0, no work. Forces red, displacement in the text colour.
+kind: diagram
+size: [400, 304]
+items:
+- {hatch: [[20, 100], [380, 100]], side: 1}
+- {rect: [40, 64, 56, 36], fill: 'surface'}
+- {arrow: [[96, 82], [156, 82]], tone: 'force', label: '*F*', label_at: [126, 74]}
+- {rect: [230, 64, 56, 36], dashed: true, tone: 'muted', animate: 'appear'}
+- {arrow: [[68, 120], [258, 120]], label: '*s*', label_at: [163, 140], animate: 'appear'}
+- {text: '*A* = *F**s*', at: [338, 50], size: 15}
+- {hatch: [[20, 272], [190, 272]], side: 1}
+- {rect: [50, 244, 36, 28], dashed: true, tone: 'muted'}
+- {rect: [50, 186, 36, 28], fill: 'surface'}
+- {arrow: [[68, 186], [68, 152]], tone: 'force', label: '*F*', label_at: [82, 162]}
+- {arrow: [[68, 200], [68, 238]], tone: 'force', label: '*m**g*', label_at: [96, 236]}
+- {arrow: [[130, 243], [130, 214]], width: 1.5}
+- {arrow: [[130, 243], [130, 272]], width: 1.5}
+- {line: [[90, 214], [136, 214]], width: 1, dashed: true, tone: 'muted'}
+- {text: '*h*', at: [144, 248], anchor: 'start'}
+- {text: 'поднимаешь: *A* = *m**g**h*', at: [105, 294], size: 13}
+- {rect: [282, 206, 36, 28], fill: 'surface'}
+- {arrow: [[300, 206], [300, 172]], tone: 'force', label: '*F*', label_at: [314, 182]}
+- {arrow: [[300, 220], [300, 258]], tone: 'force', label: '*m**g*', label_at: [328, 256]}
+- {text: 'держишь: *s* = 0, *A* = 0', at: [300, 294], size: 13}

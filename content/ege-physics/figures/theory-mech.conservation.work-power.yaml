@@ -18,7 +18,6 @@ items:
   r: 40
   label: '*α*'
 - arrow: [[90, 185], [300, 185]]
-  tone: vel
   label: '*s*'
   label_at: [316, 190]
 - rect: [230, 110, 70, 40]
