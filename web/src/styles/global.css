@@ -1393,6 +1393,107 @@ blockquote {
   margin: 0.5rem 0 0;
 }
 
+/* <pp-collide> (src/lib/sims/collide.ts): two carts collide, sticky or elastic. Colours as in
+   the momentum figures: velocity green, momentum accent; the mode chips reuse .pfx-chips and
+   the legend the .crt-key swatches. */
+.col-modes {
+  margin: 0 0 0.5rem;
+}
+
+.col-modes legend {
+  width: auto;
+  margin-right: 0.4rem;
+}
+
+.col-modes span {
+  padding: 0.25rem 0.7rem;
+}
+
+.col-track line {
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.col-track text,
+.col-group,
+.col-wait {
+  fill: var(--muted);
+}
+
+.col-body {
+  fill: var(--surface-2);
+  stroke: var(--border-strong);
+  stroke-width: 1.5;
+}
+
+.col-wheel,
+.col-mass {
+  fill: var(--text);
+}
+
+.col-mass {
+  font-size: 10px;
+}
+
+.col-marks .col-before {
+  stroke: var(--muted);
+  stroke-width: 1.5;
+}
+
+.col-marks .col-after {
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.col-arrows line {
+  stroke: var(--ok);
+  stroke-width: 2.5;
+}
+
+.col-arrows path,
+.col-arrows text {
+  fill: var(--ok);
+}
+
+.col-arrows text {
+  font-size: 12px;
+  font-style: italic;
+}
+
+.col-sub {
+  font-size: 9px;
+  font-style: normal;
+}
+
+.col-name {
+  fill: var(--text);
+  font-style: italic;
+}
+
+.col-bar {
+  fill: var(--accent);
+  fill-opacity: 0.45;
+}
+
+.col-bar.col-total {
+  fill-opacity: 1;
+}
+
+.col-name.col-total {
+  font-weight: 600;
+}
+
+.col-value {
+  fill: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.col-zero {
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
 /* <pp-path> (src/lib/sims/path.ts): path vs displacement along a route. */
 .pth-tracks {
   margin: 0 0 0.5rem;
