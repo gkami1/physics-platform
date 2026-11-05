@@ -1494,6 +1494,123 @@ blockquote {
   stroke-dasharray: 3 3;
 }
 
+/* <pp-work> (src/lib/sims/work.ts): the work of each force on a box pulled at an angle.
+   Colours as in the work-power figures: forces red, displacement in the text colour, work
+   accent; the legend reuses the .crt-key swatches. */
+.wrk-floor line {
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.wrk-floor .wrk-hatch {
+  stroke-width: 1;
+}
+
+.wrk-body {
+  fill: var(--surface-2);
+  stroke: var(--border-strong);
+  stroke-width: 1.5;
+}
+
+.wrk-ghost {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+}
+
+.wrk-mass {
+  fill: var(--text);
+  font-size: 10px;
+}
+
+.wrk-f line {
+  stroke: var(--bad);
+  stroke-width: 2.5;
+}
+
+.wrk-f .wrk-dash {
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.wrk-f path {
+  fill: var(--bad);
+}
+
+.wrk-f .wrk-arc {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.2;
+}
+
+.wrk-f text,
+.wrk-s text {
+  font-size: 12px;
+  font-style: italic;
+}
+
+.wrk-f text {
+  fill: var(--bad);
+}
+
+.wrk-sub {
+  font-size: 9px;
+  font-style: normal;
+}
+
+.wrk-s line {
+  stroke: var(--text);
+  stroke-width: 2;
+}
+
+.wrk-s .wrk-tick {
+  stroke-width: 1;
+}
+
+.wrk-s path,
+.wrk-s text {
+  fill: var(--text);
+}
+
+.wrk-key-s {
+  background: var(--text);
+}
+
+.wrk-group {
+  fill: var(--muted);
+}
+
+.wrk-name {
+  fill: var(--text);
+  font-style: italic;
+}
+
+.wrk-name.wrk-total {
+  font-style: normal;
+  font-weight: 600;
+}
+
+.wrk-bar {
+  fill: var(--accent);
+  fill-opacity: 0.45;
+}
+
+.wrk-bar.wrk-total {
+  fill-opacity: 1;
+}
+
+.wrk-value {
+  fill: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.wrk-zero {
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
 /* <pp-path> (src/lib/sims/path.ts): path vs displacement along a route. */
 .pth-tracks {
   margin: 0 0 0.5rem;
