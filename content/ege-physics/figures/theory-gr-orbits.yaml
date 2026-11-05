@@ -1,0 +1,21 @@
+# mech.dynamics.gravity 7.5: orbits of radius r and 4r. Speeds v and v/2 (arrows 56 and
+# 28 px); dots at equal time steps: 40° per step inside, 5° outside (ω falls 8 times), so the
+# outer arcs are half as long
+kind: diagram
+size: [420, 340]
+items:
+- {circle: [200, 170], r: 160, dashed: true, tone: muted, width: 1}
+- {circle: [200, 170], r: 40, dashed: true, tone: muted, width: 1}
+- {circle: [200, 170], r: 20, fill: surface}
+- {dots: [[234.6, 190], [239.4, 163.1], [225.7, 139.4], [200, 130]], r: 3, tone: accent, animate: appear}
+- {dots: [[120, 31.4], [108.2, 38.9], [97.2, 47.4], [86.9, 56.9]], r: 3, tone: accent, animate: appear}
+- {dots: [[200, 130]], r: 5.5}
+- {arrow: [[200, 130], [144, 130]], tone: vel, label: '*v*'}
+- {dots: [[86.9, 56.9]], r: 5.5}
+- {arrow: [[86.9, 56.9], [67.1, 76.7]], tone: vel, label: '*v*/2'}
+- {line: [[200, 170], [165.4, 190]], width: 1}
+- {text: '*r*', at: [157.6, 196.5], size: 13}
+- {line: [[200, 170], [322.6, 272.8]], width: 1, tone: muted}
+- {text: '4*r*', at: [274, 258.2], size: 13}
+- {text: 'точки — через равные', at: [415, 20], size: 12, anchor: end, tone: accent, animate: appear}
+- {text: 'промежутки времени', at: [415, 36], size: 12, anchor: end, tone: accent, animate: appear}

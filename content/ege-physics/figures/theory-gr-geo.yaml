@@ -1,0 +1,25 @@
+# mech.dynamics.gravity 7.6: geostationary orbit seen from above the North Pole (not to
+# scale). A point on the equator and the satellite over it; four hours later both have turned 60°
+kind: diagram
+size: [400, 260]
+items:
+- {circle: [130, 135], r: 108, dashed: true, tone: muted, width: 1}
+- {circle: [130, 135], r: 38, fill: surface}
+- {text: 'С', at: [122, 151], size: 11, tone: muted}
+- {dots: [[130, 135]], r: 2.5}
+- {path: 'M84.9 151.4A48 48 0 0 0 113.6 180.1', width: 1.5, tone: muted}
+- {arrow: [[113.6, 180.1], [123.3, 182.5]], width: 1.5, tone: muted}
+- {line: [[130, 135], [238, 135]], width: 1, dashed: true, tone: muted}
+- {dots: [[168, 135]], r: 4, tone: force}
+- {dots: [[238, 135]], r: 6}
+- {arrow: [[238, 135], [238, 95]], tone: vel}
+- {line: [[130, 135], [184, 41.5]], width: 1, dashed: true, tone: muted, animate: appear}
+- {dots: [[149, 102.1]], r: 4, tone: force, animate: appear}
+- {dots: [[184, 41.5]], r: 6, animate: appear}
+- {arrow: [[184, 41.5], [149.4, 21.5]], tone: vel, animate: appear}
+- {text: 'через 4 ч: точка и спутник', at: [395, 40], size: 12, anchor: end, animate: appear}
+- {text: 'повернулись вместе на 60°', at: [395, 56], size: 12, anchor: end, animate: appear}
+- {text: '*T* = 24 ч', at: [395, 190], size: 13, anchor: end}
+- {text: 'над экватором, в сторону', at: [395, 208], size: 12, anchor: end}
+- {text: 'вращения Земли', at: [395, 224], size: 12, anchor: end}
+- {text: '*r* ≈ 42 000 км ≈ 6,6*R*', at: [395, 244], size: 13, anchor: end}
