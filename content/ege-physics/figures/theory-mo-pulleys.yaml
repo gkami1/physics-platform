@@ -1,0 +1,34 @@
+# mech.statics.moments 8.3: a fixed pulley (F = P, only the direction changes) and a movable
+# one (the load hangs on two strands, F = P/2). Then: the load rises h, the rope end 2h
+kind: diagram
+size: [400, 276]
+items:
+- {hatch: [[40, 30], [160, 30]], side: -1}
+- {line: [[100, 30], [100, 70]], width: 1.5}
+- {circle: [100, 70], r: 22, fill: surface}
+- {dots: [[100, 70]], r: 3}
+- {line: [[78, 70], [78, 190]], width: 1.5}
+- {rect: [62, 190, 32, 32], fill: surface}
+- {text: '*P*', at: [78, 211], size: 13}
+- {line: [[122, 70], [122, 160]], width: 1.5}
+- {arrow: [[122, 160], [122, 204]], tone: force, label: '*F*', label_at: [136, 204]}
+- {text: 'неподвижный', at: [100, 248], size: 12}
+- {text: '*F* = *P*', at: [100, 266], size: 13}
+- {hatch: [[230, 30], [330, 30]], side: -1}
+- {line: [[255, 30], [255, 160]], width: 1.5}
+- {circle: [280, 160], r: 25, fill: surface}
+- {dots: [[280, 160]], r: 3}
+- {line: [[305, 160], [305, 90]], width: 1.5}
+- {arrow: [[305, 90], [305, 48]], tone: force, label: '*F*', label_at: [319, 56]}
+- {line: [[280, 160], [280, 196]], width: 1.5}
+- {rect: [264, 196, 32, 32], fill: surface}
+- {text: '*P*', at: [280, 217], size: 13}
+- {text: '*P*/2', at: [240, 120], size: 12}
+- {text: '*P*/2', at: [322, 132], size: 12, anchor: start}
+- {text: 'подвижный', at: [280, 248], size: 12}
+- {text: '*F* = *P*/2', at: [280, 266], size: 13}
+- {rect: [264, 166, 32, 32], dashed: true, tone: accent, width: 1, animate: appear}
+- {line: [[352, 196], [352, 166]], width: 2, tone: accent, animate: appear}
+- {text: '*h*', at: [360, 186.0], size: 13, anchor: start, tone: accent, animate: appear}
+- {line: [[352, 90], [352, 30]], width: 2, tone: accent, animate: appear}
+- {text: '2*h*', at: [360, 65], size: 13, anchor: start, tone: accent, animate: appear}

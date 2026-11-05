@@ -1,0 +1,18 @@
+# mech.statics.moments 8.2: a door seen from above, hinges on the left. The same push at the
+# handle (1) turns it easily, near the hinges (2) hardly, along the door (3) not at all
+kind: diagram
+size: [410, 232]
+items:
+- {hatch: [[46, 70], [46, 150]], side: -1}
+- {rect: [52, 104, 290, 12], fill: surface}
+- {circle: [58, 110], r: 5, fill: solid}
+- {text: петли, at: [80, 140], size: 12, tone: muted}
+- {dots: [[318, 110]], r: 3}
+- {text: ручка, at: [318, 140], size: 12, tone: muted}
+- {path: 'M342 110A284 284 0 0 1 330 191', width: 1, dashed: true, tone: muted}
+- {arrow: [[318, 40], [318, 102]], tone: force, label: '1', label_at: [306, 46]}
+- {arrow: [[96, 40], [96, 102]], tone: force, label: '2', label_at: [84, 46]}
+- {arrow: [[400, 110], [346, 110]], tone: force, label: '3', label_at: [392, 98]}
+- {text: '1 — у ручки: открыть легко', at: [10, 186], size: 12, anchor: start}
+- {text: '2 — у петель: трудно', at: [10, 204], size: 12, anchor: start}
+- {text: '3 — вдоль двери: не поворачивает', at: [10, 222], size: 12, anchor: start}

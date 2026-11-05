@@ -1,0 +1,23 @@
+# mech.statics.moments 8.4: a uniform log lifted by one end, the other end on the ground
+# (the axis). mg (36 px) acts at the middle, F (18 px) at the end: arms l/2 and l, so F = mg/2
+kind: diagram
+size: [400, 266]
+items:
+- {hatch: [[20, 170], [380, 170]]}
+- {line: [[46.7, 154.3], [340.1, 92], [343.4, 107.6], [50, 170]], closed: true, fill: surface}
+- {dots: [[50, 170]], r: 3.5}
+- {text: 'ось', at: [50, 192], size: 12, tone: muted}
+- {dots: [[195.1, 131]], r: 4, tone: accent}
+- {arrow: [[195.1, 131], [195.1, 167]], tone: force, label: '*m**g*', label_at: [215.1, 161]}
+- {arrow: [[341.8, 99.8], [341.8, 81.8]], tone: force, label: '*F*', label_at: [355.8, 87.8]}
+- {text: 'центр тяжести', at: [185.1, 113], size: 12, tone: accent, anchor: end}
+- {line: [[50, 210], [195.1, 210]], width: 1.2}
+- {line: [[195.1, 204], [195.1, 216]], width: 1.2}
+- {line: [[50, 204], [50, 216]], width: 1.2}
+- {text: '*l*/2', at: [122.5, 228], size: 13}
+- {line: [[50, 238], [341.8, 238]], width: 1.2}
+- {line: [[341.8, 232], [341.8, 244]], width: 1.2}
+- {line: [[50, 232], [50, 244]], width: 1.2}
+- {text: '*l*', at: [195.9, 256], size: 13}
+- {line: [[195.1, 169], [195.1, 204]], width: 1, dashed: true, tone: muted}
+- {line: [[341.8, 99.8], [341.8, 232]], width: 1, dashed: true, tone: muted}

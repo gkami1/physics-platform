@@ -1,0 +1,36 @@
+# mech.statics.moments 8.2: a ruler on a pivot (40 px = 0,1 м). Left: 4 Н at 0,2 м turns it
+# anticlockwise; right: 2 Н at 0,1 м and 3 Н at 0,2 м turn it clockwise. 0,8 = 0,2 + 0,6 Н·м
+kind: diagram
+size: [400, 204]
+items:
+- {rect: [40, 92, 320, 10], fill: surface}
+- {line: [[200, 102], [187, 126], [213, 126]], closed: true, fill: surface}
+- {hatch: [[177, 126], [223, 126]]}
+- {dots: [[200, 97]], r: 2.5}
+- {line: [[40, 92], [40, 97]], width: 1, tone: muted}
+- {line: [[80, 92], [80, 97]], width: 1, tone: muted}
+- {line: [[120, 92], [120, 97]], width: 1, tone: muted}
+- {line: [[160, 92], [160, 97]], width: 1, tone: muted}
+- {line: [[240, 92], [240, 97]], width: 1, tone: muted}
+- {line: [[280, 92], [280, 97]], width: 1, tone: muted}
+- {line: [[320, 92], [320, 97]], width: 1, tone: muted}
+- {line: [[360, 92], [360, 97]], width: 1, tone: muted}
+- {line: [[120, 102], [120, 120]], width: 1}
+- {rect: [109, 120, 22, 40], fill: surface}
+- {text: '4 Н', at: [120, 175], size: 12}
+- {text: '0,2 м', at: [120, 190], size: 11, tone: muted}
+- {line: [[240, 102], [240, 120]], width: 1}
+- {rect: [229, 120, 22, 20], fill: surface}
+- {text: '2 Н', at: [240, 155], size: 12}
+- {text: '0,1 м', at: [240, 170], size: 11, tone: muted}
+- {line: [[280, 102], [280, 120]], width: 1}
+- {rect: [269, 120, 22, 30], fill: surface}
+- {text: '3 Н', at: [280, 165], size: 12}
+- {text: '0,2 м', at: [280, 180], size: 11, tone: muted}
+- {path: 'M178.8 38.7A62 62 0 0 0 146.3 66', width: 1.5}
+- {arrow: [[146.3, 66], [142.5, 73.8]], width: 1.5}
+- {path: 'M221.2 38.7A62 62 0 0 1 253.7 66', width: 1.5}
+- {arrow: [[253.7, 66], [257.5, 73.8]], width: 1.5}
+- {text: 'против часовой', at: [118, 40], size: 12}
+- {text: 'по часовой', at: [286, 40], size: 12}
+- {text: 'расстояния — от оси', at: [200, 196], size: 11, tone: muted}
