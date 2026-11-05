@@ -1,0 +1,17 @@
+# mech.statics.moments 8.5: a force F at 30° to the lever, applied at distance l from the axis O.
+# The arm d is the perpendicular from O to the line of action: d = l sin α (110 px for l = 220)
+kind: diagram
+size: [400, 240]
+items:
+- {rect: [60.0, 107.0, 220.0, 10], fill: surface}
+- {circle: [60, 112], r: 5, fill: solid}
+- {text: '*O*', at: [46.0, 104.0], size: 13}
+- {line: [[280, 112], [370, 112.0]], width: 1, dashed: true, tone: muted}
+- {line: [[95.9, 218.3], [280, 112]], width: 1, dashed: true, tone: muted}
+- {text: 'линия действия силы', at: [101.9, 222.3], size: 12, anchor: start, tone: muted}
+- {arrow: [[280, 112], [356.2, 68]], tone: force, label: '*F*', label_at: [362.2, 62]}
+- {angle: [280, 112], start: 0, end: 30, r: 34, label: 'α'}
+- {line: [[60, 112], [115, 207.3]], width: 2.5, tone: accent}
+- {line: [[110.5, 199.5], [118.3, 195], [122.8, 202.8]], width: 1, tone: accent}
+- {text: '*d* = *l* sin α', at: [77.5, 165.6], size: 13, anchor: end, tone: accent}
+- {text: '*l*', at: [170.0, 100.0], size: 13}

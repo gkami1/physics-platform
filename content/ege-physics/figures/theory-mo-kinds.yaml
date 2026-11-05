@@ -1,0 +1,20 @@
+# mech.statics.moments 8.7: a ball in a bowl (stable), on a hill (unstable), on a flat table
+# (neutral); then the ball nudged aside (dashed) and what it does
+kind: diagram
+size: [400, 142]
+items:
+- {path: 'M20 35Q70 115 120 35', width: 2}
+- {circle: [70, 66], r: 9, fill: surface}
+- {circle: [88.5, 58.6], r: 9, dashed: true, tone: muted, width: 1, animate: appear}
+- {text: 'устойчивое', at: [70, 113], size: 12}
+- {text: 'вернётся', at: [70, 131], size: 12, tone: accent, animate: appear}
+- {path: 'M150 85Q200 5 250 85', width: 2}
+- {circle: [200, 36], r: 9, fill: surface}
+- {circle: [229.5, 47.1], r: 9, dashed: true, tone: muted, width: 1, animate: appear}
+- {text: 'неустойчивое', at: [200, 113], size: 12}
+- {text: 'скатится', at: [200, 131], size: 12, tone: accent, animate: appear}
+- {line: [[290, 75], [390, 75]], width: 2}
+- {circle: [325, 66], r: 9, fill: surface}
+- {circle: [355, 66], r: 9, dashed: true, tone: muted, width: 1, animate: appear}
+- {text: 'безразличное', at: [340, 113], size: 12}
+- {text: 'останется', at: [340, 131], size: 12, tone: accent, animate: appear}

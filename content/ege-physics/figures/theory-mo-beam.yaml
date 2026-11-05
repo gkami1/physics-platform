@@ -1,0 +1,24 @@
+# mech.statics.moments 8.6: a uniform board (4 м, 10 кг) on supports under its ends, a bucket
+# (30 кг) 1 м from the left. Forces at 0,3 px/Н: P = 300, mg = 100, N1 = 275, N2 = 125 Н.
+# Axis at the left support
+kind: diagram
+size: [400, 270]
+items:
+- {rect: [40, 110, 320, 14], fill: surface}
+- {line: [[50, 124], [37, 148], [63, 148]], closed: true, fill: surface}
+- {hatch: [[27, 148], [73, 148]]}
+- {line: [[350, 124], [337, 148], [363, 148]], closed: true, fill: surface}
+- {hatch: [[327, 148], [373, 148]]}
+- {rect: [107, 80, 36, 30], fill: surface}
+- {arrow: [[125, 124], [125, 214.0]], tone: force, label: '*P*', label_at: [141, 214.0]}
+- {arrow: [[200, 124], [200, 154.0]], tone: force, label: '*m**g*', label_at: [222, 166]}
+- {arrow: [[50, 110], [50, 27.5]], tone: force, label: '*N*_1', label_at: [68, 34]}
+- {arrow: [[350, 110], [350, 72.5]], tone: force, label: '*N*_2', label_at: [332, 78]}
+- {circle: [50, 117], r: 9, tone: accent, width: 2}
+- {text: 'ось', at: [24, 121], size: 12, tone: accent}
+- {text: '1 м', at: [87.5, 226], size: 12, tone: muted}
+- {text: '2 м', at: [155.0, 244], size: 12, tone: muted}
+- {text: '4 м', at: [200, 262], size: 12, tone: muted}
+- {line: [[50, 216], [125, 216]], width: 1, tone: muted}
+- {line: [[50, 234], [200, 234]], width: 1, tone: muted}
+- {line: [[50, 252], [350, 252]], width: 1, tone: muted}
