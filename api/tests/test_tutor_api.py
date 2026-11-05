@@ -108,7 +108,7 @@ def test_hint_request_needs_no_text(signed_in: TestClient) -> None:
 def test_theory_thread(signed_in: TestClient) -> None:
     model = ScriptedModel(replies=("Сила — мера взаимодействия.",))
     use_model(signed_in, model)
-    evs = ask(signed_in, "Что такое сила?", kind="theory", id="mech.dynamics.newton")
+    evs = ask(signed_in, "Что такое сила?", kind="theory", id="mech.dynamics.newton/force")
     assert evs[0][1]["hint_level"] is None
     assert reply_text(evs) == "Сила — мера взаимодействия."
     r = signed_in.post("/api/tutor/messages", json={"kind": "theory", "id": "nope", "text": "?"})

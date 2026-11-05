@@ -1,0 +1,14 @@
+# mech.dynamics.newton 5.6: forces 3 Н (east) and 4 Н (north) on one body, 30 px per Н; the
+# resultant 5 Н is the diagonal of the rectangle, and the acceleration points along it
+kind: diagram
+size: [400, 200]
+items:
+- {line: [[200, 160], [200, 40]], tone: muted, width: 1, dashed: true}
+- {line: [[110, 40], [200, 40]], tone: muted, width: 1, dashed: true}
+- {arrow: [[110, 160], [200, 160]], tone: force, label: 3 Н, label_at: [214, 172]}
+- {arrow: [[110, 160], [110, 40]], tone: force, label: 4 Н, label_at: [86, 42]}
+- {arrow: [[110, 160], [200, 40]], tone: force, width: 2.5, label: 5 Н, label_at: [214, 32], animate: appear}
+- {dots: [[110, 160]], r: 5}
+- {arrow: [[270, 150], [306, 102]], tone: accent, label: '*a*', label_at: [318, 100], animate: appear}
+- {text: ускорение —, at: [300, 172], size: 12, tone: accent, animate: appear}
+- {text: по равнодействующей, at: [300, 188], size: 12, tone: accent, animate: appear}

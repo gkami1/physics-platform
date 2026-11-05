@@ -994,6 +994,100 @@ blockquote {
   background: var(--accent);
 }
 
+/* <pp-cart> (src/lib/sims/cart.ts): a cart pushed by a constant force. Same colours as the
+   dynamics figures: force red, velocity green, acceleration accent. */
+.crt-track line {
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.crt-track text,
+.crt-marks text {
+  fill: var(--muted);
+}
+
+.crt-marks line {
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.crt-previous line {
+  stroke: var(--muted);
+  stroke-width: 1.5;
+  stroke-dasharray: 2 2;
+}
+
+.crt-body {
+  fill: var(--surface-2);
+  stroke: var(--border-strong);
+  stroke-width: 1.5;
+}
+
+.crt-wheel {
+  fill: var(--text);
+}
+
+.crt-mass {
+  fill: var(--text);
+  font-size: 10px;
+}
+
+.crt-arrows line {
+  stroke-width: 2.5;
+}
+
+.crt-f line {
+  stroke: var(--bad);
+}
+
+.crt-arrows text {
+  font-size: 12px;
+  font-style: italic;
+}
+
+.crt-f path,
+.crt-f text {
+  fill: var(--bad);
+}
+
+.crt-v line {
+  stroke: var(--ok);
+}
+
+.crt-v path,
+.crt-v text {
+  fill: var(--ok);
+}
+
+.crt-a line {
+  stroke: var(--accent);
+}
+
+.crt-a path,
+.crt-a text {
+  fill: var(--accent);
+}
+
+.crt-key {
+  display: inline-block;
+  width: 1.2em;
+  height: 0.2em;
+  border-radius: 1px;
+  vertical-align: middle;
+}
+
+.crt-key-f {
+  background: var(--bad);
+}
+
+.crt-key-v {
+  background: var(--ok);
+}
+
+.crt-key-a {
+  background: var(--accent);
+}
+
 /* <pp-path> (src/lib/sims/path.ts): path vs displacement along a route. */
 .pth-tracks {
   margin: 0 0 0.5rem;

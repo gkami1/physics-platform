@@ -1,0 +1,15 @@
+# mech.dynamics.newton 5.5: the Earth pulls the apple and the apple pulls the Earth: equal
+# arrows (56 px), opposite directions, applied to different bodies
+kind: diagram
+size: [400, 240]
+items:
+- {circle: [200, 680], r: 520, fill: surface}
+- {text: Земля, at: [330, 230], size: 13}
+- {circle: [200, 46], r: 9, fill: solid}
+- {line: [[200, 37], [204, 28]], width: 1.5}
+- {text: яблоко, at: [222, 50], size: 12, anchor: start}
+- {arrow: [[200, 55], [200, 111]], tone: force, label: '*F*_1', label_at: [218, 104]}
+- {arrow: [[200, 222], [200, 166]], tone: force, label: '*F*_2', label_at: [218, 184], animate: appear}
+- {text: 'Земля тянет яблоко', at: [30, 90], size: 12, anchor: start}
+- {text: 'яблоко тянет Землю', at: [30, 214], size: 12, anchor: start, animate: appear}
+- {text: '|*F*_1| = |*F*_2|', at: [330, 110], size: 14, animate: appear}

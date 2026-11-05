@@ -1,0 +1,17 @@
+# mech.dynamics.newton 5.1: a father (80 кг) and a son (40 кг) push off on the ice; the son
+# gets 2 м/с, the father 1 м/с (40 px per м/с): twice the mass, half the speed
+kind: diagram
+size: [400, 230]
+items:
+- {hatch: [[30, 200], [370, 200]]}
+- {rect: [146, 80, 44, 120], fill: surface, radius: 6}
+- {circle: [168, 62], r: 16, fill: surface}
+- {rect: [212, 130, 30, 70], fill: surface, radius: 5}
+- {circle: [227, 116], r: 11, fill: surface}
+- {line: [[190, 120], [212, 150]], width: 2}
+- {text: 80 кг, at: [168, 146], size: 13}
+- {text: 40 кг, at: [227, 170], size: 12}
+- {arrow: [[146, 104], [106, 104]], tone: vel, label: 1 м/с, label_at: [96, 92], animate: appear}
+- {arrow: [[242, 150], [322, 150]], tone: vel, label: 2 м/с, label_at: [300, 138], animate: appear}
+- {text: масса вдвое больше —, at: [200, 20], size: 13}
+- {text: скорость вдвое меньше, at: [200, 38], size: 13}
