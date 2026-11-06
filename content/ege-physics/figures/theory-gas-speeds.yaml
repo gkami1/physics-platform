@@ -1,6 +1,6 @@
 # thermo.mkt.ideal-gas 2.7: hydrogen (M = 2 г/моль) and water vapour (18 г/моль) at the same
 # temperature: equal mean energy, but the light molecules are √9 = 3 times faster (green
-# arrows 45 : 15). Not H₂ against O₂: their ratio 4 is an intermediate of ks-gas-06.
+# arrows 54 : 18). Not H₂ against O₂: their ratio 4 is an intermediate of ks-gas-06.
 # Seed 31.
 # Colours (whole topic, extending «Основы МКТ»): molecules in the text colour, the tracked
 # molecule and the focal quantity (pressure, the Kelvin scale, energy) accent, velocity green,
@@ -33,43 +33,43 @@ items:
 - arrow:
   - - 43.5
     - 59.0
-  - - 66.7
-    - 97.5
+  - - 71.4
+    - 105.2
   width: 1.5
   tone: vel
 - arrow:
   - - 89.1
     - 104.7
-  - - 134.0
-    - 107.8
+  - - 143.0
+    - 108.4
   width: 1.5
   tone: vel
 - arrow:
   - - 121.5
     - 60.9
-  - - 165.7
-    - 52.4
+  - - 174.5
+    - 50.7
   width: 1.5
   tone: vel
 - arrow:
   - - 154.8
     - 82.2
-  - - 150.6
-    - 127.0
+  - - 149.7
+    - 136.0
   width: 1.5
   tone: vel
 - arrow:
   - - 156.4
     - 117.1
-  - - 165.3
-    - 73.0
+  - - 167.1
+    - 64.2
   width: 1.5
   tone: vel
 - arrow:
   - - 84.7
     - 66.3
-  - - 97.7
-    - 109.4
+  - - 100.3
+    - 118.0
   width: 1.5
   tone: vel
 - text: водород H_{2}
@@ -96,47 +96,47 @@ items:
     - 117.1
   - - 280.7
     - 66.3
-  r: 6.5
+  r: 5
 - arrow:
   - - 239.5
     - 59.0
-  - - 247.2
-    - 71.8
+  - - 248.8
+    - 74.4
   width: 1.5
   tone: vel
 - arrow:
   - - 285.1
     - 104.7
-  - - 300.1
-    - 105.7
+  - - 303.1
+    - 105.9
   width: 1.5
   tone: vel
 - arrow:
   - - 317.5
     - 60.9
-  - - 332.2
-    - 58.1
+  - - 335.2
+    - 57.5
   width: 1.5
   tone: vel
 - arrow:
   - - 350.8
     - 82.2
-  - - 349.4
-    - 97.1
+  - - 349.1
+    - 100.1
   width: 1.5
   tone: vel
 - arrow:
   - - 352.4
     - 117.1
-  - - 355.4
-    - 102.4
+  - - 356.0
+    - 99.5
   width: 1.5
   tone: vel
 - arrow:
   - - 280.7
     - 66.3
-  - - 285.0
-    - 80.7
+  - - 285.9
+    - 83.5
   width: 1.5
   tone: vel
 - text: водяной пар H_{2}O
