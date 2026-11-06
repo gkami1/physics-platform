@@ -388,6 +388,11 @@ blockquote {
   stroke: var(--accent);
 }
 
+/* A graph series with its own tone (muted, vel…) sits in a tone group: draw it in that colour. */
+.fig :is(.fig-force, .fig-vel, .fig-accent, .fig-muted) .fig-line {
+  stroke: currentColor;
+}
+
 /* Diagram tones: groups set `color`, shapes inside draw with currentColor. */
 .fig .fig-force {
   color: var(--bad);
