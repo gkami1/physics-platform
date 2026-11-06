@@ -1,0 +1,23 @@
+# mech.conservation.energy 12.5: a spring launcher. Compressed by x, the ball at rest stores
+# kx²/2; the straightened spring has given it all away as kinetic energy (green arrow, appears).
+kind: diagram
+size: [400, 224]
+items:
+- {text: 'пружина сжата на *x*', at: [48, 26], size: 12, tone: 'muted', anchor: 'start'}
+- {hatch: [[40, 60], [40, 100]], side: 1}
+- {hatch: [[40, 100], [390, 100]], side: 1}
+- {spring: [[40, 91], [120, 91]], coils: 9, amplitude: 7}
+- {circle: [129, 91], r: 9, fill: 'solid'}
+- {line: [[180, 74], [180, 100]], width: 1, dashed: true, tone: 'muted'}
+- {arrow: [[150, 62], [121, 62]], width: 1.2}
+- {arrow: [[150, 62], [179, 62]], width: 1.2}
+- {text: '*x*', at: [150, 54], size: 13}
+- {text: '*v* = 0,  *E* = *k**x*^{2}/2', at: [200, 86], size: 13, anchor: 'start'}
+- {text: 'пружина распрямилась', at: [48, 136], size: 12, tone: 'muted', anchor: 'start'}
+- {hatch: [[40, 160], [40, 200]], side: 1}
+- {hatch: [[40, 200], [390, 200]], side: 1}
+- {spring: [[40, 191], [180, 191]], coils: 9, amplitude: 7}
+- {line: [[180, 174], [180, 200]], width: 1, dashed: true, tone: 'muted'}
+- {circle: [262, 191], r: 9, fill: 'solid', animate: 'appear'}
+- {arrow: [[274, 191], [330, 191]], tone: 'vel', label: '*v*', label_at: [334, 182], animate: 'appear'}
+- {text: '*E* = *m**v*^{2}/2', at: [262, 166], size: 13, animate: 'appear'}

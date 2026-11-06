@@ -1,0 +1,19 @@
+# mech.conservation.energy 12.4: a pendulum let go from rest swings down: it falls by h and
+# gets the speed v at the lowest point (green); the thread does no work. Qualitative.
+kind: diagram
+size: [400, 236]
+items:
+- {hatch: [[160, 30], [240, 30]], side: -1}
+- {line: [[200, 30], [200, 171]], width: 1, dashed: true, tone: 'muted'}
+- {line: [[200, 30], [290.6, 137.9]], width: 1.5}
+- {path: 'M296.4 144.9A150 150 0 0 1 103.6 144.9', width: 1, tone: 'muted', animate: 'draw', mover: true}
+- {circle: [296.4, 144.9], r: 9, fill: 'solid'}
+- {circle: [200, 180], r: 9, fill: 'surface'}
+- {line: [[310, 144.9], [372, 144.9]], width: 1, dashed: true, tone: 'muted'}
+- {line: [[212, 180], [372, 180]], width: 1, dashed: true, tone: 'muted'}
+- {arrow: [[360, 162], [360, 146]], width: 1.2}
+- {arrow: [[360, 162], [360, 178]], width: 1.2}
+- {text: '*h*', at: [368, 167], size: 13, anchor: 'start'}
+- {arrow: [[188, 180], [128, 180]], tone: 'vel', label: '*v*', label_at: [124, 172]}
+- {text: '*v* = 0', at: [312, 132], size: 12, anchor: 'start'}
+- {text: '*m**g**h* = *m**v*^{2}/2', at: [200, 224], size: 13}

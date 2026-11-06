@@ -1,0 +1,30 @@
+# mech.conservation.energy 12.8: two equal plasticine balls stick together. The momentum
+# (accent, as in the momentum figures) is the same before and after; half of the kinetic energy
+# (green) becomes heat Q (muted). Qualitative: no numbers.
+kind: diagram
+size: [400, 232]
+items:
+- {text: 'до', at: [20, 24], size: 12, tone: 'muted', anchor: 'start'}
+- {circle: [40, 56], r: 12, fill: 'solid'}
+- {arrow: [[54, 56], [104, 56]], tone: 'vel', label: '*v*', label_at: [100, 46]}
+- {circle: [150, 56], r: 12, fill: 'surface'}
+- {text: 'после', at: [20, 114], size: 12, tone: 'muted', anchor: 'start'}
+- {circle: [104, 146], r: 12, fill: 'solid'}
+- {circle: [128, 146], r: 12, fill: 'surface'}
+- {arrow: [[142, 146], [167, 146]], tone: 'vel', label: '*u*', label_at: [166, 136]}
+- {text: 'импульс', at: [328, 24], size: 12, tone: 'muted'}
+- {text: 'до', at: [262, 51], size: 12, anchor: 'end'}
+- {rect: [268, 40, 100, 14], fill: 'accent', tone: 'accent'}
+- {text: 'после', at: [262, 71], size: 12, anchor: 'end'}
+- {rect: [268, 60, 100, 14], fill: 'accent', tone: 'accent'}
+- {text: 'энергия', at: [328, 114], size: 12, tone: 'muted'}
+- {text: 'до', at: [262, 141], size: 12, anchor: 'end'}
+- {rect: [268, 130, 120, 14], fill: 'accent', tone: 'vel'}
+- {text: '*E*_к', at: [328, 141], size: 11}
+- {text: 'после', at: [262, 161], size: 12, anchor: 'end'}
+- {rect: [268, 150, 60, 14], fill: 'accent', tone: 'vel'}
+- {text: '*E*_к', at: [298, 161], size: 11}
+- {rect: [328, 150, 60, 14], fill: 'accent', tone: 'muted', animate: 'appear'}
+- {text: '*Q*', at: [358, 161], size: 11, animate: 'appear'}
+- {text: 'импульс сохранился, механическая энергия — нет', at: [200, 200], size: 13}
+- {text: '*Q* = *E*_до − *E*_после', at: [200, 222], size: 13}

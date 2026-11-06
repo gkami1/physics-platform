@@ -1,0 +1,19 @@
+# mech.conservation.energy 12.6: a braking car. The braking force (red) points back, its work
+# −Fs takes away all the kinetic energy; the car stops after s (dashed). Qualitative.
+kind: diagram
+size: [400, 152]
+items:
+- {hatch: [[10, 82], [390, 82]], side: 1}
+- {rect: [70, 48, 64, 24], fill: 'surface', radius: 4}
+- {circle: [84, 76], r: 6, fill: 'solid'}
+- {circle: [120, 76], r: 6, fill: 'solid'}
+- {arrow: [[90, 30], [150, 30]], tone: 'vel', label: '*v*', label_at: [158, 34]}
+- {arrow: [[70, 60], [24, 60]], tone: 'force', label: '*F*', label_at: [30, 50]}
+- {rect: [290, 48, 64, 24], radius: 4, dashed: true, tone: 'muted'}
+- {circle: [304, 76], r: 6, width: 1, tone: 'muted'}
+- {circle: [340, 76], r: 6, width: 1, tone: 'muted'}
+- {text: '*v* = 0', at: [322, 36], size: 12}
+- {path: 'M102 98V114M322 98V114', width: 1}
+- {arrow: [[102, 106], [322, 106]], width: 1.5, animate: 'appear'}
+- {text: '*s*', at: [212, 100], size: 13}
+- {text: '−*F**s* = 0 − *m**v*^{2}/2', at: [200, 140], size: 13}
