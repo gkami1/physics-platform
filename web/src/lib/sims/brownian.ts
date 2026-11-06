@@ -15,6 +15,8 @@
 // Written into theory Markdown as plain HTML; the theory page imports this module only when such
 // an element is present. Light DOM, site CSS variables: follows the light/dark theme.
 
+import { gaussian, rng } from './random';
+
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
 export const BOX = { w: 400, h: 240 }; // px, the vessel
@@ -29,18 +31,6 @@ export const RUN = 30; // с, a run
 export const SEED = 20261106;
 const T_RANGE = { min: -100, max: 500, step: 20 }; // °C
 const STEP_REDUCED = 2; // с per press with reduced motion
-
-/** Small seeded PRNG (mulberry32): the same molecules every time. */
-export function rng(seed: number): () => number {
-  let a = seed >>> 0;
-  return () => {
-    a = (a + 0x6d2b79f5) >>> 0;
-    let t = a;
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
 
 /** Molecular speeds scale as √T: the factor relative to 20 °C. */
 export function speedScale(tC: number): number {
@@ -68,7 +58,7 @@ export interface State {
 /** Start: the particle at rest in the middle, molecules scattered with 2D Maxwell velocities. */
 export function create(tC: number, seed = SEED): State {
   const r = rng(seed);
-  const gauss = () => Math.sqrt(-2 * Math.log(1 - r())) * Math.cos(2 * Math.PI * r());
+  const gauss = gaussian(r);
   // mean speed of a 2D Maxwell distribution is σ√(π/2)
   const sigma = (V0 * speedScale(tC)) / Math.sqrt(Math.PI / 2);
   const s: State = {
