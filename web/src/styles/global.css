@@ -1926,6 +1926,54 @@ blockquote {
   fill: var(--ok);
 }
 
+/* <pp-brownian> (src/lib/sims/brownian.ts): a Brownian particle hit by molecules. Molecules in
+   the text colour, the particle and its trace accent, as in the topic's figures. Its one chip
+   fieldset is the last of type, which .pfx-chips turns green: kept accent here. */
+.brn-chips {
+  margin: 0.6rem 0 0;
+}
+
+.brn-chips legend {
+  width: auto;
+  margin-right: 0.4rem;
+}
+
+.brn-chips span {
+  padding: 0.25rem 0.7rem;
+}
+
+.pfx-chips.brn-chips input:checked + span {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.brn-box {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.5;
+}
+
+.brn-mols circle {
+  fill: var(--text);
+}
+
+.brn-big {
+  fill: var(--surface-2);
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+
+.brn-trace {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+.brn-dots circle {
+  fill: var(--accent);
+}
+
 /* <pp-path> (src/lib/sims/path.ts): path vs displacement along a route. */
 .pth-tracks {
   margin: 0 0 0.5rem;
