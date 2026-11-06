@@ -1,0 +1,172 @@
+# thermo.mkt.ideal-gas 2.5: left, one molecule (accent) hits the wall with vₓ and bounces
+# back: its momentum changes by 2m₀vₓ (mechanics 10.5); right, a cube with the six
+# directions of motion: on average a third of v² is along each axis. Qualitative.
+# Colours (whole topic, extending «Основы МКТ»): molecules in the text colour, the tracked
+# molecule and the focal quantity (pressure, the Kelvin scale, energy) accent, velocity green,
+# forces (hits on a wall) red, notes muted.
+kind: diagram
+size:
+- 400
+- 212
+items:
+- hatch:
+  - - 168
+    - 22
+  - - 168
+    - 170
+  side: -1
+- line:
+  - - 24
+    - 96
+  - - 156
+    - 96
+  width: 1
+  dashed: true
+  tone: muted
+- dots:
+  - - 138
+    - 66
+  r: 6
+  tone: accent
+- arrow:
+  - - 138
+    - 66
+  - - 84
+    - 66
+  tone: vel
+  label: '*v*_x'
+  label_at:
+  - 64
+  - 71
+- text: после
+  at:
+  - 110
+  - 50
+  size: 12
+  tone: muted
+- dots:
+  - - 44
+    - 126
+  r: 6
+  tone: accent
+- arrow:
+  - - 44
+    - 126
+  - - 98
+    - 126
+  tone: vel
+  label: '*v*_x'
+  label_at:
+  - 116
+  - 131
+- text: до
+  at:
+  - 72
+  - 150
+  size: 12
+  tone: muted
+- text: Δ*p* = 2*m*_0*v*_x
+  at:
+  - 94
+  - 196
+  size: 14
+  tone: accent
+- line:
+  - &id001
+    - 233.0
+    - 73.0
+  - &id003
+    - 325.0
+    - 73.0
+  - &id005
+    - 325.0
+    - 165.0
+  - &id007
+    - 233.0
+    - 165.0
+  closed: true
+  width: 1.2
+  tone: muted
+- line:
+  - &id002
+    - 263.0
+    - 43.0
+  - &id004
+    - 355.0
+    - 43.0
+  - &id006
+    - 355.0
+    - 135.0
+  - &id008
+    - 263.0
+    - 135.0
+  closed: true
+  width: 1.2
+  tone: muted
+- line:
+  - *id001
+  - *id002
+  width: 1.2
+  tone: muted
+- line:
+  - *id003
+  - *id004
+  width: 1.2
+  tone: muted
+- line:
+  - *id005
+  - *id006
+  width: 1.2
+  tone: muted
+- line:
+  - *id007
+  - *id008
+  width: 1.2
+  tone: muted
+- arrow:
+  - &id009
+    - 294.0
+    - 104.0
+  - - 328.0
+    - 104.0
+  width: 1.6
+  tone: vel
+- arrow:
+  - *id009
+  - - 260.0
+    - 104.0
+  width: 1.6
+  tone: vel
+- arrow:
+  - *id009
+  - - 294.0
+    - 70.0
+  width: 1.6
+  tone: vel
+- arrow:
+  - *id009
+  - - 294.0
+    - 138.0
+  width: 1.6
+  tone: vel
+- arrow:
+  - *id009
+  - - 311.0
+    - 87.0
+  width: 1.6
+  tone: vel
+- arrow:
+  - *id009
+  - - 277.0
+    - 121.0
+  width: 1.6
+  tone: vel
+- dots:
+  - *id009
+  r: 4
+- text: три направления
+  at:
+  - 294
+  - 196
+  size: 12
+  tone: muted

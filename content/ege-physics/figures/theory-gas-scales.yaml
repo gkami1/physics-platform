@@ -1,0 +1,117 @@
+# thermo.mkt.ideal-gas 2.3: the Celsius and Kelvin scales side by side; the same three
+# points (absolute zero, melting ice, boiling water) on both, the Kelvin scale accent.
+# No other temperatures: the step tasks ask for −73 °C and 27 → 327 °C.
+# Colours (whole topic, extending «Основы МКТ»): molecules in the text colour, the tracked
+# molecule and the focal quantity (pressure, the Kelvin scale, energy) accent, velocity green,
+# forces (hits on a wall) red, notes muted.
+kind: diagram
+size:
+- 400
+- 214
+items:
+- line:
+  - - 110
+    - 202
+  - - 110
+    - 23.1
+  width: 2.4
+  tone: default
+- line:
+  - - 290
+    - 202
+  - - 290
+    - 23.1
+  width: 2.4
+  tone: accent
+- text: °C
+  at:
+  - 110
+  - 11.100000000000001
+  size: 15
+- text: К
+  at:
+  - 290
+  - 11.100000000000001
+  size: 15
+  tone: accent
+- line:
+  - - 102
+    - 196.0
+  - - 298
+    - 196.0
+  width: 1
+  dashed: true
+  tone: muted
+- text: −273 °C
+  at:
+  - 96
+  - 201.0
+  size: 13
+  anchor: end
+- text: 0 К
+  at:
+  - 304
+  - 201.0
+  size: 13
+  anchor: start
+  tone: accent
+- text: абсолютный ноль
+  at:
+  - 200
+  - 190.0
+  size: 12
+  tone: muted
+- line:
+  - - 102
+    - 75.9
+  - - 298
+    - 75.9
+  width: 1
+  dashed: true
+  tone: muted
+- text: 0 °C
+  at:
+  - 96
+  - 80.9
+  size: 13
+  anchor: end
+- text: 273 К
+  at:
+  - 304
+  - 80.9
+  size: 13
+  anchor: start
+  tone: accent
+- text: тает лёд
+  at:
+  - 200
+  - 69.9
+  size: 12
+  tone: muted
+- line:
+  - - 102
+    - 31.9
+  - - 298
+    - 31.9
+  width: 1
+  dashed: true
+  tone: muted
+- text: 100 °C
+  at:
+  - 96
+  - 36.9
+  size: 13
+  anchor: end
+- text: 373 К
+  at:
+  - 304
+  - 36.9
+  size: 13
+  anchor: start
+  tone: accent
+- text: кипит вода
+  at:
+  - 200
+  - 25.9
+  size: 12
+  tone: muted

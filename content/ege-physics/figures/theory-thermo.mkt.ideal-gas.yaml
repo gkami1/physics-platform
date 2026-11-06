@@ -1,48 +1,335 @@
-# thermo.mkt.ideal-gas: molecules hit the wall; the impacts add up to pressure
+# thermo.mkt.ideal-gas 2.1 (the ladder's figure, redrawn): left, molecules in a box; the
+# hits press on every wall equally (red); right, one hit up close: the molecule (accent)
+# comes in and bounces back, the wall feels a push F. Seed 21, qualitative.
+# Colours (whole topic, extending «Основы МКТ»): molecules in the text colour, the tracked
+# molecule and the focal quantity (pressure, the Kelvin scale, energy) accent, velocity green,
+# forces (hits on a wall) red, notes muted.
 kind: diagram
-size: [400, 250]
+size:
+- 400
+- 232
 items:
-- rect: [40, 40, 260, 180]
-  width: 2
-- arrow: [[70, 70], [100, 88]]
-  tone: vel
+- arrow:
+  - - 32
+    - 40.0
+  - - 16
+    - 40.0
   width: 1.5
-- arrow: [[120, 150], [98, 175]]
-  tone: vel
-  width: 1.5
-- arrow: [[160, 95], [188, 75]]
-  tone: vel
-  width: 1.5
-- arrow: [[95, 190], [127, 184]]
-  tone: vel
-  width: 1.5
-- arrow: [[200, 175], [175, 153]]
-  tone: vel
-  width: 1.5
-- arrow: [[230, 60], [250, 88]]
-  tone: vel
-  width: 1.5
-- arrow: [[60, 140], [42, 114]]
-  tone: vel
-  width: 1.5
-- dots: [[70, 70], [120, 150], [160, 95], [95, 190], [200, 175], [230, 60], [60, 140]]
-  r: 5
-- dots: [[284, 120]]
-  r: 5
-- arrow: [[240, 90], [280, 118]]
-  tone: vel
-  width: 1.5
-  dashed: true
-- arrow: [[284, 124], [244, 152]]
-  tone: vel
-  width: 1.5
-- arrow: [[302, 120], [340, 120]]
   tone: force
+- arrow:
+  - - 232
+    - 40.0
+  - - 248
+    - 40.0
+  width: 1.5
+  tone: force
+- arrow:
+  - - 32
+    - 72.0
+  - - 16
+    - 72.0
+  width: 1.5
+  tone: force
+- arrow:
+  - - 232
+    - 72.0
+  - - 248
+    - 72.0
+  width: 1.5
+  tone: force
+- arrow:
+  - - 32
+    - 104.0
+  - - 16
+    - 104.0
+  width: 1.5
+  tone: force
+- arrow:
+  - - 232
+    - 104.0
+  - - 248
+    - 104.0
+  width: 1.5
+  tone: force
+- arrow:
+  - - 32
+    - 136.0
+  - - 16
+    - 136.0
+  width: 1.5
+  tone: force
+- arrow:
+  - - 232
+    - 136.0
+  - - 248
+    - 136.0
+  width: 1.5
+  tone: force
+- arrow:
+  - - 32
+    - 168.0
+  - - 16
+    - 168.0
+  width: 1.5
+  tone: force
+- arrow:
+  - - 232
+    - 168.0
+  - - 248
+    - 168.0
+  width: 1.5
+  tone: force
+- arrow:
+  - - 50.3
+    - 22
+  - - 50.3
+    - 6
+  width: 1.5
+  tone: force
+- arrow:
+  - - 50.3
+    - 186
+  - - 50.3
+    - 202
+  width: 1.5
+  tone: force
+- arrow:
+  - - 83.0
+    - 22
+  - - 83.0
+    - 6
+  width: 1.5
+  tone: force
+- arrow:
+  - - 83.0
+    - 186
+  - - 83.0
+    - 202
+  width: 1.5
+  tone: force
+- arrow:
+  - - 115.7
+    - 22
+  - - 115.7
+    - 6
+  width: 1.5
+  tone: force
+- arrow:
+  - - 115.7
+    - 186
+  - - 115.7
+    - 202
+  width: 1.5
+  tone: force
+- arrow:
+  - - 148.3
+    - 22
+  - - 148.3
+    - 6
+  width: 1.5
+  tone: force
+- arrow:
+  - - 148.3
+    - 186
+  - - 148.3
+    - 202
+  width: 1.5
+  tone: force
+- arrow:
+  - - 181.0
+    - 22
+  - - 181.0
+    - 6
+  width: 1.5
+  tone: force
+- arrow:
+  - - 181.0
+    - 186
+  - - 181.0
+    - 202
+  width: 1.5
+  tone: force
+- arrow:
+  - - 213.7
+    - 22
+  - - 213.7
+    - 6
+  width: 1.5
+  tone: force
+- arrow:
+  - - 213.7
+    - 186
+  - - 213.7
+    - 202
+  width: 1.5
+  tone: force
+- rect:
+  - 34
+  - 24
+  - 196
+  - 160
+  width: 2
+- dots:
+  - - 73.0
+    - 130.6
+  - - 155.8
+    - 101.1
+  - - 186.2
+    - 105.7
+  - - 132.9
+    - 67.0
+  - - 44.6
+    - 85.9
+  - - 147.0
+    - 43.7
+  - - 183.7
+    - 66.5
+  - - 85.0
+    - 39.9
+  - - 219.6
+    - 137.4
+  - - 211.5
+    - 85.6
+  - - 66.0
+    - 163.9
+  - - 123.8
+    - 111.3
+  - - 176.8
+    - 140.8
+  - - 146.2
+    - 136.2
+  - - 48.7
+    - 47.1
+  - - 170.4
+    - 173.0
+  - - 105.3
+    - 163.8
+  - - 202.2
+    - 168.2
+  r: 4
+- arrow:
+  - - 73.0
+    - 130.6
+  - - 56.3
+    - 119.6
+  width: 1.5
+  tone: vel
+- arrow:
+  - - 155.8
+    - 101.1
+  - - 175.8
+    - 102.5
+  width: 1.5
+  tone: vel
+- arrow:
+  - - 186.2
+    - 105.7
+  - - 205.6
+    - 110.5
+  width: 1.5
+  tone: vel
+- arrow:
+  - - 132.9
+    - 67.0
+  - - 116.0
+    - 77.8
+  width: 1.5
+  tone: vel
+- arrow:
+  - - 44.6
+    - 85.9
+  - - 59.4
+    - 99.3
+  width: 1.5
+  tone: vel
+- arrow:
+  - - 147.0
+    - 43.7
+  - - 127.0
+    - 42.6
+  width: 1.5
+  tone: vel
+- arrow:
+  - - 183.7
+    - 66.5
+  - - 169.5
+    - 52.4
+  width: 1.5
+  tone: vel
+- arrow:
+  - - 85.0
+    - 39.9
+  - - 85.4
+    - 19.9
+  width: 1.5
+  tone: vel
+- arrow:
+  - - 219.6
+    - 137.4
+  - - 233.8
+    - 151.4
+  width: 1.5
+  tone: vel
+- hatch:
+  - - 330
+    - 40
+  - - 330
+    - 170
+  side: -1
+- path: M262 62L324 104L262 146
+  width: 1
+  tone: muted
+  animate: draw
+  mover: false
+- arrow:
+  - - 262
+    - 62
+  - - 296.1
+    - 85.1
+  tone: vel
+  label: '*v*'
+  label_at:
+  - 272
+  - 98
+- arrow:
+  - - 324
+    - 104
+  - - 296.1
+    - 122.9
+  tone: vel
+  animate: appear
+- dots:
+  - - 262
+    - 62
+  r: 5
+  tone: accent
+- dots:
+  - - 324
+    - 104
+  r: 5
+  tone: accent
+  animate: appear
+- arrow:
+  - - 334
+    - 104
+  - - 372
+    - 104
+  tone: force
+  width: 2.4
   label: '*F*'
-  label_at: [354, 125]
-- text: удары молекул о стенку
-  at: [170, 240]
-  size: 13
-- text: '*p* = *n**k**T*'
-  at: [345, 60]
-  size: 15
+  label_at:
+  - 380
+  - 94
+  animate: appear
+- text: газ давит на все стенки
+  at:
+  - 132.0
+  - 222
+  size: 12
+  tone: muted
+- text: один удар
+  at:
+  - 306
+  - 222
+  size: 12
+  tone: muted

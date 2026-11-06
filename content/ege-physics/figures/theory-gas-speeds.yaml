@@ -1,0 +1,152 @@
+# thermo.mkt.ideal-gas 2.7: hydrogen (M = 2 г/моль) and water vapour (18 г/моль) at the same
+# temperature: equal mean energy, but the light molecules are √9 = 3 times faster (green
+# arrows 45 : 15). Not H₂ against O₂: their ratio 4 is an intermediate of ks-gas-06.
+# Seed 31.
+# Colours (whole topic, extending «Основы МКТ»): molecules in the text colour, the tracked
+# molecule and the focal quantity (pressure, the Kelvin scale, energy) accent, velocity green,
+# forces (hits on a wall) red, notes muted.
+kind: diagram
+size:
+- 400
+- 192
+items:
+- rect:
+  - 22
+  - 30
+  - 160
+  - 120
+  width: 1.5
+- dots:
+  - - 43.5
+    - 59.0
+  - - 89.1
+    - 104.7
+  - - 121.5
+    - 60.9
+  - - 154.8
+    - 82.2
+  - - 156.4
+    - 117.1
+  - - 84.7
+    - 66.3
+  r: 3
+- arrow:
+  - - 43.5
+    - 59.0
+  - - 66.7
+    - 97.5
+  width: 1.5
+  tone: vel
+- arrow:
+  - - 89.1
+    - 104.7
+  - - 134.0
+    - 107.8
+  width: 1.5
+  tone: vel
+- arrow:
+  - - 121.5
+    - 60.9
+  - - 165.7
+    - 52.4
+  width: 1.5
+  tone: vel
+- arrow:
+  - - 154.8
+    - 82.2
+  - - 150.6
+    - 127.0
+  width: 1.5
+  tone: vel
+- arrow:
+  - - 156.4
+    - 117.1
+  - - 165.3
+    - 73.0
+  width: 1.5
+  tone: vel
+- arrow:
+  - - 84.7
+    - 66.3
+  - - 97.7
+    - 109.4
+  width: 1.5
+  tone: vel
+- text: водород H_{2}
+  at:
+  - 102.0
+  - 20
+  size: 13
+- rect:
+  - 218
+  - 30
+  - 160
+  - 120
+  width: 1.5
+- dots:
+  - - 239.5
+    - 59.0
+  - - 285.1
+    - 104.7
+  - - 317.5
+    - 60.9
+  - - 350.8
+    - 82.2
+  - - 352.4
+    - 117.1
+  - - 280.7
+    - 66.3
+  r: 6.5
+- arrow:
+  - - 239.5
+    - 59.0
+  - - 247.2
+    - 71.8
+  width: 1.5
+  tone: vel
+- arrow:
+  - - 285.1
+    - 104.7
+  - - 300.1
+    - 105.7
+  width: 1.5
+  tone: vel
+- arrow:
+  - - 317.5
+    - 60.9
+  - - 332.2
+    - 58.1
+  width: 1.5
+  tone: vel
+- arrow:
+  - - 350.8
+    - 82.2
+  - - 349.4
+    - 97.1
+  width: 1.5
+  tone: vel
+- arrow:
+  - - 352.4
+    - 117.1
+  - - 355.4
+    - 102.4
+  width: 1.5
+  tone: vel
+- arrow:
+  - - 280.7
+    - 66.3
+  - - 285.0
+    - 80.7
+  width: 1.5
+  tone: vel
+- text: водяной пар H_{2}O
+  at:
+  - 298.0
+  - 20
+  size: 13
+- text: одна *T* — одна *E*_к, а скорости разные
+  at:
+  - 200
+  - 180
+  size: 13
+  tone: accent

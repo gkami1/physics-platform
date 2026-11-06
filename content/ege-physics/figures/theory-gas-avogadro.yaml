@@ -1,0 +1,83 @@
+# thermo.mkt.ideal-gas 2.6: hydrogen and oxygen in equal boxes at the same pressure and
+# temperature hold equally many molecules (n = p/kT); the molecules differ, their number
+# does not. Seed 12, qualitative.
+# Colours (whole topic, extending «Основы МКТ»): molecules in the text colour, the tracked
+# molecule and the focal quantity (pressure, the Kelvin scale, energy) accent, velocity green,
+# forces (hits on a wall) red, notes muted.
+kind: diagram
+size:
+- 400
+- 172
+items:
+- rect:
+  - 30
+  - 30
+  - 150
+  - 110
+  width: 1.5
+- dots:
+  - - 101.9
+    - 97.9
+  - - 125.3
+    - 55.7
+  - - 45.3
+    - 74.7
+  - - 77.4
+    - 110.4
+  - - 128.3
+    - 93.3
+  - - 51.2
+    - 111.1
+  - - 85.1
+    - 77.2
+  - - 164.4
+    - 121.6
+  - - 90.9
+    - 46.5
+  - - 132.6
+    - 123.3
+  r: 3
+- text: водород H_{2}
+  at:
+  - 105.0
+  - 20
+  size: 13
+- rect:
+  - 220
+  - 30
+  - 150
+  - 110
+  width: 1.5
+- dots:
+  - - 291.9
+    - 97.9
+  - - 315.3
+    - 55.7
+  - - 235.3
+    - 74.7
+  - - 267.4
+    - 110.4
+  - - 318.3
+    - 93.3
+  - - 241.2
+    - 111.1
+  - - 275.1
+    - 77.2
+  - - 354.4
+    - 121.6
+  - - 280.9
+    - 46.5
+  - - 322.6
+    - 123.3
+  r: 6
+- text: кислород O_{2}
+  at:
+  - 295.0
+  - 20
+  size: 13
+- text: одинаковые *V*, *p* и *T* — молекул поровну
+  at:
+  - 200
+  - 170
+  size: 13
+  tone: accent

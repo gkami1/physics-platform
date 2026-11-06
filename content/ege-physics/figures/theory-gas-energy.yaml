@@ -1,0 +1,40 @@
+# thermo.mkt.ideal-gas 2.4: the mean kinetic energy of a molecule against the Celsius
+# temperature: a straight line that reaches zero at −273 °C, not at 0 °C; E is
+# proportional to T in kelvins, not to t. Qualitative energy axis.
+# Colours (whole topic, extending «Основы МКТ»): molecules in the text colour, the tracked
+# molecule and the focal quantity (pressure, the Kelvin scale, energy) accent, velocity green,
+# forces (hits on a wall) red, notes muted.
+kind: graph
+x:
+  var: t
+  unit: °C
+  min: -300
+  max: 200
+  step: 100
+y:
+  var: E_к
+  min: 0
+  max: 10
+  step: 2
+  numbers: false
+series:
+- points:
+  - - -273
+    - 0
+  - - 200
+    - 7.6
+  tone: accent
+guides:
+- - 0
+  - 4.4
+notes:
+- at:
+  - -215
+  - 0.3
+  text: абсолютный ноль
+  anchor: start
+- at:
+  - 12
+  - 3.8000000000000003
+  text: при 0 °C — не ноль
+  anchor: start
