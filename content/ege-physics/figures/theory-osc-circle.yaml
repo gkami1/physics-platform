@@ -1,0 +1,116 @@
+# mech.oscillations.harmonic 13.3: a point goes round a circle of radius A with angular
+# speed ω (lesson 4.4); its shadow on a line below moves like a load on a spring:
+# x = A cos ωt. Drawn at ωt = 50°.
+kind: diagram
+size:
+- 400
+- 256
+items:
+- line:
+  - - 106
+    - 104
+  - - 294
+    - 104
+  width: 1
+  tone: muted
+- path: M280 104A80 80 0 1 0 120 104A80 80 0 1 0 280 104
+  width: 1
+  tone: muted
+  animate: draw
+  mover: true
+- line:
+  - - 251.4
+    - 42.7
+  - - 251.4
+    - 212
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 200
+    - 104
+  - - 251.4
+    - 42.7
+  width: 2
+  tone: accent
+- dots:
+  - - 200
+    - 104
+  r: 3
+- angle:
+  - 200
+  - 104
+  start: 0
+  end: 50
+  r: 26
+  label: '*ω**t*'
+- text: '*A*'
+  at:
+  - 214
+  - 66
+  size: 13
+  tone: accent
+- dots:
+  - - 251.4
+    - 42.7
+  r: 5
+  tone: accent
+- line:
+  - - 110
+    - 222
+  - - 290
+    - 222
+  width: 1.2
+- line:
+  - - 120
+    - 216
+  - - 120
+    - 228
+  width: 1.2
+- line:
+  - - 200
+    - 216
+  - - 200
+    - 228
+  width: 1.2
+- line:
+  - - 280
+    - 216
+  - - 280
+    - 228
+  width: 1.2
+- arrow:
+  - - 200
+    - 202
+  - - 250.4
+    - 202
+  width: 1.5
+  tone: accent
+- text: '*x* = *A* cos *ω**t*'
+  at:
+  - 262
+  - 198
+  size: 13
+  tone: accent
+  anchor: start
+- rect:
+  - 241.4
+  - 214
+  - 20
+  - 16
+  fill: surface
+- text: −*A*
+  at:
+  - 120
+  - 246
+  size: 13
+- text: '0'
+  at:
+  - 200
+  - 246
+  size: 13
+- text: '*A*'
+  at:
+  - 280
+  - 246
+  size: 13

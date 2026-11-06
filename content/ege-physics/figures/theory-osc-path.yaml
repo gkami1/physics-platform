@@ -1,0 +1,177 @@
+# mech.oscillations.harmonic 13.1: a load on a spring pulled out by A; one full oscillation
+# from the middle is four stretches of A (accent): path 4A, displacement 0. Qualitative.
+kind: diagram
+size:
+- 400
+- 246
+items:
+- hatch:
+  - - 40
+    - 28
+  - - 40
+    - 90
+  side: 1
+- hatch:
+  - - 40
+    - 90
+  - - 380
+    - 90
+  side: 1
+- line:
+  - - 130
+    - 30
+  - - 130
+    - 98
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 200
+    - 30
+  - - 200
+    - 98
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 270
+    - 30
+  - - 270
+    - 98
+  width: 1
+  dashed: true
+  tone: muted
+- spring:
+  - - 40
+    - 73
+  - - 255
+    - 73
+  coils: 10
+- rect:
+  - 255
+  - 56
+  - 30
+  - 34
+  fill: surface
+- text: '*m*'
+  at:
+  - 270
+  - 78
+  size: 13
+- arrow:
+  - - 235
+    - 42
+  - - 201
+    - 42
+  width: 1.2
+- arrow:
+  - - 235
+    - 42
+  - - 269
+    - 42
+  width: 1.2
+- text: '*A*'
+  at:
+  - 235
+  - 35
+  size: 13
+- text: −*A*
+  at:
+  - 130
+  - 116
+  size: 13
+- text: '0'
+  at:
+  - 200
+  - 116
+  size: 13
+- text: '*A*'
+  at:
+  - 270
+  - 116
+  size: 13
+- line:
+  - - 130
+    - 128
+  - - 130
+    - 214
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 200
+    - 128
+  - - 200
+    - 214
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 270
+    - 128
+  - - 270
+    - 214
+  width: 1
+  dashed: true
+  tone: muted
+- arrow:
+  - - 200
+    - 140
+  - - 270
+    - 140
+  tone: accent
+  width: 2
+- text: '*A*'
+  at:
+  - 282
+  - 144
+  size: 12
+  tone: accent
+  anchor: start
+- arrow:
+  - - 270
+    - 162
+  - - 200
+    - 162
+  tone: accent
+  width: 2
+- text: '*A*'
+  at:
+  - 282
+  - 166
+  size: 12
+  tone: accent
+  anchor: start
+- arrow:
+  - - 200
+    - 184
+  - - 130
+    - 184
+  tone: accent
+  width: 2
+- text: '*A*'
+  at:
+  - 118
+  - 188
+  size: 12
+  tone: accent
+  anchor: end
+- arrow:
+  - - 130
+    - 206
+  - - 200
+    - 206
+  tone: accent
+  width: 2
+- text: '*A*'
+  at:
+  - 118
+  - 210
+  size: 12
+  tone: accent
+  anchor: end
+- text: 'одно колебание: путь 4*A*, перемещение 0'
+  at:
+  - 200
+  - 236
+  size: 13

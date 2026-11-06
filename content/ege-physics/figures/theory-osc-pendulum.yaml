@@ -1,0 +1,89 @@
+# mech.oscillations.harmonic 13.6: two thread pendulums with the same small swing; the thread
+# four times longer gives twice the period, T = 2π√(l/g). Qualitative.
+kind: diagram
+size:
+- 400
+- 306
+items:
+- hatch:
+  - - 70
+    - 30
+  - - 150
+    - 30
+  side: -1
+- hatch:
+  - - 230
+    - 30
+  - - 310
+    - 30
+  side: -1
+- line:
+  - - 110
+    - 30
+  - - 110
+    - 100
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 270
+    - 30
+  - - 270
+    - 274
+  width: 1
+  dashed: true
+  tone: muted
+- path: M94.0 85.8A58 58 0 0 0 126.0 85.8
+  width: 1
+  dashed: true
+  tone: muted
+- path: M206.1 253.0A232 232 0 0 0 333.9 253.0
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 110
+    - 30
+  - - 126.0
+    - 85.8
+  width: 1.5
+- line:
+  - - 270
+    - 30
+  - - 333.9
+    - 253.0
+  width: 1.5
+- circle:
+  - 126.0
+  - 85.8
+  r: 7
+  fill: solid
+- circle:
+  - 333.9
+  - 253.0
+  r: 7
+  fill: solid
+- text: '*l*'
+  at:
+  - 102
+  - 64
+  size: 13
+  anchor: end
+- text: 4*l*
+  at:
+  - 262
+  - 150
+  size: 13
+  anchor: end
+- text: период *T*
+  at:
+  - 110
+  - 130
+  size: 13
+  tone: accent
+- text: период 2*T*
+  at:
+  - 270
+  - 296
+  size: 13
+  tone: accent

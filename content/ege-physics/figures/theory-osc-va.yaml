@@ -1,0 +1,110 @@
+# mech.oscillations.harmonic 13.4: three moments of one oscillation, top to bottom: at the
+# edge v = 0 and the acceleration (accent) is largest, towards the middle; in the middle
+# the speed (green) is largest and a = 0. Qualitative.
+kind: diagram
+size:
+- 400
+- 232
+items:
+- line:
+  - - 110
+    - 20
+  - - 110
+    - 200
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 200
+    - 20
+  - - 200
+    - 200
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 290
+    - 20
+  - - 290
+    - 200
+  width: 1
+  dashed: true
+  tone: muted
+- circle:
+  - 290
+  - 44
+  r: 9
+  fill: solid
+- arrow:
+  - - 278
+    - 44
+  - - 226
+    - 44
+  tone: accent
+  label: '*a*_max'
+  label_at:
+  - 236
+  - 34
+- text: '*v* = 0'
+  at:
+  - 306
+  - 48
+  size: 13
+  anchor: start
+- circle:
+  - 200
+  - 112
+  r: 9
+  fill: solid
+- arrow:
+  - - 188
+    - 112
+  - - 124
+    - 112
+  tone: vel
+  label: '*v*_max'
+  label_at:
+  - 138
+  - 102
+- text: '*a* = 0'
+  at:
+  - 216
+  - 116
+  size: 13
+  anchor: start
+- circle:
+  - 110
+  - 180
+  r: 9
+  fill: solid
+- arrow:
+  - - 122
+    - 180
+  - - 174
+    - 180
+  tone: accent
+  label: '*a*_max'
+  label_at:
+  - 160
+  - 170
+- text: '*v* = 0'
+  at:
+  - 94
+  - 184
+  size: 13
+  anchor: end
+- text: −*A*
+  at:
+  - 110
+  - 222
+  size: 13
+- text: '0'
+  at:
+  - 200
+  - 222
+  size: 13
+- text: '*A*'
+  at:
+  - 290
+  - 222
+  size: 13

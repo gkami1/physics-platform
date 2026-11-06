@@ -1706,6 +1706,129 @@ blockquote {
   background: var(--muted);
 }
 
+/* <pp-spring> (src/lib/sims/spring.ts): a load on a spring, the point on a circle whose shadow
+   it is, a live x(t) graph and energy bars. Velocity and kinetic energy green, acceleration
+   and the spring's energy accent; the legend reuses the .crt-key swatches. */
+.spr-solid,
+.spr-axis {
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.spr-thin,
+.spr-ticks line {
+  stroke: var(--muted);
+  stroke-width: 1;
+}
+
+.spr-ticks text,
+.spr-name,
+.spr-m {
+  fill: var(--text);
+}
+
+.spr-m,
+.spr-it {
+  font-style: italic;
+}
+
+.spr-name.spr-total {
+  font-weight: 600;
+}
+
+.spr-group {
+  fill: var(--muted);
+  font-size: 11px;
+}
+
+.spr-sub {
+  font-size: 9px;
+  font-style: normal;
+}
+
+.spr-circle {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.spr-shadow {
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.spr-radius {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.spr-point {
+  fill: var(--accent);
+}
+
+.spr-spring {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+.spr-load {
+  fill: var(--surface-2);
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.spr-trace {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+
+.spr-vel line {
+  stroke: var(--ok);
+  stroke-width: 2.5;
+}
+
+.spr-vel path {
+  fill: var(--ok);
+}
+
+.spr-acc line {
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+
+.spr-acc path {
+  fill: var(--accent);
+}
+
+.spr-bar {
+  fill-opacity: 0.55;
+}
+
+.spr-p {
+  fill: var(--accent);
+}
+
+.spr-k {
+  fill: var(--ok);
+}
+
+.spr-frame {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1;
+}
+
+.spr-value {
+  fill: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
 /* <pp-path> (src/lib/sims/path.ts): path vs displacement along a route. */
 .pth-tracks {
   margin: 0 0 0.5rem;
