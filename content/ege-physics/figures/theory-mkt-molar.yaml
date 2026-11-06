@@ -1,0 +1,78 @@
+# thermo.mkt.basics 1.5: one mole of carbon, water and aluminium: the same number of
+# particles N_A, different masses (accent, M in grams). Sizes follow the real volumes
+# roughly (5,5; 18; 10 см³). Only substances the tasks give in their statements or not at all.
+# Colours (whole topic): molecules in the text colour, the tracked particle and the focal
+# quantity accent, velocity green, forces between molecules red, notes muted.
+kind: diagram
+size:
+- 400
+- 186
+items:
+- text: в каждой кучке 1 моль — *N*_A частиц
+  at:
+  - 200
+  - 20
+  size: 12
+  tone: muted
+- rect:
+  - 57.5
+  - 93
+  - 35
+  - 35
+  fill: surface
+  width: 1.5
+- path: M172 66V128H228V66
+  width: 1.5
+- rect:
+  - 173
+  - 88
+  - 54
+  - 39.3
+  fill: surface
+  width: 0
+- line:
+  - - 173
+    - 88
+  - - 227
+    - 88
+  width: 1
+- rect:
+  - 303.5
+  - 85
+  - 43
+  - 43
+  fill: surface
+  width: 1.5
+- text: углерод C
+  at:
+  - 75
+  - 152
+  size: 13
+- text: 12 г
+  at:
+  - 75
+  - 174
+  size: 14
+  tone: accent
+- text: вода H_{2}O
+  at:
+  - 200
+  - 152
+  size: 13
+- text: 18 г
+  at:
+  - 200
+  - 174
+  size: 14
+  tone: accent
+- text: алюминий Al
+  at:
+  - 325
+  - 152
+  size: 13
+- text: 27 г
+  at:
+  - 325
+  - 174
+  size: 14
+  tone: accent
