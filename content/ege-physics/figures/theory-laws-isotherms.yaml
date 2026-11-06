@@ -1,0 +1,110 @@
+# thermo.gas-laws 3.6: two isotherms of the same gas on the p–V axes. At the same volume
+# the upper one has the larger pressure, so the larger temperature: T₁ accent, the hotter
+# isotherm muted. Qualitative.
+# Colours (whole topic, extending «Основы МКТ» and «Идеальный газ»): molecules in the text
+# colour, the focal quantity accent, velocity green, forces (pressure on a wall) red, notes
+# muted. Graphs of processes: the process being discussed accent (drawn with a moving
+# point where it runs from 1 to 2), its extension to the origin dashed muted, other
+# isotherms or isochores muted, the other two isoprocesses through the same state in the
+# text colour.
+kind: diagram
+size:
+- 400
+- 252
+items:
+- arrow:
+  - - 50
+    - 225
+  - - 390
+    - 225
+  width: 1.5
+- arrow:
+  - - 50
+    - 225
+  - - 50
+    - 15
+  width: 1.5
+- text: '*V*'
+  at:
+  - 388
+  - 245
+  anchor: end
+- text: '*p*'
+  at:
+  - 62
+  - 27
+  anchor: start
+- text: '0'
+  at:
+  - 42
+  - 241
+  size: 13
+  anchor: end
+- path: M125.4 38.8L131.6 52.9L137.8 65L143.9 75.5L150.1 84.7L156.3 92.9L162.4 100.1L168.6 106.6L174.8
+    112.5L181 117.8L187.2 122.6L193.3 127L199.5 131.1L205.7 134.8L211.8 138.3L218 141.4L224.2 144.4L230.4
+    147.2L236.6 149.7L242.7 152.2L248.9 154.4L255.1 156.5L261.2 158.5L267.4 160.4L273.6 162.2L279.8 163.9L285.9
+    165.5L292.1 167L298.3 168.5L304.5 169.8L310.7 171.1L316.8 172.4L323 173.6L329.2 174.7L335.3 175.8L341.5
+    176.8L347.7 177.8L353.9 178.8L360.1 179.7L366.2 180.6L372.4 181.5
+  width: 2.5
+  tone: muted
+- path: M89 65L96.1 89.6L103.2 107.6L110.3 121.4L117.3 132.3L124.4 141.2L131.5 148.4L138.6 154.6L145.7
+    159.8L152.8 164.3L159.8 168.2L166.9 171.6L174 174.7L181.1 177.4L188.2 179.8L195.3 182L202.4 184L209.4
+    185.9L216.5 187.5L223.6 189.1L230.7 190.5L237.8 191.8L244.9 193L252 194.1L259 195.1L266.1 196.1L273.2
+    197L280.3 197.9L287.4 198.7L294.5 199.5L301.6 200.2L308.6 200.9L315.7 201.5L322.8 202.1L329.9 202.7L337
+    203.3L344.1 203.8L351.1 204.3L358.2 204.8L365.3 205.2L372.4 205.6
+  width: 2.5
+  tone: accent
+- line:
+  - - 206.0
+    - 225
+  - - 206.0
+    - 135.0
+  - - 50
+    - 135.0
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 206.0
+    - 225
+  - - 206.0
+    - 185.0
+  - - 50
+    - 185.0
+  width: 1
+  dashed: true
+  tone: muted
+- dots:
+  - - 206.0
+    - 185.0
+  r: 4
+  tone: accent
+- dots:
+  - - 206.0
+    - 135.0
+  r: 4
+  tone: muted
+- text: '*T*_{1}'
+  at:
+  - 375.0
+  - 198.1
+  anchor: start
+  tone: accent
+- text: '*T*_{2}'
+  at:
+  - 375.0
+  - 174.0
+  anchor: start
+  tone: muted
+- text: '*T*_{2} > *T*_{1}'
+  at:
+  - 219.0
+  - 69.0
+  anchor: start
+- text: '*V* та же, *p* больше'
+  at:
+  - 219.0
+  - 93.0
+  anchor: start
+  size: 12
+  tone: muted

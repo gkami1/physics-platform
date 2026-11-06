@@ -1,0 +1,42 @@
+# ks-laws-15: two isochores of the same mass of gas on the p–T axes; at 400 К the
+# pressures are 240 and 80 кПа, so V₂/V₁ = 240/80 = 3.
+kind: graph
+x:
+  var: T
+  unit: К
+  min: 0
+  max: 500
+  step: 100
+y:
+  var: p
+  unit: кПа
+  min: 0
+  max: 320
+  step: 40
+series:
+- points:
+  - - 0
+    - 0
+  - - 500
+    - 300
+- points:
+  - - 0
+    - 0
+  - - 500
+    - 100
+guides:
+- - 400
+  - 240
+- - 400
+  - 80
+notes:
+- at:
+  - 440
+  - 276
+  text: '1'
+  anchor: end
+- at:
+  - 470
+  - 106
+  text: '2'
+  anchor: end

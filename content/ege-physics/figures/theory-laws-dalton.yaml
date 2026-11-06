@@ -1,0 +1,195 @@
+# thermo.gas-laws 3.7: Dalton's law. The same vessel with gas 1 alone (filled dots), gas
+# 2 alone (rings) and both together: the pressure arrows (red) add up, 24 + 18 = 42 px.
+# Seed 7, qualitative.
+# Colours (whole topic, extending «Основы МКТ» and «Идеальный газ»): molecules in the text
+# colour, the focal quantity accent, velocity green, forces (pressure on a wall) red, notes
+# muted. Graphs of processes: the process being discussed accent (drawn with a moving
+# point where it runs from 1 to 2), its extension to the origin dashed muted, other
+# isotherms or isochores muted, the other two isoprocesses through the same state in the
+# text colour.
+kind: diagram
+size:
+- 400
+- 186
+items:
+- rect:
+  - 15
+  - 70
+  - 110
+  - 90
+  width: 1.5
+- dots:
+  - - 52.4
+    - 87.1
+  - - 85.1
+    - 80.8
+  - - 73.6
+    - 104.3
+  - - 25.8
+    - 115.6
+  - - 27.0
+    - 82.3
+  - - 62.5
+    - 141.1
+  - - 32.4
+    - 92.9
+  - - 82.7
+    - 150.8
+  r: 3
+- arrow:
+  - - 70.0
+    - 68
+  - - 70.0
+    - 44
+  tone: force
+  width: 2.2
+- text: '*p*_{1}'
+  at:
+  - 78.0
+  - 62
+  anchor: start
+  tone: force
+  size: 13
+- text: газ 1
+  at:
+  - 70.0
+  - 180
+  size: 13
+- rect:
+  - 145
+  - 70
+  - 110
+  - 90
+  width: 1.5
+- circle:
+  - 207.7
+  - 106.7
+  r: 3.5
+  width: 1.5
+- circle:
+  - 247.6
+  - 78.7
+  r: 3.5
+  width: 1.5
+- circle:
+  - 235.8
+  - 98.2
+  r: 3.5
+  width: 1.5
+- circle:
+  - 164.4
+  - 84.4
+  r: 3.5
+  width: 1.5
+- circle:
+  - 180.8
+  - 140.3
+  r: 3.5
+  width: 1.5
+- circle:
+  - 168.1
+  - 121.5
+  r: 3.5
+  width: 1.5
+- arrow:
+  - - 200.0
+    - 68
+  - - 200.0
+    - 50
+  tone: force
+  width: 2.2
+- text: '*p*_{2}'
+  at:
+  - 208.0
+  - 62
+  anchor: start
+  tone: force
+  size: 13
+- text: газ 2
+  at:
+  - 200.0
+  - 180
+  size: 13
+- rect:
+  - 275
+  - 70
+  - 110
+  - 90
+  width: 1.5
+- dots:
+  - - 343.9
+    - 104.8
+  - - 334.8
+    - 80.0
+  - - 286.0
+    - 91.5
+  - - 311.4
+    - 121.8
+  - - 325.3
+    - 99.0
+  - - 359.4
+    - 130.9
+  - - 332.5
+    - 145.0
+  - - 352.9
+    - 98.0
+  r: 3
+- circle:
+  - 378.0
+  - 84.4
+  r: 3.5
+  width: 1.5
+- circle:
+  - 321.8
+  - 135.6
+  r: 3.5
+  width: 1.5
+- circle:
+  - 295.2
+  - 114.1
+  r: 3.5
+  width: 1.5
+- circle:
+  - 283.9
+  - 128.5
+  r: 3.5
+  width: 1.5
+- circle:
+  - 367.5
+  - 100.1
+  r: 3.5
+  width: 1.5
+- circle:
+  - 349.5
+  - 122.5
+  r: 3.5
+  width: 1.5
+- arrow:
+  - - 330.0
+    - 68
+  - - 330.0
+    - 26
+  tone: force
+  width: 2.2
+- text: '*p*_{1} + *p*_{2}'
+  at:
+  - 338.0
+  - 62
+  anchor: start
+  tone: force
+  size: 13
+- text: вместе
+  at:
+  - 330.0
+  - 180
+  size: 13
+- text: +
+  at:
+  - 135
+  - 120
+  size: 18
+- text: '='
+  at:
+  - 265
+  - 120
+  size: 18

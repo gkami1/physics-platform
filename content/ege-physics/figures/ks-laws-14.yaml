@@ -1,0 +1,35 @@
+# ks-laws-14: a process 1 → 2 on the p–V axes; T₂/T₁ = p₂V₂/(p₁V₁) = (100·4)/(160·1) = 2,5.
+kind: graph
+x:
+  var: V
+  unit: л
+  min: 0
+  max: 5
+  step: 0.5
+  label_every: 2
+y:
+  var: p
+  unit: кПа
+  min: 0
+  max: 180
+  step: 20
+series:
+- points:
+  - - 1
+    - 160
+  - - 4
+    - 100
+guides:
+- - 1
+  - 160
+- - 4
+  - 100
+notes:
+- at:
+  - 1.1
+  - 166
+  text: '1'
+- at:
+  - 4.1
+  - 106
+  text: '2'

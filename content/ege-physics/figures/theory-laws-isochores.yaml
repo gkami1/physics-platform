@@ -1,0 +1,79 @@
+# thermo.gas-laws 3.6: two isochores of the same gas on the p–T axes; the steeper one has
+# the smaller volume (p/T = νR/V). The parts near 0 К dashed. Qualitative.
+# Colours (whole topic, extending «Основы МКТ» and «Идеальный газ»): molecules in the text
+# colour, the focal quantity accent, velocity green, forces (pressure on a wall) red, notes
+# muted. Graphs of processes: the process being discussed accent (drawn with a moving
+# point where it runs from 1 to 2), its extension to the origin dashed muted, other
+# isotherms or isochores muted, the other two isoprocesses through the same state in the
+# text colour.
+kind: diagram
+size:
+- 400
+- 252
+items:
+- arrow:
+  - - 50
+    - 225
+  - - 390
+    - 225
+  width: 1.5
+- arrow:
+  - - 50
+    - 225
+  - - 50
+    - 15
+  width: 1.5
+- text: '*T*'
+  at:
+  - 388
+  - 245
+  anchor: end
+- text: '*p*'
+  at:
+  - 62
+  - 27
+  anchor: start
+- text: '0'
+  at:
+  - 42
+  - 241
+  size: 13
+  anchor: end
+- path: M50 225L122.8 177.1
+  width: 1.5
+  dashed: true
+  tone: muted
+- path: M122.8 177.1L351.6 26.6
+  width: 2.5
+  tone: accent
+- text: '*V*_{1}'
+  at:
+  - 356.8
+  - 23.0
+  anchor: start
+  tone: accent
+- path: M50 225L122.8 203.8
+  width: 1.5
+  dashed: true
+  tone: muted
+- path: M122.8 203.8L351.6 137.3
+  width: 2.5
+  tone: muted
+- text: '*V*_{2}'
+  at:
+  - 356.8
+  - 133.7
+  anchor: start
+  tone: muted
+- text: '*V*_{1} < *V*_{2}'
+  at:
+  - 102.0
+  - 37.8
+  anchor: start
+- text: круче — объём меньше
+  at:
+  - 102.0
+  - 59.4
+  anchor: start
+  size: 12
+  tone: muted
