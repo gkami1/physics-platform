@@ -1829,6 +1829,103 @@ blockquote {
   font-variant-numeric: tabular-nums;
 }
 
+/* <pp-wave> (src/lib/sims/wave.ts): a wave running along a rope of beads. The rope in the text
+   colour, the marked beads and their ranges accent, the wave's direction green; the legend
+   reuses the .crt-key swatches. */
+.wav-chips {
+  margin: 0 0 0.5rem;
+}
+
+.wav-chips legend {
+  width: auto;
+  margin-right: 0.4rem;
+}
+
+.wav-chips span {
+  padding: 0.25rem 0.7rem;
+}
+
+.wav-marks {
+  margin: 0.6rem 0 0;
+}
+
+.pfx-chips.wav-marks input:checked + span {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.wav-fixed line {
+  stroke: var(--muted);
+  stroke-width: 1;
+}
+
+.wav-fixed text {
+  fill: var(--muted);
+}
+
+.wav-source {
+  fill: var(--surface-2);
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.wav-rope {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.wav-beads circle {
+  fill: var(--text);
+}
+
+.wav-layers line {
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.wav-marked {
+  fill: var(--accent);
+}
+
+.wav-marked-line {
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+
+.wav-range {
+  stroke: var(--accent);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.wav-bracket line {
+  stroke: var(--text);
+  stroke-width: 1.2;
+}
+
+.wav-bracket path,
+.wav-bracket text {
+  fill: var(--text);
+}
+
+.wav-front {
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.wav-v line {
+  stroke: var(--ok);
+  stroke-width: 2.5;
+}
+
+.wav-v path,
+.wav-v text {
+  fill: var(--ok);
+}
+
 /* <pp-path> (src/lib/sims/path.ts): path vs displacement along a route. */
 .pth-tracks {
   margin: 0 0 0.5rem;

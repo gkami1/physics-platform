@@ -1,0 +1,107 @@
+# mech.oscillations.waves 14.5: an echo sounder: the pulse (green, a dot riding the drawn path)
+# goes down to the bottom and back up, so in the time t sound covers 2h. Qualitative.
+kind: diagram
+size:
+- 400
+- 226
+items:
+- line:
+  - - 20
+    - 44.0
+  - - 380
+    - 44.0
+  width: 1
+  tone: muted
+- text: вода
+  at:
+  - 372
+  - 62.0
+  size: 12
+  tone: muted
+  anchor: end
+- path: M150 44.0L156 58.0L244 58.0L252 44.0Z
+  fill: surface
+  width: 1.5
+- rect:
+  - 186
+  - 26.0
+  - 30
+  - 18
+  fill: surface
+  radius: 2
+- hatch:
+  - - 20
+    - 184.0
+  - - 380
+    - 184.0
+  side: 1
+- text: дно
+  at:
+  - 372
+  - 176.0
+  size: 12
+  anchor: end
+- path: M194 60.0L200 182.0L206 60.0
+  width: 2
+  tone: vel
+  animate: draw
+  mover: true
+- arrow:
+  - - 176
+    - 86
+  - - 176
+    - 146
+  width: 1.6
+  tone: vel
+- text: туда
+  at:
+  - 168
+  - 120
+  size: 12
+  tone: vel
+  anchor: end
+- arrow:
+  - - 224
+    - 146
+  - - 224
+    - 86
+  width: 1.6
+  tone: vel
+- text: обратно
+  at:
+  - 232
+  - 120
+  size: 12
+  tone: vel
+  anchor: start
+- arrow:
+  - - 70
+    - 121.0
+  - - 70
+    - 59.0
+  width: 1.2
+- arrow:
+  - - 70
+    - 121.0
+  - - 70
+    - 183.0
+  width: 1.2
+- text: '*h*'
+  at:
+  - 60
+  - 126.0
+  size: 13
+  anchor: end
+- line:
+  - - 60
+    - 58.0
+  - - 150
+    - 58.0
+  width: 1
+  dashed: true
+  tone: muted
+- text: за время *t* звук прошёл 2*h* = *v**t*
+  at:
+  - 200
+  - 214
+  size: 13
