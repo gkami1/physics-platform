@@ -1611,6 +1611,101 @@ blockquote {
   stroke-dasharray: 3 3;
 }
 
+/* <pp-energy> (src/lib/sims/energy.ts): a puck in a trough with energy bars. Colours as in the
+   energy figures: potential energy accent, kinetic energy and velocity green, heat muted; the
+   legend reuses the .crt-key swatches. */
+.eng-ground {
+  fill: var(--surface-2);
+}
+
+.eng-line {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.eng-level line {
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.eng-level text,
+.eng-group {
+  fill: var(--muted);
+  font-size: 11px;
+}
+
+.eng-turns circle {
+  fill: var(--muted);
+}
+
+.eng-puck {
+  fill: var(--text);
+}
+
+.eng-vel line {
+  stroke: var(--ok);
+  stroke-width: 2.5;
+}
+
+.eng-vel path {
+  fill: var(--ok);
+}
+
+.eng-sub {
+  font-size: 9px;
+  font-style: normal;
+}
+
+.eng-name {
+  fill: var(--text);
+  font-style: italic;
+}
+
+.eng-name.eng-total {
+  font-style: normal;
+  font-weight: 600;
+}
+
+.eng-bar {
+  fill-opacity: 0.55;
+}
+
+.eng-p {
+  fill: var(--accent);
+}
+
+.eng-k {
+  fill: var(--ok);
+}
+
+.eng-q {
+  fill: var(--muted);
+}
+
+.eng-frame {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1;
+}
+
+.eng-value {
+  fill: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.eng-zero {
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.eng-key-q {
+  background: var(--muted);
+}
+
 /* <pp-path> (src/lib/sims/path.ts): path vs displacement along a route. */
 .pth-tracks {
   margin: 0 0 0.5rem;
