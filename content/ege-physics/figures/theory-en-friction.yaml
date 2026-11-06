@@ -1,0 +1,21 @@
+# mech.conservation.energy 12.7: a sled slides down a slope with friction. Potential energy at
+# the top (accent) becomes kinetic (green) plus heat Q (muted); the stacked bar keeps its
+# length. Qualitative: no numbers.
+kind: diagram
+size: [400, 232]
+items:
+- {path: 'M10 60H60L260 190H390', width: 2}
+- {hatch: [[60, 60], [260, 190]], side: 1}
+- {hatch: [[260, 190], [390, 190]], side: 1}
+- {rect: [26, 42, 28, 18], fill: 'surface', radius: 2}
+- {rect: [292, 172, 28, 18], fill: 'surface', radius: 2}
+- {arrow: [[324, 181], [376, 181]], tone: 'vel', label: '*v*', label_at: [380, 172]}
+- {text: 'наверху', at: [94, 33], size: 12, tone: 'muted', anchor: 'end'}
+- {rect: [100, 22, 160, 14], fill: 'accent', tone: 'accent'}
+- {text: '*E*_п', at: [180, 33], size: 11}
+- {text: 'внизу', at: [224, 121], size: 12, tone: 'muted', anchor: 'end'}
+- {rect: [230, 110, 100, 14], fill: 'accent', tone: 'vel', animate: 'appear'}
+- {text: '*E*_к', at: [280, 121], size: 11, animate: 'appear'}
+- {rect: [330, 110, 60, 14], fill: 'accent', tone: 'muted', animate: 'appear'}
+- {text: '*Q*', at: [360, 121], size: 11, animate: 'appear'}
+- {text: '*E*_п = *E*_к + *Q*: часть энергии стала теплом', at: [200, 222], size: 13}

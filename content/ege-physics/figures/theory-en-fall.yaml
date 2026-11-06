@@ -1,0 +1,26 @@
+# mech.conservation.energy 12.3: a falling ball at the top, halfway and just above the ground.
+# Stacked bars: potential energy (accent) turns into kinetic (green, like the velocity); the
+# bar's total length never changes. Qualitative: no numbers.
+kind: diagram
+size: [400, 240]
+items:
+- {hatch: [[20, 210], [390, 210]], side: 1}
+- {path: 'M70 42V190', width: 1, tone: 'muted', animate: 'draw', mover: true}
+- {circle: [70, 42], r: 8, fill: 'solid'}
+- {circle: [70, 122], r: 8, fill: 'surface'}
+- {circle: [70, 194], r: 8, fill: 'surface'}
+- {arrow: [[46, 112], [46, 140]], tone: 'vel'}
+- {arrow: [[46, 160], [46, 200]], tone: 'vel', label: '*v*', label_at: [32, 186]}
+- {path: 'M84 42H104M84 122H104M84 194H104', width: 1, dashed: true, tone: 'muted'}
+- {rect: [110, 35, 160, 14], fill: 'accent', tone: 'accent'}
+- {text: '*E*_п', at: [190, 46], size: 11}
+- {rect: [110, 115, 80, 14], fill: 'accent', tone: 'accent'}
+- {text: '*E*_п', at: [150, 126], size: 11}
+- {rect: [190, 115, 80, 14], fill: 'accent', tone: 'vel'}
+- {text: '*E*_к', at: [230, 126], size: 11}
+- {rect: [110, 187, 160, 14], fill: 'accent', tone: 'vel'}
+- {text: '*E*_к', at: [190, 198], size: 11}
+- {text: 'вверху *v* = 0', at: [280, 46], size: 12, anchor: 'start'}
+- {text: '*E*_п = *E*_к', at: [280, 126], size: 12, anchor: 'start'}
+- {text: 'у земли', at: [280, 198], size: 12, anchor: 'start'}
+- {text: 'сумма *E*_п + *E*_к всё время одна и та же', at: [200, 232], size: 13}

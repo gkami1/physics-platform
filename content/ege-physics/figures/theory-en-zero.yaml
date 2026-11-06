@@ -1,0 +1,24 @@
+# mech.conservation.energy 12.1: a book on a shelf; its height and potential energy depend on
+# the zero level (the floor or the table top). Qualitative: no numbers.
+kind: diagram
+size: [400, 224]
+items:
+- {hatch: [[20, 200], [390, 200]], side: 1}
+- {hatch: [[340, 16], [340, 200]], side: -1}
+- {line: [[40, 150], [170, 150]], width: 3}
+- {line: [[54, 150], [54, 200]], width: 2}
+- {line: [[156, 150], [156, 200]], width: 2}
+- {line: [[236, 80], [340, 80]], width: 3}
+- {rect: [256, 60, 44, 20], fill: 'surface', radius: 2}
+- {text: '*m*', at: [278, 75], size: 13}
+- {line: [[170, 150], [288, 150]], width: 1, dashed: true, tone: 'muted'}
+- {arrow: [[278, 115], [278, 82]], width: 1.2}
+- {arrow: [[278, 115], [278, 148]], width: 1.2}
+- {text: '*h*_2', at: [270, 120], size: 13, anchor: 'end'}
+- {arrow: [[322, 140], [322, 82]], width: 1.2}
+- {arrow: [[322, 140], [322, 198]], width: 1.2}
+- {text: '*h*_1', at: [316, 178], size: 13, anchor: 'end'}
+- {text: 'нулевой уровень — пол:', at: [30, 36], size: 12, tone: 'muted', anchor: 'start'}
+- {text: '*E*_п = *m**g**h*_1', at: [30, 56], size: 13, anchor: 'start'}
+- {text: 'нулевой уровень — стол:', at: [30, 90], size: 12, tone: 'muted', anchor: 'start'}
+- {text: '*E*_п = *m**g**h*_2', at: [30, 110], size: 13, anchor: 'start'}
