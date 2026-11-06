@@ -17,7 +17,10 @@
 // Written into theory Markdown as plain HTML; the theory page imports this module only when such
 // an element is present. Light DOM, site CSS variables: follows the light/dark theme.
 
+import { fold } from './box';
 import { gaussian, rng } from './random';
+
+export { fold };
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
@@ -72,12 +75,6 @@ export function create(n: number, tK: number, seed = SEED): Gas {
     for (let i = 0; i < n; i++) v[i] *= k;
   }
   return g;
-}
-
-/** Fold an unfolded coordinate into [0, L]: a straight line reflected by two walls. */
-export function fold(u: number, l: number): number {
-  const m = ((u % (2 * l)) + 2 * l) % (2 * l);
-  return m <= l ? m : 2 * l - m;
 }
 
 /** Position of molecule i at time t (px, centre, inside the box drawn from 0). */
