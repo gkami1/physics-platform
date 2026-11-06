@@ -1974,6 +1974,61 @@ blockquote {
   fill: var(--accent);
 }
 
+/* <pp-gas> (src/lib/sims/gas.ts): gas pressure from hits. Molecules in the text colour, the
+   sensor wall and the pressure bar accent (the focal quantity), the hits on it red (forces), the
+   previous run's mark a dashed line in the text colour (muted would vanish on the bar). */
+.gas-box {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.5;
+}
+
+.gas-sensor {
+  stroke: var(--accent);
+  stroke-width: 4;
+}
+
+.gas-mols circle {
+  fill: var(--text);
+}
+
+.gas-hits path {
+  fill: none;
+  stroke: var(--bad);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.gas-track {
+  fill: var(--surface-2);
+  stroke: var(--border);
+}
+
+.gas-fill {
+  fill: var(--accent);
+}
+
+.gas-tick {
+  stroke: var(--muted);
+}
+
+.gas-tick-label {
+  fill: var(--muted);
+  font-size: 11px;
+}
+
+.gas-p {
+  fill: var(--accent);
+  font-size: 14px;
+  font-style: italic;
+}
+
+.gas-previous {
+  stroke: var(--text);
+  stroke-width: 2;
+  stroke-dasharray: 3 3;
+}
+
 /* <pp-path> (src/lib/sims/path.ts): path vs displacement along a route. */
 .pth-tracks {
   margin: 0 0 0.5rem;
