@@ -1,57 +1,279 @@
-# electro.field.strength: field lines of a positive charge and a test charge in the field
+# electro.field.strength 2.3: field lines of a positive charge go out of it, of a negative one
+# into it. Below: E at r and at 2r on one ray, 64 and 16 px (E and E/4). Redrawn from the
+# ladder page, where the charge and the E arrow were red like a force and the lines accent.
+# Colours (extends «Электрический заряд и закон Кулона»): a charge is a circle in the text
+# colour (surface fill) with «+» or «−»; the charge being discussed (a test charge, the moving
+# particle) accent. Forces red. Field lines are the field's picture: text colour, thin, with
+# small arrowheads along them; the field strength E at a point is a vector, accent (thicker for
+# a resultant), so E is never red: red is a force. A point where the field is measured is a
+# small accent dot. Plates are bars in the text colour with their «+» and «−» signs;
+# equipotential lines dashed muted; velocities green; guides, distances and notes muted.
 kind: diagram
-size: [400, 260]
+size:
+- 400
+- 330
 items:
-- arrow: [[170.33, 121.58], [242.39, 91.73]]
-  tone: accent
-  width: 1.5
-- arrow: [[158.42, 109.67], [188.27, 37.61]]
-  tone: accent
-  width: 1.5
-- arrow: [[141.58, 109.67], [111.73, 37.61]]
-  tone: accent
-  width: 1.5
-- arrow: [[129.67, 121.58], [57.61, 91.73]]
-  tone: accent
-  width: 1.5
-- arrow: [[129.67, 138.42], [57.61, 168.27]]
-  tone: accent
-  width: 1.5
-- arrow: [[141.58, 150.33], [111.73, 222.39]]
-  tone: accent
-  width: 1.5
-- arrow: [[158.42, 150.33], [188.27, 222.39]]
-  tone: accent
-  width: 1.5
-- arrow: [[170.33, 138.42], [242.39, 168.27]]
-  tone: accent
-  width: 1.5
-- circle: [150, 130]
-  r: 13
+- path: M116 96L180 96
+  width: 1.1
+- arrow:
+  - - 141.0
+    - 96.0
+  - - 155.0
+    - 96.0
+  width: 1.3
+- path: M111.3 84.7L156.6 39.4
+  width: 1.1
+- arrow:
+  - - 129.0
+    - 67.0
+  - - 138.9
+    - 57.1
+  width: 1.3
+- path: M100 80L100 16
+  width: 1.1
+- arrow:
+  - - 100.0
+    - 55.0
+  - - 100.0
+    - 41.0
+  width: 1.3
+- path: M88.7 84.7L43.4 39.4
+  width: 1.1
+- arrow:
+  - - 71.0
+    - 67.0
+  - - 61.1
+    - 57.1
+  width: 1.3
+- path: M84 96L20 96
+  width: 1.1
+- arrow:
+  - - 59.0
+    - 96.0
+  - - 45.0
+    - 96.0
+  width: 1.3
+- path: M88.7 107.3L43.4 152.6
+  width: 1.1
+- arrow:
+  - - 71.0
+    - 125.0
+  - - 61.1
+    - 134.9
+  width: 1.3
+- path: M100 112L100 176
+  width: 1.1
+- arrow:
+  - - 100.0
+    - 137.0
+  - - 100.0
+    - 151.0
+  width: 1.3
+- path: M111.3 107.3L156.6 152.6
+  width: 1.1
+- arrow:
+  - - 129.0
+    - 125.0
+  - - 138.9
+    - 134.9
+  width: 1.3
+- circle:
+  - 100
+  - 96
+  r: 12
   fill: surface
-  tone: force
-- text: +
-  at: [150, 136]
-  size: 18
-  tone: force
-- line: [[165, 130], [292, 130]]
+  tone: default
+  label: +
+- path: M380 96L316 96
+  width: 1.1
+- arrow:
+  - - 355.0
+    - 96.0
+  - - 341.0
+    - 96.0
+  width: 1.3
+- path: M356.6 39.4L311.3 84.7
+  width: 1.1
+- arrow:
+  - - 338.9
+    - 57.1
+  - - 329.0
+    - 67.0
+  width: 1.3
+- path: M300 16L300 80
+  width: 1.1
+- arrow:
+  - - 300.0
+    - 41.0
+  - - 300.0
+    - 55.0
+  width: 1.3
+- path: M243.4 39.4L288.7 84.7
+  width: 1.1
+- arrow:
+  - - 261.1
+    - 57.1
+  - - 271.0
+    - 67.0
+  width: 1.3
+- path: M220 96L284 96
+  width: 1.1
+- arrow:
+  - - 245.0
+    - 96.0
+  - - 259.0
+    - 96.0
+  width: 1.3
+- path: M243.4 152.6L288.7 107.3
+  width: 1.1
+- arrow:
+  - - 261.1
+    - 134.9
+  - - 271.0
+    - 125.0
+  width: 1.3
+- path: M300 176L300 112
+  width: 1.1
+- arrow:
+  - - 300.0
+    - 151.0
+  - - 300.0
+    - 137.0
+  width: 1.3
+- path: M356.6 152.6L311.3 107.3
+  width: 1.1
+- arrow:
+  - - 338.9
+    - 134.9
+  - - 329.0
+    - 125.0
+  width: 1.3
+- circle:
+  - 300
+  - 96
+  r: 12
+  fill: surface
+  tone: default
+  label: −
+- text: от положительного
+  at:
+  - 100
+  - 200
+  size: 13
+  anchor: middle
+  tone: muted
+- text: к отрицательному
+  at:
+  - 300
+  - 200
+  size: 13
+  anchor: middle
+  tone: muted
+- line:
+  - - 16
+    - 216
+  - - 384
+    - 216
+  width: 1
+  tone: muted
+- circle:
+  - 40
+  - 266
+  r: 12
+  fill: surface
+  tone: default
+  label: +
+- line:
+  - - 54
+    - 266
+  - - 370
+    - 266
+  width: 1
+  tone: muted
   dashed: true
+- dots:
+  - - 124
+    - 266
+  - - 208
+    - 266
+  r: 3.5
+  tone: accent
+- arrow:
+  - - 124
+    - 266
+  - - 188
+    - 266
+  tone: accent
+  label: '*E*'
+  label_at:
+  - 156
+  - 256
+- arrow:
+  - - 208
+    - 266
+  - - 224
+    - 266
+  tone: accent
+  label: '*E*/4'
+  label_at:
+  - 232
+  - 256
+- line:
+  - - 40
+    - 287
+  - - 40
+    - 297
+  width: 1
+  tone: muted
+- line:
+  - - 124
+    - 287
+  - - 124
+    - 297
+  width: 1
+  tone: muted
+- line:
+  - - 40
+    - 292
+  - - 124
+    - 292
   width: 1
   tone: muted
 - text: '*r*'
-  at: [225, 148]
-- circle: [300, 130]
-  r: 6
-  fill: solid
-- text: '*q*'
-  at: [300, 154]
-- arrow: [[300, 130], [360, 130]]
-  tone: force
-  label: '*E*'
-  label_at: [364, 120]
-- text: '*E* = *k**Q*/*r*^{2}'
-  at: [300, 60]
-  size: 14
-- text: '*F* = *q**E*'
-  at: [300, 205]
-  size: 14
+  at:
+  - 82.0
+  - 286
+  size: 13
+- line:
+  - - 40
+    - 313
+  - - 40
+    - 323
+  width: 1
+  tone: muted
+- line:
+  - - 208
+    - 313
+  - - 208
+    - 323
+  width: 1
+  tone: muted
+- line:
+  - - 40
+    - 318
+  - - 208
+    - 318
+  width: 1
+  tone: muted
+- text: 2*r*
+  at:
+  - 124.0
+  - 312
+  size: 13
+- text: вдвое дальше — вчетверо слабее
+  at:
+  - 380
+  - 299
+  size: 13
+  anchor: end
+  tone: muted
