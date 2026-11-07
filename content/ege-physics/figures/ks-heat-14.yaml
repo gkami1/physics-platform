@@ -1,0 +1,26 @@
+# ks-heat-14: heating a 200 g sample with 100 Вт; the flat part (melting) lasts from 2 to
+# 7 min. Labels every 60 °C, so the answer (150 кДж/кг) is not printed.
+kind: graph
+x:
+  var: τ
+  unit: мин
+  min: 0
+  max: 10
+  step: 1
+y:
+  var: t
+  unit: °C
+  min: 0
+  max: 330
+  step: 30
+  label_every: 2
+series:
+- points:
+  - - 0
+    - 60
+  - - 2
+    - 240
+  - - 7
+    - 240
+  - - 8
+    - 300

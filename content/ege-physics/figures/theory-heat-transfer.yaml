@@ -1,0 +1,201 @@
+# thermo.heat 5.1: three ways of heat transfer. Conduction: heat (accent) runs up a spoon
+# from the tea. Convection: warm air (accent) rises from a radiator, cool air (muted) sinks
+# and returns. Radiation: rays from the Sun (accent) cross empty space. Qualitative.
+# Colours (whole topic, extending «Основы МКТ», «Идеальный газ», «Изопроцессы» and
+# «Насыщенный пар»): heat Q flowing in or out is the focal quantity, accent arrows; heat lost
+# to the air muted; liquid water an accent tint with an accent surface line; ice and other
+# solids the surface fill with a text-colour outline; molecules in the text colour (crystal
+# bonds muted), molecule velocities green; heaters and flames muted; notes muted. Graphs: the
+# process being discussed accent with a moving point (sloped parts and flat parts alike: the
+# notes say which is which), guides dashed muted.
+kind: diagram
+size:
+- 400
+- 196
+items:
+- rect:
+  - 21
+  - 92
+  - 78
+  - 68
+  fill: accent
+  tone: accent
+  width: 0
+- line:
+  - - 20
+    - 70
+  - - 20
+    - 160
+  - - 100
+    - 160
+  - - 100
+    - 70
+  width: 2
+- line:
+  - - 21
+    - 92
+  - - 99
+    - 92
+  tone: accent
+- line:
+  - - 52
+    - 148
+  - - 92
+    - 30
+  width: 4
+- arrow:
+  - - 60
+    - 84
+  - - 72
+    - 48
+  tone: accent
+- arrow:
+  - - 74
+    - 40
+  - - 82
+    - 16
+  tone: accent
+- text: теплопроводность
+  at:
+  - 62
+  - 184
+  size: 13
+- rect:
+  - 140
+  - 40
+  - 120
+  - 120
+  width: 1.5
+- rect:
+  - 146
+  - 130
+  - 22
+  - 28
+  fill: solid
+  tone: muted
+  width: 0
+- arrow:
+  - - 157
+    - 122
+  - - 157
+    - 62
+  tone: accent
+- arrow:
+  - - 164
+    - 52
+  - - 236
+    - 52
+  tone: accent
+- arrow:
+  - - 248
+    - 62
+  - - 248
+    - 122
+  tone: muted
+- arrow:
+  - - 238
+    - 150
+  - - 184
+    - 150
+  tone: muted
+- text: тёплый
+  at:
+  - 166
+  - 96
+  size: 13
+  anchor: start
+  tone: muted
+- text: холодный
+  at:
+  - 242
+  - 128
+  size: 13
+  anchor: end
+  tone: muted
+- text: конвекция
+  at:
+  - 200
+  - 184
+  size: 13
+- circle:
+  - 300
+  - 50
+  r: 15
+  fill: surface
+  width: 2
+- line:
+  - - 319.0
+    - 50.0
+  - - 325.0
+    - 50.0
+  width: 1.5
+- line:
+  - - 313.4
+    - 63.4
+  - - 317.7
+    - 67.7
+  width: 1.5
+- line:
+  - - 300.0
+    - 69.0
+  - - 300.0
+    - 75.0
+  width: 1.5
+- line:
+  - - 286.6
+    - 63.4
+  - - 282.3
+    - 67.7
+  width: 1.5
+- line:
+  - - 281.0
+    - 50.0
+  - - 275.0
+    - 50.0
+  width: 1.5
+- line:
+  - - 286.6
+    - 36.6
+  - - 282.3
+    - 32.3
+  width: 1.5
+- line:
+  - - 300.0
+    - 31.0
+  - - 300.0
+    - 25.0
+  width: 1.5
+- line:
+  - - 313.4
+    - 36.6
+  - - 317.7
+    - 32.3
+  width: 1.5
+- arrow:
+  - - 318
+    - 70
+  - - 352
+    - 128
+  tone: accent
+- arrow:
+  - - 302
+    - 80
+  - - 318
+    - 140
+  tone: accent
+- arrow:
+  - - 330
+    - 60
+  - - 384
+    - 110
+  tone: accent
+- hatch:
+  - - 290
+    - 152
+  - - 392
+    - 152
+- text: излучение
+  at:
+  - 340
+  - 184
+  size: 13

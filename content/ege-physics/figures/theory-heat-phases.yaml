@@ -1,0 +1,355 @@
+# thermo.heat 5.4: the same water molecules as ice (a lattice; bonds muted; a solid, surface
+# fill), liquid (close, no order; accent tint) and vapour (far apart, velocities green).
+# Melting takes λm and vaporisation Lm (accent arrows right); crystallisation and
+# condensation give them back (muted arrows left). Seed 54, qualitative.
+# Colours (whole topic, extending «Основы МКТ», «Идеальный газ», «Изопроцессы» and
+# «Насыщенный пар»): heat Q flowing in or out is the focal quantity, accent arrows; heat lost
+# to the air muted; liquid water an accent tint with an accent surface line; ice and other
+# solids the surface fill with a text-colour outline; molecules in the text colour (crystal
+# bonds muted), molecule velocities green; heaters and flames muted; notes muted. Graphs: the
+# process being discussed accent with a moving point (sloped parts and flat parts alike: the
+# notes say which is which), guides dashed muted.
+kind: diagram
+size:
+- 400
+- 212
+items:
+- rect:
+  - 10
+  - 60
+  - 100
+  - 100
+  fill: surface
+  width: 2
+- line:
+  - - 24
+    - 78
+  - - 96
+    - 78
+  width: 1
+  tone: muted
+- line:
+  - - 24
+    - 96
+  - - 96
+    - 96
+  width: 1
+  tone: muted
+- line:
+  - - 24
+    - 114
+  - - 96
+    - 114
+  width: 1
+  tone: muted
+- line:
+  - - 24
+    - 132
+  - - 96
+    - 132
+  width: 1
+  tone: muted
+- line:
+  - - 24
+    - 150
+  - - 96
+    - 150
+  width: 1
+  tone: muted
+- line:
+  - - 24
+    - 78
+  - - 24
+    - 150
+  width: 1
+  tone: muted
+- line:
+  - - 42
+    - 78
+  - - 42
+    - 150
+  width: 1
+  tone: muted
+- line:
+  - - 60
+    - 78
+  - - 60
+    - 150
+  width: 1
+  tone: muted
+- line:
+  - - 78
+    - 78
+  - - 78
+    - 150
+  width: 1
+  tone: muted
+- line:
+  - - 96
+    - 78
+  - - 96
+    - 150
+  width: 1
+  tone: muted
+- dots:
+  - - 24
+    - 78
+  - - 42
+    - 78
+  - - 60
+    - 78
+  - - 78
+    - 78
+  - - 96
+    - 78
+  - - 24
+    - 96
+  - - 42
+    - 96
+  - - 60
+    - 96
+  - - 78
+    - 96
+  - - 96
+    - 96
+  - - 24
+    - 114
+  - - 42
+    - 114
+  - - 60
+    - 114
+  - - 78
+    - 114
+  - - 96
+    - 114
+  - - 24
+    - 132
+  - - 42
+    - 132
+  - - 60
+    - 132
+  - - 78
+    - 132
+  - - 96
+    - 132
+  - - 24
+    - 150
+  - - 42
+    - 150
+  - - 60
+    - 150
+  - - 78
+    - 150
+  - - 96
+    - 150
+  r: 4.5
+- rect:
+  - 151
+  - 74
+  - 98
+  - 85
+  fill: accent
+  tone: accent
+  width: 0
+- line:
+  - - 150
+    - 60
+  - - 150
+    - 160
+  - - 250
+    - 160
+  - - 250
+    - 60
+  width: 2
+- line:
+  - - 151
+    - 74
+  - - 249
+    - 74
+  tone: accent
+- dots:
+  - - 233.1
+    - 93.1
+  - - 204.5
+    - 115.9
+  - - 236.7
+    - 109.1
+  - - 190.6
+    - 144.2
+  - - 230.3
+    - 131.8
+  - - 164.5
+    - 149.3
+  - - 180.9
+    - 102.4
+  - - 190.1
+    - 84.8
+  - - 206.3
+    - 148.9
+  - - 179.1
+    - 125.7
+  - - 161.3
+    - 116.0
+  - - 215.9
+    - 91.0
+  - - 166.2
+    - 86.4
+  - - 214.5
+    - 134.2
+  - - 224.3
+    - 147.8
+  - - 223.3
+    - 117.4
+  - - 163.4
+    - 132.1
+  - - 197.9
+    - 99.7
+  - - 240.0
+    - 148.9
+  - - 198.6
+    - 130.8
+  r: 4.5
+- rect:
+  - 290
+  - 60
+  - 100
+  - 100
+  width: 2
+- dots:
+  - - 306
+    - 82
+  - - 362
+    - 96
+  - - 322
+    - 138
+  - - 374
+    - 146
+  - - 340
+    - 112
+  r: 4.5
+- arrow:
+  - - 306
+    - 82
+  - - 324
+    - 72
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 362
+    - 96
+  - - 350
+    - 80
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 322
+    - 138
+  - - 304
+    - 128
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 374
+    - 146
+  - - 380
+    - 128
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 340
+    - 112
+  - - 358
+    - 120
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 114
+    - 96
+  - - 146
+    - 96
+  tone: accent
+- text: '*λm*'
+  at:
+  - 130
+  - 86
+  tone: accent
+  size: 13
+- arrow:
+  - - 146
+    - 126
+  - - 114
+    - 126
+  tone: muted
+- text: '*λm*'
+  at:
+  - 130
+  - 146
+  tone: muted
+  size: 13
+- arrow:
+  - - 254
+    - 96
+  - - 286
+    - 96
+  tone: accent
+- text: '*Lm*'
+  at:
+  - 270
+  - 86
+  tone: accent
+  size: 13
+- arrow:
+  - - 286
+    - 126
+  - - 254
+    - 126
+  tone: muted
+- text: '*Lm*'
+  at:
+  - 270
+  - 146
+  tone: muted
+  size: 13
+- text: лёд
+  at:
+  - 60
+  - 50
+  size: 13
+- text: вода
+  at:
+  - 200
+  - 50
+  size: 13
+- text: пар
+  at:
+  - 340
+  - 50
+  size: 13
+- text: плавление
+  at:
+  - 100
+  - 24
+  size: 13
+  anchor: middle
+  tone: accent
+- text: парообразование
+  at:
+  - 290
+  - 24
+  size: 13
+  anchor: middle
+  tone: accent
+- text: вправо — тело получает энергию, влево — отдаёт;
+  at:
+  - 200
+  - 184
+  size: 13
+  anchor: middle
+  tone: muted
+- text: температура всё это время постоянна
+  at:
+  - 200
+  - 201
+  size: 13
+  anchor: middle
+  tone: muted

@@ -1,33 +1,132 @@
-# thermo.heat: heating curve of ice; flat parts are phase transitions
-kind: graph
-x:
-  var: τ
-  min: 0
-  max: 10
-  step: 1
-  numbers: false
-y:
-  var: t
-  unit: °C
-  min: -40
-  max: 120
-  step: 20
-  label_every: 1
-series:
-- points: [[0, -30], [1.2, 0], [4, 0], [6.5, 100], [9.6, 100]]
-notes:
-- at: [1.05, -28]
-  text: лёд
-- at: [1.6, 8]
-  text: плавление
-- at: [5.5, 45]
-  text: вода
+# thermo.heat 5.5 (the ladder's figure, redrawn to scale): ice from −30 °C heated at constant
+# power. Widths ∝ heat per kilogram: ice 63, melting 330, water 420 кДж/кг, then boiling,
+# cut after 330 of its 2300 кДж/кг. Slopes ∝ 1/c: ice (2100) twice as steep as water
+# (4200). The whole curve accent, drawn with a moving point; the 100 °C guide dashed muted.
+# Colours (whole topic, extending «Основы МКТ», «Идеальный газ», «Изопроцессы» and
+# «Насыщенный пар»): heat Q flowing in or out is the focal quantity, accent arrows; heat lost
+# to the air muted; liquid water an accent tint with an accent surface line; ice and other
+# solids the surface fill with a text-colour outline; molecules in the text colour (crystal
+# bonds muted), molecule velocities green; heaters and flames muted; notes muted. Graphs: the
+# process being discussed accent with a moving point (sloped parts and flat parts alike: the
+# notes say which is which), guides dashed muted.
+kind: diagram
+size:
+- 400
+- 260
+items:
+- arrow:
+  - - 46
+    - 196
+  - - 380
+    - 196
+  width: 1.5
+- arrow:
+  - - 46
+    - 254.0
+  - - 46
+    - 18
+  width: 1.5
+- text: '*τ*'
+  at:
+  - 376
+  - 216
   anchor: end
-- at: [7, 108]
-  text: кипение
-- at: [2.6, -14]
-  text: '*Q* = *λm*'
+- text: '*t*, °C'
+  at:
+  - 56
+  - 30
+  anchor: start
+- text: '0'
+  at:
+  - 38
+  - 201
+  size: 13
+  anchor: end
+- text: '100'
+  at:
+  - 38
+  - 56.0
+  size: 13
+  anchor: end
+- text: −30
+  at:
+  - 38
+  - 244.5
+  size: 13
+  anchor: end
+- line:
+  - - 46
+    - 51.0
+  - - 259.4
+    - 51.0
+  width: 1
+  dashed: true
+  tone: muted
+- path: M46 239.5L62.5 196L149.1 196L259.4 51L346 51
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- dots:
+  - - 62.5
+    - 196.0
+  - - 149.1
+    - 196.0
+  - - 259.4
+    - 51.0
+  r: 4
+  tone: accent
+- text: лёд
+  at:
+  - 70.5
+  - 237.5
+  size: 13
+  anchor: start
+  tone: muted
+- text: плавление
+  at:
+  - 105.8
+  - 186
+  size: 13
   anchor: middle
-- at: [8, 80]
-  text: '*Q* = *Lm*'
+  tone: muted
+- text: '*λm*'
+  at:
+  - 105.8
+  - 218
+  size: 13
+  tone: accent
+- text: вода
+  at:
+  - 220.2
+  - 137.5
+  size: 13
+  anchor: start
+  tone: muted
+- text: '*c*_в*m*Δ*t*'
+  at:
+  - 220.2
+  - 155.5
+  size: 13
+  anchor: start
+  tone: accent
+- text: кипение
+  at:
+  - 302.7
+  - 41.0
+  size: 13
   anchor: middle
+  tone: muted
+- text: '*Lm*'
+  at:
+  - 302.7
+  - 73.0
+  size: 13
+  tone: accent
+- text: и ещё долго…
+  at:
+  - 346.0
+  - 93.0
+  size: 13
+  anchor: end
+  tone: muted

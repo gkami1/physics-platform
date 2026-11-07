@@ -2254,6 +2254,109 @@ blockquote {
   fill: var(--accent);
 }
 
+/* <pp-heat> (src/lib/sims/heat.ts): ice on a heater. As in the thermo.heat figures: heat accent,
+   liquid water an accent tint with an accent surface, ice the surface fill with a text-colour
+   outline, the heater muted; on the graph the whole curve for the current mass and power dashed
+   muted and the travelled part accent; bars: what a stage needs outlined, what it got accent. */
+.heat-walls {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 2;
+}
+
+.heat-water {
+  fill: var(--accent);
+  fill-opacity: 0.25;
+}
+
+.heat-surface {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+.heat-ice {
+  fill: var(--surface-2);
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.heat-bubbles circle {
+  fill: var(--surface-2);
+  stroke: var(--text);
+  stroke-width: 1;
+}
+
+.heat-plate {
+  fill: var(--muted);
+}
+
+.heat-flow line {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.heat-flow path {
+  fill: var(--accent);
+}
+
+.heat-axis {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.2;
+}
+
+.heat-axis-head {
+  fill: var(--text);
+}
+
+.sim-grid .heat-name {
+  fill: var(--text);
+  font-size: 12px;
+}
+
+.sim-grid .heat-guide {
+  stroke: var(--muted);
+  stroke-dasharray: 4 4;
+}
+
+.heat-preview {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 4;
+}
+
+.heat-trace {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.heat-dot {
+  fill: var(--accent);
+}
+
+.heat-need {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1;
+}
+
+.heat-got {
+  fill: var(--accent);
+}
+
+.heat-label,
+.heat-val {
+  fill: var(--text);
+  font-size: 11px;
+}
+
+.heat-val {
+  fill: var(--muted);
+}
+
 /* <pp-path> (src/lib/sims/path.ts): path vs displacement along a route. */
 .pth-tracks {
   margin: 0 0 0.5rem;
