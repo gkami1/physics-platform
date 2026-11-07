@@ -99,6 +99,8 @@ function el<K extends keyof SVGElementTagNameMap>(
 }
 
 const ru = (n: number, d: number) => n.toFixed(d).replace('.', ',');
+/** φ in whole percent; an unsaturated vapour never reads 100 %. */
+export const percent = (phi: number): number => (phi < 1 ? Math.min(99, Math.round(phi * 100)) : 100);
 
 // Layout: the cylinder in its bath on the left, p–V top right, p–t below it.
 const CYL = { x: 26, w: 64, bottom: 258, perV: 40, piston: 8 };
@@ -401,13 +403,12 @@ class VapourSim extends HTMLElement {
     this.vOut.textContent = `${ru(s.V, 1)} л`;
     const head =
       `<i>p</i> = ${ru(s.p, 2)} кПа, <i>p</i><sub>н</sub>(${s.t} °C) = ${ru(s.ps, 2)} кПа, ` +
-      `<i>φ</i> = ${Math.round(s.phi * 100)} %. `;
-    this.readout.innerHTML =
-      s.liquid > 0
-        ? head +
-          `Пар насыщенный: паром осталось ${ru(s.vapour, 1)} мг, ` +
-          `${ru(s.liquid, 1)} мг сконденсировалось в воду.`
-        : head + `Пар ненасыщенный: все ${MASS} мг воды — пар, жидкости нет.`;
+      `<i>φ</i> = ${percent(s.phi)} %. `;
+    let tail: string;
+    if (s.liquid === 0) tail = `Пар ненасыщенный: все ${MASS} мг воды — пар, жидкости нет.`;
+    else if (s.liquid < 0.05) tail = 'Пар только что стал насыщенным: на дне появляются первые капли.';
+    else tail = `Пар насыщенный: паром осталось ${ru(s.vapour, 1)} мг, ${ru(s.liquid, 1)} мг сконденсировалось в воду.`;
+    this.readout.innerHTML = head + tail;
   }
 }
 
