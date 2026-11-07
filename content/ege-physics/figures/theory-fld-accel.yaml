@@ -1,0 +1,236 @@
+# electro.field.strength 2.8: a charge set free between plates speeds up along the force (red):
+# a proton (+, top) towards −, to the lower potential; an electron (dot, bottom) towards +,
+# to the higher. Strobe at equal times: x ∝ t², velocities (green) 14, 28, 42 px ∝ t; earlier
+# positions muted, the last accent.
+# Colours (extends «Электрический заряд и закон Кулона»): a charge is a circle in the text
+# colour (surface fill) with «+» or «−»; the charge being discussed (a test charge, the moving
+# particle) accent. Forces red. Field lines are the field's picture: text colour, thin, with
+# small arrowheads along them; the field strength E at a point is a vector, accent (thicker for
+# a resultant), so E is never red: red is a force. A point where the field is measured is a
+# small accent dot. Plates are bars in the text colour with their «+» and «−» signs;
+# equipotential lines dashed muted; velocities green; guides, distances and notes muted.
+kind: diagram
+size:
+- 400
+- 300
+items:
+- rect:
+  - 54
+  - 30
+  - 6
+  - 90
+  fill: solid
+  width: 1
+- rect:
+  - 340
+  - 30
+  - 6
+  - 90
+  fill: solid
+  width: 1
+- text: +
+  at:
+  - 44
+  - 50.0
+  size: 15
+- text: −
+  at:
+  - 356
+  - 50.0
+  size: 15
+- text: +
+  at:
+  - 44
+  - 80.0
+  size: 15
+- text: −
+  at:
+  - 356
+  - 80.0
+  size: 15
+- text: +
+  at:
+  - 44
+  - 110.0
+  size: 15
+- text: −
+  at:
+  - 356
+  - 110.0
+  size: 15
+- circle:
+  - 74.0
+  - 75
+  r: 7
+  fill: surface
+  tone: muted
+  label: +
+- arrow:
+  - - 95.8
+    - 55
+  - - 109.8
+    - 55
+  tone: vel
+  width: 1.8
+- circle:
+  - 95.8
+  - 75
+  r: 7
+  fill: surface
+  tone: muted
+  label: +
+- arrow:
+  - - 161.1
+    - 55
+  - - 189.1
+    - 55
+  tone: vel
+  width: 1.8
+- circle:
+  - 161.1
+  - 75
+  r: 7
+  fill: surface
+  tone: muted
+  label: +
+- arrow:
+  - - 270.0
+    - 55
+  - - 312.0
+    - 55
+  tone: vel
+  width: 1.8
+  label: '*v*'
+  label_at:
+  - 291.0
+  - 45
+- circle:
+  - 270.0
+  - 75
+  r: 7
+  fill: surface
+  tone: accent
+  label: +
+- arrow:
+  - - 270
+    - 93
+  - - 300
+    - 93
+  tone: force
+  label: '*F*'
+  label_at:
+  - 285
+  - 113
+- text: протон — к минусу
+  at:
+  - 200
+  - 142
+  size: 13
+  anchor: middle
+  tone: muted
+- rect:
+  - 54
+  - 180
+  - 6
+  - 90
+  fill: solid
+  width: 1
+- rect:
+  - 340
+  - 180
+  - 6
+  - 90
+  fill: solid
+  width: 1
+- text: +
+  at:
+  - 44
+  - 200.0
+  size: 15
+- text: −
+  at:
+  - 356
+  - 200.0
+  size: 15
+- text: +
+  at:
+  - 44
+  - 230.0
+  size: 15
+- text: −
+  at:
+  - 356
+  - 230.0
+  size: 15
+- text: +
+  at:
+  - 44
+  - 260.0
+  size: 15
+- text: −
+  at:
+  - 356
+  - 260.0
+  size: 15
+- dots:
+  - - 326.0
+    - 225
+  r: 5
+  tone: muted
+- arrow:
+  - - 304.2
+    - 205
+  - - 290.2
+    - 205
+  tone: vel
+  width: 1.8
+- dots:
+  - - 304.2
+    - 225
+  r: 5
+  tone: muted
+- arrow:
+  - - 238.9
+    - 205
+  - - 210.9
+    - 205
+  tone: vel
+  width: 1.8
+- dots:
+  - - 238.9
+    - 225
+  r: 5
+  tone: muted
+- arrow:
+  - - 130.0
+    - 205
+  - - 88.0
+    - 205
+  tone: vel
+  width: 1.8
+  label: '*v*'
+  label_at:
+  - 109.0
+  - 195
+- dots:
+  - - 130.0
+    - 225
+  r: 5
+  tone: accent
+- arrow:
+  - - 130
+    - 243
+  - - 100
+    - 243
+  tone: force
+  label: '*F*'
+  label_at:
+  - 115
+  - 263
+- text: электрон — к плюсу
+  at:
+  - 200
+  - 292
+  size: 13
+  anchor: middle
+  tone: muted

@@ -2722,3 +2722,49 @@ task-answer .final {
 .cou-dot {
   fill: var(--accent);
 }
+
+/* <pp-field> (src/lib/sims/field.ts): the field of two point charges. Charges as in
+   <pp-coulomb> (.cou-q); direction arrows in the text colour (the field's picture), E₁, E₂
+   and their sum accent (the sum thicker), the parallelogram's guides muted. */
+/* No touch-action: none — a swipe over the picture still scrolls the page; a tap moves P. */
+.fld-svg {
+  cursor: crosshair;
+}
+
+.fld-dir line {
+  stroke: var(--text);
+  stroke-width: 1.3;
+}
+
+.fld-dir path {
+  fill: var(--text);
+}
+
+.fld-e1 line {
+  stroke: var(--accent);
+  stroke-width: 1.8;
+}
+
+.fld-e line {
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+
+.fld-e1 path,
+.fld-e path,
+.fld-p {
+  fill: var(--accent);
+}
+
+.fld-guide {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+}
+
+.sim-svg .fld-name {
+  fill: var(--accent);
+  font-size: 15px;
+  font-style: italic;
+}

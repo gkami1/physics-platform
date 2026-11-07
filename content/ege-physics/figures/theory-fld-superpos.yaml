@@ -1,0 +1,125 @@
+# electro.field.strength 2.4: superposition. At P, equally far from +q and −q, the field of +q
+# (E₁) points away from it and the field of −q (E₂) towards it; equal lengths (54 px). Their
+# sum E (thicker) is the diagonal of the parallelogram (dashed guides): parallel to the line
+# through the charges, from + to −. Not ks-field-03's layout (P on the line between them).
+# Colours (extends «Электрический заряд и закон Кулона»): a charge is a circle in the text
+# colour (surface fill) with «+» or «−»; the charge being discussed (a test charge, the moving
+# particle) accent. Forces red. Field lines are the field's picture: text colour, thin, with
+# small arrowheads along them; the field strength E at a point is a vector, accent (thicker for
+# a resultant), so E is never red: red is a force. A point where the field is measured is a
+# small accent dot. Plates are bars in the text colour with their «+» and «−» signs;
+# equipotential lines dashed muted; velocities green; guides, distances and notes muted.
+kind: diagram
+size:
+- 400
+- 240
+items:
+- line:
+  - - 109
+    - 187
+  - - 194
+    - 102
+  width: 1
+  tone: muted
+  dashed: true
+- line:
+  - - 291
+    - 187
+  - - 206
+    - 102
+  width: 1
+  tone: muted
+  dashed: true
+- line:
+  - - 238.2
+    - 57.8
+  - - 276.4
+    - 96.0
+  - - 238.2
+    - 134.2
+  width: 1
+  tone: muted
+  dashed: true
+- arrow:
+  - - 200
+    - 96
+  - - 238.2
+    - 57.8
+  tone: accent
+  width: 1.6
+  label: '*E*_1'
+  label_at:
+  - 224.2
+  - 53.8
+- arrow:
+  - - 200
+    - 96
+  - - 238.2
+    - 134.2
+  tone: accent
+  width: 1.6
+  label: '*E*_2'
+  label_at:
+  - 224.2
+  - 150.2
+- arrow:
+  - - 200
+    - 96
+  - - 276.4
+    - 96.0
+  tone: accent
+  width: 2.6
+  label: '*E*'
+  label_at:
+  - 290.4
+  - 101.0
+  animate: appear
+- dots:
+  - - 200
+    - 96
+  r: 3.5
+  tone: accent
+- text: '*P*'
+  at:
+  - 188
+  - 90
+  size: 14
+  tone: accent
+- circle:
+  - 100
+  - 196
+  r: 12
+  fill: surface
+  tone: default
+  label: +
+- circle:
+  - 300
+  - 196
+  r: 12
+  fill: surface
+  tone: default
+  label: −
+- text: +*q*
+  at:
+  - 100
+  - 228
+  size: 14
+- text: −*q*
+  at:
+  - 300
+  - 228
+  size: 14
+- text: от плюса
+  at:
+  - 80
+  - 146
+  size: 13
+  anchor: middle
+  tone: muted
+- text: к минусу
+  at:
+  - 320
+  - 146
+  size: 13
+  anchor: middle
+  tone: muted

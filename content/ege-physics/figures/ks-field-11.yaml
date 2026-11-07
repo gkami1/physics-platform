@@ -1,0 +1,79 @@
+# ks-field-11: +6 нКл and +8 нКл 3 см from the point P at the vertex of a right angle.
+# Only the task's values are labelled; no field vectors (60, 80 and 100 кВ/м not shown).
+kind: diagram
+size:
+- 360
+- 222
+items:
+- line:
+  - - 110
+    - 184
+  - - 110
+    - 60
+  width: 1
+  tone: muted
+  dashed: true
+- line:
+  - - 116
+    - 190
+  - - 270
+    - 190
+  width: 1
+  tone: muted
+  dashed: true
+- line:
+  - - 110
+    - 174
+  - - 126
+    - 174
+  - - 126
+    - 190
+  width: 1
+  tone: muted
+- dots:
+  - - 110
+    - 190
+  r: 4
+  tone: accent
+- text: '*P*'
+  at:
+  - 96
+  - 208
+  size: 14
+  tone: accent
+- circle:
+  - 110
+  - 48
+  r: 12
+  fill: surface
+  tone: default
+  label: +
+- circle:
+  - 282
+  - 190
+  r: 12
+  fill: surface
+  tone: default
+  label: +
+- text: +6 нКл
+  at:
+  - 90
+  - 53
+  size: 13
+  anchor: end
+- text: +8 нКл
+  at:
+  - 282
+  - 222
+  size: 13
+- text: 3 см
+  at:
+  - 118
+  - 124
+  size: 13
+  anchor: start
+- text: 3 см
+  at:
+  - 196
+  - 212
+  size: 13

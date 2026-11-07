@@ -1,0 +1,227 @@
+# electro.field.strength 2.1: a body acts through its field. Left: the Earth's field of
+# gravity (lines towards the centre) pulls an apple with mg. Right: a charge Q's electric
+# field (lines out of it) pushes a test charge q (accent) with F. Forces red.
+# Colours (extends «Электрический заряд и закон Кулона»): a charge is a circle in the text
+# colour (surface fill) with «+» or «−»; the charge being discussed (a test charge, the moving
+# particle) accent. Forces red. Field lines are the field's picture: text colour, thin, with
+# small arrowheads along them; the field strength E at a point is a vector, accent (thicker for
+# a resultant), so E is never red: red is a force. A point where the field is measured is a
+# small accent dot. Plates are bars in the text colour with their «+» and «−» signs;
+# equipotential lines dashed muted; velocities green; guides, distances and notes muted.
+kind: diagram
+size:
+- 416
+- 236
+items:
+- path: M170.8 86.6L130.1 103.5
+  width: 1.1
+- arrow:
+  - - 156.9
+    - 92.4
+  - - 144.0
+    - 97.7
+  width: 1.3
+- path: M126.4 42.2L109.5 82.9
+  width: 1.1
+- arrow:
+  - - 120.6
+    - 56.1
+  - - 115.3
+    - 69.0
+  width: 1.3
+- path: M63.6 42.2L80.5 82.9
+  width: 1.1
+- arrow:
+  - - 69.4
+    - 56.1
+  - - 74.7
+    - 69.0
+  width: 1.3
+- path: M19.2 86.6L59.9 103.5
+  width: 1.1
+- arrow:
+  - - 33.1
+    - 92.4
+  - - 46.0
+    - 97.7
+  width: 1.3
+- path: M19.2 149.4L59.9 132.5
+  width: 1.1
+- arrow:
+  - - 33.1
+    - 143.6
+  - - 46.0
+    - 138.3
+  width: 1.3
+- path: M63.6 193.8L80.5 153.1
+  width: 1.1
+- arrow:
+  - - 69.4
+    - 179.9
+  - - 74.7
+    - 167.0
+  width: 1.3
+- path: M126.4 193.8L109.5 153.1
+  width: 1.1
+- arrow:
+  - - 120.6
+    - 179.9
+  - - 115.3
+    - 167.0
+  width: 1.3
+- path: M170.8 149.4L130.1 132.5
+  width: 1.1
+- arrow:
+  - - 156.9
+    - 143.6
+  - - 144.0
+    - 138.3
+  width: 1.3
+- circle:
+  - 95
+  - 118
+  r: 34
+  fill: surface
+- text: Земля
+  at:
+  - 95
+  - 123
+  size: 13
+  anchor: middle
+  tone: default
+- circle:
+  - 172
+  - 40
+  r: 7
+  fill: surface
+  tone: accent
+- arrow:
+  - - 166
+    - 46
+  - - 142
+    - 70
+  tone: force
+  label: '*m**g*'
+  label_at:
+  - 170
+  - 78
+- text: поле тяготения
+  at:
+  - 95
+  - 222
+  size: 13
+  anchor: middle
+  tone: muted
+- line:
+  - - 208
+    - 14
+  - - 208
+    - 230
+  width: 1
+  tone: muted
+- path: M314.8 111.9L375.8 86.6
+  width: 1.1
+- arrow:
+  - - 338.8
+    - 101.9
+  - - 351.7
+    - 96.6
+  width: 1.3
+- path: M306.1 103.2L331.4 42.2
+  width: 1.1
+- arrow:
+  - - 316.1
+    - 79.2
+  - - 321.4
+    - 66.3
+  width: 1.3
+- path: M293.9 103.2L268.6 42.2
+  width: 1.1
+- arrow:
+  - - 283.9
+    - 79.2
+  - - 278.6
+    - 66.3
+  width: 1.3
+- path: M285.2 111.9L224.2 86.6
+  width: 1.1
+- arrow:
+  - - 261.2
+    - 101.9
+  - - 248.3
+    - 96.6
+  width: 1.3
+- path: M285.2 124.1L224.2 149.4
+  width: 1.1
+- arrow:
+  - - 261.2
+    - 134.1
+  - - 248.3
+    - 139.4
+  width: 1.3
+- path: M293.9 132.8L268.6 193.8
+  width: 1.1
+- arrow:
+  - - 283.9
+    - 156.8
+  - - 278.6
+    - 169.7
+  width: 1.3
+- path: M306.1 132.8L331.4 193.8
+  width: 1.1
+- arrow:
+  - - 316.1
+    - 156.8
+  - - 321.4
+    - 169.7
+  width: 1.3
+- path: M314.8 124.1L375.8 149.4
+  width: 1.1
+- arrow:
+  - - 338.8
+    - 134.1
+  - - 351.7
+    - 139.4
+  width: 1.3
+- circle:
+  - 300
+  - 118
+  r: 12
+  fill: surface
+  tone: default
+  label: +
+- text: '*Q*'
+  at:
+  - 300
+  - 152
+  size: 14
+- circle:
+  - 374
+  - 40
+  r: 9
+  fill: surface
+  tone: accent
+  label: +
+- text: '*q*'
+  at:
+  - 358
+  - 34
+  size: 14
+  tone: accent
+- text: электрическое поле
+  at:
+  - 300
+  - 222
+  size: 13
+  anchor: middle
+  tone: muted
+- arrow:
+  - - 380.9
+    - 32.7
+  - - 397.4
+    - 15.3
+  tone: force
+  label: '*F*'
+  label_at:
+  - 403.4
+  - 33.3
