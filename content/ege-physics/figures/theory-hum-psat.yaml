@@ -1,0 +1,91 @@
+# thermo.humidity 4.2: saturated water vapour pressure from 0 to 100 °C (the focus here,
+# so accent). Real values; labels only at 0, 40, 80 (°C and кПа), so
+# no task answer (50 %, 60 %, 90 °C, 120 °C, the ratio 6) is printed.
+# Colours (whole topic, extending «Основы МКТ», «Идеальный газ» and «Изопроцессы»):
+# molecules in the text colour, the tracked molecule and the focal quantity accent,
+# velocity green (a molecule leaving or returning to the liquid), pressure on a surface red,
+# notes muted; liquid water an accent tint with an accent surface line. Graphs: the curve of
+# saturated-vapour pressure p_н(t) is a property of water, drawn in the text colour; the
+# state or process being discussed accent (a moving point from 1 to 2); guides and the
+# ideal-gas continuation of an isotherm dashed muted. When p_н(t) itself is the focus
+# (graph kind, 4.2) it is accent.
+kind: graph
+x:
+  var: t
+  unit: °C
+  min: 0
+  max: 100
+  step: 10
+  label_every: 4
+y:
+  var: p_н
+  unit: кПа
+  min: 0
+  max: 110
+  step: 10
+  label_every: 4
+series:
+- points:
+  - - 0
+    - 0.6
+  - - 5
+    - 0.9
+  - - 10
+    - 1.2
+  - - 15
+    - 1.7
+  - - 20
+    - 2.3
+  - - 25
+    - 3.2
+  - - 30
+    - 4.2
+  - - 35
+    - 5.6
+  - - 40
+    - 7.4
+  - - 45
+    - 9.6
+  - - 50
+    - 12.4
+  - - 55
+    - 15.8
+  - - 60
+    - 19.9
+  - - 65
+    - 25.0
+  - - 70
+    - 31.2
+  - - 75
+    - 38.6
+  - - 80
+    - 47.4
+  - - 85
+    - 57.9
+  - - 90
+    - 70.2
+  - - 95
+    - 84.6
+  - - 100
+    - 101.4
+notes:
+- at:
+  - 96
+  - 101
+  text: кипение при
+  anchor: end
+- at:
+  - 96
+  - 91
+  text: атмосферном давлении
+  anchor: end
+- at:
+  - 28
+  - 22
+  text: медленно
+  anchor: middle
+- at:
+  - 72
+  - 50
+  text: всё быстрее
+  anchor: end

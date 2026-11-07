@@ -1,0 +1,143 @@
+# thermo.humidity 4.6: an isotherm of water vapour. Compressed at constant temperature,
+# unsaturated vapour follows pV = const (1 → 2); at V_нас it is saturated, and further
+# compression condenses vapour at constant p_н (2 → 3, flat). The whole isotherm dashed
+# accent, the ideal-gas hyperbola it would follow dashed muted. Qualitative axes.
+# Colours (whole topic, extending «Основы МКТ», «Идеальный газ» and «Изопроцессы»):
+# molecules in the text colour, the tracked molecule and the focal quantity accent,
+# velocity green (a molecule leaving or returning to the liquid), pressure on a surface red,
+# notes muted; liquid water an accent tint with an accent surface line. Graphs: the curve of
+# saturated-vapour pressure p_н(t) is a property of water, drawn in the text colour; the
+# state or process being discussed accent (a moving point from 1 to 2); guides and the
+# ideal-gas continuation of an isotherm dashed muted. When p_н(t) itself is the focus
+# (graph kind, 4.2) it is accent.
+kind: diagram
+size:
+- 400
+- 252
+items:
+- arrow:
+  - - 50
+    - 225
+  - - 390
+    - 225
+  width: 1.5
+- arrow:
+  - - 50
+    - 225
+  - - 50
+    - 20
+  width: 1.5
+- text: '*V*'
+  at:
+  - 388
+  - 245
+  anchor: end
+- text: '*p*'
+  at:
+  - 62
+  - 32
+  anchor: start
+- text: '0'
+  at:
+  - 42
+  - 241
+  size: 13
+  anchor: end
+- path: M390 182.6L384.6 182L379.3 181.3L373.9 180.5L368.5 179.8L363.2 179L357.8 178.2L352.4 177.4L347
+    176.5L341.7 175.6L336.3 174.7L330.9 173.7L325.6 172.7L320.2 171.7L314.8 170.6L309.5 169.5L304.1 168.3L298.7
+    167.1L293.3 165.8L288 164.5L282.6 163.1L277.2 161.6L271.9 160.1L266.5 158.5L261.1 156.8L255.8 155L250.4
+    153.1L245 151.2L239.7 149.1L234.3 146.9L228.9 144.5L223.5 142L218.2 139.4L212.8 136.6L207.4 133.5L202.1
+    130.3L196.7 126.8L191.3 123.1L186 119.1L180.6 114.7L175.2 110L80 110
+  width: 1.2
+  dashed: true
+  tone: accent
+- path: M175.2 110L172.7 107.6L170.1 105.1L167.5 102.5L165 99.8L162.4 96.9L159.9 93.9L157.3 90.8L154.7
+    87.5L152.2 84.1L149.6 80.4L147 76.6L144.5 72.6L141.9 68.4L139.4 63.9L136.8 59.1L134.2 54.1L131.7 48.7L129.1
+    43L126.6 36.9L124 30.4
+  width: 1.2
+  dashed: true
+  tone: muted
+- line:
+  - - 175.2
+    - 225
+  - - 175.2
+    - 110.0
+  width: 1
+  dashed: true
+  tone: muted
+- path: M350 177L345.6 176.3L341.3 175.6L336.9 174.8L332.5 174L328.2 173.2L323.8 172.4L319.4 171.6L315
+    170.7L310.7 169.8L306.3 168.8L301.9 167.8L297.6 166.8L293.2 165.8L288.8 164.7L284.5 163.6L280.1 162.4L275.7
+    161.2L271.3 159.9L267 158.6L262.6 157.3L258.2 155.8L253.9 154.4L249.5 152.8L245.1 151.2L240.8 149.5L236.4
+    147.7L232 145.9L227.7 143.9L223.3 141.9L218.9 139.7L214.5 137.5L210.2 135.1L205.8 132.6L201.4 129.9L197.1
+    127.1L192.7 124.1L188.3 120.9L184 117.5L179.6 113.9L175.2 110L98 110
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- dots:
+  - - 350.0
+    - 177.0
+  - - 175.2
+    - 110.0
+  - - 98.0
+    - 110.0
+  r: 4.5
+  tone: accent
+- text: '1'
+  at:
+  - 352.0
+  - 167.0
+- text: '2'
+  at:
+  - 183.2
+  - 102.0
+  anchor: start
+- text: '3'
+  at:
+  - 100.0
+  - 100.0
+- text: '*p*_н'
+  at:
+  - 42
+  - 115.0
+  anchor: end
+  size: 13
+- text: '*V*_{нас}'
+  at:
+  - 175.2
+  - 244
+  size: 13
+- text: '*T* = const'
+  at:
+  - 306
+  - 140
+  anchor: start
+  tone: accent
+- text: 'пар ненасыщенный:'
+  at:
+  - 196
+  - 196
+  size: 13
+  anchor: start
+  tone: muted
+- text: '*pV* = const'
+  at:
+  - 196
+  - 213
+  size: 13
+  anchor: start
+  tone: muted
+- text: насыщенный пар
+  at:
+  - 60
+  - 140
+  size: 13
+  anchor: start
+  tone: muted
+- text: 'и вода: *p* = *p*_н'
+  at:
+  - 60
+  - 157
+  size: 13
+  anchor: start
+  tone: muted
