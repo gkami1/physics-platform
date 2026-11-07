@@ -1,0 +1,119 @@
+# thermo.heat 5.6: heat balance. A hot body cools from t₁ and a cold one warms from t₂ until
+# both are at the common temperature t (dashed muted guide), between the two. Both curves
+# accent with a moving point. Qualitative axes.
+# Colours (whole topic, extending «Основы МКТ», «Идеальный газ», «Изопроцессы» and
+# «Насыщенный пар»): heat Q flowing in or out is the focal quantity, accent arrows; heat lost
+# to the air muted; liquid water an accent tint with an accent surface line; ice and other
+# solids the surface fill with a text-colour outline; molecules in the text colour (crystal
+# bonds muted), molecule velocities green; heaters and flames muted; notes muted. Graphs: the
+# process being discussed accent with a moving point (sloped parts and flat parts alike: the
+# notes say which is which), guides dashed muted.
+kind: diagram
+size:
+- 400
+- 240
+items:
+- arrow:
+  - - 50
+    - 214
+  - - 380
+    - 214
+  width: 1.5
+- arrow:
+  - - 50
+    - 214
+  - - 50
+    - 18
+  width: 1.5
+- text: '*τ*'
+  at:
+  - 378
+  - 234
+  anchor: end
+- text: '*t*'
+  at:
+  - 62
+  - 30
+  anchor: start
+- text: '0'
+  at:
+  - 42
+  - 230
+  size: 13
+  anchor: end
+- line:
+  - - 50
+    - 122.0
+  - - 360
+    - 122.0
+  width: 1
+  dashed: true
+  tone: muted
+- path: M50 44L56 50.4L62 56.3L68 61.7L74 66.6L80 71.2L86 75.4L92 79.2L98 82.7L104 85.9L110 88.9L116 91.6L122
+    94.1L128 96.4L134 98.5L140 100.4L146 102.2L152 103.8L158 105.3L164 106.7L170 108L176 109.1L182 110.2L188
+    111.1L194 112L200 112.8L206 113.6L212 114.3L218 114.9L224 115.5L230 116L236 116.5L242 117L248 117.4L254
+    117.8L260 118.1L266 118.4L272 118.7L278 119L284 119.2L290 119.5L296 119.7L302 119.9L308 120L314 120.2L320
+    120.4L326 120.5L332 120.6L338 120.7L344 120.8L350 120.9
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- path: M50 174L56 169.7L62 165.8L68 162.2L74 158.9L80 155.9L86 153.1L92 150.5L98 148.2L104 146L110 144.1L116
+    142.3L122 140.6L128 139.1L134 137.7L140 136.4L146 135.2L152 134.1L158 133.1L164 132.2L170 131.4L176
+    130.6L182 129.9L188 129.2L194 128.6L200 128.1L206 127.6L212 127.1L218 126.7L224 126.3L230 126L236
+    125.6L242 125.3L248 125.1L254 124.8L260 124.6L266 124.4L272 124.2L278 124L284 123.8L290 123.7L296
+    123.5L302 123.4L308 123.3L314 123.2L320 123.1L326 123L332 122.9L338 122.8L344 122.8L350 122.7
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- text: '*t*_1'
+  at:
+  - 42
+  - 49.0
+  anchor: end
+- text: '*t*_2'
+  at:
+  - 42
+  - 179.0
+  anchor: end
+- text: '*t*'
+  at:
+  - 42
+  - 127.0
+  anchor: end
+- text: 'горячее тело остывает:'
+  at:
+  - 96
+  - 52
+  size: 13
+  anchor: start
+  tone: muted
+- text: отдаёт *Q*_{отд}
+  at:
+  - 96
+  - 70
+  size: 13
+  anchor: start
+  tone: accent
+- text: 'холодное нагревается:'
+  at:
+  - 120
+  - 170
+  size: 13
+  anchor: start
+  tone: muted
+- text: получает *Q*_{пол}
+  at:
+  - 120
+  - 188
+  size: 13
+  anchor: start
+  tone: accent
+- text: общая температура
+  at:
+  - 370
+  - 112
+  size: 13
+  anchor: end
+  tone: muted

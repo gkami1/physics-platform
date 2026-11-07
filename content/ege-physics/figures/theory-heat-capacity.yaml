@@ -1,0 +1,163 @@
+# thermo.heat 5.2: the same heat Q = 4200 Дж (accent) into 1 kg of water (accent tint) and
+# 1 kg of steel (a solid: surface fill): water warms by 1 °C, steel by 4200/500 = 8,4 °C.
+# Thermometer columns: the rise accent, to scale between the two (4 px per °C).
+# Colours (whole topic, extending «Основы МКТ», «Идеальный газ», «Изопроцессы» and
+# «Насыщенный пар»): heat Q flowing in or out is the focal quantity, accent arrows; heat lost
+# to the air muted; liquid water an accent tint with an accent surface line; ice and other
+# solids the surface fill with a text-colour outline; molecules in the text colour (crystal
+# bonds muted), molecule velocities green; heaters and flames muted; notes muted. Graphs: the
+# process being discussed accent with a moving point (sloped parts and flat parts alike: the
+# notes say which is which), guides dashed muted.
+kind: diagram
+size:
+- 400
+- 196
+items:
+- rect:
+  - 41
+  - 100
+  - 78
+  - 60
+  fill: accent
+  tone: accent
+  width: 0
+- line:
+  - - 40
+    - 80
+  - - 40
+    - 160
+  - - 120
+    - 160
+  - - 120
+    - 80
+  width: 2
+- line:
+  - - 41
+    - 100
+  - - 119
+    - 100
+  tone: accent
+- arrow:
+  - - 80
+    - 30
+  - - 80
+    - 92
+  tone: accent
+  width: 3
+- text: '*Q*'
+  at:
+  - 92
+  - 52
+  anchor: start
+  tone: accent
+- rect:
+  - 146
+  - 40
+  - 8
+  - 110
+  radius: 4
+  width: 1.5
+- circle:
+  - 150
+  - 156
+  r: 8
+  fill: solid
+  tone: muted
+  width: 0
+- rect:
+  - 148
+  - 110
+  - 4
+  - 42
+  fill: solid
+  tone: muted
+  width: 0
+- rect:
+  - 148
+  - 106
+  - 4
+  - 4
+  fill: solid
+  tone: accent
+  width: 0
+- text: +1 °C
+  at:
+  - 164
+  - 104
+  size: 13
+  anchor: start
+  tone: muted
+- text: 1 кг воды
+  at:
+  - 80
+  - 184
+  size: 13
+- rect:
+  - 220
+  - 104
+  - 80
+  - 56
+  fill: surface
+  width: 2
+- arrow:
+  - - 260
+    - 30
+  - - 260
+    - 96
+  tone: accent
+  width: 3
+- text: '*Q*'
+  at:
+  - 272
+  - 52
+  anchor: start
+  tone: accent
+- rect:
+  - 326
+  - 40
+  - 8
+  - 110
+  radius: 4
+  width: 1.5
+- circle:
+  - 330
+  - 156
+  r: 8
+  fill: solid
+  tone: muted
+  width: 0
+- rect:
+  - 328
+  - 110
+  - 4
+  - 42
+  fill: solid
+  tone: muted
+  width: 0
+- rect:
+  - 328
+  - 76
+  - 4
+  - 34
+  fill: solid
+  tone: accent
+  width: 0
+- text: +8,4 °C
+  at:
+  - 342
+  - 80
+  size: 13
+  anchor: start
+  tone: muted
+- text: 1 кг стали
+  at:
+  - 260
+  - 184
+  size: 13
+- text: одна и та же *Q* = 4200 Дж
+  at:
+  - 200
+  - 16
+  size: 13
+  anchor: middle
+  tone: muted

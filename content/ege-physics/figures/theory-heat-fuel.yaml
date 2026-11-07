@@ -1,0 +1,139 @@
+# thermo.heat 5.3: burning fuel releases Q = qm (accent arrows into the pot); the water gets
+# Q_пол, the rest goes to the air and the pot (muted arrows). Efficiency η = Q_пол/Q.
+# Flames and the burner muted. Qualitative.
+# Colours (whole topic, extending «Основы МКТ», «Идеальный газ», «Изопроцессы» and
+# «Насыщенный пар»): heat Q flowing in or out is the focal quantity, accent arrows; heat lost
+# to the air muted; liquid water an accent tint with an accent surface line; ice and other
+# solids the surface fill with a text-colour outline; molecules in the text colour (crystal
+# bonds muted), molecule velocities green; heaters and flames muted; notes muted. Graphs: the
+# process being discussed accent with a moving point (sloped parts and flat parts alike: the
+# notes say which is which), guides dashed muted.
+kind: diagram
+size:
+- 400
+- 210
+items:
+- rect:
+  - 131
+  - 82
+  - 98
+  - 58
+  fill: accent
+  tone: accent
+  width: 0
+- line:
+  - - 130
+    - 60
+  - - 130
+    - 140
+  - - 230
+    - 140
+  - - 230
+    - 60
+  width: 2
+- line:
+  - - 131
+    - 82
+  - - 229
+    - 82
+  tone: accent
+- line:
+  - - 124
+    - 144
+  - - 236
+    - 144
+  width: 2
+- path: M141 188Q139 172.6 150 160Q161 172.6 159 188Z
+  width: 1.5
+  tone: muted
+- path: M170 188Q168 169.3 180 154Q192 169.3 190 188Z
+  width: 1.5
+  tone: muted
+- path: M201 188Q199 172.6 210 160Q221 172.6 219 188Z
+  width: 1.5
+  tone: muted
+- line:
+  - - 140
+    - 190
+  - - 220
+    - 190
+  width: 3
+  tone: muted
+- arrow:
+  - - 165
+    - 154
+  - - 165
+    - 128
+  tone: accent
+  width: 3
+- arrow:
+  - - 195
+    - 154
+  - - 195
+    - 128
+  tone: accent
+  width: 3
+- arrow:
+  - - 132
+    - 160
+  - - 94
+    - 132
+  tone: muted
+- arrow:
+  - - 228
+    - 160
+  - - 266
+    - 132
+  tone: muted
+- text: 'сгорает топливо:'
+  at:
+  - 252
+  - 182
+  size: 13
+  anchor: start
+  tone: muted
+- text: '*Q* = *qm*'
+  at:
+  - 252
+  - 200
+  anchor: start
+  tone: accent
+- text: вода получает
+  at:
+  - 180
+  - 30
+  size: 13
+  anchor: middle
+  tone: muted
+- text: '*Q*_{пол}'
+  at:
+  - 180
+  - 50
+  tone: accent
+- text: уходит
+  at:
+  - 90
+  - 108
+  size: 13
+  anchor: end
+  tone: muted
+- text: в воздух
+  at:
+  - 90
+  - 125
+  size: 13
+  anchor: end
+  tone: muted
+- text: и посуде
+  at:
+  - 90
+  - 142
+  size: 13
+  anchor: end
+  tone: muted
+- text: '*η* = *Q*_{пол}/*Q*'
+  at:
+  - 258
+  - 104
+  anchor: start
+  tone: accent

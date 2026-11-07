@@ -1,0 +1,155 @@
+# thermo.heat 5.7: does all the ice melt? The heat the warm water gives cooling to 0 °C
+# (accent bar) against λm, the heat to melt all the ice (outlined). Longer: all melts and
+# the mixture ends above 0 °C; shorter: part melts and it ends at 0 °C. Qualitative.
+# Colours (whole topic, extending «Основы МКТ», «Идеальный газ», «Изопроцессы» and
+# «Насыщенный пар»): heat Q flowing in or out is the focal quantity, accent arrows; heat lost
+# to the air muted; liquid water an accent tint with an accent surface line; ice and other
+# solids the surface fill with a text-colour outline; molecules in the text colour (crystal
+# bonds muted), molecule velocities green; heaters and flames muted; notes muted. Graphs: the
+# process being discussed accent with a moving point (sloped parts and flat parts alike: the
+# notes say which is which), guides dashed muted.
+kind: diagram
+size:
+- 400
+- 220
+items:
+- rect:
+  - 118
+  - 20
+  - 228
+  - 18
+  fill: accent
+  tone: accent
+  width: 0
+- rect:
+  - 118
+  - 20
+  - 228
+  - 18
+  width: 1.5
+  tone: accent
+- rect:
+  - 118
+  - 44
+  - 160
+  - 18
+  width: 1.5
+- text: '*cM*(*t*_1 − 0)'
+  at:
+  - 110
+  - 34
+  size: 13
+  anchor: end
+  tone: accent
+- text: '*λm*'
+  at:
+  - 110
+  - 58
+  size: 13
+  anchor: end
+- text: отдаст вода
+  at:
+  - 124
+  - 34
+  size: 13
+  anchor: start
+  tone: accent
+- text: нужно льду
+  at:
+  - 286
+  - 58
+  size: 13
+  anchor: start
+  tone: muted
+- text: 'хватает: растает весь лёд,'
+  at:
+  - 118
+  - 84
+  size: 13
+  anchor: start
+  tone: muted
+- text: потом вода из льда нагреется, *t* > 0 °C
+  at:
+  - 118
+  - 101
+  size: 13
+  anchor: start
+  tone: muted
+- line:
+  - - 278
+    - 16
+  - - 278
+    - 66
+  width: 1
+  dashed: true
+  tone: muted
+- rect:
+  - 118
+  - 124
+  - 96
+  - 18
+  fill: accent
+  tone: accent
+  width: 0
+- rect:
+  - 118
+  - 124
+  - 96
+  - 18
+  width: 1.5
+  tone: accent
+- rect:
+  - 118
+  - 148
+  - 160
+  - 18
+  width: 1.5
+- text: '*cM*(*t*_1 − 0)'
+  at:
+  - 110
+  - 138
+  size: 13
+  anchor: end
+  tone: accent
+- text: '*λm*'
+  at:
+  - 110
+  - 162
+  size: 13
+  anchor: end
+- text: отдаст вода
+  at:
+  - 222
+  - 138
+  size: 13
+  anchor: start
+  tone: muted
+- text: нужно льду
+  at:
+  - 286
+  - 162
+  size: 13
+  anchor: start
+  tone: muted
+- text: 'не хватает: растает только часть,'
+  at:
+  - 118
+  - 188
+  size: 13
+  anchor: start
+  tone: muted
+- text: в конце лёд и вода при *t* = 0 °C
+  at:
+  - 118
+  - 205
+  size: 13
+  anchor: start
+  tone: muted
+- line:
+  - - 278
+    - 120
+  - - 278
+    - 170
+  width: 1
+  dashed: true
+  tone: muted
