@@ -1,44 +1,151 @@
-# thermo.humidity: dynamic equilibrium of evaporation and condensation
+# thermo.humidity 4.2 (the ladder's figure, redrawn in the topic colours): a closed jar
+# of water; evaporation and condensation (molecule velocities, green) balance — dynamic
+# equilibrium, the vapour is saturated. Seed 42, qualitative.
+# Colours (whole topic, extending «Основы МКТ», «Идеальный газ» and «Изопроцессы»):
+# molecules in the text colour, the tracked molecule and the focal quantity accent,
+# velocity green (a molecule leaving or returning to the liquid), pressure on a surface red,
+# notes muted; liquid water an accent tint with an accent surface line. Graphs: the curve of
+# saturated-vapour pressure p_н(t) is a property of water, drawn in the text colour; the
+# state or process being discussed accent (a moving point from 1 to 2); guides and the
+# ideal-gas continuation of an isotherm dashed muted. When p_н(t) itself is the focus
+# (graph kind, 4.2) it is accent.
 kind: diagram
-size: [400, 250]
+size:
+- 400
+- 236
 items:
-- rect: [61, 141, 178, 78]
+- rect:
+  - 61
+  - 141
+  - 178
+  - 78
   fill: accent
+  tone: accent
   width: 0
-- rect: [60, 50, 180, 170]
+- rect:
+  - 60
+  - 50
+  - 180
+  - 170
   width: 2
-- line: [[60, 50], [240, 50]]
+- line:
+  - - 56
+    - 50
+  - - 244
+    - 50
   width: 4
-- line: [[60, 141], [240, 141]]
+- line:
+  - - 61
+    - 141
+  - - 239
+    - 141
   tone: accent
-- dots: [[90.21, 105.6], [209.01, 113.63], [186.02, 93.55], [125.88, 114.85], [217.92, 88.13], [182.37,
-      73.22], [96.29, 71.98], [153.83, 123.62], [114.26, 81.34], [150.24, 97.1], [153.38, 63.23], [178.69,
-      119.85]]
-  r: 4.5
-  tone: accent
-- arrow: [[100, 150], [100, 106]]
+- dots:
+  - - 173.1
+    - 149.7
+  - - 112.7
+    - 162.7
+  - - 189.3
+    - 192.7
+  - - 215.1
+    - 153.7
+  - - 137.0
+    - 150.0
+  - - 103.3
+    - 181.4
+  - - 71.4
+    - 161.1
+  - - 174.9
+    - 184.0
+  - - 225.9
+    - 170.2
+  - - 207.7
+    - 187.8
+  - - 156.0
+    - 212.2
+  - - 129.8
+    - 184.4
+  - - 111.3
+    - 209.8
+  - - 95.4
+    - 196.1
+  - - 231.3
+    - 190.2
+  - - 159.5
+    - 193.2
+  - - 160.2
+    - 165.3
+  - - 198.5
+    - 175.9
+  r: 4
+- dots:
+  - - 77.5
+    - 103.3
+  - - 232.4
+    - 110.4
+  - - 142.3
+    - 130.8
+  - - 212.4
+    - 97.6
+  - - 150.1
+    - 93.6
+  - - 116.5
+    - 115.7
+  - - 70.2
+    - 129.6
+  - - 212.9
+    - 124.9
+  - - 118.0
+    - 87.8
+  r: 4
+- arrow:
+  - - 100
+    - 152
+  - - 100
+    - 96
   tone: vel
-  label: испарение
-  label_at: [100, 170]
-- arrow: [[200, 104], [200, 148]]
-  tone: force
-  label: конденсация
-  label_at: [200, 170]
-- text: вода
-  at: [150, 205]
-  tone: muted
+- arrow:
+  - - 190
+    - 96
+  - - 190
+    - 152
+  tone: vel
+- text: испарение
+  at:
+  - 100
+  - 74
+  size: 13
+  tone: vel
+- text: конденсация
+  at:
+  - 190
+  - 74
+  size: 13
+  tone: vel
 - text: 'насыщенный пар:'
-  at: [320, 110]
+  at:
+  - 258
+  - 104
   size: 13
+  anchor: start
 - text: сколько молекул
-  at: [320, 130]
+  at:
+  - 258
+  - 124
   size: 13
+  anchor: start
+  tone: muted
 - text: вылетает, столько
-  at: [320, 148]
+  at:
+  - 258
+  - 141
   size: 13
+  anchor: start
+  tone: muted
 - text: и возвращается
-  at: [320, 166]
+  at:
+  - 258
+  - 158
   size: 13
-- text: '*φ* = *p*/*p*_н · 100 %'
-  at: [150, 245]
-  size: 14
+  anchor: start
+  tone: muted

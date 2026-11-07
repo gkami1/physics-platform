@@ -1,0 +1,169 @@
+# thermo.humidity 4.1: evaporation from an open glass. A fast molecule (accent) zigzags
+# up through the water and flies out (drawn with a moving point, its velocity green); a
+# vapour molecule returns (green arrow down). Seed 41, qualitative.
+# Colours (whole topic, extending «Основы МКТ», «Идеальный газ» and «Изопроцессы»):
+# molecules in the text colour, the tracked molecule and the focal quantity accent,
+# velocity green (a molecule leaving or returning to the liquid), pressure on a surface red,
+# notes muted; liquid water an accent tint with an accent surface line. Graphs: the curve of
+# saturated-vapour pressure p_н(t) is a property of water, drawn in the text colour; the
+# state or process being discussed accent (a moving point from 1 to 2); guides and the
+# ideal-gas continuation of an isotherm dashed muted. When p_н(t) itself is the focus
+# (graph kind, 4.2) it is accent.
+kind: diagram
+size:
+- 400
+- 230
+items:
+- rect:
+  - 71
+  - 120
+  - 158
+  - 99
+  fill: accent
+  tone: accent
+  width: 0
+- line:
+  - - 70
+    - 30
+  - - 70
+    - 220
+  - - 230
+    - 220
+  - - 230
+    - 30
+  width: 2
+- line:
+  - - 71
+    - 120
+  - - 229
+    - 120
+  tone: accent
+- dots:
+  - - 101.2
+    - 205.6
+  - - 191.1
+    - 183.9
+  - - 199.5
+    - 164.8
+  - - 99.6
+    - 139.9
+  - - 85.7
+    - 194.5
+  - - 199.8
+    - 145.6
+  - - 84.8
+    - 154.3
+  - - 98.3
+    - 184.4
+  - - 80.2
+    - 138.6
+  - - 204.7
+    - 191.6
+  - - 200.9
+    - 209.7
+  - - 112.3
+    - 164.6
+  - - 218.3
+    - 150.7
+  - - 117.4
+    - 204.2
+  - - 218.7
+    - 203.9
+  - - 197.0
+    - 129.6
+  - - 87.5
+    - 170.8
+  - - 116.6
+    - 129.1
+  - - 223.0
+    - 184.6
+  - - 116.8
+    - 186.5
+  - - 79.4
+    - 208.5
+  - - 115.1
+    - 147.6
+  - - 216.1
+    - 128.5
+  - - 221.6
+    - 169.3
+  r: 4
+- dots:
+  - - 96
+    - 52
+  - - 222
+    - 70
+  - - 92
+    - 92
+  r: 4
+- arrow:
+  - - 92
+    - 92
+  - - 92
+    - 114
+  tone: vel
+- path: M150 196L128 178L160 160L140 140L152 122L176 72L196 30
+  width: 1.5
+  tone: accent
+  animate: draw
+  mover: true
+- dots:
+  - - 196
+    - 30
+  r: 4.5
+  tone: accent
+- arrow:
+  - - 196
+    - 30
+  - - 205
+    - 8
+  tone: vel
+- text: вылетают самые
+  at:
+  - 248
+  - 46
+  size: 13
+  anchor: start
+  tone: muted
+- text: быстрые молекулы
+  at:
+  - 248
+  - 63
+  size: 13
+  anchor: start
+  tone: muted
+- text: возвращаются —
+  at:
+  - 248
+  - 96
+  size: 13
+  anchor: start
+  tone: muted
+- text: конденсация
+  at:
+  - 248
+  - 113
+  size: 13
+  anchor: start
+  tone: muted
+- text: оставшиеся
+  at:
+  - 248
+  - 160
+  size: 13
+  anchor: start
+  tone: muted
+- text: 'в среднем медленнее:'
+  at:
+  - 248
+  - 177
+  size: 13
+  anchor: start
+  tone: muted
+- text: вода остывает
+  at:
+  - 248
+  - 194
+  size: 13
+  anchor: start
+  tone: muted

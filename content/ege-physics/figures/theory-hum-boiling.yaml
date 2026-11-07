@@ -1,0 +1,165 @@
+# thermo.humidity 4.3: boiling. A bubble of vapour inside the water pushes out with the
+# saturated-vapour pressure p_н (red, a pressure on a surface); the outside pressure
+# (atmosphere, through the water) pushes in. Qualitative.
+# Colours (whole topic, extending «Основы МКТ», «Идеальный газ» and «Изопроцессы»):
+# molecules in the text colour, the tracked molecule and the focal quantity accent,
+# velocity green (a molecule leaving or returning to the liquid), pressure on a surface red,
+# notes muted; liquid water an accent tint with an accent surface line. Graphs: the curve of
+# saturated-vapour pressure p_н(t) is a property of water, drawn in the text colour; the
+# state or process being discussed accent (a moving point from 1 to 2); guides and the
+# ideal-gas continuation of an isotherm dashed muted. When p_н(t) itself is the focus
+# (graph kind, 4.2) it is accent.
+kind: diagram
+size:
+- 400
+- 232
+items:
+- rect:
+  - 81
+  - 92
+  - 168
+  - 122
+  fill: accent
+  tone: accent
+  width: 0
+- line:
+  - - 80
+    - 60
+  - - 80
+    - 215
+  - - 250
+    - 215
+  - - 250
+    - 60
+  width: 2
+- line:
+  - - 81
+    - 92
+  - - 249
+    - 92
+  tone: accent
+- rect:
+  - 70
+  - 219
+  - 190
+  - 7
+  fill: solid
+  tone: muted
+  width: 0
+- circle:
+  - 165
+  - 160
+  r: 22
+  fill: surface
+  width: 1.5
+- text: пар
+  at:
+  - 165
+  - 165
+  size: 13
+- circle:
+  - 118
+  - 128
+  r: 6
+  fill: surface
+  width: 1.2
+- circle:
+  - 214
+  - 114
+  r: 7
+  fill: surface
+  width: 1.2
+- circle:
+  - 124
+  - 186
+  r: 4
+  fill: surface
+  width: 1.2
+- circle:
+  - 230
+  - 150
+  r: 5
+  fill: surface
+  width: 1.2
+- arrow:
+  - - 189.0
+    - 160.0
+  - - 207.0
+    - 160.0
+  tone: force
+- arrow:
+  - - 165.0
+    - 136.0
+  - - 165.0
+    - 118.0
+  tone: force
+- arrow:
+  - - 141.0
+    - 160.0
+  - - 123.0
+    - 160.0
+  tone: force
+- arrow:
+  - - 165.0
+    - 184.0
+  - - 165.0
+    - 202.0
+  tone: force
+- text: '*p*_н'
+  at:
+  - 191
+  - 198
+  tone: force
+  anchor: start
+- arrow:
+  - - 120
+    - 52
+  - - 120
+    - 88
+  tone: force
+- arrow:
+  - - 165
+    - 52
+  - - 165
+    - 88
+  tone: force
+- arrow:
+  - - 210
+    - 52
+  - - 210
+    - 88
+  tone: force
+- text: '*p*_{внеш}'
+  at:
+  - 258
+  - 70
+  tone: force
+  anchor: start
+- text: пузырёк растёт,
+  at:
+  - 266
+  - 140
+  size: 13
+  anchor: start
+  tone: muted
+- text: если давление
+  at:
+  - 266
+  - 157
+  size: 13
+  anchor: start
+  tone: muted
+- text: пара в нём не
+  at:
+  - 266
+  - 174
+  size: 13
+  anchor: start
+  tone: muted
+- text: меньше внешнего
+  at:
+  - 266
+  - 191
+  size: 13
+  anchor: start
+  tone: muted
