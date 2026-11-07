@@ -13,6 +13,14 @@
 // meet, each coordinate a reflected straight line in the current box, their speed ∝ √T. With
 // reduced motion they stand still; everything else changes only when the slider moves.
 //
+// With the `work` attribute (thermo.internal-energy lessons) the model counts energy: p₀ = 100 кПа
+// and V₀ = 1 л, so p₀V₀ = 100 Дж and the gas is monatomic. Only the p–V graph is drawn, in кПа and
+// л; under each process since A the work of the gas is shaded, an accent tint where it is positive
+// (expansion) and accent hatching where it is negative (compression). Below, two bars from a zero
+// line give the work A and the change of internal energy ΔU = (3/2)Δ(pV) since A (green, like the
+// molecules' velocities); the readout gives both for the current process and since A. The work is
+// exact too: p·ΔV at constant pressure, (pV)·ln(V₂/V₁) at constant temperature, 0 at constant volume.
+//
 // Written into theory Markdown as plain HTML; the theory page imports this module only when such
 // an element is present. Light DOM, site CSS variables: follows the light/dark theme.
 
@@ -97,11 +105,35 @@ export function throughOrigin(proc: Process, x: Quantity, y: Quantity): boolean 
   return x === 'T' && ((proc === 'V' && y === 'p') || (proc === 'p' && y === 'V'));
 }
 
+/** p₀V₀ in joules in the `work` mode: p₀ = 100 кПа, V₀ = 1 л. */
+export const PV0 = 100;
+
+/** Work of the gas, in p₀V₀, along the process through a from a to the state where the free quantity is x. */
+export function work(proc: Process, a: State, x: number): number {
+  const b = stateAt(proc, a, x);
+  if (proc === 'V') return 0;
+  if (proc === 'p') return a.p * (b.V - a.V);
+  return (a.p * a.V) * Math.log(b.V / a.V); // pV is constant on the isotherm
+}
+
+/** Change of internal energy of the monatomic gas from a to b, in p₀V₀: (3/2)Δ(pV). */
+export function deltaU(a: State, b: State): number {
+  return 1.5 * (b.p * b.V - a.p * a.V);
+}
+
+/** Joules rounded to whole numbers, signed, with a real minus; never «−0» or «+0». */
+export function joules(j: number): string {
+  const n = Math.round(j);
+  if (n === 0) return '0 Дж';
+  return `${n > 0 ? '+' : '−'}${Math.abs(n)} Дж`;
+}
+
 interface Segment {
   proc: Process;
   a: State;
   lo: number;
   hi: number;
+  x: number; // the free quantity where the process is now (or ended)
 }
 
 function el<K extends keyof SVGElementTagNameMap>(
@@ -130,6 +162,7 @@ interface Graph {
   w: number;
   h: number;
   full: SVGPolylineElement;
+  areas: SVGGElement;
   past: SVGGElement;
   now: SVGPolylineElement;
   dot: SVGCircleElement;
@@ -142,8 +175,11 @@ const GRAPHS: [Quantity, Quantity, number, number, number, number][] = [
   ['T', 'V', 205, 182, 195, 158],
 ];
 
-const tickLabel = (q: Quantity, v: number): string =>
-  q === 'T' ? String(v) : `${v === 1 ? '' : v}${q}₀`;
+const tickLabel = (q: Quantity, v: number, joulesMode = false): string =>
+  q === 'T' ? String(v) : joulesMode ? String(q === 'p' ? v * 100 : v) : `${v === 1 ? '' : v}${q}₀`;
+
+// The energy bars of the `work` mode: zero line at BAR.zero, BAR.k px per joule, clamped.
+const BAR = { zero: 230, k: 0.5, max: 160, aY: 226, uY: 278, h: 18 };
 
 class IsoSim extends HTMLElement {
   private proc: Process = 'T';
@@ -173,10 +209,15 @@ class IsoSim extends HTMLElement {
   private name!: HTMLElement;
   private out!: HTMLOutputElement;
   private readout!: HTMLElement;
+  private joulesMode = false;
+  private hatchId = '';
+  private barA!: SVGRectElement;
+  private barU!: SVGRectElement;
 
   connectedCallback(): void {
     if (this.built) return;
     this.built = true;
+    this.joulesMode = this.hasAttribute('work');
     const p = this.getAttribute('process');
     this.proc = p === 'p' || p === 'V' ? p : 'T';
     const r = rng(SEED);
@@ -231,13 +272,31 @@ class IsoSim extends HTMLElement {
     }
 
     const svg = el('svg', {
-      viewBox: '0 0 400 340',
+      viewBox: this.joulesMode ? '0 0 400 324' : '0 0 400 340',
       class: 'sim-svg',
       role: 'img',
-      'aria-label':
-        'Газ в цилиндре под поршнем и три графика его состояния: давление от объёма, давление от ' +
-        'температуры и объём от температуры. Точка на графиках — текущее состояние, линия — процесс',
+      'aria-label': this.joulesMode
+        ? 'Газ в цилиндре под поршнем и график давления от объёма. Под линией процесса закрашена ' +
+          'работа газа: сплошной заливкой — положительная, штриховкой — отрицательная. Внизу полосы: ' +
+          'работа газа и изменение его внутренней энергии с точки A'
+        : 'Газ в цилиндре под поршнем и три графика его состояния: давление от объёма, давление от ' +
+          'температуры и объём от температуры. Точка на графиках — текущее состояние, линия — процесс',
     });
+    if (this.joulesMode) {
+      this.hatchId = `iso-hatch-${id}`;
+      const defs = el('defs');
+      const pat = el('pattern', {
+        id: this.hatchId,
+        patternUnits: 'userSpaceOnUse',
+        width: 7,
+        height: 7,
+        patternTransform: 'rotate(45)',
+        class: 'iso-hatch',
+      });
+      pat.append(el('line', { x1: 0, y1: 0, x2: 0, y2: 7 }));
+      defs.append(pat);
+      svg.append(defs);
+    }
 
     // the cylinder
     const cyl = el('g', { class: 'iso-cyl' });
@@ -267,7 +326,7 @@ class IsoSim extends HTMLElement {
     svg.append(cyl);
 
     // the graphs
-    for (const [xq, yq, left, top, w, h] of GRAPHS) {
+    for (const [xq, yq, left, top, w, h] of this.joulesMode ? GRAPHS.slice(0, 1) : GRAPHS) {
       const ox = left + 30;
       const oy = top + h - 20;
       const gw = w - 30 - 12;
@@ -284,18 +343,21 @@ class IsoSim extends HTMLElement {
       for (const v of ticks(xq)) {
         const x = ox + (v / MAX[xq]) * gw;
         grid.append(el('line', { x1: x, x2: x, y1: oy, y2: oy + 4 }));
-        grid.append(el('text', { x, y: oy + 14, 'text-anchor': 'middle' }, tickLabel(xq, v)));
+        grid.append(el('text', { x, y: oy + 14, 'text-anchor': 'middle' }, tickLabel(xq, v, this.joulesMode)));
       }
       for (const v of ticks(yq)) {
         const y = oy - (v / MAX[yq]) * gh;
         grid.append(el('line', { x1: ox - 4, x2: ox, y1: y, y2: y }));
-        grid.append(el('text', { x: ox - 6, y: y + 4, 'text-anchor': 'end' }, tickLabel(yq, v)));
+        grid.append(el('text', { x: ox - 6, y: y + 4, 'text-anchor': 'end' }, tickLabel(yq, v, this.joulesMode)));
       }
       grid.append(el('text', { x: ox - 6, y: oy + 14, 'text-anchor': 'end' }, '0'));
+      const units: Record<Quantity, string> = this.joulesMode
+        ? { p: ', кПа', V: ', л', T: ', К' }
+        : { p: '', V: '', T: ', К' };
       const name = (q: Quantity, attrs: Record<string, string | number>) => {
         const t = el('text', { ...attrs, class: 'iso-name' });
         t.append(el('tspan', { 'font-style': 'italic' }, q));
-        if (q === 'T') t.append(', К');
+        if (units[q]) t.append(units[q]);
         return t;
       };
       grid.append(name(xq, { x: ox + gw + 10, y: oy - 7, 'text-anchor': 'end' }));
@@ -304,11 +366,35 @@ class IsoSim extends HTMLElement {
       const [sx, sy] = [ox + (START[xq] / MAX[xq]) * gw, oy - (START[yq] / MAX[yq]) * gh];
       start.append(el('circle', { cx: sx, cy: sy, r: 2.5 }), el('text', { x: sx - 5, y: sy - 5, 'text-anchor': 'end' }, 'A'));
       const full = el('polyline', { class: 'iso-full', points: '' });
+      const areas = el('g', { class: 'iso-work' });
       const past = el('g', { class: 'iso-past' });
       const now = el('polyline', { class: 'iso-now', points: '' });
       const dot = el('circle', { r: 4, class: 'iso-dot' });
-      svg.append(grid, full, past, start, now, dot);
-      this.graphs.push({ x: xq, y: yq, ox, oy, w: gw, h: gh, full, past, now, dot });
+      svg.append(areas, grid, full, past, start, now, dot);
+      this.graphs.push({ x: xq, y: yq, ox, oy, w: gw, h: gh, full, areas, past, now, dot });
+    }
+
+    if (this.joulesMode) {
+      const bars = el('g', { class: 'iso-bars' });
+      const label = (y: number, html: [string, boolean][]) => {
+        const t = el('text', { x: 4, y, class: 'iso-bar-label' });
+        for (const [s, it] of html) t.append(it ? el('tspan', { 'font-style': 'italic' }, s) : s);
+        return t;
+      };
+      this.barA = el('rect', { y: BAR.aY, height: BAR.h, class: 'iso-bar-a' });
+      this.barU = el('rect', { y: BAR.uY, height: BAR.h, class: 'iso-bar-u' });
+      bars.append(
+        el('text', { x: 396, y: 200, 'text-anchor': 'end', class: 'iso-bar-note' }, 'с точки A'),
+        label(BAR.aY - 6, [['работа газа ', false], ['A', true]]),
+        label(BAR.uY - 6, [['изменение внутренней энергии Δ', false], ['U', true]]),
+        this.barA,
+        this.barU,
+        el('line', { x1: BAR.zero, x2: BAR.zero, y1: 206, y2: BAR.uY + BAR.h + 6, class: 'iso-bar-zero' }),
+        el('text', { x: BAR.zero, y: BAR.uY + BAR.h + 20, 'text-anchor': 'middle', class: 'iso-bar-note' }, '0'),
+        el('text', { x: BAR.zero - 40, y: BAR.uY + BAR.h + 20, 'text-anchor': 'middle', class: 'iso-bar-note' }, '−'),
+        el('text', { x: BAR.zero + 40, y: BAR.uY + BAR.h + 20, 'text-anchor': 'middle', class: 'iso-bar-note' }, '+'),
+      );
+      svg.append(bars);
     }
 
     const controls = document.createElement('div');
@@ -354,7 +440,7 @@ class IsoSim extends HTMLElement {
     for (const r of this.radios) r.checked = r.value === proc;
     const q = free(proc);
     const x = this.s[q];
-    this.segs.push({ proc, a: { ...this.s }, lo: x, hi: x });
+    this.segs.push({ proc, a: { ...this.s }, lo: x, hi: x, x });
     const [lo, hi] = sliderRange(proc, this.s);
     this.input.min = String(lo);
     this.input.max = String(hi);
@@ -367,6 +453,7 @@ class IsoSim extends HTMLElement {
   private move(x: number): void {
     const seg = this.segs[this.segs.length - 1];
     this.s = stateAt(seg.proc, seg.a, x);
+    seg.x = x;
     seg.lo = Math.min(seg.lo, x);
     seg.hi = Math.max(seg.hi, x);
     this.update();
@@ -465,6 +552,16 @@ class IsoSim extends HTMLElement {
       const [cx, cy] = this.pt(g, s).split(',');
       g.dot.setAttribute('cx', cx);
       g.dot.setAttribute('cy', cy);
+      if (this.joulesMode) {
+        g.areas.replaceChildren(
+          ...this.segs.map((p) => this.area(g, p)).filter((a): a is SVGPolygonElement => a !== null),
+        );
+      }
+    }
+
+    if (this.joulesMode) {
+      this.energy(seg);
+      return;
     }
 
     // the readout
@@ -481,6 +578,58 @@ class IsoSim extends HTMLElement {
     this.readout.innerHTML =
       `<i>p</i> = ${ru2(s.p)} <i>p</i>₀, <i>V</i> = ${ru2(s.V)} <i>V</i>₀, <i>T</i> = ${kelvin(s.T)}. ` +
       `С начала процесса: ${since}.`;
+  }
+
+  /** The work of one process as the area under it on p–V: tint if positive, hatching if negative. */
+  private area(g: Graph, seg: Segment): SVGPolygonElement | null {
+    const a = Math.round(work(seg.proc, seg.a, seg.x) * PV0);
+    if (a === 0) return null; // V = const, or nothing travelled: no area, as the readout says 0
+    const b = stateAt(seg.proc, seg.a, seg.x);
+    const pts = curve(seg.proc, seg.a, seg.a[free(seg.proc)], seg.x).map((s) => this.pt(g, s));
+    const base = (v: number) => `${(g.ox + (v / MAX.V) * g.w).toFixed(1)},${g.oy}`;
+    const poly = el('polygon', { points: [...pts, base(b.V), base(seg.a.V)].join(' ') });
+    if (a > 0) poly.setAttribute('class', 'iso-work-pos');
+    else {
+      poly.setAttribute('class', 'iso-work-neg');
+      poly.setAttribute('fill', `url(#${this.hatchId})`);
+    }
+    return poly;
+  }
+
+  /** Bars and readout of the `work` mode. */
+  private energy(seg: Segment): void {
+    const s = this.s;
+    const total = this.segs.reduce((sum, p) => sum + work(p.proc, p.a, p.x), 0) * PV0;
+    const dU = deltaU(START, s) * PV0;
+    const bar = (r: SVGRectElement, j: number) => {
+      const n = Math.round(j);
+      const w = Math.min(BAR.max, Math.abs(n) * BAR.k);
+      r.setAttribute('x', (n < 0 ? BAR.zero - w : BAR.zero).toFixed(1));
+      r.setAttribute('width', w.toFixed(1));
+    };
+    bar(this.barA, total);
+    bar(this.barU, dU);
+    if (Math.round(total) < 0) {
+      this.barA.style.fill = `url(#${this.hatchId})`; // inline: beats the class's accent fill
+      this.barA.classList.add('neg');
+    } else {
+      this.barA.style.fill = '';
+      this.barA.classList.remove('neg');
+    }
+
+    const q = free(this.proc);
+    const kelvinNb = (t: number) => kelvin(t).replace(/ (К|°C)/g, ' $1');
+    this.out.textContent = q === 'V' ? `${ru2(s.V)} л` : kelvinNb(s.T);
+    const kpa = `${Math.round(s.p * 100)} кПа`;
+    const nowA = joules(work(seg.proc, seg.a, seg.x) * PV0);
+    const nowU = joules(deltaU(seg.a, s) * PV0);
+    let text =
+      `<i>p</i> = ${kpa}, <i>V</i> = ${ru2(s.V)} л, <i>T</i> = ${kelvinNb(s.T)}. ` +
+      `В этом процессе работа газа <i>A</i> = ${nowA}, Δ<i>U</i> = ${nowU}.`;
+    if (this.segs.length > 1) {
+      text += ` С точки A: <i>A</i> = ${joules(total)}, Δ<i>U</i> = ${joules(dU)}.`;
+    }
+    this.readout.innerHTML = text;
   }
 }
 

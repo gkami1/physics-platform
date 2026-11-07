@@ -1,0 +1,192 @@
+# thermo.internal-energy 6.6: from state 1 to state 3 by two paths (accent, drawn with moving
+# points; the other path dashed muted for comparison): first expand at the high pressure,
+# then cool at constant volume (large area), or first cool, then expand at the low pressure
+# (small area). ΔU is the same, the work is not. Qualitative.
+# Colours (whole topic, extending «Изопроцессы» and «Количество теплоты»): molecules in the
+# text colour with green velocities (their energy is the internal energy; a body's own velocity
+# green too); forces on a piston red; heat Q flowing in accent; flames muted; notes muted.
+# p–V graphs: the process being discussed accent with a moving point; the work of the gas is the
+# area under it: positive work an accent tint, negative work accent hatching (the same
+# quantity, the other sign), so on a cycle tint and hatching cancel below the lower path and
+# the loop alone stays tinted; other parts of a cycle in the text colour; isotherms that only
+# mark a temperature dashed muted; guides dashed muted.
+kind: diagram
+size:
+- 400
+- 222
+items:
+- arrow:
+  - - 40
+    - 180
+  - - 200
+    - 180
+  width: 1.5
+- arrow:
+  - - 40
+    - 180
+  - - 40
+    - 30
+  width: 1.5
+- text: '*V*'
+  at:
+  - 198
+  - 198
+  anchor: end
+  size: 13
+- text: '*p*'
+  at:
+  - 50
+  - 40
+  anchor: start
+  size: 13
+- text: '0'
+  at:
+  - 34
+  - 195
+  size: 12
+  anchor: end
+- path: M82 180L82 67.8L166 67.8L166 180Z
+  fill: accent
+  tone: accent
+  width: 0
+- path: M82 67.8L166 67.8L166 142.6
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- dots:
+  - - 82.0
+    - 67.8
+  - - 166.0
+    - 67.8
+  - - 166.0
+    - 142.6
+  r: 4
+  tone: accent
+- text: '1'
+  at:
+  - 74.0
+  - 61.8
+  size: 13
+  anchor: end
+- text: '3'
+  at:
+  - 174.0
+  - 146.6
+  size: 13
+  anchor: start
+- text: '2'
+  at:
+  - 174.0
+  - 61.8
+  size: 13
+  anchor: start
+- text: работа
+  at:
+  - 124.0
+  - 111.8
+  size: 13
+  anchor: middle
+  tone: accent
+- text: больше
+  at:
+  - 124.0
+  - 127.8
+  size: 13
+  anchor: middle
+  tone: accent
+- arrow:
+  - - 226
+    - 180
+  - - 386
+    - 180
+  width: 1.5
+- arrow:
+  - - 226
+    - 180
+  - - 226
+    - 30
+  width: 1.5
+- text: '*V*'
+  at:
+  - 384
+  - 198
+  anchor: end
+  size: 13
+- text: '*p*'
+  at:
+  - 236
+  - 40
+  anchor: start
+  size: 13
+- text: '0'
+  at:
+  - 220
+  - 195
+  size: 12
+  anchor: end
+- path: M268 180L268 142.6L352 142.6L352 180Z
+  fill: accent
+  tone: accent
+  width: 0
+- path: M268 67.8L268 142.6L352 142.6
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- dots:
+  - - 268.0
+    - 67.8
+  - - 268.0
+    - 142.6
+  - - 352.0
+    - 142.6
+  r: 4
+  tone: accent
+- text: '1'
+  at:
+  - 260.0
+  - 61.8
+  size: 13
+  anchor: end
+- text: '3'
+  at:
+  - 360.0
+  - 146.6
+  size: 13
+  anchor: start
+- text: '2'
+  at:
+  - 260.0
+  - 136.6
+  size: 13
+  anchor: end
+- text: работа
+  at:
+  - 310.0
+  - 157.6
+  size: 13
+  anchor: middle
+  tone: accent
+- text: меньше
+  at:
+  - 310.0
+  - 172.6
+  size: 13
+  anchor: middle
+  tone: accent
+- path: M82 67.8L82 142.6L166 142.6
+  width: 1
+  dashed: true
+  tone: muted
+- path: M268 67.8L352 67.8L352 142.6
+  width: 1
+  dashed: true
+  tone: muted
+- text: 'из 1 в 3 двумя путями: Δ*U* одинаково, а работа — нет'
+  at:
+  - 200
+  - 212
+  size: 13
+  anchor: middle
+  tone: muted

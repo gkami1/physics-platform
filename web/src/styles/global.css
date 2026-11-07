@@ -2159,6 +2159,51 @@ blockquote {
   fill: var(--muted);
 }
 
+/* <pp-iso work>: the work of the gas under each process, positive an accent tint, negative accent
+   hatching (as in the thermo.internal-energy figures); bars since A: work accent (hatched when
+   negative), ΔU green like the molecules' velocities. */
+.iso-work-pos {
+  fill: var(--accent);
+  fill-opacity: 0.2;
+}
+
+.iso-work-neg {
+  stroke: none;
+}
+
+.iso-hatch line {
+  stroke: var(--accent);
+  stroke-width: 1.2;
+}
+
+.iso-bar-a {
+  fill: var(--accent);
+}
+
+.iso-bar-a.neg {
+  stroke: var(--accent);
+  stroke-width: 1.2;
+}
+
+.iso-bar-u {
+  fill: var(--ok);
+}
+
+.iso-bar-zero {
+  stroke: var(--text);
+  stroke-width: 1.2;
+}
+
+.sim-svg .iso-bar-label {
+  fill: var(--text);
+  font-size: 12px;
+}
+
+.sim-svg .iso-bar-note {
+  fill: var(--muted);
+  font-size: 12px;
+}
+
 /* <pp-vapour> (src/lib/sims/vapour.ts): water vapour under a piston. Molecules in the text
    colour, liquid water an accent tint with an accent surface (as in the figures), the curve
    p_н(t) in the text colour, the isotherm of the current temperature dashed accent, the states

@@ -1,0 +1,236 @@
+# thermo.internal-energy 6.2: two ways to change the internal energy. Left: a force (red)
+# pushes the piston down from where it was (dashed muted) and the compressed gas warms.
+# Right: a closed vessel over a flame (muted), heat Q flows in (accent). In both the
+# molecules' velocities (green) grow. Seed 62, qualitative.
+# Colours (whole topic, extending «Изопроцессы» and «Количество теплоты»): molecules in the
+# text colour with green velocities (their energy is the internal energy; a body's own velocity
+# green too); forces on a piston red; heat Q flowing in accent; flames muted; notes muted.
+# p–V graphs: the process being discussed accent with a moving point; the work of the gas is the
+# area under it: positive work an accent tint, negative work accent hatching (the same
+# quantity, the other sign), so on a cycle tint and hatching cancel below the lower path and
+# the loop alone stays tinted; other parts of a cycle in the text colour; isotherms that only
+# mark a temperature dashed muted; guides dashed muted.
+kind: diagram
+size:
+- 400
+- 238
+items:
+- line:
+  - - 40
+    - 30
+  - - 40
+    - 160
+  - - 130
+    - 160
+  - - 130
+    - 30
+  width: 2
+- line:
+  - - 40
+    - 54
+  - - 130
+    - 54
+  width: 1
+  dashed: true
+  tone: muted
+- text: было
+  at:
+  - 136
+  - 58
+  size: 13
+  anchor: start
+  tone: muted
+- rect:
+  - 41
+  - 84
+  - 88
+  - 8
+  fill: surface
+  width: 1.5
+- line:
+  - - 85
+    - 84
+  - - 85
+    - 46
+  width: 3
+- arrow:
+  - - 85
+    - 6
+  - - 85
+    - 42
+  tone: force
+  width: 2.5
+- text: '*F*'
+  at:
+  - 96
+  - 26
+  anchor: start
+  tone: force
+- dots:
+  - - 115.0
+    - 112.0
+  - - 82.5
+    - 145.3
+  - - 58.6
+    - 125.7
+  - - 113.4
+    - 149.5
+  - - 83.2
+    - 120.7
+  - - 50.3
+    - 146.1
+  r: 3.5
+- arrow:
+  - - 115.0
+    - 112.0
+  - - 125.0
+    - 97.0
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 82.5
+    - 145.3
+  - - 90.0
+    - 129.0
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 58.6
+    - 125.7
+  - - 72.6
+    - 137.1
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 113.4
+    - 149.5
+  - - 125.9
+    - 136.6
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 83.2
+    - 120.7
+  - - 90.7
+    - 104.4
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 50.3
+    - 146.1
+  - - 65.7
+    - 155.4
+  tone: vel
+  width: 1.5
+- text: 'совершили работу:'
+  at:
+  - 85
+  - 186
+  size: 14
+- text: газ сжали — он нагрелся
+  at:
+  - 85
+  - 204
+  size: 13
+  anchor: middle
+  tone: muted
+- rect:
+  - 260
+  - 70
+  - 90
+  - 80
+  width: 2
+- dots:
+  - - 339.9
+    - 133.4
+  - - 284.8
+    - 120.2
+  - - 330.4
+    - 92.3
+  - - 285.1
+    - 85.2
+  - - 306.9
+    - 99.9
+  - - 318.1
+    - 137.8
+  r: 3.5
+- arrow:
+  - - 339.9
+    - 133.4
+  - - 344.6
+    - 116.0
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 284.8
+    - 120.2
+  - - 292.9
+    - 104.1
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 330.4
+    - 92.3
+  - - 345.8
+    - 83.1
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 285.1
+    - 85.2
+  - - 267.8
+    - 90.2
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 306.9
+    - 99.9
+  - - 323.0
+    - 91.9
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 318.1
+    - 137.8
+  - - 327.4
+    - 122.4
+  tone: vel
+  width: 1.5
+- path: M274 184Q272 171.9 282 162Q292 171.9 290 184Z
+  width: 1.5
+  tone: muted
+- path: M320 184Q318 171.9 328 162Q338 171.9 336 184Z
+  width: 1.5
+  tone: muted
+- line:
+  - - 268
+    - 186
+  - - 342
+    - 186
+  width: 3
+  tone: muted
+- arrow:
+  - - 305
+    - 182
+  - - 305
+    - 156
+  tone: accent
+  width: 3
+- text: '*Q*'
+  at:
+  - 266
+  - 182
+  anchor: end
+  tone: accent
+- text: 'теплопередача:'
+  at:
+  - 305
+  - 210
+  size: 14
+- text: газ получил теплоту
+  at:
+  - 305
+  - 228
+  size: 13
+  anchor: middle
+  tone: muted

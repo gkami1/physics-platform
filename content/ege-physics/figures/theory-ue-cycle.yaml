@@ -1,0 +1,242 @@
+# thermo.internal-energy 6.7: the work over a cycle (clockwise on p–V; the cycle itself in the
+# text colour). Expansion along the top: positive work, accent tint under it. Compression
+# along the bottom: negative work, accent hatching under it. Together: the area inside the
+# loop (accent tint), positive. Direction arrows accent. Qualitative.
+# Colours (whole topic, extending «Изопроцессы» and «Количество теплоты»): molecules in the
+# text colour with green velocities (their energy is the internal energy; a body's own velocity
+# green too); forces on a piston red; heat Q flowing in accent; flames muted; notes muted.
+# p–V graphs: the process being discussed accent with a moving point; the work of the gas is the
+# area under it: positive work an accent tint, negative work accent hatching (the same
+# quantity, the other sign), so on a cycle tint and hatching cancel below the lower path and
+# the loop alone stays tinted; other parts of a cycle in the text colour; isotherms that only
+# mark a temperature dashed muted; guides dashed muted.
+kind: diagram
+size:
+- 400
+- 220
+items:
+- arrow:
+  - - 26
+    - 160
+  - - 138
+    - 160
+  width: 1.5
+- arrow:
+  - - 26
+    - 160
+  - - 26
+    - 36
+  width: 1.5
+- text: '*V*'
+  at:
+  - 136
+  - 178
+  anchor: end
+  size: 13
+- text: '*p*'
+  at:
+  - 36
+  - 46
+  anchor: start
+  size: 13
+- text: '0'
+  at:
+  - 20
+  - 175
+  size: 12
+  anchor: end
+- path: M51 126L51 71.6L111 71.6L111 126L51 126
+  width: 1.5
+- arrow:
+  - - 156
+    - 160
+  - - 268
+    - 160
+  width: 1.5
+- arrow:
+  - - 156
+    - 160
+  - - 156
+    - 36
+  width: 1.5
+- text: '*V*'
+  at:
+  - 266
+  - 178
+  anchor: end
+  size: 13
+- text: '*p*'
+  at:
+  - 166
+  - 46
+  anchor: start
+  size: 13
+- text: '0'
+  at:
+  - 150
+  - 175
+  size: 12
+  anchor: end
+- path: M181 126L181 71.6L241 71.6L241 126L181 126
+  width: 1.5
+- path: M51 160L51 71.6L111 71.6L111 160Z
+  fill: accent
+  tone: accent
+  width: 0
+- path: M51 71.6L111 71.6
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- arrow:
+  - - 72.0
+    - 60.6
+  - - 90.0
+    - 60.6
+  tone: accent
+  width: 1.5
+- text: '*A*_1 > 0'
+  at:
+  - 81.0
+  - 120.8
+  tone: accent
+  size: 14
+- text: расширение
+  at:
+  - 81.0
+  - 14
+  size: 14
+- path: M181 133L188 126M181 140L195 126M181 147L202 126M181 154L209 126M182 160L216 126M189 160L223 126M196
+    160L230 126M203 160L237 126M210 160L241 129M217 160L241 136M224 160L241 143M231 160L241 150M238 160L241
+    157
+  width: 1
+  tone: accent
+- path: M241 126L181 126
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- arrow:
+  - - 220.0
+    - 115.0
+  - - 202.0
+    - 115.0
+  tone: accent
+  width: 1.5
+- text: '*A*_2 < 0'
+  at:
+  - 211.0
+  - 93.6
+  tone: accent
+  size: 14
+- text: сжатие
+  at:
+  - 211.0
+  - 14
+  size: 14
+- arrow:
+  - - 286
+    - 160
+  - - 398
+    - 160
+  width: 1.5
+- arrow:
+  - - 286
+    - 160
+  - - 286
+    - 36
+  width: 1.5
+- text: '*V*'
+  at:
+  - 396
+  - 178
+  anchor: end
+  size: 13
+- text: '*p*'
+  at:
+  - 296
+  - 46
+  anchor: start
+  size: 13
+- text: '0'
+  at:
+  - 280
+  - 175
+  size: 12
+  anchor: end
+- path: M311 126L311 71.6L371 71.6L371 126L311 126Z
+  fill: accent
+  tone: accent
+  width: 0
+- path: M311 126L311 71.6L371 71.6L371 126L311 126
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- arrow:
+  - - 332.0
+    - 60.6
+  - - 350.0
+    - 60.6
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 350.0
+    - 137.0
+  - - 332.0
+    - 137.0
+  tone: accent
+  width: 1.5
+- text: '*A*_{цикл}'
+  at:
+  - 341.0
+  - 103.8
+  tone: accent
+  size: 14
+- text: за цикл
+  at:
+  - 341.0
+  - 14
+  size: 14
+- text: площадь под
+  at:
+  - 82
+  - 194
+  size: 13
+  anchor: middle
+  tone: muted
+- text: верхним путём
+  at:
+  - 82
+  - 210
+  size: 13
+  anchor: middle
+  tone: muted
+- text: площадь под
+  at:
+  - 212
+  - 194
+  size: 13
+  anchor: middle
+  tone: muted
+- text: нижним, с минусом
+  at:
+  - 212
+  - 210
+  size: 13
+  anchor: middle
+  tone: muted
+- text: сумма — площадь
+  at:
+  - 342
+  - 194
+  size: 13
+  anchor: middle
+  tone: muted
+- text: внутри цикла
+  at:
+  - 342
+  - 210
+  size: 13
+  anchor: middle
+  tone: muted

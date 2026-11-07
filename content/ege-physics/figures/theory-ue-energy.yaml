@@ -1,0 +1,283 @@
+# thermo.internal-energy 6.1: the same ball three times. At rest; flying (its velocity green,
+# its molecules move as before: the mechanical energy grew, the internal did not); heated at
+# rest (longer green arrows: the internal energy grew). Seed 61, qualitative.
+# Colours (whole topic, extending «Изопроцессы» and «Количество теплоты»): molecules in the
+# text colour with green velocities (their energy is the internal energy; a body's own velocity
+# green too); forces on a piston red; heat Q flowing in accent; flames muted; notes muted.
+# p–V graphs: the process being discussed accent with a moving point; the work of the gas is the
+# area under it: positive work an accent tint, negative work accent hatching (the same
+# quantity, the other sign), so on a cycle tint and hatching cancel below the lower path and
+# the loop alone stays tinted; other parts of a cycle in the text colour; isotherms that only
+# mark a temperature dashed muted; guides dashed muted.
+kind: diagram
+size:
+- 400
+- 236
+items:
+- circle:
+  - 68
+  - 100
+  r: 50
+  width: 2
+- dots:
+  - - 42.6
+    - 100.9
+  - - 75.1
+    - 82.1
+  - - 55.8
+    - 125.5
+  - - 81.4
+    - 123.5
+  - - 94.8
+    - 96.3
+  - - 43.7
+    - 76.6
+  r: 3.5
+- arrow:
+  - - 42.6
+    - 100.9
+  - - 54.7
+    - 107.9
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 75.1
+    - 82.1
+  - - 76.7
+    - 68.2
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 55.8
+    - 125.5
+  - - 45.1
+    - 134.5
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 81.4
+    - 123.5
+  - - 68.9
+    - 129.8
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 94.8
+    - 96.3
+  - - 105.1
+    - 105.8
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 43.7
+    - 76.6
+  - - 49.9
+    - 64.0
+  tone: vel
+  width: 1.5
+- text: лежит
+  at:
+  - 68
+  - 176
+  size: 14
+- text: для сравнения
+  at:
+  - 68
+  - 194
+  size: 13
+  anchor: middle
+  tone: muted
+- text: ''
+  at:
+  - 68
+  - 211
+  size: 13
+  anchor: middle
+  tone: default
+- circle:
+  - 200
+  - 100
+  r: 50
+  width: 2
+- dots:
+  - - 174.6
+    - 100.9
+  - - 207.1
+    - 82.1
+  - - 187.8
+    - 125.5
+  - - 213.4
+    - 123.5
+  - - 226.8
+    - 96.3
+  - - 175.7
+    - 76.6
+  r: 3.5
+- arrow:
+  - - 174.6
+    - 100.9
+  - - 186.7
+    - 107.9
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 207.1
+    - 82.1
+  - - 208.7
+    - 68.2
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 187.8
+    - 125.5
+  - - 177.1
+    - 134.5
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 213.4
+    - 123.5
+  - - 200.9
+    - 129.8
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 226.8
+    - 96.3
+  - - 237.1
+    - 105.8
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 175.7
+    - 76.6
+  - - 181.9
+    - 64.0
+  tone: vel
+  width: 1.5
+- text: летит
+  at:
+  - 200
+  - 176
+  size: 14
+- text: 'молекулы как были:'
+  at:
+  - 200
+  - 194
+  size: 13
+  anchor: middle
+  tone: muted
+- text: растёт механическая
+  at:
+  - 200
+  - 211
+  size: 13
+  anchor: middle
+  tone: default
+- circle:
+  - 332
+  - 100
+  r: 50
+  width: 2
+- dots:
+  - - 306.6
+    - 100.9
+  - - 339.1
+    - 82.1
+  - - 319.8
+    - 125.5
+  - - 345.4
+    - 123.5
+  - - 358.8
+    - 96.3
+  - - 307.7
+    - 76.6
+  r: 3.5
+- arrow:
+  - - 306.6
+    - 100.9
+  - - 327.4
+    - 112.8
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 339.1
+    - 82.1
+  - - 341.8
+    - 58.2
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 319.8
+    - 125.5
+  - - 301.4
+    - 140.9
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 345.4
+    - 123.5
+  - - 324.0
+    - 134.3
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 358.8
+    - 96.3
+  - - 376.5
+    - 112.5
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 307.7
+    - 76.6
+  - - 318.3
+    - 55.1
+  tone: vel
+  width: 1.5
+- text: нагрели
+  at:
+  - 332
+  - 176
+  size: 14
+- text: 'молекулы быстрее:'
+  at:
+  - 332
+  - 194
+  size: 13
+  anchor: middle
+  tone: muted
+- text: растёт внутренняя
+  at:
+  - 332
+  - 211
+  size: 13
+  anchor: middle
+  tone: default
+- arrow:
+  - - 168
+    - 34
+  - - 236
+    - 34
+  tone: vel
+  width: 3
+- text: '*v*'
+  at:
+  - 244
+  - 39
+  anchor: start
+  tone: vel
+- text: энергия
+  at:
+  - 200
+  - 228
+  size: 13
+  anchor: middle
+  tone: default
+- text: энергия
+  at:
+  - 332
+  - 228
+  size: 13
+  anchor: middle
+  tone: default
