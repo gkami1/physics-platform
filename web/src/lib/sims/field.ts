@@ -90,12 +90,12 @@ export function signed(q: number): string {
 }
 
 /**
- * Lengths in px of E₁, E₂ and E at P on one common scale: the longest of the three is 72 px.
+ * Lengths in px of E₁, E₂ and E at P on one common scale: the longest of the three is 56 px.
  * A common scale keeps the parallelogram exact; the readout gives the size.
  */
 export function vectorScale(e1: Vec, e2: Vec, e: Vec): number {
   const m = Math.max(Math.hypot(...e1), Math.hypot(...e2), Math.hypot(...e));
-  return m > 0 ? 72 / m : 0;
+  return m > 0 ? 56 / m : 0;
 }
 
 /** Opacity of a direction arrow: 0,2 at 300 В/м and weaker, 1 at 300 кВ/м and stronger. */
@@ -187,7 +187,8 @@ class FieldSim extends HTMLElement {
     this.grid = el('g', { class: 'fld-grid' });
     this.probe = el('g');
     this.charges = el('g');
-    this.svg.append(this.grid, this.charges, this.probe);
+    // The vectors at P go under the charges, so a charge next to P stays visible.
+    this.svg.append(this.grid, this.probe, this.charges);
     const place = (ev: PointerEvent) => {
       const m = this.svg.getScreenCTM();
       if (!m) return;
@@ -281,6 +282,7 @@ class FieldSim extends HTMLElement {
     for (let gx = 1; gx < X_MAX; gx += 2) {
       for (let gy = 1; gy < Y_MAX; gy += 2) {
         if (CHARGES.some(([cx, cy]) => Math.hypot(gx - cx, gy - cy) < 1.6)) continue;
+        if (Math.hypot(gx - this.x, gy - this.y) < 1.5) continue; // keep P's vectors clear
         const [, , e] = fields(this.q1, this.q2, gx, gy);
         const m = Math.hypot(...e);
         if (m < 1e-9) continue;
@@ -312,13 +314,15 @@ class FieldSim extends HTMLElement {
       const [e1, e2, e] = fields(this.q1, this.q2, this.x, this.y);
       const s = vectorScale(e1, e2, e);
       const both = Math.hypot(...e1) > 0 && Math.hypot(...e2) > 0;
-      const vecs: [Vec, string, string][] = both
+      // Label side: E₁ to the left of its arrow, E₂ to the right, E straight past its tip,
+      // so the three labels stay apart even when the vectors lie on one line.
+      const vecs: [Vec, string, string, number][] = both
         ? [
-            [e1, 'fld-e1', 'E₁'],
-            [e2, 'fld-e1', 'E₂'],
-            [e, 'fld-e', 'E'],
+            [e1, 'fld-e1', 'E₁', 1],
+            [e2, 'fld-e1', 'E₂', -1],
+            [e, 'fld-e', 'E', 0],
           ]
-        : [[e, 'fld-e', 'E']];
+        : [[e, 'fld-e', 'E', 0]];
       if (both && s > 0) {
         const a = [px + e1[0] * s, py + e1[1] * s];
         const b = [px + e2[0] * s, py + e2[1] * s];
@@ -330,14 +334,15 @@ class FieldSim extends HTMLElement {
           }),
         );
       }
-      for (const [v, cls, name] of vecs) {
+      for (const [v, cls, name, side] of vecs) {
         const len = Math.hypot(...v) * s;
         if (len < 6) continue;
         const ux = v[0] / Math.hypot(...v);
         const uy = v[1] / Math.hypot(...v);
         this.probe.append(this.arrow(px, py, ux, uy, len, cls, cls === 'fld-e' ? 10 : 8));
-        const lx = Math.min(L.w - 10, Math.max(10, px + ux * (len + 12)));
-        const ly = Math.min(L.h - 4, Math.max(16, py + uy * (len + 12) + 5));
+        const along = side === 0 ? 14 : 4;
+        const lx = Math.min(L.w - 10, Math.max(10, px + ux * (len + along) - uy * 13 * side));
+        const ly = Math.min(L.h - 4, Math.max(16, py + uy * (len + along) + ux * 13 * side + 5));
         this.probe.append(el('text', { x: lx.toFixed(1), y: ly.toFixed(1), 'text-anchor': 'middle', class: 'fld-name' }, name));
       }
     }
