@@ -2236,6 +2236,14 @@ blockquote {
   font-size: 13px;
 }
 
+/* <pp-iso work="eta">: the heat received Q₁ solid accent, the heat given away |Q₂| an accent
+   outline (a real flow of the cycle, not the useful part), as in the thermo.heat-engines figures. */
+.iso-bar-q2 {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.2;
+}
+
 .iso-insul {
   fill: none;
   stroke: var(--muted);
