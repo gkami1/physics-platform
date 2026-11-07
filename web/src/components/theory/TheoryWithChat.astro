@@ -41,6 +41,7 @@ const { contextId } = Astro.props;
     'pp-brownian': () => import('../../lib/sims/brownian'),
     'pp-gas': () => import('../../lib/sims/gas'),
     'pp-iso': () => import('../../lib/sims/iso'),
+    'pp-vapour': () => import('../../lib/sims/vapour'),
   };
   for (const [tag, load] of Object.entries(sims)) if (document.querySelector(tag)) void load();
   // Step tasks: the answer form is static HTML; checking needs the element's code.

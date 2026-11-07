@@ -2159,6 +2159,101 @@ blockquote {
   fill: var(--muted);
 }
 
+/* <pp-vapour> (src/lib/sims/vapour.ts): water vapour under a piston. Molecules in the text
+   colour, liquid water an accent tint with an accent surface (as in the figures), the curve
+   p_н(t) in the text colour, the isotherm of the current temperature dashed accent, the states
+   visited an accent trace with the current state an accent dot. */
+.vap-walls {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 2;
+}
+
+.vap-gas {
+  fill: var(--surface-2);
+}
+
+.vap-liquid {
+  fill: var(--accent);
+  fill-opacity: 0.25;
+}
+
+.vap-surface {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+.vap-bath rect,
+.vap-bath path {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1;
+}
+
+.vap-mols circle {
+  fill: var(--text);
+}
+
+.vap-rod {
+  stroke: var(--text);
+  stroke-width: 3;
+}
+
+.vap-piston {
+  fill: var(--surface-2);
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.vap-caption {
+  fill: var(--muted);
+}
+
+.vap-axis {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.2;
+}
+
+.vap-axis-head {
+  fill: var(--text);
+}
+
+.sim-grid .vap-name {
+  fill: var(--text);
+  font-size: 12px;
+}
+
+.vap-curve {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.8;
+}
+
+.vap-curve-name {
+  fill: var(--text);
+  font-size: 12px;
+}
+
+.vap-iso {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 4;
+  opacity: 0.7;
+}
+
+.vap-trace {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.vap-dot {
+  fill: var(--accent);
+}
+
 /* <pp-path> (src/lib/sims/path.ts): path vs displacement along a route. */
 .pth-tracks {
   margin: 0 0 0.5rem;
