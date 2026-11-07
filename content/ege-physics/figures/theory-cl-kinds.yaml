@@ -1,0 +1,192 @@
+# electro.field.coulomb 1.1: balls on threads. Like charges (+ and +, − and −) push
+# apart, unlike ones (+ and −) pull together; the electric forces on both balls are
+# equal, opposite and red, 30 px each.
+# Colours (whole topic; the first of «Электродинамика», so this sets the section's convention):
+# a charge is a circle in the text colour (surface fill) with «+» or «−» inside; the charge
+# being discussed (a test charge, a result) accent. Never + red and − blue: red is the force
+# colour and accent means focus. Electrons are small dots in the text colour, the ones that
+# moved accent, their way an accent arrow. Coulomb forces red (they are forces), equal and
+# opposite arrows of visibly equal length; a resultant red and thicker; guides and the
+# distance r muted; notes muted.
+kind: diagram
+size:
+- 464
+- 182
+items:
+- hatch:
+  - - 20
+    - 16
+  - - 136
+    - 16
+  side: -1
+  tone: muted
+- line:
+  - - 64
+    - 16
+  - - 43.3
+    - 93.3
+  width: 1.2
+- line:
+  - - 92
+    - 16
+  - - 112.7
+    - 93.3
+  width: 1.2
+- arrow:
+  - - 43.3
+    - 93.3
+  - - 13.3
+    - 93.3
+  tone: force
+- arrow:
+  - - 112.7
+    - 93.3
+  - - 142.7
+    - 93.3
+  tone: force
+- circle:
+  - 43.3
+  - 93.3
+  r: 11
+  fill: surface
+  tone: default
+  label: +
+- circle:
+  - 112.7
+  - 93.3
+  r: 11
+  fill: surface
+  tone: default
+  label: +
+- text: отталкиваются
+  at:
+  - 78
+  - 150
+  size: 13
+  anchor: middle
+  tone: muted
+- hatch:
+  - - 174
+    - 16
+  - - 290
+    - 16
+  side: -1
+  tone: muted
+- line:
+  - - 218
+    - 16
+  - - 197.3
+    - 93.3
+  width: 1.2
+- line:
+  - - 246
+    - 16
+  - - 266.7
+    - 93.3
+  width: 1.2
+- arrow:
+  - - 197.3
+    - 93.3
+  - - 167.3
+    - 93.3
+  tone: force
+- arrow:
+  - - 266.7
+    - 93.3
+  - - 296.7
+    - 93.3
+  tone: force
+- circle:
+  - 197.3
+  - 93.3
+  r: 11
+  fill: surface
+  tone: default
+  label: −
+- circle:
+  - 266.7
+  - 93.3
+  r: 11
+  fill: surface
+  tone: default
+  label: −
+- text: отталкиваются
+  at:
+  - 232
+  - 150
+  size: 13
+  anchor: middle
+  tone: muted
+- hatch:
+  - - 328
+    - 16
+  - - 444
+    - 16
+  side: -1
+  tone: muted
+- line:
+  - - 340
+    - 16
+  - - 348.4
+    - 95.6
+  width: 1.2
+- line:
+  - - 432
+    - 16
+  - - 423.6
+    - 95.6
+  width: 1.2
+- arrow:
+  - - 348.4
+    - 95.6
+  - - 378.4
+    - 95.6
+  tone: force
+- arrow:
+  - - 423.6
+    - 95.6
+  - - 393.6
+    - 95.6
+  tone: force
+- circle:
+  - 348.4
+  - 95.6
+  r: 11
+  fill: surface
+  tone: default
+  label: +
+- circle:
+  - 423.6
+  - 95.6
+  r: 11
+  fill: surface
+  tone: default
+  label: −
+- text: притягиваются
+  at:
+  - 386
+  - 150
+  size: 13
+  anchor: middle
+  tone: muted
+- text: одноимённые
+  at:
+  - 155
+  - 172
+  size: 13
+  anchor: middle
+  tone: muted
+- line:
+  - - 30
+    - 160
+  - - 280
+    - 160
+  width: 1
+  tone: muted
+- text: разноимённые
+  at:
+  - 386
+  - 172
+  size: 13
+  anchor: middle
+  tone: muted

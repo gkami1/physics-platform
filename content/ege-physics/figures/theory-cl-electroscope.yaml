@@ -1,0 +1,149 @@
+# electro.field.coulomb 1.1: an electroscope. Left: uncharged, the leaves hang together.
+# Right: a positively charged rod touched the ball; the ball, rod and both leaves are
+# charged alike, the leaves (accent: what the reader looks at) push apart.
+# Colours (whole topic; the first of «Электродинамика», so this sets the section's convention):
+# a charge is a circle in the text colour (surface fill) with «+» or «−» inside; the charge
+# being discussed (a test charge, a result) accent. Never + red and − blue: red is the force
+# colour and accent means focus. Electrons are small dots in the text colour, the ones that
+# moved accent, their way an accent arrow. Coulomb forces red (they are forces), equal and
+# opposite arrows of visibly equal length; a resultant red and thicker; guides and the
+# distance r muted; notes muted.
+kind: diagram
+size:
+- 420
+- 212
+items:
+- rect:
+  - 60
+  - 70
+  - 100
+  - 110
+  radius: 12
+  width: 1.5
+- line:
+  - - 110
+    - 46
+  - - 110
+    - 128
+  width: 2
+- rect:
+  - 96
+  - 66
+  - 28
+  - 8
+  radius: 2
+  fill: surface
+  width: 1.2
+  tone: muted
+- line:
+  - - 110
+    - 128
+  - - 107
+    - 168
+  width: 2.5
+  tone: default
+- line:
+  - - 110
+    - 128
+  - - 113
+    - 168
+  width: 2.5
+  tone: default
+- circle:
+  - 110
+  - 36
+  r: 11
+  fill: surface
+  tone: default
+  label: ''
+- text: не заряжен
+  at:
+  - 110
+  - 200
+  size: 13
+  anchor: middle
+  tone: muted
+- rect:
+  - 250
+  - 70
+  - 100
+  - 110
+  radius: 12
+  width: 1.5
+- line:
+  - - 300
+    - 46
+  - - 300
+    - 128
+  width: 2
+- rect:
+  - 286
+  - 66
+  - 28
+  - 8
+  radius: 2
+  fill: surface
+  width: 1.2
+  tone: muted
+- line:
+  - - 300
+    - 128
+  - - 281.2
+    - 163.3
+  width: 2.5
+  tone: accent
+- line:
+  - - 300
+    - 128
+  - - 318.8
+    - 163.3
+  width: 2.5
+  tone: accent
+- circle:
+  - 300
+  - 36
+  r: 11
+  fill: surface
+  tone: default
+  label: +
+- text: +
+  at:
+  - 277.6
+  - 147.7
+  size: 15
+- text: +
+  at:
+  - 322.4
+  - 147.7
+  size: 15
+- rect:
+  - 310
+  - 14
+  - 80
+  - 12
+  radius: 4
+  fill: surface
+  width: 1.2
+  rotate: -20
+- text: +
+  at:
+  - 330
+  - 26.0
+  size: 12
+- text: +
+  at:
+  - 350
+  - 18.7
+  size: 12
+- text: +
+  at:
+  - 370
+  - 11.4
+  size: 12
+- text: листочки разошлись
+  at:
+  - 300
+  - 200
+  size: 13
+  anchor: middle
+  tone: muted
