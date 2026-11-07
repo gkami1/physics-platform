@@ -1,0 +1,178 @@
+# thermo.heat-engines 8.5: the rectangular cycle of 7.7, clockwise. The sides where the gas
+# gets heat (1 → 2 → 3) accent and thick with a moving point: only they make Q₁; the sides
+# where it gives heat away (3 → 4 → 1) in the text colour: they make |Q₂|. The area inside
+# tinted: the work A. Qualitative.
+# Colours (whole topic, extending «Первый закон термодинамики»): the heat received from the
+# heater Q₁ solid accent; the heat given to the cooler |Q₂| an accent outline (a real flow of
+# the cycle, not lost by accident as the muted heat in 5.3, but not the useful part either);
+# the work A an accent tint with an accent outline, as the area inside a cycle on p–V and the
+# model's bar; energy flows as block arrows whose widths add up (Q₁ = A + |Q₂|); heater and
+# cooler (room and chamber for a refrigerator) surface blocks with a text-colour outline; what
+# cannot happen crossed out muted; flames muted; forces red (none here). p–V graphs: the cycle
+# or the part being discussed accent with a moving point and small accent arrows for the
+# direction, the rest of a cycle in the text colour; isotherms and adiabats that only mark a
+# shape or a temperature dashed muted; guides dashed muted; notes muted.
+kind: diagram
+size:
+- 400
+- 226
+items:
+- arrow:
+  - - 40
+    - 200
+  - - 290
+    - 200
+  width: 1.5
+- arrow:
+  - - 40
+    - 200
+  - - 40
+    - 10
+  width: 1.5
+- text: '*V*'
+  at:
+  - 288
+  - 218
+  anchor: end
+  size: 13
+- text: '*p*'
+  at:
+  - 50
+  - 20
+  anchor: start
+  size: 13
+- text: '0'
+  at:
+  - 34
+  - 215
+  size: 12
+  anchor: end
+- path: M106 146L106 47L249 47L249 146L106 146Z
+  fill: accent
+  tone: accent
+  width: 0
+- path: M249 47L249 146L106 146
+  width: 2
+- path: M106 146L106 47L249 47
+  width: 3.5
+  tone: accent
+  animate: draw
+  mover: true
+- arrow:
+  - - 95.0
+    - 105.5
+  - - 95.0
+    - 87.5
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 168.5
+    - 36.0
+  - - 186.5
+    - 36.0
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 260.0
+    - 87.5
+  - - 260.0
+    - 105.5
+  width: 1.5
+- arrow:
+  - - 186.5
+    - 157.0
+  - - 168.5
+    - 157.0
+  width: 1.5
+- dots:
+  - - 106.0
+    - 146.0
+  - - 106.0
+    - 47.0
+  - - 249.0
+    - 47.0
+  - - 249.0
+    - 146.0
+  r: 4
+  tone: accent
+- text: '1'
+  at:
+  - 98.0
+  - 162.0
+  size: 13
+  anchor: end
+- text: '2'
+  at:
+  - 98.0
+  - 41.0
+  size: 13
+  anchor: end
+- text: '3'
+  at:
+  - 257.0
+  - 41.0
+  size: 13
+  anchor: start
+- text: '4'
+  at:
+  - 257.0
+  - 162.0
+  size: 13
+  anchor: start
+- text: '*A*'
+  at:
+  - 177.5
+  - 101.5
+  tone: accent
+  size: 15
+- text: '*Q* > 0'
+  at:
+  - 82.0
+  - 101.5
+  size: 13
+  anchor: end
+  tone: accent
+- text: '*Q* > 0'
+  at:
+  - 177.5
+  - 25.0
+  size: 13
+  tone: accent
+- text: '*Q* < 0'
+  at:
+  - 273.0
+  - 101.5
+  size: 13
+  anchor: start
+- text: '*Q* < 0'
+  at:
+  - 177.5
+  - 178.0
+  size: 13
+- text: '*Q*_1:'
+  at:
+  - 316
+  - 70
+  size: 14
+  anchor: start
+  tone: accent
+- text: 1 → 2 → 3
+  at:
+  - 316
+  - 88
+  size: 13
+  anchor: start
+  tone: muted
+- text: '|*Q*_2|:'
+  at:
+  - 316
+  - 140
+  size: 14
+  anchor: start
+- text: 3 → 4 → 1
+  at:
+  - 316
+  - 158
+  size: 13
+  anchor: start
+  tone: muted

@@ -1,0 +1,204 @@
+# thermo.heat-engines 8.4: the Carnot cycle of a monatomic ideal gas, drawn to its real shape
+# (pV = const, pV^(5/3) = const, T₂/T₁ = 0,6): 1 → 2 isothermal expansion at T₁, the gas
+# gets Q₁; 2 → 3 adiabatic expansion; 3 → 4 isothermal compression at T₂, it gives |Q₂|
+# away; 4 → 1 adiabatic compression. The cycle accent with a moving point, the area inside
+# tinted (the work), the whole isotherms T₁ and T₂ dashed muted. Qualitative.
+# Colours (whole topic, extending «Первый закон термодинамики»): the heat received from the
+# heater Q₁ solid accent; the heat given to the cooler |Q₂| an accent outline (a real flow of
+# the cycle, not lost by accident as the muted heat in 5.3, but not the useful part either);
+# the work A an accent tint with an accent outline, as the area inside a cycle on p–V and the
+# model's bar; energy flows as block arrows whose widths add up (Q₁ = A + |Q₂|); heater and
+# cooler (room and chamber for a refrigerator) surface blocks with a text-colour outline; what
+# cannot happen crossed out muted; flames muted; forces red (none here). p–V graphs: the cycle
+# or the part being discussed accent with a moving point and small accent arrows for the
+# direction, the rest of a cycle in the text colour; isotherms and adiabats that only mark a
+# shape or a temperature dashed muted; guides dashed muted; notes muted.
+kind: diagram
+size:
+- 400
+- 236
+items:
+- arrow:
+  - - 40
+    - 210
+  - - 340
+    - 210
+  width: 1.5
+- arrow:
+  - - 40
+    - 210
+  - - 40
+    - 10
+  width: 1.5
+- text: '*V*'
+  at:
+  - 338
+  - 228
+  anchor: end
+  size: 13
+- text: '*p*'
+  at:
+  - 50
+  - 20
+  anchor: start
+  size: 13
+- text: '0'
+  at:
+  - 34
+  - 225
+  size: 12
+  anchor: end
+- path: M87.5 24.7L93.6 45.8L99.7 62.5L105.8 76.2L111.8 87.5L117.9 97.1L124 105.2L130.1 112.3L136.2 118.5L142.2
+    123.9L148.3 128.8L154.4 133.1L160.5 137L166.6 140.5L172.7 143.7L178.7 146.6L184.8 149.2L190.9 151.7L197
+    153.9L203.1 156L209.2 158L215.2 159.8L221.3 161.5L227.4 163L233.5 164.5L239.6 165.9L245.7 167.2L251.7
+    168.4L257.8 169.6L263.9 170.7L270 171.7
+  width: 1
+  dashed: true
+  tone: muted
+- path: M71 39.7L79.3 75.6L87.6 99.1L95.9 115.5L104.2 127.8L112.5 137.2L120.8 144.7L129.1 150.7L137.4
+    155.8L145.7 160L154 163.7L162.3 166.8L170.6 169.6L178.9 172L187.2 174.1L195.5 176L203.8 177.8L212.1
+    179.3L220.4 180.7L228.7 182L237 183.2L245.3 184.3L253.6 185.3L261.9 186.2L270.2 187.1L278.5 187.9L286.8
+    188.6L295.1 189.3L303.4 190L311.7 190.6L320 191.1
+  width: 1
+  dashed: true
+  tone: muted
+- text: '*T*_1'
+  at:
+  - 274.0
+  - 165.7
+  anchor: start
+  size: 13
+  tone: muted
+- text: '*T*_2'
+  at:
+  - 324.0
+  - 185.1
+  anchor: start
+  size: 13
+  tone: muted
+- path: M90 34L91.7 39.7L93.3 45L95 50L96.7 54.7L98.3 59.1L100 63.3L101.7 67.3L103.3 71.1L105 74.6L106.7
+    78L108.3 81.2L110 84.3L111.7 87.2L113.3 90L115 92.7L116.7 95.2L118.3 97.7L120 100L121.7 102.2L123.3
+    104.4L125 106.5L126.7 108.5L128.3 110.4L130 112.2L131.7 114L133.3 115.7L135 117.4L136.7 119L138.3
+    120.5L140 122L143.8 127.4L147.7 132.2L151.5 136.6L155.4 140.6L159.2 144.3L163 147.7L166.9 150.8L170.7
+    153.7L174.5 156.3L178.4 158.8L182.2 161.1L186.1 163.2L189.9 165.2L193.7 167L197.6 168.8L201.4 170.4L205.3
+    171.9L209.1 173.3L212.9 174.7L216.8 176L220.6 177.1L224.5 178.3L228.3 179.4L232.1 180.4L236 181.3L239.8
+    182.2L243.6 183.1L247.5 183.9L251.3 184.7L255.2 185.5L251.6 185L248 184.6L244.4 184.2L240.8 183.7L237.2
+    183.2L233.6 182.7L230.1 182.2L226.5 181.7L222.9 181.1L219.3 180.6L215.7 180L212.1 179.3L208.5 178.7L205
+    178L201.4 177.3L197.8 176.5L194.2 175.8L190.6 174.9L187 174.1L183.4 173.2L179.9 172.2L176.3 171.3L172.7
+    170.2L169.1 169.1L165.5 167.9L161.9 166.7L158.3 165.4L154.8 164L151.2 162.5L147.6 160.9L145.7 159.4L143.7
+    157.9L141.8 156.2L139.9 154.5L138 152.7L136.1 150.7L134.1 148.7L132.2 146.6L130.3 144.3L128.4 141.9L126.5
+    139.4L124.5 136.7L122.6 133.8L120.7 130.8L118.8 127.5L116.9 124.1L115 120.4L113 116.4L111.1 112.2L109.2
+    107.6L107.3 102.7L105.4 97.4L103.4 91.6L101.5 85.4L99.6 78.7L97.7 71.3L95.8 63.2L93.8 54.4L91.9 44.7L90
+    34Z
+  fill: accent
+  tone: accent
+  width: 0
+- path: M90 34L91.7 39.7L93.3 45L95 50L96.7 54.7L98.3 59.1L100 63.3L101.7 67.3L103.3 71.1L105 74.6L106.7
+    78L108.3 81.2L110 84.3L111.7 87.2L113.3 90L115 92.7L116.7 95.2L118.3 97.7L120 100L121.7 102.2L123.3
+    104.4L125 106.5L126.7 108.5L128.3 110.4L130 112.2L131.7 114L133.3 115.7L135 117.4L136.7 119L138.3
+    120.5L140 122L143.8 127.4L147.7 132.2L151.5 136.6L155.4 140.6L159.2 144.3L163 147.7L166.9 150.8L170.7
+    153.7L174.5 156.3L178.4 158.8L182.2 161.1L186.1 163.2L189.9 165.2L193.7 167L197.6 168.8L201.4 170.4L205.3
+    171.9L209.1 173.3L212.9 174.7L216.8 176L220.6 177.1L224.5 178.3L228.3 179.4L232.1 180.4L236 181.3L239.8
+    182.2L243.6 183.1L247.5 183.9L251.3 184.7L255.2 185.5L251.6 185L248 184.6L244.4 184.2L240.8 183.7L237.2
+    183.2L233.6 182.7L230.1 182.2L226.5 181.7L222.9 181.1L219.3 180.6L215.7 180L212.1 179.3L208.5 178.7L205
+    178L201.4 177.3L197.8 176.5L194.2 175.8L190.6 174.9L187 174.1L183.4 173.2L179.9 172.2L176.3 171.3L172.7
+    170.2L169.1 169.1L165.5 167.9L161.9 166.7L158.3 165.4L154.8 164L151.2 162.5L147.6 160.9L145.7 159.4L143.7
+    157.9L141.8 156.2L139.9 154.5L138 152.7L136.1 150.7L134.1 148.7L132.2 146.6L130.3 144.3L128.4 141.9L126.5
+    139.4L124.5 136.7L122.6 133.8L120.7 130.8L118.8 127.5L116.9 124.1L115 120.4L113 116.4L111.1 112.2L109.2
+    107.6L107.3 102.7L105.4 97.4L103.4 91.6L101.5 85.4L99.6 78.7L97.7 71.3L95.8 63.2L93.8 54.4L91.9 44.7L90
+    34
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- dots:
+  - - 90.0
+    - 34.0
+  - - 140.0
+    - 122.0
+  - - 255.2
+    - 185.5
+  - - 147.6
+    - 160.9
+  r: 4
+  tone: accent
+- text: '1'
+  at:
+  - 82.0
+  - 38.0
+  size: 13
+  anchor: end
+- text: '2'
+  at:
+  - 148.0
+  - 118.0
+  size: 13
+  anchor: start
+- text: '3'
+  at:
+  - 261.2
+  - 201.5
+  size: 13
+  anchor: start
+- text: '4'
+  at:
+  - 139.6
+  - 176.9
+  size: 13
+  anchor: end
+- arrow:
+  - - 118.1
+    - 75.8
+  - - 127.9
+    - 90.9
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 188.7
+    - 186.0
+  - - 171.3
+    - 181.6
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 149.0
+    - 58.7
+  - - 125.0
+    - 82.7
+  tone: accent
+  width: 3
+- text: '*Q*_1'
+  at:
+  - 153.0
+  - 54.7
+  anchor: start
+  tone: accent
+  size: 14
+- arrow:
+  - - 179.0
+    - 179.6
+  - - 159.0
+    - 197.6
+  tone: accent
+  width: 1.5
+- text: '|*Q*_2|'
+  at:
+  - 155.0
+  - 197.6
+  anchor: end
+  tone: accent
+  size: 14
+- text: '2 → 3 и 4 → 1:'
+  at:
+  - 320
+  - 40
+  size: 13
+  anchor: end
+  tone: muted
+- text: без теплообмена
+  at:
+  - 320
+  - 56
+  size: 13
+  anchor: end
+  tone: muted
