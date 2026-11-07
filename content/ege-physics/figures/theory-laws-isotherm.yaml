@@ -1,0 +1,122 @@
+# thermo.gas-laws 3.3: an isotherm. The gas is squeezed at constant temperature from
+# state 1 to state 2 (the point runs along the hyperbola pV = const); the whole isotherm
+# dashed. Qualitative axes: no number can meet a task's answer.
+# Colours (whole topic, extending «Основы МКТ» and «Идеальный газ»): molecules in the text
+# colour, the focal quantity accent, velocity green, forces (pressure on a wall) red, notes
+# muted. Graphs of processes: the process being discussed accent (drawn with a moving
+# point where it runs from 1 to 2), its extension to the origin dashed muted, other
+# isotherms or isochores muted, the other two isoprocesses through the same state in the
+# text colour.
+kind: diagram
+size:
+- 400
+- 252
+items:
+- arrow:
+  - - 50
+    - 225
+  - - 390
+    - 225
+  width: 1.5
+- arrow:
+  - - 50
+    - 225
+  - - 50
+    - 20
+  width: 1.5
+- text: '*V*'
+  at:
+  - 388
+  - 245
+  anchor: end
+- text: '*p*'
+  at:
+  - 62
+  - 32
+  anchor: start
+- text: '0'
+  at:
+  - 42
+  - 241
+  size: 13
+  anchor: end
+- path: M98 45L104.7 67.1L111.4 84.4L118.2 98.2L124.9 109.6L131.6 119.1L138.3 127.2L145 134.1L151.8 140.1L158.5
+    145.4L165.2 150L171.9 154.1L178.6 157.8L185.4 161.2L192.1 164.2L198.8 166.9L205.5 169.4L212.2 171.7L219
+    173.9L225.7 175.8L232.4 177.6L239.1 179.3L245.8 180.9L252.6 182.3L259.3 183.7L266 185L272.7 186.2L279.4
+    187.3L286.2 188.4L292.9 189.4L299.6 190.4L306.3 191.3L313 192.2L319.8 193L326.5 193.8L333.2 194.5L339.9
+    195.2L346.6 195.9L353.4 196.5L360.1 197.1L366.8 197.7
+  width: 1.2
+  dashed: true
+  tone: accent
+- line:
+  - - 242.0
+    - 225
+  - - 242.0
+    - 180.0
+  - - 50
+    - 180.0
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 122.0
+    - 225
+  - - 122.0
+    - 105.0
+  - - 50
+    - 105.0
+  width: 1
+  dashed: true
+  tone: muted
+- path: M242 180L238 179L234 178L230 177L226 175.9L222 174.8L218 173.6L214 172.3L210 171L206 169.6L202
+    168.2L198 166.6L194 165L190 163.3L186 161.5L182 159.5L178 157.5L174 155.3L170 153L166 150.5L162 147.9L158
+    145L154 141.9L150 138.6L146 135L142 131.1L138 126.8L134 122.1L130 117L126 111.3L122 105
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- dots:
+  - - 242.0
+    - 180.0
+  - - 122.0
+    - 105.0
+  r: 4
+  tone: accent
+- text: '1'
+  at:
+  - 251.0
+  - 172.0
+  anchor: start
+- text: '2'
+  at:
+  - 131.0
+  - 97.0
+  anchor: start
+- text: '*p*_{1}'
+  at:
+  - 42
+  - 185.0
+  anchor: end
+  size: 13
+- text: '*p*_{2}'
+  at:
+  - 42
+  - 110.0
+  anchor: end
+  size: 13
+- text: '*V*_{1}'
+  at:
+  - 242.0
+  - 244
+  size: 13
+- text: '*V*_{2}'
+  at:
+  - 122.0
+  - 244
+  size: 13
+- text: '*T* = const'
+  at:
+  - 299.6
+  - 172.5
+  anchor: start
+  tone: accent

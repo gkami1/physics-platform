@@ -1,0 +1,241 @@
+# thermo.gas-laws 3.1: the same gas under a piston three times. Twice the load — the
+# gas squeezed into half the volume, the molecules denser, the pressure on the wall
+# (red) twice as long; heated under the same load — the volume grows, the molecules are
+# faster (longer green arrow), the pressure stays. Seed 31, qualitative.
+# Colours (whole topic, extending «Основы МКТ» and «Идеальный газ»): molecules in the text
+# colour, the focal quantity accent, velocity green, forces (pressure on a wall) red, notes
+# muted. Graphs of processes: the process being discussed accent (drawn with a moving
+# point where it runs from 1 to 2), its extension to the origin dashed muted, other
+# isotherms or isochores muted, the other two isoprocesses through the same state in the
+# text colour.
+kind: diagram
+size:
+- 400
+- 236
+items:
+- line:
+  - - 50
+    - 40
+  - - 50
+    - 190
+  - - 120
+    - 190
+  - - 120
+    - 40
+  width: 2
+- rect:
+  - 51
+  - 118
+  - 68
+  - 8
+  fill: surface
+  width: 1.5
+- rect:
+  - 67
+  - 104
+  - 36
+  - 14
+  fill: surface
+  radius: 2
+- dots:
+  - - 55.7
+    - 137.1
+  - - 78.6
+    - 167.9
+  - - 68.9
+    - 171.9
+  - - 94.7
+    - 138.4
+  - - 87.1
+    - 155.2
+  - - 79.8
+    - 184.8
+  - - 111.4
+    - 152.8
+  - - 66.9
+    - 148.8
+  - - 112.2
+    - 176.3
+  - - 76.3
+    - 142.0
+  r: 2.6
+- arrow:
+  - - 55.7
+    - 137.1
+  - - 71.7
+    - 137.1
+  tone: vel
+  width: 1.8
+- arrow:
+  - - 48
+    - 158.0
+  - - 30
+    - 158.0
+  tone: force
+  width: 2.2
+- text: было
+  at:
+  - 85.0
+  - 212
+  size: 13
+- line:
+  - - 180
+    - 40
+  - - 180
+    - 190
+  - - 250
+    - 190
+  - - 250
+    - 40
+  width: 2
+- rect:
+  - 181
+  - 150
+  - 68
+  - 8
+  fill: surface
+  width: 1.5
+- rect:
+  - 197
+  - 136
+  - 36
+  - 14
+  fill: surface
+  radius: 2
+- rect:
+  - 197
+  - 122
+  - 36
+  - 14
+  fill: surface
+  radius: 2
+- dots:
+  - - 235.2
+    - 184.8
+  - - 186.8
+    - 179.2
+  - - 237.1
+    - 177.3
+  - - 198.1
+    - 180.5
+  - - 228.8
+    - 167.3
+  - - 187.5
+    - 170.4
+  - - 205.1
+    - 171.7
+  - - 223.8
+    - 181.4
+  - - 242.7
+    - 184.5
+  - - 244.5
+    - 167.3
+  r: 2.6
+- arrow:
+  - - 186.8
+    - 179.2
+  - - 202.8
+    - 179.2
+  tone: vel
+  width: 1.8
+- arrow:
+  - - 178
+    - 174.0
+  - - 142
+    - 174.0
+  tone: force
+  width: 2.2
+- text: 'сжали:'
+  at:
+  - 215.0
+  - 212
+  size: 13
+- text: давление больше
+  at:
+  - 215.0
+  - 228
+  size: 13
+  tone: muted
+- line:
+  - - 310
+    - 40
+  - - 310
+    - 190
+  - - 380
+    - 190
+  - - 380
+    - 40
+  width: 2
+- rect:
+  - 311
+  - 86
+  - 68
+  - 8
+  fill: surface
+  width: 1.5
+- rect:
+  - 327
+  - 72
+  - 36
+  - 14
+  fill: surface
+  radius: 2
+- dots:
+  - - 342.3
+    - 167.8
+  - - 348.7
+    - 109.2
+  - - 320.9
+    - 183.5
+  - - 322.2
+    - 115.7
+  - - 335.1
+    - 160.4
+  - - 366.2
+    - 139.9
+  - - 331.7
+    - 131.0
+  - - 351.8
+    - 153.7
+  - - 323.3
+    - 161.4
+  - - 356.6
+    - 182.7
+  r: 2.6
+- arrow:
+  - - 320.9
+    - 183.5
+  - - 341.9
+    - 183.5
+  tone: vel
+  width: 1.8
+- arrow:
+  - - 308
+    - 142.0
+  - - 290
+    - 142.0
+  tone: force
+  width: 2.2
+- text: 'нагрели:'
+  at:
+  - 345.0
+  - 212
+  size: 13
+- text: объём больше
+  at:
+  - 345.0
+  - 228
+  size: 13
+  tone: muted
+- text: '*T* та же'
+  at:
+  - 215
+  - 22
+  size: 12
+  tone: muted
+- text: '*p* то же'
+  at:
+  - 345
+  - 22
+  size: 12
+  tone: muted
