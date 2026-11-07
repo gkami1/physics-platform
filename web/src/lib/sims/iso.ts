@@ -179,7 +179,7 @@ const tickLabel = (q: Quantity, v: number, joulesMode = false): string =>
   q === 'T' ? String(v) : joulesMode ? String(q === 'p' ? v * 100 : v) : `${v === 1 ? '' : v}${q}₀`;
 
 // The energy bars of the `work` mode: zero line at BAR.zero, BAR.k px per joule, clamped.
-const BAR = { zero: 230, k: 0.2, max: 160, aY: 226, uY: 278, h: 18 };
+const BAR = { zero: 230, k: 0.5, max: 160, aY: 226, uY: 278, h: 18 };
 
 class IsoSim extends HTMLElement {
   private proc: Process = 'T';
@@ -272,7 +272,7 @@ class IsoSim extends HTMLElement {
     }
 
     const svg = el('svg', {
-      viewBox: this.joulesMode ? '0 0 400 310' : '0 0 400 340',
+      viewBox: this.joulesMode ? '0 0 400 324' : '0 0 400 340',
       class: 'sim-svg',
       role: 'img',
       'aria-label': this.joulesMode
