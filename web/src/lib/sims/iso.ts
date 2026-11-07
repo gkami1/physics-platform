@@ -790,7 +790,7 @@ class IsoSim extends HTMLElement {
     if (this.segs.length > 1) {
       text += ` С точки A: <i>Q</i> = ${joules(totalQ)}, Δ<i>U</i> = ${joules(totalU)}, <i>A</i> = ${joules(totalA)}.`;
     }
-    this.readout.innerHTML = text;
+    this.readout.innerHTML = text.replace(/ = /g, `${NB}=${NB}`); // never break at «=»
   }
 }
 
