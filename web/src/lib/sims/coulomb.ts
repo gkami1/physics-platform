@@ -100,7 +100,7 @@ function el<K extends keyof SVGElementTagNameMap>(
   return node;
 }
 
-const L = { w: 440, h: 250, cx: 220, cy: 70, pxPerCm: 11, rq: 11, gx0: 46, gx1: 420, gy: 232, gh: 78 };
+const L = { w: 400, h: 226, cx: 200, cy: 72, pxPerCm: 10, rq: 13, gx0: 40, gx1: 384, gy: 214, gh: 62 };
 
 let instances = 0;
 
@@ -257,8 +257,8 @@ class CoulombSim extends HTMLElement {
     const g = el('g', { class: q === 0 ? 'cou-q cou-q0' : 'cou-q' });
     g.append(
       el('circle', { cx: x, cy: L.cy, r: L.rq }),
-      el('text', { x, y: L.cy + 5, 'text-anchor': 'middle', class: 'cou-sign' }, q > 0 ? '+' : q < 0 ? MINUS : '0'),
-      el('text', { x, y: L.cy - L.rq - 30, 'text-anchor': 'middle', class: 'cou-label' }, name),
+      el('text', { x, y: L.cy + 6.5, 'text-anchor': 'middle', class: 'cou-sign' }, q > 0 ? '+' : q < 0 ? MINUS : '0'),
+      el('text', { x, y: L.cy - L.rq - 32, 'text-anchor': 'middle', class: 'cou-label' }, name),
     );
     return g;
   }
@@ -279,9 +279,9 @@ class CoulombSim extends HTMLElement {
     const x1 = L.cx - half;
     const x2 = L.cx + half;
     this.scene.replaceChildren();
-    if (eps > 1) this.scene.append(el('rect', { x: 8, y: 14, width: L.w - 16, height: 112, rx: 6, class: 'cou-liquid' }));
+    if (eps > 1) this.scene.append(el('rect', { x: 4, y: 10, width: L.w - 8, height: 126, rx: 6, class: 'cou-liquid' }));
     // r between the centres, under the charges.
-    const ry = L.cy + 46;
+    const ry = L.cy + 54;
     this.scene.append(
       el('path', { d: `M${x1} ${L.cy + L.rq + 4}V${ry + 6}M${x2} ${L.cy + L.rq + 4}V${ry + 6}`, class: 'cou-tick' }),
       el('path', {

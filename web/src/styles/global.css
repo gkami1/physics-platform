@@ -2659,20 +2659,20 @@ task-answer .final {
 
 .sim-svg .cou-sign {
   fill: var(--text);
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 600;
 }
 
 .cou-q0 .cou-sign {
   fill: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .sim-svg .cou-label,
 .sim-svg .cou-rname,
 .sim-svg .cou-name {
   fill: var(--text);
-  font-size: 13px;
+  font-size: 16px;
   font-style: italic;
 }
 
@@ -2684,7 +2684,7 @@ task-answer .final {
 .cou-f path,
 .sim-svg .cou-f text {
   fill: var(--bad);
-  font-size: 12px;
+  font-size: 15px;
   font-style: italic;
 }
 
