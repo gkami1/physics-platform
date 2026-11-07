@@ -1,0 +1,183 @@
+# thermo.first-law 7.7: a rectangular cycle run clockwise on p–V (accent, a moving point,
+# direction arrows). The sign of the heat on each side from Q = ΔU + A: heated at constant
+# volume (1 → 2) and expanding while heated (2 → 3) the gas gets heat; cooled at constant
+# volume (3 → 4) and compressed while cooled (4 → 1) it gives heat away. Qualitative.
+# Colours (whole topic, extending «Внутренняя энергия и работа газа»): heat Q accent, flowing in
+# or out (an arrow into or out of the gas); the change of internal energy ΔU green (as the
+# molecules' velocities and the model's ΔU bar); the work of the gas A an accent tint with an
+# accent outline in bars, as the area under p(V) (hatched when negative); Q split into ΔU and A
+# as a branching arrow or bars; flames muted; forces red; a piston's motion in the text colour;
+# an adiabat's insulation a thick muted layer. p–V graphs: the process being discussed accent
+# with a moving point and small accent arrows for the direction; isotherms that only mark a
+# temperature dashed muted; guides dashed muted; notes muted.
+kind: diagram
+size:
+- 400
+- 226
+items:
+- arrow:
+  - - 40
+    - 200
+  - - 290
+    - 200
+  width: 1.5
+- arrow:
+  - - 40
+    - 200
+  - - 40
+    - 10
+  width: 1.5
+- text: '*V*'
+  at:
+  - 288
+  - 218
+  anchor: end
+  size: 13
+- text: '*p*'
+  at:
+  - 50
+  - 20
+  anchor: start
+  size: 13
+- text: '0'
+  at:
+  - 34
+  - 215
+  size: 12
+  anchor: end
+- path: M106 146L106 47L249 47L249 146L106 146
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- arrow:
+  - - 95.0
+    - 105.5
+  - - 95.0
+    - 87.5
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 168.5
+    - 36.0
+  - - 186.5
+    - 36.0
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 260.0
+    - 87.5
+  - - 260.0
+    - 105.5
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 186.5
+    - 157.0
+  - - 168.5
+    - 157.0
+  tone: accent
+  width: 1.5
+- dots:
+  - - 106.0
+    - 146.0
+  - - 106.0
+    - 47.0
+  - - 249.0
+    - 47.0
+  - - 249.0
+    - 146.0
+  r: 4
+  tone: accent
+- text: '1'
+  at:
+  - 98.0
+  - 162.0
+  size: 13
+  anchor: end
+- text: '2'
+  at:
+  - 98.0
+  - 41.0
+  size: 13
+  anchor: end
+- text: '3'
+  at:
+  - 257.0
+  - 41.0
+  size: 13
+  anchor: start
+- text: '4'
+  at:
+  - 257.0
+  - 162.0
+  size: 13
+  anchor: start
+- text: '*Q* > 0'
+  at:
+  - 82.0
+  - 101.5
+  size: 13
+  anchor: end
+  tone: accent
+- text: '*Q* > 0'
+  at:
+  - 177.5
+  - 25.0
+  size: 13
+  tone: accent
+- text: '*Q* < 0'
+  at:
+  - 273.0
+  - 101.5
+  size: 13
+  anchor: start
+  tone: accent
+- text: '*Q* < 0'
+  at:
+  - 177.5
+  - 178.0
+  size: 13
+  tone: accent
+- text: получает
+  at:
+  - 316
+  - 70
+  size: 13
+  anchor: start
+  tone: default
+- text: 'теплоту:'
+  at:
+  - 316
+  - 86
+  size: 13
+  anchor: start
+  tone: default
+- text: 1 → 2 → 3
+  at:
+  - 316
+  - 104
+  size: 13
+  anchor: start
+  tone: muted
+- text: отдаёт
+  at:
+  - 316
+  - 140
+  size: 13
+  anchor: start
+  tone: default
+- text: 'теплоту:'
+  at:
+  - 316
+  - 156
+  size: 13
+  anchor: start
+  tone: default
+- text: 3 → 4 → 1
+  at:
+  - 316
+  - 174
+  size: 13
+  anchor: start
+  tone: muted

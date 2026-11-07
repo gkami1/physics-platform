@@ -1,0 +1,160 @@
+# thermo.first-law 7.1: a ball falls from h₁ (dashed muted: where it was), hits the floor and
+# bounces only to h₂; its path accent with a moving point. Bars: the energy before (mgh₁,
+# accent) and after (mgh₂ accent + the internal energy ΔU of the ball and the floor green):
+# the same total. Qualitative.
+# Colours (whole topic, extending «Внутренняя энергия и работа газа»): heat Q accent, flowing in
+# or out (an arrow into or out of the gas); the change of internal energy ΔU green (as the
+# molecules' velocities and the model's ΔU bar); the work of the gas A an accent tint with an
+# accent outline in bars, as the area under p(V) (hatched when negative); Q split into ΔU and A
+# as a branching arrow or bars; flames muted; forces red; a piston's motion in the text colour;
+# an adiabat's insulation a thick muted layer. p–V graphs: the process being discussed accent
+# with a moving point and small accent arrows for the direction; isotherms that only mark a
+# temperature dashed muted; guides dashed muted; notes muted.
+kind: diagram
+size:
+- 400
+- 244
+items:
+- line:
+  - - 20
+    - 200
+  - - 252
+    - 200
+  width: 2
+- hatch:
+  - - 20
+    - 200
+  - - 252
+    - 200
+  side: 1
+- circle:
+  - 80
+  - 56
+  r: 13
+  dashed: true
+  tone: muted
+- circle:
+  - 135
+  - 187
+  r: 13
+  tone: muted
+- path: M80 56Q107.5 56 135 187Q162.5 112 190 112
+  width: 2
+  tone: accent
+  animate: draw
+  mover: true
+- circle:
+  - 190
+  - 112
+  r: 13
+  width: 2
+- line:
+  - - 40
+    - 56
+  - - 40
+    - 200
+  width: 1.2
+- line:
+  - - 36
+    - 56
+  - - 44
+    - 56
+  width: 1.2
+- text: '*h*_1'
+  at:
+  - 46
+  - 132
+  anchor: start
+  size: 14
+- line:
+  - - 224
+    - 112
+  - - 224
+    - 200
+  width: 1.2
+- line:
+  - - 220
+    - 112
+  - - 228
+    - 112
+  width: 1.2
+- text: '*h*_2'
+  at:
+  - 230
+  - 162
+  anchor: start
+  size: 14
+- text: мяч и пол чуть нагрелись
+  at:
+  - 135
+  - 230
+  size: 13
+  anchor: middle
+  tone: muted
+- rect:
+  - 282
+  - 56
+  - 26
+  - 144
+  fill: solid
+  tone: accent
+  width: 0
+- rect:
+  - 330
+  - 112
+  - 26
+  - 88
+  fill: solid
+  tone: accent
+  width: 0
+- rect:
+  - 330
+  - 56
+  - 26
+  - 56
+  fill: solid
+  tone: vel
+  width: 0
+- line:
+  - - 274
+    - 200
+  - - 366
+    - 200
+  width: 1.2
+- text: '*mgh*_1'
+  at:
+  - 295
+  - 48
+  size: 13
+  tone: accent
+- text: Δ*U*
+  at:
+  - 361
+  - 89.0
+  size: 13
+  anchor: start
+  tone: vel
+- text: '*mgh*_2'
+  at:
+  - 361
+  - 161.0
+  size: 13
+  anchor: start
+  tone: accent
+- text: было
+  at:
+  - 295
+  - 218
+  size: 13
+- text: стало
+  at:
+  - 343
+  - 218
+  size: 13
+- text: сумма та же
+  at:
+  - 319
+  - 236
+  size: 13
+  anchor: middle
+  tone: muted

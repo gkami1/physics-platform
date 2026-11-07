@@ -1,0 +1,245 @@
+# thermo.first-law 7.6: adiabatic expansion. Left: an insulated cylinder (a thick muted
+# layer), Q = 0; the piston rose from the dashed line. Right, on p–V: the adiabat from 1
+# (accent, a moving point; pV^(5/3) = const, monatomic) falls faster than the isotherm T₁
+# through 1 (dashed muted) and ends at 2 on the cooler isotherm T₂ (dashed muted); the work
+# under it an accent tint. Real shapes, qualitative axes.
+# Colours (whole topic, extending «Внутренняя энергия и работа газа»): heat Q accent, flowing in
+# or out (an arrow into or out of the gas); the change of internal energy ΔU green (as the
+# molecules' velocities and the model's ΔU bar); the work of the gas A an accent tint with an
+# accent outline in bars, as the area under p(V) (hatched when negative); Q split into ΔU and A
+# as a branching arrow or bars; flames muted; forces red; a piston's motion in the text colour;
+# an adiabat's insulation a thick muted layer. p–V graphs: the process being discussed accent
+# with a moving point and small accent arrows for the direction; isotherms that only mark a
+# temperature dashed muted; guides dashed muted; notes muted.
+kind: diagram
+size:
+- 400
+- 226
+items:
+- line:
+  - - 25
+    - 40
+  - - 25
+    - 155
+  - - 95
+    - 155
+  - - 95
+    - 40
+  width: 6
+  tone: muted
+- rect:
+  - 31
+  - 80
+  - 58
+  - 70
+  fill: surface
+  width: 0
+- line:
+  - - 30
+    - 40
+  - - 30
+    - 150
+  - - 90
+    - 150
+  - - 90
+    - 40
+  width: 2
+- line:
+  - - 30
+    - 110
+  - - 90
+    - 110
+  width: 1
+  dashed: true
+  tone: muted
+- rect:
+  - 31
+  - 72
+  - 58
+  - 8
+  fill: surface
+  width: 1.5
+- line:
+  - - 60
+    - 72
+  - - 60
+    - 30
+  width: 2.5
+- dots:
+  - - 54.6
+    - 138.5
+  - - 47.4
+    - 105.1
+  - - 74.6
+    - 101.6
+  - - 66.7
+    - 120.1
+  r: 3
+- arrow:
+  - - 54.6
+    - 138.5
+  - - 65.9
+    - 146.8
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 47.4
+    - 105.1
+  - - 61.3
+    - 106.8
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 74.6
+    - 101.6
+  - - 74.0
+    - 115.6
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 66.7
+    - 120.1
+  - - 59.8
+    - 107.9
+  tone: vel
+  width: 1.5
+- text: '*Q* = 0'
+  at:
+  - 60
+  - 180
+  size: 14
+  tone: accent
+- text: теплоизоляция
+  at:
+  - 60
+  - 198
+  size: 13
+  anchor: middle
+  tone: muted
+- arrow:
+  - - 130
+    - 200
+  - - 390
+    - 200
+  width: 1.5
+- arrow:
+  - - 130
+    - 200
+  - - 130
+    - 10
+  width: 1.5
+- text: '*V*'
+  at:
+  - 388
+  - 218
+  anchor: end
+  size: 13
+- text: '*p*'
+  at:
+  - 140
+  - 20
+  anchor: start
+  size: 13
+- text: '0'
+  at:
+  - 124
+  - 215
+  size: 12
+  anchor: end
+- path: M190 200L190 56L193 67.2L196 77.2L199 85.9L202 93.7L205 100.7L208 107L211 112.7L214 117.8L217
+    122.5L220 126.7L223 130.6L226 134.2L229 137.5L232 140.5L235 143.3L238 145.9L241 148.3L244 150.6L247
+    152.7L250 154.6L253 156.5L256 158.2L259 159.8L262 161.3L265 162.7L268 164.1L271 165.3L274 166.5L277
+    167.7L280 168.7L283 169.7L286 170.7L289 171.6L292 172.5L295 173.3L298 174.1L301 174.9L304 175.6L307
+    176.3L310 176.9L313 177.6L316 178.2L319 178.7L322 179.3L325 179.8L328 180.3L331 180.8L334 181.3L337
+    181.7L340 182.2L343 182.6L346 183L346 200Z
+  fill: accent
+  tone: accent
+  width: 0
+- path: M184 40L187 48.4L190 56L193 62.9L196 69.1L199 74.8L202 80L205 84.8L208 89.2L211 93.3L214 97.1L217
+    100.7L220 104L223 107.1L226 110L229 112.7L232 115.3L235 117.7L238 120L241 122.2L244 124.2L247 126.2L250
+    128L253 129.8L256 131.4L259 133L262 134.5L265 136L268 137.4L271 138.7L274 140L277 141.2L280 142.4L283
+    143.5L286 144.6L289 145.7L292 146.7L295 147.6L298 148.6L301 149.5L304 150.3L307 151.2L310 152L313
+    152.8L316 153.5L319 154.3L322 155L325 155.7L328 156.4L331 157L334 157.6L337 158.3L340 158.9L343 159.4L346
+    160L349 160.5L352 161.1L355 161.6L358 162.1L361 162.6L364 163.1L367 163.5L370 164
+  width: 1.2
+  dashed: true
+  tone: muted
+- path: M202 148.9L205 151L208 152.8L211 154.6L214 156.2L217 157.7L220 159.1L223 160.4L226 161.7L229 162.8L232
+    163.9L235 165L238 165.9L241 166.9L244 167.7L247 168.6L250 169.3L253 170.1L256 170.8L259 171.5L262
+    172.1L265 172.8L268 173.3L271 173.9L274 174.5L277 175L280 175.5L283 176L286 176.4L289 176.9L292 177.3L295
+    177.7L298 178.1L301 178.5L304 178.9L307 179.2L310 179.6L313 179.9L316 180.2L319 180.5L322 180.8L325
+    181.1L328 181.4L331 181.7L334 182L337 182.2L340 182.5L343 182.7L346 183L349 183.2L352 183.4L355 183.7L358
+    183.9L361 184.1L364 184.3L367 184.5L370 184.7
+  width: 1.2
+  dashed: true
+  tone: muted
+- text: '*T*_1'
+  at:
+  - 374.0
+  - 168.0
+  size: 13
+  anchor: start
+  tone: muted
+- text: '*T*_2'
+  at:
+  - 374.0
+  - 188.7
+  size: 13
+  anchor: start
+  tone: muted
+- path: M190 56L193 67.2L196 77.2L199 85.9L202 93.7L205 100.7L208 107L211 112.7L214 117.8L217 122.5L220
+    126.7L223 130.6L226 134.2L229 137.5L232 140.5L235 143.3L238 145.9L241 148.3L244 150.6L247 152.7L250
+    154.6L253 156.5L256 158.2L259 159.8L262 161.3L265 162.7L268 164.1L271 165.3L274 166.5L277 167.7L280
+    168.7L283 169.7L286 170.7L289 171.6L292 172.5L295 173.3L298 174.1L301 174.9L304 175.6L307 176.3L310
+    176.9L313 177.6L316 178.2L319 178.7L322 179.3L325 179.8L328 180.3L331 180.8L334 181.3L337 181.7L340
+    182.2L343 182.6L346 183
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- arrow:
+  - - 247.6
+    - 153.0
+  - - 262.4
+    - 163.1
+  tone: accent
+  width: 1.5
+- dots:
+  - - 190.0
+    - 56.0
+  - - 346.0
+    - 183.0
+  r: 4
+  tone: accent
+- text: '1'
+  at:
+  - 182.0
+  - 60.0
+  size: 13
+  anchor: end
+- text: '2'
+  at:
+  - 344.0
+  - 173.0
+  size: 13
+  anchor: end
+- text: '*A* > 0'
+  at:
+  - 250.0
+  - 191.0
+  tone: accent
+  size: 14
+- text: 'адиабата круче изотермы:'
+  at:
+  - 196
+  - 24
+  size: 13
+  anchor: start
+  tone: muted
+- text: газ остыл, *T*_2 < *T*_1
+  at:
+  - 196
+  - 42
+  size: 13
+  anchor: start
+  tone: muted

@@ -21,6 +21,13 @@
 // molecules' velocities); the readout gives both for the current process and since A. The work is
 // exact too: p·ΔV at constant pressure, (pV)·ln(V₂/V₁) at constant temperature, 0 at constant volume.
 //
+// With work="q" (thermo.first-law lessons) the model also counts heat, Q = ΔU + A: a fourth chip
+// «Q = 0» runs an adiabat (insulated cylinder, pV^(5/3) = const, so A = −ΔU exactly); a third bar
+// gives Q since A (solid accent; the work bar becomes an accent tint, like the area under p(V),
+// hatched when negative); an accent arrow at the cylinder shows which way heat flowed on the last
+// slider step (in or out, none on the adiabat), and the readout adds Q = ΔU + A for the current
+// process and since A, the shown Q always the sum of the shown ΔU and A. Plain `work` is unchanged.
+//
 // Written into theory Markdown as plain HTML; the theory page imports this module only when such
 // an element is present. Light DOM, site CSS variables: follows the light/dark theme.
 
@@ -29,7 +36,8 @@ import { gaussian, rng } from './random';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
-export type Process = 'T' | 'p' | 'V';
+/** T, p or V constant; 'Q' — no heat exchange (an adiabat, only with work="q"). */
+export type Process = 'T' | 'p' | 'V' | 'Q';
 export type Quantity = 'p' | 'V' | 'T';
 
 /** p in p₀, V in V₀, T in К. */
@@ -49,12 +57,19 @@ const SEED = 20261108;
 
 /** The quantity the slider moves in each process. */
 export function free(proc: Process): Quantity {
-  return proc === 'T' ? 'V' : 'T';
+  return proc === 'T' || proc === 'Q' ? 'V' : 'T';
 }
+
+/** Adiabatic exponent of a monatomic ideal gas. */
+export const GAMMA = 5 / 3;
 
 /** The state on the process through `a` where the free quantity equals x. */
 export function stateAt(proc: Process, a: State, x: number): State {
   if (proc === 'T') return { T: a.T, V: x, p: a.T / T0 / x };
+  if (proc === 'Q') {
+    const r = a.V / x; // pV^γ and TV^(γ−1) stay constant
+    return { V: x, p: a.p * r ** GAMMA, T: a.T * r ** (GAMMA - 1) };
+  }
   if (proc === 'p') return { p: a.p, T: x, V: x / T0 / a.p };
   return { V: a.V, T: x, p: x / T0 / a.V };
 }
@@ -75,6 +90,9 @@ export function freeRange(proc: Process, a: State): [number, number] {
     const c = a.T / T0; // pV
     lo = Math.max(vl, c / ph);
     hi = Math.min(vh, c / pl);
+  } else if (proc === 'Q') {
+    lo = Math.max(vl, a.V * (a.p / ph) ** (1 / GAMMA), a.V * (a.T / th) ** (1 / (GAMMA - 1)));
+    hi = Math.min(vh, a.V * (a.p / pl) ** (1 / GAMMA), a.V * (a.T / tl) ** (1 / (GAMMA - 1)));
   } else if (proc === 'p') {
     lo = Math.max(tl, vl * T0 * a.p);
     hi = Math.min(th, vh * T0 * a.p);
@@ -113,12 +131,19 @@ export function work(proc: Process, a: State, x: number): number {
   const b = stateAt(proc, a, x);
   if (proc === 'V') return 0;
   if (proc === 'p') return a.p * (b.V - a.V);
+  if (proc === 'Q') return -deltaU(a, b); // no heat: the work is paid from the internal energy
   return (a.p * a.V) * Math.log(b.V / a.V); // pV is constant on the isotherm
 }
 
 /** Change of internal energy of the monatomic gas from a to b, in p₀V₀: (3/2)Δ(pV). */
 export function deltaU(a: State, b: State): number {
   return 1.5 * (b.p * b.V - a.p * a.V);
+}
+
+/** Heat received by the gas, in p₀V₀, along the process through a up to x: Q = ΔU + A (0 on the adiabat). */
+export function heat(proc: Process, a: State, x: number): number {
+  if (proc === 'Q') return 0;
+  return deltaU(a, stateAt(proc, a, x)) + work(proc, a, x);
 }
 
 /** Joules rounded to whole numbers, signed, with a real minus; never «−0» or «+0». */
@@ -180,6 +205,12 @@ const tickLabel = (q: Quantity, v: number, joulesMode = false): string =>
 
 // The energy bars of the `work` mode: zero line at BAR.zero, BAR.k px per joule, clamped.
 const BAR = { zero: 230, k: 0.5, max: 160, aY: 226, uY: 278, h: 18 };
+// work="q": three bars Q, ΔU, A (top to bottom, as in Q = ΔU + A), 0,3 px per joule so the largest
+// heat the model reaches at constant pressure (500 Дж) still fits.
+const QBAR = { zero: 230, k: 0.3, max: 162, qY: 224, uY: 266, aY: 308, h: 18 };
+// The heat arrow beside the cylinder's right wall, near the bottom (inside the gas at any volume).
+const HEAT = { y: CYL.bottom - 8, wall: CYL.x + CYL.w + 3, out: CYL.x + CYL.w + 29 };
+const NB = ' ';
 
 class IsoSim extends HTMLElement {
   private proc: Process = 'T';
@@ -213,13 +244,24 @@ class IsoSim extends HTMLElement {
   private hatchId = '';
   private barA!: SVGRectElement;
   private barU!: SVGRectElement;
+  private heatMode = false;
+  private barQ!: SVGRectElement;
+  private insul!: SVGPathElement;
+  private heatArrow!: SVGGElement;
+  private flow = 0; // which way heat went on the last slider step: 1 in, −1 out, 0 none
+
+  /** The element's own process: T, p, V, or Q (adiabat) with work="q". */
+  private ownProcess(): Process {
+    const p = this.getAttribute('process');
+    return p === 'p' || p === 'V' || (p === 'Q' && this.heatMode) ? p : 'T';
+  }
 
   connectedCallback(): void {
     if (this.built) return;
     this.built = true;
     this.joulesMode = this.hasAttribute('work');
-    const p = this.getAttribute('process');
-    this.proc = p === 'p' || p === 'V' ? p : 'T';
+    this.heatMode = this.getAttribute('work') === 'q';
+    this.proc = this.ownProcess();
     const r = rng(SEED);
     const g = gaussian(r);
     for (let i = 0; i < MOLS; i++) {
@@ -249,13 +291,21 @@ class IsoSim extends HTMLElement {
     const choice = document.createElement('fieldset');
     choice.className = 'pfx-chips iso-procs';
     const legend = document.createElement('legend');
-    legend.textContent = 'Постоянна';
+    legend.textContent = this.heatMode ? 'Процесс' : 'Постоянна';
     choice.append(legend);
-    for (const [key, html] of [
-      ['T', 'температура <i>T</i>'],
-      ['p', 'давление <i>p</i>'],
-      ['V', 'объём <i>V</i>'],
-    ] as [Process, string][]) {
+    const chips: [Process, string][] = this.heatMode
+      ? [
+          ['T', '<i>T</i> = const'],
+          ['p', '<i>p</i> = const'],
+          ['V', '<i>V</i> = const'],
+          ['Q', '<i>Q</i> = 0'],
+        ]
+      : [
+          ['T', 'температура <i>T</i>'],
+          ['p', 'давление <i>p</i>'],
+          ['V', 'объём <i>V</i>'],
+        ];
+    for (const [key, html] of chips) {
       const label = document.createElement('label');
       const radio = document.createElement('input');
       radio.type = 'radio';
@@ -272,10 +322,14 @@ class IsoSim extends HTMLElement {
     }
 
     const svg = el('svg', {
-      viewBox: this.joulesMode ? '0 0 400 324' : '0 0 400 340',
+      viewBox: this.heatMode ? '0 0 400 352' : this.joulesMode ? '0 0 400 324' : '0 0 400 340',
       class: 'sim-svg',
       role: 'img',
-      'aria-label': this.joulesMode
+      'aria-label': this.heatMode
+        ? 'Газ в цилиндре под поршнем и график давления от объёма. Стрелка Q у цилиндра показывает, ' +
+          'получает газ теплоту или отдаёт. Под линией процесса закрашена работа газа. Внизу полосы ' +
+          'с точки A: количество теплоты, изменение внутренней энергии и работа газа'
+        : this.joulesMode
         ? 'Газ в цилиндре под поршнем и график давления от объёма. Под линией процесса закрашена ' +
           'работа газа: сплошной заливкой — положительная, штриховкой — отрицательная. Внизу полосы: ' +
           'работа газа и изменение его внутренней энергии с точки A'
@@ -322,7 +376,14 @@ class IsoSim extends HTMLElement {
     this.stops = el('g', { class: 'iso-stops' });
     this.arrow = el('g', { class: 'iso-force' });
     this.caption = el('text', { x: CYL.x + CYL.w / 2, y: 168, 'text-anchor': 'middle', class: 'iso-caption' });
-    cyl.append(this.bath, this.gasRect, mols, walls, this.rod, this.piston, this.load, this.stops, this.arrow, this.caption);
+    // the adiabat's insulation: a thick muted layer round the walls
+    this.insul = el('path', {
+      d: `M${CYL.x - 5} 14V${CYL.bottom + 5}H${CYL.x + CYL.w + 5}V14`,
+      class: 'iso-insul',
+    });
+    this.heatArrow = el('g', { class: 'iso-heat' });
+    cyl.append(this.insul, this.bath, this.gasRect, mols, walls, this.rod, this.piston, this.load, this.stops, this.arrow);
+    cyl.append(this.heatArrow, this.caption);
     svg.append(cyl);
 
     // the graphs
@@ -374,7 +435,33 @@ class IsoSim extends HTMLElement {
       this.graphs.push({ x: xq, y: yq, ox, oy, w: gw, h: gh, full, areas, past, now, dot });
     }
 
-    if (this.joulesMode) {
+    if (this.heatMode) {
+      const bars = el('g', { class: 'iso-bars' });
+      const label = (y: number, html: [string, boolean][]) => {
+        const t = el('text', { x: 4, y, class: 'iso-bar-label' });
+        for (const [s, it] of html) t.append(it ? el('tspan', { 'font-style': 'italic' }, s) : s);
+        return t;
+      };
+      const B = QBAR;
+      this.barQ = el('rect', { y: B.qY, height: B.h, class: 'iso-bar-q' });
+      this.barU = el('rect', { y: B.uY, height: B.h, class: 'iso-bar-u' });
+      this.barA = el('rect', { y: B.aY, height: B.h, class: 'iso-bar-a tint' });
+      const foot = B.aY + B.h + 20;
+      bars.append(
+        el('text', { x: 396, y: 198, 'text-anchor': 'end', class: 'iso-bar-note' }, 'с точки A'),
+        label(B.qY - 6, [['количество теплоты ', false], ['Q', true]]),
+        label(B.uY - 6, [['изменение внутренней энергии Δ', false], ['U', true]]),
+        label(B.aY - 6, [['работа газа ', false], ['A', true]]),
+        this.barQ,
+        this.barU,
+        this.barA,
+        el('line', { x1: B.zero, x2: B.zero, y1: 204, y2: B.aY + B.h + 6, class: 'iso-bar-zero' }),
+        el('text', { x: B.zero, y: foot, 'text-anchor': 'middle', class: 'iso-bar-note' }, '0'),
+        el('text', { x: B.zero - 40, y: foot, 'text-anchor': 'middle', class: 'iso-bar-note' }, '−'),
+        el('text', { x: B.zero + 40, y: foot, 'text-anchor': 'middle', class: 'iso-bar-note' }, '+'),
+      );
+      svg.append(bars);
+    } else if (this.joulesMode) {
       const bars = el('g', { class: 'iso-bars' });
       const label = (y: number, html: [string, boolean][]) => {
         const t = el('text', { x: 4, y, class: 'iso-bar-label' });
@@ -426,10 +513,9 @@ class IsoSim extends HTMLElement {
 
   /** Back to state A with the element's own process and no history. */
   private reset(): void {
-    const p = this.getAttribute('process');
     this.s = { ...START };
     this.segs = [];
-    this.start(p === 'p' || p === 'V' ? p : 'T');
+    this.start(this.ownProcess());
   }
 
   /** Start a new process from the current state; the finished one stays on the graphs. */
@@ -437,6 +523,7 @@ class IsoSim extends HTMLElement {
     const last = this.segs[this.segs.length - 1];
     if (last && last.lo === last.hi) this.segs.pop(); // nothing travelled: drop it
     this.proc = proc;
+    this.flow = 0;
     for (const r of this.radios) r.checked = r.value === proc;
     const q = free(proc);
     const x = this.s[q];
@@ -452,6 +539,10 @@ class IsoSim extends HTMLElement {
 
   private move(x: number): void {
     const seg = this.segs[this.segs.length - 1];
+    // heat on this step alone (exact): its sign sets the arrow, so it never shows heat coming in
+    // while the gas gives it away
+    const dq = heat(seg.proc, seg.a, x) - heat(seg.proc, seg.a, seg.x);
+    this.flow = Math.abs(dq) < 1e-9 ? 0 : Math.sign(dq);
     this.s = stateAt(seg.proc, seg.a, x);
     seg.x = x;
     seg.lo = Math.min(seg.lo, x);
@@ -518,6 +609,18 @@ class IsoSim extends HTMLElement {
     this.load.style.display = this.proc === 'p' ? '' : 'none';
     this.load.setAttribute('y', (py - 14).toFixed(1));
     this.bath.style.display = this.proc === 'T' ? '' : 'none';
+    this.insul.style.display = this.proc === 'Q' ? '' : 'none';
+    this.heatArrow.replaceChildren();
+    if (this.heatMode && this.flow !== 0) {
+      // in: from outside to the wall; out: from the wall outwards
+      const [x1, x2] = this.flow > 0 ? [HEAT.out, HEAT.wall] : [HEAT.wall, HEAT.out];
+      const d = x2 > x1 ? -1 : 1; // the head points along x1 → x2
+      this.heatArrow.append(
+        el('line', { x1, y1: HEAT.y, x2: x2 + d * 7, y2: HEAT.y }),
+        el('path', { d: `M${x2} ${HEAT.y}l${9 * d} -4v8z` }),
+        el('text', { x: (HEAT.wall + HEAT.out) / 2, y: HEAT.y - 8, 'text-anchor': 'middle' }, 'Q'),
+      );
+    }
     this.stops.replaceChildren();
     if (this.proc === 'V') {
       for (const [x, d] of [
@@ -528,7 +631,13 @@ class IsoSim extends HTMLElement {
       }
     }
     this.caption.textContent =
-      this.proc === 'T' ? 'сосуд в воде: T = const' : this.proc === 'p' ? 'груз на поршне: p = const' : 'поршень закреплён: V = const';
+      this.proc === 'T'
+        ? 'сосуд в воде: T = const'
+        : this.proc === 'p'
+          ? 'груз на поршне: p = const'
+          : this.proc === 'V'
+            ? 'поршень закреплён: V = const'
+            : 'теплоизоляция: Q = 0';
     // the gas pushes the wall out: a red arrow, longer for a larger pressure
     const len = 10 + 10 * s.p;
     const ay = (top + CYL.bottom) / 2;
@@ -598,6 +707,10 @@ class IsoSim extends HTMLElement {
 
   /** Bars and readout of the `work` mode. */
   private energy(seg: Segment): void {
+    if (this.heatMode) {
+      this.heatEnergy(seg);
+      return;
+    }
     const s = this.s;
     const total = this.segs.reduce((sum, p) => sum + work(p.proc, p.a, p.x), 0) * PV0;
     const dU = deltaU(START, s) * PV0;
@@ -630,6 +743,54 @@ class IsoSim extends HTMLElement {
       text += ` С точки A: <i>A</i> = ${joules(total)}, Δ<i>U</i> = ${joules(dU)}.`;
     }
     this.readout.innerHTML = text;
+  }
+
+  /** Bars and readout of work="q": Q, ΔU and A. Q is shown as the sum of the rounded ΔU and A, so
+   * the three numbers always add up, and its sign alone says whether the gas got or gave heat. */
+  private heatEnergy(seg: Segment): void {
+    const s = this.s;
+    const totalA = Math.round(this.segs.reduce((sum, p) => sum + work(p.proc, p.a, p.x), 0) * PV0);
+    const totalU = Math.round(deltaU(START, s) * PV0);
+    const totalQ = totalA + totalU;
+    const bar = (r: SVGRectElement, n: number) => {
+      const w = Math.min(QBAR.max, Math.abs(n) * QBAR.k);
+      r.setAttribute('x', (n < 0 ? QBAR.zero - w : QBAR.zero).toFixed(1));
+      r.setAttribute('width', w.toFixed(1));
+    };
+    bar(this.barQ, totalQ);
+    bar(this.barU, totalU);
+    bar(this.barA, totalA);
+    if (totalA < 0) {
+      this.barA.style.fill = `url(#${this.hatchId})`; // inline: beats the class's accent fill
+      this.barA.classList.add('neg');
+    } else {
+      this.barA.style.fill = '';
+      this.barA.classList.remove('neg');
+    }
+
+    const q = free(this.proc);
+    const kelvinNb = (t: number) => kelvin(t).replace(/ (К|°C)/g, `${NB}$1`);
+    this.out.textContent = q === 'V' ? `${ru2(s.V)}${NB}л` : kelvinNb(s.T);
+    const nowU = Math.round(deltaU(seg.a, s) * PV0);
+    // on the adiabat A = −ΔU exactly; rounding each on its own could show «ΔU = −40, A = +41, Q = 0»
+    const nowA = seg.proc === 'Q' ? -nowU : Math.round(work(seg.proc, seg.a, seg.x) * PV0);
+    const nowQ = nowA + nowU;
+    const verdict =
+      nowQ > 0
+        ? ': газ получил теплоту'
+        : nowQ < 0
+          ? ': газ отдал теплоту'
+          : seg.proc === 'Q'
+            ? ': теплообмена нет'
+            : '';
+    let text =
+      `<i>p</i> = ${Math.round(s.p * 100)}${NB}кПа, <i>V</i> = ${ru2(s.V)}${NB}л, <i>T</i> = ${kelvinNb(s.T)}. ` +
+      `В этом процессе Δ<i>U</i> = ${joules(nowU)}, <i>A</i> = ${joules(nowA)}, ` +
+      `<i>Q</i> = Δ<i>U</i> + <i>A</i> = ${joules(nowQ)}${verdict}.`;
+    if (this.segs.length > 1) {
+      text += ` С точки A: <i>Q</i> = ${joules(totalQ)}, Δ<i>U</i> = ${joules(totalU)}, <i>A</i> = ${joules(totalA)}.`;
+    }
+    this.readout.innerHTML = text.replace(/ = /g, `${NB}=${NB}`); // never break at «=»
   }
 }
 

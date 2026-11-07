@@ -1,0 +1,242 @@
+# thermo.first-law 7.4: the same heating ΔT of the same monatomic gas. Left: the piston is
+# pinned (stops), no work, all the heat Q (accent) goes into ΔU (green). Right: a load on a
+# free piston, which rises from the dashed muted line: Q is 5 parts, ΔU the same 3 parts
+# (green), the work A 2 parts (accent tint with an outline). Bars 24 px per part.
+# Colours (whole topic, extending «Внутренняя энергия и работа газа»): heat Q accent, flowing in
+# or out (an arrow into or out of the gas); the change of internal energy ΔU green (as the
+# molecules' velocities and the model's ΔU bar); the work of the gas A an accent tint with an
+# accent outline in bars, as the area under p(V) (hatched when negative); Q split into ΔU and A
+# as a branching arrow or bars; flames muted; forces red; a piston's motion in the text colour;
+# an adiabat's insulation a thick muted layer. p–V graphs: the process being discussed accent
+# with a moving point and small accent arrows for the direction; isotherms that only mark a
+# temperature dashed muted; guides dashed muted; notes muted.
+kind: diagram
+size:
+- 400
+- 248
+items:
+- rect:
+  - 61
+  - 70
+  - 78
+  - 70
+  fill: surface
+  width: 0
+- line:
+  - - 60
+    - 30
+  - - 60
+    - 140
+  - - 140
+    - 140
+  - - 140
+    - 30
+  width: 2
+- rect:
+  - 61
+  - 62
+  - 78
+  - 8
+  fill: surface
+  width: 1.5
+- rect:
+  - 60
+  - 55
+  - 8
+  - 7
+  fill: solid
+  width: 0
+- rect:
+  - 132
+  - 55
+  - 8
+  - 7
+  fill: solid
+  width: 0
+- line:
+  - - 100
+    - 62
+  - - 100
+    - 26
+  width: 2.5
+- text: '*V* = const'
+  at:
+  - 100
+  - 14
+  size: 14
+- rect:
+  - 261
+  - 50
+  - 78
+  - 90
+  fill: surface
+  width: 0
+- line:
+  - - 260
+    - 30
+  - - 260
+    - 140
+  - - 340
+    - 140
+  - - 340
+    - 30
+  width: 2
+- line:
+  - - 260
+    - 70
+  - - 340
+    - 70
+  width: 1
+  dashed: true
+  tone: muted
+- rect:
+  - 261
+  - 42
+  - 78
+  - 8
+  fill: surface
+  width: 1.5
+- rect:
+  - 282
+  - 26
+  - 36
+  - 16
+  radius: 2
+  fill: surface
+  width: 1.5
+- text: '*p* = const'
+  at:
+  - 300
+  - 14
+  size: 14
+- arrow:
+  - - 100
+    - 174
+  - - 100
+    - 146
+  tone: accent
+  width: 3
+- text: '*Q*'
+  at:
+  - 110
+  - 168
+  anchor: start
+  tone: accent
+  size: 13
+- arrow:
+  - - 300
+    - 174
+  - - 300
+    - 146
+  tone: accent
+  width: 3
+- text: '*Q*'
+  at:
+  - 310
+  - 168
+  anchor: start
+  tone: accent
+  size: 13
+- text: одинаковый
+  at:
+  - 200
+  - 96
+  size: 13
+  anchor: middle
+  tone: muted
+- text: нагрев Δ*T*
+  at:
+  - 200
+  - 112
+  size: 13
+  anchor: middle
+  tone: muted
+- rect:
+  - 40
+  - 186
+  - 72
+  - 14
+  fill: solid
+  tone: accent
+  width: 0
+- rect:
+  - 40
+  - 206
+  - 72
+  - 14
+  fill: solid
+  tone: vel
+  width: 0
+- text: '*Q*'
+  at:
+  - 34
+  - 198
+  anchor: end
+  tone: accent
+  size: 13
+- text: Δ*U*
+  at:
+  - 34
+  - 218
+  anchor: end
+  tone: vel
+  size: 13
+- rect:
+  - 240
+  - 186
+  - 120
+  - 14
+  fill: solid
+  tone: accent
+  width: 0
+- rect:
+  - 240
+  - 206
+  - 72
+  - 14
+  fill: solid
+  tone: vel
+  width: 0
+- rect:
+  - 312
+  - 206
+  - 48
+  - 14
+  fill: accent
+  tone: accent
+  width: 1.2
+- text: '*Q*'
+  at:
+  - 234
+  - 198
+  anchor: end
+  tone: accent
+  size: 13
+- text: Δ*U*
+  at:
+  - 234
+  - 218
+  anchor: end
+  tone: vel
+  size: 13
+- text: '*A*'
+  at:
+  - 366
+  - 218
+  anchor: start
+  tone: accent
+  size: 13
+- text: вся теплота — в Δ*U*
+  at:
+  - 100
+  - 240
+  size: 13
+  anchor: middle
+  tone: muted
+- text: 3 части в Δ*U*, 2 — в работу
+  at:
+  - 300
+  - 240
+  size: 13
+  anchor: middle
+  tone: muted

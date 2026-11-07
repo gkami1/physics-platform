@@ -1,0 +1,145 @@
+# ks-first-15: a monatomic gas goes 1 → 2 at constant volume (1 л, 100 → 250 кПа), then
+# 2 → 3 at constant pressure (250 кПа, 1 → 3 л). Only the values the task needs are
+# labelled; the answer (1475 Дж) and the intermediates (225, 1250 Дж) are not printed.
+kind: diagram
+size:
+- 400
+- 240
+items:
+- arrow:
+  - - 66
+    - 214
+  - - 396
+    - 214
+  width: 1.5
+- arrow:
+  - - 66
+    - 214
+  - - 66
+    - 14
+  width: 1.5
+- text: '*V*, л'
+  at:
+  - 394
+  - 232
+  anchor: end
+  size: 14
+- text: '*p*, кПа'
+  at:
+  - 76
+  - 24
+  anchor: start
+  size: 14
+- text: '0'
+  at:
+  - 60
+  - 229
+  size: 12
+  anchor: end
+- line:
+  - - 146
+    - 214
+  - - 146
+    - 218
+  width: 1.2
+- text: '1'
+  at:
+  - 146
+  - 232
+  size: 13
+- line:
+  - - 306
+    - 214
+  - - 306
+    - 218
+  width: 1.2
+- text: '3'
+  at:
+  - 306
+  - 232
+  size: 13
+- line:
+  - - 62
+    - 154.0
+  - - 66
+    - 154.0
+  width: 1.2
+- text: '100'
+  at:
+  - 59
+  - 159.0
+  size: 13
+  anchor: end
+- line:
+  - - 62
+    - 64.0
+  - - 66
+    - 64.0
+  width: 1.2
+- text: '250'
+  at:
+  - 59
+  - 69.0
+  size: 13
+  anchor: end
+- line:
+  - - 146
+    - 214
+  - - 146
+    - 154.0
+  - - 66
+    - 154.0
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 306
+    - 214
+  - - 306
+    - 64.0
+  - - 66
+    - 64.0
+  width: 1
+  dashed: true
+  tone: muted
+- path: M146 154L146 64L306 64
+  width: 3
+  tone: accent
+- arrow:
+  - - 135.0
+    - 118.0
+  - - 135.0
+    - 100.0
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 217.0
+    - 53.0
+  - - 235.0
+    - 53.0
+  tone: accent
+  width: 1.5
+- dots:
+  - - 146
+    - 154.0
+  - - 146
+    - 64.0
+  - - 306
+    - 64.0
+  r: 4
+  tone: accent
+- text: '1'
+  at:
+  - 156
+  - 159.0
+  anchor: start
+- text: '2'
+  at:
+  - 138
+  - 54.0
+  anchor: end
+- text: '3'
+  at:
+  - 316
+  - 69.0
+  anchor: start
