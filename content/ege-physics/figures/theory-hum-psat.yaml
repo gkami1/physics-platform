@@ -1,6 +1,6 @@
 # thermo.humidity 4.2: saturated water vapour pressure from 0 to 100 °C (the focus here,
-# so accent). Real values; ticks every 20 °C and 20 кПа, so no task answer (90 °C,
-# 120 °C, the ratio 6) is marked.
+# so accent). Real values; labels only at 0, 40, 80 (°C and кПа), so
+# no task answer (50 %, 60 %, 90 °C, 120 °C, the ratio 6) is printed.
 # Colours (whole topic, extending «Основы МКТ», «Идеальный газ» and «Изопроцессы»):
 # molecules in the text colour, the tracked molecule and the focal quantity accent,
 # velocity green (a molecule leaving or returning to the liquid), pressure on a surface red,
@@ -15,13 +15,15 @@ x:
   unit: °C
   min: 0
   max: 100
-  step: 20
+  step: 10
+  label_every: 4
 y:
   var: p_н
   unit: кПа
   min: 0
-  max: 120
-  step: 20
+  max: 110
+  step: 10
+  label_every: 4
 series:
 - points:
   - - 0
