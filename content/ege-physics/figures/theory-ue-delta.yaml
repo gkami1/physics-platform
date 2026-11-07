@@ -1,0 +1,128 @@
+# thermo.internal-energy 6.4: from state 1 on the isotherm T₁ to the isotherm T₂ (both dashed
+# muted, pV = 4 and 8 in grid units) by three paths: at constant volume, along a slanted
+# line, at constant pressure (accent, drawn with moving points). U depends on T alone, so ΔU
+# is the same for all three. Qualitative axes.
+# Colours (whole topic, extending «Изопроцессы» and «Количество теплоты»): molecules in the
+# text colour with green velocities (their energy is the internal energy; a body's own velocity
+# green too); forces on a piston red; heat Q flowing in accent; flames muted; notes muted.
+# p–V graphs: the process being discussed accent with a moving point; the work of the gas is the
+# area under it: positive work an accent tint, negative work accent hatching (the same
+# quantity, the other sign), so on a cycle tint and hatching cancel below the lower path and
+# the loop alone stays tinted; other parts of a cycle in the text colour; isotherms that only
+# mark a temperature dashed muted; guides dashed muted.
+kind: diagram
+size:
+- 400
+- 250
+items:
+- arrow:
+  - - 50
+    - 222
+  - - 390
+    - 222
+  width: 1.5
+- arrow:
+  - - 50
+    - 222
+  - - 50
+    - 16
+  width: 1.5
+- text: '*V*'
+  at:
+  - 388
+  - 240
+  anchor: end
+  size: 14
+- text: '*p*'
+  at:
+  - 60
+  - 26
+  anchor: start
+  size: 14
+- text: '0'
+  at:
+  - 44
+  - 237
+  size: 12
+  anchor: end
+- path: M107.6 44.2L114 62L120.4 76.5L126.8 88.7L133.2 98.9L139.6 107.7L146 115.3L152.4 122L158.8 127.9L165.2
+    133.1L171.6 137.8L178 142L184.4 145.8L190.8 149.3L197.2 152.4L203.6 155.3L210 158L216.4 160.5L222.8
+    162.7L229.2 164.9L235.6 166.8L242 168.7L248.4 170.4L254.8 172L261.2 173.5L267.6 174.9L274 176.3L280.4
+    177.6L286.8 178.8L293.2 179.9L299.6 181L306 182L312.4 183L318.8 183.9L325.2 184.8L331.6 185.6L338
+    186.4L344.4 187.2L350.8 188L357.2 188.7
+  width: 1.2
+  dashed: true
+  tone: muted
+- path: M158.8 33.8L165.2 44.2L171.6 53.6L178 62L184.4 69.6L190.8 76.5L197.2 82.9L203.6 88.7L210 94L216.4
+    98.9L222.8 103.5L229.2 107.7L235.6 111.7L242 115.3L248.4 118.8L254.8 122L261.2 125L267.6 127.9L274
+    130.6L280.4 133.1L286.8 135.5L293.2 137.8L299.6 139.9L306 142L312.4 144L318.8 145.8L325.2 147.6L331.6
+    149.3L338 150.9L344.4 152.4L350.8 153.9L357.2 155.3
+  width: 1.2
+  dashed: true
+  tone: muted
+- text: '*T*_1'
+  at:
+  - 361.2
+  - 182.7
+  size: 13
+  anchor: start
+  tone: muted
+- text: '*T*_2'
+  at:
+  - 361.2
+  - 149.3
+  size: 13
+  anchor: start
+  tone: muted
+- path: M178 142L178 62
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- path: M178 142L254.8 122
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- path: M178 142L306 142
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- dots:
+  - - 178.0
+    - 142.0
+  - - 178.0
+    - 62.0
+  - - 254.8
+    - 122.0
+  - - 306.0
+    - 142.0
+  r: 4
+  tone: accent
+- text: '1'
+  at:
+  - 170.0
+  - 160.0
+  anchor: end
+- text: три пути от изотермы *T*_1
+  at:
+  - 230
+  - 40
+  size: 13
+  anchor: start
+  tone: muted
+- text: 'до изотермы *T*_2:'
+  at:
+  - 230
+  - 58
+  size: 13
+  anchor: start
+  tone: muted
+- text: Δ*U* у всех одинаково
+  at:
+  - 230
+  - 76
+  size: 13
+  anchor: start
+  tone: muted

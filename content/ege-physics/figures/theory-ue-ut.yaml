@@ -1,0 +1,135 @@
+# thermo.internal-energy 6.3: U = (3/2)νRT is proportional to the absolute temperature: a
+# line from the origin (accent, drawn with a moving point), twice the temperature, twice
+# the energy (guides dashed muted). Twice the gas (2ν, text colour): twice as steep.
+# Qualitative axes.
+# Colours (whole topic, extending «Изопроцессы» and «Количество теплоты»): molecules in the
+# text colour with green velocities (their energy is the internal energy; a body's own velocity
+# green too); forces on a piston red; heat Q flowing in accent; flames muted; notes muted.
+# p–V graphs: the process being discussed accent with a moving point; the work of the gas is the
+# area under it: positive work an accent tint, negative work accent hatching (the same
+# quantity, the other sign), so on a cycle tint and hatching cancel below the lower path and
+# the loop alone stays tinted; other parts of a cycle in the text colour; isotherms that only
+# mark a temperature dashed muted; guides dashed muted.
+kind: diagram
+size:
+- 400
+- 236
+items:
+- arrow:
+  - - 50
+    - 210
+  - - 380
+    - 210
+  width: 1.5
+- arrow:
+  - - 50
+    - 210
+  - - 50
+    - 14
+  width: 1.5
+- text: '*T*, К'
+  at:
+  - 378
+  - 228
+  anchor: end
+  size: 14
+- text: '*U*'
+  at:
+  - 60
+  - 24
+  anchor: start
+  size: 14
+- text: '0'
+  at:
+  - 44
+  - 225
+  size: 12
+  anchor: end
+- path: M50 210L350 50.4
+  width: 1.8
+- line:
+  - - 170.0
+    - 210
+  - - 170.0
+    - 178.1
+  - - 50
+    - 178.1
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 290.0
+    - 210
+  - - 290.0
+    - 146.2
+  - - 50
+    - 146.2
+  width: 1
+  dashed: true
+  tone: muted
+- path: M50 210L350 130.2
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- dots:
+  - - 170.0
+    - 178.1
+  - - 290.0
+    - 146.2
+  r: 4
+  tone: accent
+- text: '*ν*'
+  at:
+  - 356
+  - 135.2
+  anchor: start
+  tone: accent
+- text: 2*ν*
+  at:
+  - 356
+  - 55.4
+  anchor: start
+- text: '*T*'
+  at:
+  - 170.0
+  - 228
+  size: 13
+- text: 2*T*
+  at:
+  - 290.0
+  - 228
+  size: 13
+- text: '*U*'
+  at:
+  - 44
+  - 183.1
+  size: 13
+  anchor: end
+- text: 2*U*
+  at:
+  - 44
+  - 151.2
+  size: 13
+  anchor: end
+- text: 'прямая из нуля:'
+  at:
+  - 74
+  - 40
+  size: 13
+  anchor: start
+  tone: muted
+- text: вдвое горячее —
+  at:
+  - 74
+  - 58
+  size: 13
+  anchor: start
+  tone: muted
+- text: вдвое больше *U*
+  at:
+  - 74
+  - 76
+  size: 13
+  anchor: start
+  tone: muted

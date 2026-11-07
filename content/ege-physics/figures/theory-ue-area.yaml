@@ -1,0 +1,200 @@
+# thermo.internal-energy 6.6: the work of the gas is the area under p(V) (accent tint) for
+# any process: a rectangle at constant pressure, a trapezoid when the pressure grows
+# linearly, the area under a hyperbola at constant temperature. Paths accent with moving
+# points (all three expand: left to right). Qualitative.
+# Colours (whole topic, extending «Изопроцессы» and «Количество теплоты»): molecules in the
+# text colour with green velocities (their energy is the internal energy; a body's own velocity
+# green too); forces on a piston red; heat Q flowing in accent; flames muted; notes muted.
+# p–V graphs: the process being discussed accent with a moving point; the work of the gas is the
+# area under it: positive work an accent tint, negative work accent hatching (the same
+# quantity, the other sign), so on a cycle tint and hatching cancel below the lower path and
+# the loop alone stays tinted; other parts of a cycle in the text colour; isotherms that only
+# mark a temperature dashed muted; guides dashed muted.
+kind: diagram
+size:
+- 400
+- 220
+items:
+- arrow:
+  - - 26
+    - 160
+  - - 138
+    - 160
+  width: 1.5
+- arrow:
+  - - 26
+    - 160
+  - - 26
+    - 36
+  width: 1.5
+- text: '*V*'
+  at:
+  - 136
+  - 178
+  anchor: end
+  size: 13
+- text: '*p*'
+  at:
+  - 36
+  - 46
+  anchor: start
+  size: 13
+- text: '0'
+  at:
+  - 20
+  - 175
+  size: 12
+  anchor: end
+- path: M51 160L51 85.2L111 85.2L111 160Z
+  fill: accent
+  tone: accent
+  width: 0
+- path: M51 85.2L111 85.2
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- text: '*p*Δ*V*'
+  at:
+  - 81.0
+  - 127.6
+  tone: accent
+  size: 14
+- text: '*p* = const'
+  at:
+  - 81.0
+  - 14
+  size: 14
+- text: прямоугольник
+  at:
+  - 82
+  - 194
+  size: 13
+  anchor: middle
+  tone: muted
+- arrow:
+  - - 156
+    - 160
+  - - 268
+    - 160
+  width: 1.5
+- arrow:
+  - - 156
+    - 160
+  - - 156
+    - 36
+  width: 1.5
+- text: '*V*'
+  at:
+  - 266
+  - 178
+  anchor: end
+  size: 13
+- text: '*p*'
+  at:
+  - 166
+  - 46
+  anchor: start
+  size: 13
+- text: '0'
+  at:
+  - 150
+  - 175
+  size: 12
+  anchor: end
+- path: M181 160L181 126L241 61.4L241 160Z
+  fill: accent
+  tone: accent
+  width: 0
+- path: M181 126L241 61.4
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- text: '*p* растёт'
+  at:
+  - 211.0
+  - 14
+  size: 14
+- text: 'трапеция:'
+  at:
+  - 212
+  - 194
+  size: 13
+  anchor: middle
+  tone: muted
+- text: средняя *p* на Δ*V*
+  at:
+  - 212
+  - 210
+  size: 13
+  anchor: middle
+  tone: muted
+- arrow:
+  - - 286
+    - 160
+  - - 398
+    - 160
+  width: 1.5
+- arrow:
+  - - 286
+    - 160
+  - - 286
+    - 36
+  width: 1.5
+- text: '*V*'
+  at:
+  - 396
+  - 178
+  anchor: end
+  size: 13
+- text: '*p*'
+  at:
+  - 296
+  - 46
+  anchor: start
+  size: 13
+- text: '0'
+  at:
+  - 280
+  - 175
+  size: 12
+  anchor: end
+- path: M308.5 160L308.5 61.8L309.8 66.9L311 71.6L312.2 75.8L313.5 79.6L314.8 83.1L316 86.3L317.2 89.3L318.5
+    92L319.8 94.5L321 96.9L322.2 99L323.5 101.1L324.8 103L326 104.8L327.2 106.4L328.5 108L329.8 109.5L331
+    110.9L332.2 112.2L333.5 113.5L334.8 114.7L336 115.8L337.2 116.9L338.5 117.9L339.8 118.9L341 119.8L342.2
+    120.7L343.5 121.6L344.8 122.4L346 123.2L347.2 123.9L348.5 124.6L349.8 125.3L351 126L352.2 126.6L353.5
+    127.3L354.8 127.9L356 128.4L357.2 129L358.5 129.5L359.8 130L361 130.5L362.2 131L363.5 131.5L364.8
+    131.9L366 132.4L367.2 132.8L368.5 133.2L369.8 133.6L371 134L371 160Z
+  fill: accent
+  tone: accent
+  width: 0
+- path: M308.5 61.8L309.8 66.9L311 71.6L312.2 75.8L313.5 79.6L314.8 83.1L316 86.3L317.2 89.3L318.5 92L319.8
+    94.5L321 96.9L322.2 99L323.5 101.1L324.8 103L326 104.8L327.2 106.4L328.5 108L329.8 109.5L331 110.9L332.2
+    112.2L333.5 113.5L334.8 114.7L336 115.8L337.2 116.9L338.5 117.9L339.8 118.9L341 119.8L342.2 120.7L343.5
+    121.6L344.8 122.4L346 123.2L347.2 123.9L348.5 124.6L349.8 125.3L351 126L352.2 126.6L353.5 127.3L354.8
+    127.9L356 128.4L357.2 129L358.5 129.5L359.8 130L361 130.5L362.2 131L363.5 131.5L364.8 131.9L366 132.4L367.2
+    132.8L368.5 133.2L369.8 133.6L371 134
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- text: '*T* = const'
+  at:
+  - 341.0
+  - 14
+  size: 14
+- text: 'под гиперболой:'
+  at:
+  - 342
+  - 194
+  size: 13
+  anchor: middle
+  tone: muted
+- text: по клеточкам
+  at:
+  - 342
+  - 210
+  size: 13
+  anchor: middle
+  tone: muted

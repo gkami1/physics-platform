@@ -1,0 +1,244 @@
+# thermo.internal-energy 6.5: the sign of the gas's work on p–V. Expansion: positive work,
+# the area under the path an accent tint. Compression: negative work, the area accent
+# hatching. Constant volume: no area, no work. Paths accent with moving points and small
+# accent arrows for the direction (seen with reduced motion too). Qualitative.
+# Colours (whole topic, extending «Изопроцессы» and «Количество теплоты»): molecules in the
+# text colour with green velocities (their energy is the internal energy; a body's own velocity
+# green too); forces on a piston red; heat Q flowing in accent; flames muted; notes muted.
+# p–V graphs: the process being discussed accent with a moving point; the work of the gas is the
+# area under it: positive work an accent tint, negative work accent hatching (the same
+# quantity, the other sign), so on a cycle tint and hatching cancel below the lower path and
+# the loop alone stays tinted; other parts of a cycle in the text colour; isotherms that only
+# mark a temperature dashed muted; guides dashed muted.
+kind: diagram
+size:
+- 400
+- 220
+items:
+- arrow:
+  - - 26
+    - 160
+  - - 138
+    - 160
+  width: 1.5
+- arrow:
+  - - 26
+    - 160
+  - - 26
+    - 36
+  width: 1.5
+- text: '*V*'
+  at:
+  - 136
+  - 178
+  anchor: end
+  size: 13
+- text: '*p*'
+  at:
+  - 36
+  - 46
+  anchor: start
+  size: 13
+- text: '0'
+  at:
+  - 20
+  - 175
+  size: 12
+  anchor: end
+- path: M51 160L51 85.2L111 85.2L111 160Z
+  fill: accent
+  tone: accent
+  width: 0
+- path: M51 85.2L111 85.2
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- arrow:
+  - - 72.0
+    - 74.2
+  - - 90.0
+    - 74.2
+  tone: accent
+  width: 1.5
+- text: '*A* > 0'
+  at:
+  - 81.0
+  - 127.6
+  tone: accent
+  size: 14
+- text: расширение
+  at:
+  - 81.0
+  - 14
+  size: 14
+- arrow:
+  - - 156
+    - 160
+  - - 268
+    - 160
+  width: 1.5
+- arrow:
+  - - 156
+    - 160
+  - - 156
+    - 36
+  width: 1.5
+- text: '*V*'
+  at:
+  - 266
+  - 178
+  anchor: end
+  size: 13
+- text: '*p*'
+  at:
+  - 166
+  - 46
+  anchor: start
+  size: 13
+- text: '0'
+  at:
+  - 150
+  - 175
+  size: 12
+  anchor: end
+- path: M181 92.2L188 85.2M181 99.2L195 85.2M181 106.2L202 85.2M181 113.2L209 85.2M181 120.2L216 85.2M181
+    127.2L223 85.2M181 134.2L230 85.2M181 141.2L237 85.2M181 148.2L241 88.2M181 155.2L241 95.2M183.2 159.9L241
+    102.2M190.2 159.9L241 109.2M197.2 159.9L241 116.2M204.2 159.9L241 123.2M211.2 159.9L241 130.2M218.2
+    159.9L241 137.2M225.2 159.9L241 144.2M232.2 159.9L241 151.2M239.2 159.9L241 158.2
+  width: 1
+  tone: accent
+- path: M241 85.2L181 85.2
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- arrow:
+  - - 220.0
+    - 74.2
+  - - 202.0
+    - 74.2
+  tone: accent
+  width: 1.5
+- rect:
+  - 185.0
+  - 111.6
+  - 52
+  - 21
+  fill: surface
+  width: 0
+- text: '*A* < 0'
+  at:
+  - 211.0
+  - 127.6
+  tone: accent
+  size: 14
+- text: сжатие
+  at:
+  - 211.0
+  - 14
+  size: 14
+- arrow:
+  - - 286
+    - 160
+  - - 398
+    - 160
+  width: 1.5
+- arrow:
+  - - 286
+    - 160
+  - - 286
+    - 36
+  width: 1.5
+- text: '*V*'
+  at:
+  - 396
+  - 178
+  anchor: end
+  size: 13
+- text: '*p*'
+  at:
+  - 296
+  - 46
+  anchor: start
+  size: 13
+- text: '0'
+  at:
+  - 280
+  - 175
+  size: 12
+  anchor: end
+- line:
+  - - 341.0
+    - 160
+  - - 341.0
+    - 129.4
+  width: 1
+  dashed: true
+  tone: muted
+- path: M341 129.4L341 61.4
+  width: 3
+  tone: accent
+  animate: draw
+  mover: true
+- arrow:
+  - - 352.0
+    - 104.4
+  - - 352.0
+    - 86.4
+  tone: accent
+  width: 1.5
+- text: '*A* = 0'
+  at:
+  - 391.0
+  - 148.0
+  tone: accent
+  size: 14
+  anchor: end
+- text: '*V* = const'
+  at:
+  - 341.0
+  - 14
+  size: 14
+- text: сила газа
+  at:
+  - 82
+  - 194
+  size: 13
+  anchor: middle
+  tone: muted
+- text: по ходу движения
+  at:
+  - 82
+  - 210
+  size: 13
+  anchor: middle
+  tone: muted
+- text: сила газа
+  at:
+  - 212
+  - 194
+  size: 13
+  anchor: middle
+  tone: muted
+- text: против движения
+  at:
+  - 212
+  - 210
+  size: 13
+  anchor: middle
+  tone: muted
+- text: 'поршень стоит:'
+  at:
+  - 342
+  - 194
+  size: 13
+  anchor: middle
+  tone: muted
+- text: работы нет
+  at:
+  - 342
+  - 210
+  size: 13
+  anchor: middle
+  tone: muted
