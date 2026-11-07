@@ -2637,3 +2637,88 @@ task-answer .final {
   vertical-align: middle;
   white-space: nowrap;
 }
+
+/* <pp-coulomb> (src/lib/sims/coulomb.ts): two point charges and the forces between them.
+   Charges are circles in the text colour with «+» or «−», as in the electrostatics figures;
+   forces red; a liquid an accent tint; r and the graph's guides muted. */
+.cou-media legend {
+  width: auto;
+  margin-right: 0.4rem;
+}
+
+.cou-q circle {
+  fill: var(--surface-2);
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.cou-q0 circle {
+  stroke: var(--muted);
+  stroke-dasharray: 3 3;
+}
+
+.sim-svg .cou-sign {
+  fill: var(--text);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.cou-q0 .cou-sign {
+  fill: var(--muted);
+  font-size: 14px;
+}
+
+.sim-svg .cou-label,
+.sim-svg .cou-rname,
+.sim-svg .cou-name {
+  fill: var(--text);
+  font-size: 16px;
+  font-style: italic;
+}
+
+.cou-f line {
+  stroke: var(--bad);
+  stroke-width: 2.5;
+}
+
+.cou-f path,
+.sim-svg .cou-f text {
+  fill: var(--bad);
+  font-size: 15px;
+  font-style: italic;
+}
+
+.cou-liquid {
+  fill: var(--accent);
+  fill-opacity: 0.12;
+}
+
+.cou-tick,
+.cou-guide {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.cou-r {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.2;
+}
+
+.cou-axis {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.3;
+}
+
+.cou-curve {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.cou-dot {
+  fill: var(--accent);
+}

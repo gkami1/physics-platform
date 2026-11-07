@@ -1,0 +1,302 @@
+# electro.field.coulomb 1.2: rubbing a balloon on hair. Each body has six nuclei («+»)
+# and, before, six electrons (dots): charge 0. Two electrons (accent) move from the hair
+# to the balloon: the hair is left with +2e, the balloon gets −2e. The nuclei stay.
+# Colours (whole topic; the first of «Электродинамика», so this sets the section's convention):
+# a charge is a circle in the text colour (surface fill) with «+» or «−» inside; the charge
+# being discussed (a test charge, a result) accent. Never + red and − blue: red is the force
+# colour and accent means focus. Electrons are small dots in the text colour, the ones that
+# moved accent, their way an accent arrow. Coulomb forces red (they are forces), equal and
+# opposite arrows of visibly equal length; a resultant red and thicker; guides and the
+# distance r muted; notes muted.
+kind: diagram
+size:
+- 404
+- 272
+items:
+- text: до
+  at:
+  - 14
+  - 62
+  size: 13
+  anchor: start
+  tone: muted
+- rect:
+  - 62
+  - 28
+  - 120
+  - 74
+  radius: 10
+  width: 1.5
+- text: волосы
+  at:
+  - 122
+  - 20
+  size: 13
+  anchor: middle
+  tone: muted
+- text: +
+  at:
+  - 82
+  - 59
+  size: 15
+- text: +
+  at:
+  - 114
+  - 59
+  size: 15
+- text: +
+  at:
+  - 146
+  - 59
+  size: 15
+- text: +
+  at:
+  - 82
+  - 87
+  size: 15
+- text: +
+  at:
+  - 114
+  - 87
+  size: 15
+- text: +
+  at:
+  - 146
+  - 87
+  size: 15
+- dots:
+  - - 97
+    - 49
+  - - 129
+    - 49
+  - - 161
+    - 49
+  - - 97
+    - 77
+  - - 129
+    - 77
+  - - 161
+    - 77
+  r: 3.2
+- rect:
+  - 272
+  - 28
+  - 120
+  - 74
+  radius: 10
+  width: 1.5
+- text: шарик
+  at:
+  - 332
+  - 20
+  size: 13
+  anchor: middle
+  tone: muted
+- text: +
+  at:
+  - 292
+  - 59
+  size: 15
+- text: +
+  at:
+  - 324
+  - 59
+  size: 15
+- text: +
+  at:
+  - 356
+  - 59
+  size: 15
+- text: +
+  at:
+  - 292
+  - 87
+  size: 15
+- text: +
+  at:
+  - 324
+  - 87
+  size: 15
+- text: +
+  at:
+  - 356
+  - 87
+  size: 15
+- dots:
+  - - 307
+    - 49
+  - - 339
+    - 49
+  - - 371
+    - 49
+  - - 307
+    - 77
+  - - 339
+    - 77
+  - - 371
+    - 77
+  r: 3.2
+- text: заряд 0
+  at:
+  - 122
+  - 120
+  size: 13
+  anchor: middle
+  tone: muted
+- text: заряд 0
+  at:
+  - 332
+  - 120
+  size: 13
+  anchor: middle
+  tone: muted
+- text: после
+  at:
+  - 14
+  - 206
+  size: 13
+  anchor: start
+  tone: muted
+- rect:
+  - 62
+  - 170
+  - 120
+  - 74
+  radius: 10
+  width: 1.5
+- text: волосы
+  at:
+  - 122
+  - 162
+  size: 13
+  anchor: middle
+  tone: muted
+- text: +
+  at:
+  - 82
+  - 201
+  size: 15
+- text: +
+  at:
+  - 114
+  - 201
+  size: 15
+- text: +
+  at:
+  - 146
+  - 201
+  size: 15
+- text: +
+  at:
+  - 82
+  - 229
+  size: 15
+- text: +
+  at:
+  - 114
+  - 229
+  size: 15
+- text: +
+  at:
+  - 146
+  - 229
+  size: 15
+- dots:
+  - - 97
+    - 191
+  - - 129
+    - 191
+  - - 161
+    - 191
+  - - 97
+    - 219
+  r: 3.2
+- rect:
+  - 272
+  - 170
+  - 120
+  - 74
+  radius: 10
+  width: 1.5
+- text: шарик
+  at:
+  - 332
+  - 162
+  size: 13
+  anchor: middle
+  tone: muted
+- text: +
+  at:
+  - 292
+  - 201
+  size: 15
+- text: +
+  at:
+  - 324
+  - 201
+  size: 15
+- text: +
+  at:
+  - 356
+  - 201
+  size: 15
+- text: +
+  at:
+  - 292
+  - 229
+  size: 15
+- text: +
+  at:
+  - 324
+  - 229
+  size: 15
+- text: +
+  at:
+  - 356
+  - 229
+  size: 15
+- dots:
+  - - 307
+    - 191
+  - - 339
+    - 191
+  - - 371
+    - 191
+  - - 307
+    - 219
+  - - 339
+    - 219
+  - - 371
+    - 219
+  r: 3.2
+- dots:
+  - - 379
+    - 188
+  - - 379
+    - 210
+  r: 3.2
+  tone: accent
+- arrow:
+  - - 190
+    - 207
+  - - 264
+    - 207
+  tone: accent
+  width: 1.8
+- text: 2 электрона
+  at:
+  - 227
+  - 232
+  size: 12
+  anchor: middle
+  tone: accent
+- text: +2*e*
+  at:
+  - 122
+  - 262
+  size: 14
+- text: −2*e*
+  at:
+  - 332
+  - 262
+  size: 14

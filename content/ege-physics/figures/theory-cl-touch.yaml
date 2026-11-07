@@ -1,0 +1,114 @@
+# electro.field.coulomb 1.3: two identical metal balls with charges q₁ and q₂ touch and
+# part; each then has (q₁ + q₂)/2 (accent: the result). Same radius on purpose: only
+# identical balls share equally. No signs: the rule holds for any signs.
+# Colours (whole topic; the first of «Электродинамика», so this sets the section's convention):
+# a charge is a circle in the text colour (surface fill) with «+» or «−» inside; the charge
+# being discussed (a test charge, a result) accent. Never + red and − blue: red is the force
+# colour and accent means focus. Electrons are small dots in the text colour, the ones that
+# moved accent, their way an accent arrow. Coulomb forces red (they are forces), equal and
+# opposite arrows of visibly equal length; a resultant red and thicker; guides and the
+# distance r muted; notes muted.
+kind: diagram
+size:
+- 400
+- 258
+items:
+- text: до
+  at:
+  - 14
+  - 47
+  size: 13
+  anchor: start
+  tone: muted
+- text: касание
+  at:
+  - 14
+  - 127
+  size: 13
+  anchor: start
+  tone: muted
+- text: после
+  at:
+  - 14
+  - 207
+  size: 13
+  anchor: start
+  tone: muted
+- circle:
+  - 170
+  - 42
+  r: 20
+  fill: surface
+  tone: default
+  label: ''
+- circle:
+  - 290
+  - 42
+  r: 20
+  fill: surface
+  tone: default
+  label: ''
+- text: '*q*_1'
+  at:
+  - 140
+  - 48
+  anchor: end
+- text: '*q*_2'
+  at:
+  - 320
+  - 48
+  anchor: start
+- circle:
+  - 210
+  - 122
+  r: 20
+  fill: surface
+  tone: default
+  label: ''
+- circle:
+  - 250
+  - 122
+  r: 20
+  fill: surface
+  tone: default
+  label: ''
+- text: заряд делится
+  at:
+  - 284
+  - 117
+  size: 12
+  anchor: start
+  tone: muted
+- text: между шариками
+  at:
+  - 284
+  - 133
+  size: 12
+  anchor: start
+  tone: muted
+- circle:
+  - 170
+  - 202
+  r: 20
+  fill: surface
+  tone: accent
+  label: ''
+- circle:
+  - 290
+  - 202
+  r: 20
+  fill: surface
+  tone: accent
+  label: ''
+- text: (*q*_1 + *q*_2)/2
+  at:
+  - 170
+  - 246
+  size: 13
+  tone: accent
+- text: (*q*_1 + *q*_2)/2
+  at:
+  - 290
+  - 246
+  size: 13
+  tone: accent

@@ -1,0 +1,141 @@
+# electro.field.coulomb 1.5: the same two charges at r and 2r. Arrows 64 and 16 px
+# (F and F/4), equal on both charges in each pair. No 3r row: that is ks-coul-04.
+# Colours (whole topic; the first of «Электродинамика», so this sets the section's convention):
+# a charge is a circle in the text colour (surface fill) with «+» or «−» inside; the charge
+# being discussed (a test charge, a result) accent. Never + red and − blue: red is the force
+# colour and accent means focus. Electrons are small dots in the text colour, the ones that
+# moved accent, their way an accent arrow. Coulomb forces red (they are forces), equal and
+# opposite arrows of visibly equal length; a resultant red and thicker; guides and the
+# distance r muted; notes muted.
+kind: diagram
+size:
+- 400
+- 214
+items:
+- arrow:
+  - - 138
+    - 40
+  - - 74
+    - 40
+  tone: force
+  label: '*F*'
+  label_at:
+  - 66
+  - 28
+- arrow:
+  - - 262
+    - 40
+  - - 326
+    - 40
+  tone: force
+  label: '*F*'
+  label_at:
+  - 334
+  - 28
+- circle:
+  - 150
+  - 40
+  r: 12
+  fill: surface
+  tone: default
+  label: +
+- circle:
+  - 250
+  - 40
+  r: 12
+  fill: surface
+  tone: default
+  label: +
+- line:
+  - - 150
+    - 69
+  - - 150
+    - 79
+  width: 1
+  tone: muted
+- line:
+  - - 250
+    - 69
+  - - 250
+    - 79
+  width: 1
+  tone: muted
+- line:
+  - - 150
+    - 74
+  - - 250
+    - 74
+  width: 1
+  tone: muted
+- text: '*r*'
+  at:
+  - 200.0
+  - 68
+  size: 13
+- arrow:
+  - - 88
+    - 132
+  - - 72
+    - 132
+  tone: force
+  label: '*F*/4'
+  label_at:
+  - 62
+  - 120
+- arrow:
+  - - 312
+    - 132
+  - - 328
+    - 132
+  tone: force
+  label: '*F*/4'
+  label_at:
+  - 338
+  - 120
+- circle:
+  - 100
+  - 132
+  r: 12
+  fill: surface
+  tone: default
+  label: +
+- circle:
+  - 300
+  - 132
+  r: 12
+  fill: surface
+  tone: default
+  label: +
+- line:
+  - - 100
+    - 161
+  - - 100
+    - 171
+  width: 1
+  tone: muted
+- line:
+  - - 300
+    - 161
+  - - 300
+    - 171
+  width: 1
+  tone: muted
+- line:
+  - - 100
+    - 166
+  - - 300
+    - 166
+  width: 1
+  tone: muted
+- text: 2*r*
+  at:
+  - 200.0
+  - 160
+  size: 13
+- text: вдвое дальше — вчетверо слабее
+  at:
+  - 200
+  - 204
+  size: 13
+  anchor: middle
+  tone: muted

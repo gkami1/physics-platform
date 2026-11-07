@@ -1,69 +1,165 @@
-# electro.field.coulomb: like charges repel, unlike attract; equal and opposite forces
+# electro.field.coulomb 1.4: like charges repel, unlike attract; the forces on the two
+# charges are equal (46 px each) and opposite, along the line through them. For balls r is
+# measured between the centres. Redrawn from the ladder page: the charges were red like the
+# forces (and the negative one accent); now circles in the text colour with their sign.
+# Colours (whole topic; the first of «Электродинамика», so this sets the section's convention):
+# a charge is a circle in the text colour (surface fill) with «+» or «−» inside; the charge
+# being discussed (a test charge, a result) accent. Never + red and − blue: red is the force
+# colour and accent means focus. Electrons are small dots in the text colour, the ones that
+# moved accent, their way an accent arrow. Coulomb forces red (they are forces), equal and
+# opposite arrows of visibly equal length; a resultant red and thicker; guides and the
+# distance r muted; notes muted.
 kind: diagram
-size: [400, 260]
+size:
+- 400
+- 356
 items:
 - text: одноимённые отталкиваются
-  at: [200, 26]
+  at:
+  - 200
+  - 22
   size: 13
+  anchor: middle
   tone: muted
-- circle: [140, 65]
-  r: 13
-  fill: surface
-  tone: force
-- text: +
-  at: [140, 71]
-  size: 18
-  tone: force
-- circle: [260, 65]
-  r: 13
-  fill: surface
-  tone: force
-- text: +
-  at: [260, 71]
-  size: 18
-  tone: force
-- arrow: [[124, 65], [74, 65]]
+- arrow:
+  - - 128
+    - 60
+  - - 82
+    - 60
   tone: force
   label: '*F*'
-  label_at: [70, 55]
-- arrow: [[276, 65], [326, 65]]
+  label_at:
+  - 74
+  - 48
+- arrow:
+  - - 272
+    - 60
+  - - 318
+    - 60
   tone: force
   label: '*F*'
-  label_at: [330, 55]
+  label_at:
+  - 326
+  - 48
+- circle:
+  - 140
+  - 60
+  r: 12
+  fill: surface
+  tone: default
+  label: +
+- circle:
+  - 260
+  - 60
+  r: 12
+  fill: surface
+  tone: default
+  label: +
 - text: разноимённые притягиваются
-  at: [200, 128]
+  at:
+  - 200
+  - 122
   size: 13
+  anchor: middle
   tone: muted
-- circle: [110, 168]
-  r: 13
-  fill: surface
-  tone: force
-- text: +
-  at: [110, 174]
-  size: 18
-  tone: force
-- circle: [290, 168]
-  r: 13
-  fill: surface
-  tone: accent
-- text: −
-  at: [290, 174]
-  size: 18
-  tone: accent
-- arrow: [[126, 168], [176, 168]]
+- arrow:
+  - - 122
+    - 160
+  - - 168
+    - 160
   tone: force
   label: '*F*'
-  label_at: [170, 158]
-- arrow: [[274, 168], [224, 168]]
+  label_at:
+  - 160
+  - 148
+- arrow:
+  - - 278
+    - 160
+  - - 232
+    - 160
   tone: force
   label: '*F*'
-  label_at: [230, 158]
-- arrow: [[200, 200], [110, 200]]
-  width: 1.1
-- arrow: [[200, 200], [290, 200]]
-  width: 1.1
+  label_at:
+  - 240
+  - 148
+- circle:
+  - 110
+  - 160
+  r: 12
+  fill: surface
+  tone: default
+  label: +
+- circle:
+  - 290
+  - 160
+  r: 12
+  fill: surface
+  tone: default
+  label: −
+- line:
+  - - 110
+    - 191
+  - - 110
+    - 201
+  width: 1
+  tone: muted
+- line:
+  - - 290
+    - 191
+  - - 290
+    - 201
+  width: 1
+  tone: muted
+- line:
+  - - 110
+    - 196
+  - - 290
+    - 196
+  width: 1
+  tone: muted
 - text: '*r*'
-  at: [200, 218]
+  at:
+  - 200.0
+  - 190
+  size: 13
+- text: 'шары: *r* — между центрами'
+  at:
+  - 200
+  - 240
+  size: 13
+  anchor: middle
+  tone: muted
+- circle:
+  - 120
+  - 290
+  r: 24
+  fill: surface
+- circle:
+  - 290
+  - 290
+  r: 16
+  fill: surface
+- dots:
+  - - 120
+    - 290
+  - - 290
+    - 290
+  r: 2.5
+- line:
+  - - 120
+    - 290
+  - - 290
+    - 290
+  width: 1
+  tone: muted
+  dashed: true
+- text: '*r*'
+  at:
+  - 205.0
+  - 283
+  size: 13
 - text: '*F* = *k*|*q*_1||*q*_2|/*r*^{2}'
-  at: [200, 248]
+  at:
+  - 200
+  - 345
   size: 14

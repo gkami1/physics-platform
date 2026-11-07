@@ -1,0 +1,210 @@
+# electro.field.coulomb 1.6: forces from two charges on the test charge q₀ (accent) add
+# as vectors. Top: on one line q₁ (+) pushes q₀ to the right, q₂ (−) pulls it to the
+# left; the resultant (thicker) is the difference. Not ks-coul-06's layout (q₀ between).
+# Bottom: q₁ below pushes q₀ up, q₂ to the right pulls it right; the resultant is the
+# diagonal of the rectangle (dashed guides), as in mechanics 5.6.
+# Colours (whole topic; the first of «Электродинамика», so this sets the section's convention):
+# a charge is a circle in the text colour (surface fill) with «+» or «−» inside; the charge
+# being discussed (a test charge, a result) accent. Never + red and − blue: red is the force
+# colour and accent means focus. Electrons are small dots in the text colour, the ones that
+# moved accent, their way an accent arrow. Coulomb forces red (they are forces), equal and
+# opposite arrows of visibly equal length; a resultant red and thicker; guides and the
+# distance r muted; notes muted.
+kind: diagram
+size:
+- 400
+- 334
+items:
+- text: на одной прямой
+  at:
+  - 200
+  - 20
+  size: 13
+  anchor: middle
+  tone: muted
+- circle:
+  - 50
+  - 64
+  r: 12
+  fill: surface
+  tone: default
+  label: +
+- circle:
+  - 190
+  - 64
+  r: 12
+  fill: surface
+  tone: default
+  label: −
+- arrow:
+  - - 332
+    - 64
+  - - 360
+    - 64
+  tone: force
+  label: '*F*_1'
+  label_at:
+  - 372
+  - 54
+- arrow:
+  - - 308
+    - 64
+  - - 250
+    - 64
+  tone: force
+  label: '*F*_2'
+  label_at:
+  - 260
+  - 52
+- circle:
+  - 320
+  - 64
+  r: 12
+  fill: surface
+  tone: accent
+  label: +
+- text: '*q*_1'
+  at:
+  - 50
+  - 96
+  size: 13
+- text: '*q*_2'
+  at:
+  - 190
+  - 96
+  size: 13
+- text: '*q*_0'
+  at:
+  - 320
+  - 96
+  size: 13
+  tone: accent
+- arrow:
+  - - 320
+    - 116
+  - - 290
+    - 116
+  tone: force
+  width: 2.5
+  label: '*F*'
+  label_at:
+  - 278
+  - 121
+- text: '*F* = *F*_2 − *F*_1'
+  at:
+  - 250
+  - 121
+  size: 13
+  anchor: end
+  tone: muted
+- line:
+  - - 24
+    - 142
+  - - 376
+    - 142
+  width: 1
+  tone: muted
+- text: под углом
+  at:
+  - 200
+  - 166
+  size: 13
+  anchor: middle
+  tone: muted
+- line:
+  - - 150
+    - 182
+  - - 220
+    - 182
+  - - 220
+    - 236
+  width: 1
+  tone: muted
+  dashed: true
+- line:
+  - - 150
+    - 250
+  - - 150
+    - 302
+  width: 1
+  tone: muted
+  dashed: true
+- line:
+  - - 164
+    - 236
+  - - 316
+    - 236
+  width: 1
+  tone: muted
+  dashed: true
+- arrow:
+  - - 150
+    - 224
+  - - 150
+    - 182
+  tone: force
+  label: '*F*_1'
+  label_at:
+  - 130
+  - 188
+- arrow:
+  - - 162
+    - 236
+  - - 220
+    - 236
+  tone: force
+  label: '*F*_2'
+  label_at:
+  - 224
+  - 258
+- arrow:
+  - - 159
+    - 229
+  - - 220
+    - 182
+  tone: force
+  width: 2.5
+  label: '*F*'
+  label_at:
+  - 234
+  - 178
+  animate: appear
+- circle:
+  - 150
+  - 236
+  r: 12
+  fill: surface
+  tone: accent
+  label: +
+- circle:
+  - 150
+  - 316
+  r: 12
+  fill: surface
+  tone: default
+  label: +
+- circle:
+  - 330
+  - 236
+  r: 12
+  fill: surface
+  tone: default
+  label: −
+- text: '*q*_0'
+  at:
+  - 130
+  - 241
+  size: 13
+  anchor: end
+  tone: accent
+- text: '*q*_1'
+  at:
+  - 130
+  - 321
+  size: 13
+  anchor: end
+- text: '*q*_2'
+  at:
+  - 330
+  - 268
+  size: 13

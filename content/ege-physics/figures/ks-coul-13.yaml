@@ -1,0 +1,83 @@
+# ks-coul-13: +1 нКл at the vertex of a right angle, +3 нКл and +4 нКл 3 см from it along
+# the two sides. Only the task's values are labelled; no forces (the answer, 50 мкН, and
+# the intermediates 30 and 40 мкН are not shown).
+kind: diagram
+size:
+- 360
+- 222
+items:
+- line:
+  - - 110
+    - 176
+  - - 110
+    - 60
+  width: 1
+  tone: muted
+  dashed: true
+- line:
+  - - 124
+    - 190
+  - - 270
+    - 190
+  width: 1
+  tone: muted
+  dashed: true
+- line:
+  - - 110
+    - 174
+  - - 126
+    - 174
+  - - 126
+    - 190
+  width: 1
+  tone: muted
+- circle:
+  - 110
+  - 190
+  r: 12
+  fill: surface
+  tone: accent
+  label: +
+- circle:
+  - 110
+  - 48
+  r: 12
+  fill: surface
+  tone: default
+  label: +
+- circle:
+  - 282
+  - 190
+  r: 12
+  fill: surface
+  tone: default
+  label: +
+- text: +1 нКл
+  at:
+  - 90
+  - 195
+  size: 13
+  anchor: end
+  tone: accent
+- text: +3 нКл
+  at:
+  - 90
+  - 53
+  size: 13
+  anchor: end
+- text: +4 нКл
+  at:
+  - 282
+  - 222
+  size: 13
+- text: 3 см
+  at:
+  - 118
+  - 124
+  size: 13
+  anchor: start
+- text: 3 см
+  at:
+  - 196
+  - 212
+  size: 13
