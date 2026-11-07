@@ -119,6 +119,8 @@ const ru = (n: number, d: number) => n.toFixed(d).replace('.', ',').replace('-',
 /** Temperature for the readout: one decimal, rounded down, so a warming body never reads the
  * temperature of the next stage (99,96 °C is «99,9», −0,04 °C is «−0,1») before it gets there. */
 export const tShow = (t: number): string => ru(Math.floor(t * 10 + 1e-9) / 10, 1);
+/** Keep a number with its unit on one line in the readout. */
+const nbsp = (s: string) => s.replace(/(\d) (°C|г|с|кДж|Дж)(?=[\s.,:]|$)/g, '$1 $2');
 const kJ = (q: number) => ru(q / 1000, q < 10000 ? 2 : 1);
 
 // Layout
@@ -422,9 +424,9 @@ class HeatSim extends HTMLElement {
     const time = `<i>τ</i> = ${Math.floor(this.tau + 1e-6)} с`;
     const got = `получено <i>Q</i> = <i>Nτ</i> = ${kJ(s.Q)} кДж`;
     if (this.tau === 0) {
-      return (
+      return nbsp(
         `${total} льда при ${ru(T_START, 0)} °C. Нагреватель даёт ${this.N} Дж каждую секунду, ` +
-        'и всё это тепло идёт в сосуд. Нажми «Пуск».'
+          'и всё это тепло идёт в сосуд. Нажми «Пуск».',
       );
     }
     let what: string;
@@ -445,7 +447,7 @@ class HeatSim extends HTMLElement {
           : `Вода кипит при 100 °C: выкипело ${g(s.boiled)} из ${total}.`;
     } else what = 'Вся вода выкипела, сосуд пуст.';
     const end = this.tau >= T_END && s.stage !== 'gone' ? ' Прошло 10 минут.' : '';
-    return `${time}, ${got}. ${what}${end}`;
+    return nbsp(`${time}, ${got}. ${what}${end}`);
   }
 }
 
