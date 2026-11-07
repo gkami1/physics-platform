@@ -1,0 +1,286 @@
+# thermo.first-law 7.3: the signs. Heat in (accent arrow in): Q > 0; heat out: Q < 0. The gas
+# expands (the piston moves out from the dashed muted line, motion arrow in the text colour):
+# A > 0, the external work A′ < 0; a force (red) compresses it: A < 0, A′ > 0. Qualitative.
+# Colours (whole topic, extending «Внутренняя энергия и работа газа»): heat Q accent, flowing in
+# or out (an arrow into or out of the gas); the change of internal energy ΔU green (as the
+# molecules' velocities and the model's ΔU bar); the work of the gas A an accent tint with an
+# accent outline in bars, as the area under p(V) (hatched when negative); Q split into ΔU and A
+# as a branching arrow or bars; flames muted; forces red; a piston's motion in the text colour;
+# an adiabat's insulation a thick muted layer. p–V graphs: the process being discussed accent
+# with a moving point and small accent arrows for the direction; isotherms that only mark a
+# temperature dashed muted; guides dashed muted; notes muted.
+kind: diagram
+size:
+- 400
+- 242
+items:
+- rect:
+  - 26
+  - 84
+  - 48
+  - 56
+  fill: surface
+  width: 0
+- line:
+  - - 25
+    - 40
+  - - 25
+    - 140
+  - - 75
+    - 140
+  - - 75
+    - 40
+  width: 2
+- rect:
+  - 26
+  - 77
+  - 48
+  - 7
+  fill: surface
+  width: 1.5
+- line:
+  - - 50
+    - 77
+  - - 50
+    - 30
+  width: 2.5
+- arrow:
+  - - 50
+    - 178
+  - - 50
+    - 146
+  tone: accent
+  width: 2.5
+- text: '*Q*'
+  at:
+  - 59
+  - 172
+  anchor: start
+  tone: accent
+  size: 13
+- rect:
+  - 126
+  - 84
+  - 48
+  - 56
+  fill: surface
+  width: 0
+- line:
+  - - 125
+    - 40
+  - - 125
+    - 140
+  - - 175
+    - 140
+  - - 175
+    - 40
+  width: 2
+- rect:
+  - 126
+  - 77
+  - 48
+  - 7
+  fill: surface
+  width: 1.5
+- line:
+  - - 150
+    - 77
+  - - 150
+    - 30
+  width: 2.5
+- arrow:
+  - - 150
+    - 146
+  - - 150
+    - 178
+  tone: accent
+  width: 2.5
+- text: '*Q*'
+  at:
+  - 159
+  - 172
+  anchor: start
+  tone: accent
+  size: 13
+- rect:
+  - 226
+  - 70
+  - 48
+  - 70
+  fill: surface
+  width: 0
+- line:
+  - - 225
+    - 40
+  - - 225
+    - 140
+  - - 275
+    - 140
+  - - 275
+    - 40
+  width: 2
+- rect:
+  - 226
+  - 63
+  - 48
+  - 7
+  fill: surface
+  width: 1.5
+- line:
+  - - 250
+    - 63
+  - - 250
+    - 30
+  width: 2.5
+- line:
+  - - 225
+    - 100
+  - - 275
+    - 100
+  width: 1
+  dashed: true
+  tone: muted
+- arrow:
+  - - 286
+    - 104
+  - - 286
+    - 72
+  width: 1.5
+- rect:
+  - 326
+  - 100
+  - 48
+  - 40
+  fill: surface
+  width: 0
+- line:
+  - - 325
+    - 40
+  - - 325
+    - 140
+  - - 375
+    - 140
+  - - 375
+    - 40
+  width: 2
+- rect:
+  - 326
+  - 93
+  - 48
+  - 7
+  fill: surface
+  width: 1.5
+- line:
+  - - 350
+    - 93
+  - - 350
+    - 30
+  width: 2.5
+- line:
+  - - 325
+    - 70
+  - - 375
+    - 70
+  width: 1
+  dashed: true
+  tone: muted
+- arrow:
+  - - 386
+    - 70
+  - - 386
+    - 102
+  width: 1.5
+- arrow:
+  - - 350
+    - 2
+  - - 350
+    - 28
+  tone: force
+  width: 2.5
+- text: '*F*'
+  at:
+  - 358
+  - 18
+  anchor: start
+  tone: force
+  size: 13
+- text: '*Q* > 0'
+  at:
+  - 50
+  - 200
+  size: 15
+  tone: accent
+- text: получил
+  at:
+  - 50
+  - 218
+  size: 13
+  anchor: middle
+  tone: muted
+- text: теплоту
+  at:
+  - 50
+  - 234
+  size: 13
+  anchor: middle
+  tone: muted
+- text: '*Q* < 0'
+  at:
+  - 150
+  - 200
+  size: 15
+  tone: accent
+- text: отдал
+  at:
+  - 150
+  - 218
+  size: 13
+  anchor: middle
+  tone: muted
+- text: теплоту
+  at:
+  - 150
+  - 234
+  size: 13
+  anchor: middle
+  tone: muted
+- text: '*A* > 0'
+  at:
+  - 250
+  - 200
+  size: 15
+  tone: accent
+- text: расширился
+  at:
+  - 250
+  - 218
+  size: 13
+  anchor: middle
+  tone: muted
+- text: '*A*′ < 0'
+  at:
+  - 250
+  - 234
+  size: 13
+  anchor: middle
+  tone: muted
+- text: '*A* < 0'
+  at:
+  - 350
+  - 200
+  size: 15
+  tone: accent
+- text: сжали
+  at:
+  - 350
+  - 218
+  size: 13
+  anchor: middle
+  tone: muted
+- text: '*A*′ > 0'
+  at:
+  - 350
+  - 234
+  size: 13
+  anchor: middle
+  tone: muted

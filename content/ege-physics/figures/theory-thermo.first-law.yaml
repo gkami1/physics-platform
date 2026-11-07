@@ -1,47 +1,239 @@
-# thermo.first-law: heat supplied to a gas under a piston
+# thermo.first-law 7.2 (the ladder's figure, redrawn in the topic colours): gas under a loaded
+# piston over a flame (muted) gets heat Q (accent arrow in). Its molecules move faster
+# (green velocities) and the piston rises by Δh from where it was (dashed muted). On the
+# right the heat Q (thick accent) splits into ΔU (green) and the work A (accent).
+# Seed 72, qualitative. (The ladder's version had no physics error; it drew Q and the
+# flames red like a force and the molecules accent.)
+# Colours (whole topic, extending «Внутренняя энергия и работа газа»): heat Q accent, flowing in
+# or out (an arrow into or out of the gas); the change of internal energy ΔU green (as the
+# molecules' velocities and the model's ΔU bar); the work of the gas A an accent tint with an
+# accent outline in bars, as the area under p(V) (hatched when negative); Q split into ΔU and A
+# as a branching arrow or bars; flames muted; forces red; a piston's motion in the text colour;
+# an adiabat's insulation a thick muted layer. p–V graphs: the process being discussed accent
+# with a moving point and small accent arrows for the direction; isotherms that only mark a
+# temperature dashed muted; guides dashed muted; notes muted.
 kind: diagram
-size: [400, 260]
+size:
+- 400
+- 240
 items:
-- line: [[140, 40], [140, 190], [260, 190], [260, 40]]
-  width: 2
-- rect: [142, 92, 116, 14]
+- rect:
+  - 41
+  - 96
+  - 88
+  - 90
   fill: surface
-- line: [[200, 92], [200, 50]]
+  width: 0
+- line:
+  - - 40
+    - 40
+  - - 40
+    - 186
+  - - 130
+    - 186
+  - - 130
+    - 40
+  width: 2
+- line:
+  - - 40
+    - 130
+  - - 130
+    - 130
+  width: 1
+  dashed: true
+  tone: muted
+- text: было
+  at:
+  - 136
+  - 134
+  size: 13
+  anchor: start
+  tone: muted
+- rect:
+  - 41
+  - 88
+  - 88
+  - 8
+  fill: surface
+  width: 1.5
+- rect:
+  - 62
+  - 72
+  - 46
+  - 16
+  radius: 2
+  fill: surface
+  width: 1.5
+- line:
+  - - 28
+    - 96
+  - - 28
+    - 130
+  width: 1.2
+- line:
+  - - 24
+    - 96
+  - - 32
+    - 96
+  width: 1.2
+- line:
+  - - 24
+    - 130
+  - - 32
+    - 130
+  width: 1.2
+- text: Δ*h*
+  at:
+  - 22
+  - 118
+  anchor: end
+  size: 13
+- dots:
+  - - 55.1
+    - 148.4
+  - - 119.3
+    - 131.4
+  - - 88.1
+    - 133.5
+  - - 101.8
+    - 154.6
+  - - 91.9
+    - 174.4
+  - - 104.1
+    - 114.2
+  r: 3.5
+- arrow:
+  - - 55.1
+    - 148.4
+  - - 48.5
+    - 133.8
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 119.3
+    - 131.4
+  - - 125.7
+    - 116.7
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 88.1
+    - 133.5
+  - - 74.2
+    - 125.5
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 101.8
+    - 154.6
+  - - 101.4
+    - 138.6
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 91.9
+    - 174.4
+  - - 82.7
+    - 161.3
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 104.1
+    - 114.2
+  - - 96.2
+    - 100.3
+  tone: vel
+  width: 1.5
+- path: M62 226Q60 215.0 70 206Q80 215.0 78 226Z
+  width: 1.5
+  tone: muted
+- path: M92 226Q90 215.0 100 206Q110 215.0 108 226Z
+  width: 1.5
+  tone: muted
+- line:
+  - - 58
+    - 228
+  - - 112
+    - 228
   width: 3
-- dots: [[158, 118], [240, 122], [172, 176], [232, 172], [205, 182], [150, 150], [250, 150], [188, 124]]
-  r: 4
+  tone: muted
+- arrow:
+  - - 85
+    - 224
+  - - 85
+    - 192
+  tone: accent
+  width: 3
+- text: '*Q*'
+  at:
+  - 118
+  - 218
+  anchor: start
+  tone: accent
+- line:
+  - - 176
+    - 140
+  - - 236
+    - 140
+  width: 6
+  tone: accent
+- text: '*Q*'
+  at:
+  - 204
+  - 128
+  tone: accent
+  size: 15
+- arrow:
+  - - 236
+    - 140
+  - - 298
+    - 94
+  width: 3
+  tone: vel
+- arrow:
+  - - 236
+    - 140
+  - - 298
+    - 186
+  width: 3
   tone: accent
 - text: Δ*U*
-  at: [200, 152]
-  size: 15
-- arrow: [[285, 112], [285, 62]]
+  at:
+  - 306
+  - 94
+  anchor: start
   tone: vel
-  label: '*A*'
-  label_at: [302, 92]
-- path: M178 238C170 222 186 214 182 200C196 212 200 222 192 238Z
-  tone: force
-  fill: solid
-  width: 1
-- path: M206 238C198 220 214 214 210 202C224 214 226 224 218 238Z
-  tone: force
-  fill: solid
-  width: 1
-- arrow: [[240, 240], [240, 196]]
-  tone: force
-  label: '*Q*'
-  label_at: [256, 226]
+  size: 15
+- text: газ нагрелся
+  at:
+  - 306
+  - 112
+  size: 13
+  anchor: start
+  tone: muted
+- text: '*A*'
+  at:
+  - 306
+  - 192
+  anchor: start
+  tone: accent
+  size: 15
+- text: газ поднял
+  at:
+  - 306
+  - 210
+  size: 13
+  anchor: start
+  tone: muted
+- text: поршень
+  at:
+  - 306
+  - 226
+  size: 13
+  anchor: start
+  tone: muted
 - text: '*Q* = Δ*U* + *A*'
-  at: [60, 80]
+  at:
+  - 282
+  - 40
   size: 16
-- text: теплота идёт
-  at: [60, 110]
-  size: 12
-  tone: muted
-- text: на нагрев газа
-  at: [60, 126]
-  size: 12
-  tone: muted
-- text: и на работу
-  at: [60, 142]
-  size: 12
-  tone: muted
