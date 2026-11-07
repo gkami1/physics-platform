@@ -1,47 +1,122 @@
-# thermo.heat-engines: energy flow in a heat engine
+# thermo.heat-engines 8.1 (the ladder's figure, redrawn: it drew the heater and Q₁ red like a
+# force and the work green like ΔU): the heater gives the working body the heat Q₁ (solid
+# accent block arrow), the body does the work A (accent tint) and gives |Q₂| to the cooler
+# (accent outline). Arrow widths add up: 36 = 10 + 26 px. Qualitative.
+# Colours (whole topic, extending «Первый закон термодинамики»): the heat received from the
+# heater Q₁ solid accent; the heat given to the cooler |Q₂| an accent outline (a real flow of
+# the cycle, not lost by accident as the muted heat in 5.3, but not the useful part either);
+# the work A an accent tint with an accent outline, as the area inside a cycle on p–V and the
+# model's bar; energy flows as block arrows whose widths add up (Q₁ = A + |Q₂|); heater and
+# cooler (room and chamber for a refrigerator) surface blocks with a text-colour outline; what
+# cannot happen crossed out muted; flames muted; forces red (none here). p–V graphs: the cycle
+# or the part being discussed accent with a moving point and small accent arrows for the
+# direction, the rest of a cycle in the text colour; isotherms and adiabats that only mark a
+# shape or a temperature dashed muted; guides dashed muted; notes muted.
 kind: diagram
-size: [400, 260]
+size:
+- 400
+- 270
 items:
-- rect: [110, 14, 180, 44]
-  fill: surface
+- rect:
+  - 120
+  - 10
+  - 160
+  - 40
   radius: 6
-  tone: force
+  fill: surface
+  width: 1.5
 - text: нагреватель, *T*_1
-  at: [200, 42]
-  tone: force
-- circle: [200, 130]
-  r: 34
+  at:
+  - 200.0
+  - 35.0
+  size: 14
+- rect:
+  - 150
+  - 104
+  - 100
+  - 62
+  radius: 10
   fill: surface
-- text: рабочее
-  at: [200, 126]
+  width: 1.5
+- text: рабочее тело
+  at:
+  - 200
+  - 132
+  size: 13
+- text: газ или пар
+  at:
+  - 200
+  - 150
   size: 12
-- text: тело
-  at: [200, 141]
-  size: 12
-- rect: [110, 202, 180, 44]
-  fill: surface
+  anchor: middle
+  tone: muted
+- rect:
+  - 120
+  - 222
+  - 160
+  - 40
   radius: 6
-  tone: accent
+  fill: surface
+  width: 1.5
 - text: холодильник, *T*_2
-  at: [200, 230]
+  at:
+  - 200.0
+  - 247.0
+  size: 14
+- path: M182 50L182 90L171.2 90L200 104L228.8 90L218 90L218 50Z
+  fill: solid
   tone: accent
-- arrow: [[200, 60], [200, 94]]
-  tone: force
-  width: 3
-  label: '*Q*_1'
-  label_at: [222, 83]
-- arrow: [[200, 166], [200, 200]]
+  width: 0
+- text: '*Q*_1'
+  at:
+  - 166
+  - 84
+  anchor: end
   tone: accent
-  width: 2
-  label: '|*Q*_2|'
-  label_at: [230, 189]
-- arrow: [[236, 130], [310, 130]]
-  tone: vel
-  width: 2.5
-  label: '*A*'
-- text: '*A* = *Q*_1 − |*Q*_2|'
-  at: [60, 120]
+  size: 15
+- path: M250 140L332 140L332 146L346 135L332 124L332 130L250 130Z
+  fill: accent
+  tone: accent
+  width: 1.2
+- text: '*A*'
+  at:
+  - 300
+  - 120
+  tone: accent
+  size: 15
+- text: работа
+  at:
+  - 300
+  - 158
   size: 13
-- text: '*η* = *A*/*Q*_1'
-  at: [60, 145]
+  anchor: middle
+  tone: muted
+- path: M187 166L187 208L179.2 208L200 222L220.8 208L213 208L213 166Z
+  tone: accent
+  width: 1.5
+- text: '|*Q*_2|'
+  at:
+  - 230
+  - 200
+  anchor: start
+  tone: accent
+  size: 15
+- text: '*Q*_1 = *A* + |*Q*_2|'
+  at:
+  - 64
+  - 132
+  size: 14
+- text: энергия
+  at:
+  - 64
+  - 152
   size: 13
+  anchor: middle
+  tone: muted
+- text: не пропадает
+  at:
+  - 64
+  - 168
+  size: 13
+  anchor: middle
+  tone: muted

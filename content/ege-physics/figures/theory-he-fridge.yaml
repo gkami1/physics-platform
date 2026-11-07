@@ -1,0 +1,135 @@
+# thermo.heat-engines 8.6: a refrigerator, the engine run backwards: the working body takes
+# |Q₂| from the cold chamber (accent outline), the compressor does the work A on it (tint),
+# and it gives Q₁ = |Q₂| + A to the warm room (solid accent). Widths add up: 36 = 26 + 10.
+# Colours (whole topic, extending «Первый закон термодинамики»): the heat received from the
+# heater Q₁ solid accent; the heat given to the cooler |Q₂| an accent outline (a real flow of
+# the cycle, not lost by accident as the muted heat in 5.3, but not the useful part either);
+# the work A an accent tint with an accent outline, as the area inside a cycle on p–V and the
+# model's bar; energy flows as block arrows whose widths add up (Q₁ = A + |Q₂|); heater and
+# cooler (room and chamber for a refrigerator) surface blocks with a text-colour outline; what
+# cannot happen crossed out muted; flames muted; forces red (none here). p–V graphs: the cycle
+# or the part being discussed accent with a moving point and small accent arrows for the
+# direction, the rest of a cycle in the text colour; isotherms and adiabats that only mark a
+# shape or a temperature dashed muted; guides dashed muted; notes muted.
+kind: diagram
+size:
+- 400
+- 270
+items:
+- rect:
+  - 140
+  - 10
+  - 160
+  - 40
+  radius: 6
+  fill: surface
+  width: 1.5
+- text: комната, *T*_1
+  at:
+  - 220.0
+  - 35.0
+  size: 14
+- rect:
+  - 170
+  - 104
+  - 100
+  - 62
+  radius: 10
+  fill: surface
+  width: 1.5
+- text: рабочее тело
+  at:
+  - 220
+  - 132
+  size: 13
+- text: хладагент
+  at:
+  - 220
+  - 150
+  size: 12
+  anchor: middle
+  tone: muted
+- rect:
+  - 140
+  - 222
+  - 160
+  - 40
+  radius: 6
+  fill: surface
+  width: 1.5
+- text: камера, *T*_2
+  at:
+  - 220.0
+  - 247.0
+  size: 14
+- path: M233 222L233 180L240.8 180L220 166L199.2 180L207 180L207 222Z
+  tone: accent
+  width: 1.5
+- text: '|*Q*_2|'
+  at:
+  - 250
+  - 200
+  anchor: start
+  tone: accent
+  size: 15
+- path: M78 140L156 140L156 146L170 135L156 124L156 130L78 130Z
+  fill: accent
+  tone: accent
+  width: 1.2
+- text: '*A*'
+  at:
+  - 118
+  - 120
+  tone: accent
+  size: 15
+- text: работа
+  at:
+  - 118
+  - 158
+  size: 13
+  anchor: middle
+  tone: muted
+- text: компрессора
+  at:
+  - 118
+  - 174
+  size: 13
+  anchor: middle
+  tone: muted
+- path: M238 104L238 64L248.8 64L220 50L191.2 64L202 64L202 104Z
+  fill: solid
+  tone: accent
+  width: 0
+- text: '*Q*_1'
+  at:
+  - 186
+  - 84
+  anchor: end
+  tone: accent
+  size: 15
+- text: '*Q*_1 = |*Q*_2| + *A*'
+  at:
+  - 340
+  - 132
+  size: 14
+- text: тепло идёт
+  at:
+  - 340
+  - 152
+  size: 13
+  anchor: middle
+  tone: muted
+- text: от холодного
+  at:
+  - 340
+  - 168
+  size: 13
+  anchor: middle
+  tone: muted
+- text: к горячему
+  at:
+  - 340
+  - 184
+  size: 13
+  anchor: middle
+  tone: muted

@@ -28,6 +28,14 @@
 // slider step (in or out, none on the adiabat), and the readout adds Q = ΔU + A for the current
 // process and since A, the shown Q always the sum of the shown ΔU and A. Plain `work` is unchanged.
 //
+// With work="eta" (thermo.heat-engines lessons) everything of work="q" stays, but the heat row of
+// the bars splits into the heat received since A, Q₁ (solid accent, to the right), and the heat
+// given away, |Q₂| (an accent outline, to the left). They are summed slider step by slider step:
+// on every process the heat is monotonic in the free quantity, so a step's heat is all gain or all
+// loss, and reversing the slider counts as giving heat back. When the gas is back at A after a
+// cycle, the readout adds A = Q₁ − |Q₂| and the efficiency η = A/Q₁ (only for A > 0; a cycle with
+// A ≤ 0 is not an engine). Plain `work` and work="q" are unchanged.
+//
 // Written into theory Markdown as plain HTML; the theory page imports this module only when such
 // an element is present. Light DOM, site CSS variables: follows the light/dark theme.
 
@@ -153,6 +161,32 @@ export function joules(j: number): string {
   return `${n > 0 ? '+' : '−'}${Math.abs(n)} Дж`;
 }
 
+/** The heat of one slider step from x1 to x2 on the process through a, as [received, given away],
+ * both ≥ 0 in p₀V₀. Exact: on each process Q is monotonic in the free quantity (T at constant V or
+ * p, V at constant T, 0 on the adiabat), so a step's heat is all gain or all loss. */
+export function heatParts(proc: Process, a: State, x1: number, x2: number): [number, number] {
+  const dq = heat(proc, a, x2) - heat(proc, a, x1);
+  return dq > 0 ? [dq, 0] : [0, -dq];
+}
+
+/** Is the gas back at the start state A? */
+export function atStart(s: State): boolean {
+  return Math.abs(s.p - START.p) < 1e-9 && Math.abs(s.V - START.V) < 1e-9;
+}
+
+/** Efficiency η = A/Q₁ of a closed cycle, or null when there is none to show: nothing received
+ * yet, or the work over the cycle is not positive (that cycle is no engine). */
+export function efficiency(work: number, q1: number): number | null {
+  return q1 > 1e-9 && work > 1e-9 ? work / q1 : null;
+}
+
+/** η in whole percent, never «0 %» or «100 %»: η of a real cycle is strictly between 0 and 1. */
+export function percent(eta: number): string {
+  const n = Math.round(eta * 100);
+  if (n < 1) return 'меньше 1 %';
+  return `${Math.min(n, 99)} %`;
+}
+
 interface Segment {
   proc: Process;
   a: State;
@@ -249,6 +283,10 @@ class IsoSim extends HTMLElement {
   private insul!: SVGPathElement;
   private heatArrow!: SVGGElement;
   private flow = 0; // which way heat went on the last slider step: 1 in, −1 out, 0 none
+  private etaMode = false;
+  private barQ2!: SVGRectElement;
+  private q1 = 0; // work="eta": heat received since A, in p₀V₀
+  private q2 = 0; // and heat given away, ≥ 0
 
   /** The element's own process: T, p, V, or Q (adiabat) with work="q". */
   private ownProcess(): Process {
@@ -260,7 +298,8 @@ class IsoSim extends HTMLElement {
     if (this.built) return;
     this.built = true;
     this.joulesMode = this.hasAttribute('work');
-    this.heatMode = this.getAttribute('work') === 'q';
+    this.etaMode = this.getAttribute('work') === 'eta';
+    this.heatMode = this.getAttribute('work') === 'q' || this.etaMode;
     this.proc = this.ownProcess();
     const r = rng(SEED);
     const g = gaussian(r);
@@ -325,7 +364,11 @@ class IsoSim extends HTMLElement {
       viewBox: this.heatMode ? '0 0 400 352' : this.joulesMode ? '0 0 400 324' : '0 0 400 340',
       class: 'sim-svg',
       role: 'img',
-      'aria-label': this.heatMode
+      'aria-label': this.etaMode
+        ? 'Газ в цилиндре под поршнем и график давления от объёма. Стрелка Q у цилиндра показывает, ' +
+          'получает газ теплоту или отдаёт. Под линией процесса закрашена работа газа. Внизу полосы ' +
+          'с точки A: полученная теплота Q₁ и отданная |Q₂|, изменение внутренней энергии и работа газа'
+        : this.heatMode
         ? 'Газ в цилиндре под поршнем и график давления от объёма. Стрелка Q у цилиндра показывает, ' +
           'получает газ теплоту или отдаёт. Под линией процесса закрашена работа газа. Внизу полосы ' +
           'с точки A: количество теплоты, изменение внутренней энергии и работа газа'
@@ -442,14 +485,27 @@ class IsoSim extends HTMLElement {
         for (const [s, it] of html) t.append(it ? el('tspan', { 'font-style': 'italic' }, s) : s);
         return t;
       };
+      const at = (t: SVGTextElement, x: number, anchor: string) => {
+        t.setAttribute('x', String(x));
+        t.setAttribute('text-anchor', anchor);
+        return t;
+      };
       const B = QBAR;
-      this.barQ = el('rect', { y: B.qY, height: B.h, class: 'iso-bar-q' });
+      this.barQ =el('rect', { y: B.qY, height: B.h, class: 'iso-bar-q' });
+      this.barQ2 = el('rect', { y: B.qY + 0.6, height: B.h - 1.2, class: 'iso-bar-q2' });
       this.barU = el('rect', { y: B.uY, height: B.h, class: 'iso-bar-u' });
       this.barA = el('rect', { y: B.aY, height: B.h, class: 'iso-bar-a tint' });
       const foot = B.aY + B.h + 20;
+      if (this.etaMode) bars.append(this.barQ2);
       bars.append(
         el('text', { x: 396, y: 198, 'text-anchor': 'end', class: 'iso-bar-note' }, 'с точки A'),
-        label(B.qY - 6, [['количество теплоты ', false], ['Q', true]]),
+        ...(this.etaMode
+          ? [
+              label(B.qY - 6, [['теплота', false]]),
+              at(label(B.qY - 6, [['отдал |', false], ['Q', true], ['₂|', false]]), B.zero - 6, 'end'),
+              at(label(B.qY - 6, [['получил ', false], ['Q', true], ['₁', false]]), B.zero + 6, 'start'),
+            ]
+          : [label(B.qY - 6, [['количество теплоты ', false], ['Q', true]])]),
         label(B.uY - 6, [['изменение внутренней энергии Δ', false], ['U', true]]),
         label(B.aY - 6, [['работа газа ', false], ['A', true]]),
         this.barQ,
@@ -515,6 +571,8 @@ class IsoSim extends HTMLElement {
   private reset(): void {
     this.s = { ...START };
     this.segs = [];
+    this.q1 = 0;
+    this.q2 = 0;
     this.start(this.ownProcess());
   }
 
@@ -543,6 +601,11 @@ class IsoSim extends HTMLElement {
     // while the gas gives it away
     const dq = heat(seg.proc, seg.a, x) - heat(seg.proc, seg.a, seg.x);
     this.flow = Math.abs(dq) < 1e-9 ? 0 : Math.sign(dq);
+    if (this.etaMode) {
+      const [gain, loss] = heatParts(seg.proc, seg.a, seg.x, x);
+      this.q1 += gain;
+      this.q2 += loss;
+    }
     this.s = stateAt(seg.proc, seg.a, x);
     seg.x = x;
     seg.lo = Math.min(seg.lo, x);
@@ -757,7 +820,15 @@ class IsoSim extends HTMLElement {
       r.setAttribute('x', (n < 0 ? QBAR.zero - w : QBAR.zero).toFixed(1));
       r.setAttribute('width', w.toFixed(1));
     };
-    bar(this.barQ, totalQ);
+    // work="eta": the heat row shows Q₁ to the right and |Q₂| to the left instead of the net Q
+    const q1 = Math.round(this.q1 * PV0);
+    const closed = this.etaMode && atStart(s) && this.q1 > 1e-9;
+    // on a closed cycle Q₁ − |Q₂| = A exactly; show |Q₂| as Q₁ − A then, so the numbers add up
+    const q2 = closed ? Math.max(0, q1 - totalA) : Math.round(this.q2 * PV0);
+    if (this.etaMode) {
+      bar(this.barQ, q1);
+      bar(this.barQ2, -q2);
+    } else bar(this.barQ, totalQ);
     bar(this.barU, totalU);
     bar(this.barA, totalA);
     if (totalA < 0) {
@@ -787,7 +858,21 @@ class IsoSim extends HTMLElement {
       `<i>p</i> = ${Math.round(s.p * 100)}${NB}кПа, <i>V</i> = ${ru2(s.V)}${NB}л, <i>T</i> = ${kelvinNb(s.T)}. ` +
       `В этом процессе Δ<i>U</i> = ${joules(nowU)}, <i>A</i> = ${joules(nowA)}, ` +
       `<i>Q</i> = Δ<i>U</i> + <i>A</i> = ${joules(nowQ)}${verdict}.`;
-    if (this.segs.length > 1) {
+    if (this.etaMode) {
+      if (this.q1 + this.q2 > 1e-9) {
+        text +=
+          ` С точки A газ получил <i>Q</i>₁ = ${q1}${NB}Дж, отдал |<i>Q</i>₂| = ${q2}${NB}Дж, ` +
+          `Δ<i>U</i> = ${joules(totalU)}, <i>A</i> = ${joules(totalA)}.`;
+      }
+      if (closed) {
+        const eta = efficiency(totalA, q1);
+        text +=
+          eta === null
+            ? ` Газ вернулся в A, но работа за цикл ${totalA < 0 ? 'отрицательна' : 'равна нулю'}: это не двигатель.`
+            : ` Цикл замкнулся: <i>A</i> = <i>Q</i>₁${NB}−${NB}|<i>Q</i>₂| = ${totalA}${NB}Дж, ` +
+              `<i>η</i> = <i>A</i>/<i>Q</i>₁${NB}≈${NB}${percent(eta)}.`;
+      }
+    } else if (this.segs.length > 1) {
       text += ` С точки A: <i>Q</i> = ${joules(totalQ)}, Δ<i>U</i> = ${joules(totalU)}, <i>A</i> = ${joules(totalA)}.`;
     }
     this.readout.innerHTML = text.replace(/ = /g, `${NB}=${NB}`); // never break at «=»

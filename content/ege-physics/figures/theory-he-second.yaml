@@ -1,0 +1,177 @@
+# thermo.heat-engines 8.4: left, every engine: the heat Q₁ from the heater (solid accent) =
+# the work A (tint) + |Q₂| to the cooler (outline). Right, crossed out (muted): an engine
+# without a cooler that turns all of Q₁ into work, forbidden by the second law.
+# Colours (whole topic, extending «Первый закон термодинамики»): the heat received from the
+# heater Q₁ solid accent; the heat given to the cooler |Q₂| an accent outline (a real flow of
+# the cycle, not lost by accident as the muted heat in 5.3, but not the useful part either);
+# the work A an accent tint with an accent outline, as the area inside a cycle on p–V and the
+# model's bar; energy flows as block arrows whose widths add up (Q₁ = A + |Q₂|); heater and
+# cooler (room and chamber for a refrigerator) surface blocks with a text-colour outline; what
+# cannot happen crossed out muted; flames muted; forces red (none here). p–V graphs: the cycle
+# or the part being discussed accent with a moving point and small accent arrows for the
+# direction, the rest of a cycle in the text colour; isotherms and adiabats that only mark a
+# shape or a temperature dashed muted; guides dashed muted; notes muted.
+kind: diagram
+size:
+- 400
+- 278
+items:
+- rect:
+  - 34
+  - 30
+  - 132
+  - 34
+  radius: 6
+  fill: surface
+  width: 1.5
+- text: нагреватель
+  at:
+  - 100.0
+  - 52.0
+  size: 13
+- rect:
+  - 60
+  - 108
+  - 80
+  - 44
+  radius: 10
+  fill: surface
+  width: 1.5
+- text: газ
+  at:
+  - 100
+  - 135
+  size: 13
+- path: M85 64L85 94L76 94L100 108L124 94L115 94L115 64Z
+  fill: solid
+  tone: accent
+  width: 0
+- path: M140 135L178 135L178 141L192 130L178 119L178 125L140 125Z
+  fill: accent
+  tone: accent
+  width: 1.2
+- text: '*A*'
+  at:
+  - 164
+  - 117
+  tone: accent
+  size: 13
+- path: M90 152L90 178L84 178L100 192L116 178L110 178L110 152Z
+  tone: accent
+  width: 1.5
+- rect:
+  - 34
+  - 192
+  - 132
+  - 34
+  radius: 6
+  fill: surface
+  width: 1.5
+- text: холодильник
+  at:
+  - 100.0
+  - 214.0
+  size: 13
+- text: '*Q*_1'
+  at:
+  - 78
+  - 92
+  anchor: end
+  tone: accent
+  size: 13
+- text: так работает
+  at:
+  - 100
+  - 252
+  size: 13
+  anchor: middle
+  tone: muted
+- text: любой двигатель
+  at:
+  - 100
+  - 268
+  size: 13
+  anchor: middle
+  tone: muted
+- rect:
+  - 234
+  - 30
+  - 132
+  - 34
+  radius: 6
+  fill: surface
+  width: 1.5
+- text: нагреватель
+  at:
+  - 300.0
+  - 52.0
+  size: 13
+- rect:
+  - 260
+  - 108
+  - 80
+  - 44
+  radius: 10
+  fill: surface
+  width: 1.5
+- text: газ
+  at:
+  - 300
+  - 135
+  size: 13
+- path: M285 64L285 94L276 94L300 108L324 94L315 94L315 64Z
+  fill: solid
+  tone: accent
+  width: 0
+- path: M340 145L378 145L378 154L392 130L378 106L378 115L340 115Z
+  fill: accent
+  tone: accent
+  width: 1.2
+- text: '*A* = *Q*_1'
+  at:
+  - 366
+  - 92
+  tone: accent
+  size: 13
+- text: '*Q*_1'
+  at:
+  - 278
+  - 92
+  anchor: end
+  tone: accent
+  size: 13
+- text: холодильника нет
+  at:
+  - 300
+  - 206
+  size: 13
+  anchor: middle
+  tone: muted
+- line:
+  - - 250
+    - 102
+  - - 396
+    - 160
+  width: 3
+  tone: muted
+- line:
+  - - 396
+    - 102
+  - - 250
+    - 160
+  width: 3
+  tone: muted
+- text: так не бывает
+  at:
+  - 300
+  - 252
+  size: 13
+  anchor: middle
+  tone: muted
+- text: (второй закон)
+  at:
+  - 300
+  - 268
+  size: 13
+  anchor: middle
+  tone: muted
