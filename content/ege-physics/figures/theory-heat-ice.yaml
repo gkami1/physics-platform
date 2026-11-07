@@ -119,11 +119,11 @@ items:
   anchor: end
 - text: отдаст вода
   at:
-  - 222
+  - 124
   - 138
   size: 13
   anchor: start
-  tone: muted
+  tone: accent
 - text: нужно льду
   at:
   - 286
