@@ -2204,6 +2204,45 @@ blockquote {
   font-size: 12px;
 }
 
+/* <pp-iso work="q">: heat Q solid accent (the focal quantity, as in «Количество теплоты»), the work
+   bar an accent tint like the area under p(V) (hatched when negative), ΔU green; the heat arrow at
+   the cylinder accent; an adiabat's insulation a thick muted layer round the walls. */
+.iso-bar-q {
+  fill: var(--accent);
+}
+
+.iso-bar-a.tint {
+  fill-opacity: 0.3;
+  stroke: var(--accent);
+  stroke-width: 1.2;
+}
+
+.iso-bar-a.tint.neg {
+  fill-opacity: 1;
+}
+
+.iso-heat line {
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+
+.iso-heat path,
+.sim-svg .iso-heat text {
+  fill: var(--accent);
+}
+
+.sim-svg .iso-heat text {
+  font-style: italic;
+  font-size: 13px;
+}
+
+.iso-insul {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 5;
+  stroke-opacity: 0.45;
+}
+
 /* <pp-vapour> (src/lib/sims/vapour.ts): water vapour under a piston. Molecules in the text
    colour, liquid water an accent tint with an accent surface (as in the figures), the curve
    p_н(t) in the text colour, the isotherm of the current temperature dashed accent, the states
