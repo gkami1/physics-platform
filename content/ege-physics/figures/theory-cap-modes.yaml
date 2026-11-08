@@ -1,0 +1,306 @@
+# electro.field.capacitors 4.5: the plates moved twice as far apart (the old place of the right
+# plate dashed muted). Left, disconnected (open switch): the charge stays, the field lines as
+# dense as before (E the same), so U = Ed grows. Right, still connected to the battery: U is
+# the same, so E = U/d halves (half the lines) and half the charge went back (fewer signs).
+# What stays fixed in accent.
+# Colours (extends «Проводники и диэлектрики в электрическом поле»): plates are text-colour
+# bars with their «+» and «−»; field lines text colour, thin, with small arrowheads; E at a
+# point an accent vector (never red); a dielectric an accent tint; electrons small dots, moving
+# ones accent, their motion a green arrow. Circuit symbols (battery, capacitor, switch) and
+# wires in the text colour. Graphs (q(U), U(q)) use the diagram kind with the Axes helper: the
+# line accent, the energy under it an accent tint. What stays fixed (q or U) is accent text.
+# Guides, distances and notes muted.
+kind: diagram
+size:
+- 400
+- 230
+items:
+- rect:
+  - 100
+  - 46
+  - 6
+  - 84
+  width: 1
+  tone: muted
+  dashed: true
+- rect:
+  - 57
+  - 46
+  - 6
+  - 84
+  fill: solid
+  width: 1
+- rect:
+  - 140
+  - 46
+  - 6
+  - 84
+  fill: solid
+  width: 1
+- text: +
+  at:
+  - 47
+  - 61.5
+  size: 15
+- text: −
+  at:
+  - 156
+  - 61.5
+  size: 15
+- text: +
+  at:
+  - 47
+  - 82.5
+  size: 15
+- text: −
+  at:
+  - 156
+  - 82.5
+  size: 15
+- text: +
+  at:
+  - 47
+  - 103.5
+  size: 15
+- text: −
+  at:
+  - 156
+  - 103.5
+  size: 15
+- text: +
+  at:
+  - 47
+  - 124.5
+  size: 15
+- text: −
+  at:
+  - 156
+  - 124.5
+  size: 15
+- path: M65 53L138 53
+  width: 1.1
+- arrow:
+  - - 94.5
+    - 53.0
+  - - 108.5
+    - 53.0
+  width: 1.3
+- path: M65 67L138 67
+  width: 1.1
+- arrow:
+  - - 94.5
+    - 67.0
+  - - 108.5
+    - 67.0
+  width: 1.3
+- path: M65 81L138 81
+  width: 1.1
+- arrow:
+  - - 94.5
+    - 81.0
+  - - 108.5
+    - 81.0
+  width: 1.3
+- path: M65 95L138 95
+  width: 1.1
+- arrow:
+  - - 94.5
+    - 95.0
+  - - 108.5
+    - 95.0
+  width: 1.3
+- path: M65 109L138 109
+  width: 1.1
+- arrow:
+  - - 94.5
+    - 109.0
+  - - 108.5
+    - 109.0
+  width: 1.3
+- path: M65 123L138 123
+  width: 1.1
+- arrow:
+  - - 94.5
+    - 123.0
+  - - 108.5
+    - 123.0
+  width: 1.3
+- line:
+  - - 60
+    - 130
+  - - 60
+    - 170
+  - - 62
+    - 170
+  width: 1.6
+- element: battery
+  at:
+  - 82
+  - 170
+- element: switch
+  at:
+  - 122
+  - 170
+- line:
+  - - 142
+    - 170
+  - - 143
+    - 170
+  - - 143
+    - 130
+  width: 1.6
+- rect:
+  - 300
+  - 46
+  - 6
+  - 84
+  width: 1
+  tone: muted
+  dashed: true
+- rect:
+  - 257
+  - 46
+  - 6
+  - 84
+  fill: solid
+  width: 1
+- rect:
+  - 340
+  - 46
+  - 6
+  - 84
+  fill: solid
+  width: 1
+- text: +
+  at:
+  - 247
+  - 72.0
+  size: 15
+- text: −
+  at:
+  - 356
+  - 72.0
+  size: 15
+- text: +
+  at:
+  - 247
+  - 114.0
+  size: 15
+- text: −
+  at:
+  - 356
+  - 114.0
+  size: 15
+- path: M265 60L338 60
+  width: 1.1
+- arrow:
+  - - 294.5
+    - 60.0
+  - - 308.5
+    - 60.0
+  width: 1.3
+- path: M265 88L338 88
+  width: 1.1
+- arrow:
+  - - 294.5
+    - 88.0
+  - - 308.5
+    - 88.0
+  width: 1.3
+- path: M265 116L338 116
+  width: 1.1
+- arrow:
+  - - 294.5
+    - 116.0
+  - - 308.5
+    - 116.0
+  width: 1.3
+- line:
+  - - 260
+    - 130
+  - - 260
+    - 170
+  - - 262
+    - 170
+  width: 1.6
+- element: battery
+  at:
+  - 282
+  - 170
+- line:
+  - - 302
+    - 170
+  - - 342
+    - 170
+  width: 1.6
+- line:
+  - - 342
+    - 170
+  - - 343
+    - 170
+  - - 343
+    - 130
+  width: 1.6
+- line:
+  - - 200
+    - 8
+  - - 200
+    - 226
+  width: 1
+  tone: muted
+- text: отключён
+  at:
+  - 100
+  - 16
+  size: 14
+  anchor: middle
+  tone: default
+- text: подключён
+  at:
+  - 300
+  - 16
+  size: 14
+  anchor: middle
+  tone: default
+- text: '*q* не меняется'
+  at:
+  - 100
+  - 34
+  size: 14
+  anchor: middle
+  tone: accent
+- text: '*U* не меняется'
+  at:
+  - 300
+  - 34
+  size: 14
+  anchor: middle
+  tone: accent
+- text: '*E* то же,'
+  at:
+  - 100
+  - 202
+  size: 13
+  anchor: middle
+  tone: muted
+- text: '*U* = *Ed* больше'
+  at:
+  - 100
+  - 218
+  size: 13
+  anchor: middle
+  tone: muted
+- text: '*E* = *U*/*d* меньше,'
+  at:
+  - 300
+  - 202
+  size: 13
+  anchor: middle
+  tone: muted
+- text: часть заряда ушла
+  at:
+  - 300
+  - 218
+  size: 13
+  anchor: middle
+  tone: muted

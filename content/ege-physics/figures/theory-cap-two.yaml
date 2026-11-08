@@ -1,0 +1,160 @@
+# electro.field.capacitors 4.2: why the field is inside only. Top row: the field E₊ of the
+# positive plate alone, away from it on both sides; middle row: E₋ of the negative plate,
+# towards it; bottom row (below a muted dashed line): the sum, twice as long between the
+# plates and 0 outside. E vectors accent.
+# Colours (extends «Проводники и диэлектрики в электрическом поле»): plates are text-colour
+# bars with their «+» and «−»; field lines text colour, thin, with small arrowheads; E at a
+# point an accent vector (never red); a dielectric an accent tint; electrons small dots, moving
+# ones accent, their motion a green arrow. Circuit symbols (battery, capacitor, switch) and
+# wires in the text colour. Graphs (q(U), U(q)) use the diagram kind with the Axes helper: the
+# line accent, the energy under it an accent tint. What stays fixed (q or U) is accent text.
+# Guides, distances and notes muted.
+kind: diagram
+size:
+- 400
+- 236
+items:
+- rect:
+  - 124
+  - 22
+  - 6
+  - 184
+  fill: solid
+  width: 1
+- rect:
+  - 270
+  - 22
+  - 6
+  - 184
+  fill: solid
+  width: 1
+- text: +
+  at:
+  - 127
+  - 17.6
+  size: 16
+  tone: default
+- text: −
+  at:
+  - 273
+  - 17.6
+  size: 16
+  tone: default
+- arrow:
+  - - 83.0
+    - 56
+  - - 49.0
+    - 56
+  tone: accent
+  width: 1.8
+  label: '*E*_{+}'
+  label_at:
+  - 66
+  - 46
+- arrow:
+  - - 183.0
+    - 56
+  - - 217.0
+    - 56
+  tone: accent
+  width: 1.8
+  label: '*E*_{+}'
+  label_at:
+  - 200
+  - 46
+- arrow:
+  - - 317.0
+    - 56
+  - - 351.0
+    - 56
+  tone: accent
+  width: 1.8
+  label: '*E*_{+}'
+  label_at:
+  - 334
+  - 46
+- arrow:
+  - - 49.0
+    - 118
+  - - 83.0
+    - 118
+  tone: accent
+  width: 1.8
+  label: '*E*_{−}'
+  label_at:
+  - 66
+  - 108
+- arrow:
+  - - 183.0
+    - 118
+  - - 217.0
+    - 118
+  tone: accent
+  width: 1.8
+  label: '*E*_{−}'
+  label_at:
+  - 200
+  - 108
+- arrow:
+  - - 351.0
+    - 118
+  - - 317.0
+    - 118
+  tone: accent
+  width: 1.8
+  label: '*E*_{−}'
+  label_at:
+  - 334
+  - 108
+- arrow:
+  - - 166
+    - 182
+  - - 234
+    - 182
+  tone: accent
+  width: 2.6
+  label: '*E*'
+  label_at:
+  - 200
+  - 171
+- text: '0'
+  at:
+  - 66
+  - 187
+  size: 15
+- text: '0'
+  at:
+  - 334
+  - 187
+  size: 15
+- line:
+  - - 20
+    - 150
+  - - 116
+    - 150
+  width: 1
+  tone: muted
+  dashed: true
+- line:
+  - - 144
+    - 150
+  - - 256
+    - 150
+  width: 1
+  tone: muted
+  dashed: true
+- line:
+  - - 284
+    - 150
+  - - 380
+    - 150
+  width: 1
+  tone: muted
+  dashed: true
+- text: сумма
+  at:
+  - 200
+  - 226
+  size: 13
+  anchor: middle
+  tone: muted
