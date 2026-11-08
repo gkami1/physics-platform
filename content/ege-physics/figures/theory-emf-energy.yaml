@@ -1,0 +1,131 @@
+# electro.circuits.emf 6.7: where the energy of each coulomb goes: a bar of height ℰ (the
+# outside forces' work per coulomb, muted bracket) split into U (accent tint), given to the
+# outer circuit, and Ir (muted tint), which heats the source itself. Qualitative.
+# Colours (the circuit convention of «Ток, сопротивление и закон Ома для участка цепи», extended
+# for a real source): circuit symbols and wires in the text colour, node dots text-colour dots
+# (r 3); the conventional current I an accent arrow beside the wire, its label accent; labels R,
+# U, r and ℰ in the text colour beside the symbol, a battery's «+» and «−» small text-colour
+# signs; a real source is its battery ℰ and its internal resistance r inside a muted dashed
+# outline; voltages over a stretch as muted brackets with a text-colour label. Inside the source
+# the field E is an accent vector and the outside force F_ст red (a force), as is the field's
+# force on the charge. A source's U(I) graph uses the diagram kind with the Axes helper: the
+# line accent, its ends on the axes text-colour dots labelled ℰ and I_кз, a slope triangle in
+# muted guides. The split ℰ = U + Ir as a stacked bar: U an accent tint, Ir a muted tint.
+# What stays the same (ℰ) is accent text. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 236
+items:
+- rect:
+  - 70
+  - 72.0
+  - 64
+  - 128.0
+  fill: accent
+  tone: accent
+  width: 1.4
+- rect:
+  - 70
+  - 40
+  - 64
+  - 32.0
+  fill: accent
+  tone: muted
+  width: 1.4
+- text: '*U*'
+  at:
+  - 102.0
+  - 141.0
+  size: 15
+- text: '*Ir*'
+  at:
+  - 102.0
+  - 61.0
+  size: 15
+- line:
+  - - 60
+    - 40
+  - - 54
+    - 40
+  - - 54
+    - 200
+  - - 60
+    - 200
+  width: 1
+  tone: muted
+- text: ℰ
+  at:
+  - 48
+  - 126.0
+  size: 17
+  anchor: end
+- text: работа сторонних сил
+  at:
+  - 160
+  - 26
+  size: 14
+  anchor: start
+  tone: default
+- text: над каждым кулоном
+  at:
+  - 160
+  - 44
+  size: 13
+  anchor: start
+  tone: muted
+- arrow:
+  - - 142
+    - 56.0
+  - - 156
+    - 56.0
+  tone: muted
+  width: 1.4
+- text: греет сам источник
+  at:
+  - 162
+  - 61.0
+  size: 13
+  anchor: start
+  tone: muted
+- arrow:
+  - - 142
+    - 136.0
+  - - 156
+    - 136.0
+  tone: muted
+  width: 1.4
+- text: 'уходит во внешнюю цепь:'
+  at:
+  - 162
+  - 132.0
+  size: 13
+  anchor: start
+  tone: muted
+- text: лампа светит, резистор
+  at:
+  - 162
+  - 150.0
+  size: 13
+  anchor: start
+  tone: muted
+- text: греется
+  at:
+  - 162
+  - 168.0
+  size: 13
+  anchor: start
+  tone: muted
+- line:
+  - - 40
+    - 200
+  - - 140
+    - 200
+  width: 1.4
+- text: энергия на 1 Кл, Дж
+  at:
+  - 102.0
+  - 222
+  size: 13
+  anchor: middle
+  tone: muted

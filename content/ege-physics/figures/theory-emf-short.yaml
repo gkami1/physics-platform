@@ -1,0 +1,107 @@
+# electro.circuits.emf 6.4: short circuit: the source's poles joined by a bare wire, so the
+# outer resistance is almost zero and only r limits the current; the current arrow drawn thick.
+# Colours (the circuit convention of «Ток, сопротивление и закон Ома для участка цепи», extended
+# for a real source): circuit symbols and wires in the text colour, node dots text-colour dots
+# (r 3); the conventional current I an accent arrow beside the wire, its label accent; labels R,
+# U, r and ℰ in the text colour beside the symbol, a battery's «+» and «−» small text-colour
+# signs; a real source is its battery ℰ and its internal resistance r inside a muted dashed
+# outline; voltages over a stretch as muted brackets with a text-colour label. Inside the source
+# the field E is an accent vector and the outside force F_ст red (a force), as is the field's
+# force on the charge. A source's U(I) graph uses the diagram kind with the Axes helper: the
+# line accent, its ends on the axes text-colour dots labelled ℰ and I_кз, a slope triangle in
+# muted guides. The split ℰ = U + Ir as a stacked bar: U an accent tint, Ir a muted tint.
+# What stays the same (ℰ) is accent text. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 206
+items:
+- rect:
+  - 50
+  - 56
+  - 120
+  - 76
+  dashed: true
+  tone: muted
+  radius: 6
+- element: battery
+  at:
+  - 80
+  - 96
+  label: ℰ
+- line:
+  - - 100
+    - 96
+  - - 120
+    - 96
+  width: 1.6
+- element: resistor
+  at:
+  - 140
+  - 96
+  label: '*r*'
+- text: +
+  at:
+  - 70
+  - 122.9
+  size: 14
+  tone: default
+- text: −
+  at:
+  - 90
+  - 122.9
+  size: 14
+  tone: default
+- line:
+  - - 60
+    - 96
+  - - 30
+    - 96
+  - - 30
+    - 186
+  - - 370
+    - 186
+  - - 370
+    - 96
+  - - 160
+    - 96
+  width: 1.6
+- text: источник
+  at:
+  - 110
+  - 152
+  size: 13
+  anchor: middle
+  tone: muted
+- text: 'полюса замкнуты проводом:'
+  at:
+  - 270
+  - 82
+  size: 13
+  anchor: middle
+  tone: muted
+- text: '*R* ≈ 0'
+  at:
+  - 270
+  - 112
+  size: 15
+  anchor: middle
+  tone: default
+- arrow:
+  - - 160
+    - 170
+  - - 240
+    - 170
+  tone: accent
+  width: 4
+- text: '*I*_{кз}'
+  at:
+  - 200
+  - 160
+  size: 15
+  tone: accent
+- text: '*I*_{кз} = ℰ/*r*'
+  at:
+  - 200
+  - 36
+  size: 16

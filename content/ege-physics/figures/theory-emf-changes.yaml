@@ -1,0 +1,135 @@
+# electro.circuits.emf 6.6: ℰ = U + Ir as two stacked bars of the same height ℰ (accent
+# dashed level, «ℰ — та же» in accent): with a small outer R the current is large, the drop
+# Ir (muted tint) is large and U (accent tint) small; with a larger R the current falls, Ir
+# shrinks and U grows. Qualitative.
+# Colours (the circuit convention of «Ток, сопротивление и закон Ома для участка цепи», extended
+# for a real source): circuit symbols and wires in the text colour, node dots text-colour dots
+# (r 3); the conventional current I an accent arrow beside the wire, its label accent; labels R,
+# U, r and ℰ in the text colour beside the symbol, a battery's «+» and «−» small text-colour
+# signs; a real source is its battery ℰ and its internal resistance r inside a muted dashed
+# outline; voltages over a stretch as muted brackets with a text-colour label. Inside the source
+# the field E is an accent vector and the outside force F_ст red (a force), as is the field's
+# force on the charge. A source's U(I) graph uses the diagram kind with the Axes helper: the
+# line accent, its ends on the axes text-colour dots labelled ℰ and I_кз, a slope triangle in
+# muted guides. The split ℰ = U + Ir as a stacked bar: U an accent tint, Ir a muted tint.
+# What stays the same (ℰ) is accent text. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 244
+items:
+- line:
+  - - 40
+    - 52
+  - - 360
+    - 52
+  width: 1
+  dashed: true
+  tone: accent
+- text: ℰ — та же
+  at:
+  - 44
+  - 42
+  size: 15
+  anchor: start
+  tone: accent
+- rect:
+  - 92
+  - 131.2
+  - 56
+  - 64.8
+  fill: accent
+  tone: accent
+  width: 1.4
+- rect:
+  - 92
+  - 52
+  - 56
+  - 79.2
+  fill: accent
+  tone: muted
+  width: 1.4
+- text: '*U*'
+  at:
+  - 120.0
+  - 168.6
+  size: 15
+- text: '*Ir*'
+  at:
+  - 120.0
+  - 96.6
+  size: 15
+- rect:
+  - 252
+  - 77.9
+  - 56
+  - 118.1
+  fill: accent
+  tone: accent
+  width: 1.4
+- rect:
+  - 252
+  - 52
+  - 56
+  - 25.9
+  fill: accent
+  tone: muted
+  width: 1.4
+- text: '*U*'
+  at:
+  - 280.0
+  - 142.0
+  size: 15
+- text: '*Ir*'
+  at:
+  - 280.0
+  - 70.0
+  size: 15
+- line:
+  - - 40
+    - 196
+  - - 360
+    - 196
+  width: 1.4
+- text: '*R* меньше:'
+  at:
+  - 120
+  - 216
+  size: 14
+  anchor: middle
+  tone: default
+- text: ток больше
+  at:
+  - 120
+  - 234
+  size: 13
+  anchor: middle
+  tone: muted
+- text: '*R* больше:'
+  at:
+  - 280
+  - 216
+  size: 14
+  anchor: middle
+  tone: default
+- text: ток меньше
+  at:
+  - 280
+  - 234
+  size: 13
+  anchor: middle
+  tone: muted
+- arrow:
+  - - 170
+    - 130
+  - - 230
+    - 130
+  tone: muted
+  width: 1.6
+- text: '*R* ↑'
+  at:
+  - 200
+  - 120
+  size: 13
+  anchor: middle
+  tone: muted

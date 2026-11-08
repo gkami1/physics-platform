@@ -1,0 +1,147 @@
+# electro.circuits.emf 6.3: the circuit of 6.2 with a voltmeter on the source's poles,
+# joined just outside the dashed outline: it shows U = IR, the voltage on the outer circuit
+# (muted bracket over R), which is ℰ minus the drop Ir inside the source.
+# Colours (the circuit convention of «Ток, сопротивление и закон Ома для участка цепи», extended
+# for a real source): circuit symbols and wires in the text colour, node dots text-colour dots
+# (r 3); the conventional current I an accent arrow beside the wire, its label accent; labels R,
+# U, r and ℰ in the text colour beside the symbol, a battery's «+» and «−» small text-colour
+# signs; a real source is its battery ℰ and its internal resistance r inside a muted dashed
+# outline; voltages over a stretch as muted brackets with a text-colour label. Inside the source
+# the field E is an accent vector and the outside force F_ст red (a force), as is the field's
+# force on the charge. A source's U(I) graph uses the diagram kind with the Axes helper: the
+# line accent, its ends on the axes text-colour dots labelled ℰ and I_кз, a slope triangle in
+# muted guides. The split ℰ = U + Ir as a stacked bar: U an accent tint, Ir a muted tint.
+# What stays the same (ℰ) is accent text. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 240
+items:
+- rect:
+  - 50
+  - 84
+  - 120
+  - 76
+  dashed: true
+  tone: muted
+  radius: 6
+- element: battery
+  at:
+  - 80
+  - 124
+  label: ℰ
+- line:
+  - - 100
+    - 124
+  - - 120
+    - 124
+  width: 1.6
+- element: resistor
+  at:
+  - 140
+  - 124
+  label: '*r*'
+- text: +
+  at:
+  - 70
+  - 150.9
+  size: 14
+  tone: default
+- text: −
+  at:
+  - 90
+  - 150.9
+  size: 14
+  tone: default
+- line:
+  - - 60
+    - 124
+  - - 30
+    - 124
+  - - 30
+    - 220
+  - - 370
+    - 220
+  - - 370
+    - 124
+  - - 300
+    - 124
+  width: 1.6
+- element: resistor
+  at:
+  - 280
+  - 124
+  label: '*R*'
+- line:
+  - - 260
+    - 124
+  - - 160
+    - 124
+  width: 1.6
+- line:
+  - - 40
+    - 124
+  - - 40
+    - 36
+  - - 90
+    - 36
+  width: 1.6
+- element: voltmeter
+  at:
+  - 110
+  - 36
+- line:
+  - - 130
+    - 36
+  - - 190
+    - 36
+  - - 190
+    - 124
+  width: 1.6
+- dots:
+  - - 40
+    - 124
+  - - 190
+    - 124
+  r: 3
+- text: на полюсах
+  at:
+  - 200
+  - 41
+  size: 13
+  anchor: start
+  tone: muted
+- line:
+  - - 260
+    - 91
+  - - 260
+    - 86
+  - - 300
+    - 86
+  - - 300
+    - 91
+  width: 1
+  tone: muted
+- text: '*U* = *IR*'
+  at:
+  - 280.0
+  - 80
+  size: 15
+- arrow:
+  - - 170
+    - 206
+  - - 230
+    - 206
+  tone: accent
+  width: 1.8
+- text: '*I*'
+  at:
+  - 200
+  - 198
+  size: 15
+  tone: accent
+- text: ℰ = *U* + *Ir*
+  at:
+  - 280
+  - 178
+  size: 16

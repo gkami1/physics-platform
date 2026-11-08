@@ -1,36 +1,114 @@
-# electro.circuits.emf: source with EMF and internal resistance closed on a load
+# electro.circuits.emf 6.2: a real source — battery ℰ («+» on the left) and its internal
+# resistance r in a muted dashed outline — closed on an outer resistor R. The current I
+# (accent) leaves «+», goes round through R and returns through r to «−»: R and r in series.
+# Redrawn from the ladder's figure: its wire ran through R's symbol and left a gap between
+# the battery and r; the source now shows «+» and «−».
+# Colours (the circuit convention of «Ток, сопротивление и закон Ома для участка цепи», extended
+# for a real source): circuit symbols and wires in the text colour, node dots text-colour dots
+# (r 3); the conventional current I an accent arrow beside the wire, its label accent; labels R,
+# U, r and ℰ in the text colour beside the symbol, a battery's «+» and «−» small text-colour
+# signs; a real source is its battery ℰ and its internal resistance r inside a muted dashed
+# outline; voltages over a stretch as muted brackets with a text-colour label. Inside the source
+# the field E is an accent vector and the outside force F_ст red (a force), as is the field's
+# force on the charge. A source's U(I) graph uses the diagram kind with the Axes helper: the
+# line accent, its ends on the axes text-colour dots labelled ℰ and I_кз, a slope triangle in
+# muted guides. The split ℰ = U + Ir as a stacked bar: U an accent tint, Ir a muted tint.
+# What stays the same (ℰ) is accent text. Guides and notes muted.
 kind: diagram
-size: [400, 240]
+size:
+- 400
+- 230
 items:
-- rect: [30, 92, 120, 76]
+- rect:
+  - 50
+  - 70
+  - 120
+  - 76
   dashed: true
   tone: muted
   radius: 6
-- text: источник
-  at: [90, 186]
-  size: 12
-  tone: muted
 - element: battery
-  at: [62, 130]
+  at:
+  - 80
+  - 110
   label: ℰ
-  label_side: -1
-- element: resistor
-  at: [118, 130]
-  label: '*r*'
-  label_side: -1
-- line: [[42, 130], [20, 130], [20, 210], [380, 210], [380, 130], [138, 130]]
+- line:
+  - - 100
+    - 110
+  - - 120
+    - 110
   width: 1.6
 - element: resistor
-  at: [280, 130]
-  label: '*R*'
-  label_side: -1
-- arrow: [[170, 210], [230, 210]]
-  tone: accent
-  label: '*I*'
-  label_at: [200, 232]
-- text: '*I* = ℰ/(*R* + *r*)'
-  at: [270, 50]
-  size: 16
-- text: '*U* = ℰ − *I**r*'
-  at: [270, 78]
+  at:
+  - 140
+  - 110
+  label: '*r*'
+- text: +
+  at:
+  - 70
+  - 136.9
   size: 14
+  tone: default
+- text: −
+  at:
+  - 90
+  - 136.9
+  size: 14
+  tone: default
+- line:
+  - - 60
+    - 110
+  - - 30
+    - 110
+  - - 30
+    - 206
+  - - 370
+    - 206
+  - - 370
+    - 110
+  - - 300
+    - 110
+  width: 1.6
+- element: resistor
+  at:
+  - 280
+  - 110
+  label: '*R*'
+- line:
+  - - 260
+    - 110
+  - - 160
+    - 110
+  width: 1.6
+- text: источник
+  at:
+  - 110
+  - 166
+  size: 13
+  anchor: middle
+  tone: muted
+- arrow:
+  - - 170
+    - 192
+  - - 230
+    - 192
+  tone: accent
+  width: 1.8
+- text: '*I*'
+  at:
+  - 200
+  - 184
+  size: 15
+  tone: accent
+- text: '*I* = ℰ/(*R* + *r*)'
+  at:
+  - 200
+  - 36
+  size: 16
+- text: '*R* и *r* — последовательно'
+  at:
+  - 280
+  - 150
+  size: 13
+  anchor: middle
+  tone: muted

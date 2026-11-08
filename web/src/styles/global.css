@@ -3028,3 +3028,130 @@ task-answer .final {
   color: var(--accent);
   font-weight: 600;
 }
+
+/* <pp-source> (src/lib/sims/source.ts): a real source (battery ℰ and r in a muted dashed outline)
+   on a rheostat, with the source's U(I) line. Symbols and wires in the text colour, the current
+   and the U(I) line accent, ℰ (it does not change) in accent. Its one chip fieldset is the last
+   of type, which .pfx-chips turns green: kept accent here. */
+.emf-chips legend {
+  width: auto;
+  margin-right: 0.4rem;
+}
+
+.emf-chips span {
+  padding: 0.25rem 0.7rem;
+}
+
+.pfx-chips.emf-chips input:checked + span {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.emf-chips {
+  margin: 0 0 0.5rem;
+}
+
+.emf-wire {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.6;
+}
+
+.emf-thick {
+  stroke-width: 4;
+}
+
+.emf-thin {
+  stroke-width: 1.3;
+}
+
+.emf-dot {
+  fill: var(--text);
+}
+
+.emf-outline {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.2;
+  stroke-dasharray: 5 4;
+}
+
+.emf-current {
+  fill: none;
+  stroke: var(--accent);
+}
+
+.emf-head,
+.emf-point {
+  fill: var(--accent);
+}
+
+.emf-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.4;
+}
+
+.emf-guide {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+}
+
+.sim-svg .emf-label {
+  fill: var(--text);
+  font-size: 15px;
+}
+
+.sim-svg .emf-it {
+  font-style: italic;
+}
+
+.sim-svg .emf-i {
+  fill: var(--accent);
+}
+
+.sim-svg .emf-sign {
+  fill: var(--text);
+  font-size: 14px;
+}
+
+.sim-svg .emf-meter {
+  fill: var(--text);
+  font-size: 13px;
+}
+
+.sim-svg .emf-note {
+  fill: var(--muted);
+  font-size: 13px;
+}
+
+.emf-table {
+  width: 100%;
+  margin: 0.75rem 0 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.emf-table th,
+.emf-table td {
+  padding: 0.2rem 0.35rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+.emf-table th {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.emf-table td {
+  white-space: nowrap;
+}
+
+.emf-table tr.emf-fixed td {
+  color: var(--accent);
+  font-weight: 600;
+}
