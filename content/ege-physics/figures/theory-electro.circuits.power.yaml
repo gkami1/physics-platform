@@ -1,34 +1,131 @@
-# electro.circuits.power: lamps in parallel get the same voltage
+# electro.circuits.power 7.6: two lamps in parallel on one source (battery U, «+» on top).
+# Both get the same voltage (accent text); the lamp with the smaller resistance R₁ takes the
+# larger power U²/R and shines brighter (more and longer accent rays). Redrawn from the
+# ladder's figure: its top wire ran through an open switch (lit lamps with an open switch)
+# and its battery had no «+» and «−»; the switch is dropped.
+# Colours (the circuit convention of «Ток, сопротивление и закон Ома для участка цепи» and
+# «ЭДС и закон Ома для полной цепи», extended for power): circuit symbols and wires in the text
+# colour, node dots text-colour dots (r 3); the conventional current I an accent arrow beside the
+# wire, its label accent; labels R, U, r and ℰ in the text colour, a battery's «+» and «−» small
+# text-colour signs; a real source in a muted dashed outline; voltages as muted brackets. A lit
+# lamp has short accent rays around it: more and longer rays for a brighter lamp, none for an
+# unlit one. Energy and power bars: the useful part an accent tint, the lost part (heat in a
+# motor, heat inside a source) a muted tint. Graphs use the diagram kind with the Axes helper:
+# lines and areas accent, the P(R) maximum a text-colour dot with muted guides. What stays the
+# same is accent text. Guides and notes muted.
 kind: diagram
-size: [400, 240]
+size:
+- 400
+- 278
 items:
 - element: battery
-  at: [60, 130]
+  at:
+  - 50
+  - 130
   vertical: true
   label: '*U*'
-  label_side: -1
-- line: [[60, 110], [60, 50], [300, 50], [300, 110]]
-  width: 1.6
-- line: [[60, 150], [60, 210], [300, 210], [300, 150]]
-  width: 1.6
-- element: lamp
-  at: [180, 130]
-  vertical: true
-  label: '*R*_1'
-  label_side: 1
-- element: lamp
-  at: [300, 130]
-  vertical: true
-  label: '*R*_2'
-  label_side: 1
-- line: [[180, 50], [180, 110]]
-  width: 1.6
-- line: [[180, 150], [180, 210]]
-  width: 1.6
-- dots: [[180, 50], [180, 210]]
-  r: 3
-- element: switch
-  at: [120, 50]
-- text: '*P* = *U**I* = *I*^{2}*R* = *U*^{2}/*R*'
-  at: [200, 236]
+- text: +
+  at:
+  - 68
+  - 124.9
   size: 14
+  tone: default
+- text: −
+  at:
+  - 68
+  - 144.9
+  size: 14
+  tone: default
+- line:
+  - - 50
+    - 110
+  - - 50
+    - 46
+  - - 320
+    - 46
+  - - 320
+    - 110
+  width: 1.6
+- line:
+  - - 50
+    - 150
+  - - 50
+    - 214
+  - - 320
+    - 214
+  - - 320
+    - 150
+  width: 1.6
+- line:
+  - - 200
+    - 46
+  - - 200
+    - 110
+  width: 1.6
+- line:
+  - - 200
+    - 150
+  - - 200
+    - 214
+  width: 1.6
+- dots:
+  - - 200
+    - 46
+  - - 200
+    - 214
+  r: 3
+- element: lamp
+  at:
+  - 200
+  - 130
+  vertical: true
+- text: '*R*_1'
+  at:
+  - 230
+  - 135
+  size: 15
+  anchor: start
+- path: M194.3 116.1L190.4 106.9M205.7 143.9L209.6 153.1M186.1 124.3L176.9 120.4M213.9 135.7L223.1 139.6M186.1
+    135.7L176.9 139.6M213.9 124.3L223.1 120.4M194.3 143.9L190.4 153.1M205.7 116.1L209.6 106.9
+  width: 1.8
+  tone: accent
+- element: lamp
+  at:
+  - 320
+  - 130
+  vertical: true
+- text: '*R*_2'
+  at:
+  - 342
+  - 135
+  size: 15
+  anchor: start
+- path: M309.4 119.4L305.9 115.9M330.6 140.6L334.1 144.1M309.4 140.6L305.9 144.1M330.6 119.4L334.1 115.9
+  width: 1.8
+  tone: accent
+- arrow:
+  - - 100
+    - 32
+  - - 160
+    - 32
+  tone: accent
+  width: 1.8
+- text: '*I*'
+  at:
+  - 130
+  - 24
+  size: 15
+  tone: accent
+- text: на обеих лампах одно *U*
+  at:
+  - 200
+  - 244
+  size: 15
+  tone: accent
+- text: '*R*_1 < *R*_2: ярче первая'
+  at:
+  - 200
+  - 266
+  size: 13
+  anchor: middle
+  tone: muted

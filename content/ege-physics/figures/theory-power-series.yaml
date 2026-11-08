@@ -1,0 +1,118 @@
+# electro.circuits.power 7.6: the same two lamps in series on one source (battery U, «+» on
+# the left). One current flows through both (accent text); the lamp with the larger
+# resistance R₂ takes the larger power I²R and shines brighter (more and longer accent rays).
+# Colours (the circuit convention of «Ток, сопротивление и закон Ома для участка цепи» and
+# «ЭДС и закон Ома для полной цепи», extended for power): circuit symbols and wires in the text
+# colour, node dots text-colour dots (r 3); the conventional current I an accent arrow beside the
+# wire, its label accent; labels R, U, r and ℰ in the text colour, a battery's «+» and «−» small
+# text-colour signs; a real source in a muted dashed outline; voltages as muted brackets. A lit
+# lamp has short accent rays around it: more and longer rays for a brighter lamp, none for an
+# unlit one. Energy and power bars: the useful part an accent tint, the lost part (heat in a
+# motor, heat inside a source) a muted tint. Graphs use the diagram kind with the Axes helper:
+# lines and areas accent, the P(R) maximum a text-colour dot with muted guides. What stays the
+# same is accent text. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 270
+items:
+- line:
+  - - 40
+    - 186
+  - - 40
+    - 70
+  - - 130
+    - 70
+  width: 1.6
+- element: lamp
+  at:
+  - 150
+  - 70
+- text: '*R*_1'
+  at:
+  - 150
+  - 46
+  size: 15
+- path: M160.6 59.4L164.1 55.9M139.4 80.6L135.9 84.1M139.4 59.4L135.9 55.9M160.6 80.6L164.1 84.1
+  width: 1.8
+  tone: accent
+- line:
+  - - 170
+    - 70
+  - - 250
+    - 70
+  width: 1.6
+- element: lamp
+  at:
+  - 270
+  - 70
+- text: '*R*_2'
+  at:
+  - 270
+  - 38
+  size: 15
+- path: M283.9 64.3L293.1 60.4M256.1 75.7L246.9 79.6M275.7 56.1L279.6 46.9M264.3 83.9L260.4 93.1M264.3
+    56.1L260.4 46.9M275.7 83.9L279.6 93.1M256.1 64.3L246.9 60.4M283.9 75.7L293.1 79.6
+  width: 1.8
+  tone: accent
+- line:
+  - - 290
+    - 70
+  - - 360
+    - 70
+  - - 360
+    - 186
+  - - 220
+    - 186
+  width: 1.6
+- element: battery
+  at:
+  - 200
+  - 186
+  label: '*U*'
+  label_side: 1
+- text: +
+  at:
+  - 190
+  - 168.9
+  size: 14
+  tone: default
+- text: −
+  at:
+  - 210
+  - 168.9
+  size: 14
+  tone: default
+- line:
+  - - 180
+    - 186
+  - - 40
+    - 186
+  width: 1.6
+- arrow:
+  - - 60
+    - 130
+  - - 60
+    - 100
+  tone: accent
+  width: 1.8
+- text: '*I*'
+  at:
+  - 74
+  - 120
+  size: 15
+  tone: accent
+  anchor: start
+- text: в обеих лампах один ток *I*
+  at:
+  - 200
+  - 236
+  size: 15
+  tone: accent
+- text: '*R*_1 < *R*_2: ярче вторая'
+  at:
+  - 200
+  - 258
+  size: 13
+  anchor: middle
+  tone: muted
