@@ -148,7 +148,7 @@ def test_lesson_has_its_own_thread_and_context(signed_in: TestClient) -> None:
 
 def test_theory_step_answer_is_cut(signed_in: TestClient) -> None:
     store: ContentStore = signed_in.app.state.content  # type: ignore[attr-defined]
-    page = store.theory("electro.circuits.emf")
+    page = store.theory("method.experiment")
     assert page is not None
     steps = store.theory_steps(page)
     assert steps, "the page should embed step tasks"

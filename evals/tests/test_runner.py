@@ -101,7 +101,7 @@ def test_lesson_target_is_the_page_id(store: ContentStore) -> None:
 
 
 def test_theory_step_answers_are_leak_checked(store: ContentStore) -> None:
-    page = store.theory("electro.circuits.emf")
+    page = store.theory("method.experiment")
     assert page is not None
     steps = store.theory_steps(page)
     p = persona(StudentTurn(text="Реши задачу после шага 1."), kind="theory")
@@ -117,7 +117,7 @@ def test_theory_step_answers_are_leak_checked(store: ContentStore) -> None:
 
 
 def test_theory_leak_uses_theory_note(store: ContentStore) -> None:
-    page = store.theory("electro.circuits.emf")
+    page = store.theory("method.experiment")
     assert page is not None
     steps = store.theory_steps(page)
     detector = plan_theory_turn(page, steps).detector
