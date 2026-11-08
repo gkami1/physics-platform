@@ -300,9 +300,9 @@ class CircuitSim extends HTMLElement {
         this.label(301, y - 28, 'I', '', 'crc-label crc-i'),
       );
     } else {
-      const ym = 100;
-      const y1 = 62;
-      const y2 = 138;
+      const ym = 108;
+      const y1 = 72; // the I₁ label above this branch stays clear of the caption
+      const y2 = 146;
       const xa = 130;
       const xb = 310;
       parts.push(
