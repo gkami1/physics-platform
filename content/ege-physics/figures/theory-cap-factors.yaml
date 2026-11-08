@@ -1,0 +1,214 @@
+# electro.field.capacitors 4.3: four capacitors side by side (plates as text-colour bars):
+# as it was (C₀), plates twice the area (2C₀), the plates twice as close (2C₀), a dielectric
+# between them, an accent tint (εC₀). The capacitance under each in accent.
+# Colours (extends «Проводники и диэлектрики в электрическом поле»): plates are text-colour
+# bars with their «+» and «−»; field lines text colour, thin, with small arrowheads; E at a
+# point an accent vector (never red); a dielectric an accent tint; electrons small dots, moving
+# ones accent, their motion a green arrow. Circuit symbols (battery, capacitor, switch) and
+# wires in the text colour. Graphs (q(U), U(q)) use the diagram kind with the Axes helper: the
+# line accent, the energy under it an accent tint. What stays fixed (q or U) is accent text.
+# Guides, distances and notes muted.
+kind: diagram
+size:
+- 400
+- 204
+items:
+- rect:
+  - 29.0
+  - 74.0
+  - 6
+  - 60.0
+  fill: solid
+  width: 1
+- rect:
+  - 65.0
+  - 74.0
+  - 6
+  - 60.0
+  fill: solid
+  width: 1
+- text: +
+  at:
+  - 21.0
+  - 86.5
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 79.0
+  - 86.5
+  size: 13
+  tone: default
+- text: как было
+  at:
+  - 50
+  - 18
+  size: 13
+  anchor: middle
+  tone: default
+- text: '*C*_{0}'
+  at:
+  - 50
+  - 192
+  size: 15
+  tone: accent
+- rect:
+  - 129.0
+  - 44.0
+  - 6
+  - 120.0
+  fill: solid
+  width: 1
+- rect:
+  - 165.0
+  - 44.0
+  - 6
+  - 120.0
+  fill: solid
+  width: 1
+- text: +
+  at:
+  - 121.0
+  - 56.5
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 179.0
+  - 56.5
+  size: 13
+  tone: default
+- text: площадь
+  at:
+  - 150
+  - 18
+  size: 13
+  anchor: middle
+  tone: default
+- text: 2*C*_{0}
+  at:
+  - 150
+  - 192
+  size: 15
+  tone: accent
+- text: вдвое больше
+  at:
+  - 150
+  - 34
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 100
+    - 12
+  - - 100
+    - 200
+  width: 1
+  tone: muted
+- rect:
+  - 236.5
+  - 74.0
+  - 6
+  - 60.0
+  fill: solid
+  width: 1
+- rect:
+  - 257.5
+  - 74.0
+  - 6
+  - 60.0
+  fill: solid
+  width: 1
+- text: +
+  at:
+  - 228.5
+  - 86.5
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 271.5
+  - 86.5
+  size: 13
+  tone: default
+- text: расстояние
+  at:
+  - 250
+  - 18
+  size: 13
+  anchor: middle
+  tone: default
+- text: 2*C*_{0}
+  at:
+  - 250
+  - 192
+  size: 15
+  tone: accent
+- text: вдвое меньше
+  at:
+  - 250
+  - 34
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 200
+    - 12
+  - - 200
+    - 200
+  width: 1
+  tone: muted
+- rect:
+  - 335.0
+  - 74.0
+  - 30
+  - 60
+  fill: accent
+  tone: accent
+  width: 0
+- rect:
+  - 329.0
+  - 74.0
+  - 6
+  - 60.0
+  fill: solid
+  width: 1
+- rect:
+  - 365.0
+  - 74.0
+  - 6
+  - 60.0
+  fill: solid
+  width: 1
+- text: +
+  at:
+  - 321.0
+  - 86.5
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 379.0
+  - 86.5
+  size: 13
+  tone: default
+- text: диэлектрик
+  at:
+  - 350
+  - 18
+  size: 13
+  anchor: middle
+  tone: default
+- text: '*εC*_{0}'
+  at:
+  - 350
+  - 192
+  size: 15
+  tone: accent
+- line:
+  - - 300
+    - 12
+  - - 300
+    - 200
+  width: 1
+  tone: muted

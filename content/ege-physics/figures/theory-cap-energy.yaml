@@ -1,0 +1,106 @@
+# electro.field.capacitors 4.4: U(q) while a capacitor is charged: a straight line through the
+# origin (accent, drawn with a moving dot). Each small portion Δq is carried at the voltage U′
+# reached so far (a strip, accent outline); all the strips make the triangle under the line
+# (accent tint), whose area qU/2 is the energy W.
+# Colours (extends «Проводники и диэлектрики в электрическом поле»): plates are text-colour
+# bars with their «+» and «−»; field lines text colour, thin, with small arrowheads; E at a
+# point an accent vector (never red); a dielectric an accent tint; electrons small dots, moving
+# ones accent, their motion a green arrow. Circuit symbols (battery, capacitor, switch) and
+# wires in the text colour. Graphs (q(U), U(q)) use the diagram kind with the Axes helper: the
+# line accent, the energy under it an accent tint. What stays fixed (q or U) is accent text.
+# Guides, distances and notes muted.
+kind: diagram
+size:
+- 400
+- 236
+items:
+- arrow:
+  - - 48
+    - 210
+  - - 388
+    - 210
+  width: 1.5
+- arrow:
+  - - 48
+    - 210
+  - - 48
+    - 14
+  width: 1.5
+- text: '*q*'
+  at:
+  - 386
+  - 228
+  anchor: end
+  size: 15
+- text: '*U*'
+  at:
+  - 58
+  - 24
+  anchor: start
+  size: 15
+- text: '0'
+  at:
+  - 42
+  - 225
+  size: 12
+  anchor: end
+- path: M48 210L48 210L338 40L338 210Z
+  fill: accent
+  tone: accent
+  width: 0
+- path: M169.8 210L169.8 138.6L184.3 130.1L184.3 210Z
+  width: 1.2
+  fill: accent
+  tone: accent
+- path: M48 210L361.2 26.4
+  width: 2.4
+  tone: accent
+  animate: draw
+  mover: true
+- line:
+  - - 338
+    - 210
+  - - 338
+    - 40
+  - - 48
+    - 40
+  width: 1
+  dashed: true
+  tone: muted
+- text: '*q*'
+  at:
+  - 338
+  - 229
+  size: 14
+- text: '*U*'
+  at:
+  - 41
+  - 45
+  size: 14
+  anchor: end
+- text: '*W* = *qU*/2'
+  at:
+  - 251.0
+  - 167.5
+  size: 15
+- text: 'порция заряда:'
+  at:
+  - 84
+  - 66
+  size: 13
+  anchor: start
+  tone: muted
+- text: работа *U*′·Δ*q*
+  at:
+  - 84
+  - 82
+  size: 13
+  anchor: start
+  tone: muted
+- line:
+  - - 150
+    - 90
+  - - 177.1
+    - 152.9
+  width: 1
+  tone: muted

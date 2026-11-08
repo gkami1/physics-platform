@@ -1,0 +1,369 @@
+# electro.field.capacitors 4.6: why the formulas. Left, two capacitors in parallel: their
+# «+» plates are joined and so are their «−» plates, one capacitor with the areas added.
+# Right, two in series: the two middle plates, joined by a wire, are one conductor whose
+# charges −q and +q are induced, so every plate carries the same charge and the gaps add up.
+# Colours (extends «Проводники и диэлектрики в электрическом поле»): plates are text-colour
+# bars with their «+» and «−»; field lines text colour, thin, with small arrowheads; E at a
+# point an accent vector (never red); a dielectric an accent tint; electrons small dots, moving
+# ones accent, their motion a green arrow. Circuit symbols (battery, capacitor, switch) and
+# wires in the text colour. Graphs (q(U), U(q)) use the diagram kind with the Axes helper: the
+# line accent, the energy under it an accent tint. What stays fixed (q or U) is accent text.
+# Guides, distances and notes muted.
+kind: diagram
+size:
+- 400
+- 226
+items:
+- rect:
+  - 66
+  - 26
+  - 6
+  - 60
+  fill: solid
+  width: 1
+- rect:
+  - 128
+  - 26
+  - 6
+  - 60
+  fill: solid
+  width: 1
+- path: M74 36L126 36
+  width: 1.1
+- arrow:
+  - - 93.0
+    - 36.0
+  - - 107.0
+    - 36.0
+  width: 1.3
+- path: M74 56L126 56
+  width: 1.1
+- arrow:
+  - - 93.0
+    - 56.0
+  - - 107.0
+    - 56.0
+  width: 1.3
+- path: M74 76L126 76
+  width: 1.1
+- arrow:
+  - - 93.0
+    - 76.0
+  - - 107.0
+    - 76.0
+  width: 1.3
+- text: +
+  at:
+  - 57
+  - 40.5
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 143
+  - 40.5
+  size: 13
+  tone: default
+- rect:
+  - 66
+  - 112
+  - 6
+  - 60
+  fill: solid
+  width: 1
+- rect:
+  - 128
+  - 112
+  - 6
+  - 60
+  fill: solid
+  width: 1
+- path: M74 122L126 122
+  width: 1.1
+- arrow:
+  - - 93.0
+    - 122.0
+  - - 107.0
+    - 122.0
+  width: 1.3
+- path: M74 142L126 142
+  width: 1.1
+- arrow:
+  - - 93.0
+    - 142.0
+  - - 107.0
+    - 142.0
+  width: 1.3
+- path: M74 162L126 162
+  width: 1.1
+- arrow:
+  - - 93.0
+    - 162.0
+  - - 107.0
+    - 162.0
+  width: 1.3
+- text: +
+  at:
+  - 57
+  - 126.5
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 143
+  - 126.5
+  size: 13
+  tone: default
+- line:
+  - - 66
+    - 56
+  - - 40
+    - 56
+  - - 40
+    - 142
+  - - 66
+    - 142
+  width: 1.6
+- line:
+  - - 134
+    - 56
+  - - 160
+    - 56
+  - - 160
+    - 142
+  - - 134
+    - 142
+  width: 1.6
+- text: одна пластина
+  at:
+  - 100
+  - 196
+  size: 13
+  anchor: middle
+  tone: muted
+- text: площадью *S*_{1} + *S*_{2}
+  at:
+  - 100
+  - 212
+  size: 13
+  anchor: middle
+  tone: muted
+- line:
+  - - 200
+    - 8
+  - - 200
+    - 218
+  width: 1
+  tone: muted
+- rect:
+  - 230
+  - 40
+  - 6
+  - 120
+  fill: solid
+  width: 1
+- rect:
+  - 284
+  - 40
+  - 6
+  - 120
+  fill: solid
+  width: 1
+- rect:
+  - 310
+  - 40
+  - 6
+  - 120
+  fill: solid
+  width: 1
+- rect:
+  - 366
+  - 40
+  - 6
+  - 120
+  fill: solid
+  width: 1
+- line:
+  - - 290
+    - 100
+  - - 310
+    - 100
+  width: 1.6
+- path: M238 55L282 55
+  width: 1.1
+- arrow:
+  - - 253.0
+    - 55.0
+  - - 267.0
+    - 55.0
+  width: 1.3
+- path: M318 55L364 55
+  width: 1.1
+- arrow:
+  - - 334.0
+    - 55.0
+  - - 348.0
+    - 55.0
+  width: 1.3
+- path: M238 85L282 85
+  width: 1.1
+- arrow:
+  - - 253.0
+    - 85.0
+  - - 267.0
+    - 85.0
+  width: 1.3
+- path: M318 85L364 85
+  width: 1.1
+- arrow:
+  - - 334.0
+    - 85.0
+  - - 348.0
+    - 85.0
+  width: 1.3
+- path: M238 115L282 115
+  width: 1.1
+- arrow:
+  - - 253.0
+    - 115.0
+  - - 267.0
+    - 115.0
+  width: 1.3
+- path: M318 115L364 115
+  width: 1.1
+- arrow:
+  - - 334.0
+    - 115.0
+  - - 348.0
+    - 115.0
+  width: 1.3
+- path: M238 145L282 145
+  width: 1.1
+- arrow:
+  - - 253.0
+    - 145.0
+  - - 267.0
+    - 145.0
+  width: 1.3
+- path: M318 145L364 145
+  width: 1.1
+- arrow:
+  - - 334.0
+    - 145.0
+  - - 348.0
+    - 145.0
+  width: 1.3
+- text: +
+  at:
+  - 222
+  - 64.5
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 222
+  - 104.5
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 222
+  - 144.6
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 287
+  - 32.9
+  size: 14
+  tone: default
+- text: +
+  at:
+  - 313
+  - 32.9
+  size: 14
+  tone: default
+- text: −
+  at:
+  - 380
+  - 64.5
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 380
+  - 104.5
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 380
+  - 144.6
+  size: 13
+  tone: default
+- line:
+  - - 236
+    - 171
+  - - 236
+    - 181
+  width: 1
+  tone: muted
+- line:
+  - - 284
+    - 171
+  - - 284
+    - 181
+  width: 1
+  tone: muted
+- line:
+  - - 236
+    - 176
+  - - 284
+    - 176
+  width: 1
+  tone: muted
+- text: '*d*_{1}'
+  at:
+  - 260.0
+  - 170
+  size: 14
+- line:
+  - - 316
+    - 171
+  - - 316
+    - 181
+  width: 1
+  tone: muted
+- line:
+  - - 366
+    - 171
+  - - 366
+    - 181
+  width: 1
+  tone: muted
+- line:
+  - - 316
+    - 176
+  - - 366
+    - 176
+  width: 1
+  tone: muted
+- text: '*d*_{2}'
+  at:
+  - 341.0
+  - 170
+  size: 14
+- text: заряды всех пластин
+  at:
+  - 300
+  - 202
+  size: 13
+  anchor: middle
+  tone: muted
+- text: равны по модулю
+  at:
+  - 300
+  - 218
+  size: 13
+  anchor: middle
+  tone: muted

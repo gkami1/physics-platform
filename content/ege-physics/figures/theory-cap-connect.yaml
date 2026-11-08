@@ -1,0 +1,160 @@
+# electro.field.capacitors 4.6: circuit diagrams. Left, two capacitors in parallel across one
+# battery; right, two capacitors in series with a battery. Circuit symbols and wires in the
+# text colour.
+# Colours (extends «Проводники и диэлектрики в электрическом поле»): plates are text-colour
+# bars with their «+» and «−»; field lines text colour, thin, with small arrowheads; E at a
+# point an accent vector (never red); a dielectric an accent tint; electrons small dots, moving
+# ones accent, their motion a green arrow. Circuit symbols (battery, capacitor, switch) and
+# wires in the text colour. Graphs (q(U), U(q)) use the diagram kind with the Axes helper: the
+# line accent, the energy under it an accent tint. What stays fixed (q or U) is accent text.
+# Guides, distances and notes muted.
+kind: diagram
+size:
+- 400
+- 220
+items:
+- line:
+  - - 30
+    - 80
+  - - 30
+    - 40
+  - - 155
+    - 40
+  - - 155
+    - 80
+  width: 1.6
+- line:
+  - - 30
+    - 120
+  - - 30
+    - 160
+  - - 155
+    - 160
+  - - 155
+    - 120
+  width: 1.6
+- line:
+  - - 95
+    - 40
+  - - 95
+    - 80
+  width: 1.6
+- line:
+  - - 95
+    - 120
+  - - 95
+    - 160
+  width: 1.6
+- element: battery
+  at:
+  - 30
+  - 100
+  vertical: true
+  label: '*U*'
+- element: capacitor
+  at:
+  - 95
+  - 100
+  vertical: true
+  label: '*C*_{1}'
+  label_side: 1
+- element: capacitor
+  at:
+  - 155
+  - 100
+  vertical: true
+  label: '*C*_{2}'
+  label_side: 1
+- text: параллельно
+  at:
+  - 100
+  - 20
+  size: 14
+  anchor: middle
+  tone: default
+- text: напряжение одно,
+  at:
+  - 100
+  - 190
+  size: 13
+  anchor: middle
+  tone: muted
+- text: заряды складываются
+  at:
+  - 100
+  - 206
+  size: 13
+  anchor: middle
+  tone: muted
+- line:
+  - - 200
+    - 8
+  - - 200
+    - 214
+  width: 1
+  tone: muted
+- line:
+  - - 240
+    - 80
+  - - 240
+    - 40
+  - - 270
+    - 40
+  width: 1.6
+- element: capacitor
+  at:
+  - 290
+  - 40
+  label: '*C*_{1}'
+  label_side: 1
+- line:
+  - - 310
+    - 40
+  - - 330
+    - 40
+  width: 1.6
+- element: capacitor
+  at:
+  - 350
+  - 40
+  label: '*C*_{2}'
+  label_side: 1
+- line:
+  - - 370
+    - 40
+  - - 380
+    - 40
+  - - 380
+    - 160
+  - - 240
+    - 160
+  - - 240
+    - 120
+  width: 1.6
+- element: battery
+  at:
+  - 240
+  - 100
+  vertical: true
+  label: '*U*'
+- text: последовательно
+  at:
+  - 310
+  - 20
+  size: 14
+  anchor: middle
+  tone: default
+- text: заряд один,
+  at:
+  - 310
+  - 190
+  size: 13
+  anchor: middle
+  tone: muted
+- text: напряжения складываются
+  at:
+  - 310
+  - 206
+  size: 13
+  anchor: middle
+  tone: muted

@@ -1,0 +1,215 @@
+# electro.field.capacitors 4.1: a capacitor being charged by a battery (circuit symbol, + on
+# the left). Electrons (accent dots, green arrows for their motion) leave the left plate for
+# the battery's «+» and come from its «−» onto the right plate: the plates get +q and −q,
+# with field lines (text colour) between them. Plates are text-colour bars with signs.
+# Colours (extends «Проводники и диэлектрики в электрическом поле»): plates are text-colour
+# bars with their «+» and «−»; field lines text colour, thin, with small arrowheads; E at a
+# point an accent vector (never red); a dielectric an accent tint; electrons small dots, moving
+# ones accent, their motion a green arrow. Circuit symbols (battery, capacitor, switch) and
+# wires in the text colour. Graphs (q(U), U(q)) use the diagram kind with the Axes helper: the
+# line accent, the energy under it an accent tint. What stays fixed (q or U) is accent text.
+# Guides, distances and notes muted.
+kind: diagram
+size:
+- 400
+- 252
+items:
+- rect:
+  - 170
+  - 30
+  - 6
+  - 120
+  fill: solid
+  width: 1
+- rect:
+  - 224
+  - 30
+  - 6
+  - 120
+  fill: solid
+  width: 1
+- text: +
+  at:
+  - 160
+  - 50.0
+  size: 15
+- text: −
+  at:
+  - 240
+  - 50.0
+  size: 15
+- text: +
+  at:
+  - 160
+  - 80.0
+  size: 15
+- text: −
+  at:
+  - 240
+  - 80.0
+  size: 15
+- text: +
+  at:
+  - 160
+  - 110.0
+  size: 15
+- text: −
+  at:
+  - 240
+  - 110.0
+  size: 15
+- text: +
+  at:
+  - 160
+  - 140.0
+  size: 15
+- text: −
+  at:
+  - 240
+  - 140.0
+  size: 15
+- path: M178 45L222 45
+  width: 1.1
+- arrow:
+  - - 193.0
+    - 45.0
+  - - 207.0
+    - 45.0
+  width: 1.3
+- path: M178 75L222 75
+  width: 1.1
+- arrow:
+  - - 193.0
+    - 75.0
+  - - 207.0
+    - 75.0
+  width: 1.3
+- path: M178 105L222 105
+  width: 1.1
+- arrow:
+  - - 193.0
+    - 105.0
+  - - 207.0
+    - 105.0
+  width: 1.3
+- path: M178 135L222 135
+  width: 1.1
+- arrow:
+  - - 193.0
+    - 135.0
+  - - 207.0
+    - 135.0
+  width: 1.3
+- line:
+  - - 170
+    - 90
+  - - 60
+    - 90
+  - - 60
+    - 214
+  - - 180
+    - 214
+  width: 1.6
+- element: battery
+  at:
+  - 200
+  - 214
+- line:
+  - - 220
+    - 214
+  - - 340
+    - 214
+  - - 340
+    - 90
+  - - 230
+    - 90
+  width: 1.6
+- text: +*q*
+  at:
+  - 173
+  - 20
+  size: 15
+- text: −*q*
+  at:
+  - 227
+  - 20
+  size: 15
+- text: +
+  at:
+  - 176
+  - 200
+  size: 13
+- text: −
+  at:
+  - 224
+  - 200
+  size: 13
+- dots:
+  - - 128
+    - 90
+  r: 3.5
+  tone: accent
+- dots:
+  - - 60
+    - 150
+  r: 3.5
+  tone: accent
+- arrow:
+  - - 118
+    - 78
+  - - 94
+    - 78
+  tone: vel
+  width: 1.6
+- arrow:
+  - - 48
+    - 140
+  - - 48
+    - 164
+  tone: vel
+  width: 1.6
+- dots:
+  - - 272
+    - 90
+  r: 3.5
+  tone: accent
+- dots:
+  - - 340
+    - 150
+  r: 3.5
+  tone: accent
+- arrow:
+  - - 282
+    - 78
+  - - 306
+    - 78
+  tone: vel
+  width: 1.6
+- arrow:
+  - - 352
+    - 164
+  - - 352
+    - 140
+  tone: vel
+  width: 1.6
+- text: электроны
+  at:
+  - 92
+  - 70
+  size: 13
+  anchor: middle
+  tone: muted
+- text: электроны
+  at:
+  - 308
+  - 70
+  size: 13
+  anchor: middle
+  tone: muted
+- text: батарейка
+  at:
+  - 200
+  - 244
+  size: 13
+  anchor: middle
+  tone: muted
