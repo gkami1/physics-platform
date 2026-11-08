@@ -2834,3 +2834,105 @@ task-answer .final {
   fill: var(--muted);
   font-size: 13px;
 }
+
+/* <pp-capacitor> (src/lib/sims/capacitor.ts): a plate capacitor, connected to a battery or not.
+   Plates, wires and field lines in the text colour, a dielectric an accent tint; the quantity that
+   stays fixed in accent. Its chip fieldsets keep the accent (the last one would turn green). */
+.cap-chips legend {
+  width: auto;
+  margin-right: 0.4rem;
+}
+
+.cap-chips span {
+  padding: 0.25rem 0.7rem;
+}
+
+.pfx-chips.cap-chips input:checked + span {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.cap-mode {
+  margin: 0 0 0.5rem;
+}
+
+.cap-plate {
+  fill: var(--text);
+}
+
+.cap-wire,
+.cap-line {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.6;
+}
+
+.cap-line {
+  stroke-width: 1.1;
+}
+
+.cap-thick {
+  stroke-width: 4;
+}
+
+.cap-head,
+.cap-dot {
+  fill: var(--text);
+}
+
+.cap-diel {
+  fill: var(--accent);
+  fill-opacity: 0.16;
+  stroke: none;
+}
+
+.sim-svg .cap-sign {
+  fill: var(--text);
+  font-size: 15px;
+}
+
+.sim-svg .cap-small {
+  font-size: 13px;
+}
+
+.sim-svg .cap-small-note {
+  fill: var(--muted);
+  font-size: 13px;
+}
+
+.sim-svg .cap-caption {
+  fill: var(--accent);
+  font-size: 15px;
+}
+
+.cap-table {
+  width: 100%;
+  margin: 0.75rem 0 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.cap-table th,
+.cap-table td {
+  padding: 0.2rem 0.4rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.cap-table th {
+  font-weight: 400;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.cap-table tr.cap-fixed td {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.cap-note {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
