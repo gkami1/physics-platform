@@ -1,0 +1,158 @@
+# ks-amp-09: a coil cut along its axis (muted dashed), the current away from us in the top row
+# and towards us in the bottom row; ends 1 (left) and 2 (right). Answer 1: inside the field
+# points left, so the north pole is end 1.
+kind: diagram
+size:
+- 400
+- 176
+items:
+- circle:
+  - 140
+  - 66
+  r: 10
+  fill: surface
+  width: 1.8
+  tone: default
+- path: M134.5 60.5L145.5 71.5M134.5 71.5L145.5 60.5
+  width: 1.8
+  tone: default
+- circle:
+  - 164
+  - 66
+  r: 10
+  fill: surface
+  width: 1.8
+  tone: default
+- path: M158.5 60.5L169.5 71.5M158.5 71.5L169.5 60.5
+  width: 1.8
+  tone: default
+- circle:
+  - 188
+  - 66
+  r: 10
+  fill: surface
+  width: 1.8
+  tone: default
+- path: M182.5 60.5L193.5 71.5M182.5 71.5L193.5 60.5
+  width: 1.8
+  tone: default
+- circle:
+  - 212
+  - 66
+  r: 10
+  fill: surface
+  width: 1.8
+  tone: default
+- path: M206.5 60.5L217.5 71.5M206.5 71.5L217.5 60.5
+  width: 1.8
+  tone: default
+- circle:
+  - 236
+  - 66
+  r: 10
+  fill: surface
+  width: 1.8
+  tone: default
+- path: M230.5 60.5L241.5 71.5M230.5 71.5L241.5 60.5
+  width: 1.8
+  tone: default
+- circle:
+  - 260
+  - 66
+  r: 10
+  fill: surface
+  width: 1.8
+  tone: default
+- path: M254.5 60.5L265.5 71.5M254.5 71.5L265.5 60.5
+  width: 1.8
+  tone: default
+- circle:
+  - 140
+  - 126
+  r: 10
+  fill: surface
+  width: 1.8
+  tone: default
+- dots:
+  - - 140
+    - 126
+  r: 2.6
+  tone: default
+- circle:
+  - 164
+  - 126
+  r: 10
+  fill: surface
+  width: 1.8
+  tone: default
+- dots:
+  - - 164
+    - 126
+  r: 2.6
+  tone: default
+- circle:
+  - 188
+  - 126
+  r: 10
+  fill: surface
+  width: 1.8
+  tone: default
+- dots:
+  - - 188
+    - 126
+  r: 2.6
+  tone: default
+- circle:
+  - 212
+  - 126
+  r: 10
+  fill: surface
+  width: 1.8
+  tone: default
+- dots:
+  - - 212
+    - 126
+  r: 2.6
+  tone: default
+- circle:
+  - 236
+  - 126
+  r: 10
+  fill: surface
+  width: 1.8
+  tone: default
+- dots:
+  - - 236
+    - 126
+  r: 2.6
+  tone: default
+- circle:
+  - 260
+  - 126
+  r: 10
+  fill: surface
+  width: 1.8
+  tone: default
+- dots:
+  - - 260
+    - 126
+  r: 2.6
+  tone: default
+- line:
+  - - 96
+    - 96
+  - - 304
+    - 96
+  width: 1
+  dashed: true
+  tone: muted
+- text: '1'
+  at:
+  - 82
+  - 102
+  size: 17
+- text: '2'
+  at:
+  - 318
+  - 102
+  size: 17

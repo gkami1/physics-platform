@@ -1,0 +1,71 @@
+# ks-amp-08: a long straight wire across the page, the current away from us (a cross); point A
+# above it with four numbered directions 1 up, 2 right, 3 down, 4 left. Answer 2: the field
+# circles clockwise as seen by us, so above the wire it points right.
+kind: diagram
+size:
+- 400
+- 190
+items:
+- circle:
+  - 200
+  - 164
+  r: 11
+  fill: surface
+  width: 1.8
+  tone: default
+- path: M193.9 157.9L206.1 170.1M193.9 170.1L206.1 157.9
+  width: 1.8
+  tone: default
+- dots:
+  - - 200
+    - 80
+  r: 3
+- text: '*A*'
+  at:
+  - 216
+  - 70
+  size: 15
+- arrow:
+  - - 200
+    - 74
+  - - 200
+    - 38
+  width: 1.8
+- text: '1'
+  at:
+  - 208
+  - 31
+  size: 15
+- arrow:
+  - - 206
+    - 80
+  - - 242
+    - 80
+  width: 1.8
+- text: '2'
+  at:
+  - 254
+  - 85
+  size: 15
+- arrow:
+  - - 200
+    - 86
+  - - 200
+    - 122
+  width: 1.8
+- text: '3'
+  at:
+  - 208
+  - 139
+  size: 15
+- arrow:
+  - - 194
+    - 80
+  - - 158
+    - 80
+  width: 1.8
+- text: '4'
+  at:
+  - 146
+  - 85
+  size: 15

@@ -1,0 +1,126 @@
+# electro.magnetic.ampere 8.3: an electromagnet: a coil (slanted text-colour turns) on an iron
+# core (surface fill), fed by a battery with its «+» and «−»; paper clips stick to the core.
+# Colours (the «Электродинамика» convention, extended for magnetism): magnetic field lines
+# in the text colour, thin, with small arrowheads, always closed or leaving the picture —
+# as the electric field lines of 2.4 and 4.2; the vector B an accent arrow, as E was; a field
+# across the page a sparse grid of accent «×» (away from us) or «·» (towards us). A wire seen
+# end-on is a text-colour circle (r ≥ 10, surface fill) with a dot (current towards us) or a
+# cross (away from us); along the page the current is an accent arrow beside the wire, as in
+# circuits. A magnet's N half is an accent tint and its S half a muted tint, letters N and S
+# in the text colour; a compass needle's N half solid accent, its S half solid muted. The
+# Ampère force and other forces red; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 224
+items:
+- rect:
+  - 110
+  - 66
+  - 180
+  - 30
+  fill: surface
+  width: 1.6
+- path: M136 60L146 102M148 60L158 102M160 60L170 102M172 60L182 102M184 60L194 102M196 60L206 102M208
+    60L218 102M220 60L230 102M232 60L242 102M244 60L254 102M256 60L266 102
+  width: 1.8
+- line:
+  - - 136
+    - 60
+  - - 136
+    - 40
+  - - 60
+    - 40
+  - - 60
+    - 200
+  - - 180
+    - 200
+  width: 1.6
+- line:
+  - - 266
+    - 102
+  - - 266
+    - 138
+  - - 340
+    - 138
+  - - 340
+    - 200
+  - - 220
+    - 200
+  width: 1.6
+- element: battery
+  at:
+  - 200
+  - 200
+- text: +
+  at:
+  - 190
+  - 182.9
+  size: 14
+  tone: default
+- text: −
+  at:
+  - 210
+  - 182.9
+  size: 14
+  tone: default
+- rect:
+  - 114
+  - 96
+  - 10
+  - 26
+  radius: 5
+  width: 1.4
+- line:
+  - - 119
+    - 101
+  - - 119
+    - 115
+  width: 1.2
+- rect:
+  - 276
+  - 96
+  - 10
+  - 26
+  radius: 5
+  width: 1.4
+- line:
+  - - 281
+    - 101
+  - - 281
+    - 115
+  width: 1.2
+- rect:
+  - 114
+  - 121
+  - 10
+  - 26
+  radius: 5
+  width: 1.4
+- line:
+  - - 119
+    - 126
+  - - 119
+    - 140
+  width: 1.2
+- text: железный сердечник
+  at:
+  - 300
+  - 30
+  size: 13
+  anchor: middle
+  tone: muted
+- line:
+  - - 290
+    - 36
+  - - 276
+    - 70
+  width: 1
+  tone: muted
+- text: скрепки притянулись к концам
+  at:
+  - 200
+  - 160
+  size: 13
+  anchor: middle
+  tone: muted

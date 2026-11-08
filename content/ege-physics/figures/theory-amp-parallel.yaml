@@ -1,0 +1,182 @@
+# electro.magnetic.ampere 8.4: two parallel wires seen end-on. Wire 1's field line through
+# wire 2 (text colour) and its field B₁ there (accent, up); the left-hand rule gives the force
+# on wire 2 (red), and wire 1 gets the opposite force. Left: both currents towards us —
+# attract. Right: opposite currents — repel.
+# Colours (the «Электродинамика» convention, extended for magnetism): magnetic field lines
+# in the text colour, thin, with small arrowheads, always closed or leaving the picture —
+# as the electric field lines of 2.4 and 4.2; the vector B an accent arrow, as E was; a field
+# across the page a sparse grid of accent «×» (away from us) or «·» (towards us). A wire seen
+# end-on is a text-colour circle (r ≥ 10, surface fill) with a dot (current towards us) or a
+# cross (away from us); along the page the current is an accent arrow beside the wire, as in
+# circuits. A magnet's N half is an accent tint and its S half a muted tint, letters N and S
+# in the text colour; a compass needle's N half solid accent, its S half solid muted. The
+# Ampère force and other forces red; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 228
+items:
+- path: M126.9 167.9L128.8 165L130.6 162L132.3 158.9L133.9 155.8L135.4 152.7L136.7 149.5L138 146.2L139.1
+    142.9L140.1 139.6L141 136.2L141.8 132.8L142.5 129.4L143 125.9L143.5 122.5L143.8 119L143.9 115.5L144
+    112L143.9 108.5L143.8 105L143.5 101.5L143 98.1L142.5 94.6L141.8 91.2L141 87.8L140.1 84.4L139.1 81.1L138
+    77.8L136.7 74.5L135.4 71.3L133.9 68.2L132.3 65.1L130.6 62L128.8 59L126.9 56.1
+  width: 1.2
+- arrow:
+  - - 138.2
+    - 78.1
+  - - 132.8
+    - 65.2
+  width: 1.3
+- circle:
+  - 44
+  - 112
+  r: 11
+  fill: surface
+  width: 1.8
+  tone: default
+- dots:
+  - - 44
+    - 112
+  r: 2.9
+  tone: default
+- circle:
+  - 144
+  - 112
+  r: 11
+  fill: surface
+  width: 1.8
+  tone: default
+- dots:
+  - - 144
+    - 112
+  r: 2.9
+  tone: default
+- arrow:
+  - - 160
+    - 112
+  - - 160
+    - 74
+  tone: accent
+  label: '*B*_1'
+  label_at:
+  - 174
+  - 78
+- text: '1'
+  at:
+  - 44
+  - 144
+  size: 15
+- text: '2'
+  at:
+  - 126
+  - 146
+  size: 15
+- arrow:
+  - - 130
+    - 112
+  - - 102
+    - 112
+  tone: force
+  width: 2.4
+- arrow:
+  - - 58
+    - 112
+  - - 86
+    - 112
+  tone: force
+  width: 2.4
+- text: 'токи в одну сторону:'
+  at:
+  - 94
+  - 196
+  size: 13
+  anchor: middle
+  tone: muted
+- text: притягиваются
+  at:
+  - 94
+  - 214
+  size: 13
+  anchor: middle
+  tone: muted
+- path: M318.9 167.9L320.8 165L322.6 162L324.3 158.9L325.9 155.8L327.4 152.7L328.7 149.5L330 146.2L331.1
+    142.9L332.1 139.6L333 136.2L333.8 132.8L334.5 129.4L335 125.9L335.5 122.5L335.8 119L335.9 115.5L336
+    112L335.9 108.5L335.8 105L335.5 101.5L335 98.1L334.5 94.6L333.8 91.2L333 87.8L332.1 84.4L331.1 81.1L330
+    77.8L328.7 74.5L327.4 71.3L325.9 68.2L324.3 65.1L322.6 62L320.8 59L318.9 56.1
+  width: 1.2
+- arrow:
+  - - 330.2
+    - 78.1
+  - - 324.8
+    - 65.2
+  width: 1.3
+- circle:
+  - 236
+  - 112
+  r: 11
+  fill: surface
+  width: 1.8
+  tone: default
+- dots:
+  - - 236
+    - 112
+  r: 2.9
+  tone: default
+- circle:
+  - 336
+  - 112
+  r: 11
+  fill: surface
+  width: 1.8
+  tone: default
+- path: M329.9 105.9L342.1 118.1M329.9 118.1L342.1 105.9
+  width: 1.8
+  tone: default
+- arrow:
+  - - 352
+    - 112
+  - - 352
+    - 74
+  tone: accent
+  label: '*B*_1'
+  label_at:
+  - 366
+  - 78
+- text: '1'
+  at:
+  - 236
+  - 144
+  size: 15
+- text: '2'
+  at:
+  - 318
+  - 146
+  size: 15
+- arrow:
+  - - 350
+    - 112
+  - - 380
+    - 112
+  tone: force
+  width: 2.4
+- arrow:
+  - - 222
+    - 112
+  - - 196
+    - 112
+  tone: force
+  width: 2.4
+- text: 'токи в разные стороны:'
+  at:
+  - 286
+  - 196
+  size: 13
+  anchor: middle
+  tone: muted
+- text: отталкиваются
+  at:
+  - 286
+  - 214
+  size: 13
+  anchor: middle
+  tone: muted

@@ -1,141 +1,84 @@
-# electro.magnetic.ampere: conductor with current in a field into the page; left-hand rule
+# electro.magnetic.ampere 8.5 (the ladder's figure, redrawn): a straight conductor of length l
+# (muted bracket) with the current I up (accent arrow beside it) in a uniform field B away from
+# us (a grid of accent crosses); the Ampère force F_А (red) points left by the left-hand rule.
+# The ladder drew B as muted crosses and labelled the force F_A with a Latin A.
+# Colours (the «Электродинамика» convention, extended for magnetism): magnetic field lines
+# in the text colour, thin, with small arrowheads, always closed or leaving the picture —
+# as the electric field lines of 2.4 and 4.2; the vector B an accent arrow, as E was; a field
+# across the page a sparse grid of accent «×» (away from us) or «·» (towards us). A wire seen
+# end-on is a text-colour circle (r ≥ 10, surface fill) with a dot (current towards us) or a
+# cross (away from us); along the page the current is an accent arrow beside the wire, as in
+# circuits. A magnet's N half is an accent tint and its S half a muted tint, letters N and S
+# in the text colour; a compass needle's N half solid accent, its S half solid muted. The
+# Ampère force and other forces red; guides and notes muted.
 kind: diagram
-size: [400, 260]
+size:
+- 400
+- 244
 items:
-- text: ×
-  at: [70, 46]
-  size: 18
-  tone: muted
-- text: ×
-  at: [70, 91]
-  size: 18
-  tone: muted
-- text: ×
-  at: [70, 136]
-  size: 18
-  tone: muted
-- text: ×
-  at: [70, 181]
-  size: 18
-  tone: muted
-- text: ×
-  at: [70, 226]
-  size: 18
-  tone: muted
-- text: ×
-  at: [115, 46]
-  size: 18
-  tone: muted
-- text: ×
-  at: [115, 91]
-  size: 18
-  tone: muted
-- text: ×
-  at: [115, 136]
-  size: 18
-  tone: muted
-- text: ×
-  at: [115, 181]
-  size: 18
-  tone: muted
-- text: ×
-  at: [115, 226]
-  size: 18
-  tone: muted
-- text: ×
-  at: [160, 46]
-  size: 18
-  tone: muted
-- text: ×
-  at: [160, 91]
-  size: 18
-  tone: muted
-- text: ×
-  at: [160, 136]
-  size: 18
-  tone: muted
-- text: ×
-  at: [160, 181]
-  size: 18
-  tone: muted
-- text: ×
-  at: [160, 226]
-  size: 18
-  tone: muted
-- text: ×
-  at: [250, 46]
-  size: 18
-  tone: muted
-- text: ×
-  at: [250, 91]
-  size: 18
-  tone: muted
-- text: ×
-  at: [250, 136]
-  size: 18
-  tone: muted
-- text: ×
-  at: [250, 181]
-  size: 18
-  tone: muted
-- text: ×
-  at: [250, 226]
-  size: 18
-  tone: muted
-- text: ×
-  at: [295, 46]
-  size: 18
-  tone: muted
-- text: ×
-  at: [295, 91]
-  size: 18
-  tone: muted
-- text: ×
-  at: [295, 136]
-  size: 18
-  tone: muted
-- text: ×
-  at: [295, 181]
-  size: 18
-  tone: muted
-- text: ×
-  at: [295, 226]
-  size: 18
-  tone: muted
-- text: ×
-  at: [340, 46]
-  size: 18
-  tone: muted
-- text: ×
-  at: [340, 91]
-  size: 18
-  tone: muted
-- text: ×
-  at: [340, 136]
-  size: 18
-  tone: muted
-- text: ×
-  at: [340, 181]
-  size: 18
-  tone: muted
-- text: ×
-  at: [340, 226]
-  size: 18
-  tone: muted
-- line: [[205, 225], [205, 30]]
-  width: 4
-- arrow: [[222, 170], [222, 110]]
+- path: M39.5 39.5L48.5 48.5M39.5 48.5L48.5 39.5M39.5 87.5L48.5 96.5M39.5 96.5L48.5 87.5M39.5 135.5L48.5
+    144.5M39.5 144.5L48.5 135.5M39.5 183.5L48.5 192.5M39.5 192.5L48.5 183.5M87.5 39.5L96.5 48.5M87.5 48.5L96.5
+    39.5M87.5 87.5L96.5 96.5M87.5 96.5L96.5 87.5M87.5 135.5L96.5 144.5M87.5 144.5L96.5 135.5M87.5 183.5L96.5
+    192.5M87.5 192.5L96.5 183.5M135.5 39.5L144.5 48.5M135.5 48.5L144.5 39.5M135.5 87.5L144.5 96.5M135.5
+    96.5L144.5 87.5M135.5 135.5L144.5 144.5M135.5 144.5L144.5 135.5M135.5 183.5L144.5 192.5M135.5 192.5L144.5
+    183.5M295.5 39.5L304.5 48.5M295.5 48.5L304.5 39.5M295.5 87.5L304.5 96.5M295.5 96.5L304.5 87.5M295.5
+    135.5L304.5 144.5M295.5 144.5L304.5 135.5M295.5 183.5L304.5 192.5M295.5 192.5L304.5 183.5M343.5 39.5L352.5
+    48.5M343.5 48.5L352.5 39.5M343.5 87.5L352.5 96.5M343.5 96.5L352.5 87.5M343.5 135.5L352.5 144.5M343.5
+    144.5L352.5 135.5M343.5 183.5L352.5 192.5M343.5 192.5L352.5 183.5
+  width: 1.4
   tone: accent
-  label: '*I*'
-  label_at: [236, 140]
-- arrow: [[205, 130], [130, 130]]
+- line:
+  - - 200
+    - 40
+  - - 200
+    - 200
+  width: 4
+- arrow:
+  - - 216
+    - 156
+  - - 216
+    - 96
+  tone: accent
+  width: 1.8
+- text: '*I*'
+  at:
+  - 228
+  - 130
+  size: 15
+  anchor: start
+  tone: accent
+- arrow:
+  - - 196
+    - 120
+  - - 134
+    - 120
   tone: force
-  width: 2.5
-  label: '*F*_A'
-  label_at: [124, 118]
+  width: 2.4
+  label: '*F*_А'
+  label_at:
+  - 168
+  - 144
+- line:
+  - - 248
+    - 40
+  - - 256
+    - 40
+  - - 256
+    - 200
+  - - 248
+    - 200
+  width: 1
+  tone: muted
+- text: '*l*'
+  at:
+  - 264
+  - 172
+  size: 15
+  anchor: start
 - text: '*B* — от нас (×)'
-  at: [310, 250]
-  size: 13
-- text: '*F*_A = *I**B**l* sin *α*'
-  at: [100, 250]
-  size: 13
+  at:
+  - 200
+  - 230
+  size: 15
+  anchor: middle
+  tone: default

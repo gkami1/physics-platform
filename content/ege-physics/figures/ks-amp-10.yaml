@@ -1,0 +1,88 @@
+# ks-amp-10: a wire across the page (current away from us) between the poles S (left) and N
+# (right); four numbered directions 1 right, 2 down, 3 left, 4 up. Answer 4: B points left,
+# from N to S, and the left-hand rule gives the force up.
+kind: diagram
+size:
+- 400
+- 220
+items:
+- rect:
+  - 24
+  - 30
+  - 60
+  - 160
+  fill: accent
+  tone: muted
+  width: 1.6
+- text: S
+  at:
+  - 54.0
+  - 116.0
+  size: 18
+- rect:
+  - 316
+  - 30
+  - 60
+  - 160
+  fill: accent
+  tone: accent
+  width: 1.6
+- text: N
+  at:
+  - 346.0
+  - 116.0
+  size: 18
+- circle:
+  - 200
+  - 110
+  r: 11
+  fill: surface
+  width: 1.8
+  tone: default
+- path: M193.9 103.9L206.1 116.1M193.9 116.1L206.1 103.9
+  width: 1.8
+  tone: default
+- arrow:
+  - - 216
+    - 110
+  - - 252
+    - 110
+  width: 1.8
+- text: '1'
+  at:
+  - 264
+  - 115
+  size: 15
+- arrow:
+  - - 200
+    - 126
+  - - 200
+    - 162
+  width: 1.8
+- text: '2'
+  at:
+  - 208
+  - 179
+  size: 15
+- arrow:
+  - - 184
+    - 110
+  - - 148
+    - 110
+  width: 1.8
+- text: '3'
+  at:
+  - 136
+  - 115
+  size: 15
+- arrow:
+  - - 200
+    - 94
+  - - 200
+    - 58
+  width: 1.8
+- text: '4'
+  at:
+  - 208
+  - 51
+  size: 15
