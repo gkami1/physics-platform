@@ -53,10 +53,13 @@ export function ease(t: number): number {
   return 1 - (1 - x) ** 3;
 }
 
-/** A dipole's angle (degrees, 0 = «+» along the field) at progress s: it turns from a0 to a0/ε. */
+/**
+ * A dipole's angle (degrees, 0 = «+» along the field) at progress s: it turns from a0 to a0/(2ε),
+ * the shortest way — nearly along the field, the less so the weaker the dielectric.
+ */
 export function dipoleAngle(a0: number, eps: number, s: number): number {
   const a = ((((a0 + 180) % 360) + 360) % 360) - 180;
-  return a * (1 - s * (1 - 1 / eps));
+  return a * (1 - s * (1 - 0.5 / eps));
 }
 
 /** The line under the model. */
