@@ -1,0 +1,118 @@
+# electro.field.conductors 3.5: a small and a large metal sphere joined by a wire: one
+# conductor, one potential; charge shared in proportion to the radii (3 «+» on the small
+# one, 8 on the large one, 22 and 58 px: not ks-cond-04's 1 : 3).
+# Colours (extends «Напряжённость и потенциал электрического поля»): a charge is a circle in
+# the text colour with «+» or «−»; electrons small text-colour dots, moved ones accent; forces
+# red; field lines text colour, thin, with small arrowheads; E at a point an accent vector.
+# A conductor is a surface-filled body with a text-colour outline, its induced charges small
+# «+» and «−» in the text colour just inside its surface; a dielectric an accent tint, its
+# molecules small ovals (dipoles) with «+» and «−» ends, bound charges small «+» and «−» at
+# its surface. A charged rod (a dielectric) is an accent-tinted bar with its signs. Guides,
+# distances and notes muted.
+kind: diagram
+size:
+- 400
+- 246
+items:
+- line:
+  - - 108
+    - 104
+  - - 222
+    - 104
+  width: 2
+- path: M64 104A22 22 0 1 0 108 104A22 22 0 1 0 64 104Z
+  fill: surface
+  width: 2
+- path: M222 104A58 58 0 1 0 338 104A58 58 0 1 0 222 104Z
+  fill: surface
+  width: 2
+- text: +
+  at:
+  - 86.0
+  - 95.5
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 97.3
+  - 115.0
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 74.7
+  - 115.0
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 324.3
+  - 127.3
+  size: 14
+  tone: default
+- text: +
+  at:
+  - 298.4
+  - 153.2
+  size: 14
+  tone: default
+- text: +
+  at:
+  - 261.6
+  - 153.2
+  size: 14
+  tone: default
+- text: +
+  at:
+  - 235.7
+  - 127.3
+  size: 14
+  tone: default
+- text: +
+  at:
+  - 235.7
+  - 90.5
+  size: 14
+  tone: default
+- text: +
+  at:
+  - 261.6
+  - 64.6
+  size: 14
+  tone: default
+- text: +
+  at:
+  - 298.4
+  - 64.6
+  size: 14
+  tone: default
+- text: +
+  at:
+  - 324.3
+  - 90.5
+  size: 14
+  tone: default
+- text: '*q*_1, *R*_1'
+  at:
+  - 86
+  - 152
+  size: 14
+- text: '*q*_2, *R*_2'
+  at:
+  - 280
+  - 188
+  size: 14
+- text: 'один проводник: φ_1 = φ_2'
+  at:
+  - 200
+  - 216
+  size: 14
+  anchor: middle
+  tone: muted
+- text: на большом шаре заряда больше
+  at:
+  - 200
+  - 236
+  size: 13
+  anchor: middle
+  tone: muted

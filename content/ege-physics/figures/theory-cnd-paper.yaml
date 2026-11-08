@@ -1,0 +1,153 @@
+# electro.field.conductors 3.7: a positively charged metal ball and a neutral scrap of paper
+# (a dielectric, accent tint) polarised in its field: «−» on the near side, «+» on the far
+# side. The near charge is attracted (F₁, 48 px), the far one repelled less (F₂, 26 px, the
+# field is weaker there); the resultant F (thicker, 22 px) points to the ball. Forces red.
+# Colours (extends «Напряжённость и потенциал электрического поля»): a charge is a circle in
+# the text colour with «+» or «−»; electrons small text-colour dots, moved ones accent; forces
+# red; field lines text colour, thin, with small arrowheads; E at a point an accent vector.
+# A conductor is a surface-filled body with a text-colour outline, its induced charges small
+# «+» and «−» in the text colour just inside its surface; a dielectric an accent tint, its
+# molecules small ovals (dipoles) with «+» and «−» ends, bound charges small «+» and «−» at
+# its surface. A charged rod (a dielectric) is an accent-tinted bar with its signs. Guides,
+# distances and notes muted.
+kind: diagram
+size:
+- 400
+- 224
+items:
+- path: M44 96A40 40 0 1 0 124 96A40 40 0 1 0 44 96Z
+  fill: surface
+  width: 2
+- text: +
+  at:
+  - 113.5
+  - 110.1
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 102.2
+  - 125.6
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 84.0
+  - 131.6
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 65.8
+  - 125.6
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 54.5
+  - 110.1
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 54.5
+  - 91.0
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 65.8
+  - 75.5
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 84.0
+  - 69.5
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 102.2
+  - 75.5
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 113.5
+  - 91.0
+  size: 13
+  tone: default
+- rect:
+  - 226
+  - 83
+  - 64
+  - 26
+  fill: accent
+  tone: accent
+  width: 1.2
+  radius: 2
+- text: −
+  at:
+  - 236
+  - 101.2
+  size: 15
+  tone: default
+- text: +
+  at:
+  - 280
+  - 101.2
+  size: 15
+  tone: default
+- arrow:
+  - - 236
+    - 72
+  - - 188
+    - 72
+  tone: force
+  label: '*F*_1'
+  label_at:
+  - 176
+  - 76
+- arrow:
+  - - 280
+    - 72
+  - - 306
+    - 72
+  tone: force
+  label: '*F*_2'
+  label_at:
+  - 320
+  - 76
+- arrow:
+  - - 236
+    - 126
+  - - 214
+    - 126
+  tone: force
+  width: 3
+  label: '*F*'
+  label_at:
+  - 202
+  - 131
+- text: бумажка
+  at:
+  - 258.0
+  - 130
+  size: 13
+  anchor: start
+  tone: muted
+- text: ближний заряд притягивается сильнее,
+  at:
+  - 200
+  - 196
+  size: 13
+  anchor: middle
+  tone: muted
+- text: чем отталкивается дальний
+  at:
+  - 200
+  - 214
+  size: 13
+  anchor: middle
+  tone: muted

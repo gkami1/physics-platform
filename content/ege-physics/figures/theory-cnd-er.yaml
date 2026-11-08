@@ -1,0 +1,123 @@
+# electro.field.conductors 3.3: E(r) of a charged metal sphere, qualitative: zero inside
+# (r < R, thick accent on the axis), k|Q|/R² at the surface, then k|Q|/r² (accent, drawn with
+# a moving dot). Diagram kind with the Axes helper.
+# Colours (extends «Напряжённость и потенциал электрического поля»): a charge is a circle in
+# the text colour with «+» or «−»; electrons small text-colour dots, moved ones accent; forces
+# red; field lines text colour, thin, with small arrowheads; E at a point an accent vector.
+# A conductor is a surface-filled body with a text-colour outline, its induced charges small
+# «+» and «−» in the text colour just inside its surface; a dielectric an accent tint, its
+# molecules small ovals (dipoles) with «+» and «−» ends, bound charges small «+» and «−» at
+# its surface. A charged rod (a dielectric) is an accent-tinted bar with its signs. Guides,
+# distances and notes muted.
+kind: diagram
+size:
+- 400
+- 246
+items:
+- arrow:
+  - - 48
+    - 220
+  - - 388
+    - 220
+  width: 1.5
+- arrow:
+  - - 48
+    - 220
+  - - 48
+    - 20
+  width: 1.5
+- text: '*r*'
+  at:
+  - 386
+  - 238
+  anchor: end
+  size: 15
+- text: '*E*'
+  at:
+  - 58
+  - 30
+  anchor: start
+  size: 15
+- text: '0'
+  at:
+  - 42
+  - 235
+  size: 12
+  anchor: end
+- line:
+  - - 48
+    - 220
+  - - 158
+    - 220
+  width: 3
+  tone: accent
+- line:
+  - - 158
+    - 220
+  - - 158
+    - 60
+  width: 1
+  tone: muted
+  dashed: true
+- line:
+  - - 48
+    - 60
+  - - 158
+    - 60
+  width: 1
+  tone: muted
+  dashed: true
+- path: M158 60L160.2 66.2L162.4 72.1L164.6 77.6L166.8 82.8L169 87.8L171.2 92.4L173.4 96.9L175.6 101.1L177.8
+    105.1L180 108.9L182.2 112.5L184.4 115.9L186.6 119.2L188.8 122.3L191 125.3L193.2 128.2L195.4 130.9L197.6
+    133.5L199.8 136L202 138.4L204.2 140.7L206.4 142.8L208.6 144.9L210.8 147L213 148.9L215.2 150.7L217.4
+    152.5L219.6 154.3L221.8 155.9L224 157.5L226.2 159L228.4 160.5L230.6 161.9L232.8 163.3L235 164.6L237.2
+    165.9L239.4 167.2L241.6 168.3L243.8 169.5L246 170.6L248.2 171.7L250.4 172.7L252.6 173.8L254.8 174.7L257
+    175.7L259.2 176.6L261.4 177.5L263.6 178.4L265.8 179.2L268 180L270.2 180.8L272.4 181.6L274.6 182.3L276.8
+    183L279 183.7L281.2 184.4L283.4 185.1L285.6 185.7L287.8 186.3L290 186.9L292.2 187.5L294.4 188.1L296.6
+    188.7L298.8 189.2L301 189.8L303.2 190.3L305.4 190.8L307.6 191.3L309.8 191.8L312 192.2L314.2 192.7L316.4
+    193.1L318.6 193.6L320.8 194L323 194.4L325.2 194.8L327.4 195.2L329.6 195.6L331.8 196L334 196.3L336.2
+    196.7L338.4 197L340.6 197.4L342.8 197.7L345 198.1L347.2 198.4L349.4 198.7L351.6 199L353.8 199.3L356
+    199.6L358.2 199.9L360.4 200.2L362.6 200.4L364.8 200.7L367 201L369.2 201.2L371.4 201.5L373.6 201.7L375.8
+    202L378 202.2
+  width: 2.4
+  tone: accent
+  animate: draw
+  mover: true
+- line:
+  - - 158
+    - 220
+  - - 158
+    - 224
+  width: 1.2
+- text: '*R*'
+  at:
+  - 158
+  - 239
+  size: 14
+- text: '*k*|*Q*|/*R*^{2}'
+  at:
+  - 54
+  - 52
+  size: 14
+  anchor: start
+- text: внутри *E* = 0
+  at:
+  - 103.0
+  - 210
+  size: 13
+  anchor: middle
+  tone: muted
+- text: снаружи — как у
+  at:
+  - 384
+  - 96
+  size: 13
+  anchor: end
+  tone: muted
+- text: точечного заряда
+  at:
+  - 384
+  - 112
+  size: 13
+  anchor: end
+  tone: muted

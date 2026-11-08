@@ -1,0 +1,370 @@
+# electro.field.conductors 3.1: left, a metal (surface-filled, text outline): ions «+» in a
+# lattice and free electrons (dots) between them; right, a dielectric (accent tint): every
+# electron stays on a muted dashed orbit around its own atom.
+# Colours (extends «Напряжённость и потенциал электрического поля»): a charge is a circle in
+# the text colour with «+» or «−»; electrons small text-colour dots, moved ones accent; forces
+# red; field lines text colour, thin, with small arrowheads; E at a point an accent vector.
+# A conductor is a surface-filled body with a text-colour outline, its induced charges small
+# «+» and «−» in the text colour just inside its surface; a dielectric an accent tint, its
+# molecules small ovals (dipoles) with «+» and «−» ends, bound charges small «+» and «−» at
+# its surface. A charged rod (a dielectric) is an accent-tinted bar with its signs. Guides,
+# distances and notes muted.
+kind: diagram
+size:
+- 400
+- 204
+items:
+- rect:
+  - 10
+  - 34
+  - 182
+  - 140
+  fill: surface
+  width: 2
+  radius: 4
+- circle:
+  - 38
+  - 62
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 38
+  - 104
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 38
+  - 146
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 80
+  - 62
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 80
+  - 104
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 80
+  - 146
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 122
+  - 62
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 122
+  - 104
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 122
+  - 146
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 164
+  - 62
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 164
+  - 104
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 164
+  - 146
+  r: 9.5
+  width: 1.2
+  label: +
+- dots:
+  - - 56
+    - 82
+  - - 101
+    - 50
+  - - 121
+    - 94
+  - - 164
+    - 70
+  - - 78
+    - 128
+  - - 146
+    - 136
+  - - 58
+    - 152
+  - - 184
+    - 116
+  - - 100
+    - 158
+  - - 30
+    - 108
+  - - 170
+    - 160
+  - - 122
+    - 50
+  r: 3
+- rect:
+  - 208
+  - 34
+  - 182
+  - 140
+  fill: accent
+  tone: accent
+  width: 0
+  radius: 4
+- rect:
+  - 208
+  - 34
+  - 182
+  - 140
+  width: 1.2
+  radius: 4
+- circle:
+  - 236
+  - 62
+  r: 15
+  width: 1
+  tone: muted
+  dashed: true
+- circle:
+  - 236
+  - 62
+  r: 9.5
+  width: 1.2
+  label: +
+- dots:
+  - - 246.6
+    - 51.4
+  r: 3
+- circle:
+  - 236
+  - 104
+  r: 15
+  width: 1
+  tone: muted
+  dashed: true
+- circle:
+  - 236
+  - 104
+  r: 9.5
+  width: 1.2
+  label: +
+- dots:
+  - - 246.6
+    - 93.4
+  r: 3
+- circle:
+  - 236
+  - 146
+  r: 15
+  width: 1
+  tone: muted
+  dashed: true
+- circle:
+  - 236
+  - 146
+  r: 9.5
+  width: 1.2
+  label: +
+- dots:
+  - - 246.6
+    - 135.4
+  r: 3
+- circle:
+  - 278
+  - 62
+  r: 15
+  width: 1
+  tone: muted
+  dashed: true
+- circle:
+  - 278
+  - 62
+  r: 9.5
+  width: 1.2
+  label: +
+- dots:
+  - - 288.6
+    - 51.4
+  r: 3
+- circle:
+  - 278
+  - 104
+  r: 15
+  width: 1
+  tone: muted
+  dashed: true
+- circle:
+  - 278
+  - 104
+  r: 9.5
+  width: 1.2
+  label: +
+- dots:
+  - - 288.6
+    - 93.4
+  r: 3
+- circle:
+  - 278
+  - 146
+  r: 15
+  width: 1
+  tone: muted
+  dashed: true
+- circle:
+  - 278
+  - 146
+  r: 9.5
+  width: 1.2
+  label: +
+- dots:
+  - - 288.6
+    - 135.4
+  r: 3
+- circle:
+  - 320
+  - 62
+  r: 15
+  width: 1
+  tone: muted
+  dashed: true
+- circle:
+  - 320
+  - 62
+  r: 9.5
+  width: 1.2
+  label: +
+- dots:
+  - - 330.6
+    - 51.4
+  r: 3
+- circle:
+  - 320
+  - 104
+  r: 15
+  width: 1
+  tone: muted
+  dashed: true
+- circle:
+  - 320
+  - 104
+  r: 9.5
+  width: 1.2
+  label: +
+- dots:
+  - - 330.6
+    - 93.4
+  r: 3
+- circle:
+  - 320
+  - 146
+  r: 15
+  width: 1
+  tone: muted
+  dashed: true
+- circle:
+  - 320
+  - 146
+  r: 9.5
+  width: 1.2
+  label: +
+- dots:
+  - - 330.6
+    - 135.4
+  r: 3
+- circle:
+  - 362
+  - 62
+  r: 15
+  width: 1
+  tone: muted
+  dashed: true
+- circle:
+  - 362
+  - 62
+  r: 9.5
+  width: 1.2
+  label: +
+- dots:
+  - - 372.6
+    - 51.4
+  r: 3
+- circle:
+  - 362
+  - 104
+  r: 15
+  width: 1
+  tone: muted
+  dashed: true
+- circle:
+  - 362
+  - 104
+  r: 9.5
+  width: 1.2
+  label: +
+- dots:
+  - - 372.6
+    - 93.4
+  r: 3
+- circle:
+  - 362
+  - 146
+  r: 15
+  width: 1
+  tone: muted
+  dashed: true
+- circle:
+  - 362
+  - 146
+  r: 9.5
+  width: 1.2
+  label: +
+- dots:
+  - - 372.6
+    - 135.4
+  r: 3
+- text: металл
+  at:
+  - 101
+  - 22
+  size: 14
+  anchor: middle
+  tone: default
+- text: диэлектрик
+  at:
+  - 299
+  - 22
+  size: 14
+  anchor: middle
+  tone: default
+- text: электроны свободные
+  at:
+  - 101
+  - 194
+  size: 13
+  anchor: middle
+  tone: muted
+- text: электроны у своих атомов
+  at:
+  - 299
+  - 194
+  size: 13
+  anchor: middle
+  tone: muted
