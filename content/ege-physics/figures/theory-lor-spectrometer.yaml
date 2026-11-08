@@ -1,0 +1,107 @@
+# electro.magnetic.lorentz 9.6: a mass spectrometer. Positive ions are accelerated down between
+# two text-colour plates (voltage U), enter a field away from us (accent crosses) and turn right
+# (q v × B with Bz = −1), hitting the muted photographic plate after half a circle; the lighter
+# ions (m₁) on the smaller circle. Drawn with movers.
+# Colours (the «Электродинамика» convention with the magnetism extension of 8.x): magnetic
+# field lines in the text colour, thin, with small arrowheads; the vector B an accent arrow;
+# a field across the page a sparse grid of accent «×» (away from us) or «·» (towards us).
+# Extended for 9.x: a charged particle is a surface circle (r 11) with «+» or «−» in the text
+# colour, as the charges of 1.x and 2.x; its velocity green (and its parts muted dashed), the
+# Lorentz force and other forces red; its trajectory a text-colour line, animated ones drawn
+# with a text-colour mover dot; the radius and other guides muted dashed; notes muted; the
+# dees of a cyclotron a muted tint, its gap plain; the accelerating plates text colour.
+kind: diagram
+size:
+- 400
+- 220
+items:
+- path: M19.5 127.5L28.5 136.5M19.5 136.5L28.5 127.5M19.5 167.5L28.5 176.5M19.5 176.5L28.5 167.5M19.5
+    207.5L28.5 216.5M19.5 216.5L28.5 207.5M107.5 207.5L116.5 216.5M107.5 216.5L116.5 207.5M151.5 127.5L160.5
+    136.5M151.5 136.5L160.5 127.5M151.5 207.5L160.5 216.5M151.5 216.5L160.5 207.5M195.5 127.5L204.5 136.5M195.5
+    136.5L204.5 127.5M195.5 207.5L204.5 216.5M195.5 216.5L204.5 207.5M239.5 167.5L248.5 176.5M239.5 176.5L248.5
+    167.5M239.5 207.5L248.5 216.5M239.5 216.5L248.5 207.5M283.5 127.5L292.5 136.5M283.5 136.5L292.5 127.5M283.5
+    167.5L292.5 176.5M283.5 176.5L292.5 167.5M283.5 207.5L292.5 216.5M283.5 216.5L292.5 207.5M327.5 127.5L336.5
+    136.5M327.5 136.5L336.5 127.5M327.5 167.5L336.5 176.5M327.5 176.5L336.5 167.5M327.5 207.5L336.5 216.5M327.5
+    216.5L336.5 207.5M371.5 127.5L380.5 136.5M371.5 136.5L380.5 127.5M371.5 167.5L380.5 176.5M371.5 176.5L380.5
+    167.5M371.5 207.5L380.5 216.5M371.5 216.5L380.5 207.5
+  width: 1.4
+  tone: accent
+- line:
+  - - 34
+    - 34
+  - - 58
+    - 34
+  width: 2.4
+- line:
+  - - 70
+    - 34
+  - - 94
+    - 34
+  width: 2.4
+- line:
+  - - 34
+    - 74
+  - - 58
+    - 74
+  width: 2.4
+- line:
+  - - 70
+    - 74
+  - - 94
+    - 74
+  width: 2.4
+- text: +
+  at:
+  - 24
+  - 39
+  size: 15
+- text: −
+  at:
+  - 24
+  - 79
+  size: 15
+- text: '*U*'
+  at:
+  - 106
+  - 60
+  size: 15
+  anchor: start
+- line:
+  - - 0
+    - 104
+  - - 400
+    - 104
+  width: 1.2
+  dashed: true
+  tone: muted
+- line:
+  - - 158
+    - 104
+  - - 392
+    - 104
+  width: 4
+  tone: muted
+- text: фотопластинка
+  at:
+  - 300
+  - 94
+  size: 14
+  tone: muted
+- path: M64 14V104A62 62 0 0 0 188 104
+  width: 1.6
+  animate: draw
+  mover: true
+- path: M64 14V104A92 92 0 0 0 248 104
+  width: 1.6
+  animate: draw
+  mover: true
+- text: '*m*_1'
+  at:
+  - 126
+  - 154
+  size: 15
+- text: '*m*_2'
+  at:
+  - 156
+  - 184
+  size: 15

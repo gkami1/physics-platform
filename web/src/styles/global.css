@@ -3316,3 +3316,131 @@ task-answer .final {
   color: var(--accent);
   font-weight: 600;
 }
+
+/* <pp-lorentz> (src/lib/sims/lorentz.ts): a charged particle going round in a uniform field
+   across the picture. The field a sparse grid of accent dots (towards us) or crosses (away), the
+   orbit in the text colour, the radius a muted dashed guide, the velocity green, the Lorentz
+   force red, the particle a surface circle with its sign. Two chip fieldsets: the last of type,
+   which .pfx-chips turns green, is kept accent here. */
+.lor-chips legend {
+  width: 3.4rem;
+  margin-right: 0.2rem;
+}
+
+.lor-chips span {
+  padding: 0.25rem 0.7rem;
+}
+
+.pfx-chips.lor-chips input:checked + span {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.lor-chips {
+  margin: 0 0 0.5rem;
+}
+
+.lor-dot {
+  fill: var(--accent);
+}
+
+.lor-cross {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.4;
+}
+
+.lor-orbit {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.4;
+}
+
+.lor-guide {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.2;
+  stroke-dasharray: 5 4;
+}
+
+.lor-centre {
+  fill: var(--text);
+}
+
+.lor-v {
+  fill: none;
+  stroke: var(--ok);
+  stroke-width: 2.2;
+}
+
+.lor-v-head {
+  fill: var(--ok);
+}
+
+.lor-f {
+  fill: none;
+  stroke: var(--bad);
+  stroke-width: 2.4;
+}
+
+.lor-f-head {
+  fill: var(--bad);
+}
+
+.lor-particle {
+  fill: var(--surface);
+  stroke: var(--text);
+  stroke-width: 1.6;
+}
+
+.sim-svg .lor-sign {
+  fill: var(--text);
+  font-size: 15px;
+}
+
+.sim-svg .lor-label {
+  fill: var(--text);
+  font-size: 15px;
+  /* a halo in the panel colour keeps labels readable over the orbit and the field marks */
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.sim-svg .lor-vl {
+  fill: var(--ok);
+}
+
+.sim-svg .lor-fl {
+  fill: var(--bad);
+}
+
+.lor-table {
+  width: 100%;
+  margin: 0.75rem 0 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.lor-table th,
+.lor-table td {
+  padding: 0.2rem 0.35rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+.lor-table th {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.lor-table td {
+  white-space: nowrap;
+}
+
+.lor-table tr.lor-fixed td {
+  color: var(--accent);
+  font-weight: 600;
+}

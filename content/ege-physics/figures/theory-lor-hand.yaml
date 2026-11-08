@@ -1,0 +1,109 @@
+# electro.magnetic.lorentz 9.1: a proton and an electron fly to the right in a field away from
+# us (accent crosses). Left-hand rule: on the proton the Lorentz force points up, on the
+# electron down (q v × B with Bz = −1: (0, −1) for q > 0).
+# Colours (the «Электродинамика» convention with the magnetism extension of 8.x): magnetic
+# field lines in the text colour, thin, with small arrowheads; the vector B an accent arrow;
+# a field across the page a sparse grid of accent «×» (away from us) or «·» (towards us).
+# Extended for 9.x: a charged particle is a surface circle (r 11) with «+» or «−» in the text
+# colour, as the charges of 1.x and 2.x; its velocity green (and its parts muted dashed), the
+# Lorentz force and other forces red; its trajectory a text-colour line, animated ones drawn
+# with a text-colour mover dot; the radius and other guides muted dashed; notes muted; the
+# dees of a cyclotron a muted tint, its gap plain; the accelerating plates text colour.
+kind: diagram
+size:
+- 400
+- 240
+items:
+- path: M15.5 17.5L24.5 26.5M15.5 26.5L24.5 17.5M15.5 77.5L24.5 86.5M15.5 86.5L24.5 77.5M15.5 137.5L24.5
+    146.5M15.5 146.5L24.5 137.5M15.5 197.5L24.5 206.5M15.5 206.5L24.5 197.5M75.5 17.5L84.5 26.5M75.5 26.5L84.5
+    17.5M75.5 77.5L84.5 86.5M75.5 86.5L84.5 77.5M75.5 137.5L84.5 146.5M75.5 146.5L84.5 137.5M75.5 197.5L84.5
+    206.5M75.5 206.5L84.5 197.5M135.5 17.5L144.5 26.5M135.5 26.5L144.5 17.5M135.5 77.5L144.5 86.5M135.5
+    86.5L144.5 77.5M135.5 137.5L144.5 146.5M135.5 146.5L144.5 137.5M135.5 197.5L144.5 206.5M135.5 206.5L144.5
+    197.5M195.5 17.5L204.5 26.5M195.5 26.5L204.5 17.5M195.5 77.5L204.5 86.5M195.5 86.5L204.5 77.5M195.5
+    137.5L204.5 146.5M195.5 146.5L204.5 137.5M195.5 197.5L204.5 206.5M195.5 206.5L204.5 197.5M255.5 17.5L264.5
+    26.5M255.5 26.5L264.5 17.5M255.5 77.5L264.5 86.5M255.5 86.5L264.5 77.5M255.5 137.5L264.5 146.5M255.5
+    146.5L264.5 137.5M255.5 197.5L264.5 206.5M255.5 206.5L264.5 197.5M315.5 17.5L324.5 26.5M315.5 26.5L324.5
+    17.5M315.5 77.5L324.5 86.5M315.5 86.5L324.5 77.5M315.5 137.5L324.5 146.5M315.5 146.5L324.5 137.5M315.5
+    197.5L324.5 206.5M315.5 206.5L324.5 197.5M375.5 17.5L384.5 26.5M375.5 26.5L384.5 17.5M375.5 77.5L384.5
+    86.5M375.5 86.5L384.5 77.5M375.5 137.5L384.5 146.5M375.5 146.5L384.5 137.5M375.5 197.5L384.5 206.5M375.5
+    206.5L384.5 197.5
+  width: 1.4
+  tone: accent
+- arrow:
+  - - 123
+    - 112
+  - - 178
+    - 112
+  tone: vel
+  width: 2.2
+  label: '*v*'
+  label_at:
+  - 174
+  - 100
+- arrow:
+  - - 110
+    - 99
+  - - 110
+    - 46
+  tone: force
+  width: 2.4
+  label: '*F*_Л'
+  label_at:
+  - 134
+  - 56
+- circle:
+  - 110
+  - 112
+  r: 11
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 110
+  - 117.5
+  size: 16
+- arrow:
+  - - 303
+    - 112
+  - - 358
+    - 112
+  tone: vel
+  width: 2.2
+  label: '*v*'
+  label_at:
+  - 354
+  - 100
+- arrow:
+  - - 290
+    - 125
+  - - 290
+    - 178
+  tone: force
+  width: 2.4
+  label: '*F*_Л'
+  label_at:
+  - 314
+  - 174
+- circle:
+  - 290
+  - 112
+  r: 11
+  fill: surface
+  width: 1.6
+- text: −
+  at:
+  - 290
+  - 117.5
+  size: 16
+- text: протон
+  at:
+  - 110
+  - 228
+  size: 14
+  tone: muted
+- text: электрон
+  at:
+  - 290
+  - 228
+  size: 14
+  tone: muted

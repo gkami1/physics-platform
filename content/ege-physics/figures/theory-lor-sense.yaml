@@ -1,0 +1,93 @@
+# electro.magnetic.lorentz 9.4: two particles of equal mass and opposite charge fly in along one
+# line into a field away from us (accent crosses right of the muted dashed boundary). The
+# positive one turns up (counter-clockwise), the negative one down (clockwise): q v × B with
+# Bz = −1. After half a turn both leave the field flying back; drawn with movers.
+# Colours (the «Электродинамика» convention with the magnetism extension of 8.x): magnetic
+# field lines in the text colour, thin, with small arrowheads; the vector B an accent arrow;
+# a field across the page a sparse grid of accent «×» (away from us) or «·» (towards us).
+# Extended for 9.x: a charged particle is a surface circle (r 11) with «+» or «−» in the text
+# colour, as the charges of 1.x and 2.x; its velocity green (and its parts muted dashed), the
+# Lorentz force and other forces red; its trajectory a text-colour line, animated ones drawn
+# with a text-colour mover dot; the radius and other guides muted dashed; notes muted; the
+# dees of a cyclotron a muted tint, its gap plain; the accelerating plates text colour.
+kind: diagram
+size:
+- 400
+- 260
+items:
+- path: M171.5 59.5L180.5 68.5M171.5 68.5L180.5 59.5M171.5 103.5L180.5 112.5M171.5 112.5L180.5 103.5M171.5
+    147.5L180.5 156.5M171.5 156.5L180.5 147.5M171.5 191.5L180.5 200.5M171.5 200.5L180.5 191.5M215.5 15.5L224.5
+    24.5M215.5 24.5L224.5 15.5M215.5 59.5L224.5 68.5M215.5 68.5L224.5 59.5M215.5 103.5L224.5 112.5M215.5
+    112.5L224.5 103.5M215.5 147.5L224.5 156.5M215.5 156.5L224.5 147.5M215.5 191.5L224.5 200.5M215.5 200.5L224.5
+    191.5M215.5 235.5L224.5 244.5M215.5 244.5L224.5 235.5M259.5 15.5L268.5 24.5M259.5 24.5L268.5 15.5M259.5
+    59.5L268.5 68.5M259.5 68.5L268.5 59.5M259.5 103.5L268.5 112.5M259.5 112.5L268.5 103.5M259.5 147.5L268.5
+    156.5M259.5 156.5L268.5 147.5M259.5 191.5L268.5 200.5M259.5 200.5L268.5 191.5M259.5 235.5L268.5 244.5M259.5
+    244.5L268.5 235.5M303.5 15.5L312.5 24.5M303.5 24.5L312.5 15.5M303.5 59.5L312.5 68.5M303.5 68.5L312.5
+    59.5M303.5 191.5L312.5 200.5M303.5 200.5L312.5 191.5M303.5 235.5L312.5 244.5M303.5 244.5L312.5 235.5M347.5
+    15.5L356.5 24.5M347.5 24.5L356.5 15.5M347.5 59.5L356.5 68.5M347.5 68.5L356.5 59.5M347.5 191.5L356.5
+    200.5M347.5 200.5L356.5 191.5M347.5 235.5L356.5 244.5M347.5 244.5L356.5 235.5M391.5 15.5L400.5 24.5M391.5
+    24.5L400.5 15.5M391.5 59.5L400.5 68.5M391.5 68.5L400.5 59.5M391.5 191.5L400.5 200.5M391.5 200.5L400.5
+    191.5M391.5 235.5L400.5 244.5M391.5 244.5L400.5 235.5
+  width: 1.4
+  tone: accent
+- line:
+  - - 150
+    - 6
+  - - 150
+    - 254
+  width: 1.2
+  dashed: true
+  tone: muted
+- path: M24 130H150A56 56 0 0 0 150 18H46
+  width: 1.6
+  animate: draw
+  mover: true
+- path: M24 130H150A56 56 0 0 1 150 242H46
+  width: 1.6
+  animate: draw
+  mover: true
+- arrow:
+  - - 60
+    - 114
+  - - 110
+    - 114
+  tone: vel
+  width: 2.2
+  label: '*v*'
+  label_at:
+  - 122
+  - 119
+- circle:
+  - 34
+  - 18
+  r: 11
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 34
+  - 23.5
+  size: 16
+- circle:
+  - 34
+  - 242
+  r: 11
+  fill: surface
+  width: 1.6
+- text: −
+  at:
+  - 34
+  - 247.5
+  size: 16
+- text: поле от нас
+  at:
+  - 345
+  - 126
+  size: 13
+  tone: muted
+- text: только справа
+  at:
+  - 345
+  - 144
+  size: 13
+  tone: muted

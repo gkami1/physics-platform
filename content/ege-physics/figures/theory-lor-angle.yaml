@@ -1,0 +1,111 @@
+# electro.magnetic.lorentz 9.2: a field along the page (text-colour lines, B an accent arrow to
+# the right) and a positive particle whose velocity makes the angle α = 35° with B; muted dashed
+# legs give the part across the field, v sin α. The force is perpendicular to the page: for
+# q > 0, v × B points away from us, drawn as a red circle with a cross.
+# Colours (the «Электродинамика» convention with the magnetism extension of 8.x): magnetic
+# field lines in the text colour, thin, with small arrowheads; the vector B an accent arrow;
+# a field across the page a sparse grid of accent «×» (away from us) or «·» (towards us).
+# Extended for 9.x: a charged particle is a surface circle (r 11) with «+» or «−» in the text
+# colour, as the charges of 1.x and 2.x; its velocity green (and its parts muted dashed), the
+# Lorentz force and other forces red; its trajectory a text-colour line, animated ones drawn
+# with a text-colour mover dot; the radius and other guides muted dashed; notes muted; the
+# dees of a cyclotron a muted tint, its gap plain; the accelerating plates text colour.
+kind: diagram
+size:
+- 400
+- 250
+items:
+- path: M16 36L384 36
+  width: 1.2
+- arrow:
+  - - 309.0
+    - 36.0
+  - - 323.0
+    - 36.0
+  width: 1.3
+- path: M16 236L384 236
+  width: 1.2
+- arrow:
+  - - 309.0
+    - 236.0
+  - - 323.0
+    - 236.0
+  width: 1.3
+- arrow:
+  - - 300
+    - 76
+  - - 360
+    - 76
+  tone: accent
+  label: '*B*'
+  label_at:
+  - 290
+  - 81
+- line:
+  - - 130
+    - 160
+  - - 236.5
+    - 160
+  - - 236.5
+    - 85.4
+  width: 1.2
+  dashed: true
+  tone: muted
+- angle:
+  - 130
+  - 160
+  start: 0
+  end: 35
+  r: 34
+  label: α
+- arrow:
+  - - 140
+    - 153
+  - - 236.5
+    - 85.4
+  tone: vel
+  width: 2.2
+  label: '*v*'
+  label_at:
+  - 222.5
+  - 79.4
+- text: '*v* sin α'
+  at:
+  - 244.5
+  - 127.7
+  size: 15
+  anchor: start
+- circle:
+  - 130
+  - 160
+  r: 11
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 130
+  - 165.5
+  size: 16
+- circle:
+  - 70
+  - 196
+  r: 10
+  fill: surface
+  width: 2
+  tone: force
+- path: M64.5 190.5L75.5 201.5M64.5 201.5L75.5 190.5
+  width: 2
+  tone: force
+- text: '*F*_Л'
+  at:
+  - 44
+  - 201
+  size: 15
+  anchor: end
+  tone: force
+- text: сила — от нас
+  at:
+  - 70
+  - 226
+  size: 13
+  tone: muted
