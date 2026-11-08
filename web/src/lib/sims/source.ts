@@ -6,6 +6,11 @@
 // U(I) line with the working point on it. Current arrows get thicker with the current. Nothing is
 // animated, so reduced motion needs nothing special.
 //
+// With show="power" the same circuit has one battery (ℰ = 6 В, r = 2 Ом, no chips), the slider
+// goes from a short circuit (R = 0) to 6r, the table gives the current, the power in the outer
+// circuit I²R, the heat power inside I²r and the efficiency R/(R + r), and the graph under the
+// circuit is the outer power against R with its maximum at R = r (muted guides).
+//
 // Written into theory Markdown as plain HTML; the theory page imports this module only when
 // such an element is present. Light DOM, site CSS variables: follows the light/dark theme.
 // Colours as in the circuit figures: symbols and wires in the text colour, the source's outline
@@ -31,6 +36,30 @@ export interface State {
 export function solve(E: number, r: number, R: number): State {
   const I = E / (R + r);
   return { I, U: I * R, drop: I * r, Ishort: E / r };
+}
+
+// show="power": one battery, R from a short circuit to 6r.
+export const POWER = { r: 2, values: [0, 0.5, 1, 1.5, 2, 3, 4, 6, 8, 12], start: 6 } as const;
+
+export interface PowerState {
+  I: number; // current, А
+  P: number; // power in the outer circuit I²R, Вт
+  heat: number; // heat power inside the source I²r, Вт
+  total: number; // power of the outside forces ℰI, Вт
+  eta: number; // efficiency R/(R + r), 0…1
+}
+
+/** Powers in the whole circuit: ℰI = I²R + I²r. */
+export function power(E: number, r: number, R: number): PowerState {
+  const I = E / (R + r);
+  return { I, P: I * I * R, heat: I * I * r, total: E * I, eta: R / (R + r) };
+}
+
+/** The efficiency in whole percent, «≈» when rounded. */
+export function percentText(eta: number): string {
+  const x = eta * 100;
+  const k = Math.round(x);
+  return `${Math.abs(k - x) > 1e-9 ? '≈' : ''}${k}${NBSP}%`;
 }
 
 /** Up to three significant digits with a decimal comma; «≈» when rounded. */
@@ -71,15 +100,24 @@ let instances = 0;
 class SourceSim extends HTMLElement {
   private battery: Battery = 'fresh';
   private ri: number = R_DEFAULT;
+  private powerMode = false;
   private built = false;
   private scene!: SVGGElement;
   private rOut!: HTMLOutputElement;
   private cells: HTMLTableCellElement[] = [];
 
+  private get rValues(): readonly number[] {
+    return this.powerMode ? POWER.values : R_VALUES;
+  }
+
   connectedCallback(): void {
     if (this.built) return;
     this.built = true;
     if (this.getAttribute('battery') === 'old') this.battery = 'old';
+    if (this.getAttribute('show') === 'power') {
+      this.powerMode = true;
+      this.ri = POWER.start;
+    }
     this.replaceChildren(); // drop the no-JS fallback text
     this.classList.add('sim', 'emf');
     this.build();
@@ -118,10 +156,13 @@ class SourceSim extends HTMLElement {
       viewBox: `0 0 ${L.w} ${L.h}`,
       class: 'sim-svg',
       role: 'img',
-      'aria-label':
-        'Схема: батарейка с ЭДС и внутренним сопротивлением замкнута на реостат через амперметр, ' +
-        'вольтметр подключён к полюсам батарейки. Ниже — график напряжения на полюсах от тока, ' +
-        'точка на нём показывает ток и напряжение сейчас',
+      'aria-label': this.powerMode
+        ? 'Схема: батарейка с ЭДС и внутренним сопротивлением замкнута на реостат через амперметр, ' +
+          'вольтметр подключён к полюсам батарейки. Ниже — график мощности во внешней цепи от ' +
+          'сопротивления реостата с максимумом при R = r, точка на нём показывает мощность сейчас'
+        : 'Схема: батарейка с ЭДС и внутренним сопротивлением замкнута на реостат через амперметр, ' +
+          'вольтметр подключён к полюсам батарейки. Ниже — график напряжения на полюсах от тока, ' +
+          'точка на нём показывает ток и напряжение сейчас',
     });
     this.scene = el('g');
     svg.append(this.scene);
@@ -136,7 +177,7 @@ class SourceSim extends HTMLElement {
     const input = document.createElement('input');
     input.type = 'range';
     input.min = '0';
-    input.max = String(R_VALUES.length - 1);
+    input.max = String(this.rValues.length - 1);
     input.step = '1';
     input.value = String(this.ri);
     input.addEventListener('input', () => {
@@ -150,7 +191,9 @@ class SourceSim extends HTMLElement {
     table.className = 'emf-table';
     table.setAttribute('aria-live', 'polite');
     const body = document.createElement('tbody');
-    const rows = ['ЭДС ℰ', 'Ток I', 'Напряжение на полюсах U', 'Падение внутри Ir'];
+    const rows = this.powerMode
+      ? ['ЭДС ℰ и сопротивление r', 'Ток I', 'Мощность во внешней цепи I²R', 'Нагрев источника I²r', 'КПД η']
+      : ['ЭДС ℰ', 'Ток I', 'Напряжение на полюсах U', 'Падение внутри Ir'];
     rows.forEach((title, i) => {
       const tr = document.createElement('tr');
       if (i === 0) tr.className = 'emf-fixed';
@@ -163,7 +206,8 @@ class SourceSim extends HTMLElement {
       this.cells.push(td);
     });
     table.append(body);
-    this.append(set, svg, controls, table);
+    if (this.powerMode) this.append(svg, controls, table);
+    else this.append(set, svg, controls, table);
   }
 
   private arrow(x1: number, y1: number, x2: number, y2: number, w: number): SVGElement[] {
@@ -201,16 +245,20 @@ class SourceSim extends HTMLElement {
   }
 
   private draw(): void {
-    const r = R_INT[this.battery];
-    const R = R_VALUES[this.ri];
+    const r = this.powerMode ? POWER.r : R_INT[this.battery];
+    const R = this.rValues[this.ri];
     const s = solve(EMF, r, R);
+    const p = power(EMF, r, R);
     this.rOut.textContent = unitText(R, 'Ом');
-    const values = [
-      `${unitText(EMF, 'В')} — не меняется`,
-      unitText(s.I, 'А'),
-      unitText(s.U, 'В'),
-      unitText(s.drop, 'В'),
-    ];
+    const values = this.powerMode
+      ? [
+          `${unitText(EMF, 'В')}, ${unitText(r, 'Ом')} — не меняются`,
+          unitText(p.I, 'А'),
+          unitText(p.P, 'Вт'),
+          unitText(p.heat, 'Вт'),
+          percentText(p.eta),
+        ]
+      : [`${unitText(EMF, 'В')} — не меняется`, unitText(s.I, 'А'), unitText(s.U, 'В'), unitText(s.drop, 'В')];
     values.forEach((t, i) => (this.cells[i].textContent = t));
 
     const { left, right, top, bot, vy } = L;
@@ -258,7 +306,46 @@ class SourceSim extends HTMLElement {
       ...this.arrow(330, bot - 14, 270, bot - 14, w),
     ];
 
-    // The U(I) line of the source and the working point on it.
+    if (this.powerMode) parts.push(...this.powerGraph(r, R, p.P));
+    else parts.push(...this.lineGraph(r, s));
+    this.scene.replaceChildren(...parts);
+  }
+
+  /** The outer power against R, its maximum at R = r and the working point. */
+  private powerGraph(r: number, R: number, P: number): SVGElement[] {
+    const { ox, oy, h } = G;
+    const values = POWER.values;
+    const rmax = values[values.length - 1];
+    const kx = G.w / rmax;
+    const pmax = (EMF * EMF) / (4 * r);
+    const ky = h / pmax;
+    const X = (x: number): number => ox + x * kx;
+    const Y = (y: number): number => oy - y * ky;
+    let d = '';
+    for (let k = 0; k <= 120; k++) {
+      const x = (rmax * k) / 120;
+      d += `${k ? 'L' : 'M'}${X(x).toFixed(1)} ${Y(power(EMF, r, x).P).toFixed(1)}`;
+    }
+    return [
+      el('path', { d: `M${ox} ${oy}H${ox + G.w + 16}`, class: 'emf-wire emf-thin' }),
+      el('path', { d: `M${ox} ${oy}V${oy - h - 22}`, class: 'emf-wire emf-thin' }),
+      el('path', { d: `M${ox + G.w + 16} ${oy}l-8 -4v8z`, class: 'emf-dot' }),
+      el('path', { d: `M${ox} ${oy - h - 22}l-4 8h8z`, class: 'emf-dot' }),
+      this.text(ox + G.w + 14, oy + 18, 'R', 'emf-label emf-it', 'end'),
+      this.text(ox + 10, oy - h - 10, 'P', 'emf-label emf-it', 'start'),
+      this.text(ox - 8, oy + 5, '0', 'emf-note', 'end'),
+      el('path', { d: `M${X(r)} ${oy}V${Y(pmax)}H${ox}`, class: 'emf-guide' }),
+      this.text(X(r), oy + 18, 'r', 'emf-label emf-it'),
+      this.sub(ox - 18, Y(pmax) + 5, 'P', 'max'),
+      this.text(X(r) + 12, Y(pmax) - 6, 'максимум при R = r', 'emf-note', 'start'),
+      el('path', { d, class: 'emf-line' }),
+      el('circle', { cx: X(R).toFixed(1), cy: Y(P).toFixed(1), r: 5, class: 'emf-point' }),
+    ];
+  }
+
+  /** The U(I) line of the source and the working point on it. */
+  private lineGraph(r: number, s: State): SVGElement[] {
+    const parts: SVGElement[] = [];
     const { ox, oy, h, imax } = G;
     const kx = G.w / imax;
     const ky = h / EMF;
@@ -291,7 +378,7 @@ class SourceSim extends HTMLElement {
         this.sub(X(s.Ishort), oy + 20, 'I', 'кз'),
       );
     }
-    this.scene.replaceChildren(...parts);
+    return parts;
   }
 }
 
