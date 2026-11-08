@@ -2936,3 +2936,95 @@ task-answer .final {
   color: var(--muted);
   font-size: 0.85rem;
 }
+
+/* <pp-circuit> (src/lib/sims/circuit.ts): a source and two resistors in series or in parallel.
+   Symbols and wires in the text colour, the current an accent arrow, the column that is the same
+   for both resistors in accent. Its one chip fieldset is the last of type, which .pfx-chips
+   turns green: kept accent here. */
+.crc-chips legend {
+  width: auto;
+  margin-right: 0.4rem;
+}
+
+.crc-chips span {
+  padding: 0.25rem 0.7rem;
+}
+
+.pfx-chips.crc-chips input:checked + span {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.crc-chips {
+  margin: 0 0 0.5rem;
+}
+
+.crc-wire,
+.crc-res {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.6;
+}
+
+.crc-thick {
+  stroke-width: 4;
+}
+
+.crc-dot {
+  fill: var(--text);
+}
+
+.crc-current {
+  fill: none;
+  stroke: var(--accent);
+}
+
+.crc-head {
+  fill: var(--accent);
+}
+
+.sim-svg .crc-label {
+  fill: var(--text);
+  font-size: 15px;
+}
+
+.sim-svg .crc-i {
+  fill: var(--accent);
+}
+
+.sim-svg .crc-sign {
+  fill: var(--text);
+  font-size: 14px;
+}
+
+.sim-svg .crc-caption {
+  fill: var(--accent);
+  font-size: 15px;
+}
+
+.crc-table {
+  width: 100%;
+  margin: 0.75rem 0 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.crc-table th,
+.crc-table td {
+  padding: 0.2rem 0.35rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.crc-table th {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.crc-series tbody td:nth-child(3),
+.crc-parallel tbody td:nth-child(4) {
+  color: var(--accent);
+  font-weight: 600;
+}
