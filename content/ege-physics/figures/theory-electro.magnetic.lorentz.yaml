@@ -1,167 +1,158 @@
-# electro.magnetic.lorentz: Lorentz force is perpendicular to velocity; circular orbit
+# electro.magnetic.lorentz 9.4 (the ladder's figure, redrawn): a positive particle in a uniform
+# field towards us (accent dots). At the top of its orbit v points right and the Lorentz force
+# down, to the centre (q v × B with Bz = +1); the particle goes round clockwise; R muted dashed.
+# Colours (the «Электродинамика» convention with the magnetism extension of 8.x): magnetic
+# field lines in the text colour, thin, with small arrowheads; the vector B an accent arrow;
+# a field across the page a sparse grid of accent «×» (away from us) or «·» (towards us).
+# Extended for 9.x: a charged particle is a surface circle (r 11) with «+» or «−» in the text
+# colour, as the charges of 1.x and 2.x; its velocity green (and its parts muted dashed), the
+# Lorentz force and other forces red; its trajectory a text-colour line, animated ones drawn
+# with a text-colour mover dot; the radius and other guides muted dashed; notes muted; the
+# dees of a cyclotron a muted tint, its gap plain; the accelerating plates text colour.
 kind: diagram
-size: [400, 260]
+size:
+- 400
+- 270
 items:
-- circle: [40, 30]
+- dots:
+  - - 24
+    - 20
+  - - 24
+    - 70
+  - - 24
+    - 120
+  - - 24
+    - 170
+  - - 24
+    - 220
+  - - 74
+    - 20
+  - - 74
+    - 70
+  - - 74
+    - 120
+  - - 74
+    - 170
+  - - 74
+    - 220
+  - - 124
+    - 20
+  - - 124
+    - 70
+  - - 124
+    - 220
+  - - 174
+    - 20
+  - - 174
+    - 120
+  - - 174
+    - 170
+  - - 224
+    - 20
+  - - 224
+    - 170
+  - - 274
+    - 20
+  - - 274
+    - 70
+  - - 274
+    - 220
+  - - 324
+    - 20
+  - - 324
+    - 70
+  - - 324
+    - 120
+  - - 324
+    - 170
+  - - 324
+    - 220
+  - - 374
+    - 20
+  - - 374
+    - 70
+  - - 374
+    - 120
+  - - 374
+    - 170
+  - - 374
+    - 220
   r: 2.2
-  fill: solid
-  tone: muted
-- circle: [40, 80]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [40, 130]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [40, 180]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [40, 230]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [90, 30]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [90, 80]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [90, 130]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [90, 180]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [90, 230]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [140, 30]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [140, 80]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [140, 130]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [140, 180]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [140, 230]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [190, 30]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [190, 80]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [190, 130]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [190, 180]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [190, 230]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [240, 30]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [240, 80]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [240, 130]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [240, 180]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [240, 230]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [290, 30]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [290, 80]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [290, 130]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [290, 180]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [290, 230]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [340, 30]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [340, 80]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [340, 130]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [340, 180]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [340, 230]
-  r: 2.2
-  fill: solid
-  tone: muted
-- circle: [200, 135]
-  r: 80
+  tone: accent
+- path: M286 140L285.9 135.5L285.5 131L284.9 126.5L284.1 122.1L283.1 117.7L281.8 113.4L280.3 109.2L278.6
+    105L276.6 101L274.5 97L272.1 93.2L269.6 89.5L266.8 85.9L263.9 82.5L260.8 79.2L257.5 76.1L254.1 73.2L250.5
+    70.4L246.8 67.9L243 65.5L239 63.4L235 61.4L230.8 59.7L226.6 58.2L222.3 56.9L217.9 55.9L213.5 55.1L209
+    54.5L204.5 54.1L200 54L195.5 54.1L191 54.5L186.5 55.1L182.1 55.9L177.7 56.9L173.4 58.2L169.2 59.7L165
+    61.4L161 63.4L157 65.5L153.2 67.9L149.5 70.4L145.9 73.2L142.5 76.1L139.2 79.2L136.1 82.5L133.2 85.9L130.4
+    89.5L127.9 93.2L125.5 97L123.4 101L121.4 105L119.7 109.2L118.2 113.4L116.9 117.7L115.9 122.1L115.1
+    126.5L114.5 131L114.1 135.5L114 140L114.1 144.5L114.5 149L115.1 153.5L115.9 157.9L116.9 162.3L118.2
+    166.6L119.7 170.8L121.4 175L123.4 179L125.5 183L127.9 186.8L130.4 190.5L133.2 194.1L136.1 197.5L139.2
+    200.8L142.5 203.9L145.9 206.8L149.5 209.6L153.2 212.1L157 214.5L161 216.6L165 218.6L169.2 220.3L173.4
+    221.8L177.7 223.1L182.1 224.1L186.5 224.9L191 225.5L195.5 225.9L200 226L204.5 225.9L209 225.5L213.5
+    224.9L217.9 224.1L222.3 223.1L226.6 221.8L230.8 220.3L235 218.6L239 216.6L243 214.5L246.8 212.1L250.5
+    209.6L254.1 206.8L257.5 203.9L260.8 200.8L263.9 197.5L266.8 194.1L269.6 190.5L272.1 186.8L274.5 183L276.6
+    179L278.6 175L280.3 170.8L281.8 166.6L283.1 162.3L284.1 157.9L284.9 153.5L285.5 149L285.9 144.5L286
+    140
+  width: 1.4
+- arrow:
+  - - 256.2
+    - 205.4
+  - - 244.9
+    - 213.8
+  width: 1.3
+- arrow:
+  - - 134.5
+    - 196.3
+  - - 126.4
+    - 184.8
+  width: 1.3
+- line:
+  - - 200
+    - 140
+  - - 286
+    - 140
+  width: 1.2
   dashed: true
   tone: muted
-- arrow: [[200, 55], [262, 55]]
+- dots:
+  - - 200
+    - 140
+  r: 2.6
+- text: '*R*'
+  at:
+  - 242
+  - 132
+  size: 15
+- arrow:
+  - - 213
+    - 54
+  - - 266
+    - 54
   tone: vel
+  width: 2.2
   label: '*v*'
-- arrow: [[200, 55], [200, 105]]
+  label_at:
+  - 274
+  - 44
+- arrow:
+  - - 200
+    - 67
+  - - 200
+    - 110
   tone: force
+  width: 2.4
   label: '*F*_Л'
-  label_at: [218, 105]
-- circle: [200, 55]
-  r: 8
+  label_at:
+  - 222
+  - 108
+- circle:
+  - 200
+  - 54
+  r: 11
   fill: surface
+  width: 1.6
 - text: +
-  at: [200, 60]
-  size: 13
-- text: '*B* — к нам (·)'
-  at: [320, 252]
-  size: 13
-- text: '*R* = *m**v*/(|*q*|*B*)'
-  at: [95, 252]
-  size: 13
+  at:
+  - 200
+  - 59.5
+  size: 16

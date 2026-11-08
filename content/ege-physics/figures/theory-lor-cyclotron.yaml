@@ -1,0 +1,72 @@
+# electro.magnetic.lorentz 9.5: a cyclotron from above. Two dees (muted tint) with a gap; the
+# field towards us (accent dots). A positive particle goes round clockwise (q v × B with Bz = +1)
+# and is pushed by the voltage in the gap twice a turn: half-circles of radii 22·√k px, the
+# radius grows as √(energy), then it leaves; drawn with a mover.
+# Colours (the «Электродинамика» convention with the magnetism extension of 8.x): magnetic
+# field lines in the text colour, thin, with small arrowheads; the vector B an accent arrow;
+# a field across the page a sparse grid of accent «×» (away from us) or «·» (towards us).
+# Extended for 9.x: a charged particle is a surface circle (r 11) with «+» or «−» in the text
+# colour, as the charges of 1.x and 2.x; its velocity green (and its parts muted dashed), the
+# Lorentz force and other forces red; its trajectory a text-colour line, animated ones drawn
+# with a text-colour mover dot; the radius and other guides muted dashed; notes muted; the
+# dees of a cyclotron a muted tint, its gap plain; the accelerating plates text colour.
+kind: diagram
+size:
+- 400
+- 266
+items:
+- path: M191 28A104 104 0 0 0 191 236Z
+  fill: accent
+  tone: muted
+  width: 1.4
+- path: M209 28A104 104 0 0 1 209 236Z
+  fill: accent
+  tone: muted
+  width: 1.4
+- dots:
+  - - 110
+    - 132
+  - - 140
+    - 72
+  - - 140
+    - 192
+  - - 170
+    - 192
+  - - 230
+    - 192
+  - - 260
+    - 192
+  - - 290
+    - 132
+  r: 2.2
+  tone: accent
+- path: M200 110.0A22.0 22.0 0 0 1 200 154.0A31.1 31.1 0 0 1 200 91.8A38.1 38.1 0 0 1 200 168.0A44.0 44.0
+    0 0 1 200 80.0A49.2 49.2 0 0 1 200 178.4A53.9 53.9 0 0 1 200 70.6A58.2 58.2 0 0 1 200 187.0A62.2 62.2
+    0 0 1 200 62.6H388
+  width: 1.6
+  animate: draw
+  mover: true
+- text: дуант
+  at:
+  - 130
+  - 258
+  size: 14
+  tone: muted
+- text: дуант
+  at:
+  - 270
+  - 258
+  size: 14
+  tone: muted
+- text: зазор
+  at:
+  - 200
+  - 258
+  size: 14
+  tone: muted
+- text: к выходу
+  at:
+  - 352
+  - 52.6
+  size: 14
+  tone: muted

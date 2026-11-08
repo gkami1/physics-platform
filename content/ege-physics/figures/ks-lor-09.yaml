@@ -1,0 +1,88 @@
+# ks-lor-09: the track of a particle in a field towards us (accent dots): it flies in to the right
+# and turns up (counter-clockwise). Answer 2 (negative): for q > 0, q v × B with Bz = +1 would
+# point down.
+kind: diagram
+size:
+- 400
+- 200
+items:
+- dots:
+  - - 30
+    - 22
+  - - 30
+    - 72
+  - - 30
+    - 122
+  - - 80
+    - 22
+  - - 80
+    - 72
+  - - 80
+    - 122
+  - - 130
+    - 22
+  - - 130
+    - 72
+  - - 130
+    - 122
+  - - 180
+    - 22
+  - - 180
+    - 72
+  - - 180
+    - 122
+  - - 180
+    - 172
+  - - 230
+    - 172
+  - - 280
+    - 22
+  - - 280
+    - 72
+  - - 280
+    - 122
+  - - 280
+    - 172
+  - - 330
+    - 22
+  - - 330
+    - 72
+  - - 330
+    - 122
+  - - 330
+    - 172
+  - - 380
+    - 22
+  - - 380
+    - 72
+  - - 380
+    - 122
+  - - 380
+    - 172
+  r: 2.2
+  tone: accent
+- path: M44 160H150A92 92 0 0 0 242 68V14
+  width: 1.6
+- arrow:
+  - - 104.0
+    - 160.0
+  - - 118.0
+    - 160.0
+  width: 1.3
+- arrow:
+  - - 217.7
+    - 130.7
+  - - 226.4
+    - 119.7
+  width: 1.3
+- circle:
+  - 32
+  - 160
+  r: 11
+  fill: surface
+  width: 1.6
+- text: '?'
+  at:
+  - 32
+  - 165.5
+  size: 16

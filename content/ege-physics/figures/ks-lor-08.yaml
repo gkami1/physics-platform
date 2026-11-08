@@ -1,0 +1,109 @@
+# ks-lor-08: an electron flying left in a field towards us (accent dots); numbered arrows
+# 1 down, 2 up, 3 right. Answer 1: q v × B with q < 0, Bz = +1 points down.
+kind: diagram
+size:
+- 400
+- 210
+items:
+- dots:
+  - - 40
+    - 20
+  - - 40
+    - 76
+  - - 40
+    - 132
+  - - 40
+    - 188
+  - - 100
+    - 20
+  - - 100
+    - 76
+  - - 100
+    - 132
+  - - 100
+    - 188
+  - - 160
+    - 20
+  - - 160
+    - 76
+  - - 160
+    - 132
+  - - 160
+    - 188
+  - - 220
+    - 76
+  - - 220
+    - 132
+  - - 280
+    - 20
+  - - 280
+    - 76
+  - - 280
+    - 132
+  - - 280
+    - 188
+  - - 340
+    - 20
+  - - 340
+    - 76
+  - - 340
+    - 132
+  - - 340
+    - 188
+  r: 2.2
+  tone: accent
+- arrow:
+  - - 200
+    - 118
+  - - 200
+    - 158
+  width: 1.8
+- text: '1'
+  at:
+  - 209
+  - 175
+  size: 15
+- arrow:
+  - - 200
+    - 90
+  - - 200
+    - 50
+  width: 1.8
+- text: '2'
+  at:
+  - 209
+  - 43
+  size: 15
+- arrow:
+  - - 214
+    - 104
+  - - 254
+    - 104
+  width: 1.8
+- text: '3'
+  at:
+  - 266
+  - 109
+  size: 15
+- arrow:
+  - - 187
+    - 104
+  - - 138
+    - 104
+  tone: vel
+  width: 2.2
+  label: '*v*'
+  label_at:
+  - 140
+  - 92
+- circle:
+  - 200
+  - 104
+  r: 11
+  fill: surface
+  width: 1.6
+- text: −
+  at:
+  - 200
+  - 109.5
+  size: 16
