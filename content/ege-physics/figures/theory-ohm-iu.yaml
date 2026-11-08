@@ -1,0 +1,119 @@
+# electro.circuits.ohm 5.3: I(U) of two resistors, qualitative: straight lines through the
+# origin (accent); the steeper one has the smaller resistance, R₁ < R₂, and at the same
+# voltage U carries the larger current, I₁ > I₂ (muted guides).
+# Colours (extends «Конденсаторы»; the first circuits topic, so it fixes the circuit convention):
+# circuit symbols (battery, resistor, lamp, ammeter, voltmeter, switch, rheostat) and wires in
+# the text colour, node dots text-colour dots (r 3); the conventional current I an accent arrow
+# beside the wire (from «+» to «−» outside the source), its label I accent; moving electrons
+# accent dots with green arrows for their drift, against the current; E in a wire an accent
+# vector; a wire seen up close a conductor (surface fill, text outline) with «+» ions. Labels
+# R, U of elements in the text colour beside the symbol; voltages as muted brackets with the
+# label in the text colour. Graphs (I(U)) use the diagram kind with the Axes helper, lines
+# accent. What stays the same (one current in series, one voltage in parallel) is accent text.
+# Guides, distances and notes muted.
+kind: diagram
+size:
+- 400
+- 236
+items:
+- arrow:
+  - - 48
+    - 210
+  - - 388
+    - 210
+  width: 1.5
+- arrow:
+  - - 48
+    - 210
+  - - 48
+    - 14
+  width: 1.5
+- text: '*U*'
+  at:
+  - 386
+  - 228
+  anchor: end
+  size: 15
+- text: '*I*'
+  at:
+  - 58
+  - 24
+  anchor: start
+  size: 15
+- text: '0'
+  at:
+  - 42
+  - 225
+  size: 12
+  anchor: end
+- path: M48 210L363 31.5
+  width: 2.4
+  tone: accent
+  animate: draw
+- path: M48 210L363 138.6
+  width: 2.4
+  tone: accent
+  animate: draw
+- text: '*R*_{1}'
+  at:
+  - 355.0
+  - 35.5
+  size: 15
+  anchor: end
+  tone: accent
+- text: '*R*_{2}'
+  at:
+  - 363.0
+  - 128.6
+  size: 15
+  anchor: end
+  tone: accent
+- line:
+  - - 258.0
+    - 210
+  - - 258.0
+    - 91.0
+  - - 48
+    - 91.0
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 258.0
+    - 162.4
+  - - 48
+    - 162.4
+  width: 1
+  dashed: true
+  tone: muted
+- text: '*U*'
+  at:
+  - 258.0
+  - 229
+  size: 14
+- text: '*I*_{1}'
+  at:
+  - 41
+  - 96.0
+  size: 14
+  anchor: end
+- text: '*I*_{2}'
+  at:
+  - 41
+  - 167.4
+  size: 14
+  anchor: end
+- text: '*R*_{1} < *R*_{2}: меньше сопротивление —'
+  at:
+  - 82
+  - 28
+  size: 13
+  anchor: start
+  tone: muted
+- text: больше ток при том же *U*
+  at:
+  - 82
+  - 44
+  size: 13
+  anchor: start
+  tone: muted

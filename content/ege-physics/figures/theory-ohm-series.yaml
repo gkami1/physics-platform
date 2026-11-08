@@ -1,0 +1,159 @@
+# electro.circuits.ohm 5.5: two resistors in series with a source: one path, so the same
+# current I (three equal accent arrows) passes both; the voltages U₁ and U₂ (muted brackets
+# over the resistors) add up to the source's U. What stays the same in accent.
+# Colours (extends «Конденсаторы»; the first circuits topic, so it fixes the circuit convention):
+# circuit symbols (battery, resistor, lamp, ammeter, voltmeter, switch, rheostat) and wires in
+# the text colour, node dots text-colour dots (r 3); the conventional current I an accent arrow
+# beside the wire (from «+» to «−» outside the source), its label I accent; moving electrons
+# accent dots with green arrows for their drift, against the current; E in a wire an accent
+# vector; a wire seen up close a conductor (surface fill, text outline) with «+» ions. Labels
+# R, U of elements in the text colour beside the symbol; voltages as muted brackets with the
+# label in the text colour. Graphs (I(U)) use the diagram kind with the Axes helper, lines
+# accent. What stays the same (one current in series, one voltage in parallel) is accent text.
+# Guides, distances and notes muted.
+kind: diagram
+size:
+- 400
+- 240
+items:
+- element: battery
+  at:
+  - 50
+  - 143
+  vertical: true
+  label: '*U*'
+- text: +
+  at:
+  - 70
+  - 133.9
+  size: 14
+  tone: default
+- text: −
+  at:
+  - 70
+  - 163.9
+  size: 14
+  tone: default
+- line:
+  - - 50
+    - 123
+  - - 50
+    - 90
+  - - 130
+    - 90
+  width: 1.6
+- element: resistor
+  at:
+  - 150
+  - 90
+  label: '*R*_{1}'
+  label_side: 1
+- line:
+  - - 170
+    - 90
+  - - 230
+    - 90
+  width: 1.6
+- element: resistor
+  at:
+  - 250
+  - 90
+  label: '*R*_{2}'
+  label_side: 1
+- line:
+  - - 270
+    - 90
+  - - 350
+    - 90
+  - - 350
+    - 196
+  - - 50
+    - 196
+  - - 50
+    - 163
+  width: 1.6
+- arrow:
+  - - 84
+    - 78
+  - - 114
+    - 78
+  tone: accent
+  width: 1.8
+- text: '*I*'
+  at:
+  - 99
+  - 70
+  size: 15
+  tone: accent
+- arrow:
+  - - 185
+    - 78
+  - - 215
+    - 78
+  tone: accent
+  width: 1.8
+- text: '*I*'
+  at:
+  - 200
+  - 70
+  size: 15
+  tone: accent
+- arrow:
+  - - 286
+    - 78
+  - - 316
+    - 78
+  tone: accent
+  width: 1.8
+- text: '*I*'
+  at:
+  - 301
+  - 70
+  size: 15
+  tone: accent
+- line:
+  - - 130
+    - 49
+  - - 130
+    - 44
+  - - 170
+    - 44
+  - - 170
+    - 49
+  width: 1
+  tone: muted
+- text: '*U*_{1}'
+  at:
+  - 150.0
+  - 38
+  size: 15
+- line:
+  - - 230
+    - 49
+  - - 230
+    - 44
+  - - 270
+    - 44
+  - - 270
+    - 49
+  width: 1
+  tone: muted
+- text: '*U*_{2}'
+  at:
+  - 250.0
+  - 38
+  size: 15
+- text: ток везде один и тот же
+  at:
+  - 200
+  - 160
+  size: 14
+  anchor: middle
+  tone: accent
+- text: '*U* = *U*_{1} + *U*_{2}'
+  at:
+  - 200
+  - 228
+  size: 14
+  anchor: middle
+  tone: muted

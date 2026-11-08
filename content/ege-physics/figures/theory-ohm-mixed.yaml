@@ -1,0 +1,196 @@
+# electro.circuits.ohm 5.7: folding a mixed circuit step by step: (1) R₁ in series with R₂
+# and R₃ in parallel; (2) the parallel pair replaced by one R₂₃; (3) R₁ and R₂₃ in series
+# replaced by R = R₁ + R₂₃. Ends of the section and nodes as text-colour dots.
+# Colours (extends «Конденсаторы»; the first circuits topic, so it fixes the circuit convention):
+# circuit symbols (battery, resistor, lamp, ammeter, voltmeter, switch, rheostat) and wires in
+# the text colour, node dots text-colour dots (r 3); the conventional current I an accent arrow
+# beside the wire (from «+» to «−» outside the source), its label I accent; moving electrons
+# accent dots with green arrows for their drift, against the current; E in a wire an accent
+# vector; a wire seen up close a conductor (surface fill, text outline) with «+» ions. Labels
+# R, U of elements in the text colour beside the symbol; voltages as muted brackets with the
+# label in the text colour. Graphs (I(U)) use the diagram kind with the Axes helper, lines
+# accent. What stays the same (one current in series, one voltage in parallel) is accent text.
+# Guides, distances and notes muted.
+kind: diagram
+size:
+- 400
+- 276
+items:
+- dots:
+  - - 30
+    - 62
+  r: 3
+- line:
+  - - 30
+    - 62
+  - - 90
+    - 62
+  width: 1.6
+- element: resistor
+  at:
+  - 110
+  - 62
+  label: '*R*_{1}'
+- line:
+  - - 130
+    - 62
+  - - 180
+    - 62
+  width: 1.6
+- line:
+  - - 180
+    - 36
+  - - 180
+    - 88
+  width: 1.6
+- line:
+  - - 180
+    - 36
+  - - 230
+    - 36
+  width: 1.6
+- element: resistor
+  at:
+  - 250
+  - 36
+  label: '*R*_{2}'
+- line:
+  - - 270
+    - 36
+  - - 320
+    - 36
+  width: 1.6
+- line:
+  - - 180
+    - 88
+  - - 230
+    - 88
+  width: 1.6
+- element: resistor
+  at:
+  - 250
+  - 88
+  label: '*R*_{3}'
+  label_side: 1
+- line:
+  - - 270
+    - 88
+  - - 320
+    - 88
+  width: 1.6
+- line:
+  - - 320
+    - 36
+  - - 320
+    - 88
+  width: 1.6
+- line:
+  - - 320
+    - 62
+  - - 370
+    - 62
+  width: 1.6
+- dots:
+  - - 180
+    - 62
+  - - 320
+    - 62
+  - - 370
+    - 62
+  r: 3
+- text: '1'
+  at:
+  - 10
+  - 67
+  size: 14
+  anchor: start
+  tone: default
+- dots:
+  - - 30
+    - 160
+  r: 3
+- line:
+  - - 30
+    - 160
+  - - 90
+    - 160
+  width: 1.6
+- element: resistor
+  at:
+  - 110
+  - 160
+  label: '*R*_{1}'
+- line:
+  - - 130
+    - 160
+  - - 230
+    - 160
+  width: 1.6
+- element: resistor
+  at:
+  - 250
+  - 160
+  label: '*R*_{23}'
+- line:
+  - - 270
+    - 160
+  - - 370
+    - 160
+  width: 1.6
+- dots:
+  - - 370
+    - 160
+  r: 3
+- text: '2'
+  at:
+  - 10
+  - 165
+  size: 14
+  anchor: start
+  tone: default
+- text: пару *R*_{2}, *R*_{3} заменили одним *R*_{23}
+  at:
+  - 200
+  - 186
+  size: 13
+  anchor: middle
+  tone: muted
+- dots:
+  - - 30
+    - 240
+  r: 3
+- line:
+  - - 30
+    - 240
+  - - 180
+    - 240
+  width: 1.6
+- element: resistor
+  at:
+  - 200
+  - 240
+  label: '*R* = *R*_{1} + *R*_{23}'
+- line:
+  - - 220
+    - 240
+  - - 370
+    - 240
+  width: 1.6
+- dots:
+  - - 370
+    - 240
+  r: 3
+- text: '3'
+  at:
+  - 10
+  - 245
+  size: 14
+  anchor: start
+  tone: default
+- text: последовательные сложили
+  at:
+  - 200
+  - 266
+  size: 13
+  anchor: middle
+  tone: muted

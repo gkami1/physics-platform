@@ -1,0 +1,114 @@
+# electro.circuits.ohm 5.4: four wires of one metal side by side (conductors: surface fill,
+# text outline): as it was (R₀); twice as long (2R₀); twice the cross-section, drawn √2 times
+# thicker (R₀/2); stretched to twice the length at the same volume, so half the cross-section
+# (4R₀). The resistance beside each in accent.
+# Colours (extends «Конденсаторы»; the first circuits topic, so it fixes the circuit convention):
+# circuit symbols (battery, resistor, lamp, ammeter, voltmeter, switch, rheostat) and wires in
+# the text colour, node dots text-colour dots (r 3); the conventional current I an accent arrow
+# beside the wire (from «+» to «−» outside the source), its label I accent; moving electrons
+# accent dots with green arrows for their drift, against the current; E in a wire an accent
+# vector; a wire seen up close a conductor (surface fill, text outline) with «+» ions. Labels
+# R, U of elements in the text colour beside the symbol; voltages as muted brackets with the
+# label in the text colour. Graphs (I(U)) use the diagram kind with the Axes helper, lines
+# accent. What stays the same (one current in series, one voltage in parallel) is accent text.
+# Guides, distances and notes muted.
+kind: diagram
+size:
+- 400
+- 236
+items:
+- rect:
+  - 160
+  - 29.0
+  - 90
+  - 10.0
+  fill: surface
+  width: 1.6
+  radius: 2
+- text: как было
+  at:
+  - 10
+  - 39
+  size: 13
+  anchor: start
+  tone: default
+- text: '*R*_{0}'
+  at:
+  - 264
+  - 39
+  size: 15
+  anchor: start
+  tone: accent
+- rect:
+  - 160
+  - 79.0
+  - 180
+  - 10.0
+  fill: surface
+  width: 1.6
+  radius: 2
+- text: вдвое длиннее
+  at:
+  - 10
+  - 89
+  size: 13
+  anchor: start
+  tone: default
+- text: 2*R*_{0}
+  at:
+  - 354
+  - 89
+  size: 15
+  anchor: start
+  tone: accent
+- rect:
+  - 160
+  - 127.0
+  - 90
+  - 14.1
+  fill: surface
+  width: 1.6
+  radius: 2
+- text: сечение вдвое больше
+  at:
+  - 10
+  - 139
+  size: 13
+  anchor: start
+  tone: default
+- text: '*R*_{0}/2'
+  at:
+  - 264
+  - 139
+  size: 15
+  anchor: start
+  tone: accent
+- rect:
+  - 160
+  - 180.4
+  - 180
+  - 7.1
+  fill: surface
+  width: 1.6
+  radius: 2
+- text: вытянули вдвое
+  at:
+  - 10
+  - 189
+  size: 13
+  anchor: start
+  tone: default
+- text: 4*R*_{0}
+  at:
+  - 354
+  - 189
+  size: 15
+  anchor: start
+  tone: accent
+- text: 'при вытягивании объём тот же: длина ×2, сечение ÷2'
+  at:
+  - 200
+  - 226
+  size: 13
+  anchor: middle
+  tone: muted

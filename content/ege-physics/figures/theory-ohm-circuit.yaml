@@ -1,0 +1,134 @@
+# electro.circuits.ohm 5.1: the simplest circuit: a source (battery symbol, «+» on the
+# left), a lamp and an ammeter in series. The current I (accent arrows) leaves the «+»
+# and goes round to the «−»; an electron (accent dot) drifts the other way (green arrow).
+# Colours (extends «Конденсаторы»; the first circuits topic, so it fixes the circuit convention):
+# circuit symbols (battery, resistor, lamp, ammeter, voltmeter, switch, rheostat) and wires in
+# the text colour, node dots text-colour dots (r 3); the conventional current I an accent arrow
+# beside the wire (from «+» to «−» outside the source), its label I accent; moving electrons
+# accent dots with green arrows for their drift, against the current; E in a wire an accent
+# vector; a wire seen up close a conductor (surface fill, text outline) with «+» ions. Labels
+# R, U of elements in the text colour beside the symbol; voltages as muted brackets with the
+# label in the text colour. Graphs (I(U)) use the diagram kind with the Axes helper, lines
+# accent. What stays the same (one current in series, one voltage in parallel) is accent text.
+# Guides, distances and notes muted.
+kind: diagram
+size:
+- 400
+- 240
+items:
+- line:
+  - - 180
+    - 196
+  - - 60
+    - 196
+  - - 60
+    - 50
+  - - 130
+    - 50
+  width: 1.6
+- element: lamp
+  at:
+  - 150
+  - 50
+- line:
+  - - 170
+    - 50
+  - - 250
+    - 50
+  width: 1.6
+- element: ammeter
+  at:
+  - 270
+  - 50
+- line:
+  - - 290
+    - 50
+  - - 340
+    - 50
+  - - 340
+    - 196
+  - - 220
+    - 196
+  width: 1.6
+- element: battery
+  at:
+  - 200
+  - 196
+- text: +
+  at:
+  - 185
+  - 179.2
+  size: 15
+  tone: default
+- text: −
+  at:
+  - 215
+  - 179.2
+  size: 15
+  tone: default
+- arrow:
+  - - 190
+    - 36
+  - - 230
+    - 36
+  tone: accent
+  width: 1.8
+- text: '*I*'
+  at:
+  - 210.0
+  - 28
+  size: 15
+  tone: accent
+- arrow:
+  - - 354
+    - 100
+  - - 354
+    - 140
+  tone: accent
+  width: 1.8
+- text: '*I*'
+  at:
+  - 366
+  - 125
+  size: 15
+  tone: accent
+- dots:
+  - - 60
+    - 124
+  r: 3.5
+  tone: accent
+- arrow:
+  - - 74
+    - 110
+  - - 74
+    - 138
+  tone: vel
+  width: 1.6
+- text: электрон
+  at:
+  - 84
+  - 128
+  size: 13
+  anchor: start
+  tone: muted
+- text: лампа
+  at:
+  - 150
+  - 84
+  size: 13
+  anchor: middle
+  tone: muted
+- text: амперметр
+  at:
+  - 270
+  - 84
+  size: 13
+  anchor: middle
+  tone: muted
+- text: источник тока
+  at:
+  - 200
+  - 228
+  size: 13
+  anchor: middle
+  tone: muted

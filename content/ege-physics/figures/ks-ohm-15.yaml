@@ -1,0 +1,98 @@
+# ks-ohm-15: R₁ in series with R₂ and R₃ in parallel, joined to a source U. Labels only;
+# the values are in the statement (5, 20 and 30 Ом, 34 В).
+kind: diagram
+size:
+- 400
+- 204
+items:
+- line:
+  - - 40
+    - 120
+  - - 40
+    - 70
+  - - 90
+    - 70
+  width: 1.6
+- element: resistor
+  at:
+  - 110
+  - 70
+  label: '*R*_{1}'
+- line:
+  - - 130
+    - 70
+  - - 190
+    - 70
+  width: 1.6
+- line:
+  - - 190
+    - 40
+  - - 190
+    - 100
+  width: 1.6
+- line:
+  - - 190
+    - 40
+  - - 240
+    - 40
+  width: 1.6
+- element: resistor
+  at:
+  - 260
+  - 40
+  label: '*R*_{2}'
+- line:
+  - - 280
+    - 40
+  - - 330
+    - 40
+  width: 1.6
+- line:
+  - - 190
+    - 100
+  - - 240
+    - 100
+  width: 1.6
+- element: resistor
+  at:
+  - 260
+  - 100
+  label: '*R*_{3}'
+  label_side: 1
+- line:
+  - - 280
+    - 100
+  - - 330
+    - 100
+  width: 1.6
+- line:
+  - - 330
+    - 40
+  - - 330
+    - 100
+  width: 1.6
+- line:
+  - - 330
+    - 70
+  - - 370
+    - 70
+  - - 370
+    - 186
+  - - 40
+    - 186
+  - - 40
+    - 160
+  width: 1.6
+- dots:
+  - - 190
+    - 70
+  - - 330
+    - 70
+  r: 3
+- element: battery
+  at:
+  - 40
+  - 140
+  vertical: true
+  label: '*U*'
+  label_side: 1
