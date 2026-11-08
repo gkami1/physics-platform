@@ -1,0 +1,84 @@
+# electro.circuits.power 7.2: a kettle's rating plate (surface fill) with its rated voltage
+# and power; muted notes say what each number means.
+# Colours (the circuit convention of «Ток, сопротивление и закон Ома для участка цепи» and
+# «ЭДС и закон Ома для полной цепи», extended for power): circuit symbols and wires in the text
+# colour, node dots text-colour dots (r 3); the conventional current I an accent arrow beside the
+# wire, its label accent; labels R, U, r and ℰ in the text colour, a battery's «+» and «−» small
+# text-colour signs; a real source in a muted dashed outline; voltages as muted brackets. A lit
+# lamp has short accent rays around it: more and longer rays for a brighter lamp, none for an
+# unlit one. Energy and power bars: the useful part an accent tint, the lost part (heat in a
+# motor, heat inside a source) a muted tint. Graphs use the diagram kind with the Axes helper:
+# lines and areas accent, the P(R) maximum a text-colour dot with muted guides. What stays the
+# same is accent text. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 196
+items:
+- rect:
+  - 30
+  - 40
+  - 150
+  - 120
+  fill: surface
+  width: 1.6
+  radius: 8
+- text: 220 В
+  at:
+  - 105.0
+  - 88
+  size: 22
+- text: 2000 Вт
+  at:
+  - 105.0
+  - 130
+  size: 22
+- line:
+  - - 188
+    - 80
+  - - 218
+    - 80
+  width: 1
+  tone: muted
+- line:
+  - - 188
+    - 122
+  - - 218
+    - 122
+  width: 1
+  tone: muted
+- text: на это напряжение
+  at:
+  - 224
+  - 76
+  size: 13
+  anchor: start
+  tone: muted
+- text: он рассчитан
+  at:
+  - 224
+  - 94
+  size: 13
+  anchor: start
+  tone: muted
+- text: такую мощность он
+  at:
+  - 224
+  - 120
+  size: 13
+  anchor: start
+  tone: muted
+- text: берёт при 220 В
+  at:
+  - 224
+  - 138
+  size: 13
+  anchor: start
+  tone: muted
+- text: табличка на чайнике
+  at:
+  - 105.0
+  - 184
+  size: 13
+  anchor: middle
+  tone: muted

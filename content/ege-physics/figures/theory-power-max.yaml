@@ -1,0 +1,115 @@
+# electro.circuits.power 7.8: the power in the outer circuit P = ℰ²R/(R + r)² against the
+# outer resistance R (accent, qualitative: R up to 8r): zero at a short circuit, a maximum
+# at R = r (text-colour dot, muted guides to the axes, labels r and P_max), then slowly down.
+# Colours (the circuit convention of «Ток, сопротивление и закон Ома для участка цепи» and
+# «ЭДС и закон Ома для полной цепи», extended for power): circuit symbols and wires in the text
+# colour, node dots text-colour dots (r 3); the conventional current I an accent arrow beside the
+# wire, its label accent; labels R, U, r and ℰ in the text colour, a battery's «+» and «−» small
+# text-colour signs; a real source in a muted dashed outline; voltages as muted brackets. A lit
+# lamp has short accent rays around it: more and longer rays for a brighter lamp, none for an
+# unlit one. Energy and power bars: the useful part an accent tint, the lost part (heat in a
+# motor, heat inside a source) a muted tint. Graphs use the diagram kind with the Axes helper:
+# lines and areas accent, the P(R) maximum a text-colour dot with muted guides. What stays the
+# same is accent text. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 236
+items:
+- arrow:
+  - - 56
+    - 206
+  - - 386
+    - 206
+  width: 1.5
+- arrow:
+  - - 56
+    - 206
+  - - 56
+    - 16
+  width: 1.5
+- text: '*R*'
+  at:
+  - 384
+  - 224
+  anchor: end
+  size: 15
+- text: '*P*'
+  at:
+  - 66
+  - 26
+  anchor: start
+  size: 15
+- text: '0'
+  at:
+  - 50
+  - 221
+  size: 12
+  anchor: end
+- path: M56 206L57.9 179.2L59.8 157.1L61.7 138.9L63.6 123.8L65.5 111.3L67.4 100.9L69.3 92.3L71.2 85.2L73.1
+    79.3L75 74.4L76.9 70.5L78.8 67.3L80.7 64.7L82.6 62.6L84.5 61L86.4 59.8L88.3 59L90.2 58.4L92.1 58.1L94
+    58L95.9 58.1L97.8 58.3L99.7 58.7L101.6 59.2L103.5 59.8L105.4 60.5L107.3 61.3L109.2 62.1L111.1 63L113
+    63.9L114.9 64.9L116.8 65.9L118.7 66.9L120.6 67.9L122.5 69L124.4 70.1L126.3 71.2L128.2 72.3L130.1 73.3L132
+    74.4L133.9 75.5L135.8 76.6L137.7 77.7L139.6 78.8L141.5 79.9L143.4 81L145.3 82L147.2 83.1L149.1 84.1L151
+    85.2L152.9 86.2L154.8 87.2L156.7 88.2L158.6 89.2L160.5 90.2L162.4 91.2L164.3 92.2L166.2 93.1L168.1
+    94.1L170 95L171.9 95.9L173.8 96.8L175.7 97.7L177.6 98.6L179.5 99.5L181.4 100.3L183.3 101.2L185.2 102L187.1
+    102.9L189 103.7L190.9 104.5L192.8 105.3L194.7 106.1L196.6 106.8L198.5 107.6L200.4 108.4L202.3 109.1L204.2
+    109.8L206.1 110.6L208 111.3L209.9 112L211.8 112.7L213.7 113.4L215.6 114L217.5 114.7L219.4 115.4L221.3
+    116L223.2 116.7L225.1 117.3L227 117.9L228.9 118.6L230.8 119.2L232.7 119.8L234.6 120.4L236.5 120.9L238.4
+    121.5L240.3 122.1L242.2 122.7L244.1 123.2L246 123.8L247.9 124.3L249.8 124.9L251.7 125.4L253.6 125.9L255.5
+    126.4L257.4 126.9L259.3 127.5L261.2 128L263.1 128.4L265 128.9L266.9 129.4L268.8 129.9L270.7 130.4L272.6
+    130.8L274.5 131.3L276.4 131.7L278.3 132.2L280.2 132.6L282.1 133.1L284 133.5L285.9 133.9L287.8 134.4L289.7
+    134.8L291.6 135.2L293.5 135.6L295.4 136L297.3 136.4L299.2 136.8L301.1 137.2L303 137.6L304.9 138L306.8
+    138.4L308.7 138.7L310.6 139.1L312.5 139.5L314.4 139.8L316.3 140.2L318.2 140.5L320.1 140.9L322 141.2L323.9
+    141.6L325.8 141.9L327.7 142.3L329.6 142.6L331.5 142.9L333.4 143.3L335.3 143.6L337.2 143.9L339.1 144.2L341
+    144.5L342.9 144.9L344.8 145.2L346.7 145.5L348.6 145.8L350.5 146.1L352.4 146.4L354.3 146.7L356.2 147L358.1
+    147.2L360 147.5
+  width: 2.4
+  tone: accent
+  animate: draw
+- line:
+  - - 94
+    - 206
+  - - 94
+    - 58
+  - - 56
+    - 58
+  width: 1
+  dashed: true
+  tone: muted
+- dots:
+  - - 94
+    - 58
+  r: 3
+- text: '*r*'
+  at:
+  - 94
+  - 224
+  size: 15
+- text: '*P*_{max}'
+  at:
+  - 50
+  - 63
+  size: 14
+  anchor: end
+- text: максимум при *R* = *r*,
+  at:
+  - 170
+  - 36
+  size: 13
+  anchor: start
+  tone: muted
+- text: КПД там 50 %
+  at:
+  - 170
+  - 54
+  size: 13
+  anchor: start
+  tone: muted
+- text: при больших *R* ток мал
+  at:
+  - 200
+  - 186
+  size: 13
+  anchor: start
+  tone: muted

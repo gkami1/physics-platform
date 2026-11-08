@@ -1,0 +1,105 @@
+# electro.circuits.power 7.4: where the work of the current goes. Two bars of the same
+# height A = UIt: a kettle turns all of it into heat Q (accent tint, useful); a fan's motor
+# turns most of it into mechanical work (accent tint) and only a part into heat Q = I²Rt in
+# its windings (muted tint, lost). Qualitative.
+# Colours (the circuit convention of «Ток, сопротивление и закон Ома для участка цепи» and
+# «ЭДС и закон Ома для полной цепи», extended for power): circuit symbols and wires in the text
+# colour, node dots text-colour dots (r 3); the conventional current I an accent arrow beside the
+# wire, its label accent; labels R, U, r and ℰ in the text colour, a battery's «+» and «−» small
+# text-colour signs; a real source in a muted dashed outline; voltages as muted brackets. A lit
+# lamp has short accent rays around it: more and longer rays for a brighter lamp, none for an
+# unlit one. Energy and power bars: the useful part an accent tint, the lost part (heat in a
+# motor, heat inside a source) a muted tint. Graphs use the diagram kind with the Axes helper:
+# lines and areas accent, the P(R) maximum a text-colour dot with muted guides. What stays the
+# same is accent text. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 236
+items:
+- rect:
+  - 96
+  - 50
+  - 64
+  - 140
+  fill: accent
+  tone: accent
+  width: 1.4
+- text: '*Q*'
+  at:
+  - 128.0
+  - 125.0
+  size: 15
+- rect:
+  - 250
+  - 78.0
+  - 64
+  - 112.0
+  fill: accent
+  tone: accent
+  width: 1.4
+- text: '*A*_{мех}'
+  at:
+  - 282.0
+  - 139.0
+  size: 15
+- rect:
+  - 250
+  - 50
+  - 64
+  - 28.0
+  fill: accent
+  tone: muted
+  width: 1.4
+- text: '*Q*'
+  at:
+  - 282.0
+  - 69.0
+  size: 15
+- line:
+  - - 40
+    - 190
+  - - 360
+    - 190
+  width: 1.4
+- line:
+  - - 40
+    - 50
+  - - 360
+    - 50
+  width: 1
+  dashed: true
+  tone: muted
+- text: работа тока *A* = *UIt*
+  at:
+  - 200
+  - 36
+  size: 15
+- text: 'чайник:'
+  at:
+  - 128.0
+  - 210
+  size: 14
+  anchor: middle
+  tone: default
+- text: вся работа — тепло
+  at:
+  - 128.0
+  - 228
+  size: 13
+  anchor: middle
+  tone: muted
+- text: 'вентилятор:'
+  at:
+  - 282.0
+  - 210
+  size: 14
+  anchor: middle
+  tone: default
+- text: тепла меньше, чем *A*
+  at:
+  - 282.0
+  - 228
+  size: 13
+  anchor: middle
+  tone: muted

@@ -1,0 +1,101 @@
+# electro.circuits.power 7.1: a lit lamp on a stretch of circuit with the voltage U on it
+# (muted bracket) and the current I (accent arrow). In time t a charge q = It passes, and the
+# field does work A = qU = UIt on it.
+# Colours (the circuit convention of «Ток, сопротивление и закон Ома для участка цепи» and
+# «ЭДС и закон Ома для полной цепи», extended for power): circuit symbols and wires in the text
+# colour, node dots text-colour dots (r 3); the conventional current I an accent arrow beside the
+# wire, its label accent; labels R, U, r and ℰ in the text colour, a battery's «+» and «−» small
+# text-colour signs; a real source in a muted dashed outline; voltages as muted brackets. A lit
+# lamp has short accent rays around it: more and longer rays for a brighter lamp, none for an
+# unlit one. Energy and power bars: the useful part an accent tint, the lost part (heat in a
+# motor, heat inside a source) a muted tint. Graphs use the diagram kind with the Axes helper:
+# lines and areas accent, the P(R) maximum a text-colour dot with muted guides. What stays the
+# same is accent text. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 204
+items:
+- line:
+  - - 40
+    - 96
+  - - 180
+    - 96
+  width: 1.6
+- element: lamp
+  at:
+  - 200
+  - 96
+- path: M213 88.5L219.9 84.5M187 103.5L180.1 107.5M200 81L200 73M200 111L200 119M187 88.5L180.1 84.5M213
+    103.5L219.9 107.5
+  width: 1.8
+  tone: accent
+- line:
+  - - 220
+    - 96
+  - - 360
+    - 96
+  width: 1.6
+- circle:
+  - 36
+  - 96
+  r: 4
+  width: 1.6
+- circle:
+  - 364
+  - 96
+  r: 4
+  width: 1.6
+- line:
+  - - 150
+    - 51
+  - - 150
+    - 46
+  - - 250
+    - 46
+  - - 250
+    - 51
+  width: 1
+  tone: muted
+- text: '*U*'
+  at:
+  - 200.0
+  - 40
+  size: 15
+- arrow:
+  - - 70
+    - 82
+  - - 130
+    - 82
+  tone: accent
+  width: 1.8
+- text: '*I*'
+  at:
+  - 100
+  - 74
+  size: 15
+  tone: accent
+- text: к источнику
+  at:
+  - 36
+  - 122
+  size: 13
+  anchor: start
+  tone: muted
+- text: к источнику
+  at:
+  - 364
+  - 122
+  size: 13
+  anchor: end
+  tone: muted
+- text: за время *t* проходит заряд *q* = *It*
+  at:
+  - 200
+  - 160
+  size: 15
+- text: работа поля *A* = *qU* = *UIt*
+  at:
+  - 200
+  - 188
+  size: 15
