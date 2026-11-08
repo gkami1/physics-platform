@@ -212,15 +212,15 @@ items:
   tone: muted
 - text: к «+»
   at:
-  - 36
-  - 48
+  - 40
+  - 168
   size: 13
   anchor: start
   tone: muted
 - text: к «−»
   at:
-  - 364
-  - 48
+  - 360
+  - 168
   size: 13
   anchor: end
   tone: muted
