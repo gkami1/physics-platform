@@ -74,7 +74,7 @@ function el<K extends keyof SVGElementTagNameMap>(
 
 const f1 = (v: number): string => v.toFixed(1);
 
-const S = { w: 400, h: 280, cx: 200, cy: 140, half: 90, lines: [30, 70, 110, 170, 210, 250] };
+const S = { w: 400, h: 280, cx: 200, cy: 140, half: 84, lines: [30, 70, 110, 170, 210, 250] };
 
 let instances = 0;
 
@@ -246,8 +246,10 @@ class AmpereSim extends HTMLElement {
     }
     if (across) {
       const right = x2 >= x1 - 0.5;
-      const lx = right ? x2 + 8 : x2 - 8;
-      const t = el('text', { x: f1(lx), y: f1((y1 + y2) / 2 + 5), 'text-anchor': right ? 'start' : 'end', class: 'amp-label' });
+      // clear of the force symbol at the middle when the conductor stands across the field
+      const lx = right ? Math.max(x2, cx + 14) + 8 : Math.min(x2, cx - 14) - 8;
+      // a quarter of the way up the leg: clear of the angle's label and of F_А
+      const t = el('text', { x: f1(lx), y: f1(y1 + (y2 - y1) / 4 + 5), 'text-anchor': right ? 'start' : 'end', class: 'amp-label' });
       t.append(el('tspan', { 'font-style': 'italic' }, 'l'), el('tspan', {}, ' sin '), el('tspan', { 'font-style': 'italic' }, 'α'));
       parts.push(t);
     }
@@ -285,10 +287,10 @@ class AmpereSim extends HTMLElement {
       parts.push(el('circle', { cx, cy, r: 12, class: 'amp-force' }));
       if (f.dir === 'out') parts.push(el('circle', { cx, cy, r: 3.2, class: 'amp-force-dot' }));
       else parts.push(el('path', { d: `M${cx - 7} ${cy - 7}L${cx + 7} ${cy + 7}M${cx - 7} ${cy + 7}L${cx + 7} ${cy - 7}`, class: 'amp-force-x' }));
-      const back = theta / 2 + Math.PI;
+      // on the side of the conductor away from the current arrow
       const fl = el('text', {
-        x: f1(cx + 36 * Math.cos(back)),
-        y: f1(cy - 36 * Math.sin(back) + 5),
+        x: f1(cx - 30 * nx),
+        y: f1(cy - 30 * ny + 5),
         'text-anchor': 'middle',
         class: 'amp-label amp-f',
       });

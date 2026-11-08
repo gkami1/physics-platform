@@ -3259,6 +3259,11 @@ task-answer .final {
 .sim-svg .amp-label {
   fill: var(--text);
   font-size: 15px;
+  /* a halo in the panel colour keeps labels readable where a field line runs under them */
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
 }
 
 .sim-svg .amp-it {
