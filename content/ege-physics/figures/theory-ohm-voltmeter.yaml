@@ -1,0 +1,131 @@
+# electro.circuits.ohm 5.2: a battery and a lamp; one voltmeter is joined to the two ends
+# of the lamp, another to the two poles of the source — both in parallel (node dots where
+# their wires join the circuit).
+# Colours (extends «Конденсаторы»; the first circuits topic, so it fixes the circuit convention):
+# circuit symbols (battery, resistor, lamp, ammeter, voltmeter, switch, rheostat) and wires in
+# the text colour, node dots text-colour dots (r 3); the conventional current I an accent arrow
+# beside the wire (from «+» to «−» outside the source), its label I accent; moving electrons
+# accent dots with green arrows for their drift, against the current; E in a wire an accent
+# vector; a wire seen up close a conductor (surface fill, text outline) with «+» ions. Labels
+# R, U of elements in the text colour beside the symbol; voltages as muted brackets with the
+# label in the text colour. Graphs (I(U)) use the diagram kind with the Axes helper, lines
+# accent. What stays the same (one current in series, one voltage in parallel) is accent text.
+# Guides, distances and notes muted.
+kind: diagram
+size:
+- 400
+- 256
+items:
+- line:
+  - - 180
+    - 186
+  - - 60
+    - 186
+  - - 60
+    - 96
+  - - 180
+    - 96
+  width: 1.6
+- element: lamp
+  at:
+  - 200
+  - 96
+- line:
+  - - 220
+    - 96
+  - - 340
+    - 96
+  - - 340
+    - 186
+  - - 220
+    - 186
+  width: 1.6
+- element: battery
+  at:
+  - 200
+  - 186
+- text: +
+  at:
+  - 185
+  - 169.2
+  size: 15
+  tone: default
+- text: −
+  at:
+  - 215
+  - 169.2
+  size: 15
+  tone: default
+- line:
+  - - 150
+    - 96
+  - - 150
+    - 40
+  - - 180
+    - 40
+  width: 1.6
+- element: voltmeter
+  at:
+  - 200
+  - 40
+- line:
+  - - 220
+    - 40
+  - - 250
+    - 40
+  - - 250
+    - 96
+  width: 1.6
+- dots:
+  - - 150
+    - 96
+  - - 250
+    - 96
+  r: 3
+- line:
+  - - 150
+    - 186
+  - - 150
+    - 226
+  - - 180
+    - 226
+  width: 1.6
+- element: voltmeter
+  at:
+  - 200
+  - 226
+- line:
+  - - 220
+    - 226
+  - - 250
+    - 226
+  - - 250
+    - 186
+  width: 1.6
+- dots:
+  - - 150
+    - 186
+  - - 250
+    - 186
+  r: 3
+- text: на лампе
+  at:
+  - 268
+  - 45
+  size: 13
+  anchor: start
+  tone: muted
+- text: на источнике
+  at:
+  - 268
+  - 231
+  size: 13
+  anchor: start
+  tone: muted
+- text: лампа
+  at:
+  - 200
+  - 126
+  size: 13
+  anchor: middle
+  tone: muted

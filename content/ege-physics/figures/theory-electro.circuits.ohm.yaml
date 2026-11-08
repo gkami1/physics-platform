@@ -1,37 +1,118 @@
-# electro.circuits.ohm: ammeter in series, voltmeter in parallel with the resistor
+# electro.circuits.ohm 5.3: a source, a resistor R and an ammeter in series; a voltmeter
+# joined to the ends of the resistor (in parallel). The current I (accent arrow) returns to
+# the source's «−» along the bottom wire. Redrawn from the ladder's figure (no physics error;
+# the source now shows its «+» and «−», and the I arrow sits clear of the wire).
+# Colours (extends «Конденсаторы»; the first circuits topic, so it fixes the circuit convention):
+# circuit symbols (battery, resistor, lamp, ammeter, voltmeter, switch, rheostat) and wires in
+# the text colour, node dots text-colour dots (r 3); the conventional current I an accent arrow
+# beside the wire (from «+» to «−» outside the source), its label I accent; moving electrons
+# accent dots with green arrows for their drift, against the current; E in a wire an accent
+# vector; a wire seen up close a conductor (surface fill, text outline) with «+» ions. Labels
+# R, U of elements in the text colour beside the symbol; voltages as muted brackets with the
+# label in the text colour. Graphs (I(U)) use the diagram kind with the Axes helper, lines
+# accent. What stays the same (one current in series, one voltage in parallel) is accent text.
+# Guides, distances and notes muted.
 kind: diagram
-size: [400, 240]
+size:
+- 400
+- 244
 items:
 - element: battery
-  at: [60, 135]
+  at:
+  - 60
+  - 135
   vertical: true
   label: '*U*'
-  label_side: -1
-- line: [[60, 115], [60, 80], [180, 80]]
+- text: +
+  at:
+  - 80
+  - 124.9
+  size: 14
+  tone: default
+- text: −
+  at:
+  - 80
+  - 156.9
+  size: 14
+  tone: default
+- line:
+  - - 60
+    - 115
+  - - 60
+    - 80
+  - - 180
+    - 80
   width: 1.6
 - element: resistor
-  at: [200, 80]
+  at:
+  - 200
+  - 80
   label: '*R*'
   label_side: 1
-- line: [[220, 80], [340, 80], [340, 115]]
+- line:
+  - - 220
+    - 80
+  - - 340
+    - 80
+  - - 340
+    - 115
   width: 1.6
 - element: ammeter
-  at: [340, 135]
+  at:
+  - 340
+  - 135
   vertical: true
-- line: [[340, 155], [340, 200], [60, 200], [60, 155]]
+- line:
+  - - 340
+    - 155
+  - - 340
+    - 200
+  - - 60
+    - 200
+  - - 60
+    - 155
   width: 1.6
-- line: [[150, 80], [150, 30], [180, 30]]
+- line:
+  - - 150
+    - 80
+  - - 150
+    - 30
+  - - 180
+    - 30
   width: 1.6
 - element: voltmeter
-  at: [200, 30]
-- line: [[220, 30], [250, 30], [250, 80]]
+  at:
+  - 200
+  - 30
+- line:
+  - - 220
+    - 30
+  - - 250
+    - 30
+  - - 250
+    - 80
   width: 1.6
-- dots: [[150, 80], [250, 80]]
+- dots:
+  - - 150
+    - 80
+  - - 250
+    - 80
   r: 3
-- arrow: [[230, 200], [170, 200]]
+- arrow:
+  - - 230
+    - 214
+  - - 170
+    - 214
   tone: accent
-  label: '*I*'
-  label_at: [200, 222]
+  width: 1.8
+- text: '*I*'
+  at:
+  - 200
+  - 234
+  size: 15
+  tone: accent
 - text: '*I* = *U*/*R*'
-  at: [200, 145]
+  at:
+  - 200
+  - 150
   size: 16

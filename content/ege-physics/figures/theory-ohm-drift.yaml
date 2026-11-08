@@ -1,0 +1,226 @@
+# electro.circuits.ohm 5.1: a piece of wire up close (a conductor: surface fill, text
+# outline): ions «+» stay in place, free electrons (accent dots) drift against the field E
+# (accent vector above) — green arrows. The current I (accent arrow below) is along E, from
+# the end joined to the source's «+» to the end joined to its «−».
+# Colours (extends «Конденсаторы»; the first circuits topic, so it fixes the circuit convention):
+# circuit symbols (battery, resistor, lamp, ammeter, voltmeter, switch, rheostat) and wires in
+# the text colour, node dots text-colour dots (r 3); the conventional current I an accent arrow
+# beside the wire (from «+» to «−» outside the source), its label I accent; moving electrons
+# accent dots with green arrows for their drift, against the current; E in a wire an accent
+# vector; a wire seen up close a conductor (surface fill, text outline) with «+» ions. Labels
+# R, U of elements in the text colour beside the symbol; voltages as muted brackets with the
+# label in the text colour. Graphs (I(U)) use the diagram kind with the Axes helper, lines
+# accent. What stays the same (one current in series, one voltage in parallel) is accent text.
+# Guides, distances and notes muted.
+kind: diagram
+size:
+- 400
+- 224
+items:
+- rect:
+  - 40
+  - 56
+  - 320
+  - 92
+  fill: surface
+  width: 2
+  radius: 4
+- circle:
+  - 70
+  - 84
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 122
+  - 84
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 174
+  - 84
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 226
+  - 84
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 278
+  - 84
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 330
+  - 84
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 70
+  - 120
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 122
+  - 120
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 174
+  - 120
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 226
+  - 120
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 278
+  - 120
+  r: 9.5
+  width: 1.2
+  label: +
+- circle:
+  - 330
+  - 120
+  r: 9.5
+  width: 1.2
+  label: +
+- dots:
+  - - 100
+    - 102
+  r: 3.5
+  tone: accent
+- dots:
+  - - 204
+    - 102
+  r: 3.5
+  tone: accent
+- dots:
+  - - 308
+    - 102
+  r: 3.5
+  tone: accent
+- dots:
+  - - 152
+    - 70
+  r: 3.5
+  tone: accent
+- dots:
+  - - 256
+    - 134
+  r: 3.5
+  tone: accent
+- dots:
+  - - 150
+    - 134
+  r: 3.5
+  tone: accent
+- dots:
+  - - 352
+    - 70
+  r: 3.5
+  tone: accent
+- dots:
+  - - 232
+    - 70
+  r: 3.5
+  tone: accent
+- arrow:
+  - - 96
+    - 102
+  - - 78
+    - 102
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 200
+    - 102
+  - - 182
+    - 102
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 304
+    - 102
+  - - 286
+    - 102
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 148
+    - 70
+  - - 130
+    - 70
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 252
+    - 134
+  - - 234
+    - 134
+  tone: vel
+  width: 1.5
+- arrow:
+  - - 150
+    - 34
+  - - 250
+    - 34
+  tone: accent
+  width: 2.2
+  label: '*E*'
+  label_at:
+  - 200
+  - 24
+- text: поле в проводе
+  at:
+  - 262
+  - 39
+  size: 13
+  anchor: start
+  tone: muted
+- arrow:
+  - - 150
+    - 170
+  - - 250
+    - 170
+  tone: accent
+  width: 1.8
+- text: ток *I*
+  at:
+  - 200
+  - 192
+  size: 15
+  tone: accent
+- text: электроны дрейфуют против поля
+  at:
+  - 200
+  - 214
+  size: 13
+  anchor: middle
+  tone: muted
+- text: к «+»
+  at:
+  - 36
+  - 48
+  size: 13
+  anchor: start
+  tone: muted
+- text: к «−»
+  at:
+  - 364
+  - 48
+  size: 13
+  anchor: end
+  tone: muted

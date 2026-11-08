@@ -1,0 +1,210 @@
+# ks-ohm-10: I(U) of a resistor on a grid: a straight line through the origin and the corner
+# (8 В, 200 мА), so R = 8 / 0.2 = 40 Ом. U ticks 2…8 В, I ticks 50…200 мА.
+kind: diagram
+size:
+- 400
+- 236
+items:
+- line:
+  - - 88
+    - 200
+  - - 88
+    - 38.0
+  width: 0.6
+  tone: muted
+- line:
+  - - 120
+    - 200
+  - - 120
+    - 38.0
+  width: 0.6
+  tone: muted
+- line:
+  - - 152
+    - 200
+  - - 152
+    - 38.0
+  width: 0.6
+  tone: muted
+- line:
+  - - 184
+    - 200
+  - - 184
+    - 38.0
+  width: 0.6
+  tone: muted
+- line:
+  - - 216
+    - 200
+  - - 216
+    - 38.0
+  width: 0.6
+  tone: muted
+- line:
+  - - 248
+    - 200
+  - - 248
+    - 38.0
+  width: 0.6
+  tone: muted
+- line:
+  - - 280
+    - 200
+  - - 280
+    - 38.0
+  width: 0.6
+  tone: muted
+- line:
+  - - 312
+    - 200
+  - - 312
+    - 38.0
+  width: 0.6
+  tone: muted
+- line:
+  - - 344
+    - 200
+  - - 344
+    - 38.0
+  width: 0.6
+  tone: muted
+- line:
+  - - 56
+    - 182.0
+  - - 344
+    - 182.0
+  width: 0.6
+  tone: muted
+- line:
+  - - 56
+    - 164.0
+  - - 344
+    - 164.0
+  width: 0.6
+  tone: muted
+- line:
+  - - 56
+    - 146.0
+  - - 344
+    - 146.0
+  width: 0.6
+  tone: muted
+- line:
+  - - 56
+    - 128.0
+  - - 344
+    - 128.0
+  width: 0.6
+  tone: muted
+- line:
+  - - 56
+    - 110.0
+  - - 344
+    - 110.0
+  width: 0.6
+  tone: muted
+- line:
+  - - 56
+    - 92.0
+  - - 344
+    - 92.0
+  width: 0.6
+  tone: muted
+- line:
+  - - 56
+    - 74.0
+  - - 344
+    - 74.0
+  width: 0.6
+  tone: muted
+- line:
+  - - 56
+    - 56.0
+  - - 344
+    - 56.0
+  width: 0.6
+  tone: muted
+- line:
+  - - 56
+    - 38.0
+  - - 344
+    - 38.0
+  width: 0.6
+  tone: muted
+- arrow:
+  - - 56
+    - 200
+  - - 376
+    - 200
+  width: 1.5
+- arrow:
+  - - 56
+    - 200
+  - - 56
+    - 20
+  width: 1.5
+- text: '*U*, В'
+  at:
+  - 374
+  - 218
+  anchor: end
+  size: 14
+- text: '*I*, мА'
+  at:
+  - 66
+  - 30
+  anchor: start
+  size: 14
+- text: '0'
+  at:
+  - 50
+  - 215
+  size: 12
+  anchor: end
+- text: '2'
+  at:
+  - 120
+  - 218
+  size: 13
+- text: '4'
+  at:
+  - 184
+  - 218
+  size: 13
+- text: '6'
+  at:
+  - 248
+  - 218
+  size: 13
+- text: '8'
+  at:
+  - 312
+  - 218
+  size: 13
+- text: '50'
+  at:
+  - 49
+  - 169.0
+  size: 13
+  anchor: end
+- text: '100'
+  at:
+  - 49
+  - 133.0
+  size: 13
+  anchor: end
+- text: '150'
+  at:
+  - 49
+  - 97.0
+  size: 13
+  anchor: end
+- text: '200'
+  at:
+  - 49
+  - 61.0
+  size: 13
+  anchor: end
+- path: M56 200L344 38
+  width: 2.4
+  tone: accent
