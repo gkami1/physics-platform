@@ -1,0 +1,113 @@
+# electro.circuits.emf 6.5: the voltage on a source's poles against the current, qualitative:
+# a falling straight line U = ℰ − Ir (accent). At I = 0 (open circuit) it starts at ℰ, at
+# U = 0 (short circuit) it ends at I_кз (text-colour dots on the axes). The slope triangle
+# (muted guides) gives r = ΔU/ΔI.
+# Colours (the circuit convention of «Ток, сопротивление и закон Ома для участка цепи», extended
+# for a real source): circuit symbols and wires in the text colour, node dots text-colour dots
+# (r 3); the conventional current I an accent arrow beside the wire, its label accent; labels R,
+# U, r and ℰ in the text colour beside the symbol, a battery's «+» and «−» small text-colour
+# signs; a real source is its battery ℰ and its internal resistance r inside a muted dashed
+# outline; voltages over a stretch as muted brackets with a text-colour label. Inside the source
+# the field E is an accent vector and the outside force F_ст red (a force), as is the field's
+# force on the charge. A source's U(I) graph uses the diagram kind with the Axes helper: the
+# line accent, its ends on the axes text-colour dots labelled ℰ and I_кз, a slope triangle in
+# muted guides. The split ℰ = U + Ir as a stacked bar: U an accent tint, Ir a muted tint.
+# What stays the same (ℰ) is accent text. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 236
+items:
+- arrow:
+  - - 56
+    - 206
+  - - 386
+    - 206
+  width: 1.5
+- arrow:
+  - - 56
+    - 206
+  - - 56
+    - 10
+  width: 1.5
+- text: '*I*'
+  at:
+  - 384
+  - 224
+  anchor: end
+  size: 15
+- text: '*U*'
+  at:
+  - 66
+  - 20
+  anchor: start
+  size: 15
+- text: '0'
+  at:
+  - 50
+  - 221
+  size: 12
+  anchor: end
+- path: M56 46L356 206
+  width: 2.4
+  tone: accent
+  animate: draw
+- line:
+  - - 131.0
+    - 86.0
+  - - 242.0
+    - 86.0
+  - - 242.0
+    - 145.2
+  width: 1
+  dashed: true
+  tone: muted
+- text: Δ*I*
+  at:
+  - 186.5
+  - 79.0
+  size: 14
+- text: Δ*U*
+  at:
+  - 249.0
+  - 120.6
+  size: 14
+  anchor: start
+- dots:
+  - - 56
+    - 46.0
+  - - 356.0
+    - 206
+  r: 3
+- text: ℰ
+  at:
+  - 48
+  - 52.0
+  size: 16
+  anchor: end
+- text: '*I*_{кз}'
+  at:
+  - 356.0
+  - 226
+  size: 15
+- text: '*I* = 0: цепь разомкнута, *U* = ℰ'
+  at:
+  - 96
+  - 30
+  size: 13
+  anchor: start
+  tone: muted
+- text: '*U* = 0: короткое замыкание'
+  at:
+  - 76
+  - 180
+  size: 13
+  anchor: start
+  tone: muted
+- text: '*r* = Δ*U*/Δ*I*'
+  at:
+  - 290
+  - 84
+  size: 15
+  anchor: start
+  tone: default

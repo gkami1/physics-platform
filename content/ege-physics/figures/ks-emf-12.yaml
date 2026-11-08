@@ -1,0 +1,172 @@
+# ks-emf-12: U(I) of a source on a grid (I every 0,4 А, U every 1 В): a straight line from
+# (0; 6 В) through (0,8 А; 4 В) to (2,4 А; 0), so r = 2 / 0,8 = 2,5 Ом. Ticks I 0,8…2,4 А,
+# U 2…6 В.
+kind: diagram
+size:
+- 400
+- 236
+items:
+- line:
+  - - 100.0
+    - 200
+  - - 100.0
+    - 32
+  width: 0.6
+  tone: muted
+- line:
+  - - 144.0
+    - 200
+  - - 144.0
+    - 32
+  width: 0.6
+  tone: muted
+- line:
+  - - 188.0
+    - 200
+  - - 188.0
+    - 32
+  width: 0.6
+  tone: muted
+- line:
+  - - 232.0
+    - 200
+  - - 232.0
+    - 32
+  width: 0.6
+  tone: muted
+- line:
+  - - 276.0
+    - 200
+  - - 276.0
+    - 32
+  width: 0.6
+  tone: muted
+- line:
+  - - 320.0
+    - 200
+  - - 320.0
+    - 32
+  width: 0.6
+  tone: muted
+- line:
+  - - 364.0
+    - 200
+  - - 364.0
+    - 32
+  width: 0.6
+  tone: muted
+- line:
+  - - 56
+    - 176
+  - - 364.0
+    - 176
+  width: 0.6
+  tone: muted
+- line:
+  - - 56
+    - 152
+  - - 364.0
+    - 152
+  width: 0.6
+  tone: muted
+- line:
+  - - 56
+    - 128
+  - - 364.0
+    - 128
+  width: 0.6
+  tone: muted
+- line:
+  - - 56
+    - 104
+  - - 364.0
+    - 104
+  width: 0.6
+  tone: muted
+- line:
+  - - 56
+    - 80
+  - - 364.0
+    - 80
+  width: 0.6
+  tone: muted
+- line:
+  - - 56
+    - 56
+  - - 364.0
+    - 56
+  width: 0.6
+  tone: muted
+- line:
+  - - 56
+    - 32
+  - - 364.0
+    - 32
+  width: 0.6
+  tone: muted
+- arrow:
+  - - 56
+    - 200
+  - - 376
+    - 200
+  width: 1.5
+- arrow:
+  - - 56
+    - 200
+  - - 56
+    - 18
+  width: 1.5
+- text: '*I*, А'
+  at:
+  - 374
+  - 218
+  anchor: end
+  size: 14
+- text: '*U*, В'
+  at:
+  - 66
+  - 28
+  anchor: start
+  size: 14
+- text: '0'
+  at:
+  - 50
+  - 215
+  size: 12
+  anchor: end
+- text: 0,8
+  at:
+  - 144.0
+  - 218
+  size: 13
+- text: 1,6
+  at:
+  - 232.0
+  - 218
+  size: 13
+- text: 2,4
+  at:
+  - 320.0
+  - 218
+  size: 13
+- text: '2'
+  at:
+  - 49
+  - 157
+  size: 13
+  anchor: end
+- text: '4'
+  at:
+  - 49
+  - 109
+  size: 13
+  anchor: end
+- text: '6'
+  at:
+  - 49
+  - 61
+  size: 13
+  anchor: end
+- path: M56 56L320 200
+  width: 2.4
+  tone: accent
