@@ -3155,3 +3155,164 @@ task-answer .final {
   color: var(--accent);
   font-weight: 600;
 }
+
+/* <pp-ampere> (src/lib/sims/ampere.ts): a conductor turned in a uniform field, seen from above.
+   Field lines in the text colour, the N pole an accent tint and S a muted tint, the current and B
+   accent arrows, the Ampère force red (a circle with a dot or a cross: towards us or away),
+   guides muted. Its one chip fieldset is the last of type, which .pfx-chips turns green: kept
+   accent here. */
+.amp-chips legend {
+  width: auto;
+  margin-right: 0.4rem;
+}
+
+.amp-chips span {
+  padding: 0.25rem 0.7rem;
+}
+
+.pfx-chips.amp-chips input:checked + span {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.amp-chips {
+  margin: 0 0 0.5rem;
+}
+
+.amp-pole-n {
+  fill: var(--accent);
+  fill-opacity: 0.16;
+  stroke: var(--accent);
+  stroke-width: 1.6;
+}
+
+.amp-pole-s {
+  fill: var(--muted);
+  fill-opacity: 0.16;
+  stroke: var(--muted);
+  stroke-width: 1.6;
+}
+
+.amp-line {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.2;
+}
+
+.amp-head {
+  fill: var(--text);
+}
+
+.amp-rod {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.amp-guide {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.2;
+  stroke-dasharray: 5 4;
+}
+
+.amp-arc {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.2;
+}
+
+.amp-current,
+.amp-b {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.8;
+}
+
+.amp-current-head,
+.amp-b-head {
+  fill: var(--accent);
+}
+
+.amp-force {
+  fill: var(--surface);
+  stroke: var(--bad);
+  stroke-width: 2;
+}
+
+.amp-force-dot {
+  fill: var(--bad);
+}
+
+.amp-force-x {
+  fill: none;
+  stroke: var(--bad);
+  stroke-width: 2;
+}
+
+.sim-svg .amp-pole {
+  fill: var(--text);
+  font-size: 18px;
+}
+
+.sim-svg .amp-label {
+  fill: var(--text);
+  font-size: 15px;
+  /* a halo in the panel colour keeps labels readable where a field line runs under them */
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.sim-svg .amp-it {
+  font-style: italic;
+}
+
+.sim-svg .amp-i,
+.sim-svg .amp-bl {
+  fill: var(--accent);
+}
+
+.sim-svg .amp-f {
+  fill: var(--bad);
+}
+
+.sim-svg .amp-end {
+  fill: var(--muted);
+  font-size: 14px;
+}
+
+.sim-svg .amp-note {
+  font-size: 13px;
+}
+
+.amp-table {
+  width: 100%;
+  margin: 0.75rem 0 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.amp-table th,
+.amp-table td {
+  padding: 0.2rem 0.35rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+.amp-table th {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.amp-table td {
+  white-space: nowrap;
+}
+
+.amp-table tr.amp-fixed td {
+  color: var(--accent);
+  font-weight: 600;
+}

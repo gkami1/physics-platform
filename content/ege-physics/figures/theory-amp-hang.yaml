@@ -1,0 +1,202 @@
+# electro.magnetic.ampere 8.7: a horizontal rod seen end-on (current away from us), forces red.
+# Left: a horizontal field to the left holds it up, F_А = mg. Right: on threads in a vertical
+# field the rod swings out by α; T, mg and the horizontal F_А balance, tan α = F_А/(mg).
+# T is drawn shorter than to scale so that it stays clear of the thread.
+# Colours (the «Электродинамика» convention, extended for magnetism): magnetic field lines
+# in the text colour, thin, with small arrowheads, always closed or leaving the picture —
+# as the electric field lines of 2.4 and 4.2; the vector B an accent arrow, as E was; a field
+# across the page a sparse grid of accent «×» (away from us) or «·» (towards us). A wire seen
+# end-on is a text-colour circle (r ≥ 10, surface fill) with a dot (current towards us) or a
+# cross (away from us); along the page the current is an accent arrow beside the wire, as in
+# circuits. A magnet's N half is an accent tint and its S half a muted tint, letters N and S
+# in the text colour; a compass needle's N half solid accent, its S half solid muted. The
+# Ampère force and other forces red; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 248
+items:
+- path: M180 52L20 52
+  width: 1.2
+- arrow:
+  - - 127.0
+    - 52.0
+  - - 113.0
+    - 52.0
+  width: 1.3
+- path: M180 188L20 188
+  width: 1.2
+- arrow:
+  - - 127.0
+    - 188.0
+  - - 113.0
+    - 188.0
+  width: 1.3
+- path: M86 120L20 120
+  width: 1.2
+- arrow:
+  - - 63.0
+    - 120.0
+  - - 49.0
+    - 120.0
+  width: 1.3
+- path: M180 120L114 120
+  width: 1.2
+- arrow:
+  - - 147.0
+    - 120.0
+  - - 133.0
+    - 120.0
+  width: 1.3
+- circle:
+  - 100
+  - 120
+  r: 11
+  fill: surface
+  width: 1.8
+  tone: default
+- path: M93.9 113.9L106.1 126.1M93.9 126.1L106.1 113.9
+  width: 1.8
+  tone: default
+- arrow:
+  - - 100
+    - 107
+  - - 100
+    - 62
+  tone: force
+  width: 2.4
+  label: '*F*_А'
+  label_at:
+  - 122
+  - 76
+- arrow:
+  - - 100
+    - 133
+  - - 100
+    - 178
+  tone: force
+  width: 2.4
+  label: '*mg*'
+  label_at:
+  - 124
+  - 172
+- arrow:
+  - - 110
+    - 20
+  - - 50
+    - 20
+  tone: accent
+  label: '*B*'
+  label_at:
+  - 36
+  - 26
+- text: висит в поле
+  at:
+  - 100
+  - 222
+  size: 13
+  anchor: middle
+  tone: muted
+- path: M214 212L214 24
+  width: 1.2
+- arrow:
+  - - 214.0
+    - 99.0
+  - - 214.0
+    - 85.0
+  width: 1.3
+- path: M386 212L386 24
+  width: 1.2
+- arrow:
+  - - 386.0
+    - 99.0
+  - - 386.0
+    - 85.0
+  width: 1.3
+- hatch:
+  - - 226
+    - 30
+  - - 298
+    - 30
+  side: -1
+- line:
+  - - 262
+    - 30
+  - - 262
+    - 130
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 262
+    - 30
+  - - 322.0
+    - 133.9
+  width: 1.4
+- angle:
+  - 262
+  - 30
+  start: -90
+  end: -60
+  r: 40
+  label: '*α*'
+- circle:
+  - 322.0
+  - 133.9
+  r: 11
+  fill: surface
+  width: 1.8
+  tone: default
+- path: M315.9 127.8L328.1 140M315.9 140L328.1 127.8
+  width: 1.8
+  tone: default
+- arrow:
+  - - 322.0
+    - 145.9
+  - - 322.0
+    - 189.9
+  tone: force
+  width: 2.4
+  label: '*mg*'
+  label_at:
+  - 300.0
+  - 185.9
+- arrow:
+  - - 334.0
+    - 133.9
+  - - 366.3
+    - 133.9
+  tone: force
+  width: 2.4
+  label: '*F*_А'
+  label_at:
+  - 352.0
+  - 121.9
+- arrow:
+  - - 316.0
+    - 123.9
+  - - 296.0
+    - 89.2
+  tone: force
+  width: 2.4
+  label: '*T*'
+  label_at:
+  - 314.0
+  - 85.9
+- arrow:
+  - - 240
+    - 214
+  - - 240
+    - 172
+  tone: accent
+  label: '*B*'
+  label_at:
+  - 252
+  - 192
+- text: отклонился на нити
+  at:
+  - 290
+  - 236
+  size: 13
+  anchor: middle
+  tone: muted

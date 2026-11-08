@@ -1,0 +1,142 @@
+# electro.magnetic.ampere 8.2: the field of a straight wire. Left, side view: the current I
+# up (accent arrow) and one field line around the wire, an ellipse in perspective, its front
+# going right (counter-clockwise seen from above). Right, the same from above: the current
+# towards us (a circle with a dot), field lines concentric circles counter-clockwise, B an
+# accent vector tangent to a line.
+# Colours (the «Электродинамика» convention, extended for magnetism): magnetic field lines
+# in the text colour, thin, with small arrowheads, always closed or leaving the picture —
+# as the electric field lines of 2.4 and 4.2; the vector B an accent arrow, as E was; a field
+# across the page a sparse grid of accent «×» (away from us) or «·» (towards us). A wire seen
+# end-on is a text-colour circle (r ≥ 10, surface fill) with a dot (current towards us) or a
+# cross (away from us); along the page the current is an accent arrow beside the wire, as in
+# circuits. A magnet's N half is an accent tint and its S half a muted tint, letters N and S
+# in the text colour; a compass needle's N half solid accent, its S half solid muted. The
+# Ampère force and other forces red; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 262
+items:
+- path: M154 132L153.7 130.4L152.8 128.9L151.4 127.4L149.3 125.9L146.8 124.5L143.7 123.2L140.1 122L136.1
+    120.9L131.7 119.9L127 119L122 118.3L116.7 117.7L111.2 117.3L105.6 117.1L100 117L94.4 117.1L88.8 117.3L83.3
+    117.7L78 118.3L73 119L68.3 119.9L63.9 120.9L59.9 122L56.3 123.2L53.2 124.5L50.7 125.9L48.6 127.4L47.2
+    128.9L46.3 130.4L46 132
+  width: 1.2
+- line:
+  - - 100
+    - 34
+  - - 100
+    - 142
+  width: 2.6
+- line:
+  - - 100
+    - 152
+  - - 100
+    - 222
+  width: 2.6
+- path: M46 132L46.3 133.6L47.2 135.1L48.6 136.6L50.7 138.1L53.2 139.5L56.3 140.8L59.9 142L63.9 143.1L68.3
+    144.1L73 145L78 145.7L83.3 146.3L88.8 146.7L94.4 146.9L100 147L105.6 146.9L111.2 146.7L116.7 146.3L122
+    145.7L127 145L131.7 144.1L136.1 143.1L140.1 142L143.7 140.8L146.8 139.5L149.3 138.1L151.4 136.6L152.8
+    135.1L153.7 133.6L154 132
+  width: 1.2
+- arrow:
+  - - 107.1
+    - 147.0
+  - - 121.0
+    - 145.9
+  width: 1.3
+- arrow:
+  - - 116
+    - 206
+  - - 116
+    - 166
+  tone: accent
+  width: 1.8
+- text: '*I*'
+  at:
+  - 126
+  - 192
+  size: 15
+  anchor: start
+  tone: accent
+- text: вид сбоку
+  at:
+  - 100
+  - 250
+  size: 13
+  anchor: middle
+  tone: muted
+- path: M300 98L297.4 98.1L294.8 98.5L292.2 99L289.7 99.8L287.3 100.8L285 102L282.8 103.4L280.7 105L278.8
+    106.8L277 108.7L275.4 110.8L274 113L272.8 115.3L271.8 117.7L271 120.2L270.5 122.8L270.1 125.4L270
+    128L270.1 130.6L270.5 133.2L271 135.8L271.8 138.3L272.8 140.7L274 143L275.4 145.2L277 147.3L278.8
+    149.2L280.7 151L282.8 152.6L285 154L287.3 155.2L289.7 156.2L292.2 157L294.8 157.5L297.4 157.9L300
+    158L302.6 157.9L305.2 157.5L307.8 157L310.3 156.2L312.7 155.2L315 154L317.2 152.6L319.3 151L321.2
+    149.2L323 147.3L324.6 145.2L326 143L327.2 140.7L328.2 138.3L329 135.8L329.5 133.2L329.9 130.6L330
+    128L329.9 125.4L329.5 122.8L329 120.2L328.2 117.7L327.2 115.3L326 113L324.6 110.8L323 108.7L321.2
+    106.8L319.3 105L317.2 103.4L315 102L312.7 100.8L310.3 99.8L307.8 99L305.2 98.5L302.6 98.1L300 98
+  width: 1.2
+- arrow:
+  - - 295.4
+    - 97.5
+  - - 282.5
+    - 102.8
+  width: 1.3
+- path: M300 76L295.5 76.2L291 76.8L286.5 77.8L282.2 79.1L278 80.9L274 83L270.2 85.4L266.6 88.2L263.2
+    91.2L260.2 94.6L257.4 98.2L255 102L252.9 106L251.1 110.2L249.8 114.5L248.8 119L248.2 123.5L248 128L248.2
+    132.5L248.8 137L249.8 141.5L251.1 145.8L252.9 150L255 154L257.4 157.8L260.2 161.4L263.2 164.8L266.6
+    167.8L270.2 170.6L274 173L278 175.1L282.2 176.9L286.5 178.2L291 179.2L295.5 179.8L300 180L304.5 179.8L309
+    179.2L313.5 178.2L317.8 176.9L322 175.1L326 173L329.8 170.6L333.4 167.8L336.8 164.8L339.8 161.4L342.6
+    157.8L345 154L347.1 150L348.9 145.8L350.2 141.5L351.2 137L351.8 132.5L352 128L351.8 123.5L351.2 119L350.2
+    114.5L348.9 110.2L347.1 106L345 102L342.6 98.2L339.8 94.6L336.8 91.2L333.4 88.2L329.8 85.4L326 83L322
+    80.9L317.8 79.1L313.5 77.8L309 76.8L304.5 76.2L300 76
+  width: 1.2
+- arrow:
+  - - 256.2
+    - 99.7
+  - - 249.7
+    - 112.1
+  width: 1.3
+- path: M300 54L293.6 54.3L287.2 55.1L280.8 56.5L274.7 58.5L268.7 60.9L263 63.9L257.6 67.4L252.4 71.3L247.7
+    75.7L243.3 80.4L239.4 85.6L235.9 91L232.9 96.7L230.5 102.7L228.5 108.8L227.1 115.2L226.3 121.6L226
+    128L226.3 134.4L227.1 140.8L228.5 147.2L230.5 153.3L232.9 159.3L235.9 165L239.4 170.4L243.3 175.6L247.7
+    180.3L252.4 184.7L257.6 188.6L263 192.1L268.7 195.1L274.7 197.5L280.8 199.5L287.2 200.9L293.6 201.7L300
+    202L306.4 201.7L312.8 200.9L319.2 199.5L325.3 197.5L331.3 195.1L337 192.1L342.4 188.6L347.6 184.7L352.3
+    180.3L356.7 175.6L360.6 170.4L364.1 165L367.1 159.3L369.5 153.3L371.5 147.2L372.9 140.8L373.7 134.4L374
+    128L373.7 121.6L372.9 115.2L371.5 108.8L369.5 102.7L367.1 96.7L364.1 91L360.6 85.6L356.7 80.4L352.3
+    75.7L347.6 71.3L342.4 67.4L337 63.9L331.3 60.9L325.3 58.5L319.2 56.5L312.8 55.1L306.4 54.3L300 54
+  width: 1.2
+- arrow:
+  - - 229.8
+    - 153.3
+  - - 236.3
+    - 165.8
+  width: 1.3
+- circle:
+  - 300
+  - 128
+  r: 11
+  fill: surface
+  width: 1.8
+  tone: default
+- dots:
+  - - 300
+    - 128
+  r: 2.9
+  tone: default
+- arrow:
+  - - 352
+    - 128
+  - - 352
+    - 92
+  tone: accent
+  label: '*B*'
+  label_at:
+  - 366
+  - 102
+- text: 'вид сверху: ток к нам'
+  at:
+  - 300
+  - 250
+  size: 13
+  anchor: middle
+  tone: muted
