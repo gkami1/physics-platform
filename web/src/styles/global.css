@@ -2768,3 +2768,69 @@ task-answer .final {
   font-size: 15px;
   font-style: italic;
 }
+
+/* <pp-slab> (src/lib/sims/slab.ts): a metal or dielectric slab between charged plates. Field
+   lines and plates in the text colour; a metal surface-filled with a text outline, a dielectric
+   an accent tint; electrons text-colour dots (moved ones accent); induced/bound charges and the
+   dipoles' signs in the text colour. */
+.slb-chips legend {
+  width: auto;
+  margin-right: 0.4rem;
+}
+
+.slb-plate {
+  fill: var(--text);
+}
+
+.sim-svg .slb-sign,
+.sim-svg .slb-marks text {
+  fill: var(--text);
+  font-size: 15px;
+}
+
+.slb-line {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.2;
+}
+
+.slb-field path:not(.slb-line) {
+  fill: var(--text);
+}
+
+.slb-metal {
+  fill: var(--surface-2);
+  stroke: var(--text);
+  stroke-width: 2;
+}
+
+.slb-diel {
+  fill: var(--accent);
+  fill-opacity: 0.14;
+  stroke: var(--accent);
+  stroke-width: 1;
+}
+
+.slb-e {
+  fill: var(--text);
+}
+
+.slb-e.slb-moved {
+  fill: var(--accent);
+}
+
+.slb-dip rect {
+  fill: var(--surface);
+  stroke: var(--text);
+  stroke-width: 1.1;
+}
+
+.sim-svg .slb-dip text {
+  fill: var(--text);
+  font-size: 11px;
+}
+
+.sim-svg .slb-caption {
+  fill: var(--muted);
+  font-size: 13px;
+}

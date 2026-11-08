@@ -1,0 +1,293 @@
+# electro.field.conductors 3.6: charging by induction with a negative ebonite rod (accent
+# tint, «−»). 1: the ball's electrons are pushed to the far side (− there, + near the rod).
+# 2: a hand (a wire to the ground) lets the repelled electrons leave (accent dot and arrow).
+# 3: the hand is removed, the + stays near the rod. 4: the rod is removed, the + spreads
+# over the surface — the ball is charged opposite to the rod.
+# Colours (extends «Напряжённость и потенциал электрического поля»): a charge is a circle in
+# the text colour with «+» or «−»; electrons small text-colour dots, moved ones accent; forces
+# red; field lines text colour, thin, with small arrowheads; E at a point an accent vector.
+# A conductor is a surface-filled body with a text-colour outline, its induced charges small
+# «+» and «−» in the text colour just inside its surface; a dielectric an accent tint, its
+# molecules small ovals (dipoles) with «+» and «−» ends, bound charges small «+» and «−» at
+# its surface. A charged rod (a dielectric) is an accent-tinted bar with its signs. Guides,
+# distances and notes muted.
+kind: diagram
+size:
+- 400
+- 316
+items:
+- text: 1. поднесли палочку
+  at:
+  - 10
+  - 18
+  size: 14
+  anchor: start
+  tone: default
+- rect:
+  - 14
+  - 64
+  - 64
+  - 16
+  fill: accent
+  tone: accent
+  width: 1.2
+  radius: 3
+- text: −
+  at:
+  - 26
+  - 76.5
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 40
+  - 76.5
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 54
+  - 76.5
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 68
+  - 76.5
+  size: 13
+  tone: default
+- path: M98 72A30 30 0 1 0 158 72A30 30 0 1 0 98 72Z
+  fill: surface
+  width: 2
+- text: +
+  at:
+  - 113.2
+  - 91.4
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 107.0
+  - 76.5
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 113.2
+  - 61.7
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 142.8
+  - 61.7
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 149.0
+  - 76.5
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 142.8
+  - 91.4
+  size: 13
+  tone: default
+- text: 2. коснулись рукой
+  at:
+  - 210
+  - 18
+  size: 14
+  anchor: start
+  tone: default
+- rect:
+  - 214
+  - 64
+  - 64
+  - 16
+  fill: accent
+  tone: accent
+  width: 1.2
+  radius: 3
+- text: −
+  at:
+  - 226
+  - 76.5
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 240
+  - 76.5
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 254
+  - 76.5
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 268
+  - 76.5
+  size: 13
+  tone: default
+- path: M298 72A30 30 0 1 0 358 72A30 30 0 1 0 298 72Z
+  fill: surface
+  width: 2
+- text: +
+  at:
+  - 313.2
+  - 91.4
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 307.0
+  - 76.5
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 313.2
+  - 61.7
+  size: 13
+  tone: default
+- line:
+  - - 347.3
+    - 95.0
+  - - 369.3
+    - 117.0
+  - - 369.3
+    - 142
+  width: 1.5
+- hatch:
+  - - 353.3
+    - 142
+  - - 385.3
+    - 142
+  spacing: 7
+- dots:
+  - - 369.3
+    - 112
+  r: 3
+  tone: accent
+- arrow:
+  - - 377.3
+    - 104
+  - - 377.3
+    - 124
+  width: 1.5
+  tone: accent
+- text: 3. убрали руку
+  at:
+  - 10
+  - 178
+  size: 14
+  anchor: start
+  tone: default
+- rect:
+  - 14
+  - 224
+  - 64
+  - 16
+  fill: accent
+  tone: accent
+  width: 1.2
+  radius: 3
+- text: −
+  at:
+  - 26
+  - 236.6
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 40
+  - 236.6
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 54
+  - 236.6
+  size: 13
+  tone: default
+- text: −
+  at:
+  - 68
+  - 236.6
+  size: 13
+  tone: default
+- path: M98 232A30 30 0 1 0 158 232A30 30 0 1 0 98 232Z
+  fill: surface
+  width: 2
+- text: +
+  at:
+  - 113.2
+  - 251.4
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 107.0
+  - 236.6
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 113.2
+  - 221.7
+  size: 13
+  tone: default
+- text: 4. убрали палочку
+  at:
+  - 210
+  - 178
+  size: 14
+  anchor: start
+  tone: default
+- path: M298 232A30 30 0 1 0 358 232A30 30 0 1 0 298 232Z
+  fill: surface
+  width: 2
+- text: +
+  at:
+  - 342.8
+  - 251.4
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 313.2
+  - 251.4
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 313.2
+  - 221.7
+  size: 13
+  tone: default
+- text: +
+  at:
+  - 342.8
+  - 221.7
+  size: 13
+  tone: default
+- line:
+  - - 200
+    - 8
+  - - 200
+    - 312
+  width: 1
+  tone: muted
+- line:
+  - - 8
+    - 158
+  - - 392
+    - 158
+  width: 1
+  tone: muted

@@ -1,0 +1,705 @@
+# electro.field.conductors 3.7: left, a dielectric (accent tint) with no field — its polar
+# molecules (ovals with «+» and «−» ends) point anywhere; right, the same dielectric between
+# plates: the molecules turn along the field, bound «−» on the left surface and «+» on the
+# right; every other field line ends on a bound charge and starts again past the slab, so
+# inside the field is weaker (half the lines: ε = 2 in the picture).
+# Colours (extends «Напряжённость и потенциал электрического поля»): a charge is a circle in
+# the text colour with «+» or «−»; electrons small text-colour dots, moved ones accent; forces
+# red; field lines text colour, thin, with small arrowheads; E at a point an accent vector.
+# A conductor is a surface-filled body with a text-colour outline, its induced charges small
+# «+» and «−» in the text colour just inside its surface; a dielectric an accent tint, its
+# molecules small ovals (dipoles) with «+» and «−» ends, bound charges small «+» and «−» at
+# its surface. A charged rod (a dielectric) is an accent-tinted bar with its signs. Guides,
+# distances and notes muted.
+kind: diagram
+size:
+- 400
+- 234
+items:
+- rect:
+  - 20
+  - 40
+  - 140
+  - 150
+  fill: accent
+  tone: accent
+  width: 1
+  radius: 3
+- rect:
+  - 31.0
+  - 54.5
+  - 26
+  - 11
+  radius: 5.5
+  rotate: 20
+  width: 1.1
+- text: +
+  at:
+  - 50.6
+  - 66.2
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 37.4
+  - 61.5
+  size: 11
+  tone: default
+- rect:
+  - 77.0
+  - 54.5
+  - 26
+  - 11
+  radius: 5.5
+  rotate: 145
+  width: 1.1
+- text: +
+  at:
+  - 84.3
+  - 67.9
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 95.7
+  - 59.8
+  size: 11
+  tone: default
+- rect:
+  - 123.0
+  - 54.5
+  - 26
+  - 11
+  radius: 5.5
+  rotate: 260
+  width: 1.1
+- text: +
+  at:
+  - 134.8
+  - 57.0
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 137.2
+  - 70.7
+  size: 11
+  tone: default
+- rect:
+  - 31.0
+  - 91.5
+  - 26
+  - 11
+  radius: 5.5
+  rotate: 75
+  width: 1.1
+- text: +
+  at:
+  - 45.8
+  - 107.6
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 42.2
+  - 94.1
+  size: 11
+  tone: default
+- rect:
+  - 77.0
+  - 91.5
+  - 26
+  - 11
+  radius: 5.5
+  rotate: 310
+  width: 1.1
+- text: +
+  at:
+  - 94.5
+  - 95.5
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 85.5
+  - 106.2
+  size: 11
+  tone: default
+- rect:
+  - 123.0
+  - 91.5
+  - 26
+  - 11
+  radius: 5.5
+  rotate: 190
+  width: 1.1
+- text: +
+  at:
+  - 129.1
+  - 99.6
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 142.9
+  - 102.1
+  size: 11
+  tone: default
+- rect:
+  - 31.0
+  - 128.5
+  - 26
+  - 11
+  radius: 5.5
+  rotate: 120
+  width: 1.1
+- text: +
+  at:
+  - 40.5
+  - 143.9
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 47.5
+  - 131.8
+  size: 11
+  tone: default
+- rect:
+  - 77.0
+  - 128.5
+  - 26
+  - 11
+  radius: 5.5
+  rotate: 35
+  width: 1.1
+- text: +
+  at:
+  - 95.7
+  - 141.9
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 84.3
+  - 133.8
+  size: 11
+  tone: default
+- rect:
+  - 123.0
+  - 128.5
+  - 26
+  - 11
+  radius: 5.5
+  rotate: 230
+  width: 1.1
+- text: +
+  at:
+  - 131.5
+  - 132.5
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 140.5
+  - 143.2
+  size: 11
+  tone: default
+- rect:
+  - 31.0
+  - 165.5
+  - 26
+  - 11
+  radius: 5.5
+  rotate: 340
+  width: 1.1
+- text: +
+  at:
+  - 50.6
+  - 172.5
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 37.4
+  - 177.2
+  size: 11
+  tone: default
+- rect:
+  - 77.0
+  - 165.5
+  - 26
+  - 11
+  radius: 5.5
+  rotate: 100
+  width: 1.1
+- text: +
+  at:
+  - 88.8
+  - 181.7
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 91.2
+  - 168.0
+  size: 11
+  tone: default
+- rect:
+  - 123.0
+  - 165.5
+  - 26
+  - 11
+  radius: 5.5
+  rotate: 170
+  width: 1.1
+- text: +
+  at:
+  - 129.1
+  - 176.1
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 142.9
+  - 173.6
+  size: 11
+  tone: default
+- rect:
+  - 212
+  - 30
+  - 6
+  - 170
+  fill: solid
+  width: 1
+- rect:
+  - 392
+  - 30
+  - 6
+  - 170
+  fill: solid
+  width: 1
+- text: +
+  at:
+  - 202
+  - 49.166666666666664
+  size: 15
+- text: −
+  at:
+  - 408
+  - 49.166666666666664
+  size: 15
+- text: +
+  at:
+  - 202
+  - 77.5
+  size: 15
+- text: −
+  at:
+  - 408
+  - 77.5
+  size: 15
+- text: +
+  at:
+  - 202
+  - 105.83333333333333
+  size: 15
+- text: −
+  at:
+  - 408
+  - 105.83333333333333
+  size: 15
+- text: +
+  at:
+  - 202
+  - 134.16666666666669
+  size: 15
+- text: −
+  at:
+  - 408
+  - 134.16666666666669
+  size: 15
+- text: +
+  at:
+  - 202
+  - 162.5
+  size: 15
+- text: −
+  at:
+  - 408
+  - 162.5
+  size: 15
+- text: +
+  at:
+  - 202
+  - 190.83333333333334
+  size: 15
+- text: −
+  at:
+  - 408
+  - 190.83333333333334
+  size: 15
+- rect:
+  - 252
+  - 30
+  - 106
+  - 170
+  fill: accent
+  tone: accent
+  width: 1
+  radius: 3
+- path: M220 38.5L250 38.5
+  width: 1.1
+- path: M360 38.5L390 38.5
+  width: 1.1
+- text: −
+  at:
+  - 258
+  - 42.7
+  size: 12
+  tone: default
+- text: +
+  at:
+  - 352
+  - 42.7
+  size: 12
+  tone: default
+- path: M220 55.5L390 55.5
+  width: 1.1
+- arrow:
+  - - 231.0
+    - 55.5
+  - - 245.0
+    - 55.5
+  width: 1.3
+- path: M220 72.5L250 72.5
+  width: 1.1
+- path: M360 72.5L390 72.5
+  width: 1.1
+- text: −
+  at:
+  - 258
+  - 76.7
+  size: 12
+  tone: default
+- text: +
+  at:
+  - 352
+  - 76.7
+  size: 12
+  tone: default
+- path: M220 89.5L390 89.5
+  width: 1.1
+- arrow:
+  - - 231.0
+    - 89.5
+  - - 245.0
+    - 89.5
+  width: 1.3
+- path: M220 106.5L250 106.5
+  width: 1.1
+- path: M360 106.5L390 106.5
+  width: 1.1
+- text: −
+  at:
+  - 258
+  - 110.7
+  size: 12
+  tone: default
+- text: +
+  at:
+  - 352
+  - 110.7
+  size: 12
+  tone: default
+- path: M220 123.5L390 123.5
+  width: 1.1
+- arrow:
+  - - 231.0
+    - 123.5
+  - - 245.0
+    - 123.5
+  width: 1.3
+- path: M220 140.5L250 140.5
+  width: 1.1
+- path: M360 140.5L390 140.5
+  width: 1.1
+- text: −
+  at:
+  - 258
+  - 144.7
+  size: 12
+  tone: default
+- text: +
+  at:
+  - 352
+  - 144.7
+  size: 12
+  tone: default
+- path: M220 157.5L390 157.5
+  width: 1.1
+- arrow:
+  - - 231.0
+    - 157.5
+  - - 245.0
+    - 157.5
+  width: 1.3
+- path: M220 174.5L250 174.5
+  width: 1.1
+- path: M360 174.5L390 174.5
+  width: 1.1
+- text: −
+  at:
+  - 258
+  - 178.7
+  size: 12
+  tone: default
+- text: +
+  at:
+  - 352
+  - 178.7
+  size: 12
+  tone: default
+- path: M220 191.5L390 191.5
+  width: 1.1
+- arrow:
+  - - 231.0
+    - 191.5
+  - - 245.0
+    - 191.5
+  width: 1.3
+- rect:
+  - 273.0
+  - 34.0
+  - 24
+  - 9
+  radius: 4.5
+  rotate: 0
+  width: 1.1
+- text: +
+  at:
+  - 291.0
+  - 42.4
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 279.0
+  - 42.4
+  size: 11
+  tone: default
+- rect:
+  - 313.0
+  - 34.0
+  - 24
+  - 9
+  radius: 4.5
+  rotate: 0
+  width: 1.1
+- text: +
+  at:
+  - 331.0
+  - 42.4
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 319.0
+  - 42.4
+  size: 11
+  tone: default
+- rect:
+  - 273.0
+  - 68.0
+  - 24
+  - 9
+  radius: 4.5
+  rotate: 0
+  width: 1.1
+- text: +
+  at:
+  - 291.0
+  - 76.3
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 279.0
+  - 76.3
+  size: 11
+  tone: default
+- rect:
+  - 313.0
+  - 68.0
+  - 24
+  - 9
+  radius: 4.5
+  rotate: 0
+  width: 1.1
+- text: +
+  at:
+  - 331.0
+  - 76.3
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 319.0
+  - 76.3
+  size: 11
+  tone: default
+- rect:
+  - 273.0
+  - 102.0
+  - 24
+  - 9
+  radius: 4.5
+  rotate: 0
+  width: 1.1
+- text: +
+  at:
+  - 291.0
+  - 110.3
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 279.0
+  - 110.3
+  size: 11
+  tone: default
+- rect:
+  - 313.0
+  - 102.0
+  - 24
+  - 9
+  radius: 4.5
+  rotate: 0
+  width: 1.1
+- text: +
+  at:
+  - 331.0
+  - 110.3
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 319.0
+  - 110.3
+  size: 11
+  tone: default
+- rect:
+  - 273.0
+  - 136.0
+  - 24
+  - 9
+  radius: 4.5
+  rotate: 0
+  width: 1.1
+- text: +
+  at:
+  - 291.0
+  - 144.3
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 279.0
+  - 144.3
+  size: 11
+  tone: default
+- rect:
+  - 313.0
+  - 136.0
+  - 24
+  - 9
+  radius: 4.5
+  rotate: 0
+  width: 1.1
+- text: +
+  at:
+  - 331.0
+  - 144.3
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 319.0
+  - 144.3
+  size: 11
+  tone: default
+- rect:
+  - 273.0
+  - 170.0
+  - 24
+  - 9
+  radius: 4.5
+  rotate: 0
+  width: 1.1
+- text: +
+  at:
+  - 291.0
+  - 178.3
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 279.0
+  - 178.3
+  size: 11
+  tone: default
+- rect:
+  - 313.0
+  - 170.0
+  - 24
+  - 9
+  radius: 4.5
+  rotate: 0
+  width: 1.1
+- text: +
+  at:
+  - 331.0
+  - 178.3
+  size: 11
+  tone: default
+- text: −
+  at:
+  - 319.0
+  - 178.3
+  size: 11
+  tone: default
+- text: поля нет
+  at:
+  - 90
+  - 24
+  size: 14
+  anchor: middle
+  tone: default
+- text: в поле
+  at:
+  - 305
+  - 22
+  size: 14
+  anchor: middle
+  tone: default
+- text: молекулы повёрнуты
+  at:
+  - 90
+  - 210
+  size: 13
+  anchor: middle
+  tone: muted
+- text: как попало
+  at:
+  - 90
+  - 226
+  size: 13
+  anchor: middle
+  tone: muted
+- text: внутри линий меньше
+  at:
+  - 305
+  - 222
+  size: 13
+  anchor: middle
+  tone: muted
