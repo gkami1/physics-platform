@@ -119,20 +119,20 @@ items:
     - 184.0
   width: 1.3
 - dots:
-  - - 200
+  - - 190
     - 104.0
   r: 3.5
   tone: accent
 - arrow:
-  - - 200
+  - - 190
     - 104.0
-  - - 246
+  - - 236
     - 104.0
   tone: accent
   label: '*E*'
   label_at:
-  - 226
-  - 95.0
+  - 252
+  - 109.0
 - text: +*q*
   at:
   - 127

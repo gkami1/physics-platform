@@ -114,8 +114,6 @@ items:
   at:
   - 200
   - 214
-  label: '*U*'
-  label_side: 1
 - line:
   - - 220
     - 214
@@ -211,7 +209,7 @@ items:
 - text: батарейка
   at:
   - 200
-  - 250
+  - 244
   size: 13
   anchor: middle
   tone: muted

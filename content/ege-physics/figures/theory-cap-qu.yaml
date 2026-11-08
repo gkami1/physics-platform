@@ -102,15 +102,15 @@ items:
   anchor: end
 - text: больше ёмкость —
   at:
-  - 384
-  - 186
+  - 82
+  - 28
   size: 13
-  anchor: end
+  anchor: start
   tone: muted
 - text: больше заряд при том же *U*
   at:
-  - 384
-  - 202
+  - 82
+  - 44
   size: 13
-  anchor: end
+  anchor: start
   tone: muted
