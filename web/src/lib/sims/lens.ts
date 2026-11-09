@@ -182,7 +182,7 @@ class LensSim extends HTMLElement {
 
     const controls = document.createElement('div');
     controls.className = 'sim-controls';
-    const [dLabel, dOut, dInput] = this.slider('Расстояние до предмета d', D_MIN, D_MAX, this.dist, (v) => (this.dist = v));
+    const [dLabel, dOut, dInput] = this.slider('До предмета d', D_MIN, D_MAX, this.dist, (v) => (this.dist = v));
     const [fLabel, fOut] = this.slider('Фокусное расстояние |F|', F_MIN, F_MAX, this.focal, (v) => (this.focal = v));
     this.dOut = dOut;
     this.fOut = fOut;
