@@ -1,0 +1,102 @@
+# electro.induction.faraday 10.4: a frame turned in a uniform field (lines to the right), seen
+# edge-on in three positions: the normal along the field (Φ = BS), across it (Φ = 0) and
+# against it (Φ = −BS).
+# Colours (the «Электродинамика» convention with the magnetism extension of 8.x and 9.x):
+# magnetic field lines in the text colour, thin, with small arrowheads; the vector B an accent
+# arrow, the induced field B_инд an accent dashed arrow; a field across the page a sparse grid
+# of accent «×» (away from us) or «·» (towards us). A magnet's N half an accent tint, its S half
+# a muted tint. Wires, coils, rings, rails and frames in the text colour; a frame's normal n a
+# text-colour arrow; the induced current an accent arrow beside the wire or an accent arrowhead
+# on a ring. A moving magnet's or rod's velocity green; the Lorentz and Ampère forces red; a
+# charged particle a surface circle with its sign; the area that the flux goes through a muted
+# tint; galvanometer needles in the text colour; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 226
+items:
+- path: M10 34L390 34
+  width: 1.2
+- arrow:
+  - - 53.0
+    - 34.0
+  - - 67.0
+    - 34.0
+  width: 1.3
+- path: M10 150L390 150
+  width: 1.2
+- arrow:
+  - - 53.0
+    - 150.0
+  - - 67.0
+    - 150.0
+  width: 1.3
+- line:
+  - - 70.0
+    - 52.0
+  - - 70.0
+    - 132.0
+  width: 4
+- arrow:
+  - - 70
+    - 92
+  - - 114.0
+    - 92.0
+  tone: default
+  label: '*n*'
+  label_at:
+  - 122.0
+  - 86.0
+- text: Φ = *BS*
+  at:
+  - 70
+  - 186
+  size: 15
+- line:
+  - - 160.0
+    - 92.0
+  - - 240.0
+    - 92.0
+  width: 4
+- arrow:
+  - - 200
+    - 92
+  - - 200.0
+    - 48.0
+  tone: default
+  label: '*n*'
+  label_at:
+  - 212.0
+  - 52.0
+- text: Φ = 0
+  at:
+  - 200
+  - 186
+  size: 15
+- line:
+  - - 330.0
+    - 132.0
+  - - 330.0
+    - 52.0
+  width: 4
+- arrow:
+  - - 330
+    - 92
+  - - 286.0
+    - 92.0
+  tone: default
+  label: '*n*'
+  label_at:
+  - 278.0
+  - 86.0
+- text: Φ = −*BS*
+  at:
+  - 330
+  - 186
+  size: 15
+- text: рамку поворачивают; нормаль *n* поворачивается вместе с ней
+  at:
+  - 200
+  - 214
+  size: 13
+  tone: muted

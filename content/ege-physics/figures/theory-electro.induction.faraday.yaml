@@ -1,37 +1,298 @@
-# electro.induction.faraday: moving magnet changes the flux; the galvanometer shows a current
+# electro.induction.faraday 10.1 (redraws the ladder's figure, whose N was red and S accent):
+# Faraday's experiment in three rows. A bar magnet, N towards a coil joined to a
+# galvanometer: pushed in (green v) the needle swings right; lying inside, the needle at zero;
+# pulled out, it swings left. The coil's turns are ellipses; when the magnet is inside,
+# their front halves are drawn again over it.
+# Colours (the «Электродинамика» convention with the magnetism extension of 8.x and 9.x):
+# magnetic field lines in the text colour, thin, with small arrowheads; the vector B an accent
+# arrow, the induced field B_инд an accent dashed arrow; a field across the page a sparse grid
+# of accent «×» (away from us) or «·» (towards us). A magnet's N half an accent tint, its S half
+# a muted tint. Wires, coils, rings, rails and frames in the text colour; a frame's normal n a
+# text-colour arrow; the induced current an accent arrow beside the wire or an accent arrowhead
+# on a ring. A moving magnet's or rod's velocity green; the Lorentz and Ampère forces red; a
+# charged particle a surface circle with its sign; the area that the flux goes through a muted
+# tint; galvanometer needles in the text colour; guides and notes muted.
 kind: diagram
-size: [400, 260]
+size:
+- 400
+- 336
 items:
-- path: M200 85a10 40 0 1 0 0 80a10 40 0 1 0 0 -80M216 85a10 40 0 1 0 0 80a10 40 0 1 0 0 -80M232 85a10
-    40 0 1 0 0 80a10 40 0 1 0 0 -80M248 85a10 40 0 1 0 0 80a10 40 0 1 0 0 -80M264 85a10 40 0 1 0 0 80a10
-    40 0 1 0 0 -80M280 85a10 40 0 1 0 0 80a10 40 0 1 0 0 -80M296 85a10 40 0 1 0 0 80a10 40 0 1 0 0 -80M312
-    85a10 40 0 1 0 0 80a10 40 0 1 0 0 -80
-  width: 1.6
-- line: [[200, 165], [200, 220], [240, 220]]
-  width: 1.6
-- element: galvanometer
-  at: [260, 220]
-- line: [[280, 220], [312, 220], [312, 165]]
-  width: 1.6
-- rect: [40, 105, 50, 40]
-  fill: surface
-  tone: accent
-- rect: [90, 105, 50, 40]
-  fill: surface
-  tone: force
-- text: S
-  at: [65, 131]
-  tone: accent
-- text: N
-  at: [115, 131]
-  tone: force
-- arrow: [[60, 90], [130, 90]]
-  tone: vel
-  label: '*v*'
-  label_at: [146, 95]
-- text: поток меняется → ток в катушке
-  at: [200, 30]
+- text: магнит вдвигают — ток есть
+  at:
+  - 12
+  - 22
   size: 13
-- text: '|ℰ_i| = |ΔΦ|/Δ*t*'
-  at: [100, 220]
-  size: 14
+  anchor: start
+  tone: muted
+- path: M196 42a7 24 0 1 0 0 48a7 24 0 1 0 0 -48M212 42a7 24 0 1 0 0 48a7 24 0 1 0 0 -48M228 42a7 24 0
+    1 0 0 48a7 24 0 1 0 0 -48M244 42a7 24 0 1 0 0 48a7 24 0 1 0 0 -48M260 42a7 24 0 1 0 0 48a7 24 0 1
+    0 0 -48M276 42a7 24 0 1 0 0 48a7 24 0 1 0 0 -48M292 42a7 24 0 1 0 0 48a7 24 0 1 0 0 -48
+  width: 1.5
+- rect:
+  - 46
+  - 53
+  - 52.0
+  - 26
+  fill: accent
+  tone: muted
+  width: 1.6
+- text: S
+  at:
+  - 72.0
+  - 72.0
+  size: 18
+- rect:
+  - 98.0
+  - 53
+  - 52.0
+  - 26
+  fill: accent
+  tone: accent
+  width: 1.6
+- text: N
+  at:
+  - 124.0
+  - 72.0
+  size: 18
+- arrow:
+  - - 76
+    - 42
+  - - 126
+    - 42
+  tone: vel
+  width: 2.2
+  label: '*v*'
+  label_at:
+  - 138
+  - 47
+- line:
+  - - 292
+    - 90
+  - - 292
+    - 100
+  - - 362
+    - 100
+  - - 362
+    - 83
+  width: 1.4
+- line:
+  - - 196
+    - 42
+  - - 196
+    - 32
+  - - 362
+    - 32
+  - - 362
+    - 49
+  width: 1.4
+- circle:
+  - 362
+  - 66
+  r: 17
+  fill: surface
+  width: 1.6
+- path: M348 59.6L349.2 58.4L350.6 57.4L352.1 56.5L353.6 55.7L355.2 55L356.9 54.5L358.6 54.1L360.3 53.9L362
+    53.8L363.7 53.9L365.4 54.1L367.1 54.5L368.8 55L370.4 55.7L371.9 56.5L373.4 57.4L374.8 58.4L376 59.6
+  width: 1
+  tone: muted
+- line:
+  - - 362
+    - 55.3
+  - - 362
+    - 50.8
+  width: 1.2
+  tone: muted
+- line:
+  - - 362
+    - 73.65
+  - - 371.5
+    - 58.5
+  width: 1.8
+- dots:
+  - - 362
+    - 73.65
+  r: 2
+- text: магнит лежит в катушке — тока нет
+  at:
+  - 12
+  - 134
+  size: 13
+  anchor: start
+  tone: muted
+- path: M196 154a7 24 0 1 0 0 48a7 24 0 1 0 0 -48M212 154a7 24 0 1 0 0 48a7 24 0 1 0 0 -48M228 154a7 24
+    0 1 0 0 48a7 24 0 1 0 0 -48M244 154a7 24 0 1 0 0 48a7 24 0 1 0 0 -48M260 154a7 24 0 1 0 0 48a7 24
+    0 1 0 0 -48M276 154a7 24 0 1 0 0 48a7 24 0 1 0 0 -48M292 154a7 24 0 1 0 0 48a7 24 0 1 0 0 -48
+  width: 1.5
+- rect:
+  - 172
+  - 165
+  - 52.0
+  - 26
+  fill: accent
+  tone: muted
+  width: 1.6
+- text: S
+  at:
+  - 198.0
+  - 184.0
+  size: 18
+- rect:
+  - 224.0
+  - 165
+  - 52.0
+  - 26
+  fill: accent
+  tone: accent
+  width: 1.6
+- text: N
+  at:
+  - 250.0
+  - 184.0
+  size: 18
+- path: M196 154a7 24 0 0 0 0 48M212 154a7 24 0 0 0 0 48M228 154a7 24 0 0 0 0 48M244 154a7 24 0 0 0 0
+    48M260 154a7 24 0 0 0 0 48M276 154a7 24 0 0 0 0 48M292 154a7 24 0 0 0 0 48
+  width: 1.5
+- line:
+  - - 292
+    - 202
+  - - 292
+    - 212
+  - - 362
+    - 212
+  - - 362
+    - 195
+  width: 1.4
+- line:
+  - - 196
+    - 154
+  - - 196
+    - 144
+  - - 362
+    - 144
+  - - 362
+    - 161
+  width: 1.4
+- circle:
+  - 362
+  - 178
+  r: 17
+  fill: surface
+  width: 1.6
+- path: M348 171.6L349.2 170.4L350.6 169.4L352.1 168.5L353.6 167.7L355.2 167L356.9 166.5L358.6 166.1L360.3
+    165.9L362 165.8L363.7 165.9L365.4 166.1L367.1 166.5L368.8 167L370.4 167.7L371.9 168.5L373.4 169.4L374.8
+    170.4L376 171.6
+  width: 1
+  tone: muted
+- line:
+  - - 362
+    - 167.3
+  - - 362
+    - 162.8
+  width: 1.2
+  tone: muted
+- line:
+  - - 362
+    - 185.65
+  - - 362.0
+    - 167.8
+  width: 1.8
+- dots:
+  - - 362
+    - 185.65
+  r: 2
+- text: магнит выдвигают — ток в другую сторону
+  at:
+  - 12
+  - 246
+  size: 13
+  anchor: start
+  tone: muted
+- path: M196 266a7 24 0 1 0 0 48a7 24 0 1 0 0 -48M212 266a7 24 0 1 0 0 48a7 24 0 1 0 0 -48M228 266a7 24
+    0 1 0 0 48a7 24 0 1 0 0 -48M244 266a7 24 0 1 0 0 48a7 24 0 1 0 0 -48M260 266a7 24 0 1 0 0 48a7 24
+    0 1 0 0 -48M276 266a7 24 0 1 0 0 48a7 24 0 1 0 0 -48M292 266a7 24 0 1 0 0 48a7 24 0 1 0 0 -48
+  width: 1.5
+- rect:
+  - 46
+  - 277
+  - 52.0
+  - 26
+  fill: accent
+  tone: muted
+  width: 1.6
+- text: S
+  at:
+  - 72.0
+  - 296.0
+  size: 18
+- rect:
+  - 98.0
+  - 277
+  - 52.0
+  - 26
+  fill: accent
+  tone: accent
+  width: 1.6
+- text: N
+  at:
+  - 124.0
+  - 296.0
+  size: 18
+- arrow:
+  - - 126
+    - 266
+  - - 76
+    - 266
+  tone: vel
+  width: 2.2
+  label: '*v*'
+  label_at:
+  - 64
+  - 271
+- line:
+  - - 292
+    - 314
+  - - 292
+    - 324
+  - - 362
+    - 324
+  - - 362
+    - 307
+  width: 1.4
+- line:
+  - - 196
+    - 266
+  - - 196
+    - 256
+  - - 362
+    - 256
+  - - 362
+    - 273
+  width: 1.4
+- circle:
+  - 362
+  - 290
+  r: 17
+  fill: surface
+  width: 1.6
+- path: M348 283.6L349.2 282.4L350.6 281.4L352.1 280.5L353.6 279.7L355.2 279L356.9 278.5L358.6 278.1L360.3
+    277.9L362 277.8L363.7 277.9L365.4 278.1L367.1 278.5L368.8 279L370.4 279.7L371.9 280.5L373.4 281.4L374.8
+    282.4L376 283.6
+  width: 1
+  tone: muted
+- line:
+  - - 362
+    - 279.3
+  - - 362
+    - 274.8
+  width: 1.2
+  tone: muted
+- line:
+  - - 362
+    - 297.65
+  - - 352.5
+    - 282.5
+  width: 1.8
+- dots:
+  - - 362
+    - 297.65
+  r: 2

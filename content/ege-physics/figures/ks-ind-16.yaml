@@ -1,0 +1,71 @@
+# ks-ind-16: a metal rod moves to the right (green v) in a field towards us (accent dots); its
+# ends are numbered 1 (top) and 2 (bottom). Answer 2: q v × B with Bz = +1 pushes positive
+# charges down, electrons go up, the bottom end is «+».
+kind: diagram
+size:
+- 400
+- 240
+items:
+- dots:
+  - - 40
+    - 36
+  - - 40
+    - 96
+  - - 40
+    - 156
+  - - 40
+    - 216
+  - - 100
+    - 36
+  - - 100
+    - 96
+  - - 100
+    - 156
+  - - 100
+    - 216
+  - - 290
+    - 36
+  - - 290
+    - 96
+  - - 290
+    - 156
+  - - 290
+    - 216
+  - - 350
+    - 36
+  - - 350
+    - 96
+  - - 350
+    - 156
+  - - 350
+    - 216
+  r: 2.2
+  tone: accent
+- rect:
+  - 183
+  - 36
+  - 14
+  - 160
+  fill: surface
+  width: 1.8
+- text: '1'
+  at:
+  - 212
+  - 46
+  size: 15
+- text: '2'
+  at:
+  - 212
+  - 194
+  size: 15
+- arrow:
+  - - 220
+    - 116
+  - - 276
+    - 116
+  tone: vel
+  width: 2.2
+  label: '*v*'
+  label_at:
+  - 288
+  - 121

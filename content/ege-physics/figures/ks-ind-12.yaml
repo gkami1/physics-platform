@@ -1,0 +1,27 @@
+# ks-ind-12: the flux through a turn, Φ(t) in мВб: 1 → 5 over 0…2 с, 5 over 2…4 с, 5 → 2 over
+# 4…5 с, 2 over 5…7 с. Answer 3 мВ: the steepest part is 4…5 с (3 мВб in 1 с).
+kind: graph
+x:
+  var: t
+  unit: с
+  min: 0
+  max: 7
+  step: 1
+y:
+  var: Φ
+  unit: мВб
+  min: 0
+  max: 6
+  step: 1
+series:
+- points:
+  - - 0
+    - 1
+  - - 2
+    - 5
+  - - 4
+    - 5
+  - - 5
+    - 2
+  - - 7
+    - 2
