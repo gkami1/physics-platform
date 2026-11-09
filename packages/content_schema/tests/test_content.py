@@ -118,6 +118,16 @@ def test_latex_eaten_by_double_quotes(scratch: Path) -> None:
     assert "LaTeX backslash" in _errors(scratch)
 
 
+def test_control_character_in_body(scratch: Path) -> None:
+    # "\text{:}" written through a Python string: a tab, then "ext{:}"
+    _edit(
+        scratch / "theory/mech.kinematics.basics/02-speed-uniform.md",
+        "## Частые ловушки",
+        "Пример ${4\\ \\text{м/с}\text{:}}$\n\n## Частые ловушки",
+    )
+    assert "control character 0x09" in _errors(scratch)
+
+
 def test_missing_image(scratch: Path) -> None:
     _edit(
         scratch / "theory/mech.kinematics.basics/02-speed-uniform.md",
