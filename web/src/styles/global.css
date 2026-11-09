@@ -4238,3 +4238,118 @@ task-answer .final {
   color: var(--accent);
   font-weight: 600;
 }
+
+/* <pp-grating>: a diffraction grating (lessons 16.6–16.7). The optics convention of the figures:
+   rays accent with a mid-arrow, the grating and the sin φ axis in the text colour, guides muted
+   dashed; colours are named, not painted, so a white-light spectrum is an accent-tinted band and
+   overlapping spectra look denser. */
+.grt-chips {
+  margin: 0 0 0.5rem;
+}
+
+.grt-chips legend {
+  width: 4rem;
+  margin-right: 0.2rem;
+}
+
+.pfx-chips.grt-chips input:checked + span {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.grt-ray {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.8;
+}
+
+.grt-head,
+.grt-dot {
+  fill: var(--accent);
+}
+
+.grt-dot {
+  fill: var(--text);
+}
+
+.grt-grating,
+.grt-axis {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.4;
+}
+
+.grt-grating {
+  stroke-width: 3;
+  stroke-dasharray: 4 3;
+}
+
+.grt-screen,
+.grt-guide {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1;
+}
+
+.grt-guide {
+  stroke-dasharray: 4 3;
+}
+
+.grt-hollow {
+  fill: var(--surface);
+  stroke: var(--muted);
+  stroke-width: 1.4;
+}
+
+.grt-band {
+  fill: var(--accent);
+  fill-opacity: 0.2;
+  stroke: none;
+}
+
+.grt-edge {
+  stroke: var(--accent);
+  stroke-width: 1;
+}
+
+.sim-svg .grt-label {
+  fill: var(--text);
+  font-size: 15px;
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.sim-svg .grt-small {
+  font-size: 13px;
+}
+
+.sim-svg .grt-muted {
+  fill: var(--muted);
+}
+
+.grt-table {
+  width: 100%;
+  margin: 0.75rem 0 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.grt-table th,
+.grt-table td {
+  padding: 0.2rem 0.35rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+.grt-table th {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.grt-table tr.grt-main td {
+  color: var(--accent);
+  font-weight: 600;
+}
