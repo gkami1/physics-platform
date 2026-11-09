@@ -1,0 +1,126 @@
+# electro.oscillations.waves 13.6: power transmission. A station's generator «~», a step-up
+# transformer (two overlapping circles), a long two-wire line at a high voltage and a small
+# current (accent arrow), a step-down transformer and the houses. The wires' heat I²R is a note.
+# Colours (the «Электродинамика» convention, extended here for alternating current and waves):
+# circuit symbols, wires, coils and frames in the text colour, an iron core a text-colour
+# outline; the current an accent arrow beside a wire. As in 12.x, the electric side is accent
+# and the magnetic side green: the EMF e(t) and voltages on graphs accent, the flux in a
+# transformer's core green; in an electromagnetic wave the vector E accent and B green, the
+# direction of travel c a text-colour arrow. Field lines thin text-colour arrows, a frame's
+# normal n a text-colour arrow (10.4). The scale of waves: bands as surface cells with
+# text-colour borders, visible light the one solid accent cell, axes of ν and λ muted ticks.
+# Graphs use the diagram kind with the Axes helper: curves accent, a curve to compare with
+# (the flux Φ beside e) muted dashed, a mean or effective value a muted dashed line, the
+# energy under a power curve an accent tint. A medium (glass) a surface rect; guides and
+# notes muted.
+kind: diagram
+size:
+- 400
+- 122
+items:
+- rect:
+  - 8
+  - 46
+  - 62
+  - 46
+  fill: surface
+  width: 1.6
+- text: '~'
+  at:
+  - 39
+  - 76
+  size: 22
+- line:
+  - - 70
+    - 70
+  - - 87
+    - 70
+  width: 1.6
+- circle:
+  - 100
+  - 70
+  r: 13
+  width: 1.6
+- circle:
+  - 116
+  - 70
+  r: 13
+  width: 1.6
+- line:
+  - - 129
+    - 64
+  - - 271
+    - 64
+  width: 1.6
+- line:
+  - - 129
+    - 76
+  - - 271
+    - 76
+  width: 1.6
+- circle:
+  - 284
+  - 70
+  r: 13
+  width: 1.6
+- circle:
+  - 300
+  - 70
+  r: 13
+  width: 1.6
+- line:
+  - - 313
+    - 70
+  - - 326
+    - 70
+  width: 1.6
+- path: M326 92V64L352 44L378 64V92Z
+  fill: surface
+  width: 1.6
+- text: станция
+  at:
+  - 39
+  - 112
+  size: 12
+  anchor: middle
+  tone: muted
+- text: повышает *U*
+  at:
+  - 108
+  - 112
+  size: 12
+  anchor: middle
+  tone: muted
+- text: понижает *U*
+  at:
+  - 292
+  - 112
+  size: 12
+  anchor: middle
+  tone: muted
+- text: дома
+  at:
+  - 352
+  - 112
+  size: 12
+  anchor: middle
+  tone: muted
+- text: большое *U*, малый *I*
+  at:
+  - 200
+  - 50
+  size: 13
+- text: 'провода греются: *I*^{2}*R*'
+  at:
+  - 200
+  - 100
+  size: 12
+  anchor: middle
+  tone: muted
+- arrow:
+  - - 180
+    - 56
+  - - 220
+    - 56
+  tone: accent
+  width: 1.6

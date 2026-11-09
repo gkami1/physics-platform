@@ -1,0 +1,500 @@
+# electro.oscillations.waves 13.3: an electromagnetic wave at one moment, along the line of travel
+# (muted axis, the direction c a text-colour arrow). The vector E (accent: thin arrows' stems
+# and the curve through their tips) oscillates up and down, B (green) across, drawn obliquely
+# towards us; both are largest at the same places (in phase) and perpendicular to each other
+# and to c. A muted bracket spans one wavelength λ between neighbouring crests.
+# Colours (the «Электродинамика» convention, extended here for alternating current and waves):
+# circuit symbols, wires, coils and frames in the text colour, an iron core a text-colour
+# outline; the current an accent arrow beside a wire. As in 12.x, the electric side is accent
+# and the magnetic side green: the EMF e(t) and voltages on graphs accent, the flux in a
+# transformer's core green; in an electromagnetic wave the vector E accent and B green, the
+# direction of travel c a text-colour arrow. Field lines thin text-colour arrows, a frame's
+# normal n a text-colour arrow (10.4). The scale of waves: bands as surface cells with
+# text-colour borders, visible light the one solid accent cell, axes of ν and λ muted ticks.
+# Graphs use the diagram kind with the Axes helper: curves accent, a curve to compare with
+# (the flux Φ beside e) muted dashed, a mean or effective value a muted dashed line, the
+# energy under a power curve an accent tint. A medium (glass) a surface rect; guides and
+# notes muted.
+kind: diagram
+size:
+- 400
+- 196
+items:
+- line:
+  - - 50.0
+    - 112
+  - - 37.5
+    - 121.6
+  width: 1
+  tone: vel
+- line:
+  - - 60.0
+    - 112
+  - - 37.1
+    - 129.5
+  width: 1
+  tone: vel
+- line:
+  - - 70.0
+    - 112
+  - - 40.7
+    - 134.4
+  width: 1
+  tone: vel
+- line:
+  - - 80.0
+    - 112
+  - - 49.4
+    - 135.4
+  width: 1
+  tone: vel
+- line:
+  - - 90.0
+    - 112
+  - - 63.3
+    - 132.4
+  width: 1
+  tone: vel
+- line:
+  - - 100.0
+    - 112
+  - - 81.9
+    - 125.8
+  width: 1
+  tone: vel
+- line:
+  - - 110.0
+    - 112
+  - - 103.6
+    - 116.9
+  width: 1
+  tone: vel
+- line:
+  - - 120.0
+    - 112
+  - - 126.4
+    - 107.1
+  width: 1
+  tone: vel
+- line:
+  - - 130.0
+    - 112
+  - - 148.1
+    - 98.2
+  width: 1
+  tone: vel
+- line:
+  - - 140.0
+    - 112
+  - - 166.7
+    - 91.6
+  width: 1
+  tone: vel
+- line:
+  - - 150.0
+    - 112
+  - - 180.6
+    - 88.6
+  width: 1
+  tone: vel
+- line:
+  - - 160.0
+    - 112
+  - - 189.3
+    - 89.6
+  width: 1
+  tone: vel
+- line:
+  - - 170.0
+    - 112
+  - - 192.9
+    - 94.5
+  width: 1
+  tone: vel
+- line:
+  - - 180.0
+    - 112
+  - - 192.5
+    - 102.4
+  width: 1
+  tone: vel
+- line:
+  - - 200.0
+    - 112
+  - - 187.5
+    - 121.6
+  width: 1
+  tone: vel
+- line:
+  - - 210.0
+    - 112
+  - - 187.1
+    - 129.5
+  width: 1
+  tone: vel
+- line:
+  - - 220.0
+    - 112
+  - - 190.7
+    - 134.4
+  width: 1
+  tone: vel
+- line:
+  - - 230.0
+    - 112
+  - - 199.4
+    - 135.4
+  width: 1
+  tone: vel
+- line:
+  - - 240.0
+    - 112
+  - - 213.3
+    - 132.4
+  width: 1
+  tone: vel
+- line:
+  - - 250.0
+    - 112
+  - - 231.9
+    - 125.8
+  width: 1
+  tone: vel
+- line:
+  - - 260.0
+    - 112
+  - - 253.6
+    - 116.9
+  width: 1
+  tone: vel
+- line:
+  - - 270.0
+    - 112
+  - - 276.4
+    - 107.1
+  width: 1
+  tone: vel
+- line:
+  - - 280.0
+    - 112
+  - - 298.1
+    - 98.2
+  width: 1
+  tone: vel
+- line:
+  - - 290.0
+    - 112
+  - - 316.7
+    - 91.6
+  width: 1
+  tone: vel
+- line:
+  - - 300.0
+    - 112
+  - - 330.6
+    - 88.6
+  width: 1
+  tone: vel
+- line:
+  - - 310.0
+    - 112
+  - - 339.3
+    - 89.6
+  width: 1
+  tone: vel
+- line:
+  - - 320.0
+    - 112
+  - - 342.9
+    - 94.5
+  width: 1
+  tone: vel
+- line:
+  - - 330.0
+    - 112
+  - - 342.5
+    - 102.4
+  width: 1
+  tone: vel
+- path: M40 112L39.3 114.5L38.6 116.9L38 119.3L37.5 121.6L37.1 123.8L36.9 125.8L36.9 127.7L37.1 129.5L37.6
+    131L38.3 132.4L39.4 133.5L40.7 134.4L42.4 135L44.4 135.4L46.7 135.5L49.4 135.4L52.4 135L55.7 134.4L59.4
+    133.5L63.3 132.4L67.6 131L72.1 129.5L76.9 127.7L81.9 125.8L87.1 123.8L92.5 121.6L98 119.3L103.6 116.9L109.3
+    114.5L115 112L120.7 109.5L126.4 107.1L132 104.7L137.5 102.4L142.9 100.2L148.1 98.2L153.1 96.3L157.9
+    94.5L162.4 93L166.7 91.6L170.6 90.5L174.3 89.6L177.6 89L180.6 88.6L183.3 88.5L185.6 88.6L187.6 89L189.3
+    89.6L190.6 90.5L191.7 91.6L192.4 93L192.9 94.5L193.1 96.3L193.1 98.2L192.9 100.2L192.5 102.4L192 104.7L191.4
+    107.1L190.7 109.5L190 112L189.3 114.5L188.6 116.9L188 119.3L187.5 121.6L187.1 123.8L186.9 125.8L186.9
+    127.7L187.1 129.5L187.6 131L188.3 132.4L189.4 133.5L190.7 134.4L192.4 135L194.4 135.4L196.7 135.5L199.4
+    135.4L202.4 135L205.7 134.4L209.4 133.5L213.3 132.4L217.6 131L222.1 129.5L226.9 127.7L231.9 125.8L237.1
+    123.8L242.5 121.6L248 119.3L253.6 116.9L259.3 114.5L265 112L270.7 109.5L276.4 107.1L282 104.7L287.5
+    102.4L292.9 100.2L298.1 98.2L303.1 96.3L307.9 94.5L312.4 93L316.7 91.6L320.6 90.5L324.3 89.6L327.6
+    89L330.6 88.6L333.3 88.5L335.6 88.6L337.6 89L339.3 89.6L340.6 90.5L341.7 91.6L342.4 93L342.9 94.5L343.1
+    96.3L343.1 98.2L342.9 100.2L342.5 102.4L342 104.7L341.4 107.1L340.7 109.5L340 112
+  width: 2
+  tone: vel
+- line:
+  - - 26
+    - 112
+  - - 346
+    - 112
+  width: 1.2
+  tone: muted
+- arrow:
+  - - 348
+    - 112
+  - - 390
+    - 112
+  width: 2.2
+  label: '*c*'
+  label_at:
+  - 386
+  - 102
+- line:
+  - - 50.0
+    - 112
+  - - 50.0
+    - 87.6
+  width: 1
+  tone: accent
+- line:
+  - - 60.0
+    - 112
+  - - 60.0
+    - 67.4
+  width: 1
+  tone: accent
+- line:
+  - - 70.0
+    - 112
+  - - 70.0
+    - 54.9
+  width: 1
+  tone: accent
+- line:
+  - - 80.0
+    - 112
+  - - 80.0
+    - 52.3
+  width: 1
+  tone: accent
+- line:
+  - - 90.0
+    - 112
+  - - 90.0
+    - 60.0
+  width: 1
+  tone: accent
+- line:
+  - - 100.0
+    - 112
+  - - 100.0
+    - 76.7
+  width: 1
+  tone: accent
+- line:
+  - - 110.0
+    - 112
+  - - 110.0
+    - 99.5
+  width: 1
+  tone: accent
+- line:
+  - - 120.0
+    - 112
+  - - 120.0
+    - 124.5
+  width: 1
+  tone: accent
+- line:
+  - - 130.0
+    - 112
+  - - 130.0
+    - 147.3
+  width: 1
+  tone: accent
+- line:
+  - - 140.0
+    - 112
+  - - 140.0
+    - 164.0
+  width: 1
+  tone: accent
+- line:
+  - - 150.0
+    - 112
+  - - 150.0
+    - 171.7
+  width: 1
+  tone: accent
+- line:
+  - - 160.0
+    - 112
+  - - 160.0
+    - 169.1
+  width: 1
+  tone: accent
+- line:
+  - - 170.0
+    - 112
+  - - 170.0
+    - 156.6
+  width: 1
+  tone: accent
+- line:
+  - - 180.0
+    - 112
+  - - 180.0
+    - 136.4
+  width: 1
+  tone: accent
+- line:
+  - - 200.0
+    - 112
+  - - 200.0
+    - 87.6
+  width: 1
+  tone: accent
+- line:
+  - - 210.0
+    - 112
+  - - 210.0
+    - 67.4
+  width: 1
+  tone: accent
+- line:
+  - - 220.0
+    - 112
+  - - 220.0
+    - 54.9
+  width: 1
+  tone: accent
+- line:
+  - - 230.0
+    - 112
+  - - 230.0
+    - 52.3
+  width: 1
+  tone: accent
+- line:
+  - - 240.0
+    - 112
+  - - 240.0
+    - 60.0
+  width: 1
+  tone: accent
+- line:
+  - - 250.0
+    - 112
+  - - 250.0
+    - 76.7
+  width: 1
+  tone: accent
+- line:
+  - - 260.0
+    - 112
+  - - 260.0
+    - 99.5
+  width: 1
+  tone: accent
+- line:
+  - - 270.0
+    - 112
+  - - 270.0
+    - 124.5
+  width: 1
+  tone: accent
+- line:
+  - - 280.0
+    - 112
+  - - 280.0
+    - 147.3
+  width: 1
+  tone: accent
+- line:
+  - - 290.0
+    - 112
+  - - 290.0
+    - 164.0
+  width: 1
+  tone: accent
+- line:
+  - - 300.0
+    - 112
+  - - 300.0
+    - 171.7
+  width: 1
+  tone: accent
+- line:
+  - - 310.0
+    - 112
+  - - 310.0
+    - 169.1
+  width: 1
+  tone: accent
+- line:
+  - - 320.0
+    - 112
+  - - 320.0
+    - 156.6
+  width: 1
+  tone: accent
+- line:
+  - - 330.0
+    - 112
+  - - 330.0
+    - 136.4
+  width: 1
+  tone: accent
+- path: M40 112L42.5 105.7L45 99.5L47.5 93.5L50 87.6L52.5 82L55 76.7L57.5 71.9L60 67.4L62.5 63.5L65 60L67.5
+    57.2L70 54.9L72.5 53.3L75 52.3L77.5 52L80 52.3L82.5 53.3L85 54.9L87.5 57.2L90 60L92.5 63.5L95 67.4L97.5
+    71.9L100 76.7L102.5 82L105 87.6L107.5 93.5L110 99.5L112.5 105.7L115 112L117.5 118.3L120 124.5L122.5
+    130.5L125 136.4L127.5 142L130 147.3L132.5 152.1L135 156.6L137.5 160.5L140 164L142.5 166.8L145 169.1L147.5
+    170.7L150 171.7L152.5 172L155 171.7L157.5 170.7L160 169.1L162.5 166.8L165 164L167.5 160.5L170 156.6L172.5
+    152.1L175 147.3L177.5 142L180 136.4L182.5 130.5L185 124.5L187.5 118.3L190 112L192.5 105.7L195 99.5L197.5
+    93.5L200 87.6L202.5 82L205 76.7L207.5 71.9L210 67.4L212.5 63.5L215 60L217.5 57.2L220 54.9L222.5 53.3L225
+    52.3L227.5 52L230 52.3L232.5 53.3L235 54.9L237.5 57.2L240 60L242.5 63.5L245 67.4L247.5 71.9L250 76.7L252.5
+    82L255 87.6L257.5 93.5L260 99.5L262.5 105.7L265 112L267.5 118.3L270 124.5L272.5 130.5L275 136.4L277.5
+    142L280 147.3L282.5 152.1L285 156.6L287.5 160.5L290 164L292.5 166.8L295 169.1L297.5 170.7L300 171.7L302.5
+    172L305 171.7L307.5 170.7L310 169.1L312.5 166.8L315 164L317.5 160.5L320 156.6L322.5 152.1L325 147.3L327.5
+    142L330 136.4L332.5 130.5L335 124.5L337.5 118.3L340 112
+  width: 2.4
+  tone: accent
+- text: '*E*'
+  at:
+  - 63.5
+  - 48
+  size: 16
+  tone: accent
+  anchor: end
+- text: '*B*'
+  at:
+  - 38.7
+  - 149.5
+  size: 16
+  tone: vel
+  anchor: end
+- line:
+  - - 77.5
+    - 25
+  - - 77.5
+    - 35
+  width: 1
+  tone: muted
+- line:
+  - - 227.5
+    - 25
+  - - 227.5
+    - 35
+  width: 1
+  tone: muted
+- line:
+  - - 77.5
+    - 30
+  - - 227.5
+    - 30
+  width: 1
+  tone: muted
+- text: '*λ*'
+  at:
+  - 152.5
+  - 24
+  size: 14

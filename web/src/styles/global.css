@@ -3877,3 +3877,142 @@ task-answer .final {
   color: var(--ok);
   font-weight: 600;
 }
+
+.emw-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin: 0 0 0.5rem;
+}
+
+.emw-play {
+  min-width: 5.5rem;
+}
+
+.emw-note {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.emw-e,
+.emw-b,
+.emw-es,
+.emw-bs,
+.emw-axis,
+.emw-c,
+.emw-guide {
+  fill: none;
+}
+
+.emw-e {
+  stroke: var(--accent);
+  stroke-width: 2.4;
+}
+
+.emw-es {
+  stroke: var(--accent);
+  stroke-width: 1;
+}
+
+.emw-b {
+  stroke: var(--ok);
+  stroke-width: 2;
+}
+
+.emw-bs {
+  stroke: var(--ok);
+  stroke-width: 1;
+}
+
+.emw-axis,
+.emw-guide {
+  stroke: var(--muted);
+  stroke-width: 1.2;
+}
+
+.emw-c {
+  stroke: var(--text);
+  stroke-width: 2.2;
+}
+
+.emw-c-head {
+  fill: var(--text);
+}
+
+.emw-band {
+  fill: var(--surface);
+  stroke: var(--text);
+  stroke-width: 1;
+}
+
+.emw-vis {
+  fill: var(--accent);
+}
+
+.emw-mark {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 2.4;
+}
+
+.sim-svg .emw-label {
+  fill: var(--text);
+  font-size: 16px;
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.sim-svg .emw-small {
+  font-size: 13px;
+}
+
+.sim-svg .emw-le {
+  fill: var(--accent);
+}
+
+.sim-svg .emw-lb {
+  fill: var(--ok);
+}
+
+.sim-svg .emw-name {
+  fill: var(--text);
+  font-size: 12px;
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
+.sim-svg .emw-tick {
+  fill: var(--muted);
+  font-size: 11px;
+}
+
+.emw-table {
+  width: 100%;
+  margin: 0.75rem 0 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.emw-table th,
+.emw-table td {
+  padding: 0.2rem 0.35rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+.emw-table th {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.emw-table tr.emw-main td {
+  color: var(--accent);
+  font-weight: 600;
+  white-space: nowrap;
+}

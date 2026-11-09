@@ -1,0 +1,226 @@
+# electro.oscillations.waves 13.2: a transformer. A closed iron core (surface outline) with the
+# primary coil of N₁ turns on its left leg, joined to an AC source «~» (voltage U₁), and the
+# secondary coil of N₂ turns on its right leg (here half as many), joined to a load (voltage
+# U₂). The alternating flux Φ runs round the core (green arrows) through every turn of both
+# coils; the currents I₁ and I₂ are accent arrows beside the wires.
+# Colours (the «Электродинамика» convention, extended here for alternating current and waves):
+# circuit symbols, wires, coils and frames in the text colour, an iron core a text-colour
+# outline; the current an accent arrow beside a wire. As in 12.x, the electric side is accent
+# and the magnetic side green: the EMF e(t) and voltages on graphs accent, the flux in a
+# transformer's core green; in an electromagnetic wave the vector E accent and B green, the
+# direction of travel c a text-colour arrow. Field lines thin text-colour arrows, a frame's
+# normal n a text-colour arrow (10.4). The scale of waves: bands as surface cells with
+# text-colour borders, visible light the one solid accent cell, axes of ν and λ muted ticks.
+# Graphs use the diagram kind with the Axes helper: curves accent, a curve to compare with
+# (the flux Φ beside e) muted dashed, a mean or effective value a muted dashed line, the
+# energy under a power curve an accent tint. A medium (glass) a surface rect; guides and
+# notes muted.
+kind: diagram
+size:
+- 400
+- 220
+items:
+- path: M130 40H270V190H130ZM150 60V170H250V60Z
+  fill: surface
+  width: 1.6
+- line:
+  - - 124
+    - 72
+  - - 156
+    - 78
+  width: 1.6
+- line:
+  - - 124
+    - 84
+  - - 156
+    - 90
+  width: 1.6
+- line:
+  - - 124
+    - 96
+  - - 156
+    - 102
+  width: 1.6
+- line:
+  - - 124
+    - 108
+  - - 156
+    - 114
+  width: 1.6
+- line:
+  - - 124
+    - 120
+  - - 156
+    - 126
+  width: 1.6
+- line:
+  - - 124
+    - 132
+  - - 156
+    - 138
+  width: 1.6
+- line:
+  - - 124
+    - 144
+  - - 156
+    - 150
+  width: 1.6
+- line:
+  - - 124
+    - 156
+  - - 156
+    - 162
+  width: 1.6
+- line:
+  - - 244
+    - 92
+  - - 276
+    - 98
+  width: 1.6
+- line:
+  - - 244
+    - 104
+  - - 276
+    - 110
+  width: 1.6
+- line:
+  - - 244
+    - 116
+  - - 276
+    - 122
+  width: 1.6
+- line:
+  - - 244
+    - 128
+  - - 276
+    - 134
+  width: 1.6
+- line:
+  - - 124
+    - 72
+  - - 60
+    - 72
+  - - 60
+    - 101
+  width: 1.6
+- line:
+  - - 124
+    - 162
+  - - 60
+    - 162
+  - - 60
+    - 129
+  width: 1.6
+- circle:
+  - 60
+  - 115
+  r: 14
+  width: 1.6
+- text: '~'
+  at:
+  - 60
+  - 121
+  size: 18
+- line:
+  - - 276
+    - 92
+  - - 340
+    - 92
+  - - 340
+    - 101
+  width: 1.6
+- line:
+  - - 276
+    - 142
+  - - 340
+    - 142
+  - - 340
+    - 129
+  width: 1.6
+- element: resistor
+  at:
+  - 340
+  - 115
+  vertical: true
+- arrow:
+  - - 182
+    - 50
+  - - 222
+    - 50
+  tone: vel
+  width: 2
+- arrow:
+  - - 222
+    - 180
+  - - 182
+    - 180
+  tone: vel
+  width: 2
+- text: Φ
+  at:
+  - 202
+  - 32
+  size: 15
+  tone: vel
+- arrow:
+  - - 78
+    - 62
+  - - 108
+    - 62
+  tone: accent
+  width: 1.8
+- text: '*I*_{1}'
+  at:
+  - 93
+  - 54
+  size: 13
+  tone: accent
+- arrow:
+  - - 292
+    - 82
+  - - 322
+    - 82
+  tone: accent
+  width: 1.8
+- text: '*I*_{2}'
+  at:
+  - 307
+  - 74
+  size: 13
+  tone: accent
+- text: '*N*_{1}'
+  at:
+  - 140
+  - 210
+  size: 14
+- text: '*N*_{2}'
+  at:
+  - 260
+  - 210
+  size: 14
+- text: '*U*_{1}'
+  at:
+  - 34
+  - 120
+  size: 14
+  anchor: end
+- text: '*U*_{2}'
+  at:
+  - 362
+  - 120
+  size: 14
+  anchor: start
+- text: первичная
+  at:
+  - 90
+  - 186
+  size: 12
+  anchor: middle
+  tone: muted
+- text: вторичная
+  at:
+  - 310
+  - 166
+  size: 12
+  anchor: middle
+  tone: muted

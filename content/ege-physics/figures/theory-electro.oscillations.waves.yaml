@@ -1,66 +1,278 @@
-# electro.oscillations.waves: scale of electromagnetic waves, radio to gamma
+# electro.oscillations.waves 13.4 (the ladder's figure, redrawn): the scale of electromagnetic
+# waves on a logarithmic frequency axis, 10⁴…10²⁰ Гц (one decade 22,5 px). Bands from c/λ at
+# the usual school boundaries: radio above λ = 1 мм, infrared to 760 нм, visible to 380 нм,
+# ultraviolet to 10 нм, X-rays to 0,01 нм, then gamma; the boundaries are approximate.
+# λ ticks above (1 км … 1 нм), ν ticks below; a long and a short muted wave over the ends.
+# Colours (the «Электродинамика» convention, extended here for alternating current and waves):
+# circuit symbols, wires, coils and frames in the text colour, an iron core a text-colour
+# outline; the current an accent arrow beside a wire. As in 12.x, the electric side is accent
+# and the magnetic side green: the EMF e(t) and voltages on graphs accent, the flux in a
+# transformer's core green; in an electromagnetic wave the vector E accent and B green, the
+# direction of travel c a text-colour arrow. Field lines thin text-colour arrows, a frame's
+# normal n a text-colour arrow (10.4). The scale of waves: bands as surface cells with
+# text-colour borders, visible light the one solid accent cell, axes of ν and λ muted ticks.
+# Graphs use the diagram kind with the Axes helper: curves accent, a curve to compare with
+# (the flux Φ beside e) muted dashed, a mean or effective value a muted dashed line, the
+# energy under a power curve an accent tint. A medium (glass) a surface rect; guides and
+# notes muted.
 kind: diagram
-size: [400, 260]
+size:
+- 400
+- 198
 items:
-- rect: [20, 70, 100, 46]
-  fill: surface
-  tone: muted
-- text: радио
-  at: [70.0, 98]
-  size: 13
-- rect: [120, 70, 60, 46]
-  fill: surface
-  tone: force
-- text: ИК
-  at: [150.0, 98]
-  size: 13
-- rect: [180, 70, 20, 46]
-  fill: surface
-  tone: vel
-- rect: [200, 70, 55, 46]
-  fill: surface
-  tone: accent
-- text: УФ
-  at: [227.5, 98]
-  size: 13
-- rect: [255, 70, 70, 46]
-  fill: surface
-  tone: muted
-- text: рентген
-  at: [290.0, 98]
-  size: 13
-- rect: [325, 70, 55, 46]
-  fill: surface
-  tone: muted
-- text: гамма
-  at: [352.5, 98]
-  size: 13
-- line: [[190, 116], [190, 140]]
-  width: 1
-- text: видимый свет
-  at: [190, 156]
-  size: 13
-- text: красный … фиолетовый
-  at: [190, 174]
-  size: 11
-  tone: muted
-- sine: [30, 40]
-  length: 90
+- sine:
+  - 24
+  - 26
+  length: 120
   amplitude: 10
   periods: 1.5
   tone: muted
   width: 1.5
-- sine: [290, 40]
-  length: 90
+- sine:
+  - 300
+  - 26
+  length: 80
   amplitude: 10
-  periods: 9
+  periods: 10
   tone: muted
-  width: 1.5
-- arrow: [[40, 200], [370, 200]]
-  width: 1.3
+  width: 1.2
+- rect:
+  - 20.0
+  - 70
+  - 168.2
+  - 30
+  fill: surface
+  width: 1
+- text: радиоволны
+  at:
+  - 104.1
+  - 90
+  size: 13
+- rect:
+  - 188.2
+  - 70
+  - 70.2
+  - 30
+  fill: surface
+  width: 1
+- text: ИК
+  at:
+  - 223.3
+  - 90
+  size: 12
+- rect:
+  - 258.4
+  - 70
+  - 6.8
+  - 30
+  fill: solid
+  tone: accent
+  width: 0
+- rect:
+  - 265.2
+  - 70
+  - 35.5
+  - 30
+  fill: surface
+  width: 1
+- text: УФ
+  at:
+  - 282.9
+  - 90
+  size: 12
+- rect:
+  - 300.7
+  - 70
+  - 67.5
+  - 30
+  fill: surface
+  width: 1
+- text: рентген
+  at:
+  - 334.4
+  - 90
+  size: 12
+- rect:
+  - 368.2
+  - 70
+  - 11.8
+  - 30
+  fill: surface
+  width: 1
+- text: γ
+  at:
+  - 374.1
+  - 90
+  size: 12
+- line:
+  - - 53.2
+    - 65
+  - - 53.2
+    - 70
+  width: 1
+  tone: muted
+- text: 1 км
+  at:
+  - 53.2
+  - 60
+  size: 11
+  anchor: middle
+  tone: muted
+- line:
+  - - 120.7
+    - 65
+  - - 120.7
+    - 70
+  width: 1
+  tone: muted
+- text: 1 м
+  at:
+  - 120.7
+  - 60
+  size: 11
+  anchor: middle
+  tone: muted
+- line:
+  - - 188.2
+    - 65
+  - - 188.2
+    - 70
+  width: 1
+  tone: muted
+- text: 1 мм
+  at:
+  - 188.2
+  - 60
+  size: 11
+  anchor: middle
+  tone: muted
+- line:
+  - - 255.7
+    - 65
+  - - 255.7
+    - 70
+  width: 1
+  tone: muted
+- text: 1 мкм
+  at:
+  - 255.7
+  - 60
+  size: 11
+  anchor: middle
+  tone: muted
+- line:
+  - - 323.2
+    - 65
+  - - 323.2
+    - 70
+  width: 1
+  tone: muted
+- text: 1 нм
+  at:
+  - 323.2
+  - 60
+  size: 11
+  anchor: middle
+  tone: muted
+- text: '*λ*'
+  at:
+  - 12
+  - 60
+  size: 13
+  anchor: start
+- line:
+  - - 65.0
+    - 100
+  - - 65.0
+    - 105
+  width: 1
+  tone: muted
+- text: 10^{6}
+  at:
+  - 65.0
+  - 120
+  size: 11
+  anchor: middle
+  tone: muted
+- line:
+  - - 155.0
+    - 100
+  - - 155.0
+    - 105
+  width: 1
+  tone: muted
+- text: 10^{10}
+  at:
+  - 155.0
+  - 120
+  size: 11
+  anchor: middle
+  tone: muted
+- line:
+  - - 245.0
+    - 100
+  - - 245.0
+    - 105
+  width: 1
+  tone: muted
+- text: 10^{14}
+  at:
+  - 245.0
+  - 120
+  size: 11
+  anchor: middle
+  tone: muted
+- line:
+  - - 335.0
+    - 100
+  - - 335.0
+    - 105
+  width: 1
+  tone: muted
+- text: 10^{18}
+  at:
+  - 335.0
+  - 120
+  size: 11
+  anchor: middle
+  tone: muted
+- text: '*ν*, Гц'
+  at:
+  - 12
+  - 120
+  size: 13
+  anchor: start
+- line:
+  - - 261.8
+    - 100
+  - - 261.8
+    - 130
+  width: 1
+  tone: muted
+- text: видимый свет
+  at:
+  - 261.8
+  - 144
+  size: 13
+  anchor: end
+- text: 760–380 нм
+  at:
+  - 267.8
+  - 144
+  size: 12
+  anchor: start
+  tone: muted
+- arrow:
+  - - 40
+    - 172
+  - - 360
+    - 172
+  width: 1.2
+  tone: muted
 - text: частота растёт, длина волны уменьшается
-  at: [205, 222]
+  at:
+  - 200
+  - 190
   size: 13
-- text: '*λ* = *c*/*ν*,  *c* = 3·10^{8} м/с'
-  at: [200, 250]
-  size: 13
+  anchor: middle
+  tone: muted
