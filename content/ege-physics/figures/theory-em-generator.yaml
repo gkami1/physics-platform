@@ -1,0 +1,262 @@
+# electro.oscillations.waves 13.1: a generator's frame turning uniformly in a field (lines to
+# the right), seen edge-on at t = 0, T/4, T/2, 3T/4 and T, its normal n turning with it, as in
+# 10.4. Under it, on one time axis, the flux Φ = BS cos ωt (muted dashed) and the EMF
+# e = ℰ_max sin ωt (accent, drawn with a moving dot): the EMF is largest where the flux passes
+# zero and changes fastest, and zero where the flux is largest. Guides join each frame to its
+# moment.
+# Colours (the «Электродинамика» convention, extended here for alternating current and waves):
+# circuit symbols, wires, coils and frames in the text colour, an iron core a text-colour
+# outline; the current an accent arrow beside a wire. As in 12.x, the electric side is accent
+# and the magnetic side green: the EMF e(t) and voltages on graphs accent, the flux in a
+# transformer's core green; in an electromagnetic wave the vector E accent and B green, the
+# direction of travel c a text-colour arrow. Field lines thin text-colour arrows, a frame's
+# normal n a text-colour arrow (10.4). The scale of waves: bands as surface cells with
+# text-colour borders, visible light the one solid accent cell, axes of ν and λ muted ticks.
+# Graphs use the diagram kind with the Axes helper: curves accent, a curve to compare with
+# (the flux Φ beside e) muted dashed, a mean or effective value a muted dashed line, the
+# energy under a power curve an accent tint. A medium (glass) a surface rect; guides and
+# notes muted.
+kind: diagram
+size:
+- 400
+- 282
+items:
+- arrow:
+  - - 8
+    - 22
+  - - 392
+    - 22
+  width: 1
+- arrow:
+  - - 8
+    - 46
+  - - 392
+    - 46
+  width: 1
+- arrow:
+  - - 8
+    - 70
+  - - 392
+    - 70
+  width: 1
+- text: '*B*'
+  at:
+  - 392
+  - 16
+  size: 14
+  anchor: end
+- line:
+  - - 40.0
+    - 26.0
+  - - 40.0
+    - 66.0
+  width: 3.4
+- arrow:
+  - - 40
+    - 46
+  - - 64.0
+    - 46.0
+  width: 1.4
+- text: '*n*'
+  at:
+  - 62
+  - 62
+  size: 13
+- text: Φ = *BS*
+  at:
+  - 40
+  - 98
+  size: 12
+- line:
+  - - 100.0
+    - 46.0
+  - - 140.0
+    - 46.0
+  width: 3.4
+- arrow:
+  - - 120
+    - 46
+  - - 120.0
+    - 22.0
+  width: 1.4
+- text: Φ = 0
+  at:
+  - 120
+  - 98
+  size: 12
+- line:
+  - - 200.0
+    - 66.0
+  - - 200.0
+    - 26.0
+  width: 3.4
+- arrow:
+  - - 200
+    - 46
+  - - 176.0
+    - 46.0
+  width: 1.4
+- text: Φ = −*BS*
+  at:
+  - 200
+  - 98
+  size: 12
+- line:
+  - - 300.0
+    - 46.0
+  - - 260.0
+    - 46.0
+  width: 3.4
+- arrow:
+  - - 280
+    - 46
+  - - 280.0
+    - 70.0
+  width: 1.4
+- text: Φ = 0
+  at:
+  - 280
+  - 98
+  size: 12
+- line:
+  - - 360.0
+    - 26.0
+  - - 360.0
+    - 66.0
+  width: 3.4
+- arrow:
+  - - 360
+    - 46
+  - - 384.0
+    - 46.0
+  width: 1.4
+- text: Φ = *BS*
+  at:
+  - 360
+  - 98
+  size: 12
+- arrow:
+  - - 40
+    - 196
+  - - 392
+    - 196
+  width: 1.5
+- arrow:
+  - - 40
+    - 256
+  - - 40
+    - 124
+  width: 1.5
+- text: '*t*'
+  at:
+  - 390
+  - 214
+  size: 15
+  anchor: end
+- text: '0'
+  at:
+  - 34
+  - 211
+  size: 12
+  anchor: end
+- line:
+  - - 120.0
+    - 108
+  - - 120.0
+    - 256
+  width: 1
+  dashed: true
+  tone: muted
+- text: '*T*/4'
+  at:
+  - 124.0
+  - 270
+  size: 13
+  anchor: start
+- line:
+  - - 200.0
+    - 108
+  - - 200.0
+    - 256
+  width: 1
+  dashed: true
+  tone: muted
+- text: '*T*/2'
+  at:
+  - 204.0
+  - 270
+  size: 13
+  anchor: start
+- line:
+  - - 280.0
+    - 108
+  - - 280.0
+    - 256
+  width: 1
+  dashed: true
+  tone: muted
+- text: 3*T*/4
+  at:
+  - 284.0
+  - 270
+  size: 13
+  anchor: start
+- line:
+  - - 360.0
+    - 108
+  - - 360.0
+    - 256
+  width: 1
+  dashed: true
+  tone: muted
+- text: '*T*'
+  at:
+  - 364.0
+  - 270
+  size: 13
+  anchor: start
+- path: M40 140L43.2 140.1L46.4 140.4L49.6 141L52.8 141.8L56 142.7L59.2 143.9L62.4 145.3L65.6 146.9L68.8
+    148.7L72 150.7L75.2 152.9L78.4 155.2L81.6 157.7L84.8 160.3L88 163.1L91.2 166L94.4 169L97.6 172.2L100.8
+    175.4L104 178.7L107.2 182.1L110.4 185.5L113.6 189L116.8 192.5L120 196L123.2 199.5L126.4 203L129.6
+    206.5L132.8 209.9L136 213.3L139.2 216.6L142.4 219.8L145.6 223L148.8 226L152 228.9L155.2 231.7L158.4
+    234.3L161.6 236.8L164.8 239.1L168 241.3L171.2 243.3L174.4 245.1L177.6 246.7L180.8 248.1L184 249.3L187.2
+    250.2L190.4 251L193.6 251.6L196.8 251.9L200 252L203.2 251.9L206.4 251.6L209.6 251L212.8 250.2L216
+    249.3L219.2 248.1L222.4 246.7L225.6 245.1L228.8 243.3L232 241.3L235.2 239.1L238.4 236.8L241.6 234.3L244.8
+    231.7L248 228.9L251.2 226L254.4 223L257.6 219.8L260.8 216.6L264 213.3L267.2 209.9L270.4 206.5L273.6
+    203L276.8 199.5L280 196L283.2 192.5L286.4 189L289.6 185.5L292.8 182.1L296 178.7L299.2 175.4L302.4
+    172.2L305.6 169L308.8 166L312 163.1L315.2 160.3L318.4 157.7L321.6 155.2L324.8 152.9L328 150.7L331.2
+    148.7L334.4 146.9L337.6 145.3L340.8 143.9L344 142.7L347.2 141.8L350.4 141L353.6 140.4L356.8 140.1L360
+    140
+  width: 1.8
+  dashed: true
+  tone: muted
+- path: M40 196L43.2 192.5L46.4 189L49.6 185.5L52.8 182.1L56 178.7L59.2 175.4L62.4 172.2L65.6 169L68.8
+    166L72 163.1L75.2 160.3L78.4 157.7L81.6 155.2L84.8 152.9L88 150.7L91.2 148.7L94.4 146.9L97.6 145.3L100.8
+    143.9L104 142.7L107.2 141.8L110.4 141L113.6 140.4L116.8 140.1L120 140L123.2 140.1L126.4 140.4L129.6
+    141L132.8 141.8L136 142.7L139.2 143.9L142.4 145.3L145.6 146.9L148.8 148.7L152 150.7L155.2 152.9L158.4
+    155.2L161.6 157.7L164.8 160.3L168 163.1L171.2 166L174.4 169L177.6 172.2L180.8 175.4L184 178.7L187.2
+    182.1L190.4 185.5L193.6 189L196.8 192.5L200 196L203.2 199.5L206.4 203L209.6 206.5L212.8 209.9L216
+    213.3L219.2 216.6L222.4 219.8L225.6 223L228.8 226L232 228.9L235.2 231.7L238.4 234.3L241.6 236.8L244.8
+    239.1L248 241.3L251.2 243.3L254.4 245.1L257.6 246.7L260.8 248.1L264 249.3L267.2 250.2L270.4 251L273.6
+    251.6L276.8 251.9L280 252L283.2 251.9L286.4 251.6L289.6 251L292.8 250.2L296 249.3L299.2 248.1L302.4
+    246.7L305.6 245.1L308.8 243.3L312 241.3L315.2 239.1L318.4 236.8L321.6 234.3L324.8 231.7L328 228.9L331.2
+    226L334.4 223L337.6 219.8L340.8 216.6L344 213.3L347.2 209.9L350.4 206.5L353.6 203L356.8 199.5L360
+    196
+  width: 2.4
+  tone: accent
+  animate: draw
+  mover: true
+- text: Φ
+  at:
+  - 48
+  - 134
+  size: 15
+  anchor: start
+  tone: muted
+- text: '*e*'
+  at:
+  - 128.0
+  - 134
+  size: 15
+  anchor: start
+  tone: accent
