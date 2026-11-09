@@ -1,29 +1,100 @@
-# electro.induction.self: self-induction slows the growth of the current
-kind: graph
-x:
-  var: t
-  min: 0
-  max: 8
-  step: 1
-  numbers: false
-y:
-  var: I
-  min: 0
-  max: 5
-  step: 1
-  numbers: false
-series:
-- points: [[0, 0], [0, 4], [8, 4]]
+# electro.induction.self 11.4 (the ladder's figure, redrawn): the current after the key is
+# closed and, later, opened. Without a coil (muted dashed) it jumps up and down at once;
+# with a coil (accent, drawn with a moving dot) it grows smoothly and falls smoothly.
+# Colours (the «Электродинамика» convention with the magnetism extension of 8.x–10.x):
+# circuit symbols and wires in the text colour, an iron core a text-colour line along the
+# coil; a lit lamp an accent-tint halo behind its symbol (fading in when it lights late);
+# the coil's own field B an accent arrow, the induced field B_инд an accent dashed arrow;
+# the current I an accent arrow or accent arrowheads on the turns, the EMF of self-induction
+# ℰ_si an accent dashed arrow beside it (along or against the current). Graphs use the
+# diagram kind with the Axes helper: curves accent, a curve to compare with muted dashed,
+# the energy under a line an accent tint. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 206
+items:
+- arrow:
+  - - 46
+    - 172
+  - - 386
+    - 172
+  width: 1.5
+- arrow:
+  - - 46
+    - 172
+  - - 46
+    - 16
+  width: 1.5
+- text: '*t*'
+  at:
+  - 384
+  - 190
+  anchor: end
+  size: 15
+- text: '*I*'
+  at:
+  - 56
+  - 26
+  anchor: start
+  size: 15
+- text: '0'
+  at:
+  - 40
+  - 187
+  size: 12
+  anchor: end
+- path: M46 172L46 52L246 52L246 172L374 172
+  width: 1.6
   dashed: true
   tone: muted
-- points: [[0.0, 0.0], [0.2, 0.61], [0.4, 1.13], [0.6, 1.57], [0.8, 1.95], [1.0, 2.26], [1.2, 2.53], [
-      1.4, 2.75], [1.6, 2.95], [1.8, 3.11], [2.0, 3.24], [2.2, 3.36], [2.4, 3.46], [2.6, 3.54], [2.8,
-      3.61], [3.0, 3.67], [3.2, 3.72], [3.4, 3.76], [3.6, 3.8], [3.8, 3.83], [4.0, 3.86], [4.2, 3.88],
-    [4.4, 3.9], [4.6, 3.91], [4.8, 3.93], [5.0, 3.94], [5.2, 3.95], [5.4, 3.96], [5.6, 3.96], [5.8, 3.97],
-    [6.0, 3.97], [6.2, 3.98], [6.4, 3.98], [6.6, 3.98], [6.8, 3.99], [7.0, 3.99], [7.2, 3.99], [7.4, 3.99],
-    [7.6, 3.99], [7.8, 3.99], [8.0, 3.99]]
-notes:
-- at: [0.25, 4.3]
-  text: без катушки
-- at: [2.2, 2.2]
-  text: 'с катушкой: ток растёт постепенно'
+- path: M46 172L50 157.9L54 145.5L58 134.5L62 124.8L66 116.2L70 108.7L74 102L78 96.1L82 91L86 86.4L90
+    82.3L94 78.8L98 75.6L102 72.9L106 70.4L110 68.2L114 66.3L118 64.6L122 63.2L126 61.9L130 60.7L134 59.7L138
+    58.8L142 58L146 57.3L150 56.7L154 56.1L158 55.6L162 55.2L166 54.8L170 54.5L174 54.2L178 53.9L182 53.7L186
+    53.5L190 53.3L194 53.2L198 53L202 52.9L206 52.8L210 52.7L214 52.6L218 52.6L222 52.5L226 52.4L230 52.4L234
+    52.3L238 52.3L242 52.3L246 52.2L250 73.9L254 91.7L258 106.3L262 118.2L266 127.9L270 135.9L274 142.5L278
+    147.8L282 152.2L286 155.8L290 158.7L294 161.1L298 163.1L302 164.7L306 166L310 167.1L314 168L318 168.7L322
+    169.3L326 169.8L330 170.2L334 170.5L338 170.8L342 171L346 171.2L350 171.3L354 171.5L358 171.6L362
+    171.6L366 171.7L370 171.8L374 171.8
+  width: 2.4
+  tone: accent
+  animate: draw
+  mover: true
+- text: без катушки
+  at:
+  - 146.0
+  - 44
+  size: 13
+  tone: muted
+- text: с катушкой
+  at:
+  - 118.0
+  - 104.0
+  size: 13
+  anchor: start
+  tone: muted
+- line:
+  - - 46
+    - 172
+  - - 46
+    - 178
+  width: 1.2
+- text: ключ замкнули
+  at:
+  - 46
+  - 196
+  size: 13
+  anchor: start
+  tone: muted
+- line:
+  - - 246
+    - 172
+  - - 246
+    - 178
+  width: 1.2
+- text: ключ разомкнули
+  at:
+  - 246
+  - 196
+  size: 13
+  tone: muted

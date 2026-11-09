@@ -1,0 +1,86 @@
+# ks-self-11: a source ℰ, r and a key K on top; a resistor R and a coil L in parallel.
+kind: diagram
+size:
+- 400
+- 230
+items:
+- line:
+  - - 40
+    - 44
+  - - 110
+    - 44
+  width: 1.6
+- line:
+  - - 150
+    - 44
+  - - 250
+    - 44
+  width: 1.6
+- line:
+  - - 290
+    - 44
+  - - 360
+    - 44
+  width: 1.6
+- element: battery
+  at:
+  - 130
+  - 44
+  label: ℰ, *r*
+- element: switch
+  at:
+  - 270
+  - 44
+  label: К
+- line:
+  - - 40
+    - 44
+  - - 40
+    - 206
+  width: 1.6
+- line:
+  - - 360
+    - 44
+  - - 360
+    - 206
+  width: 1.6
+- line:
+  - - 40
+    - 130
+  - - 180
+    - 130
+  width: 1.6
+- line:
+  - - 220
+    - 130
+  - - 360
+    - 130
+  width: 1.6
+- line:
+  - - 40
+    - 206
+  - - 180
+    - 206
+  width: 1.6
+- line:
+  - - 220
+    - 206
+  - - 360
+    - 206
+  width: 1.6
+- element: resistor
+  at:
+  - 200
+  - 130
+  label: '*R*'
+- element: coil
+  at:
+  - 200
+  - 206
+  label: '*L*'
+- dots:
+  - - 40
+    - 130
+  - - 360
+    - 130
+  r: 3

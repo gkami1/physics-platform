@@ -33,6 +33,9 @@ from content_schema.models import (
 
 # "\frac" in double-quoted YAML becomes a form feed, "\theta" a tab, "\nu" a newline.
 YAML_EATEN_BACKSLASH = re.compile(r"[\x00-\x1f]")
+# In Markdown bodies the same slip comes from writing content with a script: "\text" in a
+# Python string is a tab and "ext". Newlines are the only control character a body may hold.
+BODY_CONTROL = re.compile(r"[\x00-\x09\x0b-\x1f]")
 IMAGE_REF = r"!\[[^\]]*\]\(([^)\s]+)"
 
 
@@ -118,6 +121,15 @@ def _md_files(d: Path) -> list[Path]:
 LOADER_FIELDS = {"kind", "lesson", "order"}  # derived from the file's place, not written
 
 
+def _check_body(rel: str, body: str, res: LoadResult) -> None:
+    for n, line in enumerate(body.splitlines(), start=1):
+        if m := BODY_CONTROL.search(line):
+            res.errors.append(
+                f"{rel}: body line {n} contains control character {ord(m[0]):#04x} — a LaTeX "
+                "backslash was probably eaten by a string escape in a script (\\t, \\f, \\b)"
+            )
+
+
 def _load_theory(path: Path, root: Path, res: LoadResult) -> TheoryPage | None:
     """`theory/<topic>.md` is a whole-topic page; `theory/<topic>/_topic.md` and
     `theory/<topic>/NN-slug.md` are a topic split into lessons."""
@@ -147,6 +159,7 @@ def _load_theory(path: Path, root: Path, res: LoadResult) -> TheoryPage | None:
             res.errors.append(f"{rel}: {', '.join(sorted(own))} come from the file name")
             return None
         page = TheoryPage.model_validate({**meta, "body": body, "path": rel, **derived})
+        _check_body(rel, body, res)
     except (FrontmatterError, yaml.YAMLError) as e:
         res.errors.append(f"{rel}: {e}")
         return None
@@ -178,6 +191,7 @@ def _load_task(path: Path, root: Path, res: LoadResult) -> Task | None:
                 "was probably eaten by YAML double quotes; use single quotes for LaTeX"
             )
 
+    _check_body(rel, body, res)
     if path.stem != meta.id:
         res.errors.append(f"{rel}: file name must equal task id '{meta.id}'")
     folder = STEPS_DIR if meta.ege_task is None else str(meta.ege_task)

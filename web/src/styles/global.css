@@ -3575,3 +3575,155 @@ task-answer .final {
   color: var(--accent);
   font-weight: 600;
 }
+
+/* <pp-lamps> (src/lib/sims/lamps.ts): the two-lamp experiment of self-induction. Circuit
+   symbols and wires in the text colour, a lit lamp a warm glow (opacity ∝ I²), the currents
+   accent arrows; on the graph I₁ in the text colour and I₂ (the coil's) accent. */
+.lmp-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin: 0 0 0.5rem;
+}
+
+.lmp-key {
+  min-width: 10.5rem;
+}
+
+.lmp-chips {
+  margin: 0;
+}
+
+.lmp-chips legend {
+  width: 6.4rem;
+  margin-right: 0.2rem;
+}
+
+.lmp-chips span {
+  padding: 0.25rem 0.7rem;
+}
+
+.pfx-chips.lmp-chips input:checked + span {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.lmp-wire,
+.lmp-axis {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.6;
+}
+
+.lmp-axis {
+  stroke-width: 1.4;
+}
+
+.lmp-axis-head,
+.lmp-node {
+  fill: var(--text);
+}
+
+.lmp-plate {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 4;
+}
+
+.lmp-core {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 2;
+}
+
+.lmp-bulb,
+.lmp-resistor {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.6;
+}
+
+.lmp-glow {
+  fill: var(--warn);
+}
+
+.lmp-i,
+.lmp-c2 {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.lmp-c2 {
+  stroke-width: 2.4;
+}
+
+.lmp-c1 {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.8;
+}
+
+.lmp-i-head,
+.lmp-d2 {
+  fill: var(--accent);
+}
+
+.lmp-d1 {
+  fill: var(--text);
+}
+
+.lmp-grid {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.sim-svg .lmp-tick {
+  fill: var(--muted);
+  font-size: 12px;
+}
+
+.sim-svg .lmp-label {
+  fill: var(--text);
+  font-size: 15px;
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.sim-svg .lmp-il {
+  fill: var(--accent);
+}
+
+.lmp-table {
+  width: 100%;
+  margin: 0.75rem 0 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.lmp-table th,
+.lmp-table td {
+  padding: 0.2rem 0.35rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+.lmp-table th {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.lmp-table td {
+  white-space: nowrap;
+}
+
+.lmp-table tr.lmp-fixed td {
+  color: var(--accent);
+  font-weight: 600;
+}

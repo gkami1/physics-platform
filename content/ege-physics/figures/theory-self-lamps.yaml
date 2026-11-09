@@ -1,0 +1,167 @@
+# electro.induction.self 11.1: the two-lamp experiment. A battery and a closed key on top;
+# two parallel branches: lamp 1 with a resistor R, lamp 2 with a coil L on an iron core.
+# Lamp 1's halo is there at once, lamp 2's fades in later (animate: appear).
+# Colours (the «Электродинамика» convention with the magnetism extension of 8.x–10.x):
+# circuit symbols and wires in the text colour, an iron core a text-colour line along the
+# coil; a lit lamp an accent-tint halo behind its symbol (fading in when it lights late);
+# the coil's own field B an accent arrow, the induced field B_инд an accent dashed arrow;
+# the current I an accent arrow or accent arrowheads on the turns, the EMF of self-induction
+# ℰ_si an accent dashed arrow beside it (along or against the current). Graphs use the
+# diagram kind with the Axes helper: curves accent, a curve to compare with muted dashed,
+# the energy under a line an accent tint. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 258
+items:
+- circle:
+  - 140
+  - 130
+  r: 19
+  fill: accent
+  tone: accent
+  width: 0
+- circle:
+  - 140
+  - 210
+  r: 19
+  fill: accent
+  tone: accent
+  width: 0
+  animate: appear
+- line:
+  - - 40
+    - 44
+  - - 110
+    - 44
+  width: 1.6
+- line:
+  - - 150
+    - 44
+  - - 250
+    - 44
+  width: 1.6
+- line:
+  - - 290
+    - 44
+  - - 360
+    - 44
+  width: 1.6
+- element: battery
+  at:
+  - 130
+  - 44
+- line:
+  - - 250
+    - 44
+  - - 260
+    - 44
+  - - 280
+    - 42.5
+  - - 290
+    - 44
+  width: 1.6
+- dots:
+  - - 260
+    - 44
+  - - 280
+    - 44
+  r: 2
+- line:
+  - - 40
+    - 44
+  - - 40
+    - 210
+  width: 1.6
+- line:
+  - - 360
+    - 44
+  - - 360
+    - 210
+  width: 1.6
+- line:
+  - - 40
+    - 130
+  - - 120
+    - 130
+  width: 1.6
+- line:
+  - - 160
+    - 130
+  - - 240
+    - 130
+  width: 1.6
+- line:
+  - - 280
+    - 130
+  - - 360
+    - 130
+  width: 1.6
+- line:
+  - - 40
+    - 210
+  - - 120
+    - 210
+  width: 1.6
+- line:
+  - - 160
+    - 210
+  - - 240
+    - 210
+  width: 1.6
+- line:
+  - - 280
+    - 210
+  - - 360
+    - 210
+  width: 1.6
+- element: lamp
+  at:
+  - 140
+  - 130
+  label: '1'
+- element: resistor
+  at:
+  - 260
+  - 130
+  label: '*R*'
+- element: lamp
+  at:
+  - 140
+  - 210
+  label: '2'
+- element: coil
+  at:
+  - 260
+  - 210
+  label: '*L*'
+- line:
+  - - 240
+    - 201
+  - - 280
+    - 201
+  width: 2
+- dots:
+  - - 40
+    - 130
+  - - 360
+    - 130
+  r: 3
+- text: загорается сразу
+  at:
+  - 140
+  - 162
+  size: 13
+  tone: muted
+- text: разгорается с задержкой
+  at:
+  - 140
+  - 242
+  size: 13
+  tone: muted
+- text: ключ замкнули
+  at:
+  - 270
+  - 70
+  size: 13
+  tone: muted
