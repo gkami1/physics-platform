@@ -1,0 +1,134 @@
+# electro.optics.refraction 14.7: a light guide. Light enters the end of a glass fibre (a surface
+# strip) and meets its walls at angles larger than the critical one: each time it is totally
+# reflected, so it runs along the fibre without leaving it.
+# Colours (the «Электродинамика» convention, extended here for optics): a light ray is an accent
+# line with an arrowhead in its middle; the incident and refracted rays solid, a weak partial
+# reflection a thinner accent dashed ray, a full reflection (a mirror, total internal reflection)
+# solid. The normal to a surface a muted dashed line; angles text-colour arcs, always from the
+# normal (α incidence, β reflection, γ refraction). A denser medium (water, glass) a surface
+# fill with a text-colour boundary, air none; a mirror a text-colour line hatched on its back.
+# Objects and the eye in the text colour; an image (virtual) and the continuations of rays
+# behind a mirror or a surface muted dashed. A shadow two layers of a muted tint, a penumbra
+# one. Wavefronts thin accent lines across the rays. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 116
+items:
+- rect:
+  - 60
+  - 40
+  - 330
+  - 44
+  fill: surface
+  width: 0
+  tone: muted
+- line:
+  - - 60
+    - 40
+  - - 390
+    - 40
+  width: 1.4
+- line:
+  - - 60
+    - 84
+  - - 390
+    - 84
+  width: 1.4
+- line:
+  - - 60
+    - 40
+  - - 60
+    - 84
+  width: 1.4
+- line:
+  - - 14
+    - 74
+  - - 60
+    - 66
+  width: 1.8
+  tone: accent
+- path: M41.7 69.2L34.5 74.1L33.2 67Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 60
+    - 66
+  - - 96.6
+    - 40
+  width: 1.8
+  tone: accent
+- path: M82.2 50.2L77.8 57.8L73.6 51.9Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 96.6
+    - 40
+  - - 158.6
+    - 84
+  width: 1.8
+  tone: accent
+- path: M131.6 64.8L122.9 63.1L127.1 57.2Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 158.6
+    - 84
+  - - 220.6
+    - 40
+  width: 1.8
+  tone: accent
+- path: M193.6 59.2L189.1 66.8L184.9 60.9Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 220.6
+    - 40
+  - - 282.6
+    - 84
+  width: 1.8
+  tone: accent
+- path: M255.6 64.8L246.9 63.1L251.1 57.2Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 282.6
+    - 84
+  - - 344.6
+    - 40
+  width: 1.8
+  tone: accent
+- path: M317.6 59.2L313.1 66.8L308.9 60.9Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 344.6
+    - 40
+  - - 386
+    - 69.4
+  width: 1.8
+  tone: accent
+- path: M369.2 57.5L360.6 55.8L364.8 49.9Z
+  fill: solid
+  tone: accent
+  width: 0
+- text: световод
+  at:
+  - 225
+  - 106
+  size: 13
+  anchor: middle
+  tone: muted
+- text: воздух
+  at:
+  - 14
+  - 32
+  size: 13
+  anchor: start
+  tone: muted

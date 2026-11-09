@@ -1,44 +1,123 @@
-# electro.optics.refraction: incident, reflected and refracted rays; angles from the normal
+# electro.optics.refraction 14.4: a ray at the boundary of air and water (the ladder's figure,
+# redrawn to the optics convention). The incident ray at α = 50° from the normal; most of the
+# light goes into the water as the refracted ray, at γ ≈ 35° (n = 1,33), closer to the normal;
+# a little is reflected (thin dashed accent).
+# Colours (the «Электродинамика» convention, extended here for optics): a light ray is an accent
+# line with an arrowhead in its middle; the incident and refracted rays solid, a weak partial
+# reflection a thinner accent dashed ray, a full reflection (a mirror, total internal reflection)
+# solid. The normal to a surface a muted dashed line; angles text-colour arcs, always from the
+# normal (α incidence, β reflection, γ refraction). A denser medium (water, glass) a surface
+# fill with a text-colour boundary, air none; a mirror a text-colour line hatched on its back.
+# Objects and the eye in the text colour; an image (virtual) and the continuations of rays
+# behind a mirror or a surface muted dashed. A shadow two layers of a muted tint, a penumbra
+# one. Wavefronts thin accent lines across the rays. Guides and notes muted.
 kind: diagram
-size: [400, 250]
+size:
+- 400
+- 240
 items:
-- rect: [10, 120, 380, 120]
-  fill: accent
+- rect:
+  - 10
+  - 120
+  - 380
+  - 118
+  fill: surface
   width: 0
-- line: [[10, 120], [390, 120]]
-  tone: accent
-- line: [[200, 15], [200, 235]]
-  dashed: true
-  width: 1
   tone: muted
-- arrow: [[111.9, 46.08], [200, 120]]
-  tone: force
-  width: 2.2
-- arrow: [[200, 120], [288.1, 46.08]]
-  tone: force
-  width: 1.5
+- line:
+  - - 10
+    - 120
+  - - 390
+    - 120
+  width: 1.4
+- line:
+  - - 200
+    - 12
+  - - 200
+    - 236
+  width: 1
   dashed: true
-- arrow: [[200, 120], [266.24, 214.01]]
-  tone: force
+  tone: muted
+- line:
+  - - 92.8
+    - 30.0
+  - - 200
+    - 120
   width: 2.2
-- angle: [200, 120]
+  tone: accent
+- path: M151 78.9L140.4 75.9L146.2 69Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 200
+    - 120
+  - - 291.9
+    - 42.9
+  width: 1.3
+  tone: accent
+  dashed: true
+- path: M258.8 70.6L255 78.5L250.4 73Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 200
+    - 120
+  - - 272.0
+    - 222.2
+  width: 2.2
+  tone: accent
+- path: M239.5 176L230 170.4L237.4 165.2Z
+  fill: solid
+  tone: accent
+  width: 0
+- angle:
+  - 200
+  - 120
   start: 90
   end: 140
-  r: 40
+  r: 42
   label: '*α*'
-- angle: [200, 120]
+- angle:
+  - 200
+  - 120
   start: 270
-  end: 305.17
-  r: 40
+  end: 305.16781910065805
+  r: 42
   label: '*γ*'
 - text: воздух
-  at: [50, 105]
+  at:
+  - 24
+  - 104
   size: 13
+  anchor: start
   tone: muted
 - text: вода
-  at: [50, 145]
+  at:
+  - 24
+  - 142
   size: 13
+  anchor: start
   tone: muted
-- text: '*n*_1 sin *α* = *n*_2 sin *γ*'
-  at: [310, 175]
+- text: падающий
+  at:
+  - 102.8
+  - 22.0
   size: 13
+  anchor: start
+  tone: muted
+- text: отражённый
+  at:
+  - 283.9
+  - 34.9
+  size: 13
+  anchor: end
+  tone: muted
+- text: преломлённый
+  at:
+  - 280.0
+  - 216.2
+  size: 13
+  anchor: start
+  tone: muted
