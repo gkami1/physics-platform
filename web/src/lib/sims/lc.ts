@@ -87,7 +87,7 @@ const f1 = (v: number): string => v.toFixed(1);
 /** The circuit: the capacitor at cx, the coil at lx, wires at yt and yb, elements centred at cy;
  * the bars from bx, standing on by, bh px for the whole energy; the graph: t = 0 at gx, T_END
  * at gx + gw, zero at gy, an amplitude gk px. */
-const S = { w: 400, h: 330, cx: 64, lx: 196, yt: 34, yb: 146, cy: 90, bx: 262, by: 140, bh: 96, gx: 40, gy: 252, gw: 320, gk: 50 };
+const S = { w: 400, h: 330, cx: 64, lx: 196, yt: 34, yb: 146, cy: 90, bx: 262, by: 140, bh: 96, gx: 40, gy: 252, gw: 296, gk: 50 };
 
 class LcSim extends HTMLElement {
   private lmh: number = L_MH.start;
@@ -235,7 +235,8 @@ class LcSim extends HTMLElement {
     cancelAnimationFrame(this.frame);
     this.last = performance.now();
     const tick = (now: number) => {
-      const dt = Math.min((now - this.last) / 1000, 0.1); // a hidden tab must not jump
+      // a hidden tab must not jump; the first frame may be stamped before start()
+      const dt = Math.max(0, Math.min((now - this.last) / 1000, 0.1));
       this.last = now;
       this.t += dt / SLOW;
       if (this.t >= T_END) this.t = 0;
@@ -353,7 +354,7 @@ class LcSim extends HTMLElement {
     const X = (t: number) => gx + (t / T_END) * gw;
     out.push(...this.arrow(gx, gy, gx + gw + 22, gy, 'lcm-axis', 'lcm-axis-head'));
     out.push(...this.arrow(gx, gy + gk + 10, gx, gy - gk - 18, 'lcm-axis', 'lcm-axis-head'));
-    const tl = this.label(gx + gw + 18, gy + 18, 't', '', '', 'end');
+    const tl = this.label(gx + gw + 10, gy + 18, 't', '', '', 'start');
     tl.append(el('tspan', {}, ', мс'));
     out.push(tl);
     out.push(this.label(gx + 10, gy - gk - 8, 'q', '', 'lcm-lc', 'start'));
