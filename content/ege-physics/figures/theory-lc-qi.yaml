@@ -1,0 +1,144 @@
+# electro.oscillations.lc 12.3: the charge q(t) = q_max cos ωt (accent, drawn with a moving dot)
+# and the current I(t) (green) over 1¼ periods, each scaled to its own amplitude. Muted dashed
+# guides at T/4, T/2, 3T/4 and T: where q passes zero the current is largest, and the other way.
+# Colours (the «Электродинамика» convention, extended here for the LC circuit): circuit
+# symbols and wires in the text colour, the plates' «+» and «−» in the text colour as in 4.x;
+# the current an accent arrow beside a wire. The electric side is accent and the magnetic
+# side green, as potential and kinetic energy in mechanics 13.7: the capacitor's energy W_C
+# (bars, curves, the tint between its plates) and its charge q(t) accent; the coil's energy
+# W_L (bars, curves, the tint around its turns) and the current I(t) on graphs green. Graphs
+# use the diagram kind with the Axes helper; a sum or a comparison muted dashed, guides muted.
+kind: diagram
+size:
+- 400
+- 216
+items:
+- arrow:
+  - - 40
+    - 116
+  - - 392
+    - 116
+  width: 1.5
+- arrow:
+  - - 40
+    - 196
+  - - 40
+    - 26
+  width: 1.5
+- text: '*t*'
+  at:
+  - 388
+  - 134
+  size: 15
+  anchor: end
+- text: '0'
+  at:
+  - 34
+  - 131
+  size: 12
+  anchor: end
+- path: M40 116L42.6 112.1L45.2 108.2L47.8 104.4L50.4 100.6L53 96.8L55.6 93.2L58.2 89.6L60.8 86.1L63.4
+    82.8L66 79.6L68.6 76.5L71.2 73.6L73.8 70.8L76.4 68.2L79 65.8L81.6 63.7L84.2 61.7L86.8 59.9L89.4 58.4L92
+    57L94.6 55.9L97.2 55.1L99.8 54.5L102.4 54.1L105 54L107.6 54.1L110.2 54.5L112.8 55.1L115.4 55.9L118
+    57L120.6 58.4L123.2 59.9L125.8 61.7L128.4 63.7L131 65.8L133.6 68.2L136.2 70.8L138.8 73.6L141.4 76.5L144
+    79.6L146.6 82.8L149.2 86.1L151.8 89.6L154.4 93.2L157 96.8L159.6 100.6L162.2 104.4L164.8 108.2L167.4
+    112.1L170 116L172.6 119.9L175.2 123.8L177.8 127.6L180.4 131.4L183 135.2L185.6 138.8L188.2 142.4L190.8
+    145.9L193.4 149.2L196 152.4L198.6 155.5L201.2 158.4L203.8 161.2L206.4 163.8L209 166.2L211.6 168.3L214.2
+    170.3L216.8 172.1L219.4 173.6L222 175L224.6 176.1L227.2 176.9L229.8 177.5L232.4 177.9L235 178L237.6
+    177.9L240.2 177.5L242.8 176.9L245.4 176.1L248 175L250.6 173.6L253.2 172.1L255.8 170.3L258.4 168.3L261
+    166.2L263.6 163.8L266.2 161.2L268.8 158.4L271.4 155.5L274 152.4L276.6 149.2L279.2 145.9L281.8 142.4L284.4
+    138.8L287 135.2L289.6 131.4L292.2 127.6L294.8 123.8L297.4 119.9L300 116L302.6 112.1L305.2 108.2L307.8
+    104.4L310.4 100.6L313 96.8L315.6 93.2L318.2 89.6L320.8 86.1L323.4 82.8L326 79.6L328.6 76.5L331.2 73.6L333.8
+    70.8L336.4 68.2L339 65.8L341.6 63.7L344.2 61.7L346.8 59.9L349.4 58.4L352 57L354.6 55.9L357.2 55.1L359.8
+    54.5L362.4 54.1L365 54
+  width: 2.2
+  tone: vel
+  animate: draw
+- path: M40 54L42.6 54.1L45.2 54.5L47.8 55.1L50.4 55.9L53 57L55.6 58.4L58.2 59.9L60.8 61.7L63.4 63.7L66
+    65.8L68.6 68.2L71.2 70.8L73.8 73.6L76.4 76.5L79 79.6L81.6 82.8L84.2 86.1L86.8 89.6L89.4 93.2L92 96.8L94.6
+    100.6L97.2 104.4L99.8 108.2L102.4 112.1L105 116L107.6 119.9L110.2 123.8L112.8 127.6L115.4 131.4L118
+    135.2L120.6 138.8L123.2 142.4L125.8 145.9L128.4 149.2L131 152.4L133.6 155.5L136.2 158.4L138.8 161.2L141.4
+    163.8L144 166.2L146.6 168.3L149.2 170.3L151.8 172.1L154.4 173.6L157 175L159.6 176.1L162.2 176.9L164.8
+    177.5L167.4 177.9L170 178L172.6 177.9L175.2 177.5L177.8 176.9L180.4 176.1L183 175L185.6 173.6L188.2
+    172.1L190.8 170.3L193.4 168.3L196 166.2L198.6 163.8L201.2 161.2L203.8 158.4L206.4 155.5L209 152.4L211.6
+    149.2L214.2 145.9L216.8 142.4L219.4 138.8L222 135.2L224.6 131.4L227.2 127.6L229.8 123.8L232.4 119.9L235
+    116L237.6 112.1L240.2 108.2L242.8 104.4L245.4 100.6L248 96.8L250.6 93.2L253.2 89.6L255.8 86.1L258.4
+    82.8L261 79.6L263.6 76.5L266.2 73.6L268.8 70.8L271.4 68.2L274 65.8L276.6 63.7L279.2 61.7L281.8 59.9L284.4
+    58.4L287 57L289.6 55.9L292.2 55.1L294.8 54.5L297.4 54.1L300 54L302.6 54.1L305.2 54.5L307.8 55.1L310.4
+    55.9L313 57L315.6 58.4L318.2 59.9L320.8 61.7L323.4 63.7L326 65.8L328.6 68.2L331.2 70.8L333.8 73.6L336.4
+    76.5L339 79.6L341.6 82.8L344.2 86.1L346.8 89.6L349.4 93.2L352 96.8L354.6 100.6L357.2 104.4L359.8 108.2L362.4
+    112.1L365 116
+  width: 2.4
+  tone: accent
+  animate: draw
+  mover: true
+- line:
+  - - 105.0
+    - 50
+  - - 105.0
+    - 182
+  width: 1
+  dashed: true
+  tone: muted
+- text: '*T*/4'
+  at:
+  - 109.0
+  - 196
+  size: 13
+  anchor: start
+- line:
+  - - 170.0
+    - 50
+  - - 170.0
+    - 182
+  width: 1
+  dashed: true
+  tone: muted
+- text: '*T*/2'
+  at:
+  - 174.0
+  - 196
+  size: 13
+  anchor: start
+- line:
+  - - 235.0
+    - 50
+  - - 235.0
+    - 182
+  width: 1
+  dashed: true
+  tone: muted
+- text: 3*T*/4
+  at:
+  - 239.0
+  - 196
+  size: 13
+  anchor: start
+- line:
+  - - 300
+    - 50
+  - - 300
+    - 182
+  width: 1
+  dashed: true
+  tone: muted
+- text: '*T*'
+  at:
+  - 304
+  - 196
+  size: 13
+  anchor: start
+- text: '*q*'
+  at:
+  - 51.8
+  - 46
+  size: 15
+  anchor: start
+  tone: accent
+- text: '*I*'
+  at:
+  - 120.6
+  - 46
+  size: 15
+  anchor: start
+  tone: vel

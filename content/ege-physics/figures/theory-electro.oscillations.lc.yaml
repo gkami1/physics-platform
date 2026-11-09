@@ -1,36 +1,421 @@
-# electro.oscillations.lc: capacitor discharges through the coil; energy goes back and forth
+# electro.oscillations.lc 12.1 (the ladder's figure, redrawn): one period in four snapshots.
+# t = 0: the capacitor charged (upper plate «+»), no current, all the energy in its field.
+# T/4: discharged, the current largest (to the right along the top wire), all the energy in
+# the coil's field. T/2: recharged the other way, no current. 3T/4: discharged, the current
+# largest the other way. Each panel has two bars, W_C and W_L, of the same total.
+# Colours (the «Электродинамика» convention, extended here for the LC circuit): circuit
+# symbols and wires in the text colour, the plates' «+» and «−» in the text colour as in 4.x;
+# the current an accent arrow beside a wire. The electric side is accent and the magnetic
+# side green, as potential and kinetic energy in mechanics 13.7: the capacitor's energy W_C
+# (bars, curves, the tint between its plates) and its charge q(t) accent; the coil's energy
+# W_L (bars, curves, the tint around its turns) and the current I(t) on graphs green. Graphs
+# use the diagram kind with the Axes helper; a sum or a comparison muted dashed, guides muted.
 kind: diagram
-size: [400, 240]
+size:
+- 400
+- 296
 items:
+- rect:
+  - 32
+  - 62
+  - 24
+  - 8
+  fill: accent
+  tone: accent
+  width: 0
 - element: capacitor
-  at: [120, 120]
+  at:
+  - 44
+  - 66
   vertical: true
-  label: '*C*'
-  label_side: -1
 - element: coil
-  at: [280, 120]
+  at:
+  - 134
+  - 66
   vertical: true
-  label: '*L*'
-  label_side: 1
-- line: [[120, 100], [120, 50], [280, 50], [280, 100]]
+- line:
+  - - 44
+    - 46
+  - - 44
+    - 26
+  - - 134
+    - 26
+  - - 134
+    - 46
   width: 1.6
-- line: [[120, 140], [120, 190], [280, 190], [280, 140]]
+- line:
+  - - 44
+    - 86
+  - - 44
+    - 106
+  - - 134
+    - 106
+  - - 134
+    - 86
   width: 1.6
 - text: +
-  at: [138, 112]
-  size: 15
-  tone: force
+  at:
+  - 36
+  - 57.2
+  size: 12
 - text: −
-  at: [138, 140]
-  size: 15
+  at:
+  - 36
+  - 84.2
+  size: 12
+- text: +
+  at:
+  - 52
+  - 57.2
+  size: 12
+- text: −
+  at:
+  - 52
+  - 84.2
+  size: 12
+- line:
+  - - 148
+    - 106
+  - - 164
+    - 106
+  width: 1.2
+  tone: muted
+- rect:
+  - 150
+  - 46.0
+  - 12
+  - 60.0
+  fill: solid
   tone: accent
-- arrow: [[170, 50], [230, 50]]
-  tone: accent
-  label: '*I*'
-  label_at: [200, 40]
-- text: '*T* = 2π√(*L**C*)'
-  at: [200, 125]
-  size: 16
-- text: '*q*^{2}/(2*C*) + *L**I*^{2}/2 = const'
-  at: [200, 228]
+  width: 0
+- line:
+  - - 172
+    - 106
+  - - 188
+    - 106
+  width: 1.2
+  tone: muted
+- text: '*W*_{C}'
+  at:
+  - 156
+  - 121
+  size: 11
+- text: '*W*_{L}'
+  at:
+  - 180
+  - 121
+  size: 11
+- text: '*t* = 0'
+  at:
+  - 8
+  - 13
   size: 13
+  anchor: start
+- text: заряжен, тока нет
+  at:
+  - 89
+  - 136
+  size: 12
+  anchor: middle
+  tone: muted
+- rect:
+  - 329
+  - 43
+  - 17
+  - 46
+  fill: accent
+  tone: vel
+  width: 0
+  radius: 4
+- element: capacitor
+  at:
+  - 244
+  - 66
+  vertical: true
+- element: coil
+  at:
+  - 334
+  - 66
+  vertical: true
+- line:
+  - - 244
+    - 46
+  - - 244
+    - 26
+  - - 334
+    - 26
+  - - 334
+    - 46
+  width: 1.6
+- line:
+  - - 244
+    - 86
+  - - 244
+    - 106
+  - - 334
+    - 106
+  - - 334
+    - 86
+  width: 1.6
+- arrow:
+  - - 273.0
+    - 17
+  - - 305.0
+    - 17
+  tone: accent
+  width: 1.8
+- line:
+  - - 348
+    - 106
+  - - 364
+    - 106
+  width: 1.2
+  tone: muted
+- line:
+  - - 372
+    - 106
+  - - 388
+    - 106
+  width: 1.2
+  tone: muted
+- rect:
+  - 374
+  - 46.0
+  - 12
+  - 60.0
+  fill: solid
+  tone: vel
+  width: 0
+- text: '*W*_{C}'
+  at:
+  - 356
+  - 121
+  size: 11
+- text: '*W*_{L}'
+  at:
+  - 380
+  - 121
+  size: 11
+- text: '*t* = *T*/4'
+  at:
+  - 208
+  - 13
+  size: 13
+  anchor: start
+- text: разряжен, ток наибольший
+  at:
+  - 289
+  - 136
+  size: 12
+  anchor: middle
+  tone: muted
+- rect:
+  - 32
+  - 212
+  - 24
+  - 8
+  fill: accent
+  tone: accent
+  width: 0
+- element: capacitor
+  at:
+  - 44
+  - 216
+  vertical: true
+- element: coil
+  at:
+  - 134
+  - 216
+  vertical: true
+- line:
+  - - 44
+    - 196
+  - - 44
+    - 176
+  - - 134
+    - 176
+  - - 134
+    - 196
+  width: 1.6
+- line:
+  - - 44
+    - 236
+  - - 44
+    - 256
+  - - 134
+    - 256
+  - - 134
+    - 236
+  width: 1.6
+- text: −
+  at:
+  - 36
+  - 207.2
+  size: 12
+- text: +
+  at:
+  - 36
+  - 234.2
+  size: 12
+- text: −
+  at:
+  - 52
+  - 207.2
+  size: 12
+- text: +
+  at:
+  - 52
+  - 234.2
+  size: 12
+- line:
+  - - 148
+    - 256
+  - - 164
+    - 256
+  width: 1.2
+  tone: muted
+- rect:
+  - 150
+  - 196.0
+  - 12
+  - 60.0
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 172
+    - 256
+  - - 188
+    - 256
+  width: 1.2
+  tone: muted
+- text: '*W*_{C}'
+  at:
+  - 156
+  - 271
+  size: 11
+- text: '*W*_{L}'
+  at:
+  - 180
+  - 271
+  size: 11
+- text: '*t* = *T*/2'
+  at:
+  - 8
+  - 163
+  size: 13
+  anchor: start
+- text: перезаряжен, тока нет
+  at:
+  - 89
+  - 286
+  size: 12
+  anchor: middle
+  tone: muted
+- rect:
+  - 329
+  - 193
+  - 17
+  - 46
+  fill: accent
+  tone: vel
+  width: 0
+  radius: 4
+- element: capacitor
+  at:
+  - 244
+  - 216
+  vertical: true
+- element: coil
+  at:
+  - 334
+  - 216
+  vertical: true
+- line:
+  - - 244
+    - 196
+  - - 244
+    - 176
+  - - 334
+    - 176
+  - - 334
+    - 196
+  width: 1.6
+- line:
+  - - 244
+    - 236
+  - - 244
+    - 256
+  - - 334
+    - 256
+  - - 334
+    - 236
+  width: 1.6
+- arrow:
+  - - 305.0
+    - 167
+  - - 273.0
+    - 167
+  tone: accent
+  width: 1.8
+- line:
+  - - 348
+    - 256
+  - - 364
+    - 256
+  width: 1.2
+  tone: muted
+- line:
+  - - 372
+    - 256
+  - - 388
+    - 256
+  width: 1.2
+  tone: muted
+- rect:
+  - 374
+  - 196.0
+  - 12
+  - 60.0
+  fill: solid
+  tone: vel
+  width: 0
+- text: '*W*_{C}'
+  at:
+  - 356
+  - 271
+  size: 11
+- text: '*W*_{L}'
+  at:
+  - 380
+  - 271
+  size: 11
+- text: '*t* = 3*T*/4'
+  at:
+  - 208
+  - 163
+  size: 13
+  anchor: start
+- text: разряжен, ток обратно
+  at:
+  - 289
+  - 286
+  size: 12
+  anchor: middle
+  tone: muted
+- line:
+  - - 200
+    - 8
+  - - 200
+    - 290
+  width: 1
+  tone: muted
+  dashed: true
+- line:
+  - - 8
+    - 148
+  - - 392
+    - 148
+  width: 1
+  tone: muted
+  dashed: true
