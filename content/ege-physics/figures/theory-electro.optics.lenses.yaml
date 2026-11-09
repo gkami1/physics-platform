@@ -1,40 +1,154 @@
-# electro.optics.lenses: real inverted magnified image; two rays from the top of the object
+# electro.optics.lenses 15.4: the object between F and 2F (a projector). Two rays from the
+# object's tip (parallel → through F; through O straight) meet behind 2F: a real image (solid
+# text-colour arrow), inverted and larger than the object. Rays computed from the lens equation.
+# Colours (the optics convention of 14.x): a light ray is an accent line with an arrowhead in
+# its middle; the continuation of a ray (a virtual image, a virtual focus) muted dashed; the
+# normal to a surface muted dashed; a denser medium (glass) a surface fill with a text-colour
+# boundary. Lenses (added here): a thin lens is a text-colour line across the principal axis,
+# with open arrowheads at its ends pointing outward for a converging lens and inward for a
+# diverging one; a lens drawn as a glass body is a surface fill with a text-colour outline.
+# The principal axis a muted dash-dot line, a secondary axis and the focal plane muted dashed;
+# the optical centre O, the foci F and the points 2F text-colour dots with italic labels.
+# An object a text-colour arrow from the axis; a real image a solid text-colour arrow, a virtual
+# one a muted dashed arrow; the eye in the text colour. Distances (d, f, F) muted dimension
+# lines; similar triangles a surface or an accent tint. Notes muted.
 kind: diagram
-size: [400, 260]
+size:
+- 400
+- 200
 items:
-- line: [[10, 130], [395, 130]]
+- path: M10 96L24 96M27.5 96L29 96M32.5 96L46.5 96M50 96L51.5 96M55 96L69 96M72.5 96L74 96M77.5 96L91.5
+    96M95 96L96.5 96M100 96L114 96M117.5 96L119 96M122.5 96L136.5 96M140 96L141.5 96M145 96L159 96M162.5
+    96L164 96M167.5 96L181.5 96M185 96L186.5 96M190 96L204 96M207.5 96L209 96M212.5 96L226.5 96M230 96L231.5
+    96M235 96L249 96M252.5 96L254 96M257.5 96L271.5 96M275 96L276.5 96M280 96L294 96M297.5 96L299 96M302.5
+    96L316.5 96M320 96L321.5 96M325 96L339 96M342.5 96L344 96M347.5 96L361.5 96M365 96L366.5 96M370 96L384
+    96M387.5 96L389 96
   width: 1
   tone: muted
-- arrow: [[200, 130], [200, 25]]
+- line:
+  - - 136
+    - 22
+  - - 136
+    - 170
   width: 2
-- arrow: [[200, 130], [200, 235]]
+- line:
+  - - 130
+    - 30
+  - - 136
+    - 22
+  - - 142
+    - 30
   width: 2
-- dots: [[140, 130], [260, 130], [80, 130], [320, 130]]
-  r: 2.8
+- line:
+  - - 130
+    - 162
+  - - 136
+    - 170
+  - - 142
+    - 162
+  width: 2
+- line:
+  - - 60
+    - 62
+  - - 136.0
+    - 62
+  width: 1.8
+  tone: accent
+- path: M106.6 62L98.6 65.6L98.6 58.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 136.0
+    - 62
+  - - 327.2
+    - 192.0
+  width: 1.8
+  tone: accent
+- path: M226 123.2L217.4 121.7L221.4 115.7Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 60
+    - 62
+  - - 136.0
+    - 96.0
+  width: 1.8
+  tone: accent
+- path: M106.2 82.7L97.4 82.7L100.3 76.1Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 136.0
+    - 96.0
+  - - 350.6
+    - 192.0
+  width: 1.8
+  tone: accent
+- path: M237 141.2L228.2 141.2L231.1 134.6Z
+  fill: solid
+  tone: accent
+  width: 0
+- arrow:
+  - - 60
+    - 96
+  - - 60
+    - 62
+  width: 3
+- arrow:
+  - - 282.2
+    - 96
+  - - 282.2
+    - 161.4
+  width: 3
+- dots:
+  - - 86
+    - 96
+  - - 186
+    - 96
+  - - 36
+    - 96
+  - - 236
+    - 96
+  r: 3
 - text: '*F*'
-  at: [140, 150]
-  size: 13
-- text: '*F*'
-  at: [260, 120]
-  size: 13
-- text: 2*F*
-  at: [80, 150]
-  size: 13
-- text: 2*F*
-  at: [320, 120]
-  size: 13
-- arrow: [[110, 130], [110, 80]]
-  tone: vel
-  width: 2.5
-- arrow: [[380, 130], [380, 230]]
-  tone: vel
-  width: 2.5
-- line: [[110, 80], [200, 80], [380, 230]]
-  tone: force
-  width: 1.4
-- line: [[110, 80], [380, 230]]
-  tone: force
-  width: 1.4
-- text: 1/*d* + 1/*f* = 1/*F*
-  at: [80, 230]
+  at:
+  - 86
+  - 88
   size: 14
+- text: '*F*'
+  at:
+  - 195
+  - 88
+  size: 14
+- text: 2*F*
+  at:
+  - 36
+  - 88
+  size: 14
+- text: 2*F*
+  at:
+  - 236
+  - 88
+  size: 14
+- text: '*O*'
+  at:
+  - 126
+  - 113
+  size: 14
+- text: предмет
+  at:
+  - 60
+  - 54
+  size: 13
+  anchor: middle
+  tone: muted
+- text: изображение
+  at:
+  - 290.2
+  - 132.7
+  size: 13
+  anchor: start
+  tone: muted

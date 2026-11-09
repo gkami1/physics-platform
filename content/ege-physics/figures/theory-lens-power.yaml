@@ -1,0 +1,199 @@
+# electro.optics.lenses 15.2: optical power. The same parallel beam passes two converging
+# lenses: the top one bends it a little and the rays meet far away (a long focal length, small
+# D = 1/F); the bottom one bends it more and they meet close to the lens (a short F, large D).
+# Colours (the optics convention of 14.x): a light ray is an accent line with an arrowhead in
+# its middle; the continuation of a ray (a virtual image, a virtual focus) muted dashed; the
+# normal to a surface muted dashed; a denser medium (glass) a surface fill with a text-colour
+# boundary. Lenses (added here): a thin lens is a text-colour line across the principal axis,
+# with open arrowheads at its ends pointing outward for a converging lens and inward for a
+# diverging one; a lens drawn as a glass body is a surface fill with a text-colour outline.
+# The principal axis a muted dash-dot line, a secondary axis and the focal plane muted dashed;
+# the optical centre O, the foci F and the points 2F text-colour dots with italic labels.
+# An object a text-colour arrow from the axis; a real image a solid text-colour arrow, a virtual
+# one a muted dashed arrow; the eye in the text colour. Distances (d, f, F) muted dimension
+# lines; similar triangles a surface or an accent tint. Notes muted.
+kind: diagram
+size:
+- 400
+- 244
+items:
+- path: M14 62L28 62M31.5 62L33 62M36.5 62L50.5 62M54 62L55.5 62M59 62L73 62M76.5 62L78 62M81.5 62L95.5
+    62M99 62L100.5 62M104 62L118 62M121.5 62L123 62M126.5 62L140.5 62M144 62L145.5 62M149 62L163 62M166.5
+    62L168 62M171.5 62L185.5 62M189 62L190.5 62M194 62L208 62M211.5 62L213 62M216.5 62L230.5 62M234 62L235.5
+    62M239 62L253 62M256.5 62L258 62M261.5 62L275.5 62M279 62L280.5 62M284 62L298 62M301.5 62L303 62M306.5
+    62L320.5 62M324 62L325.5 62M329 62L343 62M346.5 62L348 62M351.5 62L365.5 62M369 62L370.5 62M374 62L388
+    62
+  width: 1
+  tone: muted
+- line:
+  - - 120
+    - 18
+  - - 120
+    - 106
+  width: 2
+- line:
+  - - 114
+    - 26
+  - - 120
+    - 18
+  - - 126
+    - 26
+  width: 2
+- line:
+  - - 114
+    - 98
+  - - 120
+    - 106
+  - - 126
+    - 98
+  width: 2
+- line:
+  - - 20.0
+    - 32.0
+  - - 120.0
+    - 32.0
+  width: 1.6
+  tone: accent
+- path: M74.8 32L66.8 35.6L66.8 28.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 120.0
+    - 32.0
+  - - 390.0
+    - 86.0
+  width: 1.6
+  tone: accent
+- path: M246.2 57.2L237.7 59.2L239.1 52.1Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 20.0
+    - 92.0
+  - - 120.0
+    - 92.0
+  width: 1.6
+  tone: accent
+- path: M74.8 92L66.8 95.6L66.8 88.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 120.0
+    - 92.0
+  - - 390.0
+    - 38.0
+  width: 1.6
+  tone: accent
+- path: M246.2 66.8L239.1 71.9L237.7 64.8Z
+  fill: solid
+  tone: accent
+  width: 0
+- dots:
+  - - 270
+    - 62
+  r: 3
+- text: '*F*'
+  at:
+  - 270
+  - 85
+  size: 14
+- text: 'слабая линза: длинный фокус, малая *D*'
+  at:
+  - 16
+  - 14
+  size: 13
+  anchor: start
+  tone: default
+- path: M14 186L28 186M31.5 186L33 186M36.5 186L50.5 186M54 186L55.5 186M59 186L73 186M76.5 186L78 186M81.5
+    186L95.5 186M99 186L100.5 186M104 186L118 186M121.5 186L123 186M126.5 186L140.5 186M144 186L145.5
+    186M149 186L163 186M166.5 186L168 186M171.5 186L185.5 186M189 186L190.5 186M194 186L208 186M211.5
+    186L213 186M216.5 186L230.5 186M234 186L235.5 186M239 186L253 186M256.5 186L258 186M261.5 186L275.5
+    186M279 186L280.5 186M284 186L298 186M301.5 186L303 186M306.5 186L320.5 186M324 186L325.5 186M329
+    186L343 186M346.5 186L348 186M351.5 186L365.5 186M369 186L370.5 186M374 186L388 186
+  width: 1
+  tone: muted
+- line:
+  - - 120
+    - 142
+  - - 120
+    - 230
+  width: 2
+- line:
+  - - 114
+    - 150
+  - - 120
+    - 142
+  - - 126
+    - 150
+  width: 2
+- line:
+  - - 114
+    - 222
+  - - 120
+    - 230
+  - - 126
+    - 222
+  width: 2
+- line:
+  - - 20.0
+    - 156.0
+  - - 120.0
+    - 156.0
+  width: 1.6
+  tone: accent
+- path: M74.8 156L66.8 159.6L66.8 152.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 120.0
+    - 156.0
+  - - 276.0
+    - 234.0
+  width: 1.6
+  tone: accent
+- path: M194.5 193.2L185.7 192.9L188.9 186.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 20.0
+    - 216.0
+  - - 120.0
+    - 216.0
+  width: 1.6
+  tone: accent
+- path: M74.8 216L66.8 219.6L66.8 212.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 120.0
+    - 216.0
+  - - 276.0
+    - 138.0
+  width: 1.6
+  tone: accent
+- path: M194.5 178.8L188.9 185.6L185.7 179.1Z
+  fill: solid
+  tone: accent
+  width: 0
+- dots:
+  - - 180
+    - 186
+  r: 3
+- text: '*F*'
+  at:
+  - 180
+  - 209
+  size: 14
+- text: 'сильная линза: короткий фокус, большая *D*'
+  at:
+  - 16
+  - 138
+  size: 13
+  anchor: start
+  tone: default

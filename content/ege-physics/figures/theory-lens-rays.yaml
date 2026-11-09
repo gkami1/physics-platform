@@ -1,0 +1,182 @@
+# electro.optics.lenses 15.3: building an image with three rays (object beyond 2F). From the
+# object's tip: ray 1 parallel to the principal axis leaves through the back focus F; ray 2
+# through the optical centre O goes straight; ray 3 through the front focus leaves parallel to
+# the axis. All three meet at the image's tip: a real image (solid text-colour arrow), inverted,
+# smaller, between F and 2F. Rays computed from the lens equation.
+# Colours (the optics convention of 14.x): a light ray is an accent line with an arrowhead in
+# its middle; the continuation of a ray (a virtual image, a virtual focus) muted dashed; the
+# normal to a surface muted dashed; a denser medium (glass) a surface fill with a text-colour
+# boundary. Lenses (added here): a thin lens is a text-colour line across the principal axis,
+# with open arrowheads at its ends pointing outward for a converging lens and inward for a
+# diverging one; a lens drawn as a glass body is a surface fill with a text-colour outline.
+# The principal axis a muted dash-dot line, a secondary axis and the focal plane muted dashed;
+# the optical centre O, the foci F and the points 2F text-colour dots with italic labels.
+# An object a text-colour arrow from the axis; a real image a solid text-colour arrow, a virtual
+# one a muted dashed arrow; the eye in the text colour. Distances (d, f, F) muted dimension
+# lines; similar triangles a surface or an accent tint. Notes muted.
+kind: diagram
+size:
+- 400
+- 190
+items:
+- path: M10 96L24 96M27.5 96L29 96M32.5 96L46.5 96M50 96L51.5 96M55 96L69 96M72.5 96L74 96M77.5 96L91.5
+    96M95 96L96.5 96M100 96L114 96M117.5 96L119 96M122.5 96L136.5 96M140 96L141.5 96M145 96L159 96M162.5
+    96L164 96M167.5 96L181.5 96M185 96L186.5 96M190 96L204 96M207.5 96L209 96M212.5 96L226.5 96M230 96L231.5
+    96M235 96L249 96M252.5 96L254 96M257.5 96L271.5 96M275 96L276.5 96M280 96L294 96M297.5 96L299 96M302.5
+    96L316.5 96M320 96L321.5 96M325 96L339 96M342.5 96L344 96M347.5 96L361.5 96M365 96L366.5 96M370 96L384
+    96M387.5 96L389 96
+  width: 1
+  tone: muted
+- line:
+  - - 196
+    - 20
+  - - 196
+    - 172
+  width: 2
+- line:
+  - - 190
+    - 28
+  - - 196
+    - 20
+  - - 202
+    - 28
+  width: 2
+- line:
+  - - 190
+    - 164
+  - - 196
+    - 172
+  - - 202
+    - 164
+  width: 2
+- line:
+  - - 64
+    - 48
+  - - 196.0
+    - 48
+  width: 1.8
+  tone: accent
+- path: M141.4 48L133.4 51.6L133.4 44.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 196.0
+    - 48
+  - - 339.0
+    - 180.0
+  width: 1.8
+  tone: accent
+- path: M263.9 110.7L255.6 107.9L260.4 102.6Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 64
+    - 48
+  - - 196.0
+    - 96.0
+  width: 1.8
+  tone: accent
+- path: M141.1 76L132.4 76.7L134.8 69.9Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 196.0
+    - 96.0
+  - - 372.0
+    - 160.0
+  width: 1.8
+  tone: accent
+- path: M279.7 126.4L271 127.1L273.4 120.3Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 64
+    - 48
+  - - 196.0
+    - 127.2
+  width: 1.8
+  tone: accent
+- path: M140.7 94L132 93L135.7 86.8Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 196.0
+    - 127.2
+  - - 372.0
+    - 127.2
+  width: 1.8
+  tone: accent
+- path: M280 127.2L272 130.8L272 123.6Z
+  fill: solid
+  tone: accent
+  width: 0
+- arrow:
+  - - 64
+    - 96
+  - - 64
+    - 48
+  width: 3
+- arrow:
+  - - 281.8
+    - 96
+  - - 281.8
+    - 127.2
+  width: 3
+- dots:
+  - - 144
+    - 96
+  - - 248
+    - 96
+  - - 92
+    - 96
+  - - 300
+    - 96
+  r: 3
+- text: '*F*'
+  at:
+  - 135
+  - 114
+  size: 14
+- text: '*F*'
+  at:
+  - 258
+  - 89
+  size: 14
+- text: 2*F*
+  at:
+  - 92
+  - 114
+  size: 14
+- text: 2*F*
+  at:
+  - 300
+  - 114
+  size: 14
+- text: '*O*'
+  at:
+  - 186
+  - 113
+  size: 14
+- text: '1'
+  at:
+  - 348.0
+  - 185.0
+  size: 13
+  tone: accent
+- text: '2'
+  at:
+  - 381.0
+  - 165.0
+  size: 13
+  tone: accent
+- text: '3'
+  at:
+  - 381.0
+  - 132.2
+  size: 13
+  tone: accent

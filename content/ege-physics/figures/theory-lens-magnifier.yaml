@@ -1,0 +1,159 @@
+# electro.optics.lenses 15.4: a magnifier (the object inside F). Two rays from the object's tip
+# diverge after the lens; their continuations (muted dashed) meet in front of the lens, further
+# away than the object: a virtual image (muted dashed arrow), upright and larger. An eye behind
+# the lens sees it there. Rays computed from the lens equation.
+# Colours (the optics convention of 14.x): a light ray is an accent line with an arrowhead in
+# its middle; the continuation of a ray (a virtual image, a virtual focus) muted dashed; the
+# normal to a surface muted dashed; a denser medium (glass) a surface fill with a text-colour
+# boundary. Lenses (added here): a thin lens is a text-colour line across the principal axis,
+# with open arrowheads at its ends pointing outward for a converging lens and inward for a
+# diverging one; a lens drawn as a glass body is a surface fill with a text-colour outline.
+# The principal axis a muted dash-dot line, a secondary axis and the focal plane muted dashed;
+# the optical centre O, the foci F and the points 2F text-colour dots with italic labels.
+# An object a text-colour arrow from the axis; a real image a solid text-colour arrow, a virtual
+# one a muted dashed arrow; the eye in the text colour. Distances (d, f, F) muted dimension
+# lines; similar triangles a surface or an accent tint. Notes muted.
+kind: diagram
+size:
+- 400
+- 210
+items:
+- path: M10 132L24 132M27.5 132L29 132M32.5 132L46.5 132M50 132L51.5 132M55 132L69 132M72.5 132L74 132M77.5
+    132L91.5 132M95 132L96.5 132M100 132L114 132M117.5 132L119 132M122.5 132L136.5 132M140 132L141.5 132M145
+    132L159 132M162.5 132L164 132M167.5 132L181.5 132M185 132L186.5 132M190 132L204 132M207.5 132L209
+    132M212.5 132L226.5 132M230 132L231.5 132M235 132L249 132M252.5 132L254 132M257.5 132L271.5 132M275
+    132L276.5 132M280 132L294 132M297.5 132L299 132M302.5 132L316.5 132M320 132L321.5 132M325 132L339
+    132M342.5 132L344 132M347.5 132L361.5 132M365 132L366.5 132M370 132L384 132M387.5 132L389 132
+  width: 1
+  tone: muted
+- line:
+  - - 244
+    - 54
+  - - 244
+    - 210
+  width: 2
+- line:
+  - - 238
+    - 62
+  - - 244
+    - 54
+  - - 250
+    - 62
+  width: 2
+- line:
+  - - 238
+    - 202
+  - - 244
+    - 210
+  - - 250
+    - 202
+  width: 2
+- line:
+  - - 192
+    - 102
+  - - 244.0
+    - 102
+  width: 1.8
+  tone: accent
+- path: M225.4 102L217.4 105.6L217.4 98.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 244.0
+    - 102
+  - - 124.4
+    - 63.0
+  width: 1.2
+  dashed: true
+  tone: muted
+- line:
+  - - 244.0
+    - 102
+  - - 376.0
+    - 145.0
+  width: 1.8
+  tone: accent
+- path: M314.6 125L305.8 125.9L308.1 119.1Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 192
+    - 102
+  - - 244.0
+    - 132.0
+  width: 1.8
+  tone: accent
+- path: M224.8 120.9L216 120L219.6 113.8Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 244.0
+    - 132.0
+  - - 124.4
+    - 63.0
+  width: 1.2
+  dashed: true
+  tone: muted
+- line:
+  - - 244.0
+    - 132.0
+  - - 376.0
+    - 208.2
+  width: 1.8
+  tone: accent
+- path: M314.2 172.5L305.4 171.6L309 165.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- arrow:
+  - - 124.4
+    - 132
+  - - 124.4
+    - 63.0
+  width: 2.4
+  dashed: true
+  tone: muted
+- arrow:
+  - - 192
+    - 132
+  - - 192
+    - 102
+  width: 3
+- dots:
+  - - 152
+    - 132
+  - - 336
+    - 132
+  r: 3
+- text: '*F*'
+  at:
+  - 143
+  - 150
+  size: 14
+- text: '*F*'
+  at:
+  - 346
+  - 125
+  size: 14
+- text: '*O*'
+  at:
+  - 253
+  - 149
+  size: 14
+- text: мнимое изображение
+  at:
+  - 124.4
+  - 53.0
+  size: 13
+  anchor: middle
+  tone: muted
+- text: предмет
+  at:
+  - 202
+  - 150
+  size: 13
+  anchor: middle
+  tone: muted
