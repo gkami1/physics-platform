@@ -1,0 +1,177 @@
+# electro.optics.refraction 14.3: the image in a plane mirror. A vertical mirror (hatched behind);
+# an object (a text-colour arrow) at distance d in front of it. Two rays from the object's tip
+# reflect by the law of reflection and enter the eye; their continuations behind the mirror
+# (muted dashed) meet at the image's tip. The image (muted dashed arrow) is virtual, upright,
+# of the same size, at the same distance d behind the mirror.
+# Colours (the «Электродинамика» convention, extended here for optics): a light ray is an accent
+# line with an arrowhead in its middle; the incident and refracted rays solid, a weak partial
+# reflection a thinner accent dashed ray, a full reflection (a mirror, total internal reflection)
+# solid. The normal to a surface a muted dashed line; angles text-colour arcs, always from the
+# normal (α incidence, β reflection, γ refraction). A denser medium (water, glass) a surface
+# fill with a text-colour boundary, air none; a mirror a text-colour line hatched on its back.
+# Objects and the eye in the text colour; an image (virtual) and the continuations of rays
+# behind a mirror or a surface muted dashed. A shadow two layers of a muted tint, a penumbra
+# one. Wavefronts thin accent lines across the rays. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 240
+items:
+- line:
+  - - 210
+    - 18
+  - - 210
+    - 210
+  width: 2
+- hatch:
+  - - 210
+    - 210
+  - - 210
+    - 18
+- arrow:
+  - - 140
+    - 196
+  - - 140
+    - 126
+  width: 3
+- arrow:
+  - - 280
+    - 196
+  - - 280
+    - 126
+  width: 2.4
+  dashed: true
+  tone: muted
+- path: M52 44Q62 33 72 44Q62 55 52 44Z
+  width: 1.5
+- dots:
+  - - 66
+    - 44
+  r: 3
+- line:
+  - - 140
+    - 126
+  - - 210
+    - 95.8
+  width: 1.6
+  tone: accent
+- path: M182.9 107.5L177 114L174.1 107.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 210
+    - 95.8
+  - - 76
+    - 38
+  width: 1.6
+  tone: accent
+- path: M138.6 65L147.4 64.9L144.5 71.5Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 210
+    - 95.8
+  - - 280
+    - 126
+  width: 1.2
+  dashed: true
+  tone: muted
+- line:
+  - - 140
+    - 126
+  - - 210
+    - 99.9
+  width: 1.6
+  tone: accent
+- path: M183 110L176.8 116.1L174.2 109.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 210
+    - 99.9
+  - - 76
+    - 50
+  width: 1.6
+  tone: accent
+- path: M138.5 73.3L147.3 72.7L144.7 79.5Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 210
+    - 99.9
+  - - 280
+    - 126
+  width: 1.2
+  dashed: true
+  tone: muted
+- line:
+  - - 140
+    - 196
+  - - 280
+    - 196
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 140
+    - 219
+  - - 140
+    - 229
+  width: 1
+  tone: muted
+- line:
+  - - 210
+    - 219
+  - - 210
+    - 229
+  width: 1
+  tone: muted
+- line:
+  - - 280
+    - 219
+  - - 280
+    - 229
+  width: 1
+  tone: muted
+- line:
+  - - 140
+    - 224
+  - - 280
+    - 224
+  width: 1
+  tone: muted
+- text: '*d*'
+  at:
+  - 175.0
+  - 218
+  size: 14
+- text: '*d*'
+  at:
+  - 245.0
+  - 218
+  size: 14
+- text: предмет
+  at:
+  - 132
+  - 166
+  size: 13
+  anchor: end
+  tone: muted
+- text: изображение
+  at:
+  - 288
+  - 166
+  size: 13
+  anchor: start
+  tone: muted
+- text: зеркало
+  at:
+  - 216
+  - 14
+  size: 13
+  anchor: start
+  tone: muted

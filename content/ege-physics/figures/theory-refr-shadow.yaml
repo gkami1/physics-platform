@@ -1,0 +1,201 @@
+# electro.optics.refraction 14.1: shadows. Left: a point source (an accent dot), an opaque
+# body (a thick text-colour bar) and a screen; the rays through the body's edges bound a sharp
+# shadow. Right: a large source (a thick accent bar) and a larger body; rays from the source's
+# ends through the body's ends bound the full shadow (two muted tint layers) and the penumbra
+# around it (one layer), where only part of the source is seen.
+# Colours (the «Электродинамика» convention, extended here for optics): a light ray is an accent
+# line with an arrowhead in its middle; the incident and refracted rays solid, a weak partial
+# reflection a thinner accent dashed ray, a full reflection (a mirror, total internal reflection)
+# solid. The normal to a surface a muted dashed line; angles text-colour arcs, always from the
+# normal (α incidence, β reflection, γ refraction). A denser medium (water, glass) a surface
+# fill with a text-colour boundary, air none; a mirror a text-colour line hatched on its back.
+# Objects and the eye in the text colour; an image (virtual) and the continuations of rays
+# behind a mirror or a surface muted dashed. A shadow two layers of a muted tint, a penumbra
+# one. Wavefronts thin accent lines across the rays. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 202
+items:
+- path: M80 72L182 41.4L182 138.6L80 108Z
+  fill: accent
+  tone: muted
+  width: 0
+- path: M80 72L182 41.4L182 138.6L80 108Z
+  fill: accent
+  tone: muted
+  width: 0
+- line:
+  - - 20
+    - 90
+  - - 182
+    - 41.4
+  width: 1.4
+  tone: accent
+- path: M73.2 74L66.6 79.8L64.5 72.9Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 20
+    - 90
+  - - 182
+    - 138.6
+  width: 1.4
+  tone: accent
+- path: M73.2 106L64.5 107.1L66.6 100.2Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 20
+    - 90
+  - - 182
+    - 14
+  width: 1.4
+  tone: accent
+- path: M72.9 65.2L67.2 71.8L64.2 65.3Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 20
+    - 90
+  - - 182
+    - 166
+  width: 1.4
+  tone: accent
+- path: M72.9 114.8L64.2 114.7L67.2 108.2Z
+  fill: solid
+  tone: accent
+  width: 0
+- dots:
+  - - 20
+    - 90
+  r: 5
+  tone: accent
+- text: тень
+  at:
+  - 160
+  - 94
+  size: 13
+  anchor: middle
+  tone: default
+- text: точечный источник
+  at:
+  - 100
+  - 194
+  size: 13
+  anchor: middle
+  tone: muted
+- line:
+  - - 80
+    - 72
+  - - 80
+    - 108
+  width: 5
+- line:
+  - - 182
+    - 8
+  - - 182
+    - 176
+  width: 2
+- path: M285 70L387 8.8L387 171.2L285 110Z
+  fill: accent
+  tone: muted
+  width: 0
+- path: M285 70L387 63.2L387 116.8L285 110Z
+  fill: accent
+  tone: muted
+  width: 0
+- line:
+  - - 225
+    - 74
+  - - 387
+    - 63.2
+  width: 1.4
+  tone: accent
+- path: M278.4 70.4L270.6 74.6L270.2 67.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 225
+    - 106
+  - - 387
+    - 116.8
+  width: 1.4
+  tone: accent
+- path: M278.4 109.6L270.2 112.6L270.6 105.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 225
+    - 106
+  - - 387
+    - 8.8
+  width: 1.4
+  tone: accent
+- path: M277.7 74.4L272.7 81.6L269 75.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 225
+    - 74
+  - - 387
+    - 171.2
+  width: 1.4
+  tone: accent
+- path: M277.7 105.6L269 104.6L272.7 98.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 225
+    - 74
+  - - 225
+    - 106
+  width: 6
+  tone: accent
+- text: тень
+  at:
+  - 365
+  - 94
+  size: 13
+  anchor: middle
+  tone: default
+- text: полутень
+  at:
+  - 351
+  - 48.0
+  size: 12
+  anchor: middle
+  tone: muted
+- text: полутень
+  at:
+  - 351
+  - 144.0
+  size: 12
+  anchor: middle
+  tone: muted
+- text: большой источник
+  at:
+  - 305
+  - 194
+  size: 13
+  anchor: middle
+  tone: muted
+- line:
+  - - 285
+    - 70
+  - - 285
+    - 110
+  width: 5
+- line:
+  - - 387
+    - 8
+  - - 387
+    - 176
+  width: 2

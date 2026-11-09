@@ -1,0 +1,205 @@
+# electro.optics.refraction 14.2: specular and diffuse reflection. Left: parallel rays fall on a
+# smooth mirror and stay parallel after reflection. Right: the same rays fall on a rough surface
+# (a zigzag of small facets); each obeys the law of reflection on its own facet, and they leave
+# in different directions. Reflected directions are computed from the facets.
+# Colours (the «Электродинамика» convention, extended here for optics): a light ray is an accent
+# line with an arrowhead in its middle; the incident and refracted rays solid, a weak partial
+# reflection a thinner accent dashed ray, a full reflection (a mirror, total internal reflection)
+# solid. The normal to a surface a muted dashed line; angles text-colour arcs, always from the
+# normal (α incidence, β reflection, γ refraction). A denser medium (water, glass) a surface
+# fill with a text-colour boundary, air none; a mirror a text-colour line hatched on its back.
+# Objects and the eye in the text colour; an image (virtual) and the continuations of rays
+# behind a mirror or a surface muted dashed. A shadow two layers of a muted tint, a penumbra
+# one. Wavefronts thin accent lines across the rays. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 182
+items:
+- hatch:
+  - - 16
+    - 140
+  - - 184
+    - 140
+- line:
+  - - 16
+    - 140
+  - - 184
+    - 140
+  width: 2
+- line:
+  - - 12.4
+    - 66.3
+  - - 64
+    - 140
+  width: 1.6
+  tone: accent
+- path: M38.4 103.4L30.8 98.9L36.7 94.8Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 64
+    - 140
+  - - 115.6
+    - 66.3
+  width: 1.6
+  tone: accent
+- path: M95.1 95.5L93.5 104.1L87.6 100Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 48.4
+    - 66.3
+  - - 100
+    - 140
+  width: 1.6
+  tone: accent
+- path: M74.4 103.4L66.8 98.9L72.7 94.8Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 100
+    - 140
+  - - 151.6
+    - 66.3
+  width: 1.6
+  tone: accent
+- path: M131.1 95.5L129.5 104.1L123.6 100Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 84.4
+    - 66.3
+  - - 136
+    - 140
+  width: 1.6
+  tone: accent
+- path: M110.4 103.4L102.8 98.9L108.7 94.8Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 136
+    - 140
+  - - 187.6
+    - 66.3
+  width: 1.6
+  tone: accent
+- path: M167.1 95.5L165.5 104.1L159.6 100Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 216
+    - 140
+  - - 232
+    - 128
+  - - 250
+    - 146
+  - - 264
+    - 130
+  - - 282
+    - 144
+  - - 298
+    - 128
+  - - 316
+    - 148
+  - - 330
+    - 132
+  - - 348
+    - 142
+  - - 364
+    - 128
+  - - 384
+    - 140
+  width: 2
+- hatch:
+  - - 216
+    - 150
+  - - 384
+    - 150
+  tone: muted
+- line:
+  - - 197.2
+    - 50
+  - - 258
+    - 136.9
+  width: 1.6
+  tone: accent
+- path: M227.3 93L219.8 88.5L225.7 84.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 258
+    - 136.9
+  - - 187.0
+    - 100.1
+  width: 1.6
+  tone: accent
+- path: M214.7 114.4L223.4 114.9L220.1 121.3Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 229.8
+    - 50
+  - - 290
+    - 136.0
+  width: 1.6
+  tone: accent
+- path: M259.6 92.6L252.1 88.1L258 84Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 290
+    - 136.0
+  - - 224.5
+    - 90.1
+  width: 1.6
+  tone: accent
+- path: M250 108L258.6 109.6L254.5 115.5Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 277.5
+    - 50
+  - - 338
+    - 136.4
+  width: 1.6
+  tone: accent
+- path: M307.5 92.8L299.9 88.3L305.8 84.2Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 338
+    - 136.4
+  - - 417.9
+    - 132.1
+  width: 1.6
+  tone: accent
+- path: M386.7 133.8L378.9 137.8L378.5 130.6Z
+  fill: solid
+  tone: accent
+  width: 0
+- text: зеркальное отражение
+  at:
+  - 100
+  - 172
+  size: 13
+  anchor: middle
+  tone: muted
+- text: рассеянное отражение
+  at:
+  - 300
+  - 172
+  size: 13
+  anchor: middle
+  tone: muted

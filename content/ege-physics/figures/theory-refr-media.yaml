@@ -1,0 +1,198 @@
+# electro.optics.refraction 14.5: the same ray (60° from the normal) from air into water,
+# glass and diamond (surface fills). The larger the refractive index, the closer the refracted
+# ray to the normal (γ ≈ 41°, 35° and 21°; the angles are not written on the figure).
+# Colours (the «Электродинамика» convention, extended here for optics): a light ray is an accent
+# line with an arrowhead in its middle; the incident and refracted rays solid, a weak partial
+# reflection a thinner accent dashed ray, a full reflection (a mirror, total internal reflection)
+# solid. The normal to a surface a muted dashed line; angles text-colour arcs, always from the
+# normal (α incidence, β reflection, γ refraction). A denser medium (water, glass) a surface
+# fill with a text-colour boundary, air none; a mirror a text-colour line hatched on its back.
+# Objects and the eye in the text colour; an image (virtual) and the continuations of rays
+# behind a mirror or a surface muted dashed. A shadow two layers of a muted tint, a penumbra
+# one. Wavefronts thin accent lines across the rays. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 196
+items:
+- rect:
+  - 6
+  - 70
+  - 124
+  - 96
+  fill: surface
+  width: 0
+  tone: muted
+- line:
+  - - 6
+    - 70
+  - - 130
+    - 70
+  width: 1.4
+- line:
+  - - 70
+    - 10
+  - - 70
+    - 162
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 12.8
+    - 37.0
+  - - 70
+    - 70
+  width: 1.8
+  tone: accent
+- path: M45.6 55.9L36.8 55L40.4 48.8Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 70
+    - 70
+  - - 122.1
+    - 130.7
+  width: 1.8
+  tone: accent
+- path: M99.2 104L91.2 100.3L96.7 95.6Z
+  fill: solid
+  tone: accent
+  width: 0
+- angle:
+  - 70
+  - 70
+  start: 270
+  end: 310.6281306514821
+  r: 30
+  label: '*γ*'
+- text: вода, *n* ≈ 1,33
+  at:
+  - 70
+  - 186
+  size: 13
+  anchor: middle
+  tone: default
+- rect:
+  - 138
+  - 70
+  - 124
+  - 96
+  fill: surface
+  width: 0
+  tone: muted
+- line:
+  - - 138
+    - 70
+  - - 262
+    - 70
+  width: 1.4
+- line:
+  - - 202
+    - 10
+  - - 202
+    - 162
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 144.8
+    - 37.0
+  - - 202
+    - 70
+  width: 1.8
+  tone: accent
+- path: M177.6 55.9L168.8 55L172.4 48.8Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 202
+    - 70
+  - - 248.2
+    - 135.3
+  width: 1.8
+  tone: accent
+- path: M227.9 106.6L220.3 102.1L226.2 98Z
+  fill: solid
+  tone: accent
+  width: 0
+- angle:
+  - 202
+  - 70
+  start: 270
+  end: 305.26438968275465
+  r: 30
+  label: '*γ*'
+- text: стекло, *n* ≈ 1,5
+  at:
+  - 202
+  - 186
+  size: 13
+  anchor: middle
+  tone: default
+- rect:
+  - 270
+  - 70
+  - 124
+  - 96
+  fill: surface
+  width: 0
+  tone: muted
+- line:
+  - - 270
+    - 70
+  - - 394
+    - 70
+  width: 1.4
+- line:
+  - - 334
+    - 10
+  - - 334
+    - 162
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 276.8
+    - 37.0
+  - - 334
+    - 70
+  width: 1.8
+  tone: accent
+- path: M309.6 55.9L300.8 55L304.4 48.8Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 334
+    - 70
+  - - 362.6
+    - 144.7
+  width: 1.8
+  tone: accent
+- path: M350 111.8L343.8 105.7L350.5 103.1Z
+  fill: solid
+  tone: accent
+  width: 0
+- angle:
+  - 334
+  - 70
+  start: 270
+  end: 290.96893591663803
+  r: 30
+  label: '*γ*'
+- text: алмаз, *n* ≈ 2,42
+  at:
+  - 334
+  - 186
+  size: 13
+  anchor: middle
+  tone: default
+- text: воздух
+  at:
+  - 8
+  - 20
+  size: 13
+  anchor: start
+  tone: muted

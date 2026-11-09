@@ -1,0 +1,156 @@
+# electro.optics.refraction 14.4: why water looks shallower. Two rays from a coin on the bottom
+# (n = 1,33) bend away from the normal (muted dashed) as they leave the water and enter the eye.
+# The eye sees them as coming straight from where their backward continuations (muted dashed)
+# meet: the coin seems higher than it is (its apparent place muted dashed).
+# Colours (the «Электродинамика» convention, extended here for optics): a light ray is an accent
+# line with an arrowhead in its middle; the incident and refracted rays solid, a weak partial
+# reflection a thinner accent dashed ray, a full reflection (a mirror, total internal reflection)
+# solid. The normal to a surface a muted dashed line; angles text-colour arcs, always from the
+# normal (α incidence, β reflection, γ refraction). A denser medium (water, glass) a surface
+# fill with a text-colour boundary, air none; a mirror a text-colour line hatched on its back.
+# Objects and the eye in the text colour; an image (virtual) and the continuations of rays
+# behind a mirror or a surface muted dashed. A shadow two layers of a muted tint, a penumbra
+# one. Wavefronts thin accent lines across the rays. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 226
+items:
+- rect:
+  - 10
+  - 92
+  - 380
+  - 126
+  fill: surface
+  width: 0
+  tone: muted
+- line:
+  - - 10
+    - 92
+  - - 390
+    - 92
+  width: 1.4
+- line:
+  - - 106
+    - 204
+  - - 134
+    - 204
+  width: 4
+- line:
+  - - 120
+    - 204
+  - - 196
+    - 92
+  width: 1.8
+  tone: accent
+- path: M164.5 138.4L163 147.1L157 143Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 196
+    - 92
+  - - 278.1
+    - 18.8
+  width: 1.8
+  tone: accent
+- path: M232.4 59.5L228.9 67.6L224.1 62.2Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 196
+    - 66
+  - - 196
+    - 118
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 120
+    - 204
+  - - 214
+    - 92
+  width: 1.8
+  tone: accent
+- path: M174.8 138.7L172.4 147.2L166.9 142.5Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 214
+    - 92
+  - - 308.1
+    - 35.0
+  width: 1.8
+  tone: accent
+- path: M255.7 66.7L250.8 73.9L247 67.8Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 214
+    - 66
+  - - 214
+    - 118
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 196
+    - 92
+  - - 157.6
+    - 126.2
+  width: 1.2
+  dashed: true
+  tone: muted
+- line:
+  - - 214
+    - 92
+  - - 157.6
+    - 126.2
+  width: 1.2
+  dashed: true
+  tone: muted
+- line:
+  - - 143.6
+    - 126.2
+  - - 171.6
+    - 126.2
+  width: 3
+  dashed: true
+  tone: muted
+- path: M283.1 28.9Q293.1 17.9 303.1 28.9Q293.1 39.9 283.1 28.9Z
+  width: 1.5
+- dots:
+  - - 297.1
+    - 28.9
+  r: 3
+- text: монета
+  at:
+  - 100
+  - 208
+  size: 12
+  anchor: end
+  tone: default
+- text: кажется здесь
+  at:
+  - 139.6
+  - 130.2
+  size: 13
+  anchor: end
+  tone: muted
+- text: воздух
+  at:
+  - 24
+  - 82
+  size: 13
+  anchor: start
+  tone: muted
+- text: вода
+  at:
+  - 24
+  - 112
+  size: 13
+  anchor: start
+  tone: muted

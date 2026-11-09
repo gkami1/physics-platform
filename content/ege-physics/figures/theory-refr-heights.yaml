@@ -1,0 +1,114 @@
+# electro.optics.refraction 14.1: measuring a height by shadows. The Sun's rays (accent, parallel)
+# fall at one angle on a stick of height h and a pole of height H; their shadows l and L are thick
+# muted segments on the ground. The two right triangles are similar, so H/L = h/l.
+# Colours (the «Электродинамика» convention, extended here for optics): a light ray is an accent
+# line with an arrowhead in its middle; the incident and refracted rays solid, a weak partial
+# reflection a thinner accent dashed ray, a full reflection (a mirror, total internal reflection)
+# solid. The normal to a surface a muted dashed line; angles text-colour arcs, always from the
+# normal (α incidence, β reflection, γ refraction). A denser medium (water, glass) a surface
+# fill with a text-colour boundary, air none; a mirror a text-colour line hatched on its back.
+# Objects and the eye in the text colour; an image (virtual) and the continuations of rays
+# behind a mirror or a surface muted dashed. A shadow two layers of a muted tint, a penumbra
+# one. Wavefronts thin accent lines across the rays. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 198
+items:
+- line:
+  - - 10
+    - 170
+  - - 390
+    - 170
+  width: 1.5
+- line:
+  - - 20
+    - 102.0
+  - - 105.0
+    - 170
+  width: 1.4
+  tone: accent
+- path: M76.4 147.2L68 145L72.5 139.3Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 146
+    - 18.0
+  - - 336.0
+    - 170
+  width: 1.4
+  tone: accent
+- path: M263.7 112.2L255.3 110L259.8 104.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 50
+    - 170
+  - - 50
+    - 126
+  width: 3.4
+- line:
+  - - 186
+    - 170
+  - - 186
+    - 50
+  width: 3.4
+- line:
+  - - 50
+    - 170
+  - - 105.0
+    - 170
+  width: 5
+  tone: muted
+- line:
+  - - 186
+    - 170
+  - - 336.0
+    - 170
+  width: 5
+  tone: muted
+- text: '*h*'
+  at:
+  - 42
+  - 153.0
+  anchor: end
+  size: 15
+- text: '*H*'
+  at:
+  - 178
+  - 115.0
+  anchor: end
+  size: 15
+- text: '*l*'
+  at:
+  - 77.5
+  - 190
+  size: 15
+- text: '*L*'
+  at:
+  - 261.0
+  - 190
+  size: 15
+- text: палка
+  at:
+  - 44
+  - 190
+  size: 13
+  anchor: end
+  tone: muted
+- text: столб
+  at:
+  - 180
+  - 190
+  size: 13
+  anchor: end
+  tone: muted
+- text: лучи Солнца параллельны
+  at:
+  - 392
+  - 20
+  size: 13
+  anchor: end
+  tone: muted

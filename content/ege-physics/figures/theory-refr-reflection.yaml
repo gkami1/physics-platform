@@ -1,0 +1,101 @@
+# electro.optics.refraction 14.2: the law of reflection. A plane mirror (a text-colour line,
+# hatched below), the normal at the point of incidence (muted dashed), the incident and the
+# reflected ray (accent, both solid: a mirror reflects nearly all the light). The angle of
+# incidence α and the angle of reflection β are arcs from the normal; here both are 40°.
+# Colours (the «Электродинамика» convention, extended here for optics): a light ray is an accent
+# line with an arrowhead in its middle; the incident and refracted rays solid, a weak partial
+# reflection a thinner accent dashed ray, a full reflection (a mirror, total internal reflection)
+# solid. The normal to a surface a muted dashed line; angles text-colour arcs, always from the
+# normal (α incidence, β reflection, γ refraction). A denser medium (water, glass) a surface
+# fill with a text-colour boundary, air none; a mirror a text-colour line hatched on its back.
+# Objects and the eye in the text colour; an image (virtual) and the continuations of rays
+# behind a mirror or a surface muted dashed. A shadow two layers of a muted tint, a penumbra
+# one. Wavefronts thin accent lines across the rays. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 196
+items:
+- hatch:
+  - - 40
+    - 168
+  - - 360
+    - 168
+- line:
+  - - 40
+    - 168
+  - - 360
+    - 168
+  width: 2
+- line:
+  - - 200
+    - 168
+  - - 200
+    - 26
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 103.6
+    - 53.1
+  - - 200
+    - 168
+  width: 2.2
+  tone: accent
+- path: M155.6 115.1L145.8 110.4L152.7 104.6Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 200
+    - 168
+  - - 296.4
+    - 53.1
+  width: 2.2
+  tone: accent
+- path: M252.1 106L249.1 116.5L242.2 110.7Z
+  fill: solid
+  tone: accent
+  width: 0
+- angle:
+  - 200
+  - 168
+  start: 90
+  end: 130
+  r: 46
+  label: '*α*'
+- angle:
+  - 200
+  - 168
+  start: 50
+  end: 90
+  r: 46
+  label: '*β*'
+- text: падающий луч
+  at:
+  - 99.6
+  - 43.1
+  size: 13
+  anchor: middle
+  tone: muted
+- text: отражённый луч
+  at:
+  - 300.4
+  - 43.1
+  size: 13
+  anchor: middle
+  tone: muted
+- text: перпендикуляр
+  at:
+  - 200
+  - 16
+  size: 13
+  anchor: middle
+  tone: muted
+- text: зеркало
+  at:
+  - 356
+  - 160
+  size: 13
+  anchor: end
+  tone: muted

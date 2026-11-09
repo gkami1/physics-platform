@@ -1,0 +1,199 @@
+# electro.optics.refraction 14.7: total internal reflection. Rays 1–4 from a lamp under water
+# (an accent dot, n = 1,33) at growing angles. Rays 1 and 2 leave the water, bending away from
+# the normal, and a little light is reflected (thin dashed). Ray 3 falls at the critical angle α₀
+# (≈ 49°, arc from the normal): it is refracted along the surface. Ray 4, at a larger angle, does
+# not leave the water at all and is reflected completely (solid).
+# Colours (the «Электродинамика» convention, extended here for optics): a light ray is an accent
+# line with an arrowhead in its middle; the incident and refracted rays solid, a weak partial
+# reflection a thinner accent dashed ray, a full reflection (a mirror, total internal reflection)
+# solid. The normal to a surface a muted dashed line; angles text-colour arcs, always from the
+# normal (α incidence, β reflection, γ refraction). A denser medium (water, glass) a surface
+# fill with a text-colour boundary, air none; a mirror a text-colour line hatched on its back.
+# Objects and the eye in the text colour; an image (virtual) and the continuations of rays
+# behind a mirror or a surface muted dashed. A shadow two layers of a muted tint, a penumbra
+# one. Wavefronts thin accent lines across the rays. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 230
+items:
+- rect:
+  - 10
+  - 100
+  - 380
+  - 126
+  fill: surface
+  width: 0
+  tone: muted
+- line:
+  - - 10
+    - 100
+  - - 390
+    - 100
+  width: 1.4
+- line:
+  - - 60
+    - 206
+  - - 90.4
+    - 100
+  width: 1.8
+  tone: accent
+- path: M79.6 137.8L80.8 146.5L73.9 144.5Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 90.4
+    - 100
+  - - 105.8
+    - 153.8
+  width: 1.1
+  tone: accent
+  dashed: true
+- path: M101 136.9L95.3 130.2L102.2 128.2Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 90.4
+    - 100
+  - - 119.7
+    - 25.6
+  width: 1.8
+  tone: accent
+- path: M109.8 50.9L110.2 59.6L103.5 57Z
+  fill: solid
+  tone: accent
+  width: 0
+- text: '1'
+  at:
+  - 124.1
+  - 19.4
+  size: 13
+- line:
+  - - 60
+    - 206
+  - - 131.5
+    - 100
+  width: 1.8
+  tone: accent
+- path: M105.6 138.4L104.1 147.1L98.1 143Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 131.5
+    - 100
+  - - 191.0
+    - 46.5
+  width: 1.8
+  tone: accent
+- path: M170.8 64.7L167.2 72.7L162.4 67.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- text: '2'
+  at:
+  - 199.9
+  - 43.5
+  size: 13
+- line:
+  - - 60
+    - 206
+  - - 180.9
+    - 100
+  width: 1.8
+  tone: accent
+- path: M136.1 139.2L132.5 147.2L127.8 141.8Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 180.9
+    - 100
+  - - 223.0
+    - 136.9
+  width: 1.1
+  tone: accent
+  dashed: true
+- path: M209.8 125.3L201.4 122.7L206.1 117.3Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 180.9
+    - 100
+  - - 254.9
+    - 100.0
+  width: 1.8
+  tone: accent
+- path: M230.1 100L222.1 103.6L222.1 96.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- text: '3'
+  at:
+  - 246.9
+  - 93
+  size: 13
+- line:
+  - - 180.9
+    - 70
+  - - 180.9
+    - 160
+  width: 1
+  dashed: true
+  tone: muted
+- angle:
+  - 180.9
+  - 100
+  start: 221.24653336867277
+  end: 270
+  r: 40
+  label: '*α*_{0}'
+- line:
+  - - 60
+    - 206
+  - - 259.4
+    - 100
+  width: 1.8
+  tone: accent
+- path: M183.9 140.1L178.5 147.1L175.1 140.7Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 259.4
+    - 100
+  - - 321.2
+    - 132.9
+  width: 1.8
+  tone: accent
+- path: M300.7 122L291.9 121.4L295.3 115Z
+  fill: solid
+  tone: accent
+  width: 0
+- text: '4'
+  at:
+  - 329.2
+  - 130.9
+  size: 13
+- dots:
+  - - 60
+    - 206
+  r: 4.5
+  tone: accent
+- text: воздух
+  at:
+  - 24
+  - 90
+  size: 13
+  anchor: start
+  tone: muted
+- text: вода
+  at:
+  - 24
+  - 120
+  size: 13
+  anchor: start
+  tone: muted
