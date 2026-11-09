@@ -3444,3 +3444,134 @@ task-answer .final {
   color: var(--accent);
   font-weight: 600;
 }
+
+/* <pp-rails> (src/lib/sims/rails.ts): a rod sliding on rails in a uniform field across the
+   picture, seen from above. The field a sparse grid of accent dots (towards us) or crosses
+   (away), rails, the resistor and the rod in the text colour, the area of the circuit a muted
+   tint, the induced current accent, the velocity green, the Ampère force red. Two chip
+   fieldsets: the last of type, which .pfx-chips turns green, is kept accent here. */
+.rail-chips legend {
+  width: 5.2rem;
+  margin-right: 0.2rem;
+}
+
+.rail-chips span {
+  padding: 0.25rem 0.7rem;
+}
+
+.pfx-chips.rail-chips input:checked + span {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.rail-chips {
+  margin: 0 0 0.5rem;
+}
+
+.rail-dot {
+  fill: var(--accent);
+}
+
+.rail-cross {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.4;
+}
+
+.rail-area {
+  fill: color-mix(in srgb, var(--muted) 22%, transparent);
+}
+
+.rail-wire {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 2.2;
+}
+
+.rail-resistor,
+.rail-rod {
+  fill: var(--surface);
+  stroke: var(--text);
+  stroke-width: 1.8;
+}
+
+.rail-i {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.rail-i-head {
+  fill: var(--accent);
+}
+
+.rail-v {
+  fill: none;
+  stroke: var(--ok);
+  stroke-width: 2.2;
+}
+
+.rail-v-head {
+  fill: var(--ok);
+}
+
+.rail-f {
+  fill: none;
+  stroke: var(--bad);
+  stroke-width: 2.4;
+}
+
+.rail-f-head {
+  fill: var(--bad);
+}
+
+.sim-svg .rail-label {
+  fill: var(--text);
+  font-size: 15px;
+  /* a halo in the panel colour keeps labels readable over the field marks */
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.sim-svg .rail-il {
+  fill: var(--accent);
+}
+
+.sim-svg .rail-vl {
+  fill: var(--ok);
+}
+
+.sim-svg .rail-fl {
+  fill: var(--bad);
+}
+
+.rail-table {
+  width: 100%;
+  margin: 0.75rem 0 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.rail-table th,
+.rail-table td {
+  padding: 0.2rem 0.35rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+.rail-table th {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.rail-table td {
+  white-space: nowrap;
+}
+
+.rail-table tr.rail-fixed td {
+  color: var(--accent);
+  font-weight: 600;
+}

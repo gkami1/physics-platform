@@ -1,0 +1,154 @@
+# electro.induction.faraday 10.7: a rod on rails, seen from above, in a field away from us
+# (accent crosses). The rails are joined by a resistor R on the left; the rod slides to the
+# right (green v), the circuit's area (muted tint) grows. The induced current I (accent)
+# goes up in the rod (q v × B with Bz = −1 points up), left along the top rail, down the
+# resistor and right along the bottom rail — counter-clockwise, so its field inside is
+# towards us, against the growing flux. The Ampère force on the rod (red) points left, against v.
+# Colours (the «Электродинамика» convention with the magnetism extension of 8.x and 9.x):
+# magnetic field lines in the text colour, thin, with small arrowheads; the vector B an accent
+# arrow, the induced field B_инд an accent dashed arrow; a field across the page a sparse grid
+# of accent «×» (away from us) or «·» (towards us). A magnet's N half an accent tint, its S half
+# a muted tint. Wires, coils, rings, rails and frames in the text colour; a frame's normal n a
+# text-colour arrow; the induced current an accent arrow beside the wire or an accent arrowhead
+# on a ring. A moving magnet's or rod's velocity green; the Lorentz and Ampère forces red; a
+# charged particle a surface circle with its sign; the area that the flux goes through a muted
+# tint; galvanometer needles in the text colour; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 228
+items:
+- rect:
+  - 56
+  - 50
+  - 206
+  - 126
+  fill: accent
+  tone: muted
+  width: 0
+- path: M85.5 79.5L94.5 88.5M85.5 88.5L94.5 79.5M85.5 139.5L94.5 148.5M85.5 148.5L94.5 139.5M145.5 79.5L154.5
+    88.5M145.5 88.5L154.5 79.5M145.5 139.5L154.5 148.5M145.5 148.5L154.5 139.5M205.5 79.5L214.5 88.5M205.5
+    88.5L214.5 79.5M205.5 139.5L214.5 148.5M205.5 148.5L214.5 139.5
+  width: 1.4
+  tone: accent
+- path: M317.5 19.5L326.5 28.5M317.5 28.5L326.5 19.5M317.5 79.5L326.5 88.5M317.5 88.5L326.5 79.5M317.5
+    139.5L326.5 148.5M317.5 148.5L326.5 139.5M317.5 199.5L326.5 208.5M317.5 208.5L326.5 199.5M365.5 19.5L374.5
+    28.5M365.5 28.5L374.5 19.5M365.5 79.5L374.5 88.5M365.5 88.5L374.5 79.5M365.5 139.5L374.5 148.5M365.5
+    148.5L374.5 139.5M365.5 199.5L374.5 208.5M365.5 208.5L374.5 199.5
+  width: 1.4
+  tone: accent
+- line:
+  - - 56
+    - 50
+  - - 388
+    - 50
+  width: 2.2
+- line:
+  - - 56
+    - 176
+  - - 388
+    - 176
+  width: 2.2
+- element: resistor
+  at:
+  - 56
+  - 113.0
+  vertical: true
+  label: '*R*'
+  label_side: 1
+- line:
+  - - 56
+    - 50
+  - - 56
+    - 93.0
+  width: 2.2
+- line:
+  - - 56
+    - 176
+  - - 56
+    - 133.0
+  width: 2.2
+- rect:
+  - 257
+  - 36
+  - 10
+  - 154
+  fill: surface
+  width: 1.8
+- arrow:
+  - - 276
+    - 113
+  - - 332
+    - 113
+  tone: vel
+  width: 2.2
+  label: '*v*'
+  label_at:
+  - 344
+  - 118
+- arrow:
+  - - 246
+    - 150
+  - - 246
+    - 88
+  tone: accent
+  label: '*I*'
+  label_at:
+  - 232
+  - 98
+- arrow:
+  - - 180
+    - 38
+  - - 120
+    - 38
+  tone: accent
+- arrow:
+  - - 120
+    - 188
+  - - 180
+    - 188
+  tone: accent
+- arrow:
+  - - 232
+    - 113
+  - - 182
+    - 113
+  tone: force
+  width: 2.4
+  label: '*F*_А'
+  label_at:
+  - 166
+  - 132
+- line:
+  - - 23
+    - 50
+  - - 33
+    - 50
+  width: 1
+  tone: muted
+- line:
+  - - 23
+    - 176
+  - - 33
+    - 176
+  width: 1
+  tone: muted
+- line:
+  - - 28
+    - 50
+  - - 28
+    - 176
+  width: 1
+  tone: muted
+- text: '*l*'
+  at:
+  - 20
+  - 118.0
+  size: 15
+  anchor: end
+- text: контур растёт, поток растёт
+  at:
+  - 150
+  - 214
+  size: 13
+  tone: muted

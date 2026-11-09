@@ -1,0 +1,242 @@
+# electro.induction.faraday 10.3: Lenz's rule with a ring, in two rows. The magnet's N faces
+# the ring, so its field B at the ring points right (accent). Coming closer (green v), the
+# flux grows: the induced field B_инд (accent dashed) points left, against B, the current I
+# (accent arrowheads on the ring) goes up at the front and down at the back (the circulation
+# whose right-hand normal is −X), and the ring is pushed away (red F). Moving away: the flux
+# falls, B_инд points right, along B, the current goes the other way and the ring is pulled
+# after the magnet.
+# Colours (the «Электродинамика» convention with the magnetism extension of 8.x and 9.x):
+# magnetic field lines in the text colour, thin, with small arrowheads; the vector B an accent
+# arrow, the induced field B_инд an accent dashed arrow; a field across the page a sparse grid
+# of accent «×» (away from us) or «·» (towards us). A magnet's N half an accent tint, its S half
+# a muted tint. Wires, coils, rings, rails and frames in the text colour; a frame's normal n a
+# text-colour arrow; the induced current an accent arrow beside the wire or an accent arrowhead
+# on a ring. A moving magnet's or rod's velocity green; the Lorentz and Ampère forces red; a
+# charged particle a surface circle with its sign; the area that the flux goes through a muted
+# tint; galvanometer needles in the text colour; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 300
+items:
+- text: 'магнит приближают: поток растёт, кольцо отталкивается'
+  at:
+  - 12
+  - 18
+  size: 13
+  anchor: start
+  tone: muted
+- rect:
+  - 96
+  - 65
+  - 52.0
+  - 26
+  fill: accent
+  tone: muted
+  width: 1.6
+- text: S
+  at:
+  - 122.0
+  - 84.0
+  size: 18
+- rect:
+  - 148.0
+  - 65
+  - 52.0
+  - 26
+  fill: accent
+  tone: accent
+  width: 1.6
+- text: N
+  at:
+  - 174.0
+  - 84.0
+  size: 18
+- arrow:
+  - - 126
+    - 52
+  - - 176
+    - 52
+  tone: vel
+  width: 2.2
+  label: '*v*'
+  label_at:
+  - 188
+  - 57
+- arrow:
+  - - 196
+    - 82
+  - - 242
+    - 82
+  tone: accent
+- text: '*B*'
+  at:
+  - 219
+  - 102
+  size: 15
+  tone: accent
+- path: M272 40L274 39.7L276 39.7L277.9 39.9L279.8 40.5L281.6 41.3L283.4 42.4L285.1 43.8L286.7 45.5L288.1
+    47.4L289.5 49.5L290.7 51.8L291.7 54.4L292.7 57.1L293.4 60L294 63L294.5 66.2L294.7 69.4L294.8 72.7L294.7
+    76L294.5 79.4L294 82.7L293.4 86L292.7 89.2L291.7 92.4L290.7 95.4L289.5 98.4L288.1 101.1L286.7 103.7L285.1
+    106.1L283.4 108.2L281.6 110.2L279.8 111.9L277.9 113.3L276 114.5L274 115.4L272 116L270 116.3L268 116.3L266.1
+    116.1L264.2 115.5L262.4 114.7L260.6 113.6L258.9 112.2L257.3 110.5L255.9 108.6L254.5 106.5L253.3 104.2L252.3
+    101.6L251.3 98.9L250.6 96L250 93L249.5 89.8L249.3 86.6L249.2 83.3L249.3 80L249.5 76.6L250 73.3L250.6
+    70L251.3 66.8L252.3 63.6L253.3 60.6L254.5 57.6L255.9 54.9L257.3 52.3L258.9 49.9L260.6 47.8L262.4 45.8L264.2
+    44.1L266.1 42.7L268 41.5L270 40.6L272 40
+  width: 2.2
+- arrow:
+  - - 302
+    - 54
+  - - 246
+    - 54
+  tone: accent
+  dashed: true
+  width: 2
+- text: '*B*_инд'
+  at:
+  - 330
+  - 38
+  size: 14
+  tone: accent
+- arrow:
+  - - 294.8
+    - 80.7
+  - - 294.8
+    - 64.7
+  tone: accent
+  width: 2
+- arrow:
+  - - 249.2
+    - 75.3
+  - - 249.2
+    - 91.3
+  tone: accent
+  width: 2
+- text: '*I*'
+  at:
+  - 308.8
+  - 92.7
+  size: 15
+  tone: accent
+- arrow:
+  - - 318
+    - 112
+  - - 368
+    - 112
+  tone: force
+  width: 2.4
+  label: '*F*'
+  label_at:
+  - 374
+  - 108
+- text: 'магнит удаляют: поток убывает, кольцо притягивается'
+  at:
+  - 12
+  - 168
+  size: 13
+  anchor: start
+  tone: muted
+- rect:
+  - 60
+  - 215
+  - 52.0
+  - 26
+  fill: accent
+  tone: muted
+  width: 1.6
+- text: S
+  at:
+  - 86.0
+  - 234.0
+  size: 18
+- rect:
+  - 112.0
+  - 215
+  - 52.0
+  - 26
+  fill: accent
+  tone: accent
+  width: 1.6
+- text: N
+  at:
+  - 138.0
+  - 234.0
+  size: 18
+- arrow:
+  - - 140
+    - 202
+  - - 90
+    - 202
+  tone: vel
+  width: 2.2
+  label: '*v*'
+  label_at:
+  - 78
+  - 207
+- arrow:
+  - - 196
+    - 232
+  - - 242
+    - 232
+  tone: accent
+- text: '*B*'
+  at:
+  - 219
+  - 252
+  size: 15
+  tone: accent
+- path: M272 190L274 189.7L276 189.7L277.9 189.9L279.8 190.5L281.6 191.3L283.4 192.4L285.1 193.8L286.7
+    195.5L288.1 197.4L289.5 199.5L290.7 201.8L291.7 204.4L292.7 207.1L293.4 210L294 213L294.5 216.2L294.7
+    219.4L294.8 222.7L294.7 226L294.5 229.4L294 232.7L293.4 236L292.7 239.2L291.7 242.4L290.7 245.4L289.5
+    248.4L288.1 251.1L286.7 253.7L285.1 256.1L283.4 258.2L281.6 260.2L279.8 261.9L277.9 263.3L276 264.5L274
+    265.4L272 266L270 266.3L268 266.3L266.1 266.1L264.2 265.5L262.4 264.7L260.6 263.6L258.9 262.2L257.3
+    260.5L255.9 258.6L254.5 256.5L253.3 254.2L252.3 251.6L251.3 248.9L250.6 246L250 243L249.5 239.8L249.3
+    236.6L249.2 233.3L249.3 230L249.5 226.6L250 223.3L250.6 220L251.3 216.8L252.3 213.6L253.3 210.6L254.5
+    207.6L255.9 204.9L257.3 202.3L258.9 199.9L260.6 197.8L262.4 195.8L264.2 194.1L266.1 192.7L268 191.5L270
+    190.6L272 190
+  width: 2.2
+- arrow:
+  - - 246
+    - 204
+  - - 302
+    - 204
+  tone: accent
+  dashed: true
+  width: 2
+- text: '*B*_инд'
+  at:
+  - 330
+  - 188
+  size: 14
+  tone: accent
+- arrow:
+  - - 294.8
+    - 214.7
+  - - 294.8
+    - 230.7
+  tone: accent
+  width: 2
+- arrow:
+  - - 249.2
+    - 241.3
+  - - 249.2
+    - 225.3
+  tone: accent
+  width: 2
+- text: '*I*'
+  at:
+  - 308.8
+  - 242.7
+  size: 15
+  tone: accent
+- arrow:
+  - - 252
+    - 278
+  - - 202
+    - 278
+  tone: force
+  width: 2.4
+  label: '*F*'
+  label_at:
+  - 188
+  - 283

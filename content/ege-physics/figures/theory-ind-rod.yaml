@@ -1,0 +1,96 @@
+# electro.induction.faraday 10.7: a metal rod (surface rectangle) flies to the right (green v)
+# in a field away from us (accent crosses). An electron in it moves with it and feels the
+# Lorentz force down (red: q v × B with Bz = −1, q < 0), so electrons gather at the bottom
+# end («−») and the top end is left «+».
+# Colours (the «Электродинамика» convention with the magnetism extension of 8.x and 9.x):
+# magnetic field lines in the text colour, thin, with small arrowheads; the vector B an accent
+# arrow, the induced field B_инд an accent dashed arrow; a field across the page a sparse grid
+# of accent «×» (away from us) or «·» (towards us). A magnet's N half an accent tint, its S half
+# a muted tint. Wires, coils, rings, rails and frames in the text colour; a frame's normal n a
+# text-colour arrow; the induced current an accent arrow beside the wire or an accent arrowhead
+# on a ring. A moving magnet's or rod's velocity green; the Lorentz and Ampère forces red; a
+# charged particle a surface circle with its sign; the area that the flux goes through a muted
+# tint; galvanometer needles in the text colour; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 250
+items:
+- path: M35.5 31.5L44.5 40.5M35.5 40.5L44.5 31.5M35.5 91.5L44.5 100.5M35.5 100.5L44.5 91.5M35.5 151.5L44.5
+    160.5M35.5 160.5L44.5 151.5M35.5 211.5L44.5 220.5M35.5 220.5L44.5 211.5M95.5 31.5L104.5 40.5M95.5
+    40.5L104.5 31.5M95.5 91.5L104.5 100.5M95.5 100.5L104.5 91.5M95.5 151.5L104.5 160.5M95.5 160.5L104.5
+    151.5M95.5 211.5L104.5 220.5M95.5 220.5L104.5 211.5M295.5 31.5L304.5 40.5M295.5 40.5L304.5 31.5M295.5
+    91.5L304.5 100.5M295.5 100.5L304.5 91.5M295.5 151.5L304.5 160.5M295.5 160.5L304.5 151.5M295.5 211.5L304.5
+    220.5M295.5 220.5L304.5 211.5M355.5 31.5L364.5 40.5M355.5 40.5L364.5 31.5M355.5 91.5L364.5 100.5M355.5
+    100.5L364.5 91.5M355.5 151.5L364.5 160.5M355.5 160.5L364.5 151.5M355.5 211.5L364.5 220.5M355.5 220.5L364.5
+    211.5
+  width: 1.4
+  tone: accent
+- rect:
+  - 180.0
+  - 30
+  - 40
+  - 176
+  fill: surface
+  width: 1.8
+- text: +
+  at:
+  - 191
+  - 49
+  size: 15
+- text: −
+  at:
+  - 191
+  - 198
+  size: 15
+- text: +
+  at:
+  - 209
+  - 49
+  size: 15
+- text: −
+  at:
+  - 209
+  - 198
+  size: 15
+- arrow:
+  - - 232
+    - 118
+  - - 292
+    - 118
+  tone: vel
+  width: 2.2
+  label: '*v*'
+  label_at:
+  - 304
+  - 123
+- circle:
+  - 200
+  - 92
+  r: 9
+  fill: surface
+  width: 1.4
+- text: −
+  at:
+  - 200
+  - 97
+  size: 15
+- arrow:
+  - - 200
+    - 103
+  - - 200
+    - 150
+  tone: force
+  width: 2.4
+- text: '*F*_Л'
+  at:
+  - 166
+  - 142
+  size: 15
+  tone: force
+- text: электроны движутся вместе со стержнем
+  at:
+  - 200
+  - 238
+  size: 13
+  tone: muted

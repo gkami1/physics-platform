@@ -1,0 +1,131 @@
+# electro.induction.faraday 10.5: the flux Φ(t) (top) and the EMF |ℰ|(t) (bottom), qualitative.
+# The flux grows fast, stays, then falls slowly; the EMF is the steepness of Φ(t): large, zero,
+# small. Muted dashed guides join the moments where the slope changes.
+# Colours (the «Электродинамика» convention with the magnetism extension of 8.x and 9.x):
+# magnetic field lines in the text colour, thin, with small arrowheads; the vector B an accent
+# arrow, the induced field B_инд an accent dashed arrow; a field across the page a sparse grid
+# of accent «×» (away from us) or «·» (towards us). A magnet's N half an accent tint, its S half
+# a muted tint. Wires, coils, rings, rails and frames in the text colour; a frame's normal n a
+# text-colour arrow; the induced current an accent arrow beside the wire or an accent arrowhead
+# on a ring. A moving magnet's or rod's velocity green; the Lorentz and Ampère forces red; a
+# charged particle a surface circle with its sign; the area that the flux goes through a muted
+# tint; galvanometer needles in the text colour; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 266
+items:
+- arrow:
+  - - 46
+    - 122
+  - - 376
+    - 122
+  width: 1.5
+- arrow:
+  - - 46
+    - 122
+  - - 46
+    - 10
+  width: 1.5
+- text: '*t*'
+  at:
+  - 374
+  - 140
+  anchor: end
+  size: 14
+- text: Φ
+  at:
+  - 56
+  - 20
+  anchor: start
+  size: 14
+- text: '0'
+  at:
+  - 40
+  - 137
+  size: 12
+  anchor: end
+- arrow:
+  - - 46
+    - 248
+  - - 376
+    - 248
+  width: 1.5
+- arrow:
+  - - 46
+    - 248
+  - - 46
+    - 148
+  width: 1.5
+- text: '*t*'
+  at:
+  - 374
+  - 266
+  anchor: end
+  size: 14
+- text: '|ℰ|'
+  at:
+  - 56
+  - 158
+  anchor: start
+  size: 14
+- text: '0'
+  at:
+  - 40
+  - 263
+  size: 12
+  anchor: end
+- path: M46 86L121 32L221 32L346 86
+  width: 2.2
+  tone: accent
+- path: M46 212L121 212L121 248L221 248L221 226.4L346 226.4
+  width: 2.2
+  tone: accent
+- line:
+  - - 121.0
+    - 22
+  - - 121.0
+    - 248
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 221.0
+    - 22
+  - - 221.0
+    - 248
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 346
+    - 22
+  - - 346
+    - 248
+  width: 1
+  dashed: true
+  tone: muted
+- text: растёт быстро
+  at:
+  - 81.5
+  - 112
+  size: 12
+  tone: muted
+- text: не меняется
+  at:
+  - 175.0
+  - 112
+  size: 12
+  tone: muted
+- text: убывает медленно
+  at:
+  - 283.5
+  - 112
+  size: 12
+  tone: muted
+- text: ЭДС = 0
+  at:
+  - 171.0
+  - 240
+  size: 13
+  tone: muted
