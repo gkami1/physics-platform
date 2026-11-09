@@ -1,84 +1,518 @@
-# electro.optics.wave: diffraction grating and the directions to the maxima
+# electro.optics.wave 16.5: a diffraction grating (text colour, slits as gaps) lit by a parallel
+# beam (accent arrows). Behind it light goes on in the directions of the maxima, sin φ = kλ/d,
+# drawn for d = 3.2λ and k = 0, ±1, ±2; a converging lens (15.x) gathers each parallel bundle
+# to one point of its focal plane, at F tg φ from the axis, where the screen stands. The principal
+# axis muted dash-dot; every ray computed from the thin-lens rule for parallel bundles.
+# Colours (the optics convention of 14.x–15.x): a light ray is an accent line with an arrowhead
+# in its middle; the normal muted dashed; angles as arcs; a denser medium (glass, a film) a surface
+# fill with a text-colour boundary; a lens a text-colour line with open arrowheads, the principal
+# axis muted dash-dot; wavefronts thin accent lines; opaque screens and walls in the text colour.
+# Coloured light (decided here): the site palette has no spectrum colours and figures follow the
+# theme, so a colour is named, never painted. A ray of one colour is an accent ray labelled with
+# its colour; where red and violet share a figure, red (the long wave) is solid and violet dashed.
+# White light is a thicker accent ray labelled «белый». A spectrum is a strip of surface cells with
+# text-colour borders, each holding its colour's initial (к о ж з г с ф), red on the long-wave side;
+# a spectrum of a grating order is an accent-tinted band with «ф» and «к» at its ends.
+# An intensity pattern (brightness along a screen) is a graph with an accent curve beside the
+# screen; lengths (d, Δ, r) in the text colour, guides and notes muted.
 kind: diagram
-size: [400, 260]
+size:
+- 400
+- 256
 items:
-- line: [[150, 30], [150, 230]]
+- path: M96 130L110 130M113.5 130L115 130M118.5 130L132.5 130M136 130L137.5 130M141 130L155 130M158.5
+    130L160 130M163.5 130L177.5 130M181 130L182.5 130M186 130L200 130M203.5 130L205 130M208.5 130L222.5
+    130M226 130L227.5 130M231 130L245 130M248.5 130L250 130M253.5 130L267.5 130M271 130L272.5 130M276
+    130L290 130M293.5 130L295 130M298.5 130L310 130
+  width: 1
+  tone: muted
+- line:
+  - - 110.0
+    - 30.0
+  - - 110.0
+    - 34.0
   width: 3
-  dashed: true
-- line: [[40, 50], [40, 210]]
-  width: 1.3
+- line:
+  - - 110.0
+    - 37.0
+  - - 110.0
+    - 41.0
+  width: 3
+- line:
+  - - 110.0
+    - 44.0
+  - - 110.0
+    - 48.0
+  width: 3
+- line:
+  - - 110.0
+    - 51.0
+  - - 110.0
+    - 55.0
+  width: 3
+- line:
+  - - 110.0
+    - 58.0
+  - - 110.0
+    - 62.0
+  width: 3
+- line:
+  - - 110.0
+    - 65.0
+  - - 110.0
+    - 69.0
+  width: 3
+- line:
+  - - 110.0
+    - 72.0
+  - - 110.0
+    - 76.0
+  width: 3
+- line:
+  - - 110.0
+    - 79.0
+  - - 110.0
+    - 83.0
+  width: 3
+- line:
+  - - 110.0
+    - 86.0
+  - - 110.0
+    - 90.0
+  width: 3
+- line:
+  - - 110.0
+    - 93.0
+  - - 110.0
+    - 97.0
+  width: 3
+- line:
+  - - 110.0
+    - 100.0
+  - - 110.0
+    - 104.0
+  width: 3
+- line:
+  - - 110.0
+    - 107.0
+  - - 110.0
+    - 111.0
+  width: 3
+- line:
+  - - 110.0
+    - 114.0
+  - - 110.0
+    - 118.0
+  width: 3
+- line:
+  - - 110.0
+    - 121.0
+  - - 110.0
+    - 125.0
+  width: 3
+- line:
+  - - 110.0
+    - 128.0
+  - - 110.0
+    - 132.0
+  width: 3
+- line:
+  - - 110.0
+    - 135.0
+  - - 110.0
+    - 139.0
+  width: 3
+- line:
+  - - 110.0
+    - 142.0
+  - - 110.0
+    - 146.0
+  width: 3
+- line:
+  - - 110.0
+    - 149.0
+  - - 110.0
+    - 153.0
+  width: 3
+- line:
+  - - 110.0
+    - 156.0
+  - - 110.0
+    - 160.0
+  width: 3
+- line:
+  - - 110.0
+    - 163.0
+  - - 110.0
+    - 167.0
+  width: 3
+- line:
+  - - 110.0
+    - 170.0
+  - - 110.0
+    - 174.0
+  width: 3
+- line:
+  - - 110.0
+    - 177.0
+  - - 110.0
+    - 181.0
+  width: 3
+- line:
+  - - 110.0
+    - 184.0
+  - - 110.0
+    - 188.0
+  width: 3
+- line:
+  - - 110.0
+    - 191.0
+  - - 110.0
+    - 195.0
+  width: 3
+- line:
+  - - 110.0
+    - 198.0
+  - - 110.0
+    - 202.0
+  width: 3
+- line:
+  - - 110.0
+    - 205.0
+  - - 110.0
+    - 209.0
+  width: 3
+- line:
+  - - 110.0
+    - 212.0
+  - - 110.0
+    - 216.0
+  width: 3
+- line:
+  - - 110.0
+    - 219.0
+  - - 110.0
+    - 223.0
+  width: 3
+- line:
+  - - 110.0
+    - 226.0
+  - - 110.0
+    - 230.0
+  width: 3
+- arrow:
+  - - 60
+    - 100
+  - - 104.0
+    - 100
+  width: 1.4
   tone: accent
-- line: [[70, 50], [70, 210]]
-  width: 1.3
+- arrow:
+  - - 60
+    - 130
+  - - 104.0
+    - 130
+  width: 1.4
   tone: accent
-- line: [[100, 50], [100, 210]]
-  width: 1.3
+- arrow:
+  - - 60
+    - 160
+  - - 104.0
+    - 160
+  width: 1.4
   tone: accent
-- arrow: [[30, 130], [135, 130]]
-  tone: accent
-  width: 1.5
-- line: [[350, 20], [350, 240]]
+- line:
+  - - 190
+    - 22
+  - - 190
+    - 238
   width: 2
-- line: [[150, 130], [350, 130]]
-  tone: force
-  width: 1.8
-- circle: [350, 130]
-  r: 4
+- line:
+  - - 184
+    - 30
+  - - 190
+    - 22
+  - - 196
+    - 30
+  width: 2
+- line:
+  - - 184
+    - 230
+  - - 190
+    - 238
+  - - 196
+    - 230
+  width: 2
+- line:
+  - - 310.0
+    - 14
+  - - 310.0
+    - 246
+  width: 2.4
+- line:
+  - - 110.0
+    - 43.9
+  - - 190
+    - 108.0
+  width: 1.3
+  tone: accent
+- line:
+  - - 190
+    - 108.0
+  - - 310.0
+    - 226.1
+  width: 1.3
+  tone: accent
+- path: M259.4 176.3L251.2 173.3L256.2 168.1Z
   fill: solid
-  tone: force
+  tone: accent
+  width: 0
+- line:
+  - - 110.0
+    - 87.9
+  - - 190
+    - 152.0
+  width: 1.3
+  tone: accent
+- line:
+  - - 190
+    - 152.0
+  - - 310.0
+    - 226.1
+  width: 1.3
+  tone: accent
+- path: M260.1 195.3L251.4 194.1L255.2 188Z
+  fill: solid
+  tone: accent
+  width: 0
+- dots:
+  - - 310.0
+    - 226.1
+  r: 3.5
+- text: −2
+  at:
+  - 318.0
+  - 231.0768922830523
+  size: 13
+  anchor: start
+  tone: default
+- line:
+  - - 110.0
+    - 81.7
+  - - 190
+    - 108.0
+  width: 1.3
+  tone: accent
+- line:
+  - - 190
+    - 108.0
+  - - 310.0
+    - 169.5
+  width: 1.3
+  tone: accent
+- path: M260.3 144L251.5 143.6L254.8 137.1Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 110.0
+    - 125.7
+  - - 190
+    - 152.0
+  width: 1.3
+  tone: accent
+- line:
+  - - 190
+    - 152.0
+  - - 310.0
+    - 169.5
+  width: 1.3
+  tone: accent
+- path: M260.7 162.3L252.3 164.7L253.4 157.6Z
+  fill: solid
+  tone: accent
+  width: 0
+- dots:
+  - - 310.0
+    - 169.5
+  r: 3.5
+- text: −1
+  at:
+  - 318.0
+  - 174.47710169758614
+  size: 13
+  anchor: start
+  tone: default
+- line:
+  - - 110.0
+    - 104.0
+  - - 190
+    - 104.0
+  width: 1.3
+  tone: accent
+- line:
+  - - 190
+    - 104.0
+  - - 310.0
+    - 130.0
+  width: 1.3
+  tone: accent
+- path: M260.7 119.3L252.1 121.1L253.6 114.1Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 110.0
+    - 130.0
+  - - 190
+    - 130.0
+  width: 1.3
+  tone: accent
+- line:
+  - - 190
+    - 130.0
+  - - 310.0
+    - 130.0
+  width: 1.3
+  tone: accent
+- path: M260.8 130L252.8 133.6L252.8 126.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 110.0
+    - 156.0
+  - - 190
+    - 156.0
+  width: 1.3
+  tone: accent
+- line:
+  - - 190
+    - 156.0
+  - - 310.0
+    - 130.0
+  width: 1.3
+  tone: accent
+- path: M260.7 140.7L253.6 145.9L252.1 138.9Z
+  fill: solid
+  tone: accent
+  width: 0
+- dots:
+  - - 310.0
+    - 130.0
+  r: 3.5
 - text: '*k* = 0'
-  at: [358, 135]
-  size: 12
+  at:
+  - 318.0
+  - 135.0
+  size: 13
   anchor: start
-- line: [[150, 130], [350, 90]]
-  tone: force
-  width: 1.2
-- circle: [350, 90]
-  r: 4
+  tone: default
+- line:
+  - - 110.0
+    - 134.3
+  - - 190
+    - 108.0
+  width: 1.3
+  tone: accent
+- line:
+  - - 190
+    - 108.0
+  - - 310.0
+    - 90.5
+  width: 1.3
+  tone: accent
+- path: M260.7 97.7L253.4 102.4L252.3 95.3Z
   fill: solid
-  tone: force
-- text: '*k* = 1'
-  at: [358, 95]
-  size: 12
-  anchor: start
-- line: [[150, 130], [350, 170]]
-  tone: force
-  width: 1.2
-- circle: [350, 170]
-  r: 4
+  tone: accent
+  width: 0
+- line:
+  - - 110.0
+    - 178.3
+  - - 190
+    - 152.0
+  width: 1.3
+  tone: accent
+- line:
+  - - 190
+    - 152.0
+  - - 310.0
+    - 90.5
+  width: 1.3
+  tone: accent
+- path: M260.3 116L254.8 122.9L251.5 116.4Z
   fill: solid
-  tone: force
-- text: '*k* = −1'
-  at: [358, 175]
-  size: 12
+  tone: accent
+  width: 0
+- dots:
+  - - 310.0
+    - 90.5
+  r: 3.5
+- text: '1'
+  at:
+  - 318.0
+  - 95.52289830241386
+  size: 13
   anchor: start
-- line: [[150, 130], [350, 45]]
-  tone: force
-  width: 1.2
-- circle: [350, 45]
-  r: 4
+  tone: default
+- line:
+  - - 110.0
+    - 172.1
+  - - 190
+    - 108.0
+  width: 1.3
+  tone: accent
+- line:
+  - - 190
+    - 108.0
+  - - 310.0
+    - 33.9
+  width: 1.3
+  tone: accent
+- path: M260.1 64.7L255.2 72L251.4 65.9Z
   fill: solid
-  tone: force
-- text: '*k* = 2'
-  at: [358, 50]
-  size: 12
-  anchor: start
-- line: [[150, 130], [350, 215]]
-  tone: force
-  width: 1.2
-- circle: [350, 215]
-  r: 4
+  tone: accent
+  width: 0
+- line:
+  - - 110.0
+    - 216.1
+  - - 190
+    - 152.0
+  width: 1.3
+  tone: accent
+- line:
+  - - 190
+    - 152.0
+  - - 310.0
+    - 33.9
+  width: 1.3
+  tone: accent
+- path: M259.4 83.7L256.2 91.9L251.2 86.7Z
   fill: solid
-  tone: force
-- text: '*k* = −2'
-  at: [358, 220]
-  size: 12
+  tone: accent
+  width: 0
+- dots:
+  - - 310.0
+    - 33.9
+  r: 3.5
+- text: '2'
+  at:
+  - 318.0
+  - 38.92310771694771
+  size: 13
   anchor: start
-- angle: [150, 130]
-  start: 0
-  end: 11.31
-  r: 70
-  label: '*φ*'
-- text: '*d* sin *φ* = *kλ*'
-  at: [230, 250]
-  size: 14
+  tone: default
+- text: экран
+  at:
+  - 310.0
+  - 10
+  size: 13
+  anchor: middle
+  tone: muted
+- text: решётка
+  at:
+  - 110.0
+  - 248
+  size: 13
+  anchor: middle
+  tone: muted

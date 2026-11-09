@@ -1,0 +1,118 @@
+# electro.optics.wave 16.1: white light through a glass prism (apex 60°). The white ray (thick
+# accent) meets the left face at the angle of minimum deviation for n = 1,64; inside, red
+# (n = 1.61) and violet (n = 1.67) part, traced by Snell's law at both faces; the fan
+# between them (accent tint) is the spectrum on the screen. Violet is turned more.
+# Colours (the optics convention of 14.x–15.x): a light ray is an accent line with an arrowhead
+# in its middle; the normal muted dashed; angles as arcs; a denser medium (glass, a film) a surface
+# fill with a text-colour boundary; a lens a text-colour line with open arrowheads, the principal
+# axis muted dash-dot; wavefronts thin accent lines; opaque screens and walls in the text colour.
+# Coloured light (decided here): the site palette has no spectrum colours and figures follow the
+# theme, so a colour is named, never painted. A ray of one colour is an accent ray labelled with
+# its colour; where red and violet share a figure, red (the long wave) is solid and violet dashed.
+# White light is a thicker accent ray labelled «белый». A spectrum is a strip of surface cells with
+# text-colour borders, each holding its colour's initial (к о ж з г с ф), red on the long-wave side;
+# a spectrum of a grating order is an accent-tinted band with «ф» and «к» at its ends.
+# An intensity pattern (brightness along a screen) is a graph with an accent curve beside the
+# screen; lengths (d, Δ, r) in the text colour, guides and notes muted.
+kind: diagram
+size:
+- 400
+- 227
+items:
+- path: M150 40L215 152.6L85 152.6Z
+  fill: surface
+  width: 1.5
+- line:
+  - - 8.8
+    - 147.2
+  - - 117.5
+    - 96.3
+  width: 3
+  tone: accent
+- path: M63.2 121.7L56 130L52.2 121.9Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 117.5
+    - 96.3
+  - - 182.1
+    - 95.6
+  width: 1.6
+  tone: accent
+- line:
+  - - 182.1
+    - 95.6
+  - - 345.0
+    - 162.0
+  width: 2
+  tone: accent
+- path: M269.1 131.1L258.1 131.5L261.5 123.1Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 117.5
+    - 96.3
+  - - 182.9
+    - 97.0
+  width: 1.6
+  tone: accent
+  dashed: true
+- line:
+  - - 182.9
+    - 97.0
+  - - 345.0
+    - 183.9
+  width: 2
+  tone: accent
+  dashed: true
+- path: M269.2 143.3L258.3 142.5L262.5 134.6Z
+  fill: solid
+  tone: accent
+  width: 0
+- path: M182.1 95.6L345 162L345 183.9L182.9 97Z
+  fill: accent
+  tone: accent
+  width: 0
+- line:
+  - - 345
+    - 122.0
+  - - 345
+    - 213.9
+  width: 2.4
+- text: экран
+  at:
+  - 345
+  - 113.9966772030923
+  size: 13
+  anchor: middle
+  tone: muted
+- text: красный
+  at:
+  - 351
+  - 159.9966772030923
+  size: 12
+  anchor: start
+  tone: default
+- text: фиолетовый
+  at:
+  - 341
+  - 201.89740346726393
+  size: 12
+  anchor: end
+  tone: default
+- text: белый свет
+  at:
+  - 10.8182380893101
+  - 165.16673972736723
+  size: 13
+  anchor: start
+  tone: default
+- text: стекло
+  at:
+  - 150
+  - 140
+  size: 13
+  anchor: middle
+  tone: muted

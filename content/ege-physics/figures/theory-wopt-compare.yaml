@@ -1,0 +1,311 @@
+# electro.optics.wave 16.7: a prism and a grating side by side. Left: white light (thick accent)
+# through a glass prism, red (n = 1.61) and violet (n = 1.67) traced by Snell's law —
+# violet is turned more. Right: a grating with d = 2,6 мкм; the zero order goes straight and
+# white, in the first orders (±1) violet leaves at sin φ = 380 нм/d and red at 760 нм/d — red is
+# turned more. Red solid, violet dashed, «к» and «ф» at the ends.
+# Colours (the optics convention of 14.x–15.x): a light ray is an accent line with an arrowhead
+# in its middle; the normal muted dashed; angles as arcs; a denser medium (glass, a film) a surface
+# fill with a text-colour boundary; a lens a text-colour line with open arrowheads, the principal
+# axis muted dash-dot; wavefronts thin accent lines; opaque screens and walls in the text colour.
+# Coloured light (decided here): the site palette has no spectrum colours and figures follow the
+# theme, so a colour is named, never painted. A ray of one colour is an accent ray labelled with
+# its colour; where red and violet share a figure, red (the long wave) is solid and violet dashed.
+# White light is a thicker accent ray labelled «белый». A spectrum is a strip of surface cells with
+# text-colour borders, each holding its colour's initial (к о ж з г с ф), red on the long-wave side;
+# a spectrum of a grating order is an accent-tinted band with «ф» and «к» at its ends.
+# An intensity pattern (brightness along a screen) is a graph with an accent curve beside the
+# screen; lengths (d, Δ, r) in the text colour, guides and notes muted.
+kind: diagram
+size:
+- 400
+- 214
+items:
+- path: M88 52L134 131.7L42 131.7Z
+  fill: surface
+  width: 1.5
+- line:
+  - - -7.5
+    - 125.8
+  - - 65.0
+    - 91.8
+  width: 3
+  tone: accent
+- path: M30.6 107.9L23.4 116.3L19.6 108.1Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 65.0
+    - 91.8
+  - - 110.7
+    - 91.3
+  width: 1.5
+  tone: accent
+- line:
+  - - 110.7
+    - 91.3
+  - - 190.0
+    - 123.7
+  width: 1.8
+  tone: accent
+- path: M158.8 110.9L150 111.2L152.7 104.6Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 65.0
+    - 91.8
+  - - 111.3
+    - 92.3
+  width: 1.5
+  tone: accent
+  dashed: true
+- line:
+  - - 111.3
+    - 92.3
+  - - 190.0
+    - 134.5
+  width: 1.8
+  tone: accent
+  dashed: true
+- path: M158.8 117.8L150.1 117.2L153.5 110.8Z
+  fill: solid
+  tone: accent
+  width: 0
+- text: к
+  at:
+  - 195
+  - 125.66181992948049
+  size: 13
+  anchor: start
+  tone: default
+- text: ф
+  at:
+  - 195
+  - 146.53046997486157
+  size: 13
+  anchor: start
+  tone: default
+- text: призма
+  at:
+  - 88
+  - 204
+  size: 13
+  anchor: middle
+  tone: muted
+- line:
+  - - 250.0
+    - 52
+  - - 250.0
+    - 56
+  width: 3
+- line:
+  - - 250.0
+    - 59
+  - - 250.0
+    - 63
+  width: 3
+- line:
+  - - 250.0
+    - 66
+  - - 250.0
+    - 70
+  width: 3
+- line:
+  - - 250.0
+    - 73
+  - - 250.0
+    - 77
+  width: 3
+- line:
+  - - 250.0
+    - 80
+  - - 250.0
+    - 84
+  width: 3
+- line:
+  - - 250.0
+    - 87
+  - - 250.0
+    - 91
+  width: 3
+- line:
+  - - 250.0
+    - 94
+  - - 250.0
+    - 98
+  width: 3
+- line:
+  - - 250.0
+    - 101
+  - - 250.0
+    - 105
+  width: 3
+- line:
+  - - 250.0
+    - 108
+  - - 250.0
+    - 112
+  width: 3
+- line:
+  - - 250.0
+    - 115
+  - - 250.0
+    - 119
+  width: 3
+- line:
+  - - 250.0
+    - 122
+  - - 250.0
+    - 126
+  width: 3
+- line:
+  - - 250.0
+    - 129
+  - - 250.0
+    - 133
+  width: 3
+- line:
+  - - 250.0
+    - 136
+  - - 250.0
+    - 140
+  width: 3
+- line:
+  - - 250.0
+    - 143
+  - - 250.0
+    - 147
+  width: 3
+- line:
+  - - 250.0
+    - 150
+  - - 250.0
+    - 154
+  width: 3
+- line:
+  - - 250.0
+    - 157
+  - - 250.0
+    - 161
+  width: 3
+- line:
+  - - 250.0
+    - 164
+  - - 250.0
+    - 168
+  width: 3
+- line:
+  - - 250.0
+    - 171
+  - - 250.0
+    - 175
+  width: 3
+- line:
+  - - 250.0
+    - 178
+  - - 250.0
+    - 182
+  width: 3
+- line:
+  - - 250.0
+    - 185
+  - - 250.0
+    - 189
+  width: 3
+- line:
+  - - 222
+    - 120.0
+  - - 248.0
+    - 120.0
+  width: 3
+  tone: accent
+- path: M241 120L231 124.5L231 115.5Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 250.0
+    - 120.0
+  - - 345
+    - 120.0
+  width: 3
+  tone: accent
+- path: M303.5 120L293.5 124.5L293.5 115.5Z
+  fill: solid
+  tone: accent
+  width: 0
+- text: белый
+  at:
+  - 350
+  - 125.0
+  size: 12
+  anchor: start
+  tone: default
+- line:
+  - - 250.0
+    - 120.0
+  - - 345.0
+    - 91.0
+  width: 1.8
+  tone: accent
+- path: M311.6 101.2L305 107L302.9 100.1Z
+  fill: solid
+  tone: accent
+  width: 0
+- text: к
+  at:
+  - 350
+  - 95.96253847453862
+  size: 13
+  anchor: start
+  tone: default
+- line:
+  - - 250.0
+    - 120.0
+  - - 345.0
+    - 106.0
+  width: 1.8
+  tone: accent
+  dashed: true
+- path: M311.7 110.9L304.4 115.6L303.3 108.5Z
+  fill: solid
+  tone: accent
+  width: 0
+- text: ф
+  at:
+  - 350
+  - 110.96467147435936
+  size: 13
+  anchor: start
+  tone: default
+- line:
+  - - 250.0
+    - 120.0
+  - - 345.0
+    - 149.0
+  width: 1.8
+  tone: accent
+- path: M311.6 138.8L302.9 139.9L305 133Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 250.0
+    - 120.0
+  - - 345.0
+    - 134.0
+  width: 1.8
+  tone: accent
+  dashed: true
+- path: M311.7 129.1L303.3 131.5L304.4 124.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- text: решётка
+  at:
+  - 250.0
+  - 204
+  size: 13
+  anchor: middle
+  tone: muted

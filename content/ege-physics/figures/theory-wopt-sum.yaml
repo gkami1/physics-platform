@@ -1,0 +1,164 @@
+# electro.optics.wave 16.2: superposition. Two equal waves (accent) add point by point; the sum
+# (text colour) has twice the amplitude when they are in phase and is zero in antiphase.
+# Colours (the optics convention of 14.x–15.x): a light ray is an accent line with an arrowhead
+# in its middle; the normal muted dashed; angles as arcs; a denser medium (glass, a film) a surface
+# fill with a text-colour boundary; a lens a text-colour line with open arrowheads, the principal
+# axis muted dash-dot; wavefronts thin accent lines; opaque screens and walls in the text colour.
+# Coloured light (decided here): the site palette has no spectrum colours and figures follow the
+# theme, so a colour is named, never painted. A ray of one colour is an accent ray labelled with
+# its colour; where red and violet share a figure, red (the long wave) is solid and violet dashed.
+# White light is a thicker accent ray labelled «белый». A spectrum is a strip of surface cells with
+# text-colour borders, each holding its colour's initial (к о ж з г с ф), red on the long-wave side;
+# a spectrum of a grating order is an accent-tinted band with «ф» and «к» at its ends.
+# An intensity pattern (brightness along a screen) is a graph with an accent curve beside the
+# screen; lengths (d, Δ, r) in the text colour, guides and notes muted.
+kind: diagram
+size:
+- 400
+- 228
+items:
+- text: в фазе
+  at:
+  - 109.0
+  - 18
+  size: 14
+  anchor: middle
+  tone: default
+- line:
+  - - 34
+    - 48
+  - - 184
+    - 48
+  width: 1
+  tone: muted
+- line:
+  - - 34
+    - 98
+  - - 184
+    - 98
+  width: 1
+  tone: muted
+- line:
+  - - 34
+    - 170
+  - - 184
+    - 170
+  width: 1
+  tone: muted
+- sine:
+  - 34
+  - 48
+  length: 150
+  amplitude: 13
+  periods: 2
+  tone: accent
+  width: 1.8
+- sine:
+  - 34
+  - 98
+  length: 150
+  amplitude: 13
+  periods: 2
+  phase: 0
+  tone: accent
+  width: 1.8
+- text: +
+  at:
+  - 24
+  - 78
+  size: 16
+  anchor: middle
+  tone: default
+- text: '='
+  at:
+  - 24
+  - 140
+  size: 16
+  anchor: middle
+  tone: default
+- sine:
+  - 34
+  - 170
+  length: 150
+  amplitude: 26
+  periods: 2
+  width: 2.4
+- text: в противофазе
+  at:
+  - 301.0
+  - 18
+  size: 14
+  anchor: middle
+  tone: default
+- line:
+  - - 226
+    - 48
+  - - 376
+    - 48
+  width: 1
+  tone: muted
+- line:
+  - - 226
+    - 98
+  - - 376
+    - 98
+  width: 1
+  tone: muted
+- line:
+  - - 226
+    - 170
+  - - 376
+    - 170
+  width: 1
+  tone: muted
+- sine:
+  - 226
+  - 48
+  length: 150
+  amplitude: 13
+  periods: 2
+  tone: accent
+  width: 1.8
+- sine:
+  - 226
+  - 98
+  length: 150
+  amplitude: 13
+  periods: 2
+  phase: 180
+  tone: accent
+  width: 1.8
+- text: +
+  at:
+  - 216
+  - 78
+  size: 16
+  anchor: middle
+  tone: default
+- text: '='
+  at:
+  - 216
+  - 140
+  size: 16
+  anchor: middle
+  tone: default
+- line:
+  - - 226
+    - 170
+  - - 376
+    - 170
+  width: 2.4
+- text: амплитуда вдвое больше
+  at:
+  - 109
+  - 216
+  size: 13
+  anchor: middle
+  tone: muted
+- text: волны гасят друг друга
+  at:
+  - 301
+  - 216
+  size: 13
+  anchor: middle
+  tone: muted

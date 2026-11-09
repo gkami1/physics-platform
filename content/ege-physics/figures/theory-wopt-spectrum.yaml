@@ -1,0 +1,154 @@
+# electro.optics.wave 16.1: the visible spectrum as a strip of seven equal surface cells with the
+# colours' initials, red (about 760 нм) on the left and violet (about 380 нм) on the right;
+# arrows below: the wavelength falls and the frequency grows from red to violet.
+# Colours (the optics convention of 14.x–15.x): a light ray is an accent line with an arrowhead
+# in its middle; the normal muted dashed; angles as arcs; a denser medium (glass, a film) a surface
+# fill with a text-colour boundary; a lens a text-colour line with open arrowheads, the principal
+# axis muted dash-dot; wavefronts thin accent lines; opaque screens and walls in the text colour.
+# Coloured light (decided here): the site palette has no spectrum colours and figures follow the
+# theme, so a colour is named, never painted. A ray of one colour is an accent ray labelled with
+# its colour; where red and violet share a figure, red (the long wave) is solid and violet dashed.
+# White light is a thicker accent ray labelled «белый». A spectrum is a strip of surface cells with
+# text-colour borders, each holding its colour's initial (к о ж з г с ф), red on the long-wave side;
+# a spectrum of a grating order is an accent-tinted band with «ф» and «к» at its ends.
+# An intensity pattern (brightness along a screen) is a graph with an accent curve beside the
+# screen; lengths (d, Δ, r) in the text colour, guides and notes muted.
+kind: diagram
+size:
+- 400
+- 160
+items:
+- rect:
+  - 30.0
+  - 46
+  - 48.6
+  - 40
+  fill: surface
+  width: 1.2
+- text: к
+  at:
+  - 54.3
+  - 72
+  size: 16
+- rect:
+  - 78.6
+  - 46
+  - 48.6
+  - 40
+  fill: surface
+  width: 1.2
+- text: о
+  at:
+  - 102.9
+  - 72
+  size: 16
+- rect:
+  - 127.1
+  - 46
+  - 48.6
+  - 40
+  fill: surface
+  width: 1.2
+- text: ж
+  at:
+  - 151.4
+  - 72
+  size: 16
+- rect:
+  - 175.7
+  - 46
+  - 48.6
+  - 40
+  fill: surface
+  width: 1.2
+- text: з
+  at:
+  - 200.0
+  - 72
+  size: 16
+- rect:
+  - 224.3
+  - 46
+  - 48.6
+  - 40
+  fill: surface
+  width: 1.2
+- text: г
+  at:
+  - 248.6
+  - 72
+  size: 16
+- rect:
+  - 272.9
+  - 46
+  - 48.6
+  - 40
+  fill: surface
+  width: 1.2
+- text: с
+  at:
+  - 297.1
+  - 72
+  size: 16
+- rect:
+  - 321.4
+  - 46
+  - 48.6
+  - 40
+  fill: surface
+  width: 1.2
+- text: ф
+  at:
+  - 345.7
+  - 72
+  size: 16
+- line:
+  - - 30
+    - 42
+  - - 30
+    - 34
+  width: 1.2
+- line:
+  - - 370
+    - 42
+  - - 370
+    - 34
+  width: 1.2
+- text: 760 нм
+  at:
+  - 30
+  - 28
+  size: 13
+  anchor: start
+- text: 380 нм
+  at:
+  - 370
+  - 28
+  size: 13
+  anchor: end
+- arrow:
+  - - 30
+    - 112
+  - - 370
+    - 112
+  width: 1.5
+- text: длина волны *λ* уменьшается
+  at:
+  - 200
+  - 106
+  size: 13
+  anchor: middle
+  tone: default
+- arrow:
+  - - 30
+    - 146
+  - - 370
+    - 146
+  width: 1.5
+- text: частота *ν* растёт
+  at:
+  - 200
+  - 140
+  size: 13
+  anchor: middle
+  tone: default
