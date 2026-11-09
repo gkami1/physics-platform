@@ -1,0 +1,163 @@
+# electro.oscillations.lc 12.6: over one period the charge q(t) (top, accent) goes through one
+# full cycle, while the capacitor's energy W_C ∝ q² (bottom, accent, drawn with a moving dot)
+# and the coil's energy W_L (green) go through two: their period is T/2. Their sum (muted
+# dashed) stays. Built like theory-osc-energy (mechanics 13.7).
+# Colours (the «Электродинамика» convention, extended here for the LC circuit): circuit
+# symbols and wires in the text colour, the plates' «+» and «−» in the text colour as in 4.x;
+# the current an accent arrow beside a wire. The electric side is accent and the magnetic
+# side green, as potential and kinetic energy in mechanics 13.7: the capacitor's energy W_C
+# (bars, curves, the tint between its plates) and its charge q(t) accent; the coil's energy
+# W_L (bars, curves, the tint around its turns) and the current I(t) on graphs green. Graphs
+# use the diagram kind with the Axes helper; a sum or a comparison muted dashed, guides muted.
+kind: diagram
+size:
+- 400
+- 282
+items:
+- arrow:
+  - - 44
+    - 70
+  - - 384
+    - 70
+  width: 1.5
+- arrow:
+  - - 44
+    - 122
+  - - 44
+    - 10
+  width: 1.5
+- text: '*q*'
+  at:
+  - 54
+  - 22
+  size: 15
+  anchor: start
+- text: '*t*'
+  at:
+  - 380
+  - 88
+  size: 15
+  anchor: end
+- arrow:
+  - - 44
+    - 254
+  - - 384
+    - 254
+  width: 1.5
+- arrow:
+  - - 44
+    - 254
+  - - 44
+    - 134
+  width: 1.5
+- text: '*t*'
+  at:
+  - 382
+  - 272
+  anchor: end
+  size: 15
+- text: '*W*'
+  at:
+  - 54
+  - 144
+  anchor: start
+  size: 15
+- text: '0'
+  at:
+  - 38
+  - 269
+  size: 12
+  anchor: end
+- path: M44 24L47 24.1L50 24.4L53 24.8L56 25.4L59 26.3L62 27.2L65 28.4L68 29.7L71 31.2L74 32.8L77 34.6L80
+    36.5L83 38.5L86 40.7L89 43L92 45.4L95 47.8L98 50.4L101 53.1L104 55.8L107 58.6L110 61.4L113 64.2L116
+    67.1L119 70L122 72.9L125 75.8L128 78.6L131 81.4L134 84.2L137 86.9L140 89.6L143 92.2L146 94.6L149 97L152
+    99.3L155 101.5L158 103.5L161 105.4L164 107.2L167 108.8L170 110.3L173 111.6L176 112.8L179 113.7L182
+    114.6L185 115.2L188 115.6L191 115.9L194 116L197 115.9L200 115.6L203 115.2L206 114.6L209 113.7L212
+    112.8L215 111.6L218 110.3L221 108.8L224 107.2L227 105.4L230 103.5L233 101.5L236 99.3L239 97L242 94.6L245
+    92.2L248 89.6L251 86.9L254 84.2L257 81.4L260 78.6L263 75.8L266 72.9L269 70L272 67.1L275 64.2L278 61.4L281
+    58.6L284 55.8L287 53.1L290 50.4L293 47.8L296 45.4L299 43L302 40.7L305 38.5L308 36.5L311 34.6L314 32.8L317
+    31.2L320 29.7L323 28.4L326 27.2L329 26.3L332 25.4L335 24.8L338 24.4L341 24.1L344 24
+  width: 2.2
+  tone: accent
+  animate: draw
+- path: M44 254L47 253.6L50 252.4L53 250.3L56 247.6L59 244.1L62 239.9L65 235.1L68 229.9L71 224.1L74 218.1L77
+    211.7L80 205.3L83 198.7L86 192.3L89 185.9L92 179.9L95 174.1L98 168.9L101 164.1L104 159.9L107 156.4L110
+    153.7L113 151.6L116 150.4L119 150L122 150.4L125 151.6L128 153.7L131 156.4L134 159.9L137 164.1L140
+    168.9L143 174.1L146 179.9L149 185.9L152 192.3L155 198.7L158 205.3L161 211.7L164 218.1L167 224.1L170
+    229.9L173 235.1L176 239.9L179 244.1L182 247.6L185 250.3L188 252.4L191 253.6L194 254L197 253.6L200
+    252.4L203 250.3L206 247.6L209 244.1L212 239.9L215 235.1L218 229.9L221 224.1L224 218.1L227 211.7L230
+    205.3L233 198.7L236 192.3L239 185.9L242 179.9L245 174.1L248 168.9L251 164.1L254 159.9L257 156.4L260
+    153.7L263 151.6L266 150.4L269 150L272 150.4L275 151.6L278 153.7L281 156.4L284 159.9L287 164.1L290
+    168.9L293 174.1L296 179.9L299 185.9L302 192.3L305 198.7L308 205.3L311 211.7L314 218.1L317 224.1L320
+    229.9L323 235.1L326 239.9L329 244.1L332 247.6L335 250.3L338 252.4L341 253.6L344 254
+  width: 2.2
+  tone: vel
+  animate: draw
+- path: M44 150L47 150.4L50 151.6L53 153.7L56 156.4L59 159.9L62 164.1L65 168.9L68 174.1L71 179.9L74 185.9L77
+    192.3L80 198.7L83 205.3L86 211.7L89 218.1L92 224.1L95 229.9L98 235.1L101 239.9L104 244.1L107 247.6L110
+    250.3L113 252.4L116 253.6L119 254L122 253.6L125 252.4L128 250.3L131 247.6L134 244.1L137 239.9L140
+    235.1L143 229.9L146 224.1L149 218.1L152 211.7L155 205.3L158 198.7L161 192.3L164 185.9L167 179.9L170
+    174.1L173 168.9L176 164.1L179 159.9L182 156.4L185 153.7L188 151.6L191 150.4L194 150L197 150.4L200
+    151.6L203 153.7L206 156.4L209 159.9L212 164.1L215 168.9L218 174.1L221 179.9L224 185.9L227 192.3L230
+    198.7L233 205.3L236 211.7L239 218.1L242 224.1L245 229.9L248 235.1L251 239.9L254 244.1L257 247.6L260
+    250.3L263 252.4L266 253.6L269 254L272 253.6L275 252.4L278 250.3L281 247.6L284 244.1L287 239.9L290
+    235.1L293 229.9L296 224.1L299 218.1L302 211.7L305 205.3L308 198.7L311 192.3L314 185.9L317 179.9L320
+    174.1L323 168.9L326 164.1L329 159.9L332 156.4L335 153.7L338 151.6L341 150.4L344 150
+  width: 2.4
+  tone: accent
+  animate: draw
+  mover: true
+- line:
+  - - 44
+    - 150
+  - - 344
+    - 150
+  width: 1.2
+  dashed: true
+  tone: muted
+- line:
+  - - 194.0
+    - 20
+  - - 194.0
+    - 254
+  width: 1
+  dashed: true
+  tone: muted
+- text: '*T*/2'
+  at:
+  - 194.0
+  - 272
+  size: 13
+- line:
+  - - 344
+    - 20
+  - - 344
+    - 254
+  width: 1
+  dashed: true
+  tone: muted
+- text: '*T*'
+  at:
+  - 344
+  - 272
+  size: 13
+- text: '*W*_{C}'
+  at:
+  - 68.0
+  - 176
+  size: 14
+  anchor: start
+  tone: accent
+- text: '*W*_{L}'
+  at:
+  - 119.0
+  - 142
+  size: 14
+  tone: vel
+- text: сумма
+  at:
+  - 348
+  - 154
+  size: 13
+  anchor: start
+  tone: muted

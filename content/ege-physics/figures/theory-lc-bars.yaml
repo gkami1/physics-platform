@@ -1,0 +1,175 @@
+# electro.oscillations.lc 12.4: the energy of an ideal circuit at five moments of the first half
+# period, as stacked bars: the capacitor's part q²/(2C) (accent, below) and the coil's LI²/2
+# (green, on top). Each bar reaches the same muted dashed line: the sum stays. At T/8 and 3T/8
+# the parts are equal.
+# Colours (the «Электродинамика» convention, extended here for the LC circuit): circuit
+# symbols and wires in the text colour, the plates' «+» and «−» in the text colour as in 4.x;
+# the current an accent arrow beside a wire. The electric side is accent and the magnetic
+# side green, as potential and kinetic energy in mechanics 13.7: the capacitor's energy W_C
+# (bars, curves, the tint between its plates) and its charge q(t) accent; the coil's energy
+# W_L (bars, curves, the tint around its turns) and the current I(t) on graphs green. Graphs
+# use the diagram kind with the Axes helper; a sum or a comparison muted dashed, guides muted.
+kind: diagram
+size:
+- 400
+- 240
+items:
+- line:
+  - - 48
+    - 176
+  - - 80
+    - 176
+  width: 1.2
+  tone: muted
+- rect:
+  - 52
+  - 46.0
+  - 24
+  - 130.0
+  fill: solid
+  tone: accent
+  width: 0
+- text: '0'
+  at:
+  - 64
+  - 196
+  size: 13
+- line:
+  - - 120
+    - 176
+  - - 152
+    - 176
+  width: 1.2
+  tone: muted
+- rect:
+  - 124
+  - 111.0
+  - 24
+  - 65.0
+  fill: solid
+  tone: accent
+  width: 0
+- rect:
+  - 124
+  - 46.0
+  - 24
+  - 65.0
+  fill: solid
+  tone: vel
+  width: 0
+- text: '*T*/8'
+  at:
+  - 136
+  - 196
+  size: 13
+- line:
+  - - 192
+    - 176
+  - - 224
+    - 176
+  width: 1.2
+  tone: muted
+- rect:
+  - 196
+  - 46.0
+  - 24
+  - 130.0
+  fill: solid
+  tone: vel
+  width: 0
+- text: '*T*/4'
+  at:
+  - 208
+  - 196
+  size: 13
+- line:
+  - - 264
+    - 176
+  - - 296
+    - 176
+  width: 1.2
+  tone: muted
+- rect:
+  - 268
+  - 111.0
+  - 24
+  - 65.0
+  fill: solid
+  tone: accent
+  width: 0
+- rect:
+  - 268
+  - 46.0
+  - 24
+  - 65.0
+  fill: solid
+  tone: vel
+  width: 0
+- text: 3*T*/8
+  at:
+  - 280
+  - 196
+  size: 13
+- line:
+  - - 336
+    - 176
+  - - 368
+    - 176
+  width: 1.2
+  tone: muted
+- rect:
+  - 340
+  - 46.0
+  - 24
+  - 130.0
+  fill: solid
+  tone: accent
+  width: 0
+- text: '*T*/2'
+  at:
+  - 352
+  - 196
+  size: 13
+- line:
+  - - 40
+    - 46
+  - - 376
+    - 46
+  width: 1.2
+  dashed: true
+  tone: muted
+- text: полная энергия
+  at:
+  - 376
+  - 38
+  size: 13
+  anchor: end
+  tone: muted
+- rect:
+  - 60
+  - 214
+  - 12
+  - 12
+  fill: solid
+  tone: accent
+  width: 0
+- text: конденсатор, *q*^{2}/(2*C*)
+  at:
+  - 78
+  - 225
+  size: 13
+  anchor: start
+- rect:
+  - 230
+  - 214
+  - 12
+  - 12
+  fill: solid
+  tone: vel
+  width: 0
+- text: катушка, *LI*^{2}/2
+  at:
+  - 248
+  - 225
+  size: 13
+  anchor: start
