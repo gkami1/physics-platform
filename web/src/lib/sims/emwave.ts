@@ -330,11 +330,12 @@ class EmWaveSim extends HTMLElement {
     const lgc = Math.log10(C);
     const edges = [LG_MIN, lgc + 3, lgc - Math.log10(760e-9), lgc - Math.log10(380e-9), lgc + 8, lgc + 11, LG_MAX];
     const names = ['радиоволны', 'ИК', '', 'УФ', 'рентген', 'γ'];
+    const labels: SVGElement[] = []; // drawn over the frame, with a halo
     for (let i = 0; i < 6; i++) {
       const a = sx(edges[i]);
       const b = sx(edges[i + 1]);
       out.push(el('rect', { x: f1(a), y: top, width: f1(b - a), height: bh, class: i === 2 ? 'emw-vis' : 'emw-band' }));
-      if (names[i]) out.push(el('text', { x: f1((a + b) / 2), y: top + 17, 'text-anchor': 'middle', class: 'emw-name' }, names[i]));
+      if (names[i]) labels.push(el('text', { x: f1((a + b) / 2), y: top + 17, 'text-anchor': 'middle', class: 'emw-name' }, names[i]));
     }
     for (const [name, l] of [['1 км', 1e3], ['1 м', 1], ['1 мм', 1e-3], ['1 мкм', 1e-6], ['1 нм', 1e-9]] as const) {
       const x = sx(lgc - Math.log10(l));
@@ -352,7 +353,7 @@ class EmWaveSim extends HTMLElement {
     out.push(nl);
     this.mark = el('rect', { x: 0, y: top - 4, width: 8, height: bh + 8, rx: 2, class: 'emw-mark' });
     this.span = el('text', { x: 0, y: 22, 'text-anchor': 'middle', class: 'emw-label emw-small' });
-    out.push(this.mark, this.span);
+    out.push(this.mark, ...labels, this.span);
     return out;
   }
 }

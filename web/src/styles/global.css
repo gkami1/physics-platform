@@ -3980,6 +3980,10 @@ task-answer .final {
 .sim-svg .emw-name {
   fill: var(--text);
   font-size: 12px;
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 3px;
+  stroke-linejoin: round;
 }
 
 .sim-svg .emw-tick {
