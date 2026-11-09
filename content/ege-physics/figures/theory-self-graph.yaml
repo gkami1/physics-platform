@@ -1,0 +1,143 @@
+# electro.induction.self 11.3: the current I(t) (top) and the EMF of self-induction ℰ_si(t)
+# (bottom), qualitative. The current grows, stays, then falls twice as fast; ℰ_si = −L ΔI/Δt
+# is against the current while it grows (below the axis), zero while it stays and along it,
+# twice as large, while it falls. Muted dashed guides join the moments where the slope changes.
+# Colours (the «Электродинамика» convention with the magnetism extension of 8.x–10.x):
+# circuit symbols and wires in the text colour, an iron core a text-colour line along the
+# coil; a lit lamp an accent-tint halo behind its symbol (fading in when it lights late);
+# the coil's own field B an accent arrow, the induced field B_инд an accent dashed arrow;
+# the current I an accent arrow or accent arrowheads on the turns, the EMF of self-induction
+# ℰ_si an accent dashed arrow beside it (along or against the current). Graphs use the
+# diagram kind with the Axes helper: curves accent, a curve to compare with muted dashed,
+# the energy under a line an accent tint. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 288
+items:
+- arrow:
+  - - 46
+    - 114
+  - - 382
+    - 114
+  width: 1.5
+- arrow:
+  - - 46
+    - 114
+  - - 46
+    - 10
+  width: 1.5
+- text: '*t*'
+  at:
+  - 380
+  - 132
+  anchor: end
+  size: 14
+- text: '*I*'
+  at:
+  - 56
+  - 20
+  anchor: start
+  size: 14
+- text: '0'
+  at:
+  - 40
+  - 129
+  size: 12
+  anchor: end
+- path: M46 114L150 26L254 26L306 114L358 114
+  width: 2.2
+  tone: accent
+- arrow:
+  - - 46
+    - 222
+  - - 382
+    - 222
+  width: 1.5
+- arrow:
+  - - 46
+    - 272
+  - - 46
+    - 138
+  width: 1.5
+- text: '*t*'
+  at:
+  - 380
+  - 240
+  anchor: end
+  size: 14
+- text: ℰ_si
+  at:
+  - 56
+  - 148
+  anchor: start
+  size: 14
+- text: '0'
+  at:
+  - 40
+  - 227
+  size: 12
+  anchor: end
+- path: M46 250L150 250L150 222L254 222L254 166L306 166L306 222L358 222
+  width: 2.2
+  tone: accent
+- line:
+  - - 150
+    - 22
+  - - 150
+    - 262
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 254
+    - 22
+  - - 254
+    - 262
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 306
+    - 22
+  - - 306
+    - 262
+  width: 1
+  dashed: true
+  tone: muted
+- text: растёт
+  at:
+  - 82.4
+  - 48
+  size: 12
+  tone: muted
+- text: не меняется
+  at:
+  - 202
+  - 16
+  size: 12
+  tone: muted
+- text: убывает быстрее
+  at:
+  - 310
+  - 16
+  size: 12
+  tone: muted
+- text: против тока
+  at:
+  - 98
+  - 268
+  size: 12
+  tone: muted
+- text: ноль
+  at:
+  - 202
+  - 214
+  size: 12
+  tone: muted
+- text: по току
+  at:
+  - 338.0
+  - 160
+  size: 12
+  tone: muted

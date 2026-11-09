@@ -1,0 +1,113 @@
+# electro.induction.self 11.5: Φ(I) while the current in a coil grows: a straight line through
+# the origin (accent, drawn with a moving dot). For each small step ΔI of the current the
+# source does the work Φ′·ΔI against the EMF of self-induction (a strip, accent outline); all
+# the strips make the triangle under the line (accent tint), whose area ΦI/2 is the energy W.
+# Built like theory-cap-energy (U(q) of 4.4).
+# Colours (the «Электродинамика» convention with the magnetism extension of 8.x–10.x):
+# circuit symbols and wires in the text colour, an iron core a text-colour line along the
+# coil; a lit lamp an accent-tint halo behind its symbol (fading in when it lights late);
+# the coil's own field B an accent arrow, the induced field B_инд an accent dashed arrow;
+# the current I an accent arrow or accent arrowheads on the turns, the EMF of self-induction
+# ℰ_si an accent dashed arrow beside it (along or against the current). Graphs use the
+# diagram kind with the Axes helper: curves accent, a curve to compare with muted dashed,
+# the energy under a line an accent tint. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 236
+items:
+- arrow:
+  - - 48
+    - 210
+  - - 388
+    - 210
+  width: 1.5
+- arrow:
+  - - 48
+    - 210
+  - - 48
+    - 14
+  width: 1.5
+- text: '*I*'
+  at:
+  - 386
+  - 228
+  anchor: end
+  size: 15
+- text: Φ
+  at:
+  - 58
+  - 24
+  anchor: start
+  size: 15
+- text: '0'
+  at:
+  - 42
+  - 225
+  size: 12
+  anchor: end
+- path: M48 210L338 40L338 210Z
+  fill: accent
+  tone: accent
+  width: 0
+- path: M169.8 210L169.8 138.6L184.3 130.1L184.3 210Z
+  width: 1.2
+  fill: accent
+  tone: accent
+- path: M48 210L361.2 26.4
+  width: 2.4
+  tone: accent
+  animate: draw
+  mover: true
+- line:
+  - - 338
+    - 210
+  - - 338
+    - 40
+  - - 48
+    - 40
+  width: 1
+  dashed: true
+  tone: muted
+- text: '*I*'
+  at:
+  - 338
+  - 229
+  size: 14
+- text: Φ
+  at:
+  - 41
+  - 45
+  size: 14
+  anchor: end
+- text: Δ*I*
+  at:
+  - 177
+  - 229
+  size: 13
+- text: '*W* = Φ*I*/2'
+  at:
+  - 258
+  - 172
+  size: 15
+- text: 'шаг тока Δ*I*:'
+  at:
+  - 84
+  - 66
+  size: 13
+  anchor: start
+  tone: muted
+- text: работа Φ′·Δ*I*
+  at:
+  - 84
+  - 82
+  size: 13
+  anchor: start
+  tone: muted
+- line:
+  - - 150
+    - 90
+  - - 177.1
+    - 152.9
+  width: 1
+  tone: muted

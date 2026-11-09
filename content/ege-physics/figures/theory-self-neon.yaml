@@ -1,0 +1,125 @@
+# electro.induction.self 11.1: opening the circuit. A 4,5 V battery and an open key on top;
+# a coil L on an iron core and a neon lamp in parallel. The lamp's halo fades in: it flashes
+# when the key is opened, lit by the EMF of self-induction.
+# Colours (the «Электродинамика» convention with the magnetism extension of 8.x–10.x):
+# circuit symbols and wires in the text colour, an iron core a text-colour line along the
+# coil; a lit lamp an accent-tint halo behind its symbol (fading in when it lights late);
+# the coil's own field B an accent arrow, the induced field B_инд an accent dashed arrow;
+# the current I an accent arrow or accent arrowheads on the turns, the EMF of self-induction
+# ℰ_si an accent dashed arrow beside it (along or against the current). Graphs use the
+# diagram kind with the Axes helper: curves accent, a curve to compare with muted dashed,
+# the energy under a line an accent tint. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 256
+items:
+- circle:
+  - 200
+  - 206
+  r: 20
+  fill: accent
+  tone: accent
+  width: 0
+  animate: appear
+- line:
+  - - 40
+    - 44
+  - - 110
+    - 44
+  width: 1.6
+- line:
+  - - 150
+    - 44
+  - - 250
+    - 44
+  width: 1.6
+- line:
+  - - 290
+    - 44
+  - - 360
+    - 44
+  width: 1.6
+- element: battery
+  at:
+  - 130
+  - 44
+- element: switch
+  at:
+  - 270
+  - 44
+- line:
+  - - 40
+    - 44
+  - - 40
+    - 206
+  width: 1.6
+- line:
+  - - 360
+    - 44
+  - - 360
+    - 206
+  width: 1.6
+- line:
+  - - 40
+    - 130
+  - - 180
+    - 130
+  width: 1.6
+- line:
+  - - 220
+    - 130
+  - - 360
+    - 130
+  width: 1.6
+- line:
+  - - 40
+    - 206
+  - - 180
+    - 206
+  width: 1.6
+- line:
+  - - 220
+    - 206
+  - - 360
+    - 206
+  width: 1.6
+- element: coil
+  at:
+  - 200
+  - 130
+  label: '*L*'
+- line:
+  - - 180
+    - 121
+  - - 220
+    - 121
+  width: 2
+- element: lamp
+  at:
+  - 200
+  - 206
+- dots:
+  - - 40
+    - 130
+  - - 360
+    - 130
+  r: 3
+- text: неоновая лампа
+  at:
+  - 200
+  - 242
+  size: 13
+  tone: muted
+- text: ключ разомкнули
+  at:
+  - 270
+  - 70
+  size: 13
+  tone: muted
+- text: 4,5 В
+  at:
+  - 130
+  - 24
+  size: 13
+  tone: muted

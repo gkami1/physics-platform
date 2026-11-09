@@ -1,0 +1,27 @@
+# ks-self-09 and ks-self-10: the current in a coil, I(t): 0 → 4 А over 0–2 с, constant
+# until 4 с, back to 0 at 5 с, then zero.
+kind: graph
+x:
+  var: t
+  unit: с
+  min: 0
+  max: 6
+  step: 1
+y:
+  var: I
+  unit: А
+  min: 0
+  max: 5
+  step: 1
+series:
+- points:
+  - - 0
+    - 0
+  - - 2
+    - 4
+  - - 4
+    - 4
+  - - 5
+    - 0
+  - - 6
+    - 0

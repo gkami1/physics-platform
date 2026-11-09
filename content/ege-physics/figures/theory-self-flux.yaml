@@ -1,0 +1,93 @@
+# electro.induction.self 11.2: the coil's own flux against its current, Φ = LI: two straight
+# lines through the origin (accent), steep for a coil on an iron core, gentle without it.
+# At one current I (muted guide) the flux of the coil with the core is several times larger.
+# Colours (the «Электродинамика» convention with the magnetism extension of 8.x–10.x):
+# circuit symbols and wires in the text colour, an iron core a text-colour line along the
+# coil; a lit lamp an accent-tint halo behind its symbol (fading in when it lights late);
+# the coil's own field B an accent arrow, the induced field B_инд an accent dashed arrow;
+# the current I an accent arrow or accent arrowheads on the turns, the EMF of self-induction
+# ℰ_si an accent dashed arrow beside it (along or against the current). Graphs use the
+# diagram kind with the Axes helper: curves accent, a curve to compare with muted dashed,
+# the energy under a line an accent tint. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 258
+items:
+- arrow:
+  - - 48
+    - 206
+  - - 384
+    - 206
+  width: 1.5
+- arrow:
+  - - 48
+    - 206
+  - - 48
+    - 16
+  width: 1.5
+- text: '*I*'
+  at:
+  - 382
+  - 224
+  anchor: end
+  size: 15
+- text: Φ
+  at:
+  - 58
+  - 26
+  anchor: start
+  size: 15
+- text: '0'
+  at:
+  - 42
+  - 221
+  size: 12
+  anchor: end
+- path: M48 206L196 30
+  width: 2.4
+  tone: accent
+- path: M48 206L372 140
+  width: 2.4
+  tone: accent
+- line:
+  - - 150
+    - 206
+  - - 150
+    - 84.7
+  width: 1
+  dashed: true
+  tone: muted
+- text: '*I*'
+  at:
+  - 150
+  - 224
+  size: 14
+- dots:
+  - - 150
+    - 84.7
+  - - 150
+    - 185.2
+  r: 3.5
+  tone: accent
+- text: с железным сердечником
+  at:
+  - 204
+  - 44
+  size: 13
+  anchor: start
+  tone: muted
+- text: без сердечника
+  at:
+  - 364
+  - 120
+  size: 13
+  anchor: end
+  tone: muted
+- text: 'Φ = *LI*: чем круче прямая, тем больше *L*'
+  at:
+  - 380
+  - 250
+  size: 13
+  anchor: end
+  tone: muted

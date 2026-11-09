@@ -1,0 +1,115 @@
+# electro.induction.self 11.6: the energy of the coil's field against its current, W = LI²/2:
+# a parabola (accent, drawn with a moving dot). Muted guides at I and 2I meet it at W and 4W.
+# Colours (the «Электродинамика» convention with the magnetism extension of 8.x–10.x):
+# circuit symbols and wires in the text colour, an iron core a text-colour line along the
+# coil; a lit lamp an accent-tint halo behind its symbol (fading in when it lights late);
+# the coil's own field B an accent arrow, the induced field B_инд an accent dashed arrow;
+# the current I an accent arrow or accent arrowheads on the turns, the EMF of self-induction
+# ℰ_si an accent dashed arrow beside it (along or against the current). Graphs use the
+# diagram kind with the Axes helper: curves accent, a curve to compare with muted dashed,
+# the energy under a line an accent tint. Guides and notes muted.
+kind: diagram
+size:
+- 400
+- 258
+items:
+- arrow:
+  - - 48
+    - 206
+  - - 384
+    - 206
+  width: 1.5
+- arrow:
+  - - 48
+    - 206
+  - - 48
+    - 16
+  width: 1.5
+- text: '*I*'
+  at:
+  - 382
+  - 224
+  anchor: end
+  size: 15
+- text: '*W*'
+  at:
+  - 58
+  - 26
+  anchor: start
+  size: 15
+- text: '0'
+  at:
+  - 42
+  - 221
+  size: 12
+  anchor: end
+- path: M48 206L51.5 206L55 205.8L58.5 205.6L62 205.3L65.5 204.9L69 204.4L72.5 203.8L76 203.1L79.5 202.4L83
+    201.5L86.5 200.6L90 199.5L93.5 198.4L97 197.2L100.5 195.9L104 194.5L107.5 193L111 191.4L114.5 189.8L118
+    188L121.5 186.2L125 184.2L128.5 182.2L132 180.1L135.5 177.9L139 175.6L142.5 173.2L146 170.7L149.5
+    168.2L153 165.5L156.5 162.8L160 159.9L163.5 157L167 154L170.5 150.9L174 147.7L177.5 144.4L181 141L184.5
+    137.6L188 134L191.5 130.4L195 126.6L198.5 122.8L202 118.9L205.5 114.9L209 110.8L212.5 106.6L216 102.3L219.5
+    98L223 93.5L226.5 89L230 84.3L233.5 79.6L237 74.8L240.5 69.9L244 64.9L247.5 59.8L251 54.6L254.5 49.4L258
+    44L261.5 38.6L265 33L268.5 27.4L272 21.7L275.5 15.9
+  width: 2.4
+  tone: accent
+  animate: draw
+  mover: true
+- line:
+  - - 153.0
+    - 206
+  - - 153.0
+    - 165.5
+  - - 48
+    - 165.5
+  width: 1
+  dashed: true
+  tone: muted
+- dots:
+  - - 153.0
+    - 165.5
+  r: 3.5
+  tone: accent
+- text: '*I*'
+  at:
+  - 153.0
+  - 224
+  size: 14
+- text: '*W*'
+  at:
+  - 41
+  - 170.5
+  size: 14
+  anchor: end
+- line:
+  - - 258
+    - 206
+  - - 258
+    - 44
+  - - 48
+    - 44
+  width: 1
+  dashed: true
+  tone: muted
+- dots:
+  - - 258
+    - 44
+  r: 3.5
+  tone: accent
+- text: 2*I*
+  at:
+  - 258
+  - 224
+  size: 14
+- text: 4*W*
+  at:
+  - 41
+  - 49
+  size: 14
+  anchor: end
+- text: ток вдвое больше — энергия вчетверо
+  at:
+  - 380
+  - 250
+  size: 13
+  anchor: end
+  tone: muted
