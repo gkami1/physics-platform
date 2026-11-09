@@ -8,8 +8,9 @@
 // incident side; past it the refracted ray disappears and the reflected one becomes solid.
 // The table gives α, β = α, γ from n₁ sin α = n₂ sin γ, sin α / sin γ against n₂/n₁ and α₀.
 //
-// Nothing moves on its own, so reduced motion changes nothing: the default state (glass → air,
-// 35°) already shows all three rays and the critical angle.
+// Nothing moves on its own, so reduced motion changes nothing: the default state (glass → water,
+// 40°) already shows all three rays and the critical angle. (Glass → air would show α₀ ≈ 42°,
+// an intermediate of step task ks-refr-15; water → air shows n₂/n₁ ≈ 0,75, ks-refr-14's answer.)
 //
 // Written into theory Markdown as plain HTML; the theory page imports this module only when
 // such an element is present. Light DOM, site CSS variables: follows the light/dark theme.
@@ -26,7 +27,7 @@ export const MEDIA = [
 
 export type MediumId = (typeof MEDIA)[number][0];
 
-export const START = { top: 'glass' as MediumId, bottom: 'air' as MediumId, angle: 35 };
+export const START = { top: 'glass' as MediumId, bottom: 'water' as MediumId, angle: 40 };
 export const MAX_ANGLE = 89;
 
 const RAD = Math.PI / 180;
