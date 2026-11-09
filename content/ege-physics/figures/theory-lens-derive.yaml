@@ -1,0 +1,329 @@
+# electro.optics.lenses 15.5: deriving the thin-lens formula. Both panels show the same object h
+# at distance d and its real image H at distance f. Panel 1: the ray through O cuts two similar
+# triangles (surface tint), so H/h = f/d. Panel 2: the ray parallel to the axis meets the lens at
+# height h and passes F; the triangles at F (accent tint) are similar, so H/h = (f − F)/F.
+# Colours (the optics convention of 14.x): a light ray is an accent line with an arrowhead in
+# its middle; the continuation of a ray (a virtual image, a virtual focus) muted dashed; the
+# normal to a surface muted dashed; a denser medium (glass) a surface fill with a text-colour
+# boundary. Lenses (added here): a thin lens is a text-colour line across the principal axis,
+# with open arrowheads at its ends pointing outward for a converging lens and inward for a
+# diverging one; a lens drawn as a glass body is a surface fill with a text-colour outline.
+# The principal axis a muted dash-dot line, a secondary axis and the focal plane muted dashed;
+# the optical centre O, the foci F and the points 2F text-colour dots with italic labels.
+# An object a text-colour arrow from the axis; a real image a solid text-colour arrow, a virtual
+# one a muted dashed arrow; the eye in the text colour. Distances (d, f, F) muted dimension
+# lines; similar triangles a surface or an accent tint. Notes muted.
+kind: diagram
+size:
+- 400
+- 344
+items:
+- path: M48 34L48 70L140 70Z
+  fill: surface
+  tone: muted
+  width: 0
+- path: M283.1 126L283.1 70L140 70Z
+  fill: surface
+  tone: muted
+  width: 0
+- path: M10 70L24 70M27.5 70L29 70M32.5 70L46.5 70M50 70L51.5 70M55 70L69 70M72.5 70L74 70M77.5 70L91.5
+    70M95 70L96.5 70M100 70L114 70M117.5 70L119 70M122.5 70L136.5 70M140 70L141.5 70M145 70L159 70M162.5
+    70L164 70M167.5 70L181.5 70M185 70L186.5 70M190 70L204 70M207.5 70L209 70M212.5 70L226.5 70M230 70L231.5
+    70M235 70L249 70M252.5 70L254 70M257.5 70L271.5 70M275 70L276.5 70M280 70L294 70M297.5 70L299 70M302.5
+    70L316.5 70M320 70L321.5 70M325 70L339 70M342.5 70L344 70M347.5 70L361.5 70M365 70L366.5 70M370 70L384
+    70M387.5 70L389 70
+  width: 1
+  tone: muted
+- line:
+  - - 140
+    - 6
+  - - 140
+    - 134
+  width: 2
+- line:
+  - - 134
+    - 14
+  - - 140
+    - 6
+  - - 146
+    - 14
+  width: 2
+- line:
+  - - 134
+    - 126
+  - - 140
+    - 134
+  - - 146
+    - 126
+  width: 2
+- line:
+  - - 48
+    - 34
+  - - 140.0
+    - 70.0
+  width: 1.6
+  tone: accent
+- path: M103.1 55.5L94.3 56L96.9 49.3Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 140.0
+    - 70.0
+  - - 307.1
+    - 135.4
+  width: 1.6
+  tone: accent
+- path: M219.7 101.2L210.9 101.6L213.5 94.9Z
+  fill: solid
+  tone: accent
+  width: 0
+- arrow:
+  - - 48
+    - 70
+  - - 48
+    - 34
+  width: 3
+- arrow:
+  - - 283.1
+    - 70
+  - - 283.1
+    - 126.0
+  width: 3
+- dots:
+  - - 196
+    - 70
+  - - 84
+    - 70
+  r: 3
+- text: '*F*'
+  at:
+  - 196
+  - 62
+  size: 14
+- text: '*h*'
+  at:
+  - 39
+  - 57.0
+  anchor: end
+  size: 14
+- text: '*H*'
+  at:
+  - 292.1
+  - 103.0
+  anchor: start
+  size: 14
+- line:
+  - - 48
+    - 109
+  - - 48
+    - 119
+  width: 1
+  tone: muted
+- line:
+  - - 140
+    - 109
+  - - 140
+    - 119
+  width: 1
+  tone: muted
+- line:
+  - - 48
+    - 114
+  - - 140
+    - 114
+  width: 1
+  tone: muted
+- text: '*d*'
+  at:
+  - 94.0
+  - 130
+  size: 14
+- line:
+  - - 140
+    - 19
+  - - 140
+    - 29
+  width: 1
+  tone: muted
+- line:
+  - - 283.1
+    - 19
+  - - 283.1
+    - 29
+  width: 1
+  tone: muted
+- line:
+  - - 140
+    - 24
+  - - 283.1
+    - 24
+  width: 1
+  tone: muted
+- text: '*f*'
+  at:
+  - 211.6
+  - 18
+  size: 14
+- text: '1'
+  at:
+  - 16
+  - 30
+  size: 14
+  anchor: start
+  tone: default
+- path: M140 196L140 232L196 232Z
+  fill: accent
+  tone: accent
+  width: 0
+- path: M283.1 288L283.1 232L196 232Z
+  fill: accent
+  tone: accent
+  width: 0
+- path: M10 232L24 232M27.5 232L29 232M32.5 232L46.5 232M50 232L51.5 232M55 232L69 232M72.5 232L74 232M77.5
+    232L91.5 232M95 232L96.5 232M100 232L114 232M117.5 232L119 232M122.5 232L136.5 232M140 232L141.5 232M145
+    232L159 232M162.5 232L164 232M167.5 232L181.5 232M185 232L186.5 232M190 232L204 232M207.5 232L209
+    232M212.5 232L226.5 232M230 232L231.5 232M235 232L249 232M252.5 232L254 232M257.5 232L271.5 232M275
+    232L276.5 232M280 232L294 232M297.5 232L299 232M302.5 232L316.5 232M320 232L321.5 232M325 232L339
+    232M342.5 232L344 232M347.5 232L361.5 232M365 232L366.5 232M370 232L384 232M387.5 232L389 232
+  width: 1
+  tone: muted
+- line:
+  - - 140
+    - 168
+  - - 140
+    - 296
+  width: 2
+- line:
+  - - 134
+    - 176
+  - - 140
+    - 168
+  - - 146
+    - 176
+  width: 2
+- line:
+  - - 134
+    - 288
+  - - 140
+    - 296
+  - - 146
+    - 288
+  width: 2
+- line:
+  - - 48
+    - 196
+  - - 140.0
+    - 196
+  width: 1.6
+  tone: accent
+- path: M103.4 196L95.4 199.6L95.4 192.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 140.0
+    - 196
+  - - 307.1
+    - 303.4
+  width: 1.6
+  tone: accent
+- path: M219.2 246.9L210.6 245.6L214.4 239.6Z
+  fill: solid
+  tone: accent
+  width: 0
+- arrow:
+  - - 48
+    - 232
+  - - 48
+    - 196
+  width: 3
+- arrow:
+  - - 283.1
+    - 232
+  - - 283.1
+    - 288.0
+  width: 3
+- dots:
+  - - 196
+    - 232
+  - - 84
+    - 232
+  r: 3
+- text: '*h*'
+  at:
+  - 39
+  - 219.0
+  anchor: end
+  size: 14
+- text: '*H*'
+  at:
+  - 292.1
+  - 265.0
+  anchor: start
+  size: 14
+- text: '*h*'
+  at:
+  - 133
+  - 219.0
+  anchor: end
+  size: 14
+- line:
+  - - 140
+    - 181
+  - - 140
+    - 191
+  width: 1
+  tone: muted
+- line:
+  - - 196
+    - 181
+  - - 196
+    - 191
+  width: 1
+  tone: muted
+- line:
+  - - 140
+    - 186
+  - - 196
+    - 186
+  width: 1
+  tone: muted
+- text: '*F*'
+  at:
+  - 168.0
+  - 180
+  size: 14
+- line:
+  - - 196
+    - 319
+  - - 196
+    - 329
+  width: 1
+  tone: muted
+- line:
+  - - 283.1
+    - 319
+  - - 283.1
+    - 329
+  width: 1
+  tone: muted
+- line:
+  - - 196
+    - 324
+  - - 283.1
+    - 324
+  width: 1
+  tone: muted
+- text: '*f* − *F*'
+  at:
+  - 239.6
+  - 340
+  size: 14
+- text: '2'
+  at:
+  - 16
+  - 192
+  size: 14
+  anchor: start
+  tone: default

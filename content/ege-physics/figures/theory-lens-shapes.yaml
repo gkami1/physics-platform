@@ -1,0 +1,111 @@
+# electro.optics.lenses 15.1: lens shapes. Top row: three converging lenses (glass profiles,
+# a surface fill with a text-colour outline) — biconvex, plano-convex, a meniscus thicker in the
+# middle; bottom row: three diverging ones — biconcave, plano-concave, a meniscus thinner in the
+# middle. Right of the dashed separator, the schematic symbol of each kind.
+# Colours (the optics convention of 14.x): a light ray is an accent line with an arrowhead in
+# its middle; the continuation of a ray (a virtual image, a virtual focus) muted dashed; the
+# normal to a surface muted dashed; a denser medium (glass) a surface fill with a text-colour
+# boundary. Lenses (added here): a thin lens is a text-colour line across the principal axis,
+# with open arrowheads at its ends pointing outward for a converging lens and inward for a
+# diverging one; a lens drawn as a glass body is a surface fill with a text-colour outline.
+# The principal axis a muted dash-dot line, a secondary axis and the focal plane muted dashed;
+# the optical centre O, the foci F and the points 2F text-colour dots with italic labels.
+# An object a text-colour arrow from the axis; a real image a solid text-colour arrow, a virtual
+# one a muted dashed arrow; the eye in the text colour. Distances (d, f, F) muted dimension
+# lines; similar triangles a surface or an accent tint. Notes muted.
+kind: diagram
+size:
+- 400
+- 250
+items:
+- text: собирающие
+  at:
+  - 16
+  - 14
+  size: 14
+  anchor: start
+  tone: default
+- path: M67 26L73 26Q105 66 73 106L67 106Q35 66 67 26Z
+  fill: surface
+  width: 1.5
+- path: M149 26L155 26Q199 66 155 106L149 106Q149 66 149 26Z
+  fill: surface
+  width: 1.5
+- path: M231 26L237 26Q289 66 237 106L231 106Q255 66 231 26Z
+  fill: surface
+  width: 1.5
+- line:
+  - - 340
+    - 26
+  - - 340
+    - 106
+  width: 2
+- line:
+  - - 334
+    - 34
+  - - 340
+    - 26
+  - - 346
+    - 34
+  width: 2
+- line:
+  - - 334
+    - 98
+  - - 340
+    - 106
+  - - 346
+    - 98
+  width: 2
+- text: рассеивающие
+  at:
+  - 16
+  - 130
+  size: 14
+  anchor: start
+  tone: default
+- path: M54 142L86 142Q58 182 86 222L54 222Q82 182 54 142Z
+  fill: surface
+  width: 1.5
+- path: M139 142L165 142Q125 182 165 222L139 222Q139 182 139 142Z
+  fill: surface
+  width: 1.5
+- path: M217 142L251 142Q199 182 251 222L217 222Q193 182 217 142Z
+  fill: surface
+  width: 1.5
+- line:
+  - - 340
+    - 142
+  - - 340
+    - 222
+  width: 2
+- line:
+  - - 334
+    - 134
+  - - 340
+    - 142
+  - - 346
+    - 134
+  width: 2
+- line:
+  - - 334
+    - 230
+  - - 340
+    - 222
+  - - 346
+    - 230
+  width: 2
+- text: на схемах
+  at:
+  - 340
+  - 14
+  size: 13
+  anchor: middle
+  tone: muted
+- line:
+  - - 296
+    - 22
+  - - 296
+    - 238
+  width: 1
+  dashed: true
+  tone: muted

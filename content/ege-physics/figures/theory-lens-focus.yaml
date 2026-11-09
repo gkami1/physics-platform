@@ -1,0 +1,431 @@
+# electro.optics.lenses 15.1: the focus. Top: a beam parallel to the principal axis passes a
+# converging lens and meets at the focus F behind it (a real focus). Bottom: after a diverging
+# lens the same beam spreads out as if it came from a point F in front of the lens; the rays'
+# continuations (muted dashed) meet there (a virtual focus). F is the focal length, from the
+# optical centre O to the focus.
+# Colours (the optics convention of 14.x): a light ray is an accent line with an arrowhead in
+# its middle; the continuation of a ray (a virtual image, a virtual focus) muted dashed; the
+# normal to a surface muted dashed; a denser medium (glass) a surface fill with a text-colour
+# boundary. Lenses (added here): a thin lens is a text-colour line across the principal axis,
+# with open arrowheads at its ends pointing outward for a converging lens and inward for a
+# diverging one; a lens drawn as a glass body is a surface fill with a text-colour outline.
+# The principal axis a muted dash-dot line, a secondary axis and the focal plane muted dashed;
+# the optical centre O, the foci F and the points 2F text-colour dots with italic labels.
+# An object a text-colour arrow from the axis; a real image a solid text-colour arrow, a virtual
+# one a muted dashed arrow; the eye in the text colour. Distances (d, f, F) muted dimension
+# lines; similar triangles a surface or an accent tint. Notes muted.
+kind: diagram
+size:
+- 400
+- 290
+items:
+- path: M14 76L28 76M31.5 76L33 76M36.5 76L50.5 76M54 76L55.5 76M59 76L73 76M76.5 76L78 76M81.5 76L95.5
+    76M99 76L100.5 76M104 76L118 76M121.5 76L123 76M126.5 76L140.5 76M144 76L145.5 76M149 76L163 76M166.5
+    76L168 76M171.5 76L185.5 76M189 76L190.5 76M194 76L208 76M211.5 76L213 76M216.5 76L230.5 76M234 76L235.5
+    76M239 76L253 76M256.5 76L258 76M261.5 76L275.5 76M279 76L280.5 76M284 76L298 76M301.5 76L303 76M306.5
+    76L320.5 76M324 76L325.5 76M329 76L343 76M346.5 76L348 76M351.5 76L365.5 76M369 76L370.5 76M374 76L388
+    76
+  width: 1
+  tone: muted
+- line:
+  - - 180
+    - 22
+  - - 180
+    - 130
+  width: 2
+- line:
+  - - 174
+    - 30
+  - - 180
+    - 22
+  - - 186
+    - 30
+  width: 2
+- line:
+  - - 174
+    - 122
+  - - 180
+    - 130
+  - - 186
+    - 122
+  width: 2
+- line:
+  - - 20.0
+    - 32.0
+  - - 180.0
+    - 32.0
+  width: 1.6
+  tone: accent
+- path: M104.8 32L96.8 35.6L96.8 28.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 180.0
+    - 32.0
+  - - 380.0
+    - 142.0
+  width: 1.6
+  tone: accent
+- path: M234.2 61.8L225.5 61.1L228.9 54.8Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 20.0
+    - 50.0
+  - - 180.0
+    - 50.0
+  width: 1.6
+  tone: accent
+- path: M104.8 50L96.8 53.6L96.8 46.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 180.0
+    - 50.0
+  - - 385.0
+    - 116.6
+  width: 1.6
+  tone: accent
+- path: M235.8 68.1L227.1 69.1L229.3 62.2Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 20.0
+    - 76.0
+  - - 180.0
+    - 76.0
+  width: 1.6
+  tone: accent
+- path: M104.8 76L96.8 79.6L96.8 72.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 180.0
+    - 76.0
+  - - 385.0
+    - 76.0
+  width: 1.6
+  tone: accent
+- path: M236.1 76L228.1 79.6L228.1 72.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 20.0
+    - 102.0
+  - - 180.0
+    - 102.0
+  width: 1.6
+  tone: accent
+- path: M104.8 102L96.8 105.6L96.8 98.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 180.0
+    - 102.0
+  - - 385.0
+    - 35.4
+  width: 1.6
+  tone: accent
+- path: M235.8 83.9L229.3 89.8L227.1 82.9Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 20.0
+    - 120.0
+  - - 180.0
+    - 120.0
+  width: 1.6
+  tone: accent
+- path: M104.8 120L96.8 123.6L96.8 116.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 180.0
+    - 120.0
+  - - 380.0
+    - 10.0
+  width: 1.6
+  tone: accent
+- path: M234.2 90.2L228.9 97.2L225.5 90.9Z
+  fill: solid
+  tone: accent
+  width: 0
+- dots:
+  - - 100
+    - 76
+  - - 260
+    - 76
+  r: 3
+- text: '*F*'
+  at:
+  - 100
+  - 94
+  size: 14
+- text: '*O*'
+  at:
+  - 189
+  - 93
+  size: 14
+- text: фокус *F*
+  at:
+  - 260
+  - 20
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 180
+    - 121
+  - - 180
+    - 131
+  width: 1
+  tone: muted
+- line:
+  - - 260
+    - 121
+  - - 260
+    - 131
+  width: 1
+  tone: muted
+- line:
+  - - 180
+    - 126
+  - - 260
+    - 126
+  width: 1
+  tone: muted
+- text: '*F*'
+  at:
+  - 220.0
+  - 142
+  size: 14
+- path: M14 216L28 216M31.5 216L33 216M36.5 216L50.5 216M54 216L55.5 216M59 216L73 216M76.5 216L78 216M81.5
+    216L95.5 216M99 216L100.5 216M104 216L118 216M121.5 216L123 216M126.5 216L140.5 216M144 216L145.5
+    216M149 216L163 216M166.5 216L168 216M171.5 216L185.5 216M189 216L190.5 216M194 216L208 216M211.5
+    216L213 216M216.5 216L230.5 216M234 216L235.5 216M239 216L253 216M256.5 216L258 216M261.5 216L275.5
+    216M279 216L280.5 216M284 216L298 216M301.5 216L303 216M306.5 216L320.5 216M324 216L325.5 216M329
+    216L343 216M346.5 216L348 216M351.5 216L365.5 216M369 216L370.5 216M374 216L388 216
+  width: 1
+  tone: muted
+- line:
+  - - 180
+    - 162
+  - - 180
+    - 270
+  width: 2
+- line:
+  - - 174
+    - 154
+  - - 180
+    - 162
+  - - 186
+    - 154
+  width: 2
+- line:
+  - - 174
+    - 278
+  - - 180
+    - 270
+  - - 186
+    - 278
+  width: 2
+- line:
+  - - 180.0
+    - 172.0
+  - - 100
+    - 216
+  width: 1.2
+  dashed: true
+  tone: muted
+- line:
+  - - 20.0
+    - 172.0
+  - - 180.0
+    - 172.0
+  width: 1.6
+  tone: accent
+- path: M104.8 172L96.8 175.6L96.8 168.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 180.0
+    - 172.0
+  - - 220.0
+    - 150.0
+  width: 1.6
+  tone: accent
+- path: M204.2 158.7L198.9 165.7L195.5 159.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 180.0
+    - 190.0
+  - - 100
+    - 216
+  width: 1.2
+  dashed: true
+  tone: muted
+- line:
+  - - 20.0
+    - 190.0
+  - - 180.0
+    - 190.0
+  width: 1.6
+  tone: accent
+- path: M104.8 190L96.8 193.6L96.8 186.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 180.0
+    - 190.0
+  - - 303.1
+    - 150.0
+  width: 1.6
+  tone: accent
+- path: M246.1 168.5L239.6 174.4L237.4 167.6Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 20.0
+    - 216.0
+  - - 180.0
+    - 216.0
+  width: 1.6
+  tone: accent
+- path: M104.8 216L96.8 219.6L96.8 212.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 180.0
+    - 216.0
+  - - 385.0
+    - 216.0
+  width: 1.6
+  tone: accent
+- path: M287.3 216L279.3 219.6L279.3 212.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 180.0
+    - 242.0
+  - - 100
+    - 216
+  width: 1.2
+  dashed: true
+  tone: muted
+- line:
+  - - 20.0
+    - 242.0
+  - - 180.0
+    - 242.0
+  width: 1.6
+  tone: accent
+- path: M104.8 242L96.8 245.6L96.8 238.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 180.0
+    - 242.0
+  - - 303.1
+    - 282.0
+  width: 1.6
+  tone: accent
+- path: M246.1 263.5L237.4 264.4L239.6 257.6Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 180.0
+    - 260.0
+  - - 100
+    - 216
+  width: 1.2
+  dashed: true
+  tone: muted
+- line:
+  - - 20.0
+    - 260.0
+  - - 180.0
+    - 260.0
+  width: 1.6
+  tone: accent
+- path: M104.8 260L96.8 263.6L96.8 256.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 180.0
+    - 260.0
+  - - 220.0
+    - 282.0
+  width: 1.6
+  tone: accent
+- path: M204.2 273.3L195.5 272.6L198.9 266.3Z
+  fill: solid
+  tone: accent
+  width: 0
+- dots:
+  - - 100
+    - 216
+  - - 260
+    - 216
+  r: 3
+- text: '*F*'
+  at:
+  - 260
+  - 234
+  size: 14
+- text: '*O*'
+  at:
+  - 189
+  - 233
+  size: 14
+- text: мнимый фокус *F*
+  at:
+  - 100
+  - 160
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 180
+    - 263
+  - - 180
+    - 273
+  width: 1
+  tone: muted
+- line:
+  - - 100
+    - 263
+  - - 100
+    - 273
+  width: 1
+  tone: muted
+- line:
+  - - 180
+    - 268
+  - - 100
+    - 268
+  width: 1
+  tone: muted
+- text: '*F*'
+  at:
+  - 140.0
+  - 284
+  size: 14

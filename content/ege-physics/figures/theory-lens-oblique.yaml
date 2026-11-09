@@ -1,0 +1,128 @@
+# electro.optics.lenses 15.3: refracting an arbitrary ray. Through the optical centre O draw a
+# secondary axis (muted dashed) parallel to the ray; it crosses the focal plane (muted dashed,
+# through F) at a point (accent dot). A converging lens sends every ray parallel to that axis
+# through this point, so the refracted ray goes from the lens to it.
+# Colours (the optics convention of 14.x): a light ray is an accent line with an arrowhead in
+# its middle; the continuation of a ray (a virtual image, a virtual focus) muted dashed; the
+# normal to a surface muted dashed; a denser medium (glass) a surface fill with a text-colour
+# boundary. Lenses (added here): a thin lens is a text-colour line across the principal axis,
+# with open arrowheads at its ends pointing outward for a converging lens and inward for a
+# diverging one; a lens drawn as a glass body is a surface fill with a text-colour outline.
+# The principal axis a muted dash-dot line, a secondary axis and the focal plane muted dashed;
+# the optical centre O, the foci F and the points 2F text-colour dots with italic labels.
+# An object a text-colour arrow from the axis; a real image a solid text-colour arrow, a virtual
+# one a muted dashed arrow; the eye in the text colour. Distances (d, f, F) muted dimension
+# lines; similar triangles a surface or an accent tint. Notes muted.
+kind: diagram
+size:
+- 400
+- 200
+items:
+- path: M10 104L24 104M27.5 104L29 104M32.5 104L46.5 104M50 104L51.5 104M55 104L69 104M72.5 104L74 104M77.5
+    104L91.5 104M95 104L96.5 104M100 104L114 104M117.5 104L119 104M122.5 104L136.5 104M140 104L141.5 104M145
+    104L159 104M162.5 104L164 104M167.5 104L181.5 104M185 104L186.5 104M190 104L204 104M207.5 104L209
+    104M212.5 104L226.5 104M230 104L231.5 104M235 104L249 104M252.5 104L254 104M257.5 104L271.5 104M275
+    104L276.5 104M280 104L294 104M297.5 104L299 104M302.5 104L316.5 104M320 104L321.5 104M325 104L339
+    104M342.5 104L344 104M347.5 104L361.5 104M365 104L366.5 104M370 104L384 104M387.5 104L389 104
+  width: 1
+  tone: muted
+- line:
+  - - 170
+    - 26
+  - - 170
+    - 182
+  width: 2
+- line:
+  - - 164
+    - 34
+  - - 170
+    - 26
+  - - 176
+    - 34
+  width: 2
+- line:
+  - - 164
+    - 174
+  - - 170
+    - 182
+  - - 176
+    - 174
+  width: 2
+- line:
+  - - 280
+    - 22
+  - - 280
+    - 188
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 20
+    - 59.0
+  - - 390
+    - 170.0
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 20.0
+    - 7.0
+  - - 170.0
+    - 52.0
+  width: 1.8
+  tone: accent
+- path: M99.6 30.9L90.9 32L93 25.1Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 170.0
+    - 52.0
+  - - 346.0
+    - 188.0
+  width: 1.8
+  tone: accent
+- path: M244.2 109.3L235.7 107.3L240.1 101.6Z
+  fill: solid
+  tone: accent
+  width: 0
+- dots:
+  - - 280.0
+    - 137.0
+  r: 3.5
+  tone: accent
+- dots:
+  - - 60
+    - 104
+  - - 280
+    - 104
+  r: 3
+- text: '*F*'
+  at:
+  - 60
+  - 122
+  size: 14
+- text: '*F*'
+  at:
+  - 271
+  - 96
+  size: 14
+- text: '*O*'
+  at:
+  - 160
+  - 121
+  size: 14
+- text: фокальная плоскость
+  at:
+  - 394
+  - 16
+  size: 13
+  anchor: end
+  tone: muted
+- text: побочная ось
+  at:
+  - 24
+  - 49.0
+  size: 13
+  anchor: start
+  tone: muted

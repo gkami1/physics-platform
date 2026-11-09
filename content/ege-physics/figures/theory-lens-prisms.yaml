@@ -1,0 +1,191 @@
+# electro.optics.lenses 15.1: a lens as a stack of prisms. Left: two glass prisms base to base
+# with a slab between them (a converging lens, thicker in the middle); right: apex to apex
+# (a diverging lens). Three parallel rays (accent) are refracted at both faces by Snell's law
+# with n = 1,5 (traced exactly): each turns towards the prism's base, so the outer rays bend
+# towards the axis on the left and away from it on the right; the middle ray goes straight.
+# Colours (the optics convention of 14.x): a light ray is an accent line with an arrowhead in
+# its middle; the continuation of a ray (a virtual image, a virtual focus) muted dashed; the
+# normal to a surface muted dashed; a denser medium (glass) a surface fill with a text-colour
+# boundary. Lenses (added here): a thin lens is a text-colour line across the principal axis,
+# with open arrowheads at its ends pointing outward for a converging lens and inward for a
+# diverging one; a lens drawn as a glass body is a surface fill with a text-colour outline.
+# The principal axis a muted dash-dot line, a secondary axis and the focal plane muted dashed;
+# the optical centre O, the foci F and the points 2F text-colour dots with italic labels.
+# An object a text-colour arrow from the axis; a real image a solid text-colour arrow, a virtual
+# one a muted dashed arrow; the eye in the text colour. Distances (d, f, F) muted dimension
+# lines; similar triangles a surface or an accent tint. Notes muted.
+kind: diagram
+size:
+- 400
+- 224
+items:
+- path: M82 96L100 26L118 96Z
+  fill: surface
+  width: 1.5
+- path: M82 124L118 124L100 194Z
+  fill: surface
+  width: 1.5
+- path: M82 96L118 96L118 124L82 124Z
+  fill: surface
+  width: 1.5
+- line:
+  - - 8
+    - 68
+  - - 89.2
+    - 68.0
+  width: 1.8
+  tone: accent
+- path: M53.4 68L45.4 71.6L45.4 64.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 89.2
+    - 68.0
+  - - 111.3
+    - 69.9
+  width: 1.8
+  tone: accent
+- line:
+  - - 111.3
+    - 69.9
+  - - 196.0
+    - 93.0
+  width: 1.8
+  tone: accent
+- path: M166.7 85L158.1 86.4L160 79.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 8
+    - 110
+  - - 196
+    - 110
+  width: 1.8
+  tone: accent
+- path: M54.2 110L46.2 113.6L46.2 106.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 8
+    - 152
+  - - 89.2
+    - 152.0
+  width: 1.8
+  tone: accent
+- path: M53.4 152L45.4 155.6L45.4 148.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 89.2
+    - 152.0
+  - - 111.3
+    - 150.1
+  width: 1.8
+  tone: accent
+- line:
+  - - 111.3
+    - 150.1
+  - - 196.0
+    - 127.0
+  width: 1.8
+  tone: accent
+- path: M166.7 135L160 140.6L158.1 133.6Z
+  fill: solid
+  tone: accent
+  width: 0
+- text: собирающая
+  at:
+  - 100
+  - 214
+  size: 13
+  anchor: middle
+  tone: muted
+- path: M282 26L318 26L300 96Z
+  fill: surface
+  width: 1.5
+- path: M300 124L318 194L282 194Z
+  fill: surface
+  width: 1.5
+- path: M297.3 96L302.7 96L302.7 124L297.3 124Z
+  fill: surface
+  width: 1.5
+- line:
+  - - 208
+    - 68
+  - - 292.8
+    - 68.0
+  width: 1.8
+  tone: accent
+- path: M255.2 68L247.2 71.6L247.2 64.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 292.8
+    - 68.0
+  - - 307.5
+    - 66.7
+  width: 1.8
+  tone: accent
+- line:
+  - - 307.5
+    - 66.7
+  - - 396.0
+    - 42.6
+  width: 1.8
+  tone: accent
+- path: M365.2 51L358.5 56.6L356.6 49.6Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 208
+    - 110
+  - - 396
+    - 110
+  width: 1.8
+  tone: accent
+- path: M254.2 110L246.2 113.6L246.2 106.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 208
+    - 152
+  - - 292.8
+    - 152.0
+  width: 1.8
+  tone: accent
+- path: M255.2 152L247.2 155.6L247.2 148.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 292.8
+    - 152.0
+  - - 307.5
+    - 153.3
+  width: 1.8
+  tone: accent
+- line:
+  - - 307.5
+    - 153.3
+  - - 396.0
+    - 177.4
+  width: 1.8
+  tone: accent
+- path: M365.2 169L356.6 170.4L358.5 163.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- text: рассеивающая
+  at:
+  - 300
+  - 214
+  size: 13
+  anchor: middle
+  tone: muted
