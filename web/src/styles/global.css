@@ -3727,3 +3727,153 @@ task-answer .final {
   color: var(--accent);
   font-weight: 600;
 }
+
+.lcm-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin: 0 0 0.5rem;
+}
+
+.lcm-play {
+  min-width: 5.5rem;
+}
+
+.lcm-note {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.lcm-wire,
+.lcm-axis {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.6;
+}
+
+.lcm-axis {
+  stroke-width: 1.4;
+}
+
+.lcm-plate {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 2.6;
+}
+
+.lcm-axis-head {
+  fill: var(--text);
+}
+
+.lcm-ec,
+.lcm-bc {
+  fill: var(--accent);
+}
+
+.lcm-el,
+.lcm-bl {
+  fill: var(--ok);
+}
+
+.lcm-base,
+.lcm-grid {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.2;
+}
+
+.lcm-grid {
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.lcm-i {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.lcm-i-head,
+.lcm-dq {
+  fill: var(--accent);
+}
+
+.lcm-di {
+  fill: var(--ok);
+}
+
+.lcm-cq,
+.lcm-ci {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.4;
+}
+
+.lcm-ci {
+  stroke: var(--ok);
+  stroke-width: 2;
+}
+
+.sim-svg .lcm-sign {
+  fill: var(--text);
+  font-size: 14px;
+}
+
+.sim-svg .lcm-tick {
+  fill: var(--muted);
+  font-size: 12px;
+}
+
+.sim-svg .lcm-label {
+  fill: var(--text);
+  font-size: 15px;
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.sim-svg .lcm-il,
+.sim-svg .lcm-lc {
+  fill: var(--accent);
+}
+
+.sim-svg .lcm-ll {
+  fill: var(--ok);
+}
+
+.lcm-table {
+  width: 100%;
+  margin: 0.75rem 0 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.lcm-table th,
+.lcm-table td {
+  padding: 0.2rem 0.35rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+.lcm-table th {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.lcm-table td {
+  white-space: nowrap;
+}
+
+.lcm-table tr.lcm-fixed td,
+.lcm-table tr.lcm-wc td {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.lcm-table tr.lcm-wl td {
+  color: var(--ok);
+  font-weight: 600;
+}
