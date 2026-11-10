@@ -1,0 +1,179 @@
+# electro.optics.wave 16.5: why d sin φ = kλ. Light (accent arrows) falls on four slits of a
+# grating (text colour, period d); from every slit a ray leaves at the same angle φ = 32°. The
+# perpendicular from one slit to the neighbour's ray (muted dashed) cuts off the path difference
+# Δ = d sin φ (thick, text colour) in a right triangle whose angle at the upper slit is φ.
+# Colours (the optics convention of 14.x–15.x): a light ray is an accent line with an arrowhead
+# in its middle; the normal muted dashed; angles as arcs; a denser medium (glass, a film) a surface
+# fill with a text-colour boundary; a lens a text-colour line with open arrowheads, the principal
+# axis muted dash-dot; wavefronts thin accent lines; opaque screens and walls in the text colour.
+# Coloured light (decided here): the site palette has no spectrum colours and figures follow the
+# theme, so a colour is named, never painted. A ray of one colour is an accent ray labelled with
+# its colour; where red and violet share a figure, red (the long wave) is solid and violet dashed.
+# White light is a thicker accent ray labelled «белый». A spectrum is a strip of surface cells with
+# text-colour borders, each holding its colour's initial (к о ж з г с ф), red on the long-wave side;
+# a spectrum of a grating order is an accent-tinted band with «ф» and «к» at its ends.
+# An intensity pattern (brightness along a screen) is a graph with an accent curve beside the
+# screen; lengths (d, Δ, r) in the text colour, guides and notes muted.
+kind: diagram
+size:
+- 400
+- 246
+items:
+- line:
+  - - 120.0
+    - 12.0
+  - - 120.0
+    - 47.0
+  width: 3.5
+- line:
+  - - 120.0
+    - 53.0
+  - - 120.0
+    - 97.0
+  width: 3.5
+- line:
+  - - 120.0
+    - 103.0
+  - - 120.0
+    - 147.0
+  width: 3.5
+- line:
+  - - 120.0
+    - 153.0
+  - - 120.0
+    - 197.0
+  width: 3.5
+- line:
+  - - 120.0
+    - 203.0
+  - - 120.0
+    - 238.0
+  width: 3.5
+- arrow:
+  - - 40
+    - 50.0
+  - - 114.0
+    - 50.0
+  width: 1.4
+  tone: accent
+- line:
+  - - 120.0
+    - 50.0
+  - - 187.2
+    - 8.0
+  width: 1.6
+  tone: accent
+- path: M174.5 16L169.6 23.2L165.8 17.1Z
+  fill: solid
+  tone: accent
+  width: 0
+- arrow:
+  - - 40
+    - 100.0
+  - - 114.0
+    - 100.0
+  width: 1.4
+  tone: accent
+- line:
+  - - 120.0
+    - 100.0
+  - - 267.2
+    - 8.0
+  width: 1.6
+  tone: accent
+- path: M234.5 28.5L229.6 35.7L225.8 29.6Z
+  fill: solid
+  tone: accent
+  width: 0
+- arrow:
+  - - 40
+    - 150.0
+  - - 114.0
+    - 150.0
+  width: 1.4
+  tone: accent
+- line:
+  - - 120.0
+    - 150.0
+  - - 347.2
+    - 8.0
+  width: 1.6
+  tone: accent
+- path: M294.5 41L289.6 48.2L285.8 42.1Z
+  fill: solid
+  tone: accent
+  width: 0
+- arrow:
+  - - 40
+    - 200.0
+  - - 114.0
+    - 200.0
+  width: 1.4
+  tone: accent
+- line:
+  - - 120.0
+    - 200.0
+  - - 380.0
+    - 37.5
+  width: 1.6
+  tone: accent
+- path: M319.1 75.6L314.2 82.9L310.4 76.8Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 120.0
+    - 100.0
+  - - 142.5
+    - 136.0
+  width: 1.2
+  tone: muted
+  dashed: true
+- line:
+  - - 120.0
+    - 150.0
+  - - 142.5
+    - 136.0
+  width: 4
+- angle:
+  - 120.0
+  - 150.0
+  start: 0
+  end: 32
+  r: 44
+  label: '*φ*'
+- line:
+  - - 90.0
+    - 100.0
+  - - 90.0
+    - 150.0
+  width: 1
+  tone: muted
+- line:
+  - - 85.0
+    - 100.0
+  - - 95.0
+    - 100.0
+  width: 1
+  tone: muted
+- line:
+  - - 85.0
+    - 150.0
+  - - 95.0
+    - 150.0
+  width: 1
+  tone: muted
+- text: '*d*'
+  at:
+  - 80.0
+  - 130.0
+  size: 15
+  anchor: end
+  tone: default
+- text: Δ = *d* sin *φ*
+  at:
+  - 158.46985115747918
+  - 157.95927866972693
+  size: 14
+  anchor: start
+  tone: default

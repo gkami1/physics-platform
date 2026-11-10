@@ -1,0 +1,132 @@
+# electro.optics.wave 16.3: a thin film. A ray (accent) falls on a soap film (surface fill,
+# n = 1.33); ray 1 is reflected by the front surface, the refracted part (Snell's law) is
+# reflected by the back surface and leaves as ray 2, parallel to ray 1 and behind it by a path
+# difference set by the thickness. The normal muted dashed.
+# Colours (the optics convention of 14.x–15.x): a light ray is an accent line with an arrowhead
+# in its middle; the normal muted dashed; angles as arcs; a denser medium (glass, a film) a surface
+# fill with a text-colour boundary; a lens a text-colour line with open arrowheads, the principal
+# axis muted dash-dot; wavefronts thin accent lines; opaque screens and walls in the text colour.
+# Coloured light (decided here): the site palette has no spectrum colours and figures follow the
+# theme, so a colour is named, never painted. A ray of one colour is an accent ray labelled with
+# its colour; where red and violet share a figure, red (the long wave) is solid and violet dashed.
+# White light is a thicker accent ray labelled «белый». A spectrum is a strip of surface cells with
+# text-colour borders, each holding its colour's initial (к о ж з г с ф), red on the long-wave side;
+# a spectrum of a grating order is an accent-tinted band with «ф» and «к» at its ends.
+# An intensity pattern (brightness along a screen) is a graph with an accent curve beside the
+# screen; lengths (d, Δ, r) in the text colour, guides and notes muted.
+kind: diagram
+size:
+- 400
+- 182
+items:
+- rect:
+  - 20
+  - 100.0
+  - 360
+  - 30.0
+  fill: surface
+  width: 0
+  tone: muted
+- line:
+  - - 20
+    - 100.0
+  - - 380
+    - 100.0
+  width: 1.4
+- line:
+  - - 20
+    - 130.0
+  - - 380
+    - 130.0
+  width: 1.4
+- line:
+  - - 150.0
+    - 30.0
+  - - 150.0
+    - 160.0
+  width: 1
+  tone: muted
+  dashed: true
+- line:
+  - - 60.0
+    - 20.0
+  - - 150.0
+    - 100.0
+  width: 2.2
+  tone: accent
+- path: M109.5 64L99 60.7L105 54Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 150.0
+    - 100.0
+  - - 240.0
+    - 20.0
+  width: 1.8
+  tone: accent
+- path: M203.1 52.8L199.5 60.8L194.7 55.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 150.0
+    - 100.0
+  - - 170.4
+    - 130.0
+  width: 1.6
+  tone: accent
+- path: M164.9 122L157.5 117.4L163.4 113.3Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 170.4
+    - 130.0
+  - - 190.8
+    - 100.0
+  width: 1.6
+  tone: accent
+- path: M183.3 111L181.8 119.7L175.8 115.6Z
+  fill: solid
+  tone: accent
+  width: 0
+- line:
+  - - 190.8
+    - 100.0
+  - - 280.8
+    - 20.0
+  width: 1.8
+  tone: accent
+- path: M243.9 52.8L240.3 60.8L235.5 55.4Z
+  fill: solid
+  tone: accent
+  width: 0
+- text: '1'
+  at:
+  - 248.0
+  - 26.0
+  size: 15
+  anchor: start
+  tone: default
+- text: '2'
+  at:
+  - 288.763076518287
+  - 26.0
+  size: 15
+  anchor: start
+  tone: default
+- text: плёнка
+  at:
+  - 360
+  - 120.0
+  size: 13
+  anchor: end
+  tone: muted
+- text: лучи 1 и 2 встречаются и интерферируют
+  at:
+  - 200
+  - 168
+  size: 13
+  anchor: middle
+  tone: muted

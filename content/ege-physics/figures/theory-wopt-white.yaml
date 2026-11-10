@@ -1,0 +1,181 @@
+# electro.optics.wave 16.7: white light through a grating, on a sin φ axis. Order 0 is white;
+# each order k ≥ 1 is a spectrum (accent band) from violet at sin φ = k·380 нм/d to red at
+# k·760 нм/d, drawn for d = 2.6 мкм, one row per order. The first spectrum stands alone, the
+# second and third overlap (muted dashed bounds).
+# Colours (the optics convention of 14.x–15.x): a light ray is an accent line with an arrowhead
+# in its middle; the normal muted dashed; angles as arcs; a denser medium (glass, a film) a surface
+# fill with a text-colour boundary; a lens a text-colour line with open arrowheads, the principal
+# axis muted dash-dot; wavefronts thin accent lines; opaque screens and walls in the text colour.
+# Coloured light (decided here): the site palette has no spectrum colours and figures follow the
+# theme, so a colour is named, never painted. A ray of one colour is an accent ray labelled with
+# its colour; where red and violet share a figure, red (the long wave) is solid and violet dashed.
+# White light is a thicker accent ray labelled «белый». A spectrum is a strip of surface cells with
+# text-colour borders, each holding its colour's initial (к о ж з г с ф), red on the long-wave side;
+# a spectrum of a grating order is an accent-tinted band with «ф» and «к» at its ends.
+# An intensity pattern (brightness along a screen) is a graph with an accent curve beside the
+# screen; lengths (d, Δ, r) in the text colour, guides and notes muted.
+kind: diagram
+size:
+- 400
+- 204
+items:
+- arrow:
+  - - 76.0
+    - 176.0
+  - - 388.0
+    - 176.0
+  width: 1.4
+- text: sin *φ*
+  at:
+  - 388.0
+  - 168.0
+  size: 13
+  anchor: end
+  tone: default
+- line:
+  - - 76.0
+    - 172.0
+  - - 76.0
+    - 180.0
+  width: 1.2
+- line:
+  - - 366.0
+    - 172.0
+  - - 366.0
+    - 180.0
+  width: 1.2
+- text: '0'
+  at:
+  - 76.0
+  - 194.0
+  size: 12
+  anchor: middle
+  tone: default
+- text: '1'
+  at:
+  - 366.0
+  - 194.0
+  size: 12
+  anchor: middle
+  tone: default
+- dots:
+  - - 76.0
+    - 158.0
+  r: 4
+- text: '*k* = 0: белый'
+  at:
+  - 84.0
+  - 163.0
+  size: 12
+  anchor: start
+  tone: default
+- rect:
+  - 118.4
+  - 131.0
+  - 42.4
+  - 18
+  fill: accent
+  tone: accent
+  width: 1
+- text: ф
+  at:
+  - 123.38461538461539
+  - 145.0
+  size: 12
+  anchor: start
+  tone: default
+- text: к
+  at:
+  - 155.76923076923077
+  - 145.0
+  size: 12
+  anchor: end
+  tone: default
+- text: '*k* = 1'
+  at:
+  - 68.0
+  - 145.0
+  size: 13
+  anchor: end
+  tone: default
+- rect:
+  - 160.8
+  - 97.0
+  - 84.8
+  - 18
+  fill: accent
+  tone: accent
+  width: 1
+- text: ф
+  at:
+  - 165.76923076923077
+  - 111.0
+  size: 12
+  anchor: start
+  tone: default
+- text: к
+  at:
+  - 240.53846153846155
+  - 111.0
+  size: 12
+  anchor: end
+  tone: default
+- text: '*k* = 2'
+  at:
+  - 68.0
+  - 111.0
+  size: 13
+  anchor: end
+  tone: default
+- rect:
+  - 203.2
+  - 63.0
+  - 127.2
+  - 18
+  fill: accent
+  tone: accent
+  width: 1
+- text: ф
+  at:
+  - 208.15384615384613
+  - 77.0
+  size: 12
+  anchor: start
+  tone: default
+- text: к
+  at:
+  - 325.30769230769226
+  - 77.0
+  size: 12
+  anchor: end
+  tone: default
+- text: '*k* = 3'
+  at:
+  - 68.0
+  - 77.0
+  size: 13
+  anchor: end
+  tone: default
+- line:
+  - - 203.2
+    - 54
+  - - 203.2
+    - 124
+  width: 1
+  tone: muted
+  dashed: true
+- line:
+  - - 245.5
+    - 54
+  - - 245.5
+    - 124
+  width: 1
+  tone: muted
+  dashed: true
+- text: перекрываются
+  at:
+  - 224.34615384615384
+  - 46
+  size: 13
+  anchor: middle
+  tone: muted
