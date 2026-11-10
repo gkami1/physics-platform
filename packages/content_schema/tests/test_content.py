@@ -339,8 +339,8 @@ def test_lesson_build_entries(tmp_path: Path) -> None:
     assert lesson["topic_title"] == "Основы кинематики"
     assert lesson["lessons"][0] == "1.1 Механическое движение и система СИ"
     assert len(lesson["lessons"]) == len(basics) - 1
-    assert tutor["sr.basics"]["number"] is None
-    assert tutor["sr.basics"]["lessons"] == []
+    assert tutor["quantum.photons"]["number"] is None  # a topic still on one page
+    assert tutor["quantum.photons"]["lessons"] == []
 
 
 def test_split_frontmatter_requires_block() -> None:
