@@ -183,7 +183,7 @@ const f1 = (v: number): string => v.toFixed(1);
 /** Layout: the tube on top, the I(U) graph below. */
 const S = {
   w: 400,
-  h: 392,
+  h: 402,
   anodeX: 92,
   cathX: 268,
   plateY0: 50,
@@ -497,7 +497,7 @@ class PhotoeffectSim extends HTMLElement {
       this.label(S.cathX + 16, S.plateY0 + 12, u === 0 ? '' : plus ? MINUS : '+', 'middle', 'phe-sign'),
     );
     const on = emits(this.lam, a);
-    this.noEffect.textContent = on ? '' : 'hν < A: электроны не вылетают';
+    this.noEffect.textContent = on ? '' : 'hν < A — фотоэффекта нет';
     // the I(U) curve, the saturation current and the operating point
     const uz = stopping(this.lam, a);
     const isat = saturation(this.lam, a, this.bright) * 1e6;
