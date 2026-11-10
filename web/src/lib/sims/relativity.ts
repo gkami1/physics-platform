@@ -75,7 +75,7 @@ export function readout(h: number): [string, string, boolean][] {
   const g = gamma(b);
   const mc2 = `${NBSP}mc²`;
   return [
-    ['Скорость v', `${speedText(h)} = ${grouped(b * C_KMS)}${NBSP}км/с`, false],
+    ['Скорость v', h === 0 ? '0' : `${speedText(h)} = ${grouped(b * C_KMS)}${NBSP}км/с`, false],
     ['γ = 1/√(1 − v²/c²)', num(g), false],
     ['Полная энергия E = γmc²', num(g) + mc2, false],
     ['Кинетическая E_к = E − mc²', num(g - 1) + mc2, true],
@@ -210,7 +210,7 @@ class RelativitySim extends HTMLElement {
       parts.push(this.label(ox - 7, Y(e) + 5, String(e), 'end', 'rel-label rel-small'));
     }
     parts.push(this.label(ox - 6, oy + 16, '0', 'end', 'rel-label rel-small'));
-    parts.push(this.label(ox + gw + 22, oy + 18, 'v/c', 'end', 'rel-label rel-small rel-italic'));
+    parts.push(this.label(ox + gw + 14, oy + 18, 'v/c', 'start', 'rel-label rel-small rel-italic'));
     const yName = this.label(ox + 10, oy - gh - 8, '', 'start', 'rel-label rel-small');
     yName.append(
       el('tspan', { 'font-style': 'italic' }, 'E'),
@@ -258,10 +258,10 @@ class RelativitySim extends HTMLElement {
     parts.push(this.label(bx + bw / 2, oy - 6, 'mc²', 'middle', 'rel-label rel-tiny'));
     parts.push(this.label(bx + bw / 2, B(g) - 8, 'E', 'middle', 'rel-label rel-small rel-italic'));
     for (const e of [2, 4, 6, 8]) {
-      parts.push(el('path', { d: `M${bx + bw} ${f1(B(e))}h4`, class: 'rel-axis' }));
+      parts.push(el('path', { d: `M${bx - 4} ${f1(B(e))}h4`, class: 'rel-axis' }));
     }
-    parts.push(this.label(bx + bw + 6, B(8) + 4, '8', 'start', 'rel-label rel-tiny'));
-    parts.push(this.label(bx + bw + 6, B(4) + 4, '4', 'start', 'rel-label rel-tiny'));
+    parts.push(this.label(bx - 6, B(8) + 4, '8', 'end', 'rel-label rel-tiny'));
+    parts.push(this.label(bx - 6, B(4) + 4, '4', 'end', 'rel-label rel-tiny'));
 
     this.scene.replaceChildren(...parts);
   }
