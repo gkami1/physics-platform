@@ -4357,3 +4357,112 @@ task-answer .final {
   color: var(--accent);
   font-weight: 600;
 }
+
+/* <pp-relativity>: the energy of a fast particle (lesson 1.5 of «Основы СТО»). The graph convention
+   of the figures: axes in the text colour, E_к = mc²(γ − 1) accent, the classical mv²/2 muted
+   dashed, guides muted dashed; the bar of E = mc² + E_к a surface block plus an accent tint. */
+.rel-axis {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.4;
+}
+
+.rel-tip {
+  fill: var(--text);
+}
+
+.rel-curve {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.2;
+}
+
+.rel-classic,
+.rel-guide {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.6;
+  stroke-dasharray: 5 4;
+}
+
+.rel-guide {
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+}
+
+.rel-dot {
+  fill: var(--accent);
+}
+
+.rel-hollow {
+  fill: var(--surface);
+  stroke: var(--muted);
+  stroke-width: 1.6;
+}
+
+.rel-rest {
+  fill: var(--surface-2, var(--surface));
+  stroke: var(--text);
+  stroke-width: 1.2;
+}
+
+.rel-kin {
+  fill: var(--accent);
+  fill-opacity: 0.25;
+  stroke: var(--accent);
+  stroke-width: 1.2;
+}
+
+.sim-svg .rel-label {
+  fill: var(--text);
+  font-size: 15px;
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.sim-svg .rel-small {
+  font-size: 13px;
+}
+
+.sim-svg .rel-tiny {
+  font-size: 11px;
+}
+
+.sim-svg .rel-italic {
+  font-style: italic;
+}
+
+.sim-svg .rel-muted {
+  fill: var(--muted);
+}
+
+.sim-svg .rel-accent {
+  fill: var(--accent);
+}
+
+.rel-table {
+  width: 100%;
+  margin: 0.75rem 0 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.rel-table th,
+.rel-table td {
+  padding: 0.2rem 0.35rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+.rel-table th {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.rel-table tr.rel-main td {
+  color: var(--accent);
+  font-weight: 600;
+}
