@@ -1,0 +1,190 @@
+# quantum.photons 1.5: a photon with momentum p (accent arrow, 44 px) hits a black surface and
+# a mirror head-on. The black surface absorbs it: the photon's momentum goes from p to 0, the
+# surface gets p. The mirror sends it back with −p: the change is 2p, and the mirror gets 2p
+# (red, twice as long), as the wall in mechanics 10.5 gets 2mv from a bouncing ball.
+# Colours (the general convention): light is an accent wave; a colour is named, never painted
+# (red solid, violet dashed when both are drawn, as in electrodynamics 16.x); photons accent;
+# momenta accent arrows as in mechanics 10.5, the light's force on a surface red; bodies in the
+# text colour with a surface fill; graphs on axes in the text colour with accent curves; guides
+# and notes muted.
+kind: diagram
+size:
+- 400
+- 252
+items:
+- rect:
+  - 168.0
+  - 40
+  - 12
+  - 156
+  fill: surface
+  width: 2.2
+- text: 'чёрная: поглощает'
+  at:
+  - 95.0
+  - 22
+  size: 14
+  anchor: middle
+  tone: default
+- text: до
+  at:
+  - 14.0
+  - 64
+  size: 12
+  anchor: start
+  tone: muted
+- path: M72 72L73 69.3L74 67.5L75 67.1L76 68.2L77 70.6L78 73.4L79 75.8L80 76.9L81 76.5L82 74.7L83 72L84
+    69.3L85 67.5L86 67.1L87 68.2L88 70.6L89 73.4L90 75.8L91 76.9L92 76.5L93 74.7L94 72L95 69.3L96 67.5L97
+    67.1L98 68.2L99 70.6L100 73.4L101 75.8L102 76.9L103 76.5L104 74.7L105 72L106 69.3
+  tone: accent
+  width: 1.8
+- arrow:
+  - - 104.0
+    - 72
+  - - 116.0
+    - 72
+  tone: accent
+  width: 1.6
+- arrow:
+  - - 116.0
+    - 92
+  - - 160.0
+    - 92
+  tone: accent
+  width: 2.2
+- text: '*p*'
+  at:
+  - 138.0
+  - 108
+  size: 13
+  anchor: middle
+  tone: accent
+- text: после
+  at:
+  - 14.0
+  - 134
+  size: 12
+  anchor: start
+  tone: muted
+- text: поглощён
+  at:
+  - 158.0
+  - 150
+  size: 13
+  anchor: end
+  tone: default
+- arrow:
+  - - 116.0
+    - 186
+  - - 160.0
+    - 186
+  tone: force
+  width: 2.6
+- text: '*p*'
+  at:
+  - 138.0
+  - 178
+  size: 13
+  anchor: middle
+  tone: force
+- line:
+  - - 370.0
+    - 40
+  - - 370.0
+    - 196
+  width: 2.2
+- hatch:
+  - - 370.0
+    - 40
+  - - 370.0
+    - 196
+  side: -1
+- text: зеркало
+  at:
+  - 297.0
+  - 22
+  size: 14
+  anchor: middle
+  tone: default
+- text: до
+  at:
+  - 216.0
+  - 64
+  size: 12
+  anchor: start
+  tone: muted
+- path: M274 72L275 69.3L276 67.5L277 67.1L278 68.2L279 70.6L280 73.4L281 75.8L282 76.9L283 76.5L284 74.7L285
+    72L286 69.3L287 67.5L288 67.1L289 68.2L290 70.6L291 73.4L292 75.8L293 76.9L294 76.5L295 74.7L296 72L297
+    69.3L298 67.5L299 67.1L300 68.2L301 70.6L302 73.4L303 75.8L304 76.9L305 76.5L306 74.7L307 72L308 69.3
+  tone: accent
+  width: 1.8
+- arrow:
+  - - 306.0
+    - 72
+  - - 318.0
+    - 72
+  tone: accent
+  width: 1.6
+- arrow:
+  - - 318.0
+    - 92
+  - - 362.0
+    - 92
+  tone: accent
+  width: 2.2
+- text: '*p*'
+  at:
+  - 340.0
+  - 108
+  size: 13
+  anchor: middle
+  tone: accent
+- text: после
+  at:
+  - 216.0
+  - 134
+  size: 12
+  anchor: start
+  tone: muted
+- arrow:
+  - - 362.0
+    - 146
+  - - 318.0
+    - 146
+  tone: accent
+  width: 2.2
+- text: '*p*'
+  at:
+  - 340.0
+  - 162
+  size: 13
+  anchor: middle
+  tone: accent
+- arrow:
+  - - 274.0
+    - 186
+  - - 362.0
+    - 186
+  tone: force
+  width: 2.6
+- text: 2*p*
+  at:
+  - 318.0
+  - 178
+  size: 13
+  anchor: middle
+  tone: force
+- text: 'импульс, который получает поверхность (красный):'
+  at:
+  - 200
+  - 222
+  size: 13
+  anchor: middle
+  tone: muted
+- text: у зеркала вдвое больше — и давление вдвое больше
+  at:
+  - 200
+  - 240
+  size: 13
+  anchor: middle
+  tone: muted

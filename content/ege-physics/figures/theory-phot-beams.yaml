@@ -1,0 +1,149 @@
+# quantum.photons 1.4: a dim and a bright beam of the same colour. Each accent dot is one photon
+# of the same energy hν (equal dots); the bright beam carries three times as many photons
+# through the picture in the same time (4 vs 12, evenly along the beam, scattered across it by
+# golden-ratio offsets), so three times the power.
+# Colours (the general convention): light is an accent wave; a colour is named, never painted
+# (red solid, violet dashed when both are drawn, as in electrodynamics 16.x); photons accent;
+# momenta accent arrows as in mechanics 10.5, the light's force on a surface red; bodies in the
+# text colour with a surface fill; graphs on axes in the text colour with accent curves; guides
+# and notes muted.
+kind: diagram
+size:
+- 400
+- 234
+items:
+- rect:
+  - 16
+  - 40.0
+  - 46
+  - 44
+  fill: surface
+  width: 1.5
+  radius: 4
+- text: тусклый
+  at:
+  - 39
+  - 102.0
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 70
+    - 40.0
+  - - 384
+    - 40.0
+  width: 1
+  tone: muted
+  dashed: true
+- line:
+  - - 70
+    - 84.0
+  - - 384
+    - 84.0
+  width: 1
+  tone: muted
+  dashed: true
+- dots:
+  - - 117.8
+    - 49.0
+  - - 185.2
+    - 65.1
+  - - 252.8
+    - 55.1
+  - - 320.2
+    - 71.2
+  r: 5
+  tone: accent
+- arrow:
+  - - 364
+    - 62.0
+  - - 388
+    - 62.0
+  tone: accent
+  width: 1.6
+- rect:
+  - 16
+  - 132.0
+  - 46
+  - 44
+  fill: surface
+  width: 1.5
+  radius: 4
+- text: яркий
+  at:
+  - 39
+  - 194.0
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 70
+    - 132.0
+  - - 384
+    - 132.0
+  width: 1
+  tone: muted
+  dashed: true
+- line:
+  - - 70
+    - 176.0
+  - - 384
+    - 176.0
+  width: 1
+  tone: muted
+  dashed: true
+- dots:
+  - - 95.2
+    - 141.0
+  - - 117.8
+    - 157.1
+  - - 140.2
+    - 147.1
+  - - 162.8
+    - 163.2
+  - - 185.2
+    - 153.3
+  - - 207.8
+    - 143.3
+  - - 230.2
+    - 159.4
+  - - 252.8
+    - 149.5
+  - - 275.2
+    - 165.6
+  - - 297.8
+    - 155.6
+  - - 320.2
+    - 145.7
+  - - 342.8
+    - 161.8
+  r: 5
+  tone: accent
+- arrow:
+  - - 364
+    - 154.0
+  - - 388
+    - 154.0
+  tone: accent
+  width: 1.6
+- text: 'за то же время: 4 фотона'
+  at:
+  - 220
+  - 98
+  size: 13
+  anchor: middle
+  tone: muted
+- text: 'за то же время: 12 фотонов'
+  at:
+  - 220
+  - 190
+  size: 13
+  anchor: middle
+  tone: muted
+- text: у каждого фотона та же энергия *hν*
+  at:
+  - 200
+  - 222
+  size: 13
+  anchor: middle
+  tone: default

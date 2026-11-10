@@ -4466,3 +4466,121 @@ task-answer .final {
   color: var(--accent);
   font-weight: 600;
 }
+
+/* <pp-photons>: photons of light (lessons 1.2 and 1.4 of «Квантовая физика»). The spectrum strip
+   as surface cells with the colours' initials (a colour is named, never painted), the wave and the
+   photons accent, the laser a surface body, guides and edges muted. */
+.pht-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin: 0 0 0.5rem;
+}
+
+.pht-note {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.pht-zone {
+  fill: var(--muted);
+  fill-opacity: 0.12;
+  stroke: var(--muted);
+  stroke-width: 1;
+}
+
+.pht-cell,
+.pht-body {
+  fill: var(--surface-2, var(--surface));
+  stroke: var(--text);
+  stroke-width: 1;
+}
+
+.pht-body {
+  stroke-width: 1.5;
+}
+
+.pht-axis {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.2;
+}
+
+.pht-mark {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.4;
+}
+
+.pht-tip,
+.pht-dot {
+  fill: var(--accent);
+}
+
+.pht-wave {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.2;
+}
+
+.pht-guide,
+.pht-edge {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1;
+}
+
+.pht-edge {
+  stroke-dasharray: 5 4;
+}
+
+.sim-svg .pht-label {
+  fill: var(--text);
+  font-size: 15px;
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.sim-svg .pht-small {
+  font-size: 13px;
+}
+
+.sim-svg .pht-tiny {
+  font-size: 11px;
+}
+
+.sim-svg .pht-italic {
+  font-style: italic;
+}
+
+.sim-svg .pht-muted {
+  fill: var(--muted);
+}
+
+.pht-table {
+  width: 100%;
+  margin: 0.75rem 0 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.pht-table th,
+.pht-table td {
+  padding: 0.2rem 0.35rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+.pht-table th {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.pht-table tr.pht-main td {
+  color: var(--accent);
+  font-weight: 600;
+}
