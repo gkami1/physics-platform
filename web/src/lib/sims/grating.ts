@@ -115,6 +115,8 @@ const f1 = (v: number): string => v.toFixed(1);
 
 /** The scene: the grating at (gx, gy), a half-circle screen of radius R, the sin φ axis at ax. */
 const S = { w: 400, h: 260, gx: 44, gy: 130, R: 108, ax: 300 };
+/** White light: orders drawn as columns beside the sin φ axis (the fan shows them all). */
+const COLUMNS = 8;
 
 let instances = 0;
 
@@ -323,17 +325,22 @@ class GratingSim extends HTMLElement {
             pts.push(`L${f1(x)} ${f1(y)}`);
           }
           parts.push(el('path', { d: pts.join('') + 'Z', class: 'grt-band' }));
-          const y1 = yOf(sign * sv);
-          const y2 = yOf(sign * sr);
-          parts.push(el('rect', { x: ax - 6, y: f1(Math.min(y1, y2)), width: 12, height: f1(Math.abs(y2 - y1)), class: 'grt-band grt-edge' }));
         }
-        if (o <= 3) {
+        // on the sin φ axis: one column per order (upper half), like the rows of the 16.7 figure
+        if (o <= COLUMNS) {
+          const x = ax - 4 - 11 * o;
           const yv = yOf(sv);
           const yr = yOf(sr);
-          parts.push(this.label(ax + 12, yv + 4, `ф${o}`, 'start', 'grt-label grt-small'));
-          if (sr < 1 && yv - yr > 26) parts.push(this.label(ax + 12, yr + 10, `к${o}`, 'start', 'grt-label grt-small'));
+          parts.push(el('rect', { x: x - 4, y: f1(yr), width: 8, height: f1(yv - yr), class: 'grt-band grt-edge' }));
+          parts.push(this.label(x, gy + 16, String(o), 'middle', 'grt-label grt-tiny'));
+          if (o === 1) {
+            parts.push(this.label(ax + 8, yv + 4, 'ф', 'start', 'grt-label grt-small'));
+            parts.push(this.label(ax + 8, yr + 4, 'к', 'start', 'grt-label grt-small'));
+            parts.push(el('path', { d: `M${x + 4} ${f1(yv)}H${ax + 4}M${x + 4} ${f1(yr)}H${ax + 4}`, class: 'grt-guide' }));
+          }
         }
       }
+      parts.push(this.label(ax - 4 - 11 * Math.min(k, COLUMNS) - 8, gy + 16, 'k =', 'end', 'grt-label grt-tiny'));
       parts.push(...this.ray(gx, gy, gx + R, gy));
       parts.push(el('circle', { cx: ax, cy: gy, r: 3.5, class: 'grt-dot' }));
       parts.push(this.label(ax + 12, gy + 5, 'белый', 'start', 'grt-label grt-small'));

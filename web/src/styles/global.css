@@ -4325,6 +4325,10 @@ task-answer .final {
   font-size: 13px;
 }
 
+.sim-svg .grt-tiny {
+  font-size: 11px;
+}
+
 .sim-svg .grt-muted {
   fill: var(--muted);
 }
