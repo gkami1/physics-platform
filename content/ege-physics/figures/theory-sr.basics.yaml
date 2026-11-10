@@ -1,40 +1,147 @@
-# sr.basics: light from a moving rocket travels at c in every inertial frame
+# sr.basics 1.2 (redrawn from the ladder figure): top, a ball thrown forward at u from a car
+# moving at v — relative to the Earth v + u (mechanics 1.6). Bottom, light (accent wave) from a
+# rocket moving at v — relative to the Earth and to the rocket alike its speed is c, not c + v.
+# Colours (the general convention): bodies (cars, rockets, boxes) in the text colour with a surface
+# fill; velocities green (`vel`); light accent (a wavy line with an arrow, as in electrodynamics
+# 13.x); graphs on axes in the text colour with accent curves, the classical formula muted dashed;
+# guides and notes muted.
 kind: diagram
-size: [400, 240]
+size:
+- 400
+- 232
 items:
-- path: M70 92H170L200 110L170 128H70L56 140V80Z
+- text: мяч из вагона
+  at:
+  - 20
+  - 22
+  size: 14
+  anchor: start
+  tone: default
+- rect:
+  - 28
+  - 40
+  - 86
+  - 34
   fill: surface
-  width: 1.6
-- arrow: [[80, 160], [150, 160]]
+  width: 1.5
+  radius: 3
+- circle:
+  - 42
+  - 79
+  r: 5
+  fill: surface
+  width: 1.5
+  tone: default
+- circle:
+  - 100
+  - 79
+  r: 5
+  fill: surface
+  width: 1.5
+  tone: default
+- hatch:
+  - - 16
+    - 89
+  - - 384
+    - 89
+  side: 1
+- arrow:
+  - - 44
+    - 104
+  - - 100
+    - 104
   tone: vel
   label: '*v*'
-  label_at: [164, 165]
-- path: M205.0 110.0L206.6 111.9L208.1 113.5L209.7 114.6L211.2 115.0L212.8 114.6L214.4 113.5L215.9 111.9L217.5
-    110.0L219.1 108.1L220.6 106.5L222.2 105.4L223.8 105.0L225.3 105.4L226.9 106.5L228.4 108.1L230.0 110.0L231.6
-    111.9L233.1 113.5L234.7 114.6L236.2 115.0L237.8 114.6L239.4 113.5L240.9 111.9L242.5 110.0L244.1 108.1L245.6
-    106.5L247.2 105.4L248.8 105.0L250.3 105.4L251.9 106.5L253.4 108.1L255.0 110.0L256.6 111.9L258.1 113.5L259.7
-    114.6L261.2 115.0L262.8 114.6L264.4 113.5L265.9 111.9L267.5 110.0L269.1 108.1L270.6 106.5L272.2 105.4L273.8
-    105.0L275.3 105.4L276.9 106.5L278.4 108.1L280.0 110.0L281.6 111.9L283.1 113.5L284.7 114.6L286.2 115.0L287.8
-    114.6L289.4 113.5L290.9 111.9L292.5 110.0L294.1 108.1L295.6 106.5L297.2 105.4L298.8 105.0L300.3 105.4L301.9
-    106.5L303.4 108.1L305.0 110.0L306.6 111.9L308.1 113.5L309.7 114.6L311.2 115.0L312.8 114.6L314.4 113.5L315.9
-    111.9L317.5 110.0L319.1 108.1L320.6 106.5L322.2 105.4L323.8 105.0L325.3 105.4L326.9 106.5L328.4 108.1L330.0
-    110.0
-  tone: force
-  width: 1.6
-- arrow: [[326, 110], [345, 110]]
-  tone: force
-- text: 'свет: *c*'
-  at: [275, 90]
-  tone: force
-- hatch: [[20, 200], [380, 200]]
-  side: 1
-- text: и на ракете, и на Земле скорость света *c*
-  at: [200, 34]
+  label_at:
+  - 112
+  - 109
+- dots:
+  - - 128
+    - 56
+  r: 4.5
+- arrow:
+  - - 136
+    - 56
+  - - 186
+    - 56
+  tone: vel
+  label: '*u*'
+  label_at:
+  - 197
+  - 61
+- text: относительно Земли
+  at:
+  - 300
+  - 44
   size: 13
-- text: (не *c* + *v*)
-  at: [200, 52]
-  size: 13
+  anchor: middle
   tone: muted
-- text: '*E*_0 = *m**c*^{2}'
-  at: [300, 170]
+- text: '*v* + *u*'
+  at:
+  - 300
+  - 66
   size: 16
+  anchor: middle
+  tone: default
+- text: свет из ракеты
+  at:
+  - 20
+  - 132
+  size: 14
+  anchor: start
+  tone: default
+- path: M30 166H106L126 178L106 190H30L22 198V158Z
+  fill: surface
+  width: 1.6
+- arrow:
+  - - 40
+    - 212.0
+  - - 96
+    - 212.0
+  tone: vel
+  label: '*v*'
+  label_at:
+  - 108
+  - 217.0
+- sine:
+  - 132
+  - 178.0
+  length: 96
+  amplitude: 5
+  periods: 6
+  tone: accent
+  width: 1.6
+- arrow:
+  - - 226
+    - 178.0
+  - - 244
+    - 178.0
+  tone: accent
+- text: '*c*'
+  at:
+  - 186
+  - 164.0
+  size: 15
+  anchor: middle
+  tone: accent
+- text: относительно Земли
+  at:
+  - 318
+  - 156.0
+  size: 13
+  anchor: middle
+  tone: muted
+- text: '*c*, а не *c* + *v*'
+  at:
+  - 318
+  - 178.0
+  size: 16
+  anchor: middle
+  tone: default
+- text: и относительно ракеты *c*
+  at:
+  - 318
+  - 200.0
+  size: 13
+  anchor: middle
+  tone: muted

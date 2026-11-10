@@ -1,0 +1,111 @@
+# sr.basics 1.4: a body before and after it gives away energy ΔE (accent arrows: radiation, heat).
+# Its mass drops by ΔE/c²: «до» — m, «после» — m − ΔE/c².
+# Colours (the general convention): bodies (cars, rockets, boxes) in the text colour with a surface
+# fill; velocities green (`vel`); light accent (a wavy line with an arrow, as in electrodynamics
+# 13.x); graphs on axes in the text colour with accent curves, the classical formula muted dashed;
+# guides and notes muted.
+kind: diagram
+size:
+- 400
+- 208
+items:
+- rect:
+  - 40.0
+  - 60
+  - 120
+  - 76
+  fill: surface
+  width: 1.6
+  radius: 6
+- text: до
+  at:
+  - 100.0
+  - 38
+  size: 14
+  anchor: middle
+  tone: default
+- text: масса *m*
+  at:
+  - 100.0
+  - 160
+  size: 14
+  anchor: middle
+  tone: default
+- rect:
+  - 240.0
+  - 60
+  - 120
+  - 76
+  fill: surface
+  width: 1.6
+  radius: 6
+- text: после
+  at:
+  - 300.0
+  - 38
+  size: 14
+  anchor: middle
+  tone: default
+- text: масса *m* − Δ*E*/*c*^{2}
+  at:
+  - 300.0
+  - 160
+  size: 14
+  anchor: middle
+  tone: default
+- text: горячее
+  at:
+  - 100
+  - 103
+  size: 13
+  anchor: middle
+  tone: default
+- text: остыло
+  at:
+  - 300
+  - 103
+  size: 13
+  anchor: middle
+  tone: default
+- arrow:
+  - - 364.0
+    - 82.4
+  - - 386.5
+    - 69.4
+  tone: accent
+  width: 1.6
+- arrow:
+  - - 364.0
+    - 98.0
+  - - 390.0
+    - 98.0
+  tone: accent
+  width: 1.6
+- arrow:
+  - - 364.0
+    - 113.6
+  - - 386.5
+    - 126.6
+  tone: accent
+  width: 1.6
+- text: Δ*E*
+  at:
+  - 380
+  - 60
+  size: 14
+  anchor: middle
+  tone: accent
+- arrow:
+  - - 172
+    - 98
+  - - 228
+    - 98
+  width: 1.5
+  tone: muted
+- text: отдало энергию Δ*E* — масса уменьшилась на Δ*E*/*c*^{2}
+  at:
+  - 200
+  - 196
+  size: 13
+  anchor: middle
+  tone: muted

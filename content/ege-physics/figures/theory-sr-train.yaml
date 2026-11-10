@@ -1,0 +1,174 @@
+# sr.basics 1.1: a ball tossed straight up in a car moving uniformly. Left, in the car: it flies
+# up and falls back into the hand. Right, from the platform: the car (dashed where it was, solid
+# where it is) moves 92 px while the ball flies, so the ball draws a parabola x = x₀ + v t,
+# y = y₀ + v_y t − g t²/2 (computed, top in the middle). The law is the same, the paths differ.
+# Colours (the general convention): bodies (cars, rockets, boxes) in the text colour with a surface
+# fill; velocities green (`vel`); light accent (a wavy line with an arrow, as in electrodynamics
+# 13.x); graphs on axes in the text colour with accent curves, the classical formula muted dashed;
+# guides and notes muted.
+kind: diagram
+size:
+- 400
+- 180
+items:
+- rect:
+  - 52.0
+  - 52.0
+  - 80.0
+  - 76.0
+  fill: surface
+  width: 1.5
+  radius: 3
+- circle:
+  - 66.0
+  - 133.0
+  r: 5
+  fill: surface
+  width: 1.5
+  tone: default
+- circle:
+  - 118.0
+  - 133.0
+  r: 5
+  fill: surface
+  width: 1.5
+  tone: default
+- line:
+  - - 92.0
+    - 116.0
+  - - 92.0
+    - 70.0
+  tone: accent
+  width: 1.8
+- arrow:
+  - - 83.0
+    - 108.0
+  - - 83.0
+    - 78.0
+  tone: accent
+  width: 1.3
+- arrow:
+  - - 101.0
+    - 78.0
+  - - 101.0
+    - 108.0
+  tone: accent
+  width: 1.3
+- dots:
+  - - 92.0
+    - 70.0
+  r: 4.5
+- hatch:
+  - - 20
+    - 138.0
+  - - 190
+    - 138.0
+  side: 1
+- text: в вагоне
+  at:
+  - 92
+  - 18
+  size: 14
+  anchor: middle
+  tone: default
+- text: вверх и вниз
+  at:
+  - 92
+  - 166
+  size: 13
+  anchor: middle
+  tone: muted
+- rect:
+  - 214.0
+  - 52.0
+  - 80.0
+  - 76.0
+  width: 1
+  dashed: true
+  tone: muted
+  radius: 3
+- circle:
+  - 228.0
+  - 133.0
+  r: 5
+  fill: none
+  width: 1
+  tone: muted
+- circle:
+  - 280.0
+  - 133.0
+  r: 5
+  fill: none
+  width: 1
+  tone: muted
+- rect:
+  - 306.0
+  - 52.0
+  - 80.0
+  - 76.0
+  fill: surface
+  width: 1.5
+  radius: 3
+- circle:
+  - 320.0
+  - 133.0
+  r: 5
+  fill: surface
+  width: 1.5
+  tone: default
+- circle:
+  - 372.0
+  - 133.0
+  r: 5
+  fill: surface
+  width: 1.5
+  tone: default
+- arrow:
+  - - 320.0
+    - 40.0
+  - - 358.0
+    - 40.0
+  tone: vel
+  label: '*v*'
+  label_at:
+  - 370.0
+  - 45.0
+- path: M254 116L256.3 111.5L258.6 107.3L260.9 103.2L263.2 99.4L265.5 95.9L267.8 92.5L270.1 89.4L272.4
+    86.6L274.7 83.9L277 81.5L279.3 79.3L281.6 77.4L283.9 75.6L286.2 74.1L288.5 72.9L290.8 71.8L293.1 71L295.4
+    70.5L297.7 70.1L300 70L302.3 70.1L304.6 70.5L306.9 71L309.2 71.8L311.5 72.9L313.8 74.1L316.1 75.6L318.4
+    77.4L320.7 79.3L323 81.5L325.3 83.9L327.6 86.6L329.9 89.4L332.2 92.5L334.5 95.9L336.8 99.4L339.1 103.2L341.4
+    107.3L343.7 111.5L346 116
+  tone: accent
+  width: 1.8
+- dots:
+  - - 300.0
+    - 70.0
+  r: 4.5
+- hatch:
+  - - 204
+    - 138.0
+  - - 392
+    - 138.0
+  side: 1
+- text: с платформы
+  at:
+  - 300
+  - 18
+  size: 14
+  anchor: middle
+  tone: default
+- text: по параболе
+  at:
+  - 300
+  - 166
+  size: 13
+  anchor: middle
+  tone: muted
+- line:
+  - - 200
+    - 14
+  - - 200
+    - 176
+  width: 1
+  tone: muted
+  dashed: true
