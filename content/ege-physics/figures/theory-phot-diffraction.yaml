@@ -1,0 +1,150 @@
+# quantum.photons 1.6: electrons accelerated by 5000 В (λ = h/√(2meU) ≈ 0.0173 нм) pass a thin
+# graphite film and hit a screen. Rings from 2d sin θ = λ for the spacings 0,213 and 0,123 нм:
+# deflections 2θ ≈ 4.65° and 8.06°, radii L·tg 2θ in the ratio 1.740
+# (drawn 28.7 and 50 px). The side view is squeezed along the beam (×0.306),
+# heights to scale; the face-on screen on the right shows the rings and the central spot.
+# Colours (the general convention): light is an accent wave; a colour is named, never painted
+# (red solid, violet dashed when both are drawn, as in electrodynamics 16.x); photons accent;
+# momenta accent arrows as in mechanics 10.5, the light's force on a surface red; bodies in the
+# text colour with a surface fill; graphs on axes in the text colour with accent curves; guides
+# and notes muted.
+kind: diagram
+size:
+- 400
+- 236
+items:
+- rect:
+  - 10
+  - 98.0
+  - 36
+  - 28
+  fill: surface
+  width: 1.5
+  radius: 4
+- text: пушка
+  at:
+  - 28
+  - 146.0
+  size: 13
+  anchor: middle
+  tone: default
+- arrow:
+  - - 50
+    - 112.0
+  - - 104
+    - 112.0
+  width: 2
+- text: электроны
+  at:
+  - 76
+  - 103.0
+  size: 12
+  anchor: middle
+  tone: muted
+- rect:
+  - 108.0
+  - 68.0
+  - 4
+  - 88
+  fill: surface
+  width: 1.2
+- text: плёнка
+  at:
+  - 110.0
+  - 174.0
+  size: 13
+  anchor: middle
+  tone: default
+- text: графита
+  at:
+  - 110.0
+  - 190.0
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 218.0
+    - 46.0
+  - - 218.0
+    - 178.0
+  width: 2
+- text: экран
+  at:
+  - 218.0
+  - 198.0
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 112.0
+    - 112.0
+  - - 218.0
+    - 112.0
+  width: 1.2
+  tone: muted
+  dashed: true
+- line:
+  - - 112.0
+    - 112.0
+  - - 218.0
+    - 83.3
+  tone: accent
+  width: 1.3
+- line:
+  - - 112.0
+    - 112.0
+  - - 218.0
+    - 140.7
+  tone: accent
+  width: 1.3
+- line:
+  - - 112.0
+    - 112.0
+  - - 218.0
+    - 62.0
+  tone: accent
+  width: 1.3
+- line:
+  - - 112.0
+    - 112.0
+  - - 218.0
+    - 162.0
+  tone: accent
+  width: 1.3
+- circle:
+  - 316.0
+  - 112.0
+  r: 66
+  fill: surface
+  width: 1.2
+- dots:
+  - - 316.0
+    - 112.0
+  r: 4
+  tone: accent
+- circle:
+  - 316.0
+  - 112.0
+  r: 28.7
+  width: 3
+  tone: accent
+- circle:
+  - 316.0
+  - 112.0
+  r: 50.0
+  width: 3
+  tone: accent
+- text: на экране
+  at:
+  - 316.0
+  - 36.0
+  size: 13
+  anchor: middle
+  tone: default
+- text: кольца — как от рентгеновских лучей
+  at:
+  - 200
+  - 222
+  size: 13
+  anchor: middle
+  tone: muted
