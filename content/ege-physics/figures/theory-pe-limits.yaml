@@ -1,0 +1,332 @@
+# quantum.photoeffect 2.5: red limits λ₀ = hc/A on a wavelength scale 200…800 нм (the visible band
+# as lettered surface cells, as in <pp-photons>). For each metal an accent band from 200 нм to λ₀
+# (the photoeffect occurs), muted dashes beyond. цезий 1.9 эВ → 651.3 нм; калий 2.2 эВ → 562.5 нм; натрий 2.3 эВ → 538.0 нм; цинк 4.2 эВ → 294.6 нм.
+# Colours (the general convention): objects (metal, tube, electrodes, electrons) in the text
+# colour with a surface fill; light as accent photon packets, as in theory-phot-*; electron
+# velocities in the vel tone; graphs in the text colour with accent curves (a second curve dashed);
+# guides and notes muted. A colour of light is named, never painted.
+kind: diagram
+size:
+- 400
+- 248
+items:
+- rect:
+  - 96.0
+  - 30.0
+  - 86.4
+  - 18.0
+  fill: surface
+  width: 1
+  tone: muted
+- text: ультрафиолет
+  at:
+  - 139.2
+  - 43.0
+  size: 11
+  anchor: middle
+  tone: muted
+- rect:
+  - 182.4
+  - 30.0
+  - 28.8
+  - 18.0
+  fill: surface
+  width: 1
+- text: ф
+  at:
+  - 196.8
+  - 43.0
+  size: 11
+  anchor: middle
+  tone: default
+- rect:
+  - 211.2
+  - 30.0
+  - 21.6
+  - 18.0
+  fill: surface
+  width: 1
+- text: с
+  at:
+  - 222.0
+  - 43.0
+  size: 11
+  anchor: middle
+  tone: default
+- rect:
+  - 232.8
+  - 30.0
+  - 7.2
+  - 18.0
+  fill: surface
+  width: 1
+- rect:
+  - 240.0
+  - 30.0
+  - 31.2
+  - 18.0
+  fill: surface
+  width: 1
+- text: з
+  at:
+  - 255.6
+  - 43.0
+  size: 11
+  anchor: middle
+  tone: default
+- rect:
+  - 271.2
+  - 30.0
+  - 12.0
+  - 18.0
+  fill: surface
+  width: 1
+- text: ж
+  at:
+  - 277.2
+  - 43.0
+  size: 11
+  anchor: middle
+  tone: default
+- rect:
+  - 283.2
+  - 30.0
+  - 16.8
+  - 18.0
+  fill: surface
+  width: 1
+- text: о
+  at:
+  - 291.6
+  - 43.0
+  size: 11
+  anchor: middle
+  tone: default
+- rect:
+  - 300.0
+  - 30.0
+  - 64.8
+  - 18.0
+  fill: surface
+  width: 1
+- text: к
+  at:
+  - 332.4
+  - 43.0
+  size: 11
+  anchor: middle
+  tone: default
+- rect:
+  - 364.8
+  - 30.0
+  - 19.2
+  - 18.0
+  fill: surface
+  width: 1
+  tone: muted
+- text: ИК
+  at:
+  - 374.4
+  - 43.0
+  size: 11
+  anchor: middle
+  tone: muted
+- line:
+  - - 96.0
+    - 48.0
+  - - 96.0
+    - 52.0
+  width: 1.2
+- text: '200'
+  at:
+  - 96.0
+  - 65.0
+  size: 12
+  anchor: middle
+  tone: default
+- line:
+  - - 192.0
+    - 48.0
+  - - 192.0
+    - 52.0
+  width: 1.2
+- text: '400'
+  at:
+  - 192.0
+  - 65.0
+  size: 12
+  anchor: middle
+  tone: default
+- line:
+  - - 288.0
+    - 48.0
+  - - 288.0
+    - 52.0
+  width: 1.2
+- text: '600'
+  at:
+  - 288.0
+  - 65.0
+  size: 12
+  anchor: middle
+  tone: default
+- line:
+  - - 384.0
+    - 48.0
+  - - 384.0
+    - 52.0
+  width: 1.2
+- text: 800 нм
+  at:
+  - 384.0
+  - 65.0
+  size: 12
+  anchor: end
+  tone: default
+- text: цезий
+  at:
+  - 14
+  - 101.0
+  size: 13
+  anchor: start
+  tone: default
+- line:
+  - - 96.0
+    - 96.0
+  - - 312.6
+    - 96.0
+  tone: accent
+  width: 6
+- line:
+  - - 312.6
+    - 87.0
+  - - 312.6
+    - 105.0
+  width: 1.6
+- line:
+  - - 312.6
+    - 96.0
+  - - 384.0
+    - 96.0
+  tone: muted
+  width: 1
+  dashed: true
+- text: '*λ*₀ ≈ 650 нм'
+  at:
+  - 308.6
+  - 87.0
+  size: 12
+  anchor: end
+  tone: default
+- text: калий
+  at:
+  - 14
+  - 135.0
+  size: 13
+  anchor: start
+  tone: default
+- line:
+  - - 96.0
+    - 130.0
+  - - 270.0
+    - 130.0
+  tone: accent
+  width: 6
+- line:
+  - - 270.0
+    - 121.0
+  - - 270.0
+    - 139.0
+  width: 1.6
+- line:
+  - - 270.0
+    - 130.0
+  - - 384.0
+    - 130.0
+  tone: muted
+  width: 1
+  dashed: true
+- text: '*λ*₀ ≈ 560 нм'
+  at:
+  - 266.0
+  - 121.0
+  size: 12
+  anchor: end
+  tone: default
+- text: натрий
+  at:
+  - 14
+  - 169.0
+  size: 13
+  anchor: start
+  tone: default
+- line:
+  - - 96.0
+    - 164.0
+  - - 258.3
+    - 164.0
+  tone: accent
+  width: 6
+- line:
+  - - 258.3
+    - 155.0
+  - - 258.3
+    - 173.0
+  width: 1.6
+- line:
+  - - 258.3
+    - 164.0
+  - - 384.0
+    - 164.0
+  tone: muted
+  width: 1
+  dashed: true
+- text: '*λ*₀ ≈ 540 нм'
+  at:
+  - 266.3
+  - 158.0
+  size: 12
+  anchor: start
+  tone: default
+- text: цинк
+  at:
+  - 14
+  - 203.0
+  size: 13
+  anchor: start
+  tone: default
+- line:
+  - - 96.0
+    - 198.0
+  - - 141.4
+    - 198.0
+  tone: accent
+  width: 6
+- line:
+  - - 141.4
+    - 189.0
+  - - 141.4
+    - 207.0
+  width: 1.6
+- line:
+  - - 141.4
+    - 198.0
+  - - 384.0
+    - 198.0
+  tone: muted
+  width: 1
+  dashed: true
+- text: '*λ*₀ ≈ 295 нм'
+  at:
+  - 149.4
+  - 192.0
+  size: 12
+  anchor: start
+  tone: default
+- text: фотоэффект идёт там, где полоса; правее красной границы — нет
+  at:
+  - 200
+  - 234.0
+  size: 12
+  anchor: middle
+  tone: muted

@@ -1,0 +1,224 @@
+# quantum.photoeffect 2.6: the largest kinetic energy of photoelectrons E = hν − A (эВ) against
+# the frequency (10¹⁴ Гц) for caesium (A = 1,9 эВ, solid) and zinc (A = 4,2 эВ, dashed). Slope
+# h = 0.4125 эВ per 10¹⁴ Гц, the same for both, so the lines are parallel. цезий: ν₀ = 4.61·10¹⁴ Гц; цинк: ν₀ = 10.18·10¹⁴ Гц.
+# Muted dashes continue each line to ν = 0, where it meets the energy axis at −A.
+# Colours (the general convention): objects (metal, tube, electrodes, electrons) in the text
+# colour with a surface fill; light as accent photon packets, as in theory-phot-*; electron
+# velocities in the vel tone; graphs in the text colour with accent curves (a second curve dashed);
+# guides and notes muted. A colour of light is named, never painted.
+kind: diagram
+size:
+- 400
+- 230
+items:
+- arrow:
+  - - 44
+    - 118
+  - - 392
+    - 118
+  width: 1.5
+- arrow:
+  - - 44
+    - 222
+  - - 44
+    - 18
+  width: 1.5
+- text: '*ν*, 10¹⁴ Гц'
+  at:
+  - 390
+  - 136
+  anchor: end
+  size: 14
+- text: '*E*к max, эВ'
+  at:
+  - 52
+  - 28
+  anchor: start
+  size: 14
+- text: '0'
+  at:
+  - 38
+  - 133
+  size: 12
+  anchor: end
+  tone: default
+- line:
+  - - 146.5
+    - 118
+  - - 146.5
+    - 122
+  width: 1.2
+- text: '5'
+  at:
+  - 146.5
+  - 135
+  size: 12
+  anchor: middle
+  tone: default
+- line:
+  - - 249.0
+    - 118
+  - - 249.0
+    - 122
+  width: 1.2
+- text: '10'
+  at:
+  - 249.0
+  - 135
+  size: 12
+  anchor: middle
+  tone: default
+- line:
+  - - 40
+    - 97
+  - - 44
+    - 97
+  width: 1.2
+- text: '1'
+  at:
+  - 37
+  - 101
+  size: 12
+  anchor: end
+  tone: default
+- line:
+  - - 40
+    - 76
+  - - 44
+    - 76
+  width: 1.2
+- text: '2'
+  at:
+  - 37
+  - 80
+  size: 12
+  anchor: end
+  tone: default
+- line:
+  - - 40
+    - 55
+  - - 44
+    - 55
+  width: 1.2
+- text: '3'
+  at:
+  - 37
+  - 59
+  size: 12
+  anchor: end
+  tone: default
+- line:
+  - - 40
+    - 34
+  - - 44
+    - 34
+  width: 1.2
+- text: '4'
+  at:
+  - 37
+  - 38
+  size: 12
+  anchor: end
+  tone: default
+- path: M138.4 118L367 21.4
+  tone: accent
+  width: 2.4
+- path: M44 157.9L138.4 118
+  tone: muted
+  width: 1.2
+  dashed: true
+- dots:
+  - - 138.4
+    - 118
+  r: 3.5
+  tone: accent
+- text: '*ν*₀'
+  at:
+  - 142.4
+  - 112
+  size: 13
+  anchor: start
+  tone: default
+- line:
+  - - 40
+    - 157.9
+  - - 44
+    - 157.9
+  width: 1.2
+- text: −1,9
+  at:
+  - 37
+  - 161.9
+  size: 12
+  anchor: end
+  tone: default
+- text: цезий
+  at:
+  - 355.0
+  - 43.4
+  size: 13
+  anchor: end
+  tone: default
+- path: M252.7 118L392.5 58.9
+  tone: accent
+  width: 2.4
+  dashed: true
+- path: M44 206.2L252.7 118
+  tone: muted
+  width: 1.2
+  dashed: true
+- dots:
+  - - 252.7
+    - 118
+  r: 3.5
+  tone: accent
+- text: '*ν*₀'
+  at:
+  - 256.7
+  - 112
+  size: 13
+  anchor: start
+  tone: default
+- line:
+  - - 40
+    - 206.2
+  - - 44
+    - 206.2
+  width: 1.2
+- text: −4,2
+  at:
+  - 37
+  - 210.2
+  size: 12
+  anchor: end
+  tone: default
+- text: цинк
+  at:
+  - 380.5
+  - 80.9
+  size: 13
+  anchor: end
+  tone: default
+- line:
+  - - 228.5
+    - 79.9
+  - - 290.0
+    - 79.9
+  - - 290.0
+    - 53.9
+  width: 1
+  tone: muted
+- text: наклон *h*
+  at:
+  - 296.0
+  - 70.9
+  size: 12
+  anchor: start
+  tone: muted
+- text: продолжение до *ν* = 0 даёт −*A*вых
+  at:
+  - 380
+  - 214
+  size: 12
+  anchor: end
+  tone: muted

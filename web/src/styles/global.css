@@ -4584,3 +4584,137 @@ task-answer .final {
   color: var(--accent);
   font-weight: 600;
 }
+
+/* <pp-photoeffect>: the photoeffect in a vacuum photocell (lessons 2.2 and 2.4 of «Квантовая
+   физика»). Tube, electrodes and electrons in the text colour, photons and the I(U) curve accent,
+   guides muted; labels with a halo in the panel colour. */
+.phe-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin: 0 0 0.5rem;
+}
+
+.phe-note {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.phe-chips legend {
+  width: auto;
+  margin-right: 0.4rem;
+}
+
+.phe-tube,
+.phe-wire,
+.phe-meter,
+.phe-axis {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.4;
+}
+
+.phe-tube {
+  stroke-width: 1.6;
+}
+
+.phe-plate {
+  fill: var(--surface-2, var(--surface));
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.phe-meter {
+  fill: var(--surface);
+}
+
+.phe-photon,
+.phe-point {
+  fill: var(--accent);
+}
+
+.phe-electron {
+  fill: var(--text);
+}
+
+.phe-curve {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+}
+
+.phe-guide {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1;
+}
+
+.phe-dash {
+  stroke-dasharray: 5 4;
+}
+
+.phe-zmark {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.sim-svg .phe-label {
+  fill: var(--text);
+  font-size: 15px;
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.sim-svg .phe-sign {
+  font-size: 18px;
+}
+
+.sim-svg .phe-small {
+  font-size: 13px;
+}
+
+.sim-svg .phe-tiny {
+  font-size: 11px;
+}
+
+.sim-svg .phe-italic {
+  font-style: italic;
+}
+
+.sim-svg .phe-muted {
+  fill: var(--muted);
+}
+
+.sim-svg .phe-accent {
+  fill: var(--accent);
+}
+
+.phe-table {
+  width: 100%;
+  margin: 0.75rem 0 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.phe-table th,
+.phe-table td {
+  padding: 0.2rem 0.35rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+.phe-table th {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.phe-table tr.phe-main td {
+  color: var(--accent);
+  font-weight: 600;
+}
