@@ -1,0 +1,172 @@
+# quantum.atom 3.4: Bohr's frequency rule on three levels of some atom (not to scale). Left: the
+# atom drops from E₃ to E₁ and emits a photon (accent packet) hν = E₃ − E₁. Right: it absorbs a
+# photon hν = E₂ − E₁ and rises from E₁ to E₂.
+# Colours (the general convention): objects (nucleus, electrons, foil, levels) in the text colour
+# with a surface fill; light as accent photon packets, as in theory-phot-* and theory-pe-*;
+# electron velocities in the vel tone; guides and notes muted. A colour of light is named, never
+# painted: spectra are lettered surface cells with labelled lines.
+kind: diagram
+size:
+- 400
+- 240
+items:
+- line:
+  - - 46.0
+    - 196.0
+  - - 166.0
+    - 196.0
+  width: 1.6
+- text: '*E*₁'
+  at:
+  - 40.0
+  - 201.0
+  size: 14
+  anchor: end
+  tone: default
+- line:
+  - - 46.0
+    - 116.0
+  - - 166.0
+    - 116.0
+  width: 1.6
+- text: '*E*₂'
+  at:
+  - 40.0
+  - 121.0
+  size: 14
+  anchor: end
+  tone: default
+- line:
+  - - 46.0
+    - 72.0
+  - - 166.0
+    - 72.0
+  width: 1.6
+- text: '*E*₃'
+  at:
+  - 40.0
+  - 77.0
+  size: 14
+  anchor: end
+  tone: default
+- text: излучение
+  at:
+  - 106.0
+  - 26
+  size: 14
+  anchor: middle
+  tone: default
+- line:
+  - - 242.0
+    - 196.0
+  - - 362.0
+    - 196.0
+  width: 1.6
+- text: '*E*₁'
+  at:
+  - 236.0
+  - 201.0
+  size: 14
+  anchor: end
+  tone: default
+- line:
+  - - 242.0
+    - 116.0
+  - - 362.0
+    - 116.0
+  width: 1.6
+- text: '*E*₂'
+  at:
+  - 236.0
+  - 121.0
+  size: 14
+  anchor: end
+  tone: default
+- line:
+  - - 242.0
+    - 72.0
+  - - 362.0
+    - 72.0
+  width: 1.6
+- text: '*E*₃'
+  at:
+  - 236.0
+  - 77.0
+  size: 14
+  anchor: end
+  tone: default
+- text: поглощение
+  at:
+  - 302.0
+  - 26
+  size: 14
+  anchor: middle
+  tone: default
+- arrow:
+  - - 96.0
+    - 72.0
+  - - 96.0
+    - 194.0
+  tone: accent
+  width: 2
+- path: M102 150L103.5 152.3L104.8 153.4L105.7 152.8L106.2 150.5L106.6 147.6L107.1 145.4L108 144.7L109.3
+    145.8L110.8 148.1L112.3 150.4L113.6 151.5L114.5 150.9L115 148.6L115.4 145.7L115.9 143.5L116.8 142.8L118.1
+    143.9L119.6 146.2L121.1 148.5L122.4 149.7L123.3 149L123.8 146.7L124.2 143.8L124.7 141.6L125.6 140.9L126.9
+    142
+  tone: accent
+  width: 1.6
+- arrow:
+  - - 127.4
+    - 144.6
+  - - 182.1
+    - 132.8
+  tone: accent
+  width: 1.4
+- text: '*hν* = *E*₃ − *E*₁'
+  at:
+  - 104
+  - 226
+  size: 13
+  anchor: middle
+  tone: accent
+- path: M372 150L370.3 147.8L368.9 146.8L368.1 147.6L367.8 149.9L367.6 152.8L367.3 155.1L366.5 155.8L365.1
+    154.8L363.4 152.7L361.7 150.5L360.3 149.5L359.5 150.2L359.2 152.5L359 155.5L358.7 157.8L357.9 158.5L356.5
+    157.5L354.8 155.3L353.1 153.2L351.7 152.2L350.9 152.9L350.6 155.2L350.4 158.1L350.1 160.4L349.3 161.2L347.9
+    160.2
+  tone: accent
+  width: 1.6
+- arrow:
+  - - 347.2
+    - 157.7
+  - - 317.8
+    - 166.8
+  tone: accent
+  width: 1.4
+- arrow:
+  - - 308.0
+    - 196.0
+  - - 308.0
+    - 118.0
+  tone: accent
+  width: 2
+- text: '*hν* = *E*₂ − *E*₁'
+  at:
+  - 300
+  - 226
+  size: 13
+  anchor: middle
+  tone: accent
+- text: энергия
+  at:
+  - 6
+  - 46
+  size: 11
+  anchor: start
+  tone: muted
+- arrow:
+  - - 10
+    - 186
+  - - 10
+    - 56
+  width: 1
+  tone: muted

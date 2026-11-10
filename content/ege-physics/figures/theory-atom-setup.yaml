@@ -1,0 +1,174 @@
+# quantum.atom 3.1: Rutherford's experiment. A source of α-particles in a lead block, a narrow
+# beam onto a gold foil, a ring screen around it; flashes (accent dots) mark where α-particles
+# hit: almost all straight ahead, a few at large angles, one bounced back.
+# Colours (the general convention): objects (nucleus, electrons, foil, levels) in the text colour
+# with a surface fill; light as accent photon packets, as in theory-phot-* and theory-pe-*;
+# electron velocities in the vel tone; guides and notes muted. A colour of light is named, never
+# painted: spectra are lettered surface cells with labelled lines.
+kind: diagram
+size:
+- 400
+- 232
+items:
+- rect:
+  - 18
+  - 92.0
+  - 62
+  - 52
+  fill: surface
+  width: 1.6
+- rect:
+  - 62
+  - 114.0
+  - 18
+  - 8
+  fill: none
+  width: 1.2
+- dots:
+  - - 44
+    - 118.0
+  r: 5
+- text: свинец
+  at:
+  - 49
+  - 86.0
+  size: 12
+  anchor: middle
+  tone: muted
+- text: источник
+  at:
+  - 49
+  - 162.0
+  size: 12
+  anchor: middle
+  tone: default
+- text: α-частиц
+  at:
+  - 49
+  - 176.0
+  size: 12
+  anchor: middle
+  tone: default
+- arrow:
+  - - 80
+    - 118.0
+  - - 216.0
+    - 118.0
+  width: 1.6
+- text: пучок
+  at:
+  - 112
+  - 110.0
+  size: 12
+  anchor: middle
+  tone: muted
+- rect:
+  - 220.0
+  - 88.0
+  - 4
+  - 60
+  fill: solid
+  width: 1
+- text: золотая фольга
+  at:
+  - 222.0
+  - 80.0
+  size: 12
+  anchor: middle
+  tone: default
+- path: M142.8 129.1L143.4 133.1L144.3 137L145.3 140.9L146.6 144.7L148 148.4L149.6 152.1L151.4 155.6L153.4
+    159.1L155.5 162.5L157.8 165.8L160.3 168.9L162.9 171.9L165.7 174.8L168.6 177.6L171.7 180.2L174.8 182.6L178.1
+    184.9L181.5 187L185 188.9L188.6 190.7L192.3 192.3L196 193.7L199.9 194.9L203.7 195.9L207.7 196.7L211.6
+    197.3L215.6 197.7L219.6 198L223.6 198L227.6 197.8L231.6 197.4L235.5 196.8L239.5 196.1L243.3 195.1L247.2
+    193.9L250.9 192.6L254.6 191L258.2 189.3L261.8 187.4L265.2 185.3L268.5 183.1L271.7 180.7L274.8 178.1L277.7
+    175.4L280.5 172.6L283.2 169.6L285.7 166.4L288 163.2L290.2 159.8L292.2 156.4L294 152.8L295.7 149.2L297.1
+    145.4L298.4 141.7L299.5 137.8L300.4 133.9L301.1 130L301.6 126L301.9 122L302 118L301.9 114L301.6 110L301.1
+    106L300.4 102.1L299.5 98.2L298.4 94.3L297.1 90.6L295.7 86.8L294 83.2L292.2 79.6L290.2 76.2L288 72.8L285.7
+    69.6L283.2 66.4L280.5 63.4L277.7 60.6L274.8 57.9L271.7 55.3L268.5 52.9L265.2 50.7L261.8 48.6L258.2
+    46.7L254.6 45L250.9 43.4L247.2 42.1L243.3 40.9L239.5 39.9L235.5 39.2L231.6 38.6L227.6 38.2L223.6 38L219.6
+    38L215.6 38.3L211.6 38.7L207.7 39.3L203.7 40.1L199.9 41.1L196 42.3L192.3 43.7L188.6 45.3L185 47.1L181.5
+    49L178.1 51.1L174.8 53.4L171.7 55.8L168.6 58.4L165.7 61.2L162.9 64.1L160.3 67.1L157.8 70.2L155.5 73.5L153.4
+    76.9L151.4 80.4L149.6 83.9L148 87.6L146.6 91.3L145.3 95.1L144.3 99L143.4 102.9L142.8 106.9
+  width: 3
+  tone: muted
+- text: экран
+  at:
+  - 308.0
+  - 56.0
+  size: 12
+  anchor: start
+  tone: muted
+- dots:
+  - - 295.6
+    - 125.7
+  - - 295.8
+    - 123.2
+  - - 295.9
+    - 121.2
+  - - 296.0
+    - 119.3
+  - - 296.0
+    - 118.0
+  - - 296.0
+    - 116.7
+  - - 295.9
+    - 114.8
+  - - 295.8
+    - 112.8
+  - - 295.6
+    - 110.3
+  - - 295.9
+    - 121.9
+  - - 295.9
+    - 114.1
+  r: 2.6
+  tone: accent
+- dots:
+  - - 287.3
+    - 83.3
+  - - 272.5
+    - 172.1
+  - - 234.8
+    - 45.1
+  r: 2.6
+  tone: accent
+- dots:
+  - - 153.4
+    - 90.3
+  r: 2.6
+  tone: accent
+- text: почти все
+  at:
+  - 310.0
+  - 122.0
+  size: 12
+  anchor: start
+  tone: default
+- text: прошли прямо
+  at:
+  - 310.0
+  - 136.0
+  size: 12
+  anchor: start
+  tone: default
+- text: редкие
+  at:
+  - 280.5
+  - 188.1
+  size: 12
+  anchor: start
+  tone: default
+- text: отскочила
+  at:
+  - 140.4
+  - 73.0
+  size: 12
+  anchor: end
+  tone: default
+- text: назад
+  at:
+  - 140.4
+  - 87.0
+  size: 12
+  anchor: end
+  tone: default
