@@ -1,0 +1,106 @@
+# quantum.photoeffect 2.4: the energy of one photon of green light, 550 нм (hν = hc/λ = 2.250 эВ),
+# goes to one electron of caesium: the work function 1.9 эВ (surface bar) and the kinetic energy
+# 0.350 эВ (accent). Both columns to one scale, 66 px per эВ.
+# Colours (the general convention): objects (metal, tube, electrodes, electrons) in the text
+# colour with a surface fill; light as accent photon packets, as in theory-phot-*; electron
+# velocities in the vel tone; graphs in the text colour with accent curves (a second curve dashed);
+# guides and notes muted. A colour of light is named, never painted.
+kind: diagram
+size:
+- 400
+- 246
+items:
+- rect:
+  - 70
+  - 65.5
+  - 60
+  - 148.5
+  fill: accent
+  tone: accent
+  width: 1.5
+- text: фотон
+  at:
+  - 100
+  - 234.0
+  size: 14
+  anchor: middle
+  tone: default
+- text: '*hν* = 2,25 эВ'
+  at:
+  - 100
+  - 55.5
+  size: 13
+  anchor: middle
+  tone: accent
+- text: '='
+  at:
+  - 166
+  - 145.8
+  size: 22
+  anchor: middle
+  tone: default
+- rect:
+  - 200
+  - 88.6
+  - 60
+  - 125.4
+  fill: surface
+  width: 1.5
+- rect:
+  - 200
+  - 65.5
+  - 60
+  - 23.1
+  fill: accent
+  tone: accent
+  width: 1.5
+- text: электрон
+  at:
+  - 230
+  - 234.0
+  size: 14
+  anchor: middle
+  tone: default
+- text: работа выхода
+  at:
+  - 270
+  - 147.3
+  size: 13
+  anchor: start
+  tone: default
+- text: '*A*вых = 1,9 эВ'
+  at:
+  - 270
+  - 165.3
+  size: 13
+  anchor: start
+  tone: default
+- text: кинетическая
+  at:
+  - 270
+  - 69.1
+  size: 13
+  anchor: start
+  tone: accent
+- text: '*E*к max = 0,35 эВ'
+  at:
+  - 270
+  - 87.1
+  size: 13
+  anchor: start
+  tone: accent
+- line:
+  - - 50
+    - 214.0
+  - - 300
+    - 214.0
+  width: 1
+  tone: muted
+  dashed: true
+- text: зелёный свет 550 нм на цезии
+  at:
+  - 200
+  - 20
+  size: 13
+  anchor: middle
+  tone: muted

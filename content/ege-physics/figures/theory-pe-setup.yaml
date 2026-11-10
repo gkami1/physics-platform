@@ -1,0 +1,200 @@
+# quantum.photoeffect 2.1: Stoletov's setup. A glass vacuum tube with two electrodes: the cathode
+# (right, joined to the minus of the source) is lit through the glass (accent photon packets);
+# the photoelectrons (vel arrows) fly to the anode (left, plus) and close the circuit through the
+# ammeter. Battery: long plate = +.
+# Colours (the general convention): objects (metal, tube, electrodes, electrons) in the text
+# colour with a surface fill; light as accent photon packets, as in theory-phot-*; electron
+# velocities in the vel tone; graphs in the text colour with accent curves (a second curve dashed);
+# guides and notes muted. A colour of light is named, never painted.
+kind: diagram
+size:
+- 400
+- 248
+items:
+- rect:
+  - 40
+  - 36
+  - 280
+  - 120
+  width: 1.6
+  radius: 40
+- text: вакуум
+  at:
+  - 180
+  - 56
+  size: 12
+  anchor: middle
+  tone: muted
+- rect:
+  - 86.0
+  - 62
+  - 8
+  - 68
+  fill: surface
+  width: 1.5
+- rect:
+  - 262.0
+  - 62
+  - 8
+  - 68
+  fill: surface
+  width: 1.5
+- text: анод
+  at:
+  - 90.0
+  - 148
+  size: 13
+  anchor: middle
+  tone: default
+- text: катод
+  at:
+  - 266.0
+  - 148
+  size: 13
+  anchor: middle
+  tone: default
+- path: M352 54L350.4 51.8L349 50.7L348.2 51.5L347.8 53.7L347.5 56.6L347.1 58.9L346.3 59.7L345 58.6L343.3
+    56.4L341.7 54.2L340.3 53.1L339.5 53.8L339.1 56.1L338.9 59L338.5 61.3L337.6 62L336.3 61L334.6 58.8L333
+    56.6L331.7 55.5L330.8 56.2L330.4 58.5L330.2 61.4L329.8 63.7L328.9 64.4L327.6 63.4
+  tone: accent
+  width: 1.6
+- arrow:
+  - - 326.9
+    - 60.9
+  - - 275.9
+    - 74.9
+  tone: accent
+  width: 1.4
+- path: M352 82L350.6 79.6L349.4 78.4L348.5 79L347.8 81.2L347.3 84.1L346.6 86.3L345.7 86.9L344.5 85.7L343.1
+    83.3L341.7 80.9L340.5 79.7L339.6 80.4L338.9 82.6L338.4 85.4L337.7 87.7L336.8 88.3L335.6 87.1L334.2
+    84.7L332.8 82.3L331.6 81.1L330.7 81.7L330 83.9L329.5 86.8L328.8 89L327.9 89.6L326.7 88.4
+  tone: accent
+  width: 1.6
+- arrow:
+  - - 326.3
+    - 85.9
+  - - 276.0
+    - 93.4
+  tone: accent
+  width: 1.4
+- path: M352 110L350.9 107.5L349.9 106.1L348.9 106.6L348 108.7L347 111.5L346.1 113.6L345.1 114.1L344.1
+    112.8L343 110.2L341.9 107.7L340.9 106.3L339.9 106.8L339 109L338 111.7L337.1 113.8L336.1 114.3L335.1
+    113L334 110.4L332.9 107.9L331.9 106.6L330.9 107.1L330 109.2L329 111.9L328.1 114.1L327.1 114.6L326.1
+    113.2
+  tone: accent
+  width: 1.6
+- arrow:
+  - - 326.0
+    - 110.6
+  - - 276.0
+    - 111.9
+  tone: accent
+  width: 1.4
+- text: свет
+  at:
+  - 392
+  - 52
+  size: 13
+  anchor: end
+  tone: accent
+- circle:
+  - 228
+  - 84
+  r: 4
+  fill: solid
+- arrow:
+  - - 221
+    - 84
+  - - 198
+    - 84
+  tone: vel
+  width: 1.6
+- circle:
+  - 176
+  - 104
+  r: 4
+  fill: solid
+- arrow:
+  - - 169
+    - 104
+  - - 146
+    - 104
+  tone: vel
+  width: 1.6
+- circle:
+  - 128
+  - 92
+  r: 4
+  fill: solid
+- arrow:
+  - - 121
+    - 92
+  - - 98
+    - 92
+  tone: vel
+  width: 1.6
+- text: электроны
+  at:
+  - 180
+  - 128
+  size: 12
+  anchor: middle
+  tone: muted
+- line:
+  - - 90.0
+    - 130
+  - - 90.0
+    - 206.0
+  - - 130
+    - 206.0
+  width: 1.5
+- element: battery
+  at:
+  - 150
+  - 206.0
+- text: +
+  at:
+  - 140
+  - 188.0
+  size: 15
+  anchor: middle
+  tone: default
+- text: −
+  at:
+  - 162
+  - 188.0
+  size: 15
+  anchor: middle
+  tone: default
+- line:
+  - - 170
+    - 206.0
+  - - 206
+    - 206.0
+  width: 1.5
+- element: ammeter
+  at:
+  - 226
+  - 206.0
+- line:
+  - - 246
+    - 206.0
+  - - 266.0
+    - 206.0
+  - - 266.0
+    - 130
+  width: 1.5
+- text: источник
+  at:
+  - 150
+  - 236.0
+  size: 12
+  anchor: middle
+  tone: default
+- text: амперметр
+  at:
+  - 226
+  - 236.0
+  size: 12
+  anchor: middle
+  tone: default
