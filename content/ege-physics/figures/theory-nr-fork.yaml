@@ -1,0 +1,152 @@
+# quantum.nuclear-reactions 6.1: a cloud chamber with nitrogen (Blackett, 1925), schematic. Straight
+# α tracks of nearly equal length from the source; one ends in a fork (ringed, dashed accent): a long
+# thin proton track and a short thick track of the recoiling oxygen-17; the α-particle is gone.
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot; particles are named, not painted; α tracks solid, β
+# dashed; γ and graphs' curves accent; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 250
+items:
+- rect:
+  - 12
+  - 12
+  - 376
+  - 226
+  width: 1.2
+  tone: muted
+  radius: 10
+- rect:
+  - 22
+  - 142
+  - 14
+  - 20
+  fill: surface
+  width: 1.4
+- dots:
+  - - 38
+    - 152
+  r: 3.5
+- text: источник α-частиц
+  at:
+  - 22
+  - 184
+  size: 12
+  anchor: start
+  tone: muted
+- line:
+  - - 44
+    - 152
+  - - 326.5
+    - 218.1
+  width: 2
+- line:
+  - - 44
+    - 152
+  - - 336.9
+    - 201.7
+  width: 2
+- line:
+  - - 44
+    - 152
+  - - 333.4
+    - 182.8
+  width: 2
+- line:
+  - - 44
+    - 152
+  - - 341.7
+    - 165.2
+  width: 2
+- line:
+  - - 44
+    - 152
+  - - 336.0
+    - 146.8
+  width: 2
+- line:
+  - - 44
+    - 152
+  - - 342.1
+    - 128.2
+  width: 2
+- line:
+  - - 44
+    - 152
+  - - 334.1
+    - 110.7
+  width: 2
+- line:
+  - - 44
+    - 152
+  - - 337.9
+    - 91.4
+  width: 2
+- line:
+  - - 44
+    - 152
+  - - 213.9
+    - 105.4
+  width: 2
+- line:
+  - - 213.9
+    - 105.4
+  - - 287.4
+    - 31.9
+  width: 1.1
+- line:
+  - - 213.9
+    - 105.4
+  - - 230.9
+    - 111.3
+  width: 4
+- circle:
+  - 213.9
+  - 105.4
+  r: 10
+  width: 1.2
+  tone: accent
+  dashed: true
+- text: протон
+  at:
+  - 279.4
+  - 41.9
+  size: 13
+  anchor: end
+  tone: default
+- line:
+  - - 233.9
+    - 109.3
+  - - 288
+    - 104
+  width: 1
+  tone: muted
+- text: ядро
+  at:
+  - 292
+  - 90
+  size: 13
+  anchor: start
+  tone: default
+- text: кислорода-17
+  at:
+  - 292
+  - 106
+  size: 13
+  anchor: start
+  tone: default
+- text: «вилка»
+  at:
+  - 201.9
+  - 91.4
+  size: 13
+  anchor: end
+  tone: accent
+- text: треки альфа-частиц
+  at:
+  - 210
+  - 228
+  size: 12
+  anchor: middle
+  tone: muted

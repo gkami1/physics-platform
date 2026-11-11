@@ -5084,3 +5084,126 @@ task-answer .final {
   color: var(--accent);
   font-weight: 600;
 }
+
+/* <pp-chain>: a chain reaction in a block of uranium-235 (lessons 6.5 and 6.6 of «Квантовая физика»).
+   A whole nucleus is a text-colour dot, a split one a hollow muted circle (the latest generation's
+   ringed in accent), neutrons small accent dots, control rods muted bars; the run's neutrons per
+   generation in the text colour, the law N·k^g dashed accent. */
+.chn-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.5rem;
+}
+
+.chn-top .btn:first-child {
+  min-width: 5.5rem;
+}
+
+.chn-block {
+  fill: var(--surface);
+  stroke: var(--muted);
+  stroke-width: 1.4;
+}
+
+.chn-rod {
+  fill: var(--muted);
+  opacity: 0.75;
+}
+
+.chn-src {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.chn-nuc {
+  fill: var(--text);
+}
+
+.chn-split {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1;
+}
+
+.chn-split.chn-new {
+  stroke: var(--accent);
+  stroke-width: 1.6;
+}
+
+.chn-n {
+  fill: var(--accent);
+}
+
+.chn-axis {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.4;
+}
+
+.chn-axis-tip {
+  fill: var(--text);
+}
+
+.chn-law {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 7 5;
+}
+
+.chn-run {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.6;
+}
+
+.chn-dot {
+  fill: var(--text);
+  stroke: var(--surface);
+  stroke-width: 1.5;
+}
+
+.sim-svg .chn-label {
+  fill: var(--text);
+  font-size: 15px;
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.sim-svg .chn-small {
+  font-size: 13px;
+}
+
+.sim-svg .chn-accent {
+  fill: var(--accent);
+}
+
+.chn-table {
+  width: 100%;
+  margin: 0.75rem 0 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.chn-table th,
+.chn-table td {
+  padding: 0.2rem 0.35rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+.chn-table th {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.chn-table tr.chn-main td {
+  color: var(--accent);
+  font-weight: 600;
+}
