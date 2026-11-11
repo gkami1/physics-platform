@@ -1,0 +1,163 @@
+# quantum.nuclear-reactions 6.4: the rest energy before and after a reaction, schematic. Left:
+# ⁷Li + p → 2 ⁴He, the products are lighter, Q > 0 is released; right: ¹⁴N + ⁴He → ¹⁷O + p,
+# heavier products, |Q| must come from the kinetic energy of the colliding particles.
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot; particles are named, not painted; α tracks solid, β
+# dashed; γ and graphs' curves accent; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 226
+items:
+- text: энергия выделяется, *Q* > 0
+  at:
+  - 102
+  - 26
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 26
+    - 70
+  - - 94
+    - 70
+  width: 2.4
+- line:
+  - - 112
+    - 150
+  - - 180
+    - 150
+  width: 2.4
+- text: до
+  at:
+  - 60
+  - 62
+  size: 12
+  anchor: middle
+  tone: muted
+- text: после
+  at:
+  - 146
+  - 142
+  size: 12
+  anchor: middle
+  tone: muted
+- text: ^{7}Li + p
+  at:
+  - 60
+  - 90
+  size: 13
+  anchor: middle
+  tone: default
+- text: 2 ^{4}He
+  at:
+  - 146
+  - 170
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 94
+    - 70
+  - - 112
+    - 70
+  width: 1
+  tone: muted
+  dashed: true
+- arrow:
+  - - 104
+    - 73
+  - - 104
+    - 147
+  width: 2
+  tone: accent
+- text: '*Q*'
+  at:
+  - 98
+  - 116
+  size: 14
+  anchor: end
+  tone: accent
+- text: энергия поглощается, *Q* < 0
+  at:
+  - 297
+  - 26
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 221
+    - 150
+  - - 289
+    - 150
+  width: 2.4
+- line:
+  - - 307
+    - 70
+  - - 375
+    - 70
+  width: 2.4
+- text: до
+  at:
+  - 255
+  - 142
+  size: 12
+  anchor: middle
+  tone: muted
+- text: после
+  at:
+  - 341
+  - 62
+  size: 12
+  anchor: middle
+  tone: muted
+- text: ^{14}N + ^{4}He
+  at:
+  - 255
+  - 170
+  size: 13
+  anchor: middle
+  tone: default
+- text: ^{17}O + p
+  at:
+  - 341
+  - 90
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 289
+    - 150
+  - - 307
+    - 150
+  width: 1
+  tone: muted
+  dashed: true
+- arrow:
+  - - 299
+    - 147
+  - - 299
+    - 73
+  width: 2
+  tone: accent
+- text: '|*Q*|'
+  at:
+  - 293
+  - 116
+  size: 14
+  anchor: end
+  tone: accent
+- text: уровень — энергия покоя *mc*^{2} всех частиц
+  at:
+  - 200
+  - 196
+  size: 12
+  anchor: middle
+  tone: muted
+- text: справа недостающую энергию дают налетающие частицы
+  at:
+  - 200
+  - 214
+  size: 12
+  anchor: middle
+  tone: muted

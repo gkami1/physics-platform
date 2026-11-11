@@ -1,0 +1,277 @@
+# quantum.nuclear-reactions 6.6: a pressurised-water reactor (like the ВВЭР), schematic. In the vessel:
+# fuel rods (solid), control rods (muted) from above, water as moderator and coolant. The first loop
+# carries hot water to the steam generator and back through a pump; the second loop's steam turns
+# the turbine and the generator, the condensed water returns.
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot; particles are named, not painted; α tracks solid, β
+# dashed; γ and graphs' curves accent; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 280
+items:
+- rect:
+  - 20
+  - 44
+  - 112
+  - 176
+  width: 2
+  radius: 16
+- sine:
+  - 26
+  - 62
+  length: 100
+  amplitude: 2.5
+  periods: 6
+  width: 1
+  tone: muted
+- rect:
+  - 36
+  - 96
+  - 8
+  - 108
+  fill: solid
+  width: 1
+  radius: 2
+- rect:
+  - 60
+  - 96
+  - 8
+  - 108
+  fill: solid
+  width: 1
+  radius: 2
+- rect:
+  - 84
+  - 96
+  - 8
+  - 108
+  fill: solid
+  width: 1
+  radius: 2
+- rect:
+  - 108
+  - 96
+  - 8
+  - 108
+  fill: solid
+  width: 1
+  radius: 2
+- line:
+  - - 49
+    - 18
+  - - 121
+    - 18
+  width: 2
+- rect:
+  - 46
+  - 18
+  - 6
+  - 104
+  fill: solid
+  tone: muted
+  width: 0
+- rect:
+  - 70
+  - 18
+  - 6
+  - 104
+  fill: solid
+  tone: muted
+  width: 0
+- rect:
+  - 94
+  - 18
+  - 6
+  - 104
+  fill: solid
+  tone: muted
+  width: 0
+- text: регулирующие стержни
+  at:
+  - 128
+  - 16
+  size: 11
+  anchor: start
+  tone: muted
+- text: твэлы с ураном
+  at:
+  - 76
+  - 238
+  size: 12
+  anchor: middle
+  tone: muted
+- text: вода — замедлитель
+  at:
+  - 76
+  - 254
+  size: 12
+  anchor: middle
+  tone: muted
+- text: и теплоноситель
+  at:
+  - 76
+  - 270
+  size: 12
+  anchor: middle
+  tone: muted
+- line:
+  - - 76
+    - 204
+  - - 76
+    - 226
+  width: 1
+  tone: muted
+- arrow:
+  - - 132
+    - 78
+  - - 176
+    - 78
+  width: 1.8
+- text: горячая
+  at:
+  - 154
+  - 70
+  size: 11
+  anchor: middle
+  tone: muted
+- line:
+  - - 176
+    - 196
+  - - 132
+    - 196
+  width: 1.8
+- circle:
+  - 154
+  - 196
+  r: 8
+  fill: surface
+  width: 1.5
+- text: насос
+  at:
+  - 154
+  - 216
+  size: 11
+  anchor: middle
+  tone: muted
+- rect:
+  - 176
+  - 54
+  - 52
+  - 160
+  width: 2
+  radius: 8
+- path: M184 78L220 87L184 96L220 105L184 114L220 123L184 132L220 141L184 150L220 159L184 168L220 177L184
+    186L220 195L184 196
+  width: 1.4
+- text: парогенератор
+  at:
+  - 210
+  - 236
+  size: 12
+  anchor: middle
+  tone: muted
+- line:
+  - - 202
+    - 54
+  - - 202
+    - 34
+  - - 260
+    - 34
+  width: 1.8
+- arrow:
+  - - 240
+    - 34
+  - - 262
+    - 34
+  width: 1.8
+- text: пар
+  at:
+  - 230
+  - 48
+  size: 11
+  anchor: middle
+  tone: muted
+- path: M262 20L316 6L316 74L262 60Z
+  width: 2
+  fill: surface
+- text: турбина
+  at:
+  - 289
+  - 92
+  size: 12
+  anchor: middle
+  tone: muted
+- line:
+  - - 316
+    - 40
+  - - 334
+    - 40
+  width: 3
+- circle:
+  - 356
+  - 40
+  r: 22
+  fill: surface
+  width: 2
+- text: '~'
+  at:
+  - 356
+  - 48
+  size: 24
+- text: генератор
+  at:
+  - 356
+  - 80
+  size: 12
+  anchor: middle
+  tone: muted
+- line:
+  - - 289
+    - 74
+  - - 289
+    - 150
+  - - 252
+    - 150
+  width: 1.8
+- arrow:
+  - - 256
+    - 150
+  - - 230
+    - 150
+  width: 1.8
+- text: вода
+  at:
+  - 276
+  - 142
+  size: 11
+  anchor: middle
+  tone: muted
+- line:
+  - - 356
+    - 108
+  - - 356
+    - 128
+  width: 1.5
+  tone: accent
+- arrow:
+  - - 356
+    - 128
+  - - 380
+    - 128
+  width: 1.5
+  tone: accent
+- line:
+  - - 356
+    - 62
+  - - 356
+    - 108
+  width: 1.5
+  tone: accent
+- text: ток в сеть
+  at:
+  - 372
+  - 148
+  size: 12
+  anchor: middle
+  tone: accent

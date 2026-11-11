@@ -1,0 +1,183 @@
+# quantum.nuclear-reactions 6.7: the potential energy of two nuclei with charges e (D and T) against
+# their distance r, computed: k e²/r = 1,44/r МэВ beyond r0 = 4·10⁻¹⁵ м (0,36 МэВ at the top), a
+# schematic nuclear well inside; the mean energy 3kT/2 at 10⁸ К (≈ 0,013 МэВ) dashed, to scale.
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot; particles are named, not painted; α tracks solid, β
+# dashed; γ and graphs' curves accent; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 260
+items:
+- arrow:
+  - - 56
+    - 160
+  - - 386
+    - 160
+  width: 1.5
+- arrow:
+  - - 56
+    - 240
+  - - 56
+    - 14
+  width: 1.5
+- text: '*r*, 10^{−15} м'
+  at:
+  - 384
+  - 194
+  size: 13
+  anchor: end
+  tone: default
+- text: '*E*_p'
+  at:
+  - 64
+  - 24
+  size: 14
+  anchor: start
+  tone: default
+- text: '0'
+  at:
+  - 50
+  - 175
+  size: 12
+  anchor: end
+  tone: default
+- line:
+  - - 116
+    - 160
+  - - 116
+    - 164
+  width: 1.2
+- text: '2'
+  at:
+  - 116
+  - 178
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 176
+    - 160
+  - - 176
+    - 164
+  width: 1.2
+- text: '4'
+  at:
+  - 176
+  - 178
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 236
+    - 160
+  - - 236
+    - 164
+  width: 1.2
+- text: '6'
+  at:
+  - 236
+  - 178
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 296
+    - 160
+  - - 296
+    - 164
+  width: 1.2
+- text: '8'
+  at:
+  - 296
+  - 178
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 356
+    - 160
+  - - 356
+    - 164
+  width: 1.2
+- text: '10'
+  at:
+  - 356
+  - 178
+  size: 13
+  anchor: middle
+  tone: default
+- path: M56 232L167 232L176 52L176 52L177.5 53.3L179 54.6L180.5 55.9L182 57.1L183.5 58.4L185 59.5L186.5
+    60.7L188 61.8L189.5 62.9L191 64L192.5 65.1L194 66.1L195.5 67.1L197 68.1L198.5 69.1L200 70L201.5 70.9L203
+    71.8L204.5 72.7L206 73.6L207.5 74.5L209 75.3L210.5 76.1L212 76.9L213.5 77.7L215 78.5L216.5 79.3L218
+    80L219.5 80.7L221 81.5L222.5 82.2L224 82.9L225.5 83.5L227 84.2L228.5 84.9L230 85.5L231.5 86.2L233
+    86.8L234.5 87.4L236 88L237.5 88.6L239 89.2L240.5 89.8L242 90.3L243.5 90.9L245 91.4L246.5 92L248 92.5L249.5
+    93L251 93.5L252.5 94L254 94.5L255.5 95L257 95.5L258.5 96L260 96.5L261.5 96.9L263 97.4L264.5 97.8L266
+    98.3L267.5 98.7L269 99.2L270.5 99.6L272 100L273.5 100.4L275 100.8L276.5 101.2L278 101.6L279.5 102L281
+    102.4L282.5 102.8L284 103.2L285.5 103.5L287 103.9L288.5 104.3L290 104.6L291.5 105L293 105.3L294.5
+    105.7L296 106L297.5 106.3L299 106.7L300.5 107L302 107.3L303.5 107.6L305 108L306.5 108.3L308 108.6L309.5
+    108.9L311 109.2L312.5 109.5L314 109.8L315.5 110.1L317 110.3L318.5 110.6L320 110.9L321.5 111.2L323
+    111.5L324.5 111.7L326 112L327.5 112.3L329 112.5L330.5 112.8L332 113L333.5 113.3L335 113.5L336.5 113.8L338
+    114L339.5 114.3L341 114.5L342.5 114.8L344 115L345.5 115.2L347 115.5L348.5 115.7L350 115.9L351.5 116.1L353
+    116.4L354.5 116.6L356 116.8L357.5 117L359 117.2L360.5 117.4L362 117.6L363.5 117.9L365 118.1L366.5
+    118.3L368 118.5L369.5 118.7L371 118.9L372.5 119.1
+  width: 2.2
+  tone: accent
+- line:
+  - - 56
+    - 52.0
+  - - 176.0
+    - 52.0
+  width: 1
+  tone: muted
+  dashed: true
+- text: 0,36 МэВ
+  at:
+  - 50
+  - 56.0
+  size: 12
+  anchor: end
+  tone: default
+- text: 'кулоновский барьер:'
+  at:
+  - 192.0
+  - 36.0
+  size: 13
+  anchor: start
+  tone: default
+- text: ядра отталкиваются
+  at:
+  - 192.0
+  - 52.0
+  size: 12
+  anchor: start
+  tone: muted
+- line:
+  - - 56
+    - 156.1
+  - - 366
+    - 156.1
+  width: 1.4
+  tone: muted
+  dashed: true
+- text: средняя энергия ядер при 10^{8} К ≈ 0,013 МэВ
+  at:
+  - 376
+  - 150.1
+  size: 12
+  anchor: end
+  tone: muted
+- text: 'ядерные силы:'
+  at:
+  - 62
+  - 208
+  size: 13
+  anchor: start
+  tone: default
+- text: притяжение
+  at:
+  - 62
+  - 224
+  size: 12
+  anchor: start
+  tone: muted

@@ -1,0 +1,256 @@
+# quantum.nuclear-reactions 6.7: the D + T reaction ²₁H + ³₁H → ⁴₂He + ¹₀n as nucleons; the neutron
+# flies off fast (velocity `vel`).
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot; particles are named, not painted; α tracks solid, β
+# dashed; γ and graphs' curves accent; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 202
+items:
+- circle:
+  - 35.7
+  - 62.0
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 35.7
+  - 65.6
+  size: 10.6
+- circle:
+  - 52.3
+  - 62.0
+  r: 8.5
+  fill: solid
+  width: 1.6
+- text: +
+  at:
+  - 86
+  - 69.7
+  size: 22
+- circle:
+  - 115.7
+  - 57.2
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 115.7
+  - 60.8
+  size: 10.6
+- circle:
+  - 132.3
+  - 57.2
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 124.0
+  - 71.6
+  r: 8.5
+  fill: solid
+  width: 1.6
+- arrow:
+  - - 160
+    - 62
+  - - 200
+    - 62
+  width: 1.6
+- circle:
+  - 235.7
+  - 62.0
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 235.7
+  - 65.6
+  size: 10.6
+- circle:
+  - 252.3
+  - 62.0
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 244.0
+  - 76.4
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 244.0
+  - 47.6
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 244.0
+  - 51.1
+  size: 10.6
+- text: +
+  at:
+  - 286
+  - 69.7
+  size: 22
+- circle:
+  - 318
+  - 62
+  r: 8.5
+  fill: solid
+  width: 1.6
+- arrow:
+  - - 330
+    - 62
+  - - 384
+    - 62
+  width: 1.8
+  tone: vel
+- text: H
+  at:
+  - 38
+  - 132
+  size: 22
+  anchor: start
+  tone: default
+- text: '2'
+  at:
+  - 37
+  - 122.8
+  size: 13.6
+  anchor: end
+  tone: default
+- text: '1'
+  at:
+  - 37
+  - 136.8
+  size: 13.6
+  anchor: end
+  tone: default
+- text: H
+  at:
+  - 118
+  - 132
+  size: 22
+  anchor: start
+  tone: default
+- text: '3'
+  at:
+  - 117
+  - 122.8
+  size: 13.6
+  anchor: end
+  tone: default
+- text: '1'
+  at:
+  - 117
+  - 136.8
+  size: 13.6
+  anchor: end
+  tone: default
+- text: He
+  at:
+  - 236
+  - 132
+  size: 22
+  anchor: start
+  tone: default
+- text: '4'
+  at:
+  - 235
+  - 122.8
+  size: 13.6
+  anchor: end
+  tone: default
+- text: '2'
+  at:
+  - 235
+  - 136.8
+  size: 13.6
+  anchor: end
+  tone: default
+- text: n
+  at:
+  - 316
+  - 132
+  size: 22
+  anchor: start
+  tone: default
+- text: '1'
+  at:
+  - 315
+  - 122.8
+  size: 13.6
+  anchor: end
+  tone: default
+- text: '0'
+  at:
+  - 315
+  - 136.8
+  size: 13.6
+  anchor: end
+  tone: default
+- text: дейтерий
+  at:
+  - 44
+  - 156
+  size: 12
+  anchor: middle
+  tone: muted
+- text: тритий
+  at:
+  - 124
+  - 156
+  size: 12
+  anchor: middle
+  tone: muted
+- text: гелий-4
+  at:
+  - 244
+  - 156
+  size: 12
+  anchor: middle
+  tone: muted
+- text: быстрый нейтрон
+  at:
+  - 340
+  - 156
+  size: 12
+  anchor: middle
+  tone: muted
+- circle:
+  - 126
+  - 186
+  r: 7
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 126
+  - 188.9
+  size: 8.8
+- text: протон
+  at:
+  - 138
+  - 190.5
+  size: 12
+  anchor: start
+  tone: default
+- circle:
+  - 212
+  - 186
+  r: 7
+  fill: solid
+  width: 1.6
+- text: нейтрон
+  at:
+  - 224
+  - 190.5
+  size: 12
+  anchor: start
+  tone: default

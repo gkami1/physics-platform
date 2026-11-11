@@ -1,0 +1,314 @@
+# quantum.nuclear-reactions 6.5: the chain reaction as a tree, four generations computed. Left, k = 2:
+# 1, 2, 4, 8 fissions (dots = nuclei split, arrows `vel` = neutrons). Right, k = 1: each fission's
+# second neutron (dashed) escapes or is absorbed, one fission per generation.
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot; particles are named, not painted; α tracks solid, β
+# dashed; γ and graphs' curves accent; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 266
+items:
+- dots:
+  - - 105.0
+    - 38
+  r: 4.5
+- arrow:
+  - - 105.0
+    - 44
+  - - 59.5
+    - 85
+  width: 1.3
+  tone: vel
+- arrow:
+  - - 105.0
+    - 44
+  - - 150.5
+    - 85
+  width: 1.3
+  tone: vel
+- dots:
+  - - 59.5
+    - 92
+  - - 150.5
+    - 92
+  r: 4.5
+- arrow:
+  - - 59.5
+    - 98
+  - - 36.8
+    - 139
+  width: 1.3
+  tone: vel
+- arrow:
+  - - 59.5
+    - 98
+  - - 82.2
+    - 139
+  width: 1.3
+  tone: vel
+- arrow:
+  - - 150.5
+    - 98
+  - - 127.8
+    - 139
+  width: 1.3
+  tone: vel
+- arrow:
+  - - 150.5
+    - 98
+  - - 173.2
+    - 139
+  width: 1.3
+  tone: vel
+- dots:
+  - - 36.8
+    - 146
+  - - 82.2
+    - 146
+  - - 127.8
+    - 146
+  - - 173.2
+    - 146
+  r: 4.5
+- arrow:
+  - - 36.8
+    - 152
+  - - 25.4
+    - 193
+  width: 1.3
+  tone: vel
+- arrow:
+  - - 36.8
+    - 152
+  - - 48.1
+    - 193
+  width: 1.3
+  tone: vel
+- arrow:
+  - - 82.2
+    - 152
+  - - 70.9
+    - 193
+  width: 1.3
+  tone: vel
+- arrow:
+  - - 82.2
+    - 152
+  - - 93.6
+    - 193
+  width: 1.3
+  tone: vel
+- arrow:
+  - - 127.8
+    - 152
+  - - 116.4
+    - 193
+  width: 1.3
+  tone: vel
+- arrow:
+  - - 127.8
+    - 152
+  - - 139.1
+    - 193
+  width: 1.3
+  tone: vel
+- arrow:
+  - - 173.2
+    - 152
+  - - 161.9
+    - 193
+  width: 1.3
+  tone: vel
+- arrow:
+  - - 173.2
+    - 152
+  - - 184.6
+    - 193
+  width: 1.3
+  tone: vel
+- dots:
+  - - 25.4
+    - 200
+  - - 48.1
+    - 200
+  - - 70.9
+    - 200
+  - - 93.6
+    - 200
+  - - 116.4
+    - 200
+  - - 139.1
+    - 200
+  - - 161.9
+    - 200
+  - - 184.6
+    - 200
+  r: 4.5
+- dots:
+  - - 268
+    - 38
+  r: 4.5
+- arrow:
+  - - 268
+    - 44
+  - - 268
+    - 85
+  width: 1.3
+  tone: vel
+- arrow:
+  - - 273
+    - 42
+  - - 320
+    - 68
+  width: 1.3
+  tone: vel
+  dashed: true
+- text: ×
+  at:
+  - 326
+  - 74
+  size: 15
+  anchor: middle
+  tone: muted
+- dots:
+  - - 268
+    - 92
+  r: 4.5
+- arrow:
+  - - 268
+    - 98
+  - - 268
+    - 139
+  width: 1.3
+  tone: vel
+- arrow:
+  - - 273
+    - 96
+  - - 320
+    - 122
+  width: 1.3
+  tone: vel
+  dashed: true
+- text: ×
+  at:
+  - 326
+  - 128
+  size: 15
+  anchor: middle
+  tone: muted
+- dots:
+  - - 268
+    - 146
+  r: 4.5
+- arrow:
+  - - 268
+    - 152
+  - - 268
+    - 193
+  width: 1.3
+  tone: vel
+- arrow:
+  - - 273
+    - 150
+  - - 320
+    - 176
+  width: 1.3
+  tone: vel
+  dashed: true
+- text: ×
+  at:
+  - 326
+  - 182
+  size: 15
+  anchor: middle
+  tone: muted
+- dots:
+  - - 268
+    - 200
+  r: 4.5
+- text: × — вылетел или поглощён
+  at:
+  - 306
+  - 226
+  size: 11
+  anchor: middle
+  tone: muted
+- text: '1'
+  at:
+  - 202
+  - 42
+  size: 13
+  anchor: start
+  tone: accent
+- text: '1'
+  at:
+  - 385
+  - 42
+  size: 13
+  anchor: end
+  tone: accent
+- text: '2'
+  at:
+  - 202
+  - 96
+  size: 13
+  anchor: start
+  tone: accent
+- text: '1'
+  at:
+  - 385
+  - 96
+  size: 13
+  anchor: end
+  tone: accent
+- text: '4'
+  at:
+  - 202
+  - 150
+  size: 13
+  anchor: start
+  tone: accent
+- text: '1'
+  at:
+  - 385
+  - 150
+  size: 13
+  anchor: end
+  tone: accent
+- text: '8'
+  at:
+  - 202
+  - 204
+  size: 13
+  anchor: start
+  tone: accent
+- text: '1'
+  at:
+  - 385
+  - 204
+  size: 13
+  anchor: end
+  tone: accent
+- line:
+  - - 214
+    - 20
+  - - 214
+    - 256
+  width: 0.8
+  tone: muted
+  dashed: true
+- text: '*k* = 2: число делений растёт'
+  at:
+  - 105
+  - 254
+  size: 13
+  anchor: middle
+  tone: default
+- text: '*k* = 1: постоянно'
+  at:
+  - 302
+  - 254
+  size: 13
+  anchor: middle
+  tone: default

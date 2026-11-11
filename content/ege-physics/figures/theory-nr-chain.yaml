@@ -1,0 +1,456 @@
+# quantum.nuclear-reactions 6.3: the start of the real uranium series U-238 →α Th-234 →β Pa-234 →β
+# U-234 →α Th-230 →α Ra-226 on a grid of Z (across) and A (up); α steps solid, β⁻ dashed.
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot; particles are named, not painted; α tracks solid, β
+# dashed; γ and graphs' curves accent; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 374
+items:
+- arrow:
+  - - 56
+    - 348
+  - - 386
+    - 348
+  width: 1.5
+- arrow:
+  - - 56
+    - 348
+  - - 56
+    - 14
+  width: 1.5
+- text: '*Z*'
+  at:
+  - 384
+  - 340
+  size: 14
+  anchor: end
+  tone: default
+- text: '*A*'
+  at:
+  - 66
+  - 24
+  size: 14
+  anchor: start
+  tone: default
+- line:
+  - - 112
+    - 348
+  - - 112
+    - 352
+  width: 1.2
+- text: '88'
+  at:
+  - 112
+  - 366
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 112
+    - 344
+  - - 112
+    - 40
+  width: 0.8
+  tone: muted
+  dashed: true
+- line:
+  - - 168
+    - 348
+  - - 168
+    - 352
+  width: 1.2
+- text: '89'
+  at:
+  - 168
+  - 366
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 168
+    - 344
+  - - 168
+    - 40
+  width: 0.8
+  tone: muted
+  dashed: true
+- line:
+  - - 224
+    - 348
+  - - 224
+    - 352
+  width: 1.2
+- text: '90'
+  at:
+  - 224
+  - 366
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 224
+    - 344
+  - - 224
+    - 40
+  width: 0.8
+  tone: muted
+  dashed: true
+- line:
+  - - 280
+    - 348
+  - - 280
+    - 352
+  width: 1.2
+- text: '91'
+  at:
+  - 280
+  - 366
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 280
+    - 344
+  - - 280
+    - 40
+  width: 0.8
+  tone: muted
+  dashed: true
+- line:
+  - - 336
+    - 348
+  - - 336
+    - 352
+  width: 1.2
+- text: '92'
+  at:
+  - 336
+  - 366
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 336
+    - 344
+  - - 336
+    - 40
+  width: 0.8
+  tone: muted
+  dashed: true
+- line:
+  - - 52
+    - 304
+  - - 56
+    - 304
+  width: 1.2
+- text: '226'
+  at:
+  - 49
+  - 309
+  size: 13
+  anchor: end
+  tone: default
+- line:
+  - - 60
+    - 304
+  - - 356
+    - 304
+  width: 0.8
+  tone: muted
+  dashed: true
+- line:
+  - - 52
+    - 216
+  - - 56
+    - 216
+  width: 1.2
+- text: '230'
+  at:
+  - 49
+  - 221
+  size: 13
+  anchor: end
+  tone: default
+- line:
+  - - 60
+    - 216
+  - - 356
+    - 216
+  width: 0.8
+  tone: muted
+  dashed: true
+- line:
+  - - 52
+    - 128
+  - - 56
+    - 128
+  width: 1.2
+- text: '234'
+  at:
+  - 49
+  - 133
+  size: 13
+  anchor: end
+  tone: default
+- line:
+  - - 60
+    - 128
+  - - 356
+    - 128
+  width: 0.8
+  tone: muted
+  dashed: true
+- line:
+  - - 52
+    - 40
+  - - 56
+    - 40
+  width: 1.2
+- text: '238'
+  at:
+  - 49
+  - 45
+  size: 13
+  anchor: end
+  tone: default
+- line:
+  - - 60
+    - 40
+  - - 356
+    - 40
+  width: 0.8
+  tone: muted
+  dashed: true
+- arrow:
+  - - 329.7
+    - 44.9
+  - - 231.1
+    - 122.4
+  width: 1.8
+- text: α
+  at:
+  - 270.0
+  - 78.0
+  size: 15
+  anchor: end
+  tone: default
+- arrow:
+  - - 232.0
+    - 128.0
+  - - 271.0
+    - 128.0
+  width: 1.8
+  dashed: true
+- text: β^{−}
+  at:
+  - 252.0
+  - 150
+  size: 13
+  anchor: middle
+  tone: default
+- arrow:
+  - - 288.0
+    - 128.0
+  - - 327.0
+    - 128.0
+  width: 1.8
+  dashed: true
+- text: β^{−}
+  at:
+  - 308.0
+  - 120
+  size: 13
+  anchor: middle
+  tone: default
+- arrow:
+  - - 329.7
+    - 132.9
+  - - 231.1
+    - 210.4
+  width: 1.8
+- text: α
+  at:
+  - 288.0
+  - 190.0
+  size: 15
+  anchor: start
+  tone: default
+- arrow:
+  - - 217.7
+    - 220.9
+  - - 119.1
+    - 298.4
+  width: 1.8
+- text: α
+  at:
+  - 176.0
+  - 278.0
+  size: 15
+  anchor: start
+  tone: default
+- dots:
+  - - 336
+    - 40
+  r: 4.5
+- dots:
+  - - 224
+    - 128
+  r: 4.5
+- dots:
+  - - 280
+    - 128
+  r: 4.5
+- dots:
+  - - 336
+    - 128
+  r: 4.5
+- dots:
+  - - 224
+    - 216
+  r: 4.5
+- dots:
+  - - 112
+    - 304
+  r: 4.5
+- text: U
+  at:
+  - 363
+  - 46
+  size: 18
+  anchor: start
+  tone: default
+- text: '238'
+  at:
+  - 362
+  - 38.4
+  size: 11.2
+  anchor: end
+  tone: default
+- text: '92'
+  at:
+  - 362
+  - 50.0
+  size: 11.2
+  anchor: end
+  tone: default
+- text: U
+  at:
+  - 363
+  - 134
+  size: 18
+  anchor: start
+  tone: default
+- text: '234'
+  at:
+  - 362
+  - 126.4
+  size: 11.2
+  anchor: end
+  tone: default
+- text: '92'
+  at:
+  - 362
+  - 138.0
+  size: 11.2
+  anchor: end
+  tone: default
+- text: Th
+  at:
+  - 194
+  - 120
+  size: 18
+  anchor: start
+  tone: default
+- text: '234'
+  at:
+  - 193
+  - 112.4
+  size: 11.2
+  anchor: end
+  tone: default
+- text: '90'
+  at:
+  - 193
+  - 124.0
+  size: 11.2
+  anchor: end
+  tone: default
+- text: Th
+  at:
+  - 251
+  - 228
+  size: 18
+  anchor: start
+  tone: default
+- text: '230'
+  at:
+  - 250
+  - 220.4
+  size: 11.2
+  anchor: end
+  tone: default
+- text: '90'
+  at:
+  - 250
+  - 232.0
+  size: 11.2
+  anchor: end
+  tone: default
+- text: Ra
+  at:
+  - 139
+  - 310
+  size: 18
+  anchor: start
+  tone: default
+- text: '226'
+  at:
+  - 138
+  - 302.4
+  size: 11.2
+  anchor: end
+  tone: default
+- text: '88'
+  at:
+  - 138
+  - 314.0
+  size: 11.2
+  anchor: end
+  tone: default
+- text: Pa
+  at:
+  - 276
+  - 118
+  size: 16
+  anchor: start
+  tone: default
+- text: '234'
+  at:
+  - 275
+  - 111.3
+  size: 9.9
+  anchor: end
+  tone: default
+- text: '91'
+  at:
+  - 275
+  - 121.5
+  size: 9.9
+  anchor: end
+  tone: default
+- text: 'α: *A* − 4, *Z* − 2'
+  at:
+  - 84
+  - 40
+  size: 13
+  anchor: start
+  tone: default
+- text: 'β^{−}: *A* то же, *Z* + 1'
+  at:
+  - 84
+  - 60
+  size: 13
+  anchor: start
+  tone: default

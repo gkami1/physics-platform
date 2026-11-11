@@ -1,0 +1,489 @@
+# quantum.nuclear-reactions 6.1: Rutherford's reaction (1919) ¹⁴₇N + ⁴₂He → ¹⁷₈O + ¹₁p as nucleons:
+# 7p + 7n and 2p + 2n become 8p + 9n and one proton; both sums (18 and 9) shown.
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot; particles are named, not painted; α tracks solid, β
+# dashed; γ and graphs' curves accent; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 262
+items:
+- circle:
+  - 51.9
+  - 67.6
+  r: 6.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 51.9
+  - 70.4
+  size: 8.1
+- circle:
+  - 64.6
+  - 67.6
+  r: 6.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 58.3
+  - 78.7
+  r: 6.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 58.3
+  - 81.4
+  size: 8.1
+- circle:
+  - 58.3
+  - 56.6
+  r: 6.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 45.5
+  - 78.7
+  r: 6.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 45.5
+  - 81.4
+  size: 8.1
+- circle:
+  - 45.5
+  - 56.6
+  r: 6.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 39.2
+  - 67.6
+  r: 6.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 39.2
+  - 70.4
+  size: 8.1
+- circle:
+  - 71.0
+  - 78.7
+  r: 6.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 71.0
+  - 56.6
+  r: 6.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 71.0
+  - 59.3
+  size: 8.1
+- circle:
+  - 51.9
+  - 89.7
+  r: 6.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 51.9
+  - 45.6
+  r: 6.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 51.9
+  - 48.3
+  size: 8.1
+- circle:
+  - 32.8
+  - 78.7
+  r: 6.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 77.4
+  - 67.6
+  r: 6.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 77.4
+  - 70.4
+  size: 8.1
+- circle:
+  - 64.6
+  - 89.7
+  r: 6.5
+  fill: solid
+  width: 1.6
+- text: +
+  at:
+  - 106
+  - 77.7
+  size: 22
+- circle:
+  - 133.6
+  - 70.0
+  r: 6.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 133.6
+  - 72.7
+  size: 8.1
+- circle:
+  - 146.4
+  - 70.0
+  r: 6.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 140.0
+  - 81.0
+  r: 6.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 140.0
+  - 59.0
+  r: 6.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 140.0
+  - 61.7
+  size: 8.1
+- arrow:
+  - - 170
+    - 70
+  - - 206
+    - 70
+  width: 1.6
+- circle:
+  - 255.8
+  - 68.7
+  r: 6.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 255.8
+  - 71.4
+  size: 8.1
+- circle:
+  - 268.5
+  - 68.7
+  r: 6.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 262.1
+  - 79.7
+  r: 6.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 262.1
+  - 82.5
+  size: 8.1
+- circle:
+  - 262.1
+  - 57.7
+  r: 6.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 249.4
+  - 79.7
+  r: 6.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 249.4
+  - 82.5
+  size: 8.1
+- circle:
+  - 249.4
+  - 57.7
+  r: 6.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 243.0
+  - 68.7
+  r: 6.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 243.0
+  - 71.4
+  size: 8.1
+- circle:
+  - 274.9
+  - 79.7
+  r: 6.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 274.9
+  - 57.7
+  r: 6.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 274.9
+  - 60.4
+  size: 8.1
+- circle:
+  - 255.8
+  - 90.8
+  r: 6.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 255.8
+  - 46.6
+  r: 6.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 255.8
+  - 49.4
+  size: 8.1
+- circle:
+  - 236.6
+  - 79.7
+  r: 6.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 281.2
+  - 68.7
+  r: 6.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 281.2
+  - 71.4
+  size: 8.1
+- circle:
+  - 268.5
+  - 90.8
+  r: 6.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 236.6
+  - 57.7
+  r: 6.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 236.6
+  - 60.4
+  size: 8.1
+- circle:
+  - 268.5
+  - 46.6
+  r: 6.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 243.0
+  - 90.8
+  r: 6.5
+  fill: solid
+  width: 1.6
+- text: +
+  at:
+  - 310
+  - 77.7
+  size: 22
+- circle:
+  - 346
+  - 70
+  r: 6.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 346
+  - 72.7
+  size: 8.1
+- text: N
+  at:
+  - 52
+  - 146
+  size: 24
+  anchor: start
+  tone: default
+- text: '14'
+  at:
+  - 51
+  - 135.9
+  size: 14.9
+  anchor: end
+  tone: default
+- text: '7'
+  at:
+  - 51
+  - 151.3
+  size: 14.9
+  anchor: end
+  tone: default
+- text: He
+  at:
+  - 132
+  - 146
+  size: 24
+  anchor: start
+  tone: default
+- text: '4'
+  at:
+  - 131
+  - 135.9
+  size: 14.9
+  anchor: end
+  tone: default
+- text: '2'
+  at:
+  - 131
+  - 151.3
+  size: 14.9
+  anchor: end
+  tone: default
+- text: O
+  at:
+  - 254
+  - 146
+  size: 24
+  anchor: start
+  tone: default
+- text: '17'
+  at:
+  - 253
+  - 135.9
+  size: 14.9
+  anchor: end
+  tone: default
+- text: '8'
+  at:
+  - 253
+  - 151.3
+  size: 14.9
+  anchor: end
+  tone: default
+- text: p
+  at:
+  - 344
+  - 146
+  size: 24
+  anchor: start
+  tone: default
+- text: '1'
+  at:
+  - 343
+  - 135.9
+  size: 14.9
+  anchor: end
+  tone: default
+- text: '1'
+  at:
+  - 343
+  - 151.3
+  size: 14.9
+  anchor: end
+  tone: default
+- text: азот
+  at:
+  - 56
+  - 172
+  size: 12
+  anchor: middle
+  tone: muted
+- text: α-частица
+  at:
+  - 140
+  - 172
+  size: 12
+  anchor: middle
+  tone: muted
+- text: кислород-17
+  at:
+  - 258
+  - 172
+  size: 12
+  anchor: middle
+  tone: muted
+- text: протон
+  at:
+  - 346
+  - 172
+  size: 12
+  anchor: middle
+  tone: muted
+- text: 'верхние числа: 14 + 4 = 17 + 1'
+  at:
+  - 200
+  - 200
+  size: 13
+  anchor: middle
+  tone: default
+- text: 'нижние числа: 7 + 2 = 8 + 1'
+  at:
+  - 200
+  - 220
+  size: 13
+  anchor: middle
+  tone: default
+- circle:
+  - 126
+  - 246
+  r: 7
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 126
+  - 248.9
+  size: 8.8
+- text: протон
+  at:
+  - 138
+  - 250.5
+  size: 12
+  anchor: start
+  tone: default
+- circle:
+  - 212
+  - 246
+  r: 7
+  fill: solid
+  width: 1.6
+- text: нейтрон
+  at:
+  - 224
+  - 250.5
+  size: 12
+  anchor: start
+  tone: default
