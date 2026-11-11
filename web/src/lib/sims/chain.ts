@@ -38,7 +38,7 @@ export const NU_MEAN = 2.5; // 2 or 3 neutrons per fission, equally likely
 export const N_START = 10; // neutrons from the source in generation 0
 export const G_END = 10;
 export const MEV = 200; // per fission
-export const SEED = 20261358;
+export const SEED = 20261895;
 export const GEN_S = 1.2; // seconds per generation
 const PX = 5.2; // px per см
 const CX = 200;
@@ -107,7 +107,7 @@ export function simulate(si: number, rods: number, run: number): Run {
   const R = size * PX;
   const pts = nuclei(size, rods);
   const rx = rodXs(size, rods);
-  const r = rng(SEED + 7919 * run);
+  const r = rng(SEED + 7919 * run + 104729 * si + 1299709 * rods); // each setting its own draws
   const split = pts.map(() => -1);
   let free = pts.length;
   let births: [number, number][] = Array.from({ length: N_START }, () => [CX, CY]);
@@ -249,7 +249,7 @@ function el<K extends keyof SVGElementTagNameMap>(
 const f1 = (v: number): string => v.toFixed(1);
 
 /** The graph: g = 0 at gx, G_END at gx + gw; N = 0 at gy, the top at gy − gh. */
-const S = { w: 400, h: 470, gx: 56, gy: 446, gw: 312, gh: 112 };
+const S = { w: 400, h: 486, gx: 56, gy: 446, gw: 312, gh: 112 };
 
 class ChainSim extends HTMLElement {
   private si = SIZES.indexOf(SIZE_START);
@@ -496,7 +496,7 @@ class ChainSim extends HTMLElement {
     const counts = this.sim.gens.map((g) => g.length);
     const last = Math.min(Math.floor(t + 1e-9), counts.length - 1);
     const law = (g: number): number => N_START * k ** g;
-    const top = nice(Math.max(...counts, law(Math.max(counts.length - 1, 0))));
+    const top = nice(Math.max(...counts, law(Math.max(counts.length - 1, 0))) + 1); // headroom: a flat k = 1 line below the top
     const X = (g: number): number => gx + (g / G_END) * gw;
     const Y = (n: number): number => gy - (n / top) * gh;
     const parts: SVGElement[] = [];
@@ -504,7 +504,7 @@ class ChainSim extends HTMLElement {
     parts.push(el('path', { d: `M${gx + gw + 20} ${gy}l-9 -4v8z`, class: 'chn-axis-tip' }));
     parts.push(el('path', { d: `M${gx} ${gy}V${gy - gh - 14}`, class: 'chn-axis' }));
     parts.push(el('path', { d: `M${gx} ${gy - gh - 20}l-4 9h8z`, class: 'chn-axis-tip' }));
-    parts.push(this.text(gx + gw + 18, gy + 17, 'поколение', 'end', 'chn-small'));
+    parts.push(this.text(gx + gw + 18, gy + 34, 'поколение', 'end', 'chn-small'));
     parts.push(this.text(gx + 9, gy - gh - 8, 'нейтронов', 'start', 'chn-small'));
     for (const v of [0, 2, 4, 6, 8, 10]) {
       if (v) parts.push(el('path', { d: `M${f1(X(v))} ${gy}v4`, class: 'chn-axis' }));
@@ -540,7 +540,7 @@ class ChainSim extends HTMLElement {
     parts.push(el('path', { d: `M${lx} ${ly}h22`, class: 'chn-run' }));
     parts.push(this.text(lx + 28, ly + 4, 'опыт', 'start', 'chn-small'));
     parts.push(el('path', { d: `M${lx} ${ly + 18}h22`, class: 'chn-law' }));
-    parts.push(this.text(lx + 28, ly + 22, `${N_START}·k^g`, 'start', 'chn-small chn-accent'));
+    parts.push(this.text(lx + 28, ly + 22, `${N_START}·kᵍ`, 'start', 'chn-small chn-accent'));
     this.plot.replaceChildren(...parts);
   }
 }
