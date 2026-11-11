@@ -1,97 +1,279 @@
-# method.measurement-error: reading a scale and writing the result with its uncertainty
+# method.measurement-error 1.2 (the ladder's figure, redrawn): a scale from 0 to 5 Н with a division
+# of 0,2 Н and the pointer (accent) at 3,8 Н; the four divisions counted from 3 Н are accent arcs.
+# Computed: 25 divisions, the pointer from its value.
+# Colours (the general convention): instruments and objects in the text colour, guides and notes
+# muted, what to look at in accent (the pointer, the counted divisions, the reading).
 kind: diagram
-size: [400, 220]
+size:
+- 400
+- 210
 items:
-- rect: [20, 60, 360, 70]
+- rect:
+  - 20
+  - 50
+  - 360
+  - 64
   fill: surface
   radius: 6
-- line: [[40.0, 70], [40.0, 92]]
+  width: 1.2
+- line:
+  - - 40.0
+    - 64
+  - - 40.0
+    - 86
   width: 1.4
 - text: '0'
-  at: [40.0, 110]
+  at:
+  - 40.0
+  - 102
   size: 13
-- line: [[52.8, 70], [52.8, 82]]
+- line:
+  - - 52.4
+    - 64
+  - - 52.4
+    - 75
   width: 1
-- line: [[65.6, 70], [65.6, 82]]
+- line:
+  - - 64.8
+    - 64
+  - - 64.8
+    - 75
   width: 1
-- line: [[78.4, 70], [78.4, 82]]
+- line:
+  - - 77.2
+    - 64
+  - - 77.2
+    - 75
   width: 1
-- line: [[91.2, 70], [91.2, 82]]
+- line:
+  - - 89.6
+    - 64
+  - - 89.6
+    - 75
   width: 1
-- line: [[104.0, 70], [104.0, 92]]
+- line:
+  - - 102.0
+    - 64
+  - - 102.0
+    - 86
   width: 1.4
 - text: '1'
-  at: [104.0, 110]
+  at:
+  - 102.0
+  - 102
   size: 13
-- line: [[116.8, 70], [116.8, 82]]
+- line:
+  - - 114.4
+    - 64
+  - - 114.4
+    - 75
   width: 1
-- line: [[129.6, 70], [129.6, 82]]
+- line:
+  - - 126.8
+    - 64
+  - - 126.8
+    - 75
   width: 1
-- line: [[142.4, 70], [142.4, 82]]
+- line:
+  - - 139.2
+    - 64
+  - - 139.2
+    - 75
   width: 1
-- line: [[155.2, 70], [155.2, 82]]
+- line:
+  - - 151.6
+    - 64
+  - - 151.6
+    - 75
   width: 1
-- line: [[168.0, 70], [168.0, 92]]
+- line:
+  - - 164.0
+    - 64
+  - - 164.0
+    - 86
   width: 1.4
 - text: '2'
-  at: [168.0, 110]
+  at:
+  - 164.0
+  - 102
   size: 13
-- line: [[180.8, 70], [180.8, 82]]
+- line:
+  - - 176.4
+    - 64
+  - - 176.4
+    - 75
   width: 1
-- line: [[193.6, 70], [193.6, 82]]
+- line:
+  - - 188.8
+    - 64
+  - - 188.8
+    - 75
   width: 1
-- line: [[206.4, 70], [206.4, 82]]
+- line:
+  - - 201.2
+    - 64
+  - - 201.2
+    - 75
   width: 1
-- line: [[219.2, 70], [219.2, 82]]
+- line:
+  - - 213.6
+    - 64
+  - - 213.6
+    - 75
   width: 1
-- line: [[232.0, 70], [232.0, 92]]
+- line:
+  - - 226.0
+    - 64
+  - - 226.0
+    - 86
   width: 1.4
 - text: '3'
-  at: [232.0, 110]
+  at:
+  - 226.0
+  - 102
   size: 13
-- line: [[244.8, 70], [244.8, 82]]
+- line:
+  - - 238.4
+    - 64
+  - - 238.4
+    - 75
   width: 1
-- line: [[257.6, 70], [257.6, 82]]
+- line:
+  - - 250.8
+    - 64
+  - - 250.8
+    - 75
   width: 1
-- line: [[270.4, 70], [270.4, 82]]
+- line:
+  - - 263.2
+    - 64
+  - - 263.2
+    - 75
   width: 1
-- line: [[283.2, 70], [283.2, 82]]
+- line:
+  - - 275.6
+    - 64
+  - - 275.6
+    - 75
   width: 1
-- line: [[296.0, 70], [296.0, 92]]
+- line:
+  - - 288.0
+    - 64
+  - - 288.0
+    - 86
   width: 1.4
 - text: '4'
-  at: [296.0, 110]
+  at:
+  - 288.0
+  - 102
   size: 13
-- line: [[308.8, 70], [308.8, 82]]
+- line:
+  - - 300.4
+    - 64
+  - - 300.4
+    - 75
   width: 1
-- line: [[321.6, 70], [321.6, 82]]
+- line:
+  - - 312.8
+    - 64
+  - - 312.8
+    - 75
   width: 1
-- line: [[334.4, 70], [334.4, 82]]
+- line:
+  - - 325.2
+    - 64
+  - - 325.2
+    - 75
   width: 1
-- line: [[347.2, 70], [347.2, 82]]
+- line:
+  - - 337.6
+    - 64
+  - - 337.6
+    - 75
   width: 1
-- line: [[360.0, 70], [360.0, 92]]
+- line:
+  - - 350.0
+    - 64
+  - - 350.0
+    - 86
   width: 1.4
 - text: '5'
-  at: [360.0, 110]
+  at:
+  - 350.0
+  - 102
   size: 13
-- arrow: [[193.6, 150], [193.6, 76]]
-  tone: force
-  width: 2.2
 - text: Н
-  at: [372, 110]
+  at:
+  - 368
+  - 102
   size: 13
+  anchor: middle
   tone: muted
-- arrow: [[104.0, 50], [116.8, 50]]
-  width: 1
-- arrow: [[116.8, 50], [104.0, 50]]
-  width: 1
-- text: цена деления 1/5 = 0,2 Н
-  at: [130, 40]
+- arrow:
+  - - 275.6
+    - 150
+  - - 275.6
+    - 68
+  width: 2.4
+  tone: accent
+- path: M228.0 60Q232.2 46 236.4 60
+  width: 1.5
+  tone: accent
+- text: '1'
+  at:
+  - 232.2
+  - 44
   size: 12
-- text: 'показание: 12 делений · 0,2 Н = 2,4 Н'
-  at: [200, 180]
+  anchor: middle
+  tone: accent
+- path: M240.4 60Q244.6 46 248.8 60
+  width: 1.5
+  tone: accent
+- text: '2'
+  at:
+  - 244.6
+  - 44
+  size: 12
+  anchor: middle
+  tone: accent
+- path: M252.8 60Q257.0 46 261.2 60
+  width: 1.5
+  tone: accent
+- text: '3'
+  at:
+  - 257.0
+  - 44
+  size: 12
+  anchor: middle
+  tone: accent
+- path: M265.2 60Q269.4 46 273.6 60
+  width: 1.5
+  tone: accent
+- text: '4'
+  at:
+  - 269.4
+  - 44
+  size: 12
+  anchor: middle
+  tone: accent
+- text: 'цена деления: (1 − 0) Н : 5 = 0,2 Н'
+  at:
+  - 20
+  - 30
+  size: 12
+  anchor: start
+  tone: muted
+- text: 3 Н + 4 · 0,2 Н = 3,8 Н
+  at:
+  - 200
+  - 176
+  size: 14
+  anchor: middle
+  tone: default
+- text: или 4 Н − 1 · 0,2 Н = 3,8 Н
+  at:
+  - 200
+  - 198
   size: 13
-- text: 'запись: (2,4 ± 0,2) Н'
-  at: [200, 205]
-  size: 15
+  anchor: middle
+  tone: muted

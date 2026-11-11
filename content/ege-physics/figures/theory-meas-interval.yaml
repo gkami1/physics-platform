@@ -1,0 +1,190 @@
+# method.measurement-error 1.3: the result (5,6 ± 0,2) см on a number line from 5,0 to 6,2 см: the
+# measured value (accent dot) and the interval from x − Δx = 5,4 to x + Δx = 5,8 (accent segment).
+# Computed: ticks every 0,1 см.
+# Colours (the general convention): instruments and objects in the text colour, guides and notes
+# muted, what to look at in accent (the pointer, the counted divisions, the reading).
+kind: diagram
+size:
+- 400
+- 170
+items:
+- line:
+  - - 20
+    - 92
+  - - 360
+    - 92
+  width: 1.4
+- line:
+  - - 30.0
+    - 92
+  - - 30.0
+    - 102
+  width: 1.4
+- text: 5,0
+  at:
+  - 30.0
+  - 116
+  size: 12
+- line:
+  - - 56.7
+    - 92
+  - - 56.7
+    - 98
+  width: 1
+- line:
+  - - 83.3
+    - 92
+  - - 83.3
+    - 102
+  width: 1.4
+- text: 5,2
+  at:
+  - 83.3
+  - 116
+  size: 12
+- line:
+  - - 110.0
+    - 92
+  - - 110.0
+    - 98
+  width: 1
+- line:
+  - - 136.7
+    - 92
+  - - 136.7
+    - 102
+  width: 1.4
+- text: 5,4
+  at:
+  - 136.7
+  - 116
+  size: 12
+- line:
+  - - 163.3
+    - 92
+  - - 163.3
+    - 98
+  width: 1
+- line:
+  - - 190.0
+    - 92
+  - - 190.0
+    - 102
+  width: 1.4
+- text: 5,6
+  at:
+  - 190.0
+  - 116
+  size: 12
+- line:
+  - - 216.7
+    - 92
+  - - 216.7
+    - 98
+  width: 1
+- line:
+  - - 243.3
+    - 92
+  - - 243.3
+    - 102
+  width: 1.4
+- text: 5,8
+  at:
+  - 243.3
+  - 116
+  size: 12
+- line:
+  - - 270.0
+    - 92
+  - - 270.0
+    - 98
+  width: 1
+- line:
+  - - 296.7
+    - 92
+  - - 296.7
+    - 102
+  width: 1.4
+- text: 6,0
+  at:
+  - 296.7
+  - 116
+  size: 12
+- line:
+  - - 323.3
+    - 92
+  - - 323.3
+    - 98
+  width: 1
+- line:
+  - - 350.0
+    - 92
+  - - 350.0
+    - 102
+  width: 1.4
+- text: 6,2
+  at:
+  - 350.0
+  - 116
+  size: 12
+- line:
+  - - 136.7
+    - 92
+  - - 243.3
+    - 92
+  width: 5
+  tone: accent
+- line:
+  - - 136.7
+    - 80
+  - - 136.7
+    - 104
+  width: 1.6
+  tone: accent
+- line:
+  - - 243.3
+    - 80
+  - - 243.3
+    - 104
+  width: 1.6
+  tone: accent
+- dots:
+  - - 190.0
+    - 92
+  r: 5
+  tone: accent
+- text: x − Δx
+  at:
+  - 136.7
+  - 62
+  size: 13
+  anchor: middle
+  tone: accent
+- text: x
+  at:
+  - 190.0
+  - 62
+  size: 14
+  anchor: middle
+  tone: accent
+- text: x + Δx
+  at:
+  - 243.3
+  - 62
+  size: 13
+  anchor: middle
+  tone: accent
+- text: см
+  at:
+  - 372
+  - 120
+  size: 12
+  anchor: start
+  tone: muted
+- text: 'L = (5,6 ± 0,2) см: от 5,4 см до 5,8 см'
+  at:
+  - 200
+  - 156
+  size: 14
+  anchor: middle
+  tone: default
