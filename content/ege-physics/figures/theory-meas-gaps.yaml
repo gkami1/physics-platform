@@ -1,0 +1,161 @@
+# method.measurement-error 1.1: a scale between the labelled marks 100 г and 200 г with four
+# unlabelled marks inside: the marks (muted, 1–4) make five gaps (accent arcs, 1–5), so the
+# division is (200 − 100) / 5 = 20 г. Computed: five equal gaps.
+# Colours (the general convention): instruments and objects in the text colour, guides and notes
+# muted, what to look at in accent (the pointer, the counted divisions, the reading).
+kind: diagram
+size:
+- 400
+- 196
+items:
+- line:
+  - - 40
+    - 92
+  - - 360
+    - 92
+  width: 1.4
+- line:
+  - - 60.0
+    - 92
+  - - 60.0
+    - 116
+  width: 1.6
+- text: 100 г
+  at:
+  - 60.0
+  - 136
+  size: 14
+- path: M64.0 82Q88.0 62 112.0 82
+  width: 1.5
+  tone: accent
+- text: '1'
+  at:
+  - 88.0
+  - 60
+  size: 14
+  anchor: middle
+  tone: accent
+- line:
+  - - 116.0
+    - 92
+  - - 116.0
+    - 105
+  width: 1.2
+- text: '1'
+  at:
+  - 116.0
+  - 124
+  size: 12
+  anchor: middle
+  tone: muted
+- path: M120.0 82Q144.0 62 168.0 82
+  width: 1.5
+  tone: accent
+- text: '2'
+  at:
+  - 144.0
+  - 60
+  size: 14
+  anchor: middle
+  tone: accent
+- line:
+  - - 172.0
+    - 92
+  - - 172.0
+    - 105
+  width: 1.2
+- text: '2'
+  at:
+  - 172.0
+  - 124
+  size: 12
+  anchor: middle
+  tone: muted
+- path: M176.0 82Q200.0 62 224.0 82
+  width: 1.5
+  tone: accent
+- text: '3'
+  at:
+  - 200.0
+  - 60
+  size: 14
+  anchor: middle
+  tone: accent
+- line:
+  - - 228.0
+    - 92
+  - - 228.0
+    - 105
+  width: 1.2
+- text: '3'
+  at:
+  - 228.0
+  - 124
+  size: 12
+  anchor: middle
+  tone: muted
+- path: M232.0 82Q256.0 62 280.0 82
+  width: 1.5
+  tone: accent
+- text: '4'
+  at:
+  - 256.0
+  - 60
+  size: 14
+  anchor: middle
+  tone: accent
+- line:
+  - - 284.0
+    - 92
+  - - 284.0
+    - 105
+  width: 1.2
+- text: '4'
+  at:
+  - 284.0
+  - 124
+  size: 12
+  anchor: middle
+  tone: muted
+- path: M288.0 82Q312.0 62 336.0 82
+  width: 1.5
+  tone: accent
+- text: '5'
+  at:
+  - 312.0
+  - 60
+  size: 14
+  anchor: middle
+  tone: accent
+- line:
+  - - 340.0
+    - 92
+  - - 340.0
+    - 116
+  width: 1.6
+- text: 200 г
+  at:
+  - 340.0
+  - 136
+  size: 14
+- text: 'промежутки: 5'
+  at:
+  - 200
+  - 34
+  size: 13
+  anchor: middle
+  tone: accent
+- text: 'штрихи внутри: 4'
+  at:
+  - 200
+  - 148
+  size: 12
+  anchor: middle
+  tone: muted
+- text: 'цена деления = (200 − 100) г : 5 = 20 г'
+  at:
+  - 200
+  - 180
+  size: 14
+  anchor: middle
+  tone: default

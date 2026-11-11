@@ -1,0 +1,276 @@
+# method.measurement-error 1.2: a measuring cylinder, 0…40 мл, division 2 мл (labels every 10 мл), with
+# water whose concave meniscus has its lower edge at 26 мл (accent dot). Three eyes look at it: the one
+# at the level (accent solid line of sight) reads right, from above and below (muted dashed) wrong.
+# Computed: ticks from 5 px per мл, the level from its value.
+# Colours (the general convention): instruments and objects in the text colour, guides and notes
+# muted, what to look at in accent (the pointer, the counted divisions, the reading).
+kind: diagram
+size:
+- 400
+- 270
+items:
+- path: M120 250L120 113.0Q128 120.0 148.0 120.0Q168 120.0 176 113.0L176 250Z
+  fill: surface
+  width: 0
+- path: M120 113.0Q128 120.0 148.0 120.0Q168 120.0 176 113.0
+  width: 1.4
+- line:
+  - - 120
+    - 28
+  - - 120
+    - 250
+  - - 176
+    - 250
+  - - 176
+    - 28
+  width: 1.8
+- line:
+  - - 102
+    - 258
+  - - 194
+    - 258
+  width: 2.2
+- line:
+  - - 120
+    - 250.0
+  - - 136
+    - 250.0
+  width: 1.3
+- text: '0'
+  at:
+  - 112
+  - 254.5
+  size: 12
+  anchor: end
+- line:
+  - - 120
+    - 240.0
+  - - 128
+    - 240.0
+  width: 1
+- line:
+  - - 120
+    - 230.0
+  - - 128
+    - 230.0
+  width: 1
+- line:
+  - - 120
+    - 220.0
+  - - 128
+    - 220.0
+  width: 1
+- line:
+  - - 120
+    - 210.0
+  - - 128
+    - 210.0
+  width: 1
+- line:
+  - - 120
+    - 200.0
+  - - 136
+    - 200.0
+  width: 1.3
+- text: '10'
+  at:
+  - 112
+  - 204.5
+  size: 12
+  anchor: end
+- line:
+  - - 120
+    - 190.0
+  - - 128
+    - 190.0
+  width: 1
+- line:
+  - - 120
+    - 180.0
+  - - 128
+    - 180.0
+  width: 1
+- line:
+  - - 120
+    - 170.0
+  - - 128
+    - 170.0
+  width: 1
+- line:
+  - - 120
+    - 160.0
+  - - 128
+    - 160.0
+  width: 1
+- line:
+  - - 120
+    - 150.0
+  - - 136
+    - 150.0
+  width: 1.3
+- text: '20'
+  at:
+  - 112
+  - 154.5
+  size: 12
+  anchor: end
+- line:
+  - - 120
+    - 140.0
+  - - 128
+    - 140.0
+  width: 1
+- line:
+  - - 120
+    - 130.0
+  - - 128
+    - 130.0
+  width: 1
+- line:
+  - - 120
+    - 120.0
+  - - 128
+    - 120.0
+  width: 1
+- line:
+  - - 120
+    - 110.0
+  - - 128
+    - 110.0
+  width: 1
+- line:
+  - - 120
+    - 100.0
+  - - 136
+    - 100.0
+  width: 1.3
+- text: '30'
+  at:
+  - 112
+  - 104.5
+  size: 12
+  anchor: end
+- line:
+  - - 120
+    - 90.0
+  - - 128
+    - 90.0
+  width: 1
+- line:
+  - - 120
+    - 80.0
+  - - 128
+    - 80.0
+  width: 1
+- line:
+  - - 120
+    - 70.0
+  - - 128
+    - 70.0
+  width: 1
+- line:
+  - - 120
+    - 60.0
+  - - 128
+    - 60.0
+  width: 1
+- line:
+  - - 120
+    - 50.0
+  - - 136
+    - 50.0
+  width: 1.3
+- text: '40'
+  at:
+  - 112
+  - 54.5
+  size: 12
+  anchor: end
+- text: мл
+  at:
+  - 112
+  - 24
+  size: 12
+  anchor: end
+  tone: muted
+- line:
+  - - 337
+    - 58.0
+  - - 148.0
+    - 120.0
+  width: 1.1
+  tone: muted
+  dashed: true
+- path: M339 58.0Q352 48.0 363 55.0M339 58.0Q352 68.0 363 61.0
+  width: 1.5
+  tone: default
+- dots:
+  - - 347
+    - 58.0
+  r: 3
+  tone: default
+- text: сверху — ошибка
+  at:
+  - 392
+  - 80.0
+  size: 12
+  anchor: end
+  tone: muted
+- line:
+  - - 337
+    - 120.0
+  - - 148.0
+    - 120.0
+  width: 1.5
+  tone: accent
+  dashed: false
+- path: M339 120.0Q352 110.0 363 117.0M339 120.0Q352 130.0 363 123.0
+  width: 1.5
+  tone: default
+- dots:
+  - - 347
+    - 120.0
+  r: 3
+  tone: default
+- text: на уровне — верно
+  at:
+  - 392
+  - 142.0
+  size: 12
+  anchor: end
+  tone: accent
+- line:
+  - - 337
+    - 182.0
+  - - 148.0
+    - 120.0
+  width: 1.1
+  tone: muted
+  dashed: true
+- path: M339 182.0Q352 172.0 363 179.0M339 182.0Q352 192.0 363 185.0
+  width: 1.5
+  tone: default
+- dots:
+  - - 347
+    - 182.0
+  r: 3
+  tone: default
+- text: снизу — ошибка
+  at:
+  - 392
+  - 204.0
+  size: 12
+  anchor: end
+  tone: muted
+- dots:
+  - - 148.0
+    - 120.0
+  r: 3
+  tone: accent
+- text: 'нижний край мениска: 26 мл'
+  at:
+  - 196
+  - 30
+  size: 13
+  anchor: start
+  tone: accent
