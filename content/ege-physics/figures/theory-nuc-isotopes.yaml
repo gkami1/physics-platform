@@ -1,0 +1,213 @@
+# quantum.nucleus 4.2: the three isotopes of hydrogen: protium (p), deuterium (p + n), tritium
+# (p + 2n), each with its one electron on a muted orbit; nuclei not to scale.
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot in the text colour, so the two differ in both themes
+# without painted colours; graphs have accent curves (a second curve dashed); guides and notes muted.
+kind: diagram
+size:
+- 400
+- 262
+items:
+- circle:
+  - 70
+  - 70
+  r: 50
+  width: 1
+  tone: muted
+  dashed: true
+- dots:
+  - - 111.0
+    - 98.7
+  r: 3.5
+- circle:
+  - 70.0
+  - 70.0
+  r: 10
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 70.0
+  - 74.2
+  size: 12.5
+- text: H
+  at:
+  - 64
+  - 158
+  size: 24
+  anchor: start
+  tone: default
+- text: '1'
+  at:
+  - 63
+  - 147.9
+  size: 14.9
+  anchor: end
+  tone: default
+- text: '1'
+  at:
+  - 63
+  - 163.3
+  size: 14.9
+  anchor: end
+  tone: default
+- text: протий
+  at:
+  - 70
+  - 184
+  size: 13
+  anchor: middle
+  tone: default
+- text: '*Z* = 1, *N* = 0'
+  at:
+  - 70
+  - 204
+  size: 13
+  anchor: middle
+  tone: default
+- circle:
+  - 200
+  - 70
+  r: 50
+  width: 1
+  tone: muted
+  dashed: true
+- dots:
+  - - 241.0
+    - 98.7
+  r: 3.5
+- circle:
+  - 190.2
+  - 70.0
+  r: 10
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 190.2
+  - 74.2
+  size: 12.5
+- circle:
+  - 209.8
+  - 70.0
+  r: 10
+  fill: solid
+  width: 1.6
+- text: H
+  at:
+  - 194
+  - 158
+  size: 24
+  anchor: start
+  tone: default
+- text: '2'
+  at:
+  - 193
+  - 147.9
+  size: 14.9
+  anchor: end
+  tone: default
+- text: '1'
+  at:
+  - 193
+  - 163.3
+  size: 14.9
+  anchor: end
+  tone: default
+- text: дейтерий
+  at:
+  - 200
+  - 184
+  size: 13
+  anchor: middle
+  tone: default
+- text: '*Z* = 1, *N* = 1'
+  at:
+  - 200
+  - 204
+  size: 13
+  anchor: middle
+  tone: default
+- circle:
+  - 330
+  - 70
+  r: 50
+  width: 1
+  tone: muted
+  dashed: true
+- dots:
+  - - 371.0
+    - 98.7
+  r: 3.5
+- circle:
+  - 320.2
+  - 64.3
+  r: 10
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 320.2
+  - 68.5
+  size: 12.5
+- circle:
+  - 339.8
+  - 64.3
+  r: 10
+  fill: solid
+  width: 1.6
+- circle:
+  - 330.0
+  - 81.3
+  r: 10
+  fill: solid
+  width: 1.6
+- text: H
+  at:
+  - 324
+  - 158
+  size: 24
+  anchor: start
+  tone: default
+- text: '3'
+  at:
+  - 323
+  - 147.9
+  size: 14.9
+  anchor: end
+  tone: default
+- text: '1'
+  at:
+  - 323
+  - 163.3
+  size: 14.9
+  anchor: end
+  tone: default
+- text: тритий
+  at:
+  - 330
+  - 184
+  size: 13
+  anchor: middle
+  tone: default
+- text: '*Z* = 1, *N* = 2'
+  at:
+  - 330
+  - 204
+  size: 13
+  anchor: middle
+  tone: default
+- text: один электрон у всех трёх — химически они одинаковы
+  at:
+  - 200
+  - 232
+  size: 12
+  anchor: middle
+  tone: muted
+- text: ядра на рисунке сильно увеличены
+  at:
+  - 200
+  - 250
+  size: 12
+  anchor: middle
+  tone: muted

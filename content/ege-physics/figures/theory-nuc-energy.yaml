@@ -1,0 +1,259 @@
+# quantum.nucleus 4.7: the same curve (AME2020); fission of U-238 into fragments near A = 90 and
+# 138 and fusion of ²H into ⁴He both climb the curve: the products are bound more strongly.
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot in the text colour, so the two differ in both themes
+# without painted colours; graphs have accent curves (a second curve dashed); guides and notes muted.
+kind: diagram
+size:
+- 400
+- 262
+items:
+- arrow:
+  - - 44
+    - 236
+  - - 390
+    - 236
+  width: 1.5
+- arrow:
+  - - 44
+    - 236
+  - - 44
+    - 14
+  width: 1.5
+- text: '*A*'
+  at:
+  - 388
+  - 254
+  anchor: end
+  size: 13
+- text: '*E*_св/*A*, МэВ'
+  at:
+  - 54
+  - 24
+  anchor: start
+  size: 13
+- text: '0'
+  at:
+  - 38
+  - 251
+  size: 12
+  anchor: end
+- line:
+  - - 113.0
+    - 236
+  - - 113.0
+    - 240
+  width: 1.2
+- text: '50'
+  at:
+  - 113.0
+  - 254
+  size: 12
+- line:
+  - - 182.0
+    - 236
+  - - 182.0
+    - 240
+  width: 1.2
+- text: '100'
+  at:
+  - 182.0
+  - 254
+  size: 12
+- line:
+  - - 251.0
+    - 236
+  - - 251.0
+    - 240
+  width: 1.2
+- text: '150'
+  at:
+  - 251.0
+  - 254
+  size: 12
+- line:
+  - - 320.0
+    - 236
+  - - 320.0
+    - 240
+  width: 1.2
+- text: '200'
+  at:
+  - 320.0
+  - 254
+  size: 12
+- line:
+  - - 40
+    - 192
+  - - 44
+    - 192
+  width: 1.2
+- text: '2'
+  at:
+  - 37
+  - 196
+  size: 12
+  anchor: end
+- line:
+  - - 44
+    - 192
+  - - 374
+    - 192
+  width: 0.6
+  tone: muted
+  dashed: true
+- line:
+  - - 40
+    - 148
+  - - 44
+    - 148
+  width: 1.2
+- text: '4'
+  at:
+  - 37
+  - 152
+  size: 12
+  anchor: end
+- line:
+  - - 44
+    - 148
+  - - 374
+    - 148
+  width: 0.6
+  tone: muted
+  dashed: true
+- line:
+  - - 40
+    - 104
+  - - 44
+    - 104
+  width: 1.2
+- text: '6'
+  at:
+  - 37
+  - 108
+  size: 12
+  anchor: end
+- line:
+  - - 44
+    - 104
+  - - 374
+    - 104
+  width: 0.6
+  tone: muted
+  dashed: true
+- line:
+  - - 40
+    - 60
+  - - 44
+    - 60
+  width: 1.2
+- text: '8'
+  at:
+  - 37
+  - 64
+  size: 12
+  anchor: end
+- line:
+  - - 44
+    - 60
+  - - 374
+    - 60
+  width: 0.6
+  tone: muted
+  dashed: true
+- path: M46.8 211.5L48.1 179.4L49.5 80.4L52.3 118.7L53.7 112.7L56.4 93.8L57.8 93.5L59.2 83.6L60.6 67L61.9
+    71.7L63.3 71.5L64.7 66.6L66.1 60.5L67.5 65.5L68.8 65.1L70.2 64.9L71.6 59.3L73 60.6L74.4 58.2L75.7
+    57.5L77.1 54.3L81.3 52.7L82.6 50.1L88.2 49.2L99.2 46.9L110.2 44.1L115.8 42.9L118.5 43.8L121.3 42.6L122.7
+    43.1L124 42.6L125.4 43.1L129.6 42.5L130.9 43.5L132.3 43.8L159.9 44.2L165.4 43.9L168.2 44.4L179.2 46L191.7
+    47.8L209.6 48.9L226.2 50.6L234.4 51.3L240 52.4L262 55.6L297.9 59.9L313.1 61.6L315.9 61.9L331 62.9L332.4
+    63.3L364.2 68.5L372.4 69.5
+  width: 2
+  tone: accent
+- line:
+  - - 154.4
+    - 69.5
+  - - 372.4
+    - 69.5
+  width: 1
+  tone: muted
+  dashed: true
+- arrow:
+  - - 168.2
+    - 69.5
+  - - 168.2
+    - 48.4
+  width: 1.6
+- arrow:
+  - - 234.4
+    - 69.5
+  - - 234.4
+    - 55.3
+  width: 1.6
+- dots:
+  - - 372.4
+    - 69.5
+  - - 168.2
+    - 44.4
+  - - 234.4
+    - 51.3
+  r: 3.2
+- text: 'деление тяжёлого ядра:'
+  at:
+  - 166
+  - 89.5
+  size: 13
+  anchor: middle
+  tone: default
+- text: осколки выше на кривой
+  at:
+  - 166
+  - 105.5
+  size: 13
+  anchor: middle
+  tone: default
+- path: M51.8 211.5L55 209.5L58 207.4L60.8 205.2L63.5 203L66.1 200.8L68.4 198.5L70.7 196.1L72.7 193.7L74.6
+    191.2L76.3 188.6L77.9 186L79.3 183.4L80.6 180.6L81.7 177.9L82.6 175L83.4 172.1L84.1 169.2L84.5 166.2L84.8
+    163.1L85 160L85 156.8L84.8 153.6L84.5 150.3L84 146.9L83.3 143.5L82.5 140L81.5 136.5L80.4 132.9L79.1
+    129.3L77.7 125.6L76.1 121.8L74.3 118L72.4 114.1L70.3 110.2L68.1 106.2L65.7 102.2
+  width: 1.6
+- arrow:
+  - - 69.4
+    - 108.6
+  - - 54.5
+    - 85.4
+  width: 1.6
+- dots:
+  - - 46.8
+    - 211.5
+  - - 49.5
+    - 80.4
+  r: 3.2
+- text: ^{2}H
+  at:
+  - 54.8
+  - 223.5
+  size: 12
+  anchor: start
+  tone: default
+- text: ^{238}U
+  at:
+  - 368.4
+  - 91.5
+  size: 12
+  anchor: middle
+  tone: default
+- text: синтез лёгких ядер
+  at:
+  - 94.8
+  - 165.6
+  size: 13
+  anchor: start
+  tone: default
+- text: продукты связаны прочнее — энергия выделяется
+  at:
+  - 226.2
+  - 134.8
+  size: 12
+  anchor: middle
+  tone: muted

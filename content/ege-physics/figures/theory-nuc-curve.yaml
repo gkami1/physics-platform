@@ -1,0 +1,314 @@
+# quantum.nucleus 4.6: the binding energy per nucleon against A, computed from AME2020 atomic
+# masses (nuc_data.py: stable nuclei, plus U-238; one nucleus per A) with the exact m_p, m_n,
+# m_e and 931,494 МэВ: ⁵⁶Fe 8.790, ²³⁸U 7.570 МэВ; the peak (⁶²Ni, ⁵⁶Fe, ⁵⁸Fe) near iron.
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot in the text colour, so the two differ in both themes
+# without painted colours; graphs have accent curves (a second curve dashed); guides and notes muted.
+kind: diagram
+size:
+- 400
+- 262
+items:
+- arrow:
+  - - 44
+    - 236
+  - - 390
+    - 236
+  width: 1.5
+- arrow:
+  - - 44
+    - 236
+  - - 44
+    - 14
+  width: 1.5
+- text: '*A*'
+  at:
+  - 388
+  - 254
+  anchor: end
+  size: 13
+- text: '*E*_св/*A*, МэВ'
+  at:
+  - 54
+  - 24
+  anchor: start
+  size: 13
+- text: '0'
+  at:
+  - 38
+  - 251
+  size: 12
+  anchor: end
+- line:
+  - - 113.0
+    - 236
+  - - 113.0
+    - 240
+  width: 1.2
+- text: '50'
+  at:
+  - 113.0
+  - 254
+  size: 12
+- line:
+  - - 182.0
+    - 236
+  - - 182.0
+    - 240
+  width: 1.2
+- text: '100'
+  at:
+  - 182.0
+  - 254
+  size: 12
+- line:
+  - - 251.0
+    - 236
+  - - 251.0
+    - 240
+  width: 1.2
+- text: '150'
+  at:
+  - 251.0
+  - 254
+  size: 12
+- line:
+  - - 320.0
+    - 236
+  - - 320.0
+    - 240
+  width: 1.2
+- text: '200'
+  at:
+  - 320.0
+  - 254
+  size: 12
+- line:
+  - - 40
+    - 192
+  - - 44
+    - 192
+  width: 1.2
+- text: '2'
+  at:
+  - 37
+  - 196
+  size: 12
+  anchor: end
+- line:
+  - - 44
+    - 192
+  - - 374
+    - 192
+  width: 0.6
+  tone: muted
+  dashed: true
+- line:
+  - - 40
+    - 148
+  - - 44
+    - 148
+  width: 1.2
+- text: '4'
+  at:
+  - 37
+  - 152
+  size: 12
+  anchor: end
+- line:
+  - - 44
+    - 148
+  - - 374
+    - 148
+  width: 0.6
+  tone: muted
+  dashed: true
+- line:
+  - - 40
+    - 104
+  - - 44
+    - 104
+  width: 1.2
+- text: '6'
+  at:
+  - 37
+  - 108
+  size: 12
+  anchor: end
+- line:
+  - - 44
+    - 104
+  - - 374
+    - 104
+  width: 0.6
+  tone: muted
+  dashed: true
+- line:
+  - - 40
+    - 60
+  - - 44
+    - 60
+  width: 1.2
+- text: '8'
+  at:
+  - 37
+  - 64
+  size: 12
+  anchor: end
+- line:
+  - - 44
+    - 60
+  - - 374
+    - 60
+  width: 0.6
+  tone: muted
+  dashed: true
+- path: M46.8 211.5L48.1 179.4L49.5 80.4L52.3 118.7L53.7 112.7L56.4 93.8L57.8 93.5L59.2 83.6L60.6 67L61.9
+    71.7L63.3 71.5L64.7 66.6L66.1 60.5L67.5 65.5L68.8 65.1L70.2 64.9L71.6 59.3L73 60.6L74.4 58.2L75.7
+    57.5L77.1 54.3L81.3 52.7L82.6 50.1L88.2 49.2L99.2 46.9L110.2 44.1L115.8 42.9L118.5 43.8L121.3 42.6L122.7
+    43.1L124 42.6L125.4 43.1L129.6 42.5L130.9 43.5L132.3 43.8L159.9 44.2L165.4 43.9L168.2 44.4L179.2 46L191.7
+    47.8L209.6 48.9L226.2 50.6L234.4 51.3L240 52.4L262 55.6L297.9 59.9L313.1 61.6L315.9 61.9L331 62.9L332.4
+    63.3L364.2 68.5L372.4 69.5
+  width: 2
+  tone: accent
+- dots:
+  - - 46.8
+    - 211.5
+  - - 48.1
+    - 179.4
+  - - 49.5
+    - 80.4
+  - - 52.3
+    - 118.7
+  - - 53.7
+    - 112.7
+  - - 56.4
+    - 93.8
+  - - 57.8
+    - 93.5
+  - - 59.2
+    - 83.6
+  - - 60.6
+    - 67.0
+  - - 61.9
+    - 71.7
+  - - 63.3
+    - 71.5
+  - - 64.7
+    - 66.6
+  - - 66.1
+    - 60.5
+  - - 67.5
+    - 65.5
+  - - 68.8
+    - 65.1
+  - - 70.2
+    - 64.9
+  - - 71.6
+    - 59.3
+  - - 73.0
+    - 60.6
+  - - 74.4
+    - 58.2
+  - - 75.7
+    - 57.5
+  - - 77.1
+    - 54.3
+  - - 81.3
+    - 52.7
+  - - 82.6
+    - 50.1
+  - - 88.2
+    - 49.2
+  - - 99.2
+    - 46.9
+  - - 110.2
+    - 44.1
+  - - 115.8
+    - 42.9
+  - - 118.5
+    - 43.8
+  - - 121.3
+    - 42.6
+  - - 122.7
+    - 43.1
+  - - 124.0
+    - 42.6
+  - - 125.4
+    - 43.1
+  - - 129.6
+    - 42.5
+  - - 130.9
+    - 43.5
+  - - 132.3
+    - 43.8
+  - - 159.9
+    - 44.2
+  - - 165.4
+    - 43.9
+  - - 168.2
+    - 44.4
+  - - 179.2
+    - 46.0
+  - - 191.7
+    - 47.8
+  - - 209.6
+    - 48.9
+  - - 226.2
+    - 50.6
+  - - 234.4
+    - 51.3
+  - - 240.0
+    - 52.4
+  - - 262.0
+    - 55.6
+  - - 297.9
+    - 59.9
+  - - 313.1
+    - 61.6
+  - - 315.9
+    - 61.9
+  - - 331.0
+    - 62.9
+  - - 332.4
+    - 63.3
+  - - 364.2
+    - 68.5
+  - - 372.4
+    - 69.5
+  r: 2.6
+- text: ^{2}H
+  at:
+  - 54.8
+  - 221.5
+  size: 12
+  anchor: start
+  tone: default
+- text: ^{4}He
+  at:
+  - 65.5
+  - 92.4
+  size: 12
+  anchor: start
+  tone: default
+- text: ^{56}Fe ≈ 8,8
+  at:
+  - 113.0
+  - 64.6
+  size: 12
+  anchor: start
+  tone: default
+- text: ^{238}U ≈ 7,6
+  at:
+  - 366.4
+  - 91.5
+  size: 12
+  anchor: middle
+  tone: default
+- text: самые прочные ядра — около железа
+  at:
+  - 209.6
+  - 134.8
+  size: 12
+  anchor: middle
+  tone: muted

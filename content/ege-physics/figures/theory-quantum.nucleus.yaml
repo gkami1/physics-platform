@@ -1,48 +1,201 @@
-# quantum.nucleus: nucleons in a helium-4 nucleus
+# quantum.nucleus 4.3 (redrawn from the ladder figure): the helium-4 nucleus, two protons and
+# two neutrons; force-tone arrows: the Coulomb repulsion of the protons; muted dashed lines: the
+# nuclear attraction between every pair of neighbours.
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot in the text colour, so the two differ in both themes
+# without painted colours; graphs have accent curves (a second curve dashed); guides and notes muted.
 kind: diagram
-size: [400, 220]
+size:
+- 400
+- 244
 items:
-- circle: [110, 95]
-  r: 18
-  fill: solid
-  tone: force
-- circle: [146, 95]
-  r: 18
+- line:
+  - - 92.3
+    - 84.3
+  - - 147.7
+    - 84.3
+  width: 1.2
+  tone: muted
+  dashed: true
+- line:
+  - - 92.3
+    - 84.3
+  - - 92.3
+    - 139.7
+  width: 1.2
+  tone: muted
+  dashed: true
+- line:
+  - - 147.7
+    - 139.7
+  - - 147.7
+    - 84.3
+  width: 1.2
+  tone: muted
+  dashed: true
+- line:
+  - - 147.7
+    - 139.7
+  - - 92.3
+    - 139.7
+  width: 1.2
+  tone: muted
+  dashed: true
+- line:
+  - - 92.3
+    - 84.3
+  - - 147.7
+    - 139.7
+  width: 1.2
+  tone: muted
+  dashed: true
+- line:
+  - - 147.7
+    - 84.3
+  - - 92.3
+    - 139.7
+  width: 1.2
+  tone: muted
+  dashed: true
+- circle:
+  - 92.3
+  - 84.3
+  r: 20.0
   fill: surface
-- circle: [110, 131]
-  r: 18
+  width: 1.6
+- text: +
+  at:
+  - 92.3
+  - 92.7
+  size: 25.0
+- circle:
+  - 147.7
+  - 84.3
+  r: 20.0
+  fill: solid
+  width: 1.6
+- circle:
+  - 92.3
+  - 139.7
+  r: 20.0
+  fill: solid
+  width: 1.6
+- circle:
+  - 147.7
+  - 139.7
+  r: 20.0
   fill: surface
-- circle: [146, 131]
-  r: 18
-  fill: solid
-  tone: force
+  width: 1.6
 - text: +
-  at: [110, 101]
-  size: 16
-- text: +
-  at: [146, 137]
-  size: 16
-- circle: [225, 70]
-  r: 9
-  fill: solid
+  at:
+  - 147.7
+  - 148.1
+  size: 25.0
+- arrow:
+  - - 76.0
+    - 68.0
+  - - 52.7
+    - 44.7
+  width: 2
   tone: force
+- arrow:
+  - - 164.0
+    - 156.0
+  - - 187.3
+    - 179.3
+  width: 2
+  tone: force
+- text: кулоновское
+  at:
+  - 230
+  - 40
+  size: 12
+  anchor: start
+  tone: force
+- text: отталкивание протонов
+  at:
+  - 230
+  - 54
+  size: 12
+  anchor: start
+  tone: force
+- text: ядерное притяжение
+  at:
+  - 230
+  - 96
+  size: 12
+  anchor: start
+  tone: muted
+- text: между всеми соседями
+  at:
+  - 230
+  - 110
+  size: 12
+  anchor: start
+  tone: muted
+- line:
+  - - 226
+    - 104
+  - - 126.0
+    - 112.0
+  width: 1
+  tone: muted
+- circle:
+  - 236
+  - 150
+  r: 8
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 236
+  - 153.4
+  size: 10.0
 - text: протон, заряд +*e*
-  at: [243, 75]
+  at:
+  - 250
+  - 154.5
+  size: 12
   anchor: start
-  size: 13
-- circle: [225, 104]
-  r: 9
-  fill: surface
-- text: нейтрон, без заряда
-  at: [243, 109]
+  tone: default
+- circle:
+  - 236
+  - 172
+  r: 8
+  fill: solid
+  width: 1.6
+- text: нейтрон, заряда нет
+  at:
+  - 250
+  - 176.5
+  size: 12
   anchor: start
+  tone: default
+- text: He
+  at:
+  - 100
+  - 228
+  size: 24
+  anchor: start
+  tone: default
+- text: '4'
+  at:
+  - 99
+  - 217.9
+  size: 14.9
+  anchor: end
+  tone: default
+- text: '2'
+  at:
+  - 99
+  - 233.3
+  size: 14.9
+  anchor: end
+  tone: default
+- text: 'ядро гелия-4: *Z* = 2, *N* = 2'
+  at:
+  - 140
+  - 226
   size: 13
-- text: 'ядро гелия ^{4}He: *Z* = 2, *A* = 4'
-  at: [128, 190]
-  size: 14
-- text: нейтронов *N* = *A* − *Z*
-  at: [300, 160]
-  size: 13
-- text: '*E*_св = Δ*m**c*^{2}'
-  at: [300, 190]
-  size: 14
+  anchor: start
+  tone: default

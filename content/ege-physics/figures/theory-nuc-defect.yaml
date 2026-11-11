@@ -1,0 +1,224 @@
+# quantum.nucleus 4.4: the mass defect of lithium-7 to scale (the bars start at 7 а.е.м.):
+# 3m_p + 4m_n = 7.05648 with m_p = 1,00728 and m_n = 1,00866 а.е.м.; the nucleus
+# M = M_atom − 3m_e = 7.01436 а.е.м. (AME2020); Δm = 0.04212 а.е.м.
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot in the text colour, so the two differ in both themes
+# without painted colours; graphs have accent curves (a second curve dashed); guides and notes muted.
+kind: diagram
+size:
+- 400
+- 214
+items:
+- circle:
+  - 22
+  - 46
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 22
+  - 49.8
+  size: 11.2
+- circle:
+  - 48
+  - 46
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 74
+  - 46
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 74
+  - 49.8
+  size: 11.2
+- circle:
+  - 100
+  - 46
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 22
+  - 72
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 22
+  - 75.8
+  size: 11.2
+- circle:
+  - 48
+  - 72
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 74
+  - 72
+  r: 9
+  fill: solid
+  width: 1.6
+- text: по отдельности
+  at:
+  - 62
+  - 108
+  size: 12
+  anchor: middle
+  tone: default
+- rect:
+  - 150.0
+  - 44
+  - 216.5
+  - 24
+  fill: surface
+  width: 1.4
+- text: 7,05648 а.е.м.
+  at:
+  - 360.5
+  - 61
+  size: 12
+  anchor: end
+  tone: default
+- text: 3*m*_p + 4*m*_n
+  at:
+  - 156.0
+  - 61
+  size: 12
+  anchor: start
+  tone: default
+- circle:
+  - 62.0
+  - 160.0
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 62.0
+  - 163.8
+  size: 11.2
+- circle:
+  - 79.6
+  - 160.0
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 70.8
+  - 175.3
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 70.8
+  - 179.1
+  size: 11.2
+- circle:
+  - 70.8
+  - 144.7
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 53.2
+  - 175.3
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 53.2
+  - 144.7
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 53.2
+  - 148.5
+  size: 11.2
+- circle:
+  - 44.4
+  - 160.0
+  r: 9
+  fill: solid
+  width: 1.6
+- text: ядро лития-7
+  at:
+  - 62
+  - 200
+  size: 12
+  anchor: middle
+  tone: default
+- rect:
+  - 150.0
+  - 148
+  - 55.0
+  - 24
+  fill: surface
+  width: 1.4
+- text: 7,01436 а.е.м.
+  at:
+  - 211.0
+  - 165
+  size: 12
+  anchor: start
+  tone: default
+- line:
+  - - 205.0
+    - 74
+  - - 205.0
+    - 142
+  width: 1
+  tone: muted
+  dashed: true
+- line:
+  - - 366.5
+    - 74
+  - - 366.5
+    - 142
+  width: 1
+  tone: muted
+  dashed: true
+- arrow:
+  - - 285.8
+    - 108
+  - - 205.0
+    - 108
+  width: 1.5
+  tone: accent
+- arrow:
+  - - 285.8
+    - 108
+  - - 366.5
+    - 108
+  width: 1.5
+  tone: accent
+- text: Δ*m* = 0,04212 а.е.м.
+  at:
+  - 285.8
+  - 100
+  size: 12
+  anchor: middle
+  tone: accent
+- line:
+  - - 150.0
+    - 36
+  - - 150.0
+    - 182
+  width: 1.4
+- text: шкала начинается с 7 а.е.м.
+  at:
+  - 150.0
+  - 206
+  size: 11
+  anchor: start
+  tone: muted
