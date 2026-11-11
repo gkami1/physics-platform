@@ -270,6 +270,7 @@ class AtomSim extends HTMLElement {
     const low = Number(this.getAttribute('lower'));
     if (UPPERS.includes(up)) this.upper = up;
     if (LOWERS.includes(low) && low < this.upper) this.lower = low;
+    else if (this.mode === 'shine' && !this.hasAttribute('lower')) this.lower = 1; // the ground state
     const e = Number((this.getAttribute('energy') ?? '').replace(',', '.'));
     if (e > 0) this.energy = this.nearest(e);
     this.replaceChildren(); // drop the no-JS fallback text
@@ -523,8 +524,9 @@ class AtomSim extends HTMLElement {
         parts.push(...this.arrow(x, Y(level(a)), Y(level(b)), isChosen ? 'atm-accent' : 'atm-faint'));
         marks.push(wavelengthNm(photonEv(a, b)));
         if (isChosen) {
-          const ym = (Y(level(a)) + Y(level(b))) / 2;
-          parts.push(...this.packet(x + 6, ym, x + 50, ym - 18));
+          // the photon leaves through open space: just below the lower level, or above n = 1
+          const ym = b >= 2 ? Y(level(b)) + 18 : Y(level(1)) - 30;
+          parts.push(...this.packet(x + 6, ym, x + 52, ym + 10));
         }
       });
       lineNm = wavelengthNm(photonEv(this.upper, this.lower));
