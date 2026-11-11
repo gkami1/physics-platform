@@ -1,0 +1,256 @@
+# quantum.atom 3.7: hydrogen excited to n = 3 (levels to scale, 12 px per эВ) gives three lines:
+# 3→2, 3→1 and 2→1 (accent arrows), marked on a vertical wavelength scale 0…800 нм (ultraviolet
+# muted, the visible band as lettered surface cells). hc = 1239,84 эВ·нм: 3→2: 656.4 нм; 3→1: 102.6 нм; 2→1: 121.6 нм.
+# Colours (the general convention): objects (nucleus, electrons, foil, levels) in the text colour
+# with a surface fill; light as accent photon packets, as in theory-phot-* and theory-pe-*;
+# electron velocities in the vel tone; guides and notes muted. A colour of light is named, never
+# painted: spectra are lettered surface cells with labelled lines.
+kind: diagram
+size:
+- 400
+- 256
+items:
+- line:
+  - - 60.0
+    - 30.0
+  - - 200.0
+    - 30.0
+  width: 1
+  tone: muted
+  dashed: true
+- text: '0'
+  at:
+  - 54.0
+  - 34.0
+  size: 11
+  anchor: end
+  tone: muted
+- line:
+  - - 60.0
+    - 193.2
+  - - 200.0
+    - 193.2
+  width: 1.6
+- text: '*n* = 1'
+  at:
+  - 54.0
+  - 197.2
+  size: 11
+  anchor: end
+  tone: default
+- line:
+  - - 60.0
+    - 70.8
+  - - 200.0
+    - 70.8
+  width: 1.6
+- text: '*n* = 2'
+  at:
+  - 54.0
+  - 74.8
+  size: 11
+  anchor: end
+  tone: default
+- line:
+  - - 60.0
+    - 48.1
+  - - 200.0
+    - 48.1
+  width: 1.6
+- text: '*n* = 3'
+  at:
+  - 54.0
+  - 52.1
+  size: 11
+  anchor: end
+  tone: default
+- arrow:
+  - - 92.0
+    - 48.1
+  - - 92.0
+    - 70.8
+  tone: accent
+  width: 1.8
+- text: 3→2
+  at:
+  - 92.0
+  - 209.2
+  size: 11
+  anchor: middle
+  tone: default
+- arrow:
+  - - 128.0
+    - 48.1
+  - - 128.0
+    - 193.2
+  tone: accent
+  width: 1.8
+- text: 3→1
+  at:
+  - 128.0
+  - 209.2
+  size: 11
+  anchor: middle
+  tone: default
+- arrow:
+  - - 164.0
+    - 70.8
+  - - 164.0
+    - 193.2
+  tone: accent
+  width: 1.8
+- text: 2→1
+  at:
+  - 164.0
+  - 209.2
+  size: 11
+  anchor: middle
+  tone: default
+- rect:
+  - 290.0
+  - 119.2
+  - 22
+  - 80.8
+  fill: surface
+  width: 1
+  tone: muted
+- text: УФ
+  at:
+  - 301.0
+  - 143.6
+  size: 11
+  anchor: middle
+  tone: muted
+- rect:
+  - 290.0
+  - 106.5
+  - 22
+  - 12.7
+  fill: surface
+  width: 1
+- text: ф
+  at:
+  - 301.0
+  - 116.8
+  size: 10
+  anchor: middle
+  tone: default
+- rect:
+  - 290.0
+  - 96.9
+  - 22
+  - 9.6
+  fill: surface
+  width: 1
+- rect:
+  - 290.0
+  - 93.8
+  - 22
+  - 3.1
+  fill: surface
+  width: 1
+- rect:
+  - 290.0
+  - 79.9
+  - 22
+  - 13.9
+  fill: surface
+  width: 1
+- text: з
+  at:
+  - 301.0
+  - 90.8
+  size: 10
+  anchor: middle
+  tone: default
+- rect:
+  - 290.0
+  - 74.6
+  - 22
+  - 5.3
+  fill: surface
+  width: 1
+- rect:
+  - 290.0
+  - 67.2
+  - 22
+  - 7.4
+  fill: surface
+  width: 1
+- rect:
+  - 290.0
+  - 38.5
+  - 22
+  - 28.7
+  fill: surface
+  width: 1
+- text: к
+  at:
+  - 301.0
+  - 56.9
+  size: 10
+  anchor: middle
+  tone: default
+- line:
+  - - 286.0
+    - 60.5
+  - - 316.0
+    - 60.5
+  tone: accent
+  width: 2.4
+- line:
+  - - 286.0
+    - 178.2
+  - - 316.0
+    - 178.2
+  tone: accent
+  width: 2.4
+- line:
+  - - 286.0
+    - 174.2
+  - - 316.0
+    - 174.2
+  tone: accent
+  width: 2.4
+- text: 656 нм
+  at:
+  - 320.0
+  - 64.5
+  size: 11
+  anchor: start
+  tone: default
+- text: 122 нм
+  at:
+  - 320.0
+  - 172.2
+  size: 11
+  anchor: start
+  tone: default
+- text: 103 нм
+  at:
+  - 320.0
+  - 188.2
+  size: 11
+  anchor: start
+  tone: default
+- text: '*λ*'
+  at:
+  - 301.0
+  - 22.0
+  size: 12
+  anchor: middle
+  tone: default
+- text: больше прыжок —
+  at:
+  - 130
+  - 234
+  size: 12
+  anchor: middle
+  tone: muted
+- text: короче волна
+  at:
+  - 130
+  - 248
+  size: 12
+  anchor: middle
+  tone: muted

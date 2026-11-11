@@ -1,0 +1,223 @@
+# quantum.atom 3.6: hydrogen in the ground state (levels to scale, 17 px per эВ, E = 0 muted dashed)
+# meets three photons (accent packets). The accent arrow from n = 1 is each photon's energy: 10,2 эВ
+# ends exactly on n = 2 (absorbed); 11 эВ ends between levels (dashed: not absorbed); 15 эВ passes
+# E = 0 (ionisation), the 1,4 эВ above zero is the free electron's kinetic energy (vel arrow).
+# Colours (the general convention): objects (nucleus, electrons, foil, levels) in the text colour
+# with a surface fill; light as accent photon packets, as in theory-phot-* and theory-pe-*;
+# electron velocities in the vel tone; guides and notes muted. A colour of light is named, never
+# painted: spectra are lettered surface cells with labelled lines.
+kind: diagram
+size:
+- 400
+- 360
+items:
+- line:
+  - - 60.0
+    - 52.0
+  - - 380.0
+    - 52.0
+  width: 1
+  tone: muted
+  dashed: true
+- text: '0'
+  at:
+  - 54.0
+  - 56.0
+  size: 11
+  anchor: end
+  tone: muted
+- line:
+  - - 60.0
+    - 283.2
+  - - 380.0
+    - 283.2
+  width: 1.6
+- text: '*n* = 1'
+  at:
+  - 54.0
+  - 287.2
+  size: 11
+  anchor: end
+  tone: default
+- line:
+  - - 60.0
+    - 109.8
+  - - 380.0
+    - 109.8
+  width: 1.6
+- text: '*n* = 2'
+  at:
+  - 54.0
+  - 113.8
+  size: 11
+  anchor: end
+  tone: default
+- line:
+  - - 60.0
+    - 77.7
+  - - 380.0
+    - 77.7
+  width: 1.6
+- text: '*n* = 3'
+  at:
+  - 54.0
+  - 81.7
+  size: 11
+  anchor: end
+  tone: default
+- line:
+  - - 60.0
+    - 66.5
+  - - 380.0
+    - 66.5
+  width: 1.6
+- text: '*n* = 4'
+  at:
+  - 54.0
+  - 70.5
+  size: 11
+  anchor: end
+  tone: default
+- path: M74 317.2L76.3 318.7L77.9 319.2L78.5 318.3L78 316L77.3 313.2L76.8 310.9L77.4 309.9L79 310.4L81.3
+    311.9L83.6 313.4L85.2 314L85.8 313L85.3 310.7L84.6 307.9L84.1 305.6L84.7 304.6L86.3 305.2L88.6 306.7L90.9
+    308.2L92.5 308.7L93.1 307.7L92.6 305.4L91.9 302.6L91.4 300.4L92 299.4L93.6 299.9
+  tone: accent
+  width: 1.6
+- arrow:
+  - - 95.1
+    - 302.0
+  - - 113.8
+    - 288.5
+  tone: accent
+  width: 1.4
+- arrow:
+  - - 120.0
+    - 283.2
+  - - 120.0
+    - 109.8
+  tone: accent
+  width: 2
+- text: 10,2 эВ
+  at:
+  - 126.0
+  - 226.5
+  size: 12
+  anchor: start
+  tone: accent
+- text: 'поглощён:'
+  at:
+  - 120.0
+  - 333.2
+  size: 12
+  anchor: middle
+  tone: default
+- text: ровно до *n* = 2
+  at:
+  - 120.0
+  - 347.2
+  size: 12
+  anchor: middle
+  tone: default
+- path: M179 317.2L181.3 318.7L182.9 319.2L183.5 318.3L183 316L182.3 313.2L181.8 310.9L182.4 309.9L184
+    310.4L186.3 311.9L188.6 313.4L190.2 314L190.8 313L190.3 310.7L189.6 307.9L189.1 305.6L189.7 304.6L191.3
+    305.2L193.6 306.7L195.9 308.2L197.5 308.7L198.1 307.7L197.6 305.4L196.9 302.6L196.4 300.4L197 299.4L198.6
+    299.9
+  tone: accent
+  width: 1.6
+- arrow:
+  - - 200.1
+    - 302.0
+  - - 218.8
+    - 288.5
+  tone: accent
+  width: 1.4
+- arrow:
+  - - 225.0
+    - 283.2
+  - - 225.0
+    - 96.2
+  tone: accent
+  width: 2
+  dashed: true
+- text: 11 эВ
+  at:
+  - 231.0
+  - 219.7
+  size: 12
+  anchor: start
+  tone: accent
+- text: 'не поглощён:'
+  at:
+  - 225.0
+  - 333.2
+  size: 12
+  anchor: middle
+  tone: default
+- text: уровня нет
+  at:
+  - 225.0
+  - 347.2
+  size: 12
+  anchor: middle
+  tone: default
+- path: M284 317.2L286.3 318.7L287.9 319.2L288.5 318.3L288 316L287.3 313.2L286.8 310.9L287.4 309.9L289
+    310.4L291.3 311.9L293.6 313.4L295.2 314L295.8 313L295.3 310.7L294.6 307.9L294.1 305.6L294.7 304.6L296.3
+    305.2L298.6 306.7L300.9 308.2L302.5 308.7L303.1 307.7L302.6 305.4L301.9 302.6L301.4 300.4L302 299.4L303.6
+    299.9
+  tone: accent
+  width: 1.6
+- arrow:
+  - - 305.1
+    - 302.0
+  - - 323.8
+    - 288.5
+  tone: accent
+  width: 1.4
+- arrow:
+  - - 330.0
+    - 283.2
+  - - 330.0
+    - 28.2
+  tone: accent
+  width: 2
+- text: 15 эВ
+  at:
+  - 336.0
+  - 185.7
+  size: 12
+  anchor: start
+  tone: accent
+- text: ионизация
+  at:
+  - 330.0
+  - 333.2
+  size: 12
+  anchor: middle
+  tone: default
+- line:
+  - - 322.0
+    - 52.0
+  - - 338.0
+    - 52.0
+  width: 1.4
+- arrow:
+  - - 334.0
+    - 28.2
+  - - 370.0
+    - 12.2
+  tone: vel
+  width: 1.8
+- text: '*E*к = 1,4 эВ'
+  at:
+  - 324.0
+  - 22.2
+  size: 12
+  anchor: end
+  tone: vel
+- text: электрон свободен
+  at:
+  - 324.0
+  - 36.2
+  size: 11
+  anchor: end
+  tone: muted

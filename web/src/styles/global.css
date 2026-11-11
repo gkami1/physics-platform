@@ -4718,3 +4718,162 @@ task-answer .final {
   color: var(--accent);
   font-weight: 600;
 }
+
+/* <pp-atom>: the hydrogen atom by Bohr (lessons 3.5 and 3.7 of «Квантовая физика»). Levels and axis
+   in the text colour, the chosen levels thicker; transitions muted, the chosen one and photons accent;
+   the free electron vel; the spectrum strip as lettered surface cells (a colour is named, never
+   painted), the Balmer lines in the text colour; labels with a halo in the panel colour. */
+.atm-chips legend {
+  width: auto;
+  margin-right: 0.4rem;
+}
+
+.atm-axis,
+.atm-level {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.4;
+}
+
+.atm-axis-tip {
+  fill: var(--text);
+}
+
+.atm-level.atm-chosen {
+  stroke-width: 3;
+}
+
+.atm-guide {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.2;
+  stroke-dasharray: 5 4;
+}
+
+.atm-guide.atm-chosen {
+  stroke: var(--text);
+  stroke-width: 2.4;
+}
+
+.atm-hit {
+  fill: transparent;
+  cursor: pointer;
+}
+
+.atm-faint {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.2;
+}
+
+.atm-faint-tip {
+  fill: var(--muted);
+}
+
+.atm-accent,
+.atm-wave,
+.atm-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.4;
+}
+
+.atm-wave {
+  stroke-width: 1.8;
+}
+
+.atm-line {
+  stroke-width: 3;
+}
+
+.atm-accent-tip {
+  fill: var(--accent);
+}
+
+.atm-dash {
+  stroke-dasharray: 6 4;
+}
+
+.atm-vel {
+  fill: none;
+  stroke: var(--ok);
+  stroke-width: 2;
+}
+
+.atm-zone {
+  fill: var(--surface);
+  stroke: var(--muted);
+  stroke-width: 1;
+}
+
+.atm-cell {
+  fill: var(--surface-2, var(--surface));
+  stroke: var(--text);
+  stroke-width: 1;
+}
+
+.atm-balmer {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 2;
+}
+
+.atm-mark {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 2;
+}
+
+.sim-svg .atm-label {
+  fill: var(--text);
+  font-size: 15px;
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.sim-svg .atm-small {
+  font-size: 13px;
+}
+
+.sim-svg .atm-tiny {
+  font-size: 11px;
+}
+
+.sim-svg .atm-muted {
+  fill: var(--muted);
+}
+
+.sim-svg .atm-accent-text {
+  fill: var(--accent);
+}
+
+.sim-svg .atm-vel-text {
+  fill: var(--ok);
+}
+
+.atm-table {
+  width: 100%;
+  margin: 0.75rem 0 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.atm-table th,
+.atm-table td {
+  padding: 0.2rem 0.35rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+.atm-table th {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.atm-table tr.atm-main td {
+  color: var(--accent);
+  font-weight: 600;
+}

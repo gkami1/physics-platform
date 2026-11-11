@@ -1,70 +1,304 @@
-# quantum.atom: hydrogen energy levels (schematic); emission when the atom drops a level
+# quantum.atom 3.5 (redrawn from the ladder figure): the levels of hydrogen to scale, E_n = −13,6/n²
+# эВ, 20 px per эВ, n = 1…6 and ∞ (E = 0, muted dashed). Accent arrows: transitions down to n = 1
+# (Lyman, ultraviolet), to n = 2 (Balmer, from n = 3…6 all visible) and to n = 3 (Paschen,
+# infrared).
+# Colours (the general convention): objects (nucleus, electrons, foil, levels) in the text colour
+# with a surface fill; light as accent photon packets, as in theory-phot-* and theory-pe-*;
+# electron velocities in the vel tone; guides and notes muted. A colour of light is named, never
+# painted: spectra are lettered surface cells with labelled lines.
 kind: diagram
-size: [400, 260]
+size:
+- 400
+- 340
 items:
-- line: [[90, 40], [300, 40]]
-  dashed: true
+- arrow:
+  - - 46
+    - 324.0
+  - - 46
+    - 18.0
+  width: 1.3
+- text: '*E*, эВ'
+  at:
+  - 52
+  - 22.0
+  size: 12
+  anchor: start
+  tone: default
+- line:
+  - - 42
+    - 40.0
+  - - 46
+    - 40.0
+  width: 1.2
+- text: '0'
+  at:
+  - 38
+  - 44.0
+  size: 11
+  anchor: end
+  tone: default
+- line:
+  - - 42
+    - 120.0
+  - - 46
+    - 120.0
+  width: 1.2
+- text: −4
+  at:
+  - 38
+  - 124.0
+  size: 11
+  anchor: end
+  tone: default
+- line:
+  - - 42
+    - 200.0
+  - - 46
+    - 200.0
+  width: 1.2
+- text: −8
+  at:
+  - 38
+  - 204.0
+  size: 11
+  anchor: end
+  tone: default
+- line:
+  - - 42
+    - 280.0
+  - - 46
+    - 280.0
+  width: 1.2
+- text: −12
+  at:
+  - 38
+  - 284.0
+  size: 11
+  anchor: end
+  tone: default
+- line:
+  - - 92.0
+    - 40.0
+  - - 330.0
+    - 40.0
   width: 1
   tone: muted
-- text: 0 (ионизация)
-  at: [306, 44]
+  dashed: true
+- text: '*n* = ∞'
+  at:
+  - 88.0
+  - 44.0
+  size: 11
+  anchor: end
+  tone: default
+- text: '0'
+  at:
+  - 336.0
+  - 44.0
   size: 11
   anchor: start
   tone: muted
-- line: [[90, 220], [300, 220]]
+- line:
+  - - 92.0
+    - 312.0
+  - - 330.0
+    - 312.0
   width: 1.6
 - text: '*n* = 1'
-  at: [82, 224]
-  size: 12
+  at:
+  - 88.0
+  - 316.0
+  size: 11
   anchor: end
-- text: −13,6 эВ
-  at: [306, 224]
+  tone: default
+- text: −13,6
+  at:
+  - 336.0
+  - 316.0
   size: 11
   anchor: start
-- line: [[90, 125], [300, 125]]
+  tone: default
+- line:
+  - - 92.0
+    - 108.0
+  - - 330.0
+    - 108.0
   width: 1.6
 - text: '*n* = 2'
-  at: [82, 129]
-  size: 12
+  at:
+  - 88.0
+  - 112.0
+  size: 11
   anchor: end
-- text: −3,4 эВ
-  at: [306, 129]
+  tone: default
+- text: −3,4
+  at:
+  - 336.0
+  - 112.0
   size: 11
   anchor: start
-- line: [[90, 88], [300, 88]]
+  tone: default
+- line:
+  - - 92.0
+    - 70.2
+  - - 330.0
+    - 70.2
   width: 1.6
 - text: '*n* = 3'
-  at: [82, 92]
-  size: 12
+  at:
+  - 88.0
+  - 74.2
+  size: 11
   anchor: end
-- text: −1,51 эВ
-  at: [306, 92]
+  tone: default
+- text: −1,51
+  at:
+  - 336.0
+  - 74.2
   size: 11
   anchor: start
-- line: [[90, 64], [300, 64]]
+  tone: default
+- line:
+  - - 92.0
+    - 57.0
+  - - 330.0
+    - 57.0
   width: 1.6
 - text: '*n* = 4'
-  at: [82, 68]
-  size: 12
+  at:
+  - 88.0
+  - 61.0
+  size: 11
   anchor: end
-- text: −0,85 эВ
-  at: [306, 68]
+  tone: default
+- text: −0,85
+  at:
+  - 336.0
+  - 61.0
   size: 11
   anchor: start
-- arrow: [[130, 125], [130, 220]]
+  tone: default
+- line:
+  - - 92.0
+    - 50.9
+  - - 330.0
+    - 50.9
+  width: 1
+- line:
+  - - 92.0
+    - 47.6
+  - - 330.0
+    - 47.6
+  width: 1
+- arrow:
+  - - 112.0
+    - 108.0
+  - - 112.0
+    - 312.0
   tone: accent
-  label: УФ
-  label_at: [150, 178]
-- arrow: [[195, 88], [195, 220]]
+  width: 1.6
+- arrow:
+  - - 124.0
+    - 70.2
+  - - 124.0
+    - 312.0
   tone: accent
-- arrow: [[255, 88], [255, 125]]
-  tone: force
-  label: красная
-  label_at: [262, 112]
-- text: '*hν* = *E*_n − *E*_m'
-  at: [200, 250]
-  size: 14
-- text: (не в масштабе)
-  at: [44, 250]
-  size: 10
+  width: 1.6
+- arrow:
+  - - 136.0
+    - 57.0
+  - - 136.0
+    - 312.0
+  tone: accent
+  width: 1.6
+- arrow:
+  - - 148.0
+    - 50.9
+  - - 148.0
+    - 312.0
+  tone: accent
+  width: 1.6
+- text: ультрафиолет
+  at:
+  - 130.0
+  - 327.0
+  size: 11
+  anchor: middle
+  tone: accent
+- text: серия Лаймана
+  at:
+  - 130.0
+  - 340.0
+  size: 11
+  anchor: middle
   tone: muted
+- arrow:
+  - - 196.0
+    - 70.2
+  - - 196.0
+    - 108.0
+  tone: accent
+  width: 1.6
+- arrow:
+  - - 208.0
+    - 57.0
+  - - 208.0
+    - 108.0
+  tone: accent
+  width: 1.6
+- arrow:
+  - - 220.0
+    - 50.9
+  - - 220.0
+    - 108.0
+  tone: accent
+  width: 1.6
+- arrow:
+  - - 232.0
+    - 47.6
+  - - 232.0
+    - 108.0
+  tone: accent
+  width: 1.6
+- text: видимый свет
+  at:
+  - 214.0
+  - 123.0
+  size: 11
+  anchor: middle
+  tone: accent
+- text: серия Бальмера
+  at:
+  - 214.0
+  - 136.0
+  size: 11
+  anchor: middle
+  tone: muted
+- arrow:
+  - - 282.0
+    - 57.0
+  - - 282.0
+    - 70.2
+  tone: accent
+  width: 1.6
+- arrow:
+  - - 294.0
+    - 50.9
+  - - 294.0
+    - 70.2
+  tone: accent
+  width: 1.6
+- arrow:
+  - - 306.0
+    - 47.6
+  - - 306.0
+    - 70.2
+  tone: accent
+  width: 1.6
+- text: ИК
+  at:
+  - 294.0
+  - 85.2
+  size: 11
+  anchor: middle
+  tone: accent

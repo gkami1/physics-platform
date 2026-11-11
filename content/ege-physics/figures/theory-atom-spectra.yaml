@@ -1,0 +1,349 @@
+# quantum.atom 3.3: three spectra on one wavelength scale 760…380 нм (red on the left, the visible
+# band as lettered surface cells). Continuous; the emission spectrum of hydrogen (bright lines on an
+# empty strip); the absorption spectrum (dark lines on the continuous strip). Lines from
+# E_n = −13,6/n² эВ, λ = hc/(E_n − E_2), hc = 1239,84 эВ·нм: 656.4, 486.2, 434.1, 410.2 нм.
+# Colours (the general convention): objects (nucleus, electrons, foil, levels) in the text colour
+# with a surface fill; light as accent photon packets, as in theory-phot-* and theory-pe-*;
+# electron velocities in the vel tone; guides and notes muted. A colour of light is named, never
+# painted: spectra are lettered surface cells with labelled lines.
+kind: diagram
+size:
+- 400
+- 250
+items:
+- text: 'сплошной: раскалённое твёрдое тело'
+  at:
+  - 30.0
+  - 26.0
+  size: 13
+  anchor: start
+  tone: default
+- text: 'испускания: светящийся водород'
+  at:
+  - 30.0
+  - 96.0
+  size: 13
+  anchor: start
+  tone: default
+- text: 'поглощения: свет через холодный водород'
+  at:
+  - 30.0
+  - 166.0
+  size: 13
+  anchor: start
+  tone: default
+- rect:
+  - 316.3
+  - 34.0
+  - 53.7
+  - 22.0
+  fill: surface
+  width: 1
+- text: ф
+  at:
+  - 343.1
+  - 49.5
+  size: 11
+  anchor: middle
+  tone: default
+- rect:
+  - 276.1
+  - 34.0
+  - 40.2
+  - 22.0
+  fill: surface
+  width: 1
+- text: с
+  at:
+  - 296.2
+  - 49.5
+  size: 11
+  anchor: middle
+  tone: default
+- rect:
+  - 262.6
+  - 34.0
+  - 13.5
+  - 22.0
+  fill: surface
+  width: 1
+- text: г
+  at:
+  - 269.4
+  - 49.5
+  size: 11
+  anchor: middle
+  tone: default
+- rect:
+  - 204.5
+  - 34.0
+  - 58.1
+  - 22.0
+  fill: surface
+  width: 1
+- text: з
+  at:
+  - 233.6
+  - 49.5
+  size: 11
+  anchor: middle
+  tone: default
+- rect:
+  - 182.1
+  - 34.0
+  - 22.4
+  - 22.0
+  fill: surface
+  width: 1
+- text: ж
+  at:
+  - 193.3
+  - 49.5
+  size: 11
+  anchor: middle
+  tone: default
+- rect:
+  - 150.8
+  - 34.0
+  - 31.3
+  - 22.0
+  fill: surface
+  width: 1
+- text: о
+  at:
+  - 166.4
+  - 49.5
+  size: 11
+  anchor: middle
+  tone: default
+- rect:
+  - 30.0
+  - 34.0
+  - 120.8
+  - 22.0
+  fill: surface
+  width: 1
+- text: к
+  at:
+  - 90.4
+  - 49.5
+  size: 11
+  anchor: middle
+  tone: default
+- rect:
+  - 30.0
+  - 104.0
+  - 340.0
+  - 22.0
+  fill: none
+  width: 1
+  tone: muted
+- line:
+  - - 122.7
+    - 104.0
+  - - 122.7
+    - 126.0
+  width: 2.6
+- line:
+  - - 275.0
+    - 104.0
+  - - 275.0
+    - 126.0
+  width: 2.6
+- line:
+  - - 321.6
+    - 104.0
+  - - 321.6
+    - 126.0
+  width: 2.6
+- line:
+  - - 342.9
+    - 104.0
+  - - 342.9
+    - 126.0
+  width: 2.6
+- rect:
+  - 316.3
+  - 174.0
+  - 53.7
+  - 22.0
+  fill: surface
+  width: 1
+- text: ф
+  at:
+  - 343.1
+  - 189.5
+  size: 11
+  anchor: middle
+  tone: default
+- rect:
+  - 276.1
+  - 174.0
+  - 40.2
+  - 22.0
+  fill: surface
+  width: 1
+- text: с
+  at:
+  - 296.2
+  - 189.5
+  size: 11
+  anchor: middle
+  tone: default
+- rect:
+  - 262.6
+  - 174.0
+  - 13.5
+  - 22.0
+  fill: surface
+  width: 1
+- text: г
+  at:
+  - 269.4
+  - 189.5
+  size: 11
+  anchor: middle
+  tone: default
+- rect:
+  - 204.5
+  - 174.0
+  - 58.1
+  - 22.0
+  fill: surface
+  width: 1
+- text: з
+  at:
+  - 233.6
+  - 189.5
+  size: 11
+  anchor: middle
+  tone: default
+- rect:
+  - 182.1
+  - 174.0
+  - 22.4
+  - 22.0
+  fill: surface
+  width: 1
+- text: ж
+  at:
+  - 193.3
+  - 189.5
+  size: 11
+  anchor: middle
+  tone: default
+- rect:
+  - 150.8
+  - 174.0
+  - 31.3
+  - 22.0
+  fill: surface
+  width: 1
+- text: о
+  at:
+  - 166.4
+  - 189.5
+  size: 11
+  anchor: middle
+  tone: default
+- rect:
+  - 30.0
+  - 174.0
+  - 120.8
+  - 22.0
+  fill: surface
+  width: 1
+- text: к
+  at:
+  - 90.4
+  - 189.5
+  size: 11
+  anchor: middle
+  tone: default
+- line:
+  - - 122.7
+    - 171.0
+  - - 122.7
+    - 199.0
+  width: 3
+- line:
+  - - 275.0
+    - 171.0
+  - - 275.0
+    - 199.0
+  width: 3
+- line:
+  - - 321.6
+    - 171.0
+  - - 321.6
+    - 199.0
+  width: 3
+- line:
+  - - 342.9
+    - 171.0
+  - - 342.9
+    - 199.0
+  width: 3
+- text: '656'
+  at:
+  - 122.7
+  - 141.0
+  size: 11
+  anchor: middle
+  tone: default
+- text: '656'
+  at:
+  - 122.7
+  - 213.0
+  size: 11
+  anchor: middle
+  tone: default
+- text: '486'
+  at:
+  - 275.0
+  - 141.0
+  size: 11
+  anchor: middle
+  tone: default
+- text: '486'
+  at:
+  - 275.0
+  - 213.0
+  size: 11
+  anchor: middle
+  tone: default
+- text: '434'
+  at:
+  - 314.6
+  - 141.0
+  size: 11
+  anchor: middle
+  tone: default
+- text: '434'
+  at:
+  - 314.6
+  - 213.0
+  size: 11
+  anchor: middle
+  tone: default
+- text: '410'
+  at:
+  - 349.9
+  - 141.0
+  size: 11
+  anchor: middle
+  tone: default
+- text: '410'
+  at:
+  - 349.9
+  - 213.0
+  size: 11
+  anchor: middle
+  tone: default
+- text: длины волн в нм; линии на одних и тех же местах
+  at:
+  - 200
+  - 240
+  size: 12
+  anchor: middle
+  tone: muted
