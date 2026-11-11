@@ -443,14 +443,14 @@ items:
 - text: 'α: *A* − 4, *Z* − 2'
   at:
   - 84
-  - 40
+  - 62
   size: 13
   anchor: start
   tone: default
 - text: 'β^{−}: *A* то же, *Z* + 1'
   at:
   - 84
-  - 60
+  - 82
   size: 13
   anchor: start
   tone: default
