@@ -1,0 +1,148 @@
+# quantum.radioactivity 5.7: carbon-14 in a dead organism, N/N0 = 2^(−t/5730 лет), computed;
+# 1/2 at 5730 лет and 1/4 at 11 460 лет marked (no further: a step task asks the next halving).
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot; α, β and γ are named, not painted: α and β tracks in
+# the text colour (β dashed), γ accent like light; graphs have accent curves; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 236
+items:
+- arrow:
+  - - 64
+    - 206
+  - - 394
+    - 206
+  width: 1.5
+- arrow:
+  - - 64
+    - 206
+  - - 64
+    - 14
+  width: 1.5
+- text: '*t*, тыс. лет'
+  at:
+  - 392
+  - 224
+  anchor: end
+  size: 13
+- text: '*N*/*N*_0'
+  at:
+  - 74
+  - 24
+  anchor: start
+  size: 13
+- text: '0'
+  at:
+  - 58
+  - 221
+  size: 12
+  anchor: end
+- line:
+  - - 224
+    - 206
+  - - 224
+    - 210
+  width: 1.2
+- text: '10'
+  at:
+  - 224
+  - 224
+  size: 13
+- line:
+  - - 155.7
+    - 206
+  - - 155.7
+    - 126.0
+  - - 64
+    - 126.0
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 247.4
+    - 206
+  - - 247.4
+    - 166.0
+  - - 64
+    - 166.0
+  width: 1
+  dashed: true
+  tone: muted
+- path: M64 46L68 50.8L72 55.4L76 59.9L80 64.2L84 68.5L88 72.6L92 76.5L96 80.4L100 84.1L104 87.8L108 91.3L112
+    94.7L116 98L120 101.2L124 104.3L128 107.4L132 110.3L136 113.2L140 115.9L144 118.6L148 121.2L152 123.7L156
+    126.2L160 128.6L164 130.9L168 133.1L172 135.3L176 137.4L180 139.4L184 141.4L188 143.3L192 145.2L196
+    147L200 148.8L204 150.5L208 152.1L212 153.7L216 155.3L220 156.8L224 158.3L228 159.7L232 161.1L236
+    162.4L240 163.7L244 165L248 166.2L252 167.4L256 168.5L260 169.6L264 170.7L268 171.8L272 172.8L276
+    173.8L280 174.7L284 175.7L288 176.6L292 177.5L296 178.3L300 179.1L304 179.9L308 180.7L312 181.5L316
+    182.2L320 182.9L324 183.6L328 184.3L332 184.9L336 185.5L340 186.1L344 186.7L348 187.3L352 187.9L356
+    188.4L360 188.9L364 189.4L368 189.9L372 190.4L376 190.9L380 191.3L384 191.8
+  width: 2.2
+  tone: accent
+- line:
+  - - 60
+    - 46
+  - - 64
+    - 46
+  width: 1.2
+- text: '1'
+  at:
+  - 57
+  - 51
+  size: 13
+  anchor: end
+- line:
+  - - 60
+    - 126.0
+  - - 64
+    - 126.0
+  width: 1.2
+- text: 1/2
+  at:
+  - 57
+  - 131.0
+  size: 13
+  anchor: end
+- line:
+  - - 60
+    - 166.0
+  - - 64
+    - 166.0
+  width: 1.2
+- text: 1/4
+  at:
+  - 57
+  - 171.0
+  size: 13
+  anchor: end
+- dots:
+  - - 155.7
+    - 126.0
+  r: 3.2
+  tone: accent
+- text: 5730 лет
+  at:
+  - 162.7
+  - 118.0
+  size: 12
+  anchor: start
+  tone: default
+- dots:
+  - - 247.4
+    - 166.0
+  r: 3.2
+  tone: accent
+- text: 11 460 лет
+  at:
+  - 254.4
+  - 158.0
+  size: 12
+  anchor: start
+  tone: default
+- text: '*t* = 0 — гибель организма'
+  at:
+  - 150
+  - 56
+  size: 12
+  anchor: start
+  tone: muted

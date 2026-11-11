@@ -1,0 +1,153 @@
+# quantum.radioactivity 5.4: γ after β⁻. ⁶⁰Co (2,823 МэВ above ⁶⁰Ni's ground state) decays to
+# the 4⁺ level of ⁶⁰Ni at 2,5057 МэВ; the nucleus drops to 1,3325 and then to 0, emitting γ-quanta
+# of 1,17 and 1,33 МэВ (accent, like photons in the atom's figures). Levels to scale, 66 px per МэВ.
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot; α, β and γ are named, not painted: α and β tracks in
+# the text colour (β dashed), γ accent like light; graphs have accent curves; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 278
+items:
+- line:
+  - - 176
+    - 236.0
+  - - 330
+    - 236.0
+  width: 2
+- line:
+  - - 176
+    - 148.1
+  - - 330
+    - 148.1
+  width: 2
+- line:
+  - - 176
+    - 70.6
+  - - 330
+    - 70.6
+  width: 2
+- line:
+  - - 40
+    - 49.7
+  - - 132
+    - 49.7
+  width: 2
+- text: Co
+  at:
+  - 80
+  - 37.7
+  size: 20
+  anchor: start
+  tone: default
+- text: '60'
+  at:
+  - 79
+  - 29.3
+  size: 12.4
+  anchor: end
+  tone: default
+- text: '27'
+  at:
+  - 79
+  - 42.1
+  size: 12.4
+  anchor: end
+  tone: default
+- text: Ni
+  at:
+  - 240
+  - 266
+  size: 20
+  anchor: start
+  tone: default
+- text: '60'
+  at:
+  - 239
+  - 257.6
+  size: 12.4
+  anchor: end
+  tone: default
+- text: '28'
+  at:
+  - 239
+  - 270.4
+  size: 12.4
+  anchor: end
+  tone: default
+- arrow:
+  - - 124
+    - 53.7
+  - - 196
+    - 67.6
+  width: 1.6
+- text: β^{−}
+  at:
+  - 152
+  - 75.7
+  size: 14
+  anchor: middle
+  tone: default
+- arrow:
+  - - 222
+    - 72.6
+  - - 222
+    - 145.1
+  width: 2
+  tone: accent
+- text: γ 1,17
+  at:
+  - 229
+  - 114.35
+  size: 13
+  anchor: start
+  tone: accent
+- arrow:
+  - - 286
+    - 150.1
+  - - 286
+    - 233.0
+  width: 2
+  tone: accent
+- text: γ 1,33
+  at:
+  - 293
+  - 197.05
+  size: 13
+  anchor: start
+  tone: accent
+- text: 2,51 МэВ
+  at:
+  - 336
+  - 74.6
+  size: 12
+  anchor: start
+  tone: muted
+- text: 1,33 МэВ
+  at:
+  - 336
+  - 152.1
+  size: 12
+  anchor: start
+  tone: muted
+- text: '0'
+  at:
+  - 336
+  - 240
+  size: 12
+  anchor: start
+  tone: muted
+- text: возбуждённые
+  at:
+  - 170
+  - 114.6
+  size: 12
+  anchor: end
+  tone: muted
+- text: основное
+  at:
+  - 170
+  - 240
+  size: 12
+  anchor: end
+  tone: muted
