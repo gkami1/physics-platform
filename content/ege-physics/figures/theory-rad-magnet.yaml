@@ -1,0 +1,341 @@
+# quantum.radioactivity 5.2: a source in a lead channel, a magnetic field away from the reader.
+# γ goes straight; α (positive, heavy) bends a little to the left on a large circle (R 720 px);
+# β (negative, light) bends strongly to the right (R 92 px). Radii qualitative, sides by F = qv × B.
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot; α, β and γ are named, not painted: α and β tracks in
+# the text colour (β dashed), γ accent like light; graphs have accent curves; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 312
+items:
+- rect:
+  - 168
+  - 206
+  - 28
+  - 46
+  fill: surface
+  width: 1.5
+- rect:
+  - 204
+  - 206
+  - 28
+  - 46
+  fill: surface
+  width: 1.5
+- rect:
+  - 168
+  - 252
+  - 64
+  - 10
+  fill: surface
+  width: 1.5
+- dots:
+  - - 200
+    - 244
+  r: 4
+- text: свинец
+  at:
+  - 160
+  - 236
+  size: 12
+  anchor: end
+  tone: muted
+- text: препарат
+  at:
+  - 240
+  - 236
+  size: 12
+  anchor: start
+  tone: muted
+- arrow:
+  - - 200
+    - 206
+  - - 200
+    - 22
+  width: 2
+  tone: accent
+- text: γ
+  at:
+  - 208
+  - 30
+  size: 16
+  anchor: start
+  tone: accent
+- path: M200 206L200 202L200 198L199.9 194L199.8 190L199.7 186L199.6 182L199.5 178L199.3 174L199.1 170L198.9
+    166L198.7 162L198.4 158L198.1 154L197.8 150.1L197.5 146.1L197.2 142.1L196.8 138.1L196.4 134.1L196
+    130.1L195.6 126.2L195.1 122.2L194.6 118.2L194.1 114.3L193.6 110.3L193.1 106.3L192.5 102.4L191.9 98.4L191.3
+    94.5L190.7 90.5L190 86.6L189.3 82.6L188.7 78.7L187.9 74.7L187.2 70.8L186.4 66.9L185.6 63L184.8 59L184
+    55.1L183.2 51.2L182.3 47.3L181.4 43.4L180.5 39.5
+  width: 2
+- arrow:
+  - - 180.5
+    - 39.5
+  - - 177.6
+    - 27.9
+  width: 2
+- text: α
+  at:
+  - 167.6
+  - 34
+  size: 16
+  anchor: end
+  tone: default
+- path: M200 206L200.1 202.4L200.3 198.8L200.6 195.2L201.1 191.6L201.8 188.1L202.5 184.6L203.4 181.1L204.5
+    177.6L205.7 174.2L207 170.9L208.4 167.6L210 164.3L211.7 161.2L213.5 158L215.4 155L217.5 152L219.7
+    149.2L221.9 146.4L224.3 143.7L226.8 141.1L229.4 138.6L232.1 136.2L234.9 133.9L237.7 131.7L240.7 129.6L243.7
+    127.7L246.8 125.9L250 124.1L253.2 122.6L256.5 121.1L259.9 119.8L263.3 118.6L266.7 117.5L270.2 116.6L273.7
+    115.8L277.3 115.2L280.8 114.7L284.4 114.3L288 114.1L291.6 114L295.2 114.1L298.8 114.3L302.4 114.6L306
+    115.1L309.5 115.7L313.1 116.4L316.5 117.3L320 118.4L323.4 119.5L326.8 120.8L330.1 122.2L333.3 123.8L336.5
+    125.5L339.6 127.3L342.7 129.2L345.6 131.3L348.5 133.4
+  width: 2
+  dashed: true
+- arrow:
+  - - 348.5
+    - 133.4
+  - - 356.6
+    - 140.5
+  width: 2
+- text: β
+  at:
+  - 360.6
+  - 164.5
+  size: 16
+  anchor: middle
+  tone: default
+- text: ×
+  at:
+  - 56
+  - 39
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 56
+  - 78
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 56
+  - 117
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 56
+  - 156
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 56
+  - 195
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 96
+  - 39
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 96
+  - 78
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 96
+  - 117
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 96
+  - 156
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 96
+  - 195
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 136
+  - 39
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 136
+  - 78
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 136
+  - 117
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 136
+  - 156
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 136
+  - 195
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 176
+  - 117
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 176
+  - 156
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 176
+  - 195
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 216
+  - 78
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 216
+  - 117
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 256
+  - 39
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 256
+  - 78
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 256
+  - 156
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 256
+  - 195
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 296
+  - 39
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 296
+  - 78
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 296
+  - 156
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 296
+  - 195
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 336
+  - 39
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 336
+  - 78
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 336
+  - 156
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 336
+  - 195
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 376
+  - 39
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 376
+  - 78
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 376
+  - 117
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 376
+  - 156
+  size: 14
+  tone: muted
+- text: ×
+  at:
+  - 376
+  - 195
+  size: 14
+  tone: muted
+- text: × — поле *B* направлено от нас
+  at:
+  - 20
+  - 286
+  size: 12
+  anchor: start
+  tone: muted
+- text: α отклоняются слабо, β — сильно и в другую сторону
+  at:
+  - 20
+  - 304
+  size: 12
+  anchor: start
+  tone: muted

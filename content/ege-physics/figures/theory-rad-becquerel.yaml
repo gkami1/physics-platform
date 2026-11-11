@@ -1,0 +1,153 @@
+# quantum.radioactivity 5.1: Becquerel's experiment (1896). Uranium salt on a photographic plate
+# wrapped in black paper, a metal cross between them; the developed plate shows a dark patch
+# with the cross's light shadow: an invisible radiation passes through paper, not through metal.
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot; α, β and γ are named, not painted: α and β tracks in
+# the text colour (β dashed), γ accent like light; graphs have accent curves; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 204
+items:
+- rect:
+  - 24
+  - 118
+  - 170
+  - 26
+  width: 1.5
+- rect:
+  - 32
+  - 128
+  - 154
+  - 6
+  fill: solid
+  width: 1
+- rect:
+  - 84
+  - 110
+  - 50
+  - 6
+  fill: surface
+  width: 1.3
+- dots:
+  - - 44
+    - 100
+  - - 57
+    - 105
+  - - 70
+    - 100
+  - - 83
+    - 105
+  - - 96
+    - 100
+  - - 109
+    - 105
+  - - 122
+    - 100
+  - - 135
+    - 105
+  - - 148
+    - 100
+  - - 161
+    - 105
+  - - 174
+    - 100
+  r: 5
+  fill: surface
+- text: соль урана
+  at:
+  - 110
+  - 84
+  size: 13
+  anchor: middle
+  tone: default
+- line:
+  - - 134
+    - 113
+  - - 150
+    - 160
+  - - 170
+    - 160
+  width: 1
+  tone: muted
+- text: крестик
+  at:
+  - 174
+  - 164
+  size: 12
+  anchor: start
+  tone: muted
+- line:
+  - - 60
+    - 131
+  - - 60
+    - 176
+  - - 40
+    - 176
+  width: 1
+  tone: muted
+- text: фотопластинка в чёрной бумаге
+  at:
+  - 24
+  - 194
+  size: 12
+  anchor: start
+  tone: muted
+- rect:
+  - 262
+  - 30
+  - 118
+  - 96
+  fill: surface
+  width: 1.5
+- rect:
+  - 274
+  - 44
+  - 94
+  - 68
+  fill: solid
+  tone: muted
+  width: 0
+  radius: 10
+- rect:
+  - 296
+  - 73
+  - 50
+  - 10
+  fill: surface
+  width: 0
+- rect:
+  - 316
+  - 53
+  - 10
+  - 50
+  fill: surface
+  width: 0
+- text: после проявки
+  at:
+  - 321
+  - 148
+  size: 13
+  anchor: middle
+  tone: default
+- text: тёмное пятно,
+  at:
+  - 321
+  - 166
+  size: 12
+  anchor: middle
+  tone: muted
+- text: светлая тень крестика
+  at:
+  - 321
+  - 182
+  size: 12
+  anchor: middle
+  tone: muted
+- arrow:
+  - - 204
+    - 84
+  - - 250
+    - 84
+  width: 1.5
+  tone: muted

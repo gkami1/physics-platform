@@ -1,0 +1,137 @@
+# quantum.radioactivity 5.2: penetrating power. α stops in a sheet of paper, β in a few mm of
+# aluminium, γ passes through centimetres of lead weakened (dashed, thinner after the lead).
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot; α, β and γ are named, not painted: α and β tracks in
+# the text colour (β dashed), γ accent like light; graphs have accent curves; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 220
+items:
+- rect:
+  - 16
+  - 34
+  - 14
+  - 140
+  fill: solid
+  width: 0
+  tone: muted
+- text: препарат
+  at:
+  - 10
+  - 196
+  size: 12
+  anchor: start
+  tone: muted
+- rect:
+  - 112
+  - 30
+  - 3
+  - 148
+  fill: surface
+  width: 1.5
+- text: бумага
+  at:
+  - 113.5
+  - 196
+  size: 12
+  anchor: middle
+  tone: default
+- rect:
+  - 206
+  - 30
+  - 12
+  - 148
+  fill: surface
+  width: 1.5
+- text: алюминий
+  at:
+  - 212.0
+  - 196
+  size: 12
+  anchor: middle
+  tone: default
+- rect:
+  - 292
+  - 30
+  - 36
+  - 148
+  fill: surface
+  width: 1.5
+- text: свинец
+  at:
+  - 310.0
+  - 196
+  size: 12
+  anchor: middle
+  tone: default
+- text: несколько мм
+  at:
+  - 212
+  - 212
+  size: 12
+  anchor: middle
+  tone: muted
+- text: сантиметры
+  at:
+  - 310
+  - 212
+  size: 12
+  anchor: middle
+  tone: muted
+- arrow:
+  - - 36
+    - 54
+  - - 110
+    - 54
+  width: 2
+- arrow:
+  - - 36
+    - 104
+  - - 210
+    - 104
+  width: 2
+  dashed: true
+- line:
+  - - 36
+    - 154
+  - - 292
+    - 154
+  width: 2
+  tone: accent
+- arrow:
+  - - 328
+    - 154
+  - - 388
+    - 154
+  width: 1.3
+  dashed: true
+  tone: accent
+- text: α
+  at:
+  - 44
+  - 46
+  size: 16
+  anchor: start
+  tone: default
+- text: β
+  at:
+  - 44
+  - 96
+  size: 16
+  anchor: start
+  tone: default
+- text: γ
+  at:
+  - 44
+  - 146
+  size: 16
+  anchor: start
+  tone: accent
+- text: ослаблено
+  at:
+  - 388
+  - 176
+  size: 12
+  anchor: end
+  tone: muted

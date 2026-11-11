@@ -1,0 +1,546 @@
+# quantum.radioactivity 5.3: α-decay. A nucleus ᴬ_Z X (a heavy one in miniature: 28 nucleons)
+# emits ⁴₂He — 2 protons and 2 neutrons — and becomes ᴬ⁻⁴_{Z−2}Y; the α-particle's velocity `vel`.
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot; α, β and γ are named, not painted: α and β tracks in
+# the text colour (β dashed), γ accent like light; graphs have accent curves; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 224
+items:
+- circle:
+  - 77.8
+  - 91.0
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 77.8
+  - 94.5
+  size: 10.6
+- circle:
+  - 94.5
+  - 91.0
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 86.2
+  - 105.4
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 86.2
+  - 76.5
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 86.2
+  - 80.1
+  size: 10.6
+- circle:
+  - 69.5
+  - 105.4
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 69.5
+  - 76.5
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 69.5
+  - 80.1
+  size: 10.6
+- circle:
+  - 61.2
+  - 91.0
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 102.8
+  - 105.4
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 102.8
+  - 76.5
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 102.8
+  - 80.1
+  size: 10.6
+- circle:
+  - 77.8
+  - 119.8
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 77.8
+  - 62.1
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 52.8
+  - 105.4
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 52.8
+  - 109.0
+  size: 10.6
+- circle:
+  - 111.2
+  - 91.0
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 94.5
+  - 119.8
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 94.5
+  - 123.4
+  size: 10.6
+- circle:
+  - 52.8
+  - 76.5
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 94.5
+  - 62.1
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 61.2
+  - 119.8
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 61.2
+  - 123.4
+  size: 10.6
+- circle:
+  - 61.2
+  - 62.1
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 44.5
+  - 91.0
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 119.5
+  - 105.4
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 119.5
+  - 109.0
+  size: 10.6
+- circle:
+  - 111.2
+  - 119.8
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 119.5
+  - 76.5
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 119.5
+  - 80.1
+  size: 10.6
+- circle:
+  - 86.2
+  - 134.3
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 111.2
+  - 62.1
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 69.5
+  - 134.3
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 69.5
+  - 137.8
+  size: 10.6
+- circle:
+  - 86.2
+  - 47.7
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 44.5
+  - 119.8
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 69.5
+  - 47.7
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 69.5
+  - 51.3
+  size: 10.6
+- text: X
+  at:
+  - 84
+  - 178
+  size: 26
+  anchor: start
+  tone: default
+- text: A
+  at:
+  - 83
+  - 167.1
+  size: 16.1
+  anchor: end
+  tone: default
+- text: Z
+  at:
+  - 83
+  - 183.7
+  size: 16.1
+  anchor: end
+  tone: default
+- arrow:
+  - - 146
+    - 92
+  - - 186
+    - 92
+  width: 1.6
+- circle:
+  - 241.4
+  - 96.2
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 241.4
+  - 99.8
+  size: 10.6
+- circle:
+  - 258.1
+  - 96.2
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 249.7
+  - 110.6
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 249.7
+  - 81.8
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 249.7
+  - 85.3
+  size: 10.6
+- circle:
+  - 233.1
+  - 110.6
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 233.1
+  - 81.8
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 233.1
+  - 85.3
+  size: 10.6
+- circle:
+  - 224.7
+  - 96.2
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 266.4
+  - 110.6
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 266.4
+  - 81.8
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 266.4
+  - 85.3
+  size: 10.6
+- circle:
+  - 241.4
+  - 125.1
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 241.4
+  - 67.3
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 216.4
+  - 110.6
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 216.4
+  - 114.2
+  size: 10.6
+- circle:
+  - 274.7
+  - 96.2
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 258.1
+  - 125.1
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 258.1
+  - 128.6
+  size: 10.6
+- circle:
+  - 216.4
+  - 81.8
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 258.1
+  - 67.3
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 224.7
+  - 125.1
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 224.7
+  - 128.6
+  size: 10.6
+- circle:
+  - 224.7
+  - 67.3
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 208.1
+  - 96.2
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 283.1
+  - 110.6
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 283.1
+  - 114.2
+  size: 10.6
+- circle:
+  - 274.7
+  - 125.1
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 283.1
+  - 81.8
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 283.1
+  - 85.3
+  size: 10.6
+- circle:
+  - 249.7
+  - 139.5
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 274.7
+  - 67.3
+  r: 8.5
+  fill: solid
+  width: 1.6
+- text: Y
+  at:
+  - 240
+  - 178
+  size: 26
+  anchor: start
+  tone: default
+- text: A−4
+  at:
+  - 239
+  - 167.1
+  size: 16.1
+  anchor: end
+  tone: default
+- text: Z−2
+  at:
+  - 239
+  - 183.7
+  size: 16.1
+  anchor: end
+  tone: default
+- circle:
+  - 343.7
+  - 52.0
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 343.7
+  - 55.6
+  size: 10.6
+- circle:
+  - 360.3
+  - 52.0
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 352.0
+  - 66.4
+  r: 8.5
+  fill: solid
+  width: 1.6
+- circle:
+  - 352.0
+  - 37.6
+  r: 8.5
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 352.0
+  - 41.1
+  size: 10.6
+- arrow:
+  - - 368
+    - 36
+  - - 392
+    - 14
+  width: 1.6
+  tone: vel
+- text: He
+  at:
+  - 346
+  - 104
+  size: 22
+  anchor: start
+  tone: default
+- text: '4'
+  at:
+  - 345
+  - 94.8
+  size: 13.6
+  anchor: end
+  tone: default
+- text: '2'
+  at:
+  - 345
+  - 108.8
+  size: 13.6
+  anchor: end
+  tone: default
+- text: α-частица
+  at:
+  - 356
+  - 126
+  size: 12
+  anchor: middle
+  tone: muted
+- text: ядро теряет 2 протона и 2 нейтрона
+  at:
+  - 200
+  - 214
+  size: 12
+  anchor: middle
+  tone: muted

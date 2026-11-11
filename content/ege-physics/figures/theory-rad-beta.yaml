@@ -1,0 +1,403 @@
+# quantum.radioactivity 5.4: β⁻-decay. One neutron of ᴬ_Z X (ringed, dashed accent) turns into a
+# proton: the nucleus ᴬ_{Z+1}Y; an electron (velocity `vel`) and an antineutrino (muted, dashed) fly out.
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot; α, β and γ are named, not painted: α and β tracks in
+# the text colour (β dashed), γ accent like light; graphs have accent curves; guides and notes muted.
+kind: diagram
+size:
+- 400
+- 216
+items:
+- circle:
+  - 78.0
+  - 86.0
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 78.0
+  - 89.8
+  size: 11.2
+- circle:
+  - 95.7
+  - 86.0
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 86.9
+  - 101.3
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 86.9
+  - 70.7
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 86.9
+  - 74.5
+  size: 11.2
+- circle:
+  - 69.2
+  - 101.3
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 69.2
+  - 70.7
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 69.2
+  - 74.5
+  size: 11.2
+- circle:
+  - 60.4
+  - 86.0
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 104.5
+  - 101.3
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 104.5
+  - 70.7
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 104.5
+  - 74.5
+  size: 11.2
+- circle:
+  - 78.0
+  - 116.6
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 78.0
+  - 55.4
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 51.6
+  - 101.3
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 51.6
+  - 105.1
+  size: 11.2
+- circle:
+  - 113.3
+  - 86.0
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 95.7
+  - 116.6
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 95.7
+  - 120.3
+  size: 11.2
+- circle:
+  - 51.6
+  - 70.7
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 95.7
+  - 55.4
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 60.4
+  - 116.6
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 60.4
+  - 120.3
+  size: 11.2
+- circle:
+  - 60.4
+  - 55.4
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 250.0
+  - 86.0
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 250.0
+  - 89.8
+  size: 11.2
+- circle:
+  - 267.7
+  - 86.0
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 258.9
+  - 101.3
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 258.9
+  - 70.7
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 258.9
+  - 74.5
+  size: 11.2
+- circle:
+  - 241.2
+  - 101.3
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 241.2
+  - 70.7
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 241.2
+  - 74.5
+  size: 11.2
+- circle:
+  - 232.4
+  - 86.0
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 276.5
+  - 101.3
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 276.5
+  - 70.7
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 276.5
+  - 74.5
+  size: 11.2
+- circle:
+  - 250.0
+  - 116.6
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 250.0
+  - 55.4
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 223.6
+  - 101.3
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 223.6
+  - 105.1
+  size: 11.2
+- circle:
+  - 285.3
+  - 86.0
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 267.7
+  - 116.6
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 267.7
+  - 120.3
+  size: 11.2
+- circle:
+  - 223.6
+  - 70.7
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 267.7
+  - 55.4
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 267.7
+  - 59.2
+  size: 11.2
+- circle:
+  - 232.4
+  - 116.6
+  r: 9
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 232.4
+  - 120.3
+  size: 11.2
+- circle:
+  - 232.4
+  - 55.4
+  r: 9
+  fill: solid
+  width: 1.6
+- circle:
+  - 95.7
+  - 55.4
+  r: 13.5
+  width: 1.6
+  tone: accent
+  dashed: true
+- circle:
+  - 267.7
+  - 55.4
+  r: 13.5
+  width: 1.6
+  tone: accent
+  dashed: true
+- arrow:
+  - - 138
+    - 86
+  - - 178
+    - 86
+  width: 1.6
+- text: X
+  at:
+  - 80
+  - 170
+  size: 26
+  anchor: start
+  tone: default
+- text: A
+  at:
+  - 79
+  - 159.1
+  size: 16.1
+  anchor: end
+  tone: default
+- text: Z
+  at:
+  - 79
+  - 175.7
+  size: 16.1
+  anchor: end
+  tone: default
+- text: Y
+  at:
+  - 246
+  - 170
+  size: 26
+  anchor: start
+  tone: default
+- text: A
+  at:
+  - 245
+  - 159.1
+  size: 16.1
+  anchor: end
+  tone: default
+- text: Z+1
+  at:
+  - 245
+  - 175.7
+  size: 16.1
+  anchor: end
+  tone: default
+- dots:
+  - - 338
+    - 46
+  r: 3.5
+- arrow:
+  - - 344
+    - 42
+  - - 372
+    - 24
+  width: 1.6
+  tone: vel
+- text: e^{−}
+  at:
+  - 334
+  - 36
+  size: 14
+  anchor: end
+  tone: default
+- arrow:
+  - - 330
+    - 112
+  - - 380
+    - 136
+  width: 1.4
+  dashed: true
+  tone: muted
+- text: ν̃
+  at:
+  - 386
+  - 154
+  size: 15
+  anchor: end
+  tone: muted
+- text: 'в ядре: n → p + e^{−} + ν̃'
+  at:
+  - 200
+  - 206
+  size: 13
+  anchor: middle
+  tone: default
