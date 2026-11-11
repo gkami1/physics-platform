@@ -13,7 +13,7 @@
 // Without reduced motion the run plays in real time (1 с per second) once the model is on screen
 // and stops at 20 с; dragging the moment slider pauses it. With reduced motion nothing runs: the
 // moment stands at the end of the graph, so the still shows the whole run. Defaults by attributes
-// `n0` and `half` (400 nuclei, T = 5 с without them); the lessons set 400 and 5 с (5.5) and 20 and
+// `n0` and `half` (400 nuclei, T = 5 с without them); the lessons set 400 and 7 с (5.5) and 20 and
 // 5 с (5.7), clear of their pages' tasks.
 //
 // Written into theory Markdown as plain HTML; the theory page imports this module only when such an
