@@ -1,0 +1,179 @@
+# quantum.nucleus 4.1: the notation ᴬ_Z X on lithium-7 (A = 7 nucleons above, Z = 3 protons
+# below) and the nucleus itself as 3 protons and 4 neutrons; N = A − Z = 4.
+# Colours (the general convention): objects in the text colour; a proton is a hollow (surface)
+# circle marked +, a neutron a solid dot in the text colour, so the two differ in both themes
+# without painted colours; graphs have accent curves (a second curve dashed); guides and notes muted.
+kind: diagram
+size:
+- 400
+- 256
+items:
+- text: Li
+  at:
+  - 96
+  - 112
+  size: 56
+  anchor: start
+  tone: default
+- text: '7'
+  at:
+  - 95
+  - 88.5
+  size: 34.7
+  anchor: end
+  tone: default
+- text: '3'
+  at:
+  - 95
+  - 124.3
+  size: 34.7
+  anchor: end
+  tone: default
+- text: нуклонов
+  at:
+  - 52
+  - 52
+  size: 12
+  anchor: middle
+  tone: muted
+- text: протонов
+  at:
+  - 52
+  - 152
+  size: 12
+  anchor: middle
+  tone: muted
+- line:
+  - - 52
+    - 58
+  - - 52
+    - 64
+  - - 70
+    - 72
+  width: 1
+  tone: muted
+- line:
+  - - 52
+    - 140
+  - - 52
+    - 132
+  - - 70
+    - 126
+  width: 1
+  tone: muted
+- circle:
+  - 282.0
+  - 106.0
+  r: 13
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 282.0
+  - 111.5
+  size: 16.2
+- circle:
+  - 307.5
+  - 106.0
+  r: 13
+  fill: solid
+  width: 1.6
+- circle:
+  - 294.7
+  - 128.1
+  r: 13
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 294.7
+  - 133.5
+  size: 16.2
+- circle:
+  - 294.7
+  - 83.9
+  r: 13
+  fill: solid
+  width: 1.6
+- circle:
+  - 269.3
+  - 128.1
+  r: 13
+  fill: solid
+  width: 1.6
+- circle:
+  - 269.3
+  - 83.9
+  r: 13
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 269.3
+  - 89.4
+  size: 16.2
+- circle:
+  - 256.5
+  - 106.0
+  r: 13
+  fill: solid
+  width: 1.6
+- text: ядро лития-7
+  at:
+  - 282
+  - 168
+  size: 13
+  anchor: middle
+  tone: default
+- text: '*A* — массовое число: сколько всего нуклонов'
+  at:
+  - 20
+  - 196
+  size: 13
+  anchor: start
+  tone: default
+- text: '*Z* — зарядовое число: сколько протонов'
+  at:
+  - 20
+  - 218
+  size: 13
+  anchor: start
+  tone: default
+- text: '*N* = *A* − *Z* = 7 − 3 = 4 нейтрона'
+  at:
+  - 20
+  - 240
+  size: 13
+  anchor: start
+  tone: default
+- circle:
+  - 232
+  - 18
+  r: 7
+  fill: surface
+  width: 1.6
+- text: +
+  at:
+  - 232
+  - 20.9
+  size: 8.8
+- text: протон, заряд +*e*
+  at:
+  - 246
+  - 22.5
+  size: 12
+  anchor: start
+  tone: default
+- circle:
+  - 232
+  - 38
+  r: 7
+  fill: solid
+  width: 1.6
+- text: нейтрон, заряда нет
+  at:
+  - 246
+  - 42.5
+  size: 12
+  anchor: start
+  tone: default
