@@ -4877,3 +4877,107 @@ task-answer .final {
   color: var(--accent);
   font-weight: 600;
 }
+
+/* <pp-nucleus>: a nucleus from protons and neutrons (lessons 4.1, 4.5 and 4.6 of «Квантовая физика»).
+   A proton is a hollow circle in the surface colour marked +, a neutron a solid dot in the text colour
+   (as in the theory-nuc-* figures), so they differ in both themes without painted colours; the
+   binding-energy curve accent, the chosen nucleus an accent dot; labels with a halo in the panel colour. */
+.nuc-p {
+  fill: var(--surface);
+  stroke: var(--text);
+  stroke-width: 1.4;
+}
+
+.nuc-n {
+  fill: var(--text);
+  stroke: var(--text);
+  stroke-width: 1.4;
+}
+
+.nuc-axis {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.4;
+}
+
+.nuc-axis-tip {
+  fill: var(--text);
+}
+
+.nuc-grid {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 0.8;
+  stroke-dasharray: 5 4;
+}
+
+.nuc-curve {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.nuc-dot {
+  fill: var(--accent);
+  stroke: var(--surface);
+  stroke-width: 2;
+}
+
+.sim-svg .nuc-label {
+  fill: var(--text);
+  font-size: 15px;
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.sim-svg .nuc-plus {
+  font-size: 15px;
+  stroke-width: 0;
+}
+
+.sim-svg .nuc-big {
+  font-size: 48px;
+}
+
+.sim-svg .nuc-mid {
+  font-size: 22px;
+}
+
+.sim-svg .nuc-small {
+  font-size: 13px;
+}
+
+.sim-svg .nuc-muted {
+  fill: var(--muted);
+}
+
+.sim-svg .nuc-accent {
+  fill: var(--accent);
+}
+
+.nuc-table {
+  width: 100%;
+  margin: 0.75rem 0 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.nuc-table th,
+.nuc-table td {
+  padding: 0.2rem 0.35rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+.nuc-table th {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.nuc-table tr.nuc-main td {
+  color: var(--accent);
+  font-weight: 600;
+}
