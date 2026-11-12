@@ -1,0 +1,21 @@
+# el-0028: q(t) through a conductor, a line through 0 and (6 с, 18 мКл); I = 3 мА not shown.
+kind: graph
+x:
+  var: t
+  unit: с
+  min: 0
+  max: 7
+  step: 1
+y:
+  var: q
+  unit: мКл
+  min: 0
+  max: 22
+  step: 2
+  label_every: 2
+series:
+- points:
+  - - 0
+    - 0
+  - - 6
+    - 18

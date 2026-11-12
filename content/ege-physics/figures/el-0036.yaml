@@ -1,0 +1,140 @@
+# el-0036: R1 + R2 || (R3 + R4), key K in parallel with R4; R each.
+kind: diagram
+size:
+- 400
+- 220
+items:
+- dots:
+  - - 30
+    - 100
+  r: 3
+- text: A
+  at:
+  - 30
+  - 84
+  size: 14
+  anchor: middle
+  tone: default
+- line:
+  - - 30
+    - 100
+  - - 70
+    - 100
+  width: 1.6
+- element: resistor
+  at:
+  - 90
+  - 100
+  label: '*R*_{1}'
+- line:
+  - - 110
+    - 100
+  - - 150
+    - 100
+  width: 1.6
+- line:
+  - - 150
+    - 50
+  - - 150
+    - 150
+  width: 1.6
+- line:
+  - - 150
+    - 50
+  - - 220
+    - 50
+  width: 1.6
+- element: resistor
+  at:
+  - 240
+  - 50
+  label: '*R*_{2}'
+- line:
+  - - 260
+    - 50
+  - - 330
+    - 50
+  width: 1.6
+- line:
+  - - 150
+    - 150
+  - - 180
+    - 150
+  width: 1.6
+- element: resistor
+  at:
+  - 200
+  - 150
+  label: '*R*_{3}'
+- line:
+  - - 220
+    - 150
+  - - 260
+    - 150
+  width: 1.6
+- element: resistor
+  at:
+  - 280
+  - 150
+  label: '*R*_{4}'
+- line:
+  - - 300
+    - 150
+  - - 330
+    - 150
+  width: 1.6
+- line:
+  - - 330
+    - 50
+  - - 330
+    - 150
+  width: 1.6
+- line:
+  - - 245
+    - 150
+  - - 245
+    - 195
+  - - 260
+    - 195
+  width: 1.6
+- element: switch
+  at:
+  - 280
+  - 195
+  label: К
+  label_side: 1
+- line:
+  - - 300
+    - 195
+  - - 315
+    - 195
+  - - 315
+    - 150
+  width: 1.6
+- line:
+  - - 330
+    - 100
+  - - 370
+    - 100
+  width: 1.6
+- dots:
+  - - 370
+    - 100
+  r: 3
+- text: B
+  at:
+  - 370
+  - 84
+  size: 14
+  anchor: middle
+  tone: default
+- dots:
+  - - 150
+    - 100
+  - - 330
+    - 100
+  - - 245
+    - 150
+  - - 315
+    - 150
+  r: 3
