@@ -1,0 +1,7 @@
+# kin-0016: uniform motion, x = -4 + 3t (м, с), drawn 0..4 с. The answer 3 м/с depends on these numbers.
+kind: graph
+x: {var: t, unit: с, min: 0, max: 5, step: 1}
+y: {var: x, unit: м, min: -4, max: 8, step: 2}
+series:
+  - points: [[0, -4], [4, 8]]
+guides: [[4, 8]]

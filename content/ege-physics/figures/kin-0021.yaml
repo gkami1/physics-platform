@@ -1,0 +1,6 @@
+# kin-0021: braking 16 -> 0 м/с over 0..4 с. The answer 4 м/с² depends on these numbers.
+kind: graph
+x: {var: t, unit: с, min: 0, max: 5, step: 1}
+y: {var: v, unit: м/с, min: 0, max: 20, step: 4}
+series:
+  - points: [[0, 16], [4, 0]]
