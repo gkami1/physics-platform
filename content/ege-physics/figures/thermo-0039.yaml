@@ -1,0 +1,25 @@
+# thermo-0039: solid 20 -> 140 °C in 0..4 мин (c = 500 given), melting 4..12 мин, liquid to 180 °C at 14 мин.
+# λ = 500·120/4·8 = 120 кДж/кг is not shown.
+kind: graph
+x:
+  var: τ
+  unit: мин
+  min: 0
+  max: 16
+  step: 2
+y:
+  var: t
+  unit: °C
+  min: 0
+  max: 200
+  step: 20
+series:
+- points:
+  - - 0
+    - 20
+  - - 4
+    - 140
+  - - 12
+    - 140
+  - - 14
+    - 180

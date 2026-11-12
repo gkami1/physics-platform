@@ -1,0 +1,26 @@
+# thermo-0037: 0,4 кг: solid 20 -> 80 °C (0..12 кДж), melting at 80 °C (12..48 кДж), liquid to 100 °C at 60 кДж.
+# λ = 36/0,4 = 90 кДж/кг is not shown.
+kind: graph
+x:
+  var: Q
+  unit: кДж
+  min: 0
+  max: 66
+  step: 6
+  label_every: 2
+y:
+  var: t
+  unit: °C
+  min: 0
+  max: 120
+  step: 20
+series:
+- points:
+  - - 0
+    - 20
+  - - 12
+    - 80
+  - - 48
+    - 80
+  - - 60
+    - 100

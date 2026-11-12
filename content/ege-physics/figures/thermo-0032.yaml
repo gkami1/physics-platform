@@ -1,0 +1,43 @@
+# thermo-0032: V–T straight line whose extension passes through 0 (dashed): isobaric, 300 -> 500 К.
+kind: graph
+x:
+  var: T
+  unit: К
+  min: 0
+  max: 600
+  step: 100
+y:
+  var: V
+  min: 0
+  max: 6
+  step: 1.5
+  numbers: false
+series:
+- points:
+  - - 0
+    - 0
+  - - 300
+    - 3
+  dashed: true
+  tone: muted
+- points:
+  - - 300
+    - 3
+  - - 500
+    - 5
+guides:
+- - 300
+  - 3
+- - 500
+  - 5
+notes:
+- at:
+  - 290
+  - 3.35
+  text: '1'
+  anchor: end
+- at:
+  - 490
+  - 5.35
+  text: '2'
+  anchor: end

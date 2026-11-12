@@ -1,0 +1,186 @@
+# thermo-0043: cycle 1 (2 л, 100 кПа) -> 2 (2 л, 200) -> 3 (6 л, 200) -> 4 (4 л, 100) -> 1, clockwise.
+# Work 300 Дж and η = 12 % are not shown; no area fill.
+kind: diagram
+size:
+- 400
+- 240
+items:
+- arrow:
+  - - 66
+    - 214
+  - - 386
+    - 214
+  width: 1.5
+- arrow:
+  - - 66
+    - 214
+  - - 66
+    - 14
+  width: 1.5
+- text: '*V*, л'
+  at:
+  - 384
+  - 232
+  anchor: end
+  size: 14
+- text: '*p*, кПа'
+  at:
+  - 76
+  - 24
+  anchor: start
+  size: 14
+- text: '0'
+  at:
+  - 60
+  - 229
+  size: 12
+  anchor: end
+- line:
+  - - 156
+    - 214
+  - - 156
+    - 218
+  width: 1.2
+- text: '2'
+  at:
+  - 156
+  - 232
+  size: 13
+- line:
+  - - 246
+    - 214
+  - - 246
+    - 218
+  width: 1.2
+- text: '4'
+  at:
+  - 246
+  - 232
+  size: 13
+- line:
+  - - 336
+    - 214
+  - - 336
+    - 218
+  width: 1.2
+- text: '6'
+  at:
+  - 336
+  - 232
+  size: 13
+- line:
+  - - 62
+    - 134.0
+  - - 66
+    - 134.0
+  width: 1.2
+- text: '100'
+  at:
+  - 59
+  - 139.0
+  size: 13
+  anchor: end
+- line:
+  - - 62
+    - 54.0
+  - - 66
+    - 54.0
+  width: 1.2
+- text: '200'
+  at:
+  - 59
+  - 59.0
+  size: 13
+  anchor: end
+- line:
+  - - 156
+    - 214
+  - - 156
+    - 54.0
+  - - 66
+    - 54.0
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 336
+    - 214
+  - - 336
+    - 54.0
+  - - 66
+    - 54.0
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 246
+    - 214
+  - - 246
+    - 134.0
+  - - 66
+    - 134.0
+  width: 1
+  dashed: true
+  tone: muted
+- path: M156 134L156 54L336 54L246 134L156 134
+  width: 3
+  tone: accent
+- arrow:
+  - - 145.0
+    - 103.0
+  - - 145.0
+    - 85.0
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 237.0
+    - 43.0
+  - - 255.0
+    - 43.0
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 307.7
+    - 94.0
+  - - 294.3
+    - 106.0
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 210.0
+    - 145.0
+  - - 192.0
+    - 145.0
+  tone: accent
+  width: 1.5
+- dots:
+  - - 156
+    - 134.0
+  - - 156
+    - 54.0
+  - - 336
+    - 54.0
+  - - 246
+    - 134.0
+  r: 4
+  tone: accent
+- text: '1'
+  at:
+  - 146
+  - 152.0
+  anchor: middle
+- text: '2'
+  at:
+  - 146
+  - 46.0
+  anchor: middle
+- text: '3'
+  at:
+  - 346
+  - 46.0
+  anchor: middle
+- text: '4'
+  at:
+  - 256
+  - 152.0
+  anchor: middle
