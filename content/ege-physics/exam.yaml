@@ -6,8 +6,13 @@ title: ЕГЭ по физике
 locale: ru
 season: 2027
 verified: false
-duration_minutes: 235  # 3 h 55 min in 2025–2026
-source: "Reconstructed from 2025–2026 structure; 2027 draft reports thematic changes to 21 and 23 only"
+duration_minutes: 235  # 3 h 55 min, unchanged 2025–2027
+# Checked line by line against the 2027 DRAFT specification (ПРОЕКТ, FIPI): parts, answer kinds,
+# points and scoring match it and the approved 2026 one. The only 2027 change is thematic: the
+# generalised plan narrows №21 from content areas 2, 3 to 3 (electrodynamics) and №23 from 2, 3
+# to 2 (molecular physics and thermodynamics); tasks that no longer fit carry last_season: 2026.
+# Set verified: true only after the APPROVED 2027 specification is checked.
+source: "2027 draft specification (ПРОЕКТ); structure and scoring as in the approved 2026 one"
 
 tasks:
   1:  {part: 1, answer_kind: numeric,     max_points: 1, scoring: exact,             title: "Механика: расчёт"}
@@ -30,9 +35,9 @@ tasks:
   18: {part: 1, answer_kind: sequence,    max_points: 2, scoring: one_error_partial, title: "Выбор верных утверждений (весь курс)"}
   19: {part: 1, answer_kind: measurement, max_points: 1, scoring: exact,             title: "Показания прибора с учётом погрешности"}
   20: {part: 1, answer_kind: sequence,    max_points: 1, scoring: exact,             title: "Планирование опыта"}
-  21: {part: 2, answer_kind: extended,    max_points: 3, scoring: manual,            title: "Качественная задача"}
+  21: {part: 2, answer_kind: extended,    max_points: 3, scoring: manual,            title: "Электродинамика: качественная задача"}
   22: {part: 2, answer_kind: extended,    max_points: 2, scoring: manual,            title: "Расчётная задача"}
-  23: {part: 2, answer_kind: extended,    max_points: 2, scoring: manual,            title: "Расчётная задача"}
+  23: {part: 2, answer_kind: extended,    max_points: 2, scoring: manual,            title: "МКТ и термодинамика: расчётная задача"}
   24: {part: 2, answer_kind: extended,    max_points: 3, scoring: manual,            title: "Расчётная задача"}
   25: {part: 2, answer_kind: extended,    max_points: 3, scoring: manual,            title: "Расчётная задача"}
   26: {part: 2, answer_kind: extended,    max_points: 4, scoring: manual,            title: "Расчётная задача с обоснованием"}
