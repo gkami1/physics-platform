@@ -14,6 +14,7 @@ Future exams (AP Physics), languages and subjects must be *additions* (new conte
 
 - 26 tasks, 235 minutes. Tasks 1–20 short answer (Part 1), 21–26 extended written solution (Part 2). Max primary score 45 (Part 1: 28, Part 2: 17).
 - 2027: FIPI published the *draft* demo/spec/codifier in Aug 2026; reported changes are thematic only (tasks 21 and 23). **Per-task max points and scoring rules must be taken from the approved 2027 specification** (expected Nov 2026) and recorded in `content/ege-physics/exam.yaml`. That file is the single source of truth; code never hardcodes per-task points.
+- *(checked 2026-11-12 against the 2027 draft specification)* Parts, answer kinds, points and scoring are as in the approved 2026 spec; tasks 5, 9, 14 and 18 read «выберите все верные утверждения» with two or three true answers (one wrong, extra or missing digit = 1 point). The thematic change is in the generalised plan: №21 (qualitative, 3 points) narrows from content areas 2, 3 to 3 — electrodynamics; №23 (calculation, 2 points) from 2, 3 to 2 — molecular physics and thermodynamics. (In the 2026 demo №21 was a thermodynamic cycle and №23 an LC circuit.) The spec's Table 1 still lists broader topics for both; the plan is taken as decisive. `exam.yaml` keeps `verified: false` until the approved 2027 spec is checked; bank tasks that no longer fit carry `last_season: 2026` (see «Варианты»).
 
 ## 2. Options considered
 
