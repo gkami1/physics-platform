@@ -211,14 +211,19 @@ def render_graph(spec: GraphSpec) -> str:
     if grid:
         out.append(f'<path class="fig-grid" stroke-width="1" opacity="0.35" d="{" ".join(grid)}"/>')
 
+    # A qualitative graph has no tick labels to show where zero is, so when its values change
+    # sign the horizontal axis itself (arrow, name, «0») runs at the zero level.
+    mid_axis = not spec.y.numbers and spec.y.min < 0 < spec.y.max
+    ax = zero if mid_axis else str(y0)
+
     # axes with arrowheads
     out.append(
-        f'<path class="fig-axis" stroke-width="1.5" d="M{x0} {y0}H{W - 8}M{x0} {y0}V8"/>'
+        f'<path class="fig-axis" stroke-width="1.5" d="M{x0} {ax}H{W - 8}M{x0} {y0}V8"/>'
         f'<path class="fig-axis" fill="currentColor" stroke="none" '
-        f'd="M{W - 4} {y0}l-9 -4v8zM{x0} 4l-4 9h8z"/>'
+        f'd="M{W - 4} {ax}l-9 -4v8zM{x0} 4l-4 9h8z"/>'
     )
 
-    if spec.y.min < 0 < spec.y.max:
+    if spec.y.min < 0 < spec.y.max and not mid_axis:
         out.append(f'<path class="fig-axis" stroke-width="1.5" d="M{x0} {zero}H{x0 + pw}"/>')
 
     # tick labels
@@ -237,7 +242,7 @@ def render_graph(spec: GraphSpec) -> str:
                     f'<text x="{x0 - 7}" y="{_f(sy(t) + 4.5)}" text-anchor="end">{_num(t)}</text>'
                 )
     if not spec.x.numbers and not spec.y.numbers:
-        labels.append(f'<text x="{x0 - 7}" y="{y0 + 16}" text-anchor="end">0</text>')
+        labels.append(f'<text x="{x0 - 7}" y="{float(ax) + 16:g}" text-anchor="end">0</text>')
     out.append(f'<g class="fig-text" fill="currentColor" stroke="none">{"".join(labels)}')
 
     # axis names: italic symbol, upright unit
@@ -245,7 +250,7 @@ def render_graph(spec: GraphSpec) -> str:
         var = f'<tspan font-style="italic">{rich_text(a.var, 13)}</tspan>'
         return f"{var}, {html.escape(a.unit)}" if a.unit else var
 
-    out.append(f'<text x="{W - 6}" y="{y0 - 10}" text-anchor="end">{name(spec.x)}</text>')
+    out.append(f'<text x="{W - 6}" y="{float(ax) - 10:g}" text-anchor="end">{name(spec.x)}</text>')
     out.append(f'<text x="{x0 + 10}" y="16">{name(spec.y)}</text></g>')
 
     # dashed guides
