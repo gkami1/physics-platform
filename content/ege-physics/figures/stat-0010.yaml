@@ -1,0 +1,7 @@
+# stat-0010: F_A grows linearly to 1 Н at h = 5 см (the cube's edge), then stays. Answer 800 кг/м³ depends on these.
+kind: graph
+x: {var: h, unit: см, min: 0, max: 8, step: 1}
+y: {var: F_А, unit: Н, min: 0, max: 1.2, step: 0.2}
+series:
+  - points: [[0, 0], [5, 1], [8, 1]]
+guides: [[5, 1]]

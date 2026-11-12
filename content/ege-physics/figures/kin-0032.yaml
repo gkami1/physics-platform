@@ -1,0 +1,15 @@
+# kin-0032: A from 20 м to 0 over 0..10 с; B at 0 until 2 с, then to 16 м at 10 с. They meet at (6 с, 8 м);
+# answer «12» depends on these numbers. No mark at the meeting point (statement 3 asks for it).
+kind: graph
+x: {var: t, unit: с, min: 0, max: 11, step: 1}
+y: {var: x, unit: м, min: 0, max: 22, step: 2}
+series:
+  - points: [[0, 20], [10, 0]]
+  - points: [[0, 0], [2, 0], [10, 16]]
+    dashed: true
+notes:
+  - at: [0.4, 20.6]
+    text: "*A*"
+  - at: [9.5, 16.6]
+    text: "*B*"
+    anchor: end

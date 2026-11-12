@@ -1,0 +1,19 @@
+# stat-0012: hinged rod 40..300 at y = 200, thread from (300, 200) to the wall at 30° to the rod:
+# rise = 260·tan30° ≈ 150 -> wall point (40, 50). Setup only, no numbers.
+kind: diagram
+size: [340, 240]
+items:
+  - hatch: [[40, 20], [40, 230]]
+    side: 1
+  - rect: [40, 194, 260, 12]
+    fill: surface
+  - circle: [46, 200]
+    r: 5
+    fill: solid
+  - line: [[300, 200], [40, 50]]
+    width: 1.5
+  - angle: [300, 200]
+    start: 150
+    end: 180
+    r: 50
+    label: "30°"

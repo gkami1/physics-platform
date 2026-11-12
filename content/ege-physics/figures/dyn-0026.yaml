@@ -1,0 +1,22 @@
+# dyn-0026: two loads hung in a chain on two springs. A setup picture only; it carries no numbers.
+kind: diagram
+size: [200, 280]
+items:
+  - hatch: [[50, 20], [150, 20]]
+    side: -1
+  - spring: [[100, 20], [100, 95]]
+    coils: 6
+  - text: "*k*_{1}"
+    at: [130, 63]
+  - rect: [80, 95, 40, 30]
+    fill: surface
+  - text: "*m*_{1}"
+    at: [100, 115]
+  - spring: [[100, 125], [100, 200]]
+    coils: 6
+  - text: "*k*_{2}"
+    at: [130, 168]
+  - rect: [75, 200, 50, 40]
+    fill: surface
+  - text: "*m*_{2}"
+    at: [100, 225]

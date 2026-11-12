@@ -1,0 +1,6 @@
+# cons-0033: v_y = 15 - 10t on 0..3 с. Answer «12» depends on these numbers.
+kind: graph
+x: {var: t, unit: с, min: 0, max: 3.5, step: 0.5}
+y: {var: v_y, unit: м/с, min: -20, max: 20, step: 5}
+series:
+  - points: [[0, 15], [3, -15]]

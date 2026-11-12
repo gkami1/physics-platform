@@ -1,0 +1,23 @@
+# dyn-0036: block on a table, thread over a pulley at the edge to a hanging load. Setup only, no numbers.
+kind: diagram
+size: [340, 230]
+items:
+  - line: [[20, 110], [260, 110], [260, 220]]
+    width: 2
+  - hatch: [[20, 110], [255, 110]]
+    side: 1
+  - rect: [70, 70, 70, 40]
+    fill: surface
+  - text: "*M*"
+    at: [105, 96]
+  - line: [[140, 90], [276, 90]]
+  - circle: [276, 106]
+    r: 16
+  - dots: [[276, 106]]
+    r: 2.5
+  - line: [[262, 110], [276, 106]]
+  - line: [[292, 106], [292, 160]]
+  - rect: [277, 160, 30, 30]
+    fill: surface
+  - text: "*m*"
+    at: [292, 181]

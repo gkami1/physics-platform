@@ -1,0 +1,41 @@
+# stat-0017: ceiling y = 20. Fixed pulley at (200, 50); upper movable pulley U at (170, 130) on a rope
+# from the ceiling (x = 155) over the fixed pulley (x = 185 -> 215) to the free end; lower movable pulley L
+# at (155, 230) on a rope from the ceiling (x = 140) to U's axle (x = 170); the load hangs from L.
+kind: diagram
+size: [300, 310]
+items:
+  - hatch: [[40, 20], [280, 20]]
+    side: -1
+  # fixed pulley and its mount
+  - line: [[200, 20], [200, 50]]
+  - circle: [200, 50]
+    r: 15
+    fill: surface
+  - dots: [[200, 50]]
+    r: 2.5
+  # upper movable pulley: rope ceiling -> left side, right side -> over the fixed pulley -> free end
+  - line: [[155, 20], [155, 130]]
+  - line: [[185, 130], [185, 50]]
+  - arrow: [[215, 50], [215, 205]]
+    tone: force
+    label: "*F*"
+    label_at: [232, 200]
+  - circle: [170, 130]
+    r: 15
+    fill: surface
+  - line: [[170, 130], [170, 145]]
+  - dots: [[170, 130]]
+    r: 2.5
+  # lower movable pulley: rope ceiling -> left side, right side -> U's axle
+  - line: [[140, 20], [140, 230]]
+  - line: [[170, 145], [170, 230]]
+  - circle: [155, 230]
+    r: 15
+    fill: surface
+  - dots: [[155, 230]]
+    r: 2.5
+  - line: [[155, 230], [155, 262]]
+  - rect: [133, 262, 44, 36]
+    fill: surface
+  - text: "*m*"
+    at: [155, 286]

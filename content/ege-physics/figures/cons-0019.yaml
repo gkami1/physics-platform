@@ -1,0 +1,20 @@
+# cons-0019: top view; the wall is vertical on the right. Both velocities make 30° with the wall plane:
+# (dx, dy) = (75, 130) per arrow, atan(75/130) = 30° from the wall line.
+kind: diagram
+size: [300, 300]
+items:
+  - hatch: [[230, 10], [230, 290]]
+    side: -1
+  - arrow: [[155, 20], [229, 148]]
+    tone: vel
+    label: "*v*"
+    label_at: [172, 80]
+  - arrow: [[229, 152], [155, 280]]
+    tone: vel
+    label: "*v*"
+    label_at: [172, 236]
+  - angle: [230, 150]
+    start: 90
+    end: 120
+    r: 60
+    label: "30°"

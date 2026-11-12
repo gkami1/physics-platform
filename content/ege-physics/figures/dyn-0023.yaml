@@ -1,0 +1,7 @@
+# dyn-0023: v_x falls 8 -> 2 м/с over 0..3 с, then stays 2 м/с to 5 с. Answer 5 Н (m = 2,5 кг) depends on these numbers.
+kind: graph
+x: {var: t, unit: с, min: 0, max: 6, step: 1}
+y: {var: v_x, unit: м/с, min: 0, max: 10, step: 2}
+series:
+  - points: [[0, 8], [3, 2], [5, 2]]
+guides: [[3, 2]]

@@ -1,0 +1,22 @@
+# stat-0014: 30 px cells; O at (60, 210), A three cells right and four up at (150, 90);
+# F vertical down from A. Arm = 3 cells = 0,3 м -> 6 Н·м at 20 Н.
+kind: diagram
+size: [270, 270]
+items:
+  - path: "M30 30V240M60 30V240M90 30V240M120 30V240M150 30V240M180 30V240M210 30V240M240 30V240M30 30H240M30 60H240M30 90H240M30 120H240M30 150H240M30 180H240M30 210H240M30 240H240"
+    width: 1
+    tone: muted
+  - line: [[60, 210], [150, 90]]
+    width: 4
+  - circle: [60, 210]
+    r: 5
+    fill: surface
+    width: 2
+  - text: "*O*"
+    at: [44, 232]
+  - text: "*A*"
+    at: [164, 82]
+  - arrow: [[150, 90], [150, 180]]
+    tone: force
+    label: "*F*"
+    label_at: [166, 170]

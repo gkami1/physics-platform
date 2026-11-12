@@ -88,6 +88,15 @@ def test_precision_must_be_power_of_ten() -> None:
         ("1", "13", False, 1),  # one missing
         ("134", "13", False, 1),  # one extra
         ("45", "13", False, 2),
+        # «Выберите все верные утверждения» (2026 spec): two or three true, any order;
+        # one wrong, one extra or one missing digit is one error.
+        ("531", "135", False, 0),
+        ("13", "135", False, 1),  # one missing of three
+        ("134", "135", False, 1),  # one wrong of three
+        ("1345", "135", False, 1),  # one extra beside all three
+        ("1", "135", False, 2),  # two missing
+        ("1245", "135", False, 2),
+        ("135", "35", False, 1),  # an extra third digit on a two-digit answer
         ("13", "13", True, 0),
         ("31", "13", True, 2),
         ("12", "13", True, 1),

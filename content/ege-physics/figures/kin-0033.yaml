@@ -1,0 +1,6 @@
+# kin-0033: v_x 0 -> 6 over 0..3 с, 6 to 5 с, 6 -> 0 over 5..7 с. Answer «135» depends on these numbers.
+kind: graph
+x: {var: t, unit: с, min: 0, max: 8, step: 1}
+y: {var: v_x, unit: м/с, min: 0, max: 8, step: 1}
+series:
+  - points: [[0, 0], [3, 6], [5, 6], [7, 0]]

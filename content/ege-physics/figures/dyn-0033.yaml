@@ -1,0 +1,14 @@
+# dyn-0033: F = 2x (spring 1) and F = x (spring 2), x in см, F in Н: k1 = 200, k2 = 100 Н/м. Answer «134».
+kind: graph
+x: {var: x, unit: см, min: 0, max: 6, step: 1}
+y: {var: F, unit: Н, min: 0, max: 12, step: 2}
+series:
+  - points: [[0, 0], [6, 12]]
+  - points: [[0, 0], [6, 6]]
+notes:
+  - at: [5.3, 11.6]
+    text: "1"
+    anchor: end
+  - at: [5.7, 6.3]
+    text: "2"
+    anchor: end

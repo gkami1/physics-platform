@@ -92,6 +92,18 @@ def test_negative_values_fill_to_the_zero_line() -> None:
     assert len(_axis_paths(render_graph(graph()))) == 2  # the axes and their arrowheads
 
 
+def test_qualitative_graph_with_negative_values_puts_the_t_axis_at_zero() -> None:
+    # No tick labels show where zero is, so the axis itself (arrow, name, «0») moves there.
+    x = {"var": "t", "min": 0, "max": 5, "step": 1, "numbers": False}
+    y = {"var": "", "min": -4, "max": 8, "step": 2, "numbers": False}
+    svg = render_graph(graph(x=x, y=y, series=[{"points": [[0, 6], [5, -4]]}]))
+    zero = "155.3"
+    axes, heads = _axis_paths(svg)  # no separate zero line
+    assert axes.startswith(f"M52 {zero}H392")
+    assert heads.startswith(f"M396 {zero}")
+    assert re.search(r'<text x="45" y="171.3"[^>]*>0</text>', svg)
+
+
 def test_inline_replaces_only_own_line_svg_images(tmp_path: Path) -> None:
     (tmp_path / "a.svg").write_text('<?xml version="1.0"?>\n<svg>\n  <g/>\n</svg>\n', "utf-8")
     md = (
