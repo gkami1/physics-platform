@@ -39,6 +39,7 @@ def public_task(t: Task) -> dict[str, Any]:
         "topics": t.meta.topics,
         "difficulty": t.meta.difficulty,
         "status": t.meta.status,
+        "last_season": t.meta.last_season,
         "statement": t.statement,
         "answer_input": {"type": a.type, "unit": unit},
         "hint_count": len(t.meta.hints),

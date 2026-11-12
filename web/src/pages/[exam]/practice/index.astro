@@ -6,6 +6,7 @@ import {
   difficultyLabel,
   firstParagraph,
   formatDuration,
+  inSeason,
   orderedTopics,
   type PublicBundle,
   specFor,
@@ -29,7 +30,7 @@ const topicTitle = new Map(topics.map((t) => [t.id, t.title]));
 const numbers = Object.keys(b.exam.tasks)
   .map(Number)
   .sort((x, y) => x - y)
-  .filter((n) => b.tasks.some((t) => t.ege_task === n));
+  .filter((n) => b.tasks.some((t) => t.ege_task === n && inSeason(b, t)));
 const rows = await Promise.all(
   [...b.tasks]
     .sort((x, y) => taskOrder(x) - taskOrder(y) || x.difficulty - y.difficulty)
@@ -121,7 +122,7 @@ const rows = await Promise.all(
                     data-id={t.id}
                     data-href={taskUrl(exam, t.id)}
                     data-part={spec.part}
-                    data-number={t.ege_task ?? 'steps'}
+                    data-number={t.ege_task === null ? 'steps' : inSeason(b, t) ? t.ege_task : 'off'}
                     data-topics={t.topics.join(' ')}
                   >
                     <td class="c-status">
@@ -132,8 +133,15 @@ const rows = await Promise.all(
                         <span class="chip" title={spec.title}>
                           Т
                         </span>
-                      ) : (
+                      ) : inSeason(b, t) ? (
                         <span class="chip">№ {t.ege_task}</span>
+                      ) : (
+                        <span
+                          class="chip"
+                          title={`По плану ЕГЭ ${b.exam.season} это задание не входит в № ${t.ege_task}`}
+                        >
+                          № {t.ege_task} · {t.last_season}
+                        </span>
                       )}
                     </td>
                     <td class="c-task">

@@ -7,6 +7,7 @@ import {
   bundles,
   difficultyLabel,
   embeddingPage,
+  inSeason,
   type PublicBundle,
   type PublicTask,
   specFor,
@@ -30,7 +31,13 @@ const { b, task } = Astro.props;
 const spec = specFor(b, task);
 const topics = topicsById(b);
 const stepOf = embeddingPage(b, task.id);
-const heading = task.ege_task === null ? spec.title : `Задание № ${task.ege_task}`;
+// A task whose number no longer fits this season's plan keeps its old number, labelled.
+const heading =
+  task.ege_task === null
+    ? spec.title
+    : inSeason(b, task)
+      ? `Задание № ${task.ege_task}`
+      : `Задание № ${task.ege_task} (ЕГЭ ${task.last_season})`;
 const theoryTopics = new Set(b.theory.map((t) => t.topic));
 const statementHtml = await renderMarkdown(task.statement);
 ---
