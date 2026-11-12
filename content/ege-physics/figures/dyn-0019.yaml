@@ -1,0 +1,22 @@
+# dyn-0019: three forces on a 30 px grid from O (150, 150), y up in cells:
+# F1 (2, 3), F2 (3, -2), F3 (-2, 3); sum (3, 4) cells -> 5 cells = 10 Н at 2 Н per cell.
+kind: diagram
+size: [300, 260]
+items:
+  - path: "M60 30V240M90 30V240M120 30V240M150 30V240M180 30V240M210 30V240M240 30V240M270 30V240M60 30H270M60 60H270M60 90H270M60 120H270M60 150H270M60 180H270M60 210H270M60 240H270"
+    width: 1
+    tone: muted
+  - arrow: [[150, 150], [210, 60]]
+    tone: force
+    label: "*F*_{1}"
+    label_at: [226, 58]
+  - arrow: [[150, 150], [240, 210]]
+    tone: force
+    label: "*F*_{2}"
+    label_at: [256, 222]
+  - arrow: [[150, 150], [90, 60]]
+    tone: force
+    label: "*F*_{3}"
+    label_at: [74, 58]
+  - dots: [[150, 150]]
+    r: 4
