@@ -1,0 +1,120 @@
+# method.experiment 2.4: proving the period does not depend on the mass. Two pendulums of the same
+# length l and angle (muted), bobs of the same size: a light (hollow) and a heavy (solid) one,
+# ringed in accent. Computed from l = 130 px and 16°.
+# Colours (the general convention): objects in the text colour, guides and notes muted, what to
+# look at in accent (the one quantity that differs, the line or the mean).
+kind: diagram
+size:
+- 400
+- 266
+items:
+- hatch:
+  - - 40
+    - 34
+  - - 360
+    - 34
+  side: -1
+- line:
+  - - 120
+    - 34
+  - - 120
+    - 178
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 120
+    - 34
+  - - 155.8
+    - 159.0
+  width: 1.4
+- angle:
+  - 120
+  - 34
+  start: 270
+  end: 286
+  r: 40
+  tone: muted
+- circle:
+  - 155.8
+  - 159.0
+  r: 11
+  fill: none
+  width: 1.8
+- circle:
+  - 155.8
+  - 159.0
+  r: 18
+  width: 1.4
+  dashed: true
+  tone: accent
+- text: лёгкий груз
+  at:
+  - 120
+  - 199.0
+  size: 13
+  tone: accent
+- text: '*l*'
+  at:
+  - 125.9
+  - 96.5
+  tone: muted
+- line:
+  - - 280
+    - 34
+  - - 280
+    - 178
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 280
+    - 34
+  - - 315.8
+    - 159.0
+  width: 1.4
+- angle:
+  - 280
+  - 34
+  start: 270
+  end: 286
+  r: 40
+  tone: muted
+- circle:
+  - 315.8
+  - 159.0
+  r: 11
+  fill: solid
+  width: 1.8
+- circle:
+  - 315.8
+  - 159.0
+  r: 18
+  width: 1.4
+  dashed: true
+  tone: accent
+- text: тяжёлый груз
+  at:
+  - 280
+  - 199.0
+  size: 13
+  tone: accent
+- text: '*l*'
+  at:
+  - 285.9
+  - 96.5
+  tone: muted
+- text: меняем только массу груза — периоды совпали
+  at:
+  - 200
+  - 232
+  size: 13
+  anchor: middle
+  tone: accent
+- text: длина нити *l* и угол — одинаковые
+  at:
+  - 200
+  - 252
+  size: 12
+  anchor: middle
+  tone: muted

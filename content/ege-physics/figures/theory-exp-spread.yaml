@@ -1,0 +1,254 @@
+# method.experiment 2.5: five repeated times 4,1; 4,4; 4,2; 5,6; 4,1 с on a number line (equal
+# results stacked). The outlier 5,6 с is ringed (accent), the mean of the other four, 4,2 с, is an
+# accent mark, their spread a muted bracket. Computed from the data.
+# Colours (the general convention): objects in the text colour, guides and notes muted, what to
+# look at in accent (the one quantity that differs, the line or the mean).
+kind: diagram
+size:
+- 400
+- 186
+items:
+- arrow:
+  - - 30
+    - 120
+  - - 380
+    - 120
+  width: 1.4
+- line:
+  - - 40.0
+    - 120
+  - - 40.0
+    - 126
+  width: 1
+- line:
+  - - 56.0
+    - 120
+  - - 56.0
+    - 126
+  width: 1
+- line:
+  - - 72.0
+    - 120
+  - - 72.0
+    - 132
+  width: 1.2
+- text: '4'
+  at:
+  - 72.0
+  - 150
+  size: 13
+- line:
+  - - 88.0
+    - 120
+  - - 88.0
+    - 126
+  width: 1
+- line:
+  - - 104.0
+    - 120
+  - - 104.0
+    - 126
+  width: 1
+- line:
+  - - 120.0
+    - 120
+  - - 120.0
+    - 126
+  width: 1
+- line:
+  - - 136.0
+    - 120
+  - - 136.0
+    - 126
+  width: 1
+- line:
+  - - 152.0
+    - 120
+  - - 152.0
+    - 132
+  width: 1.2
+- text: 4,5
+  at:
+  - 152.0
+  - 150
+  size: 13
+- line:
+  - - 168.0
+    - 120
+  - - 168.0
+    - 126
+  width: 1
+- line:
+  - - 184.0
+    - 120
+  - - 184.0
+    - 126
+  width: 1
+- line:
+  - - 200.0
+    - 120
+  - - 200.0
+    - 126
+  width: 1
+- line:
+  - - 216.0
+    - 120
+  - - 216.0
+    - 126
+  width: 1
+- line:
+  - - 232.0
+    - 120
+  - - 232.0
+    - 132
+  width: 1.2
+- text: '5'
+  at:
+  - 232.0
+  - 150
+  size: 13
+- line:
+  - - 248.0
+    - 120
+  - - 248.0
+    - 126
+  width: 1
+- line:
+  - - 264.0
+    - 120
+  - - 264.0
+    - 126
+  width: 1
+- line:
+  - - 280.0
+    - 120
+  - - 280.0
+    - 126
+  width: 1
+- line:
+  - - 296.0
+    - 120
+  - - 296.0
+    - 126
+  width: 1
+- line:
+  - - 312.0
+    - 120
+  - - 312.0
+    - 132
+  width: 1.2
+- text: 5,5
+  at:
+  - 312.0
+  - 150
+  size: 13
+- line:
+  - - 328.0
+    - 120
+  - - 328.0
+    - 126
+  width: 1
+- line:
+  - - 344.0
+    - 120
+  - - 344.0
+    - 126
+  width: 1
+- line:
+  - - 360.0
+    - 120
+  - - 360.0
+    - 126
+  width: 1
+- text: '*t*, с'
+  at:
+  - 378
+  - 150
+  size: 13
+  anchor: end
+- circle:
+  - 88.0
+  - 108
+  r: 6
+  fill: solid
+  width: 1
+- circle:
+  - 136.0
+  - 108
+  r: 6
+  fill: solid
+  width: 1
+- circle:
+  - 104.0
+  - 108
+  r: 6
+  fill: solid
+  width: 1
+- circle:
+  - 328.0
+  - 108
+  r: 6
+  fill: solid
+  width: 1
+- circle:
+  - 88.0
+  - 92
+  r: 6
+  fill: solid
+  width: 1
+- circle:
+  - 328.0
+  - 108
+  r: 13
+  width: 1.4
+  dashed: true
+  tone: accent
+- text: промах
+  at:
+  - 328.0
+  - 84
+  size: 13
+  anchor: middle
+  tone: accent
+- line:
+  - - 104.0
+    - 56
+  - - 104.0
+    - 122
+  width: 1.8
+  tone: accent
+- text: 'среднее четырёх: 4,2 с'
+  at:
+  - 104.0
+  - 48
+  size: 13
+  anchor: middle
+  tone: accent
+- line:
+  - - 88.0
+    - 166
+  - - 136.0
+    - 166
+  width: 1.4
+  tone: muted
+- line:
+  - - 88.0
+    - 161
+  - - 88.0
+    - 171
+  width: 1.4
+  tone: muted
+- line:
+  - - 136.0
+    - 161
+  - - 136.0
+    - 171
+  width: 1.4
+  tone: muted
+- text: разброс
+  at:
+  - 144.0
+  - 171
+  size: 12
+  anchor: start
+  tone: muted
