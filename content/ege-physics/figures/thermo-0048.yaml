@@ -1,0 +1,93 @@
+# thermo-0048: p–T cycle: 1→2 isobaric heating, 2→3 along a line through 0 (isochoric cooling),
+# 3→1 isothermal compression. Dashed muted: the extension of 2→3 to the origin.
+kind: diagram
+size:
+- 400
+- 240
+items:
+- arrow:
+  - - 66
+    - 214
+  - - 386
+    - 214
+  width: 1.5
+- arrow:
+  - - 66
+    - 214
+  - - 66
+    - 14
+  width: 1.5
+- text: '*T*'
+  at:
+  - 384
+  - 232
+  anchor: end
+  size: 14
+- text: '*p*'
+  at:
+  - 76
+  - 24
+  anchor: start
+  size: 14
+- text: '0'
+  at:
+  - 60
+  - 229
+  size: 12
+  anchor: end
+- line:
+  - - 66
+    - 214
+  - - 166.0
+    - 150.0
+  width: 1
+  dashed: true
+  tone: muted
+- path: M166 54L316 54L166 150L166 54
+  width: 3
+  tone: accent
+- arrow:
+  - - 232.0
+    - 43.0
+  - - 250.0
+    - 43.0
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 256.6
+    - 107.1
+  - - 241.4
+    - 116.9
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 155.0
+    - 111.0
+  - - 155.0
+    - 93.0
+  tone: accent
+  width: 1.5
+- dots:
+  - - 166.0
+    - 54.0
+  - - 316.0
+    - 54.0
+  - - 166.0
+    - 150.0
+  r: 4
+  tone: accent
+- text: '1'
+  at:
+  - 156.0
+  - 46.0
+  anchor: middle
+- text: '2'
+  at:
+  - 326.0
+  - 46.0
+  anchor: middle
+- text: '3'
+  at:
+  - 172.0
+  - 170.0
+  anchor: middle

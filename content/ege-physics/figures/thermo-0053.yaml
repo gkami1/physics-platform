@@ -1,0 +1,150 @@
+# thermo-0053: cycle 1 (2 л, 100 кПа) -> 2 (2 л, 400) -> 3 (4 л, 400) -> 1 straight; no fill.
+kind: diagram
+size:
+- 400
+- 240
+items:
+- arrow:
+  - - 66
+    - 214
+  - - 386
+    - 214
+  width: 1.5
+- arrow:
+  - - 66
+    - 214
+  - - 66
+    - 14
+  width: 1.5
+- text: '*V*, л'
+  at:
+  - 384
+  - 232
+  anchor: end
+  size: 14
+- text: '*p*, кПа'
+  at:
+  - 76
+  - 24
+  anchor: start
+  size: 14
+- text: '0'
+  at:
+  - 60
+  - 229
+  size: 12
+  anchor: end
+- line:
+  - - 186
+    - 214
+  - - 186
+    - 218
+  width: 1.2
+- text: '2'
+  at:
+  - 186
+  - 232
+  size: 13
+- line:
+  - - 306
+    - 214
+  - - 306
+    - 218
+  width: 1.2
+- text: '4'
+  at:
+  - 306
+  - 232
+  size: 13
+- line:
+  - - 62
+    - 172.0
+  - - 66
+    - 172.0
+  width: 1.2
+- text: '100'
+  at:
+  - 59
+  - 177.0
+  size: 13
+  anchor: end
+- line:
+  - - 62
+    - 46.0
+  - - 66
+    - 46.0
+  width: 1.2
+- text: '400'
+  at:
+  - 59
+  - 51.0
+  size: 13
+  anchor: end
+- line:
+  - - 186
+    - 214
+  - - 186
+    - 172.0
+  - - 66
+    - 172.0
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 306
+    - 214
+  - - 306
+    - 46.0
+  - - 66
+    - 46.0
+  width: 1
+  dashed: true
+  tone: muted
+- path: M186 172L186 46L306 46L186 172
+  width: 3
+  tone: accent
+- arrow:
+  - - 175.0
+    - 118.0
+  - - 175.0
+    - 100.0
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 237.0
+    - 35.0
+  - - 255.0
+    - 35.0
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 262.2
+    - 110.5
+  - - 249.8
+    - 123.5
+  tone: accent
+  width: 1.5
+- dots:
+  - - 186
+    - 172.0
+  - - 186
+    - 46.0
+  - - 306
+    - 46.0
+  r: 4
+  tone: accent
+- text: '1'
+  at:
+  - 176
+  - 190.0
+  anchor: middle
+- text: '2'
+  at:
+  - 176
+  - 38.0
+  anchor: middle
+- text: '3'
+  at:
+  - 316
+  - 38.0
+  anchor: middle

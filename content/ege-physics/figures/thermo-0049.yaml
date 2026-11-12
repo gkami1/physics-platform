@@ -1,0 +1,51 @@
+# thermo-0049: ice from −40 °C heated at constant power; segment lengths ∝ heat per kg:
+# AB 2100·40, BC 3,3·10⁵ (melting), CD 4200·100, DE boiling (cut). Time axis qualitative.
+kind: graph
+x:
+  var: τ
+  min: 0
+  max: 11.5
+  step: 1
+  numbers: false
+y:
+  var: t
+  unit: °C
+  min: -60
+  max: 120
+  step: 20
+series:
+- points:
+  - - 0
+    - -40
+  - - 0.84
+    - 0
+  - - 4.14
+    - 0
+  - - 8.34
+    - 100
+  - - 10.94
+    - 100
+notes:
+- at:
+  - 0.15
+  - -46
+  text: A
+- at:
+  - 0.84
+  - 8
+  text: B
+  anchor: middle
+- at:
+  - 4.29
+  - -10
+  text: C
+- at:
+  - 8.34
+  - 108
+  text: D
+  anchor: middle
+- at:
+  - 10.94
+  - 108
+  text: E
+  anchor: middle

@@ -1,0 +1,35 @@
+# thermo-0050: bodies of 0,5 кг: 1 from 20 to 60 °C, 2 from 20 to 100 °C over 0..8 кДж (c1 = 400, c2 = 200).
+kind: graph
+x:
+  var: Q
+  unit: кДж
+  min: 0
+  max: 10
+  step: 1
+  label_every: 2
+y:
+  var: t
+  unit: °C
+  min: 0
+  max: 120
+  step: 20
+series:
+- points:
+  - - 0
+    - 20
+  - - 8
+    - 60
+- points:
+  - - 0
+    - 20
+  - - 8
+    - 100
+notes:
+- at:
+  - 8.2
+  - 60
+  text: '1'
+- at:
+  - 8.2
+  - 100
+  text: '2'
