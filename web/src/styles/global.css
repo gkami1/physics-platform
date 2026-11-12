@@ -5368,3 +5368,102 @@ task-answer .final {
   color: var(--accent);
   font-weight: 600;
 }
+
+/* <pp-planner>: an experiment planner for task 20 (lesson 2.3 of «Методология»). The column under
+   test has an accent heading; in the two ticked rows, cells that differ are accent in that column
+   and warning in any other. Its study chips are the last fieldset of type, which .pfx-chips turns
+   green: kept accent here. */
+.pln-chips legend {
+  width: auto;
+  margin-right: 0.4rem;
+}
+
+.pfx-chips.pln-chips input:checked + span {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.pln-chips {
+  margin-top: 0;
+}
+
+.pln-wrap {
+  overflow-x: auto;
+}
+
+.pln-table,
+.pln-readout {
+  width: 100%;
+  margin: 0.5rem 0 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.pln-table th,
+.pln-table td,
+.pln-readout th,
+.pln-readout td {
+  padding: 0.25rem 0.4rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.pln-table th {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.pln-table th.pln-key {
+  color: var(--accent);
+}
+
+.pln-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.pln-table tr.pln-picked td {
+  background: var(--accent-soft);
+}
+
+.pln-table td.pln-diff {
+  color: var(--accent);
+  font-weight: 700;
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.pln-table td.pln-warn {
+  color: var(--warn-text);
+  font-weight: 700;
+  background: var(--warn-soft);
+  box-shadow: inset 0 0 0 2px var(--warn);
+}
+
+.pln-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.pln-readout th {
+  font-weight: 400;
+  color: var(--muted);
+  width: 34%;
+}
+
+.pln-readout tr.pln-ok td {
+  color: var(--ok);
+  font-weight: 600;
+}
+
+.pln-readout tr.pln-bad td {
+  color: var(--warn-text);
+  font-weight: 600;
+}

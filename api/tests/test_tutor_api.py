@@ -148,7 +148,7 @@ def test_lesson_has_its_own_thread_and_context(signed_in: TestClient) -> None:
 
 def test_theory_step_answer_is_cut(signed_in: TestClient) -> None:
     store: ContentStore = signed_in.app.state.content  # type: ignore[attr-defined]
-    page = store.theory("method.experiment")
+    page = store.theory("method.experiment/task20")  # a lesson with step tasks
     assert page is not None
     steps = store.theory_steps(page)
     assert steps, "the page should embed step tasks"
@@ -159,9 +159,9 @@ def test_theory_step_answer_is_cut(signed_in: TestClient) -> None:
         a for t in steps if (a := format_answer(t.answer)) and detector.leaks(f"Ответ {a}.")
     )
     use_model(signed_in, ScriptedModel(replies=(f"Давай проверим. Получится {answer}. Ясно?",)))
-    evs = ask(signed_in, "Реши задачу", kind="theory", id=page.topic)
+    evs = ask(signed_in, "Реши задачу", kind="theory", id=page.id)
     assert reply_text(evs) == "Давай проверим." + THEORY_LEAK_NOTE
-    thread = signed_in.get(f"/api/tutor/thread?kind=theory&id={page.topic}").json()
+    thread = signed_in.get(f"/api/tutor/thread?kind=theory&id={page.id}").json()
     assert thread["messages"][-1]["leak"] is True
 
 

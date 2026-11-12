@@ -1,45 +1,128 @@
-# method.experiment: change one parameter, keep the others the same
+# method.experiment 2.2 (was two pendulums of different length — the bank's exp-0001 study): two
+# chutes of the same length L, the same ball at the top, heights h_1 and h_2 = 2h_1 in accent.
+# Only the height differs. Computed from L = 150 px and the two heights.
+# Colours (the general convention): objects in the text colour, guides and notes muted, what to
+# look at in accent (the one quantity that differs, the line or the mean).
 kind: diagram
-size: [400, 255]
+size:
+- 400
+- 246
 items:
-- hatch: [[40, 30], [360, 30]]
-  side: -1
-- line: [[120, 30], [120, 139]]
-  dashed: true
-  width: 1
-  tone: muted
-- line: [[120, 30], [144.59, 121.76]]
-  width: 1.4
-- circle: [144.59, 121.76]
-  r: 10
+- hatch:
+  - - 16
+    - 176
+  - - 384
+    - 176
+  side: 1
+- line:
+  - - 44
+    - 176
+  - - 185.4
+    - 176
+  - - 44
+    - 126
+  closed: true
+  fill: surface
+  width: 1.5
+- circle:
+  - 64.3
+  - 122.6
+  r: 9
   fill: solid
-  tone: accent
-- angle: [120, 30]
-  start: 270
-  end: 285
-  r: 34
-- line: [[280, 30], [280, 204]]
-  dashed: true
-  width: 1
+  width: 1.5
+- text: '*L*'
+  at:
+  - 124.0
+  - 135.9
+  size: 14
   tone: muted
-- line: [[280, 30], [321.41, 184.55]]
-  width: 1.4
-- circle: [321.41, 184.55]
-  r: 10
-  fill: solid
+- line:
+  - - 30
+    - 176
+  - - 30
+    - 126
+  width: 1.6
   tone: accent
-- angle: [280, 30]
-  start: 270
-  end: 285
-  r: 34
-- text: '*l*_1'
-  at: [140, 85]
-- text: '*l*_2'
-  at: [302, 120]
-- text: меняем только длину нити
-  at: [200, 226]
+- line:
+  - - 25
+    - 126
+  - - 35
+    - 126
+  width: 1.6
+  tone: accent
+- line:
+  - - 25
+    - 176
+  - - 35
+    - 176
+  width: 1.6
+  tone: accent
+- text: '*h*_1'
+  at:
+  - 24
+  - 156.0
+  anchor: end
+  tone: accent
+- line:
+  - - 234
+    - 176
+  - - 345.8
+    - 176
+  - - 234
+    - 76
+  closed: true
+  fill: surface
+  width: 1.5
+- circle:
+  - 254.1
+  - 80.5
+  r: 9
+  fill: solid
+  width: 1.5
+- text: '*L*'
+  at:
+  - 304.6
+  - 114.1
+  size: 14
+  tone: muted
+- line:
+  - - 220
+    - 176
+  - - 220
+    - 76
+  width: 1.6
+  tone: accent
+- line:
+  - - 215
+    - 76
+  - - 225
+    - 76
+  width: 1.6
+  tone: accent
+- line:
+  - - 215
+    - 176
+  - - 225
+    - 176
+  width: 1.6
+  tone: accent
+- text: '*h*_2'
+  at:
+  - 214
+  - 131.0
+  anchor: end
+  tone: accent
+- text: меняем только высоту желоба
+  at:
+  - 200
+  - 212
   size: 13
-- text: масса груза и угол — одинаковые
-  at: [200, 246]
+  anchor: middle
+  tone: accent
+- text: шарик и длина желоба *L* — одинаковые
+  at:
+  - 200
+  - 232
   size: 12
+  anchor: middle
   tone: muted
