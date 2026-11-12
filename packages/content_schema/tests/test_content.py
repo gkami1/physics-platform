@@ -339,7 +339,29 @@ def test_lesson_build_entries(tmp_path: Path) -> None:
     assert lesson["topic_title"] == "Основы кинематики"
     assert lesson["lessons"][0] == "1.1 Механическое движение и система СИ"
     assert len(lesson["lessons"]) == len(basics) - 1
-    assert tutor["method.experiment"]["number"] is None  # a topic still on one page
+
+
+def test_single_page_build_entry(scratch: Path, tmp_path: Path) -> None:
+    # Every repo topic has lessons now; keep the one-page layout covered with a temporary one.
+    folder = scratch / "theory/method.experiment"
+    shutil.rmtree(folder, ignore_errors=True)  # whichever layout the repo has
+    embeds = "".join(
+        f'\n<pp-task id="{p.stem}"></pp-task>\n'
+        for p in sorted((scratch / "tasks/steps").glob("ks-exp-*.md"))
+    )
+    page = "---\ntopic: method.experiment\ntitle: Планирование опыта\n---\nТ.\n"
+    (scratch / "theory/method.experiment.md").write_text(page + embeds, "utf-8")
+    res = load_exam_dir(scratch)
+    assert res.errors == []
+    assert res.bundle is not None
+    out = tmp_path / "build"
+    build(res.bundle, out)
+    public = json.loads((out / "public/ege-physics.json").read_text("utf-8"))
+    private = json.loads((out / "private/ege-physics.json").read_text("utf-8"))
+    pages = [p for p in public["theory"] if p["topic"] == "method.experiment"]
+    assert [(p["kind"], p["number"]) for p in pages] == [("page", None)]
+    tutor = {p["id"]: p for p in private["theory"]}
+    assert tutor["method.experiment"]["number"] is None
     assert tutor["method.experiment"]["lessons"] == []
 
 
