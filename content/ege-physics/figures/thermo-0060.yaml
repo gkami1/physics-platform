@@ -1,0 +1,93 @@
+# thermo-0060: V–T cycle: 1→2 isochoric heating, 2→3 isothermal expansion, 3→1 along a line
+# through 0 (isobaric cooling). Dashed muted: the extension of 3→1 to the origin.
+kind: diagram
+size:
+- 400
+- 240
+items:
+- arrow:
+  - - 66
+    - 214
+  - - 386
+    - 214
+  width: 1.5
+- arrow:
+  - - 66
+    - 214
+  - - 66
+    - 14
+  width: 1.5
+- text: '*T*'
+  at:
+  - 384
+  - 232
+  anchor: end
+  size: 14
+- text: '*V*'
+  at:
+  - 76
+  - 24
+  anchor: start
+  size: 14
+- text: '0'
+  at:
+  - 60
+  - 229
+  size: 12
+  anchor: end
+- line:
+  - - 66
+    - 214
+  - - 166.0
+    - 150.0
+  width: 1
+  dashed: true
+  tone: muted
+- path: M166 150L316 150L316 54L166 150
+  width: 3
+  tone: accent
+- arrow:
+  - - 232.0
+    - 161.0
+  - - 250.0
+    - 161.0
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 327.0
+    - 111.0
+  - - 327.0
+    - 93.0
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 240.6
+    - 87.1
+  - - 225.4
+    - 96.9
+  tone: accent
+  width: 1.5
+- dots:
+  - - 166.0
+    - 150.0
+  - - 316.0
+    - 150.0
+  - - 316.0
+    - 54.0
+  r: 4
+  tone: accent
+- text: '1'
+  at:
+  - 170.0
+  - 170.0
+  anchor: middle
+- text: '2'
+  at:
+  - 326.0
+  - 166.0
+  anchor: middle
+- text: '3'
+  at:
+  - 326.0
+  - 46.0
+  anchor: middle

@@ -1,0 +1,45 @@
+# thermo-0031: 1 (1 л, 200 кПа) -> 2 (4 л, 200 кПа) -> 3 (7 л, 100 кПа), straight segments; A23/A12 = 0,75 not shown.
+kind: graph
+x:
+  var: V
+  unit: л
+  min: 0
+  max: 8
+  step: 1
+y:
+  var: p
+  unit: кПа
+  min: 0
+  max: 250
+  step: 50
+series:
+- points:
+  - - 1
+    - 200
+  - - 4
+    - 200
+  - - 7
+    - 100
+guides:
+- - 1
+  - 200
+- - 4
+  - 200
+- - 7
+  - 100
+notes:
+- at:
+  - 1
+  - 212
+  text: '1'
+  anchor: middle
+- at:
+  - 4
+  - 212
+  text: '2'
+  anchor: middle
+- at:
+  - 7
+  - 112
+  text: '3'
+  anchor: middle

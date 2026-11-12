@@ -1,0 +1,34 @@
+# mkt-0040: straight line 1 (2 л, 300 кПа) -> 2 (6 л, 100 кПа); T1 = T2, Tmax at 4 л.
+kind: graph
+x:
+  var: V
+  unit: л
+  min: 0
+  max: 7
+  step: 1
+y:
+  var: p
+  unit: кПа
+  min: 0
+  max: 350
+  step: 50
+series:
+- points:
+  - - 2
+    - 300
+  - - 6
+    - 100
+guides:
+- - 2
+  - 300
+- - 6
+  - 100
+notes:
+- at:
+  - 2.15
+  - 315
+  text: '1'
+- at:
+  - 6.15
+  - 115
+  text: '2'

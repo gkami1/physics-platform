@@ -1,0 +1,36 @@
+# mkt-0030: process 1 (200 К, 6 л) -> 2 (600 К, 4 л) on V–T axes; p2/p1 = 4,5 is not shown.
+kind: graph
+x:
+  var: T
+  unit: К
+  min: 0
+  max: 700
+  step: 100
+y:
+  var: V
+  unit: л
+  min: 0
+  max: 8
+  step: 1
+series:
+- points:
+  - - 200
+    - 6
+  - - 600
+    - 4
+guides:
+- - 200
+  - 6
+- - 600
+  - 4
+notes:
+- at:
+  - 200
+  - 6.4
+  text: '1'
+  anchor: middle
+- at:
+  - 600
+  - 4.4
+  text: '2'
+  anchor: middle

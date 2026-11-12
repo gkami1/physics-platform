@@ -97,7 +97,7 @@ sections:
         title: Насыщенный пар и влажность
         codifier: ["2.1.12", "2.1.13"]
         prereqs: [thermo.gas-laws]
-        ege_tasks: [7, 9, 10, 23, 24]
+        ege_tasks: [9, 10, 23, 24]
       - id: thermo.heat
         title: Количество теплоты и фазовые переходы
         codifier: []

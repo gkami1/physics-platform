@@ -1,0 +1,162 @@
+# mkt-0033: straight line 1 (V0, 3p0) -> 2 (3V0, p0), point 3 (2V0, 2p0); T3/T1 = 4/3 not shown.
+kind: diagram
+size:
+- 400
+- 240
+items:
+- arrow:
+  - - 66
+    - 214
+  - - 386
+    - 214
+  width: 1.5
+- arrow:
+  - - 66
+    - 214
+  - - 66
+    - 14
+  width: 1.5
+- text: '*V*'
+  at:
+  - 384
+  - 232
+  anchor: end
+  size: 14
+- text: '*p*'
+  at:
+  - 76
+  - 24
+  anchor: start
+  size: 14
+- text: '0'
+  at:
+  - 60
+  - 229
+  size: 12
+  anchor: end
+- line:
+  - - 146
+    - 214
+  - - 146
+    - 218
+  width: 1.2
+- text: '*V*_{0}'
+  at:
+  - 146
+  - 232
+  size: 13
+- line:
+  - - 226
+    - 214
+  - - 226
+    - 218
+  width: 1.2
+- text: 2*V*_{0}
+  at:
+  - 226
+  - 232
+  size: 13
+- line:
+  - - 306
+    - 214
+  - - 306
+    - 218
+  width: 1.2
+- text: 3*V*_{0}
+  at:
+  - 306
+  - 232
+  size: 13
+- line:
+  - - 62
+    - 159
+  - - 66
+    - 159
+  width: 1.2
+- text: '*p*_{0}'
+  at:
+  - 59
+  - 164
+  size: 13
+  anchor: end
+- line:
+  - - 62
+    - 104
+  - - 66
+    - 104
+  width: 1.2
+- text: 2*p*_{0}
+  at:
+  - 59
+  - 109
+  size: 13
+  anchor: end
+- line:
+  - - 62
+    - 49
+  - - 66
+    - 49
+  width: 1.2
+- text: 3*p*_{0}
+  at:
+  - 59
+  - 54
+  size: 13
+  anchor: end
+- line:
+  - - 146
+    - 214
+  - - 146
+    - 49
+  - - 66
+    - 49
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 226
+    - 214
+  - - 226
+    - 104
+  - - 66
+    - 104
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 306
+    - 214
+  - - 306
+    - 159
+  - - 66
+    - 159
+  width: 1
+  dashed: true
+  tone: muted
+- path: M146 49L306 159
+  width: 3
+  tone: accent
+- dots:
+  - - 146
+    - 49
+  - - 226
+    - 104
+  - - 306
+    - 159
+  r: 4
+  tone: accent
+- text: '1'
+  at:
+  - 156
+  - 41
+  anchor: middle
+- text: '3'
+  at:
+  - 236
+  - 96
+  anchor: middle
+- text: '2'
+  at:
+  - 316
+  - 151
+  anchor: middle

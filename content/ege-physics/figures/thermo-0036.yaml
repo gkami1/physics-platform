@@ -1,0 +1,24 @@
+# thermo-0036: 0,5 кг heated 20 -> 100 °C by 16 кДж; c = 400 not shown.
+kind: graph
+x:
+  var: Q
+  unit: кДж
+  min: 0
+  max: 20
+  step: 2
+  label_every: 2
+y:
+  var: t
+  unit: °C
+  min: 0
+  max: 120
+  step: 20
+series:
+- points:
+  - - 0
+    - 20
+  - - 16
+    - 100
+guides:
+- - 16
+  - 100

@@ -1,0 +1,140 @@
+# mkt-0048: p–T straight segment 1 (T0, p0) -> 2 (3T0, 2p0); V ∝ T/p grows.
+kind: diagram
+size:
+- 400
+- 240
+items:
+- arrow:
+  - - 66
+    - 214
+  - - 386
+    - 214
+  width: 1.5
+- arrow:
+  - - 66
+    - 214
+  - - 66
+    - 14
+  width: 1.5
+- text: '*T*'
+  at:
+  - 384
+  - 232
+  anchor: end
+  size: 14
+- text: '*p*'
+  at:
+  - 76
+  - 24
+  anchor: start
+  size: 14
+- text: '0'
+  at:
+  - 60
+  - 229
+  size: 12
+  anchor: end
+- line:
+  - - 146
+    - 214
+  - - 146
+    - 218
+  width: 1.2
+- text: '*T*_{0}'
+  at:
+  - 146
+  - 232
+  size: 13
+- line:
+  - - 226
+    - 214
+  - - 226
+    - 218
+  width: 1.2
+- text: 2*T*_{0}
+  at:
+  - 226
+  - 232
+  size: 13
+- line:
+  - - 306
+    - 214
+  - - 306
+    - 218
+  width: 1.2
+- text: 3*T*_{0}
+  at:
+  - 306
+  - 232
+  size: 13
+- line:
+  - - 62
+    - 139
+  - - 66
+    - 139
+  width: 1.2
+- text: '*p*_{0}'
+  at:
+  - 59
+  - 144
+  size: 13
+  anchor: end
+- line:
+  - - 62
+    - 64
+  - - 66
+    - 64
+  width: 1.2
+- text: 2*p*_{0}
+  at:
+  - 59
+  - 69
+  size: 13
+  anchor: end
+- line:
+  - - 146
+    - 214
+  - - 146
+    - 139
+  - - 66
+    - 139
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 306
+    - 214
+  - - 306
+    - 64
+  - - 66
+    - 64
+  width: 1
+  dashed: true
+  tone: muted
+- path: M146 139L306 64
+  width: 3
+  tone: accent
+- arrow:
+  - - 213.9
+    - 94.3
+  - - 230.1
+    - 86.7
+  tone: accent
+  width: 1.5
+- dots:
+  - - 146
+    - 139
+  - - 306
+    - 64
+  r: 4
+  tone: accent
+- text: '1'
+  at:
+  - 144
+  - 127
+  anchor: middle
+- text: '2'
+  at:
+  - 316
+  - 56
+  anchor: middle
