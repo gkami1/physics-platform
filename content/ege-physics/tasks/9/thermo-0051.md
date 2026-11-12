@@ -27,7 +27,14 @@ status: draft
 
 2 — неверно: при ${V = \text{const}}$ ${\dfrac{T_2}{T_1} = \dfrac{p_2}{p_1} = \dfrac{250}{150} = \dfrac{5}{3}.}$
 
-5 — верно: ${\Delta U = \dfrac{3}{2}V\Delta p = 1{,}5 \cdot 4 \cdot 10^{-3} \cdot 10^5\ \text{Дж} = 600\ \text{Дж}.}$
+5 — верно:
+
+$$
+\begin{aligned}
+\Delta U &= \frac{3}{2}V\Delta p = 1{,}5 \cdot 4 \cdot 10^{-3} \cdot 10^5\ \text{Дж} \\
+&= 600\ \text{Дж}.
+\end{aligned}
+$$
 
 3 — неверно: ${A = 0,}$ поэтому ${Q = \Delta U = 600\ \text{Дж}.}$
 

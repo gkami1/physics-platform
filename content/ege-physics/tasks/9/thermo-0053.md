@@ -26,7 +26,14 @@ status: draft
 
 ## Решение
 
-1 — верно: площадь треугольника ${\dfrac{1}{2} \cdot 2\ \text{л} \cdot 300\ \text{кПа} = \dfrac{1}{2} \cdot 2 \cdot 10^{-3}\ \text{м}^3 \cdot 3 \cdot 10^5\ \text{Па} = 300\ \text{Дж}.}$
+1 — верно: работа равна площади треугольника,
+
+$$
+\begin{aligned}
+A &= \frac{1}{2} \cdot 2\ \text{л} \cdot 300\ \text{кПа} \\
+&= \frac{1}{2} \cdot 2 \cdot 10^{-3}\ \text{м}^3 \cdot 3 \cdot 10^5\ \text{Па} = 300\ \text{Дж}.
+\end{aligned}
+$$
 
 2 — верно: объём постоянен (${A = 0}$), давление и температура растут, ${Q = \Delta U > 0.}$
 
@@ -37,7 +44,10 @@ status: draft
 5 — верно: процесс изобарный,
 
 $$
-Q_{23} = \frac{5}{2}p\Delta V = 2{,}5 \cdot 4 \cdot 10^5\ \text{Па} \cdot 2 \cdot 10^{-3}\ \text{м}^3 = 2000\ \text{Дж}.
+\begin{aligned}
+Q_{23} &= \frac{5}{2}p\Delta V = 2{,}5 \cdot 4 \cdot 10^5\ \text{Па} \cdot 2 \cdot 10^{-3}\ \text{м}^3 \\
+&= 2000\ \text{Дж}.
+\end{aligned}
 $$
 
 Ответ: 125.

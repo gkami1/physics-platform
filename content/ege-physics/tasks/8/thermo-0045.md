@@ -18,7 +18,10 @@ status: draft
 За ${t = 60\ \text{с}}$ двигатель совершает работу ${A = Pt = 5000 \cdot 60 = 3 \cdot 10^5\ \text{Дж}.}$
 
 $$
-Q_1 = \frac{A}{\eta} = \frac{3 \cdot 10^5}{0{,}25}\ \text{Дж} = 1{,}2 \cdot 10^6\ \text{Дж} = 1{,}2\ \text{МДж}.
+\begin{aligned}
+Q_1 &= \frac{A}{\eta} = \frac{3 \cdot 10^5}{0{,}25}\ \text{Дж} \\
+&= 1{,}2 \cdot 10^6\ \text{Дж} = 1{,}2\ \text{МДж}.
+\end{aligned}
 $$
 
 Ответ: $1{,}2\ \text{МДж}$.

@@ -18,7 +18,10 @@ status: draft
 Для одноатомного идеального газа ${U = \dfrac{3}{2}\nu RT = \dfrac{3}{2}pV,}$ откуда
 
 $$
-p = \frac{2U}{3V} = \frac{2 \cdot 900}{3 \cdot 5 \cdot 10^{-3}}\ \text{Па} = 1{,}2 \cdot 10^5\ \text{Па} = 120\ \text{кПа}.
+\begin{aligned}
+p &= \frac{2U}{3V} = \frac{2 \cdot 900}{3 \cdot 5 \cdot 10^{-3}}\ \text{Па} \\
+&= 1{,}2 \cdot 10^5\ \text{Па} = 120\ \text{кПа}.
+\end{aligned}
 $$
 
 Ответ: $120\ \text{кПа}$.

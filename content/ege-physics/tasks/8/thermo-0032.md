@@ -22,7 +22,10 @@ status: draft
 Объём пропорционален абсолютной температуре — процесс изобарный. Тогда ${pV = \nu RT}$ даёт ${p\Delta V = \nu R \Delta T}$:
 
 $$
-A = p\Delta V = \nu R (T_2 - T_1) = 2 \cdot 8{,}31 \cdot 200\ \text{Дж} = 3324\ \text{Дж} \approx 3{,}3\ \text{кДж}.
+\begin{aligned}
+A &= p\Delta V = \nu R (T_2 - T_1) = 2 \cdot 8{,}31 \cdot 200\ \text{Дж} \\
+&= 3324\ \text{Дж} \approx 3{,}3\ \text{кДж}.
+\end{aligned}
 $$
 
 Ответ: $3{,}3\ \text{кДж}$.

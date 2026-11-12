@@ -24,7 +24,8 @@ status: draft
 $$
 \begin{aligned}
 \lambda m &= 2\,cm\Delta t, \\
-\lambda &= 2c\Delta t = 2 \cdot 500 \cdot 120\ \text{Дж/кг} = 120\,000\ \text{Дж/кг} = 120\ \text{кДж/кг}.
+\lambda &= 2c\Delta t = 2 \cdot 500 \cdot 120\ \text{Дж/кг} \\
+&= 120\,000\ \text{Дж/кг} = 120\ \text{кДж/кг}.
 \end{aligned}
 $$
 

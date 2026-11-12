@@ -16,7 +16,10 @@ status: draft
 ## Решение
 
 $$
-Q = cm(t_1 - t_2) = 920 \cdot 2 \cdot 200\ \text{Дж} = 368\,000\ \text{Дж} = 368\ \text{кДж}.
+\begin{aligned}
+Q &= cm(t_1 - t_2) = 920 \cdot 2 \cdot 200\ \text{Дж} \\
+&= 368\,000\ \text{Дж} = 368\ \text{кДж}.
+\end{aligned}
 $$
 
 Ответ: $368\ \text{кДж}$.

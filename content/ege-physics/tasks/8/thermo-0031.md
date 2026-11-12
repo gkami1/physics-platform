@@ -24,7 +24,8 @@ status: draft
 $$
 \begin{aligned}
 A_{12} &= p_1 (V_2 - V_1) = 200\ \text{кПа} \cdot 3\ \text{л} = 600\ \text{Дж}, \\
-A_{23} &= \frac{p_2 + p_3}{2}(V_3 - V_2) = \frac{200 + 100}{2}\ \text{кПа} \cdot 3\ \text{л} = 450\ \text{Дж}.
+A_{23} &= \frac{p_2 + p_3}{2}(V_3 - V_2) \\
+&= \frac{200 + 100}{2}\ \text{кПа} \cdot 3\ \text{л} = 450\ \text{Дж}.
 \end{aligned}
 $$
 

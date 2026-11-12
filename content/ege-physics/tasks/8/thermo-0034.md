@@ -18,7 +18,10 @@ status: draft
 При постоянном давлении из ${pV = \nu RT}$ следует ${p\Delta V = \nu R\Delta T:}$
 
 $$
-A = p\Delta V = \nu R\Delta T = 3 \cdot 8{,}31 \cdot 60\ \text{Дж} = 1495{,}8\ \text{Дж} \approx 1496\ \text{Дж}.
+\begin{aligned}
+A &= p\Delta V = \nu R\Delta T = 3 \cdot 8{,}31 \cdot 60\ \text{Дж} \\
+&= 1495{,}8\ \text{Дж} \approx 1496\ \text{Дж}.
+\end{aligned}
 $$
 
 Ответ: $1496\ \text{Дж}$.
