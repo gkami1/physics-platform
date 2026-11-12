@@ -32,9 +32,16 @@ export interface PublicTask {
   topics: string[];
   difficulty: number;
   status: 'draft' | 'published';
+  /** Last exam season whose plan the task's number fits; later it is topic practice only. */
+  last_season: number | null;
   statement: string;
   answer_input: { type: TaskNumberSpec['answer_kind']; unit: string | null };
   hint_count: number;
+}
+
+/** Whether the task counts as its EGE number this season (variants, the «№» filter). */
+export function inSeason(b: PublicBundle, t: PublicTask): boolean {
+  return t.ege_task !== null && (t.last_season === null || b.exam.season <= t.last_season);
 }
 
 export interface PublicBundle {
@@ -197,14 +204,17 @@ function mulberry32(seed: number): () => number {
 }
 
 /** Synthetic exam variants: for every task number, its pool is shuffled once (seeded by the
- * number) and variant k takes item k mod pool size. Published tasks are preferred. */
+ * number) and variant k takes item k mod pool size. Published tasks are preferred; tasks
+ * whose number no longer fits this season's plan (`last_season`) are left out. */
 export function variants(b: PublicBundle): Variant[] {
   const numbers = Object.keys(b.exam.tasks)
     .map(Number)
     .sort((x, y) => x - y);
   const pools = new Map<number, PublicTask[]>();
   for (const n of numbers) {
-    const all = b.tasks.filter((t) => t.ege_task === n).sort((x, y) => x.id.localeCompare(y.id));
+    const all = b.tasks
+      .filter((t) => t.ege_task === n && inSeason(b, t))
+      .sort((x, y) => x.id.localeCompare(y.id));
     const published = all.filter((t) => t.status === 'published');
     const pool = published.length > 0 ? published : all;
     const rnd = mulberry32(n * 7919);

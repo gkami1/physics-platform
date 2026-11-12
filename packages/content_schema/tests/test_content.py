@@ -48,6 +48,7 @@ def test_public_build_has_no_private_fields(exam_dir: Path, tmp_path: Path) -> N
             "topics",
             "difficulty",
             "status",
+            "last_season",
             "statement",
             "answer_input",
             "hint_count",
@@ -88,6 +89,24 @@ def test_wrong_answer_type_for_task_number(scratch: Path) -> None:
 def test_task_in_wrong_folder(scratch: Path) -> None:
     (scratch / "tasks/1/kin-0001.md").rename(scratch / "tasks/2/kin-0001.md")
     assert "must live in tasks/1/" in _errors(scratch)
+
+
+def test_last_season_needs_an_ege_number(scratch: Path) -> None:
+    step = next((scratch / "tasks/steps").glob("ks-basics-*.md"))
+    _edit(step, "status:", "last_season: 2026\nstatus:")
+    assert "last_season applies only to tasks with an ege_task" in _errors(scratch)
+
+
+def test_last_season_marks_a_task_out_of_later_seasons(scratch: Path) -> None:
+    _edit(scratch / "tasks/1/kin-0001.md", "status:", "last_season: 2026\nstatus:")
+    res = load_exam_dir(scratch)
+    assert res.errors == []
+    assert res.bundle is not None
+    meta = next(t.meta for t in res.bundle.tasks if t.meta.id == "kin-0001")
+    assert meta.in_season(2026)
+    assert not meta.in_season(2027)
+    other = next(t.meta for t in res.bundle.tasks if t.meta.id == "kin-0003")
+    assert other.in_season(2027)
 
 
 def test_unknown_topic(scratch: Path) -> None:

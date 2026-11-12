@@ -199,6 +199,22 @@ class TaskMeta(Strict):
     hints: list[str] = Field(default_factory=list, max_length=5)
     tutor_notes: str | None = None  # private guidance for the tutor (common mistakes etc.)
     status: Literal["draft", "published"] = "draft"
+    # The last exam season whose plan this task's number still fits (e.g. 2026 for a
+    # thermodynamics №23 once the 2027 plan made №23 molecular physics only). In later
+    # seasons the task stays for topic practice but leaves variants and its number's list.
+    last_season: int | None = Field(default=None, ge=2000, le=2100)
+
+    @model_validator(mode="after")
+    def _season_needs_number(self) -> TaskMeta:
+        if self.last_season is not None and self.ege_task is None:
+            raise ValueError("last_season applies only to tasks with an ege_task")
+        return self
+
+    def in_season(self, season: int) -> bool:
+        """Whether this task counts as its EGE number in the given exam season."""
+        if self.ege_task is None:
+            return False
+        return self.last_season is None or season <= self.last_season
 
 
 SOLUTION_HEADING = re.compile(r"^##\s+Решение\s*$", re.MULTILINE)

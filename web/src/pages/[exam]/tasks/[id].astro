@@ -7,6 +7,7 @@ import {
   bundles,
   difficultyLabel,
   embeddingPage,
+  inSeason,
   type PublicBundle,
   type PublicTask,
   specFor,
@@ -30,7 +31,13 @@ const { b, task } = Astro.props;
 const spec = specFor(b, task);
 const topics = topicsById(b);
 const stepOf = embeddingPage(b, task.id);
-const heading = task.ege_task === null ? spec.title : `Задание № ${task.ege_task}`;
+// A task whose number no longer fits this season's plan keeps its old number, labelled.
+const heading =
+  task.ege_task === null
+    ? spec.title
+    : inSeason(b, task)
+      ? `Задание № ${task.ege_task}`
+      : `Задание № ${task.ege_task} (ЕГЭ ${task.last_season})`;
 const theoryTopics = new Set(b.theory.map((t) => t.topic));
 const statementHtml = await renderMarkdown(task.statement);
 ---
@@ -52,7 +59,9 @@ const statementHtml = await renderMarkdown(task.statement);
   </nav>
   <h1>{heading}</h1>
   <p class="meta">
-    <span class="badge">{spec.title}</span>
+    <span class="badge"
+      >{inSeason(b, task) || task.ege_task === null ? spec.title : `не входит в ЕГЭ ${b.exam.season}`}</span
+    >
     <span class="muted"
       >макс. {spec.max_points} балл{spec.max_points === 1 ? '' : 'а'} · {difficultyLabel(task.difficulty)}</span
     >
