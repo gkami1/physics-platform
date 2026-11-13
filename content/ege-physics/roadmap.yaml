@@ -24,7 +24,7 @@ sections:
         title: Движение по окружности
         codifier: ["1.1.8"]
         prereqs: [mech.kinematics.basics]
-        ege_tasks: [1, 5, 6]
+        ege_tasks: [1, 5, 6, 22, 26]
       - id: mech.dynamics.newton
         title: Законы Ньютона
         codifier: ["1.2.1", "1.2.2", "1.2.3", "1.2.4", "1.2.5"]
@@ -34,12 +34,12 @@ sections:
         title: Силы в механике — упругость, трение, вес
         codifier: ["1.2.9", "1.2.10"]
         prereqs: [mech.dynamics.newton]
-        ege_tasks: [2, 5, 6, 26]
+        ege_tasks: [2, 5, 6, 22, 26]
       - id: mech.dynamics.gravity
         title: Всемирное тяготение и спутники
         codifier: ["1.2.6", "1.2.7", "1.2.8"]
         prereqs: [mech.dynamics.newton, mech.kinematics.circular]
-        ege_tasks: [2, 5, 6]
+        ege_tasks: [2, 5, 6, 22]
       - id: mech.statics.moments
         title: Момент силы и равновесие тела
         codifier: ["1.3.1", "1.3.2"]
@@ -49,7 +49,7 @@ sections:
         title: Давление жидкости и закон Архимеда
         codifier: ["1.3.3", "1.3.4", "1.3.5"]
         prereqs: [mech.dynamics.forces]
-        ege_tasks: [4, 5, 6, 26]
+        ege_tasks: [4, 5, 6, 22, 26]
       - id: mech.conservation.momentum
         title: Импульс и закон сохранения импульса
         codifier: ["1.4.1", "1.4.2", "1.4.3"]
@@ -59,7 +59,7 @@ sections:
         title: Работа и мощность
         codifier: ["1.4.4", "1.4.5"]
         prereqs: [mech.dynamics.forces]
-        ege_tasks: [3, 5, 6]
+        ege_tasks: [3, 5, 6, 22]
       - id: mech.conservation.energy
         title: Механическая энергия и её сохранение
         codifier: ["1.4.6", "1.4.7", "1.4.8"]
@@ -69,7 +69,7 @@ sections:
         title: Механические колебания
         codifier: ["1.5.1", "1.5.2", "1.5.3"]
         prereqs: [mech.conservation.energy, mech.kinematics.circular]
-        ege_tasks: [4, 5, 6]
+        ege_tasks: [4, 5, 6, 22]
       - id: mech.oscillations.waves
         title: Механические волны и звук
         codifier: ["1.5.4", "1.5.5"]

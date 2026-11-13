@@ -1,0 +1,49 @@
+# cons-0045: puck towards a free smooth hill of height H on a smooth floor.
+kind: diagram
+size:
+- 400
+- 220
+items:
+- hatch:
+  - - 10
+    - 200.0
+  - - 390
+    - 200.0
+  side: 1
+- line:
+  - - 10
+    - 200.0
+  - - 390
+    - 200.0
+  width: 2
+- path: M200.0 200.0C250.0 200.0 250.0 110.0 290.0 110.0C330.0 110.0 330.0 200.0 380.0
+    200.0Z
+  fill: surface
+  width: 1.8
+- rect:
+  - 50
+  - 186.0
+  - 26
+  - 14
+  fill: solid
+  width: 1
+- arrow:
+  - - 63
+    - 174.0
+  - - 123
+    - 174.0
+  tone: vel
+  label: '*v*_{0}'
+- line:
+  - - 290.0
+    - 110.0
+  - - 290.0
+    - 200.0
+  width: 1
+  dashed: true
+  tone: muted
+- text: '*H*'
+  at:
+  - 304.0
+  - 165
+  size: 14

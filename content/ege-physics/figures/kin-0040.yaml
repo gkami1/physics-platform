@@ -1,0 +1,53 @@
+# kin-0040: horizontal throw from the top of a slope with tg a = 0.75.
+kind: diagram
+size:
+- 400
+- 280
+items:
+- line:
+  - - 60.0
+    - 50.0
+  - - 340.0
+    - 260.0
+  width: 2.2
+- hatch:
+  - - 60.0
+    - 50.0
+  - - 340.0
+    - 260.0
+  side: 1
+- line:
+  - - 20.0
+    - 50.0
+  - - 60.0
+    - 50.0
+  width: 2.2
+- line:
+  - - 60.0
+    - 50.0
+  - - 210.0
+    - 50.0
+  width: 1.2
+  dashed: true
+  tone: muted
+- angle:
+  - 60.0
+  - 50.0
+  start: 323.13
+  end: 360
+  r: 95
+  label: '*α*'
+- dots:
+  - - 60.0
+    - 44.0
+  r: 5
+- arrow:
+  - - 60.0
+    - 44.0
+  - - 110.0
+    - 44.0
+  tone: vel
+  label: '*v*_{0}'
+  label_at:
+  - 100.0
+  - 32.0

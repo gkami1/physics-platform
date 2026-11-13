@@ -1,0 +1,52 @@
+# dyn-0041: conical pendulum, thread at 60 deg to the vertical.
+kind: diagram
+size:
+- 400
+- 200
+items:
+- hatch:
+  - - 150
+    - 30
+  - - 250
+    - 30
+  side: -1
+- line:
+  - - 150
+    - 30
+  - - 250
+    - 30
+  width: 2
+- line:
+  - - 200.0
+    - 30.0
+  - - 200.0
+    - 115.00000000000001
+  width: 1
+  dashed: true
+  tone: muted
+- path: M70.1 105.0A129.9 22 0 1 0 329.9 105.0A129.9 22 0 1 0 70.1 105.0
+  width: 1.2
+  dashed: true
+  tone: muted
+- line:
+  - - 200.0
+    - 30.0
+  - - 329.9
+    - 105.0
+  width: 1.6
+- angle:
+  - 200.0
+  - 30.0
+  start: 270
+  end: 330
+  r: 40
+  label: 60°
+- circle:
+  - 329.9
+  - 105.0
+  r: 8
+  fill: solid
+- dots:
+  - - 200.0
+    - 105.0
+  r: 2.5
