@@ -1,0 +1,114 @@
+# el-0052: source -> R1 (voltmeter across) -> (R2 + ammeter) || rheostat -> back.
+kind: diagram
+size:
+- 380
+- 220
+items:
+- element: battery
+  at:
+  - 40
+  - 130
+  vertical: true
+- line:
+  - - 40
+    - 110
+  - - 40
+    - 60
+  - - 110
+    - 60
+  width: 1.6
+- line:
+  - - 40
+    - 150
+  - - 40
+    - 200
+  - - 340
+    - 200
+  - - 340
+    - 140
+  width: 1.6
+- element: resistor
+  at:
+  - 130
+  - 60
+  label: '*R*_{1}'
+  label_side: 1
+- element: voltmeter
+  at:
+  - 130
+  - 20
+- line:
+  - - 90
+    - 60
+  - - 90
+    - 20
+  - - 110
+    - 20
+  width: 1.6
+- line:
+  - - 150
+    - 20
+  - - 170
+    - 20
+  - - 170
+    - 60
+  width: 1.6
+- line:
+  - - 150
+    - 60
+  - - 230
+    - 60
+  width: 1.6
+- element: resistor
+  at:
+  - 250
+  - 60
+  label: '*R*_{2}'
+- line:
+  - - 270
+    - 60
+  - - 280
+    - 60
+  width: 1.6
+- element: ammeter
+  at:
+  - 300
+  - 60
+- line:
+  - - 320
+    - 60
+  - - 340
+    - 60
+  - - 340
+    - 140
+  width: 1.6
+- line:
+  - - 210
+    - 60
+  - - 210
+    - 140
+  - - 255
+    - 140
+  width: 1.6
+- element: rheostat
+  at:
+  - 275
+  - 140
+  label: '*R*'
+  label_side: 1
+- line:
+  - - 295
+    - 140
+  - - 340
+    - 140
+  width: 1.6
+- dots:
+  - - 90
+    - 60
+  - - 170
+    - 60
+  - - 210
+    - 60
+  - - 340
+    - 140
+  r: 3
