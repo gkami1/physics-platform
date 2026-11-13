@@ -1,0 +1,54 @@
+# stat-0020: vessel with water and an oil layer, a cube across the interface.
+kind: diagram
+size:
+- 400
+- 250
+items:
+- line:
+  - - 80.0
+    - 30.0
+  - - 80.0
+    - 230.0
+  - - 320.0
+    - 230.0
+  - - 320.0
+    - 30.0
+  width: 2
+- rect:
+  - 80.0
+  - 150.0
+  - 240.0
+  - 80.0
+  fill: surface
+  width: 0
+- line:
+  - - 80.0
+    - 150.0
+  - - 320.0
+    - 150.0
+  width: 1.2
+- line:
+  - - 80.0
+    - 60.0
+  - - 320.0
+    - 60.0
+  width: 1.2
+- rect:
+  - 165.0
+  - 122.0
+  - 70.0
+  - 70.0
+  fill: none
+  width: 2
+- text: масло
+  at:
+  - 92.0
+  - 110
+  size: 13
+  anchor: start
+- text: вода
+  at:
+  - 92.0
+  - 200
+  size: 13
+  anchor: start
