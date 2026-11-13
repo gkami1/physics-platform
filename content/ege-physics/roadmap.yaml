@@ -160,7 +160,7 @@ sections:
         title: Магнитное поле и сила Ампера
         codifier: ["3.3.1", "3.3.2", "3.3.3"]
         prereqs: [electro.circuits.ohm]
-        ege_tasks: [12, 14, 15, 21]
+        ege_tasks: [12, 14, 15, 21, 25]
       - id: electro.magnetic.lorentz
         title: Сила Лоренца
         codifier: ["3.3.4"]
@@ -180,7 +180,7 @@ sections:
         title: Колебательный контур
         codifier: ["3.5.1", "3.5.2"]
         prereqs: [electro.induction.self, electro.field.capacitors, mech.oscillations.harmonic]
-        ege_tasks: [13, 14, 15]
+        ege_tasks: [13, 14, 15, 25]
       - id: electro.oscillations.waves
         title: Переменный ток и электромагнитные волны
         codifier: ["3.5.3", "3.5.4", "3.5.5"]
@@ -190,12 +190,12 @@ sections:
         title: Отражение и преломление света
         codifier: ["3.6.1", "3.6.2", "3.6.3", "3.6.4", "3.6.5"]
         prereqs: [mech.kinematics.basics]
-        ege_tasks: [13, 14, 15, 21]
+        ege_tasks: [13, 14, 15, 21, 25]
       - id: electro.optics.lenses
         title: Линзы
         codifier: []
         prereqs: [electro.optics.refraction]
-        ege_tasks: [13, 14, 15, 21]
+        ege_tasks: [13, 14, 15, 21, 25]
       - id: electro.optics.wave
         title: Волновая оптика — интерференция, дифракция, дисперсия
         codifier: []
