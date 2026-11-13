@@ -200,7 +200,7 @@ sections:
         title: Волновая оптика — интерференция, дифракция, дисперсия
         codifier: []
         prereqs: [electro.optics.refraction, electro.oscillations.waves]
-        ege_tasks: [13, 14]
+        ege_tasks: [14, 15]
   - id: sr
     title: Основы СТО
     topics:

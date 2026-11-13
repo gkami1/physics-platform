@@ -1,0 +1,26 @@
+# mag-0020: Φ(t) through a ring: 0→6 мВб over 0–2 с, constant to 4 с, 6→2 мВб over 4–6 с.
+kind: graph
+x:
+  var: t
+  unit: с
+  min: 0
+  max: 7
+  step: 1
+y:
+  var: Φ
+  unit: мВб
+  min: 0
+  max: 7
+  step: 1
+series:
+- points:
+  - - 0
+    - 0
+  - - 2
+    - 6
+  - - 4
+    - 6
+  - - 6
+    - 2
+  - - 7
+    - 2
