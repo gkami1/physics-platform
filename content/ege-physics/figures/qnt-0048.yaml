@@ -1,0 +1,41 @@
+# qnt-0048: energy levels to scale (y = 34 + 22·|E| px): E0 = 0.0, E3 = -2.0, E2 = -4.5, E1 = -8.0 эВ
+kind: diagram
+size: [320, 232]
+items:
+- line: [[70, 34], [230, 34]]
+  width: 1.6
+  dashed: true
+- text: '0'
+  at: [238, 39]
+  size: 14
+  anchor: start
+- line: [[70, 78], [230, 78]]
+  width: 1.6
+- text: '*E*_{3}'
+  at: [62, 83]
+  size: 14
+  anchor: end
+- text: '−2,0 эВ'
+  at: [238, 83]
+  size: 14
+  anchor: start
+- line: [[70, 133], [230, 133]]
+  width: 1.6
+- text: '*E*_{2}'
+  at: [62, 138]
+  size: 14
+  anchor: end
+- text: '−4,5 эВ'
+  at: [238, 138]
+  size: 14
+  anchor: start
+- line: [[70, 210], [230, 210]]
+  width: 1.6
+- text: '*E*_{1}'
+  at: [62, 215]
+  size: 14
+  anchor: end
+- text: '−8,0 эВ'
+  at: [238, 215]
+  size: 14
+  anchor: start
