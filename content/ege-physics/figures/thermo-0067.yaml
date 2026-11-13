@@ -1,0 +1,222 @@
+# thermo-0067: 1 (1 л, 500 кПа) -> 2 (5 л, 100 кПа) straight, -> 3 (1 л, 100 кПа) isobar, -> 1 isochore.
+kind: diagram
+size:
+- 400
+- 240
+items:
+- arrow:
+  - - 66
+    - 214
+  - - 386
+    - 214
+  width: 1.5
+- arrow:
+  - - 66
+    - 214
+  - - 66
+    - 14
+  width: 1.5
+- text: '*V*, л'
+  at:
+  - 384
+  - 232
+  anchor: end
+  size: 14
+- text: '*p*, кПа'
+  at:
+  - 76
+  - 24
+  anchor: start
+  size: 14
+- text: '0'
+  at:
+  - 60
+  - 229
+  size: 12
+  anchor: end
+- line:
+  - - 122
+    - 214
+  - - 122
+    - 218
+  width: 1.2
+- text: '1'
+  at:
+  - 122
+  - 232
+  size: 13
+- line:
+  - - 178
+    - 214
+  - - 178
+    - 218
+  width: 1.2
+- text: '2'
+  at:
+  - 178
+  - 232
+  size: 13
+- line:
+  - - 234
+    - 214
+  - - 234
+    - 218
+  width: 1.2
+- text: '3'
+  at:
+  - 234
+  - 232
+  size: 13
+- line:
+  - - 290
+    - 214
+  - - 290
+    - 218
+  width: 1.2
+- text: '4'
+  at:
+  - 290
+  - 232
+  size: 13
+- line:
+  - - 346
+    - 214
+  - - 346
+    - 218
+  width: 1.2
+- text: '5'
+  at:
+  - 346
+  - 232
+  size: 13
+- line:
+  - - 62
+    - 178.0
+  - - 66
+    - 178.0
+  width: 1.2
+- text: '100'
+  at:
+  - 59
+  - 183.0
+  size: 13
+  anchor: end
+- line:
+  - - 62
+    - 142.0
+  - - 66
+    - 142.0
+  width: 1.2
+- text: '200'
+  at:
+  - 59
+  - 147.0
+  size: 13
+  anchor: end
+- line:
+  - - 62
+    - 106.0
+  - - 66
+    - 106.0
+  width: 1.2
+- text: '300'
+  at:
+  - 59
+  - 111.0
+  size: 13
+  anchor: end
+- line:
+  - - 62
+    - 70.0
+  - - 66
+    - 70.0
+  width: 1.2
+- text: '400'
+  at:
+  - 59
+  - 75.0
+  size: 13
+  anchor: end
+- line:
+  - - 62
+    - 34.0
+  - - 66
+    - 34.0
+  width: 1.2
+- text: '500'
+  at:
+  - 59
+  - 39.0
+  size: 13
+  anchor: end
+- line:
+  - - 122
+    - 214
+  - - 122
+    - 34.0
+  - - 66
+    - 34.0
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 346
+    - 214
+  - - 346
+    - 178.0
+  - - 66
+    - 178.0
+  width: 1
+  dashed: true
+  tone: muted
+- path: M122 34L346 178L122 178L122 34Z
+  width: 3
+  tone: accent
+- arrow:
+  - - 235.4
+    - 92.1
+  - - 250.6
+    - 101.9
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 243.0
+    - 189.0
+  - - 225.0
+    - 189.0
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 111.0
+    - 115.0
+  - - 111.0
+    - 97.0
+  tone: accent
+  width: 1.5
+- dots:
+  - - 122
+    - 34.0
+  - - 346
+    - 178.0
+  - - 122
+    - 178.0
+  r: 4
+  tone: accent
+- text: '1'
+  at:
+  - 134
+  - 30.0
+  anchor: middle
+  size: 14
+- text: '2'
+  at:
+  - 356
+  - 170.0
+  anchor: middle
+  size: 14
+- text: '3'
+  at:
+  - 134
+  - 170.0
+  anchor: middle
+  size: 14
