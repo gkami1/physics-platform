@@ -1,0 +1,121 @@
+# opt-0029: solution: S at 1.2 m under a raft r = h tg a0, n = 1.33; edge rays, TIR ray.
+kind: diagram
+size:
+- 530
+- 185
+items:
+- rect:
+  - 93.1
+  - 42.0
+  - 273.7
+  - 8
+  fill: solid
+- line:
+  - - 10
+    - 50.0
+  - - 520
+    - 50.0
+  width: 1.6
+- text: воздух
+  at:
+  - 14
+  - 36.0
+  size: 13
+  anchor: start
+- text: вода
+  at:
+  - 14
+  - 76.0
+  size: 13
+  anchor: start
+- line:
+  - - 230.0
+    - 50.0
+  - - 230.0
+    - 170.0
+  dashed: true
+  width: 1
+- text: '*h*'
+  at:
+  - 222.0
+  - 115.0
+  size: 14
+  anchor: end
+- dots:
+  - - 230.0
+    - 170.0
+  r: 4
+- text: '*S*'
+  at:
+  - 242.0
+  - 176.0
+  size: 14
+  anchor: start
+- arrow:
+  - - 230.0
+    - 170.0
+  - - 93.1
+    - 50.0
+  width: 1.6
+- arrow:
+  - - 230.0
+    - 170.0
+  - - 366.9
+    - 50.0
+  width: 1.6
+- arrow:
+  - - 230.0
+    - 170.0
+  - - 168.4
+    - 50.0
+  width: 1.2
+  tone: muted
+- arrow:
+  - - 230.0
+    - 170.0
+  - - 441.9
+    - 50.0
+  width: 1.6
+- arrow:
+  - - 441.9
+    - 50.0
+  - - 515.0
+    - 91.4
+  width: 1.6
+- line:
+  - - 366.9
+    - 20.0
+  - - 366.9
+    - 120.0
+  dashed: true
+  width: 1
+- angle:
+  - 366.9
+  - 50.0
+  start: 221.2
+  end: 270
+  r: 34
+  label: '*α*_{0}'
+- line:
+  - - 230.0
+    - 28.0
+  - - 366.9
+    - 28.0
+  width: 1
+- line:
+  - - 230.0
+    - 23.0
+  - - 230.0
+    - 33.0
+  width: 1
+- line:
+  - - 366.9
+    - 23.0
+  - - 366.9
+    - 33.0
+  width: 1
+- text: '*r*'
+  at:
+  - 298.4
+  - 22.0
+  size: 14
