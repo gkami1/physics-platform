@@ -19,8 +19,9 @@ status: draft
 
 $$
 \begin{aligned}
-Q_{\text{п}} &= Lm_{\text{п}} + c_{\text{в}}m_{\text{п}} \cdot 100 = \\
-&= (2{,}3 \cdot 10^6 \cdot 0{,}05 + 4200 \cdot 0{,}05 \cdot 100)\ \text{Дж} = 136\ \text{кДж}.
+Lm_{\text{п}} &= 2{,}3 \cdot 10^6 \cdot 0{,}05\ \text{Дж} = 115\ \text{кДж}, \\
+c_{\text{в}}m_{\text{п}} \cdot 100 &= 4200 \cdot 0{,}05 \cdot 100\ \text{Дж} = 21\ \text{кДж}, \\
+Q_{\text{п}} &= (115 + 21)\ \text{кДж} = 136\ \text{кДж}.
 \end{aligned}
 $$
 
@@ -28,8 +29,9 @@ $$
 
 $$
 \begin{aligned}
-Q_{\text{л}} &= c_{\text{л}}m_{\text{л}} \cdot 20 + \lambda m_{\text{л}} = \\
-&= (2100 \cdot 0{,}3 \cdot 20 + 3{,}3 \cdot 10^5 \cdot 0{,}3)\ \text{Дж} = 111{,}6\ \text{кДж}.
+c_{\text{л}}m_{\text{л}} \cdot 20 &= 2100 \cdot 0{,}3 \cdot 20\ \text{Дж} = 12{,}6\ \text{кДж}, \\
+\lambda m_{\text{л}} &= 3{,}3 \cdot 10^5 \cdot 0{,}3\ \text{Дж} = 99\ \text{кДж}, \\
+Q_{\text{л}} &= (12{,}6 + 99)\ \text{кДж} = 111{,}6\ \text{кДж}.
 \end{aligned}
 $$
 
@@ -38,10 +40,16 @@ ${Q_{\text{п}} > Q_{\text{л}}\text{:}}$ весь лёд растает, и у�
 **Тепловой баланс.** Вода из пара остывает от ${100\ ^\circ\text{C}}$ до ${t,}$ вода из льда нагревается от ${0\ ^\circ\text{C}}$ до ${t\text{:}}$
 
 $$
+Lm_{\text{п}} + c_{\text{в}}m_{\text{п}}(100 - t) = Q_{\text{л}} + c_{\text{в}}m_{\text{л}}t,
+$$
+
+откуда
+
+$$
 \begin{aligned}
-Lm_{\text{п}} + c_{\text{в}}m_{\text{п}}(100 - t) &= Q_{\text{л}} + c_{\text{в}}m_{\text{л}}t, \\
 t &= \frac{Q_{\text{п}} - Q_{\text{л}}}{c_{\text{в}}(m_{\text{л}} + m_{\text{п}})} = \\
-&= \frac{136\,000 - 111\,600}{4200 \cdot 0{,}35}\ ^\circ\text{C} \approx 16{,}6\ ^\circ\text{C}.
+&= \frac{136\,000 - 111\,600}{4200 \cdot 0{,}35}\ ^\circ\text{C} \approx \\
+&\approx 16{,}6\ ^\circ\text{C}.
 \end{aligned}
 $$
 
