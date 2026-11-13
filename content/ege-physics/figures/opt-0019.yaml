@@ -1,0 +1,45 @@
+# opt-0019: two plane mirrors at 70°, a ray parallel to mirror 2 falls on mirror 1.
+kind: diagram
+size:
+- 400
+- 240
+items:
+- hatch:
+  - - 60.0
+    - 200.0
+  - - 370
+    - 200
+  side: 1
+- hatch:
+  - - 60.0
+    - 200.0
+  - - 128.4
+    - 12.1
+  side: -1
+- angle:
+  - 60.0
+  - 200.0
+  start: 0
+  end: 70
+  r: 34
+  label: 70°
+- arrow:
+  - - 301.3
+    - 59.0
+  - - 250.0
+    - 200.0
+  tone: accent
+- text: '1'
+  at:
+  - 350
+  - 188
+  size: 14
+  anchor: middle
+  tone: default
+- text: '2'
+  at:
+  - 144.4
+  - 22.1
+  size: 14
+  anchor: middle
+  tone: default
