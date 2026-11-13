@@ -1,0 +1,96 @@
+# el-0040: source U, ammeter in the main line, R1 || R2.
+kind: diagram
+size:
+- 400
+- 230
+items:
+- line:
+  - - 40
+    - 120
+  - - 40
+    - 70
+  - - 90
+    - 70
+  width: 1.6
+- element: ammeter
+  at:
+  - 110
+  - 70
+- line:
+  - - 130
+    - 70
+  - - 190
+    - 70
+  width: 1.6
+- line:
+  - - 190
+    - 40
+  - - 190
+    - 100
+  width: 1.6
+- line:
+  - - 190
+    - 40
+  - - 240
+    - 40
+  width: 1.6
+- element: resistor
+  at:
+  - 260
+  - 40
+  label: '*R*_{1}'
+- line:
+  - - 280
+    - 40
+  - - 330
+    - 40
+  width: 1.6
+- line:
+  - - 190
+    - 100
+  - - 240
+    - 100
+  width: 1.6
+- element: resistor
+  at:
+  - 260
+  - 100
+  label: '*R*_{2}'
+  label_side: 1
+- line:
+  - - 280
+    - 100
+  - - 330
+    - 100
+  width: 1.6
+- line:
+  - - 330
+    - 40
+  - - 330
+    - 100
+  width: 1.6
+- line:
+  - - 330
+    - 70
+  - - 370
+    - 70
+  - - 370
+    - 200
+  - - 40
+    - 200
+  - - 40
+    - 160
+  width: 1.6
+- element: battery
+  at:
+  - 40
+  - 140
+  vertical: true
+  label: '*U*'
+  label_side: 1
+- dots:
+  - - 190
+    - 70
+  - - 330
+    - 70
+  r: 3

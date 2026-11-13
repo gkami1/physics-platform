@@ -1,0 +1,36 @@
+# el-0044: I(U) of two resistors: 1 through (10 В, 5 А), 2 through (10 В, 2 А).
+kind: graph
+x:
+  var: U
+  unit: В
+  min: 0
+  max: 12
+  step: 2
+y:
+  var: I
+  unit: А
+  min: 0
+  max: 6
+  step: 1
+series:
+- points:
+  - - 0
+    - 0
+  - - 10
+    - 5
+- points:
+  - - 0
+    - 0
+  - - 10
+    - 2
+notes:
+- at:
+  - 9.0
+  - 5.1
+  text: '1'
+  anchor: middle
+- at:
+  - 10.7
+  - 2.5
+  text: '2'
+  anchor: middle
