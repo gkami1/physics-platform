@@ -1,0 +1,26 @@
+# mag-0024: B(t): 0→40 мТл over 0–2 с, constant to 6 с, 40→0 over 6–8 с.
+kind: graph
+x:
+  var: t
+  unit: с
+  min: 0
+  max: 9
+  step: 1
+y:
+  var: B
+  unit: мТл
+  min: 0
+  max: 50
+  step: 10
+series:
+- points:
+  - - 0
+    - 0
+  - - 2
+    - 40
+  - - 6
+    - 40
+  - - 8
+    - 0
+  - - 9
+    - 0
