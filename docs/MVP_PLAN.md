@@ -161,7 +161,8 @@ Each milestone has a **definition of done**; a milestone is not finished until i
   - Duplicates avoided (find.py over all tasks, the mechanics step tasks and lessons; shared-givens scan after): the prompt's №26 candidates «bullet into a block on a thread», «leaving a sphere» and «ladder at the slipping limit» are already cons-0015, dyn-0016 and stat-0008; a hinged rod on a thread is stat-0012 (№4); a tipping box pushed on the floor is ks-moments-15 and a lesson example; a dynamometer in water is ks-hydro-14/stat-0011 (so no Archimedes + spring); a car's power at a given speed is cons-0009 (№3). dyn-0044 first had 2 кг, 30°, μ = 0,4 — the same block and incline as dyn-0034 (№5) — moved to 2,5 кг and μ = 0,5.
   - Roadmap: №22 added to `mech.kinematics.circular`, `mech.dynamics.forces`, `mech.dynamics.gravity`, `mech.statics.hydrostatics`, `mech.conservation.work-power` and `mech.oscillations.harmonic`; №26 to `mech.kinematics.circular` (cons-0016 and dyn-0016 already used it).
   - Left for the author: mkt-0017 and thermo-0019 (thermodynamics) sit in №22, which the 2026 plan and the 2027 draft give area 1 only — not counted in season; probably `last_season: 2026` or a move to №23/№24. The older №22/№26 tasks cons-0014, cons-0016, dyn-0016, kin-0015 and stat-0008 use `\qquad`.
-- **Next:** the bank is at target. Re-check `exam.yaml` and every number's plan codes when FIPI approves the 2027 specification; then the author's open questions from the bank PRs (#57 onwards).
+- **Done (2026-11-13):** FIPI published the approved 2027 specification the same day; `exam.yaml` re-checked line by line and set `verified: true` (no change to points or scoring; the plan codes per number are the ones the bank was built on — see ARCHITECTURE «EGE physics structure»).
+- **Next:** the author's open questions from the bank PRs (#57 onwards).
 
 ## M6 — Roadmap and guidance (week 6)
 - Roadmap graph page (prerequisites, EGE task numbers per topic).
