@@ -1,0 +1,70 @@
+# dyn-0044: block on a 30 deg rough incline, thread over a pulley at the top to a hanging load.
+kind: diagram
+size:
+- 400
+- 240
+items:
+- hatch:
+  - - 10
+    - 220.0
+  - - 390
+    - 220.0
+  side: 1
+- line:
+  - - 30.0
+    - 220.0
+  - - 272.5
+    - 80.0
+  - - 272.48711305964287
+    - 220.0
+  width: 2
+  closed: true
+- line:
+  - - 272.5
+    - 80.0
+  - - 284.6
+    - 73.0
+  width: 2
+- circle:
+  - 284.6
+  - 73.0
+  r: 12.0
+  width: 1.6
+- dots:
+  - - 284.6
+    - 73.0
+  r: 2.5
+- rect:
+  - 110.1
+  - 134.6
+  - 46.0
+  - 24.0
+  rotate: -30
+  fill: surface
+  width: 1.6
+- line:
+  - - 153.0
+    - 135.1
+  - - 278.6
+    - 62.6
+  width: 1.4
+- line:
+  - - 296.6
+    - 73.0
+  - - 296.6
+    - 163.0
+  width: 1.4
+- rect:
+  - 281.6
+  - 163.0
+  - 30
+  - 34
+  fill: surface
+  width: 1.6
+- angle:
+  - 30.0
+  - 220.0
+  start: 0
+  end: 30
+  r: 50
+  label: 30°

@@ -1,0 +1,33 @@
+# stat-0021: brick b:h = 2:3 standing on a tilted board.
+kind: diagram
+size:
+- 400
+- 230
+items:
+- hatch:
+  - - 20
+    - 210.0
+  - - 380
+    - 210.0
+  side: 1
+- line:
+  - - 40.0
+    - 210.0
+  - - 336.7
+    - 90.1
+  width: 2.2
+- rect:
+  - 141.5
+  - 63.3
+  - 60.0
+  - 90.0
+  rotate: -22
+  fill: surface
+  width: 1.8
+- angle:
+  - 40.0
+  - 210.0
+  start: 0
+  end: 22
+  r: 52
+  label: '*α*'
