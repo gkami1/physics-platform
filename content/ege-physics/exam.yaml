@@ -1,18 +1,22 @@
 # EGE physics task structure. Single source of truth for per-task answer kinds and scoring.
-# verified: set to true only after checking every line against the APPROVED FIPI specification
-# for the season (ФИ-11 ЕГЭ <year> СПЕЦ, fipi.ru). Totals below: Part 1 = 28, Part 2 = 17, sum 45.
+# verified: true only after checking every line against the APPROVED FIPI specification for the
+# season (ФИ-11 ЕГЭ <year> СПЕЦ, fipi.ru); reset it to false when the season changes.
+# Totals below: Part 1 = 28, Part 2 = 17, sum 45.
 id: ege-physics
 title: ЕГЭ по физике
 locale: ru
 season: 2027
-verified: false
+verified: true
 duration_minutes: 235  # 3 h 55 min, unchanged 2025–2027
-# Checked line by line against the 2027 DRAFT specification (ПРОЕКТ, FIPI): parts, answer kinds,
-# points and scoring match it and the approved 2026 one. The only 2027 change is thematic: the
-# generalised plan narrows №21 from content areas 2, 3 to 3 (electrodynamics) and №23 from 2, 3
-# to 2 (molecular physics and thermodynamics); tasks that no longer fit carry last_season: 2026.
-# Set verified: true only after the APPROVED 2027 specification is checked.
-source: "2027 draft specification (ПРОЕКТ); structure and scoring as in the approved 2026 one"
+# Checked line by line on 2026-11-13 against the APPROVED 2027 specification (ФИ-11 ЕГЭ 2027 СПЕЦ,
+# fi_11_2027.zip, published by FIPI on 2026-11-13; it matches the August draft). Parts, answer kinds,
+# points, partial-credit rules (6/10/15/17: one wrong position = 1; 5/9/14/18: two or three true
+# answers, order free; 20: order free), the 45-point total and the 235 minutes are unchanged from
+# 2026. Section 11 of the spec: «Изменения структуры КИМ отсутствуют. Внесены коррективы в тематику
+# заданий 21 и 23» — the generalised plan narrows №21 from content areas 2, 3 to 3 (electrodynamics)
+# and №23 from 2, 3 to 2 (molecular physics and thermodynamics); tasks that no longer fit carry
+# last_season: 2026. Row 22 now reads «практико-ориентированные задачи» (still area 1, «П», 2 points).
+source: "ФИ-11 ЕГЭ 2027 СПЕЦ (approved, FIPI, 2026-11-13)"
 
 tasks:
   1:  {part: 1, answer_kind: numeric,     max_points: 1, scoring: exact,             title: "Механика: расчёт"}
