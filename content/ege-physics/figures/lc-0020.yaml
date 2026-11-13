@@ -1,0 +1,74 @@
+# lc-0020: source (ℰ, r) -> switch -> coil L || capacitor C.
+kind: diagram
+size:
+- 350
+- 215
+items:
+- element: battery
+  at:
+  - 70
+  - 115
+  vertical: true
+  label: ℰ, *r*
+- line:
+  - - 70
+    - 95
+  - - 70
+    - 40
+  - - 110
+    - 40
+  width: 1.6
+- element: switch
+  at:
+  - 130
+  - 40
+  label: К
+- line:
+  - - 150
+    - 40
+  - - 300
+    - 40
+  - - 300
+    - 95
+  width: 1.6
+- line:
+  - - 200
+    - 40
+  - - 200
+    - 95
+  width: 1.6
+- element: coil
+  at:
+  - 200
+  - 115
+  vertical: true
+  label: '*L*'
+- line:
+  - - 200
+    - 135
+  - - 200
+    - 190
+  width: 1.6
+- element: capacitor
+  at:
+  - 300
+  - 115
+  vertical: true
+  label: '*C*'
+  label_side: 1
+- line:
+  - - 300
+    - 135
+  - - 300
+    - 190
+  - - 70
+    - 190
+  - - 70
+    - 135
+  width: 1.6
+- dots:
+  - - 200
+    - 40
+  - - 200
+    - 190
+  r: 3

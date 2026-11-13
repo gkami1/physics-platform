@@ -1,0 +1,71 @@
+# el-0054: source + on top -> switch -> R -> capacitor plate charged minus; plus plate -> minus pole.
+kind: diagram
+size:
+- 350
+- 215
+items:
+- element: battery
+  at:
+  - 70
+  - 115
+  vertical: true
+  label: ℰ
+- line:
+  - - 70
+    - 95
+  - - 70
+    - 40
+  - - 120
+    - 40
+  width: 1.6
+- element: switch
+  at:
+  - 140
+  - 40
+  label: К
+- line:
+  - - 160
+    - 40
+  - - 200
+    - 40
+  width: 1.6
+- element: resistor
+  at:
+  - 220
+  - 40
+  label: '*R*'
+- line:
+  - - 240
+    - 40
+  - - 300
+    - 40
+  - - 300
+    - 95
+  width: 1.6
+- element: capacitor
+  at:
+  - 300
+  - 115
+  vertical: true
+  label: '*C*'
+  label_side: 1
+- text: −
+  at:
+  - 282
+  - 108
+  size: 16
+- text: +
+  at:
+  - 282
+  - 132
+  size: 16
+- line:
+  - - 300
+    - 135
+  - - 300
+    - 190
+  - - 70
+    - 190
+  - - 70
+    - 135
+  width: 1.6

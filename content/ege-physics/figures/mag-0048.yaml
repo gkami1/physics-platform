@@ -1,0 +1,54 @@
+# mag-0048: side view: rails at 30 deg, rod section, vertical B.
+kind: diagram
+size:
+- 400
+- 220
+items:
+- hatch:
+  - - 20
+    - 200.0
+  - - 380
+    - 200.0
+  side: 1
+- line:
+  - - 40.0
+    - 200.0
+  - - 282.5
+    - 60.0
+  width: 2.2
+- angle:
+  - 40.0
+  - 200.0
+  start: 0
+  end: 30.0
+  r: 46
+  label: 30°
+- circle:
+  - 181.5
+  - 109.1
+  r: 7
+  fill: solid
+- arrow:
+  - - 170.5
+    - 90.0
+  - - 122.9
+    - 117.5
+  tone: vel
+  label: '*v*'
+- arrow:
+  - - 330
+    - 190
+  - - 330
+    - 100
+  width: 1.6
+- arrow:
+  - - 362
+    - 190
+  - - 362
+    - 100
+  width: 1.6
+- text: '*B*'
+  at:
+  - 346
+  - 92
+  size: 14
