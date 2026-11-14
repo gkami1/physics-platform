@@ -164,6 +164,10 @@ Each milestone has a **definition of done**; a milestone is not finished until i
 - **Done (2026-11-13):** FIPI published the approved 2027 specification the same day; `exam.yaml` re-checked line by line and set `verified: true` (no change to points or scoring; the plan codes per number are the ones the bank was built on — see ARCHITECTURE «EGE physics structure»).
 - **Next:** the author's open questions from the bank PRs (#57 onwards).
 
+## Блиц (2026-11-14) — code done (`feat/blitz`); pending: the author's review of `formulas.yaml`, phone QA on a real device, deploy
+- A fourth header tab: a timed formula game (ARCHITECTURE §5 «Блиц»). 210 formulas over every roadmap section, grades 7–11, written once in textbook form; the browser accepts any equal form.
+- Next if it is used: «trouble formulas» across rounds (per-formula misses in localStorage, or attempts in the API if it should count for mastery), a reverse mode (express another quantity from the same formula), daily challenge with a fixed seed.
+
 ## M6 — Roadmap and guidance (week 6)
 - Roadmap graph page (prerequisites, EGE task numbers per topic).
 - "What to practise next" (weakest mastered-enough prerequisites first).
