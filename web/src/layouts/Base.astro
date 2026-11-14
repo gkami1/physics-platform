@@ -25,6 +25,7 @@ const tabs = [
     active: path.includes('/practice') || path.includes('/tasks/'),
   },
   { href: `/${exam}/variants/`, label: 'Варианты', active: path.includes('/variants') },
+  { href: `/${exam}/blitz/`, label: 'Блиц', active: path.includes('/blitz') },
 ];
 ---
 
@@ -262,6 +263,7 @@ const tabs = [
     .tabs a {
       flex: 1;
       text-align: center;
+      padding-inline: 0.3rem;
     }
     .email {
       display: none;
@@ -270,6 +272,9 @@ const tabs = [
   @media (max-width: 22rem) {
     .name {
       display: none;
+    }
+    .tabs a {
+      font-size: 0.85rem;
     }
   }
 </style>
