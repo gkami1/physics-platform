@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from content_schema.build import build, leak_needles
+from content_schema.build import build, leak_needles, public_formulas
 from content_schema.cli import main
 from content_schema.loader import load_exam_dir, split_frontmatter
 
@@ -394,3 +394,43 @@ def test_cli_validate_exit_codes(scratch: Path, tmp_path: Path) -> None:
     (scratch / "tasks/1/kin-0001.md").write_text("broken", "utf-8")
     assert main(["validate", "--content", str(scratch.parent)]) == 1
     assert main(["validate", "--content", str(tmp_path / "empty")]) == 2
+
+
+# --- formulas («Блиц») -------------------------------------------------------------------
+
+
+def test_public_formulas_follow_the_roadmap() -> None:
+    res = load_exam_dir(CONTENT / "ege-physics")
+    assert res.bundle is not None
+    formulas = public_formulas(res.bundle)
+    assert len(formulas) > 100
+    assert set(formulas[0]) == {"topic", "grade", "title", "ask", "also"}
+    order = [t.id for t in res.bundle.roadmap.topics()]
+    positions = [order.index(f["topic"]) for f in formulas]
+    assert positions == sorted(positions)
+
+
+@pytest.mark.parametrize(
+    ("old", "new", "message"),
+    [
+        ("mech.kinematics.basics:\n", "mech.kinematics.x:\n", "unknown topic 'mech.kinematics.x'"),
+        ("ask: 'v = s/t'", "ask: 'v = s/t = x'", "exactly one «=» expected"),
+        ("ask: 'v = s/t'", "ask: 'v = (s/t'", "unbalanced parentheses"),
+        ("ask: 'v = s/t'", "ask: 'v = s/t;'", "unexpected character"),
+        ("ask: 'v = s/t'", "ask: 'v = '", "both sides must be non-empty"),
+        ("grade: 7, title: 'Скорость", "grade: 6, title: 'Скорость", "grade"),
+        # YAML turns \t in double quotes into a tab (the CLAUDE.md gotcha).
+        ("title: 'Скорость равномерного движения'", r'title: "\theta"', "control character"),
+    ],
+)
+def test_formula_errors(scratch: Path, old: str, new: str, message: str) -> None:
+    _edit(scratch / "formulas.yaml", old, new)
+    assert message in _errors(scratch)
+
+
+def test_formulas_are_optional(scratch: Path) -> None:
+    (scratch / "formulas.yaml").unlink()
+    res = load_exam_dir(scratch)
+    assert res.errors == []
+    assert res.bundle is not None
+    assert res.bundle.formulas.topics == {}

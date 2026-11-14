@@ -130,6 +130,18 @@ def theory_entries(bundle: ContentBundle) -> tuple[list[dict[str, Any]], list[di
     return public, private
 
 
+def public_formulas(bundle: ContentBundle) -> list[dict[str, Any]]:
+    """Formulas for the blitz game, in roadmap order. Public: they are the theory's own
+    formulas, and the game checks answers in the browser (nothing is scored or stored)."""
+    order = {t.id: i for i, t in enumerate(bundle.roadmap.topics())}
+    topics = sorted(bundle.formulas.topics.items(), key=lambda kv: order.get(kv[0], len(order)))
+    return [
+        {"topic": topic, "grade": f.grade, "title": f.title, "ask": f.ask, "also": f.also}
+        for topic, formulas in topics
+        for f in formulas
+    ]
+
+
 def build(bundle: ContentBundle, out: Path) -> str:
     version = content_version(bundle.root)
     tasks = [with_inline_figures(t, bundle.root) for t in bundle.tasks]
@@ -143,6 +155,7 @@ def build(bundle: ContentBundle, out: Path) -> str:
         "roadmap": roadmap,
         "theory": theory_index,
         "tasks": [public_task(t) for t in tasks],
+        "formulas": public_formulas(bundle),
     }
     private = {
         "content_version": version,

@@ -59,6 +59,17 @@ export interface PublicBundle {
   roadmap: { sections: Section[] };
   theory: TheoryEntry[];
   tasks: PublicTask[];
+  /** «Блиц»: formulas in roadmap order (empty when the exam has no formulas.yaml). */
+  formulas: PublicFormula[];
+}
+
+export interface PublicFormula {
+  topic: string;
+  grade: number;
+  title: string;
+  /** `lhs = rhs` in the syntax of web/src/lib/blitz/expr.ts. */
+  ask: string;
+  also: string[];
 }
 
 /**

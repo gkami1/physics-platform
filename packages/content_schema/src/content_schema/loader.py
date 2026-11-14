@@ -24,6 +24,7 @@ from content_schema.models import (
     TOPIC_INTRO,
     AnswerKind,
     ExamSpec,
+    FormulaBank,
     Roadmap,
     Task,
     TaskMeta,
@@ -46,6 +47,7 @@ class ContentBundle:
     roadmap: Roadmap
     theory: list[TheoryPage]
     tasks: list[Task]
+    formulas: FormulaBank = field(default_factory=lambda: FormulaBank(topics={}))
 
 
 @dataclass
@@ -107,11 +109,40 @@ def load_exam_dir(root: Path) -> LoadResult:
     theory = [p for p in (_load_theory(f, root, res) for f in _md_files(root / "theory")) if p]
     tasks = [t for t in (_load_task(f, root, res) for f in _md_files(root / "tasks")) if t]
 
-    bundle = ContentBundle(root=root, exam=exam, roadmap=roadmap, theory=theory, tasks=tasks)
+    formulas = _load_formulas(root, res)
+
+    bundle = ContentBundle(
+        root=root, exam=exam, roadmap=roadmap, theory=theory, tasks=tasks, formulas=formulas
+    )
     _cross_validate(bundle, res)
     _check_figures(root, res)
     res.bundle = bundle
     return res
+
+
+FORMULAS_FILE = "formulas.yaml"
+
+
+def _load_formulas(root: Path, res: LoadResult) -> FormulaBank:
+    """Optional `formulas.yaml` for the blitz game; an exam without it has no blitz."""
+    path = root / FORMULAS_FILE
+    if not path.exists():
+        return FormulaBank(topics={})
+    data = _load_yaml(path)
+    try:
+        bank = FormulaBank.model_validate(data)
+    except ValidationError as e:
+        res.errors.append(f"{FORMULAS_FILE}: {_fmt(e)}")
+        return FormulaBank(topics={})
+    for formulas in bank.topics.values():
+        for f in formulas:
+            for text in (f.title, f.ask, *f.also):
+                if YAML_EATEN_BACKSLASH.search(text):
+                    res.errors.append(
+                        f"{FORMULAS_FILE}: «{f.title}» contains a control character — "
+                        "use single quotes for strings with a backslash"
+                    )
+    return bank
 
 
 def _md_files(d: Path) -> list[Path]:
@@ -237,6 +268,14 @@ def _cross_validate(b: ContentBundle, res: LoadResult) -> None:
     for page in b.theory:
         if page.topic not in seen:
             res.errors.append(f"{page.path}: unknown topic '{page.topic}'")
+    asks: set[tuple[str, str]] = set()
+    for topic, formulas in b.formulas.topics.items():
+        if topic not in seen:
+            res.errors.append(f"formulas.yaml: unknown topic '{topic}'")
+        for f in formulas:
+            if (f.title, f.ask) in asks:
+                res.errors.append(f"formulas.yaml: duplicate formula «{f.title}: {f.ask}»")
+            asks.add((f.title, f.ask))
     _check_theory_layout(b, res)
 
     task_ids: set[str] = set()

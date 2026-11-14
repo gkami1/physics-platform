@@ -1,0 +1,271 @@
+# Formulas for «Блиц» (/ege-physics/blitz/). The player sees the title and the left side of
+# `ask` and types the right side; any algebraically equal answer counts (checked by evaluating
+# both at random values), so write each formula once, in its textbook form.
+#
+# `ask` syntax (web/src/lib/blitz/expr.ts):
+#   - one letter per variable; a subscript follows `_`: v_0, F_тр, E_{к2} (braces for a
+#     subscript that ends in a digit after letters); Δ joins the next letter: Δt, ΔΦ
+#   - letters next to each other multiply: m g h; `*` or `·` also work
+#   - `/` divides everything to its left in the same product by everything to its right in
+#     the same product: m v^2/2 is (m v²)/2; use parentheses for a sum below the line
+#   - functions with parentheses: sin(α), cos(α), tg(α), sqrt(l/g); powers: sin(α)^2
+#   - π is the number; every other letter (g, G, k, c, h, e, N_A…) is a variable
+# `also` lists other right sides that count as correct (e.g. a different rounding).
+# Topics are roadmap ids; grade is the school grade where the formula first appears.
+topics:
+  mech.kinematics.basics:
+    - {grade: 7, title: 'Скорость равномерного движения', ask: 'v = s/t'}
+    - {grade: 7, title: 'Путь при равномерном движении', ask: 's = v t'}
+    - {grade: 7, title: 'Средняя скорость на двух участках пути', ask: 'v_ср = (s_1 + s_2)/(t_1 + t_2)'}
+    - {grade: 9, title: 'Координата при равномерном движении', ask: 'x = x_0 + v t'}
+  mech.kinematics.uniform-accel:
+    - {grade: 9, title: 'Ускорение', ask: 'a = (v - v_0)/t'}
+    - {grade: 9, title: 'Скорость при равноускоренном движении', ask: 'v = v_0 + a t'}
+    - {grade: 9, title: 'Перемещение при равноускоренном движении', ask: 's = v_0 t + a t^2/2'}
+    - {grade: 9, title: 'Координата при равноускоренном движении', ask: 'x = x_0 + v_0 t + a t^2/2'}
+    - {grade: 9, title: 'Перемещение без времени движения', ask: 's = (v^2 - v_0^2)/(2 a)'}
+    - {grade: 9, title: 'Перемещение через начальную и конечную скорости', ask: 's = (v_0 + v) t/2'}
+  mech.kinematics.free-fall:
+    - {grade: 9, title: 'Скорость тела, падающего без начальной скорости', ask: 'v = g t'}
+    - {grade: 9, title: 'Высота падения без начальной скорости за время t', ask: 'h = g t^2/2'}
+    - {grade: 9, title: 'Скорость тела в конце падения с высоты h', ask: 'v = sqrt(2 g h)'}
+    - {grade: 10, title: 'Максимальная высота подъёма тела, брошенного вверх', ask: 'h_max = v_0^2/(2 g)'}
+    - {grade: 10, title: 'Время подъёма тела, брошенного вверх', ask: 't_п = v_0/g'}
+    - {grade: 10, title: 'Горизонтальная проекция скорости тела, брошенного под углом α', ask: 'v_x = v_0 cos(α)'}
+    - {grade: 10, title: 'Время полёта тела, брошенного под углом α к горизонту', ask: 't = 2 v_0 sin(α)/g'}
+    - {grade: 10, title: 'Дальность полёта тела, брошенного под углом α к горизонту', ask: 'L = v_0^2 sin(2 α)/g'}
+    - {grade: 10, title: 'Максимальная высота тела, брошенного под углом α к горизонту', ask: 'h_max = v_0^2 sin(α)^2/(2 g)'}
+    - {grade: 10, title: 'Дальность полёта тела, брошенного горизонтально с высоты h', ask: 'L = v_0 sqrt(2 h/g)'}
+  mech.kinematics.circular:
+    - {grade: 9, title: 'Период обращения', ask: 'T = t/N'}
+    - {grade: 9, title: 'Частота обращения', ask: 'ν = 1/T'}
+    - {grade: 9, title: 'Угловая скорость через период', ask: 'ω = 2 π/T'}
+    - {grade: 9, title: 'Линейная скорость через период', ask: 'v = 2 π R/T'}
+    - {grade: 9, title: 'Линейная скорость через угловую', ask: 'v = ω R'}
+    - {grade: 9, title: 'Центростремительное ускорение', ask: 'a_ц = v^2/R'}
+    - {grade: 9, title: 'Центростремительное ускорение через угловую скорость', ask: 'a_ц = ω^2 R'}
+  mech.dynamics.newton:
+    - {grade: 9, title: 'Второй закон Ньютона', ask: 'a = F/m'}
+    - {grade: 9, title: 'Равнодействующая сила по второму закону Ньютона', ask: 'F = m a'}
+  mech.dynamics.forces:
+    - {grade: 7, title: 'Плотность вещества', ask: 'ρ = m/V'}
+    - {grade: 7, title: 'Масса тела через плотность', ask: 'm = ρ V'}
+    - {grade: 7, title: 'Сила тяжести', ask: 'F_т = m g'}
+    - {grade: 7, title: 'Вес покоящегося тела', ask: 'P = m g'}
+    - {grade: 7, title: 'Закон Гука', ask: 'F_упр = k x'}
+    - {grade: 7, title: 'Сила трения скольжения', ask: 'F_тр = μ N'}
+    - {grade: 10, title: 'Вес тела в лифте, который разгоняется вверх с ускорением a', ask: 'P = m (g + a)'}
+    - {grade: 10, title: 'Вес тела в лифте, который разгоняется вниз с ускорением a', ask: 'P = m (g - a)'}
+    - {grade: 10, title: 'Сила реакции опоры на наклонной плоскости с углом α', ask: 'N = m g cos(α)'}
+    - {grade: 10, title: 'Жёсткость двух пружин, соединённых параллельно', ask: 'k = k_1 + k_2'}
+    - {grade: 10, title: 'Жёсткость двух пружин, соединённых последовательно', ask: 'k = k_1 k_2/(k_1 + k_2)'}
+  mech.dynamics.gravity:
+    - {grade: 9, title: 'Закон всемирного тяготения', ask: 'F = G m_1 m_2/r^2'}
+    - {grade: 9, title: 'Ускорение свободного падения на поверхности планеты', ask: 'g = G M/R^2'}
+    - {grade: 9, title: 'Ускорение свободного падения на высоте h над планетой', ask: 'g = G M/(R + h)^2'}
+    - {grade: 9, title: 'Первая космическая скорость', ask: 'v_1 = sqrt(G M/R)'}
+    - {grade: 9, title: 'Первая космическая скорость через g', ask: 'v_1 = sqrt(g R)'}
+    - {grade: 10, title: 'Скорость спутника на высоте h над планетой', ask: 'v = sqrt(G M/(R + h))'}
+  mech.statics.moments:
+    - {grade: 7, title: 'Момент силы', ask: 'M = F l'}
+    - {grade: 7, title: 'Правило рычага', ask: 'F_1 l_1 = F_2 l_2'}
+  mech.statics.hydrostatics:
+    - {grade: 7, title: 'Давление', ask: 'p = F/S'}
+    - {grade: 7, title: 'Давление столба жидкости', ask: 'p = ρ g h'}
+    - {grade: 7, title: 'Давление на глубине h с учётом атмосферного p₀', ask: 'p = p_0 + ρ g h'}
+    - {grade: 7, title: 'Сила Архимеда', ask: 'F_А = ρ_ж g V_т'}
+    - {grade: 7, title: 'Гидравлический пресс', ask: 'F_2/F_1 = S_2/S_1'}
+  mech.conservation.momentum:
+    - {grade: 9, title: 'Импульс тела', ask: 'p = m v'}
+    - {grade: 9, title: 'Изменение импульса и импульс силы', ask: 'Δp = F Δt'}
+    - {grade: 9, title: 'Скорость тел после абсолютно неупругого удара', ask: 'v = (m_1 v_1 + m_2 v_2)/(m_1 + m_2)'}
+    - {grade: 10, title: 'Кинетическая энергия через импульс', ask: 'E_к = p^2/(2 m)'}
+  mech.conservation.work-power:
+    - {grade: 7, title: 'Механическая работа', ask: 'A = F s'}
+    - {grade: 7, title: 'Мощность', ask: 'N = A/t'}
+    - {grade: 7, title: 'КПД механизма (в долях)', ask: 'η = A_п/A_з'}
+    - {grade: 9, title: 'Мощность через силу и скорость', ask: 'N = F v'}
+    - {grade: 10, title: 'Работа силы под углом α к перемещению', ask: 'A = F s cos(α)'}
+    - {grade: 10, title: 'Работа силы тяжести', ask: 'A = m g (h_1 - h_2)'}
+    - {grade: 10, title: 'Работа силы упругости', ask: 'A = k (x_1^2 - x_2^2)/2'}
+  mech.conservation.energy:
+    - {grade: 7, title: 'Кинетическая энергия', ask: 'E_к = m v^2/2'}
+    - {grade: 7, title: 'Потенциальная энергия поднятого тела', ask: 'E_п = m g h'}
+    - {grade: 9, title: 'Потенциальная энергия сжатой пружины', ask: 'E_п = k x^2/2'}
+    - {grade: 9, title: 'Полная механическая энергия', ask: 'E = E_к + E_п'}
+    - {grade: 10, title: 'Теорема о кинетической энергии', ask: 'A = E_{к2} - E_{к1}'}
+  mech.oscillations.harmonic:
+    - {grade: 9, title: 'Период колебаний', ask: 'T = t/N'}
+    - {grade: 9, title: 'Период через частоту', ask: 'T = 1/ν'}
+    - {grade: 9, title: 'Циклическая частота', ask: 'ω = 2 π ν'}
+    - {grade: 9, title: 'Период математического маятника', ask: 'T = 2 π sqrt(l/g)'}
+    - {grade: 9, title: 'Период пружинного маятника', ask: 'T = 2 π sqrt(m/k)'}
+    - {grade: 11, title: 'Циклическая частота пружинного маятника', ask: 'ω = sqrt(k/m)'}
+    - {grade: 11, title: 'Уравнение гармонических колебаний', ask: 'x = x_max cos(ω t)'}
+    - {grade: 11, title: 'Амплитуда скорости при гармонических колебаниях', ask: 'v_max = x_max ω'}
+    - {grade: 11, title: 'Амплитуда ускорения при гармонических колебаниях', ask: 'a_max = x_max ω^2'}
+    - {grade: 11, title: 'Полная энергия пружинного маятника', ask: 'E = k x_max^2/2'}
+  mech.oscillations.waves:
+    - {grade: 9, title: 'Длина волны', ask: 'λ = v T'}
+    - {grade: 9, title: 'Длина волны через частоту', ask: 'λ = v/ν'}
+    - {grade: 9, title: 'Скорость волны', ask: 'v = λ ν'}
+  thermo.mkt.basics:
+    - {grade: 10, title: 'Количество вещества через число частиц', ask: 'ν = N/N_A'}
+    - {grade: 10, title: 'Количество вещества через массу', ask: 'ν = m/M'}
+    - {grade: 10, title: 'Масса одной молекулы', ask: 'm_0 = M/N_A'}
+    - {grade: 10, title: 'Число молекул в теле массой m', ask: 'N = m N_A/M'}
+    - {grade: 10, title: 'Концентрация молекул', ask: 'n = N/V'}
+  thermo.mkt.ideal-gas:
+    - {grade: 10, title: 'Абсолютная температура', ask: 'T = t + 273', also: ['t + 273.15']}
+    - {grade: 10, title: 'Основное уравнение МКТ (v — средняя квадратичная скорость)', ask: 'p = m_0 n v^2/3'}
+    - {grade: 10, title: 'Основное уравнение МКТ (E — средняя кинетическая энергия молекулы)', ask: 'p = 2 n E/3'}
+    - {grade: 10, title: 'Давление газа через концентрацию и температуру', ask: 'p = n k T'}
+    - {grade: 10, title: 'Средняя кинетическая энергия молекулы', ask: 'E = 3 k T/2'}
+    - {grade: 10, title: 'Средняя квадратичная скорость молекул', ask: 'v = sqrt(3 k T/m_0)'}
+    - {grade: 10, title: 'Средняя квадратичная скорость через молярную массу', ask: 'v = sqrt(3 R T/M)'}
+  thermo.gas-laws:
+    - {grade: 10, title: 'Уравнение Менделеева — Клапейрона', ask: 'p V = ν R T'}
+    - {grade: 10, title: 'Уравнение Менделеева — Клапейрона через массу', ask: 'p V = m R T/M'}
+    - {grade: 10, title: 'Плотность газа', ask: 'ρ = p M/(R T)'}
+    - {grade: 10, title: 'Универсальная газовая постоянная', ask: 'R = k N_A'}
+    - {grade: 10, title: 'Закон Бойля — Мариотта (T = const)', ask: 'p_1 V_1 = p_2 V_2'}
+    - {grade: 10, title: 'Закон Гей-Люссака (p = const)', ask: 'V_1/T_1 = V_2/T_2'}
+    - {grade: 10, title: 'Закон Шарля (V = const)', ask: 'p_1/T_1 = p_2/T_2'}
+    - {grade: 10, title: 'Объединённый газовый закон', ask: 'p_1 V_1/T_1 = p_2 V_2/T_2'}
+    - {grade: 10, title: 'Закон Дальтона для двух газов', ask: 'p = p_1 + p_2'}
+  thermo.humidity:
+    - {grade: 10, title: 'Относительная влажность через давление пара (в долях)', ask: 'φ = p/p_н'}
+    - {grade: 10, title: 'Относительная влажность через плотность пара (в долях)', ask: 'φ = ρ/ρ_н'}
+  thermo.heat:
+    - {grade: 8, title: 'Количество теплоты при нагревании', ask: 'Q = c m (t_2 - t_1)'}
+    - {grade: 8, title: 'Теплоёмкость тела', ask: 'C = c m'}
+    - {grade: 8, title: 'Количество теплоты при плавлении', ask: 'Q = λ m'}
+    - {grade: 8, title: 'Количество теплоты при парообразовании', ask: 'Q = L m'}
+    - {grade: 8, title: 'Количество теплоты при сгорании топлива', ask: 'Q = q m'}
+  thermo.internal-energy:
+    - {grade: 10, title: 'Внутренняя энергия одноатомного идеального газа', ask: 'U = 3 ν R T/2'}
+    - {grade: 10, title: 'Внутренняя энергия одноатомного газа через p и V', ask: 'U = 3 p V/2'}
+    - {grade: 10, title: 'Изменение внутренней энергии одноатомного газа', ask: 'ΔU = 3 ν R ΔT/2'}
+    - {grade: 10, title: 'Работа газа при изобарном процессе', ask: 'A = p ΔV'}
+    - {grade: 10, title: 'Работа газа при изобарном процессе через ΔT', ask: 'A = ν R ΔT'}
+  thermo.first-law:
+    - {grade: 10, title: 'Первый закон термодинамики', ask: 'Q = ΔU + A'}
+    - {grade: 10, title: 'Теплота при изохорном процессе', ask: 'Q = ΔU'}
+    - {grade: 10, title: 'Теплота при изобарном процессе с одноатомным газом', ask: 'Q = 5 ν R ΔT/2'}
+    - {grade: 10, title: 'Работа газа при адиабатном процессе', ask: 'A = -ΔU'}
+  thermo.heat-engines:
+    - {grade: 10, title: 'Работа тепловой машины за цикл', ask: 'A = Q_н - Q_х'}
+    - {grade: 10, title: 'КПД тепловой машины', ask: 'η = A/Q_н'}
+    - {grade: 10, title: 'КПД тепловой машины через теплоты', ask: 'η = (Q_н - Q_х)/Q_н'}
+    - {grade: 10, title: 'КПД цикла Карно', ask: 'η = (T_н - T_х)/T_н'}
+  electro.field.coulomb:
+    - {grade: 8, title: 'Заряд тела из N элементарных зарядов', ask: 'q = N e'}
+    - {grade: 10, title: 'Закон Кулона', ask: 'F = k q_1 q_2/r^2'}
+    - {grade: 10, title: 'Закон Кулона в диэлектрике', ask: 'F = k q_1 q_2/(ε r^2)'}
+    - {grade: 10, title: 'Коэффициент в законе Кулона', ask: 'k = 1/(4 π ε_0)'}
+  electro.field.strength:
+    - {grade: 10, title: 'Напряжённость электрического поля', ask: 'E = F/q'}
+    - {grade: 10, title: 'Напряжённость поля точечного заряда', ask: 'E = k q/r^2'}
+    - {grade: 10, title: 'Потенциал поля точечного заряда', ask: 'φ = k q/r'}
+    - {grade: 10, title: 'Энергия взаимодействия двух зарядов', ask: 'W = k q_1 q_2/r'}
+    - {grade: 10, title: 'Потенциальная энергия заряда в поле', ask: 'W = q φ'}
+    - {grade: 10, title: 'Напряжение через работу поля', ask: 'U = A/q'}
+    - {grade: 10, title: 'Напряжение как разность потенциалов', ask: 'U = φ_1 - φ_2'}
+    - {grade: 10, title: 'Напряжённость однородного поля', ask: 'E = U/d'}
+    - {grade: 10, title: 'Работа однородного поля вдоль силовой линии', ask: 'A = q E d'}
+  electro.field.conductors:
+    - {grade: 10, title: 'Напряжённость поля в диэлектрике', ask: 'E = E_0/ε'}
+  electro.field.capacitors:
+    - {grade: 10, title: 'Электроёмкость', ask: 'C = q/U'}
+    - {grade: 10, title: 'Ёмкость плоского конденсатора', ask: 'C = ε ε_0 S/d'}
+    - {grade: 10, title: 'Энергия конденсатора через C и U', ask: 'W = C U^2/2'}
+    - {grade: 10, title: 'Энергия конденсатора через q и C', ask: 'W = q^2/(2 C)'}
+    - {grade: 10, title: 'Энергия конденсатора через q и U', ask: 'W = q U/2'}
+    - {grade: 10, title: 'Ёмкость двух конденсаторов, соединённых параллельно', ask: 'C = C_1 + C_2'}
+    - {grade: 10, title: 'Ёмкость двух конденсаторов, соединённых последовательно', ask: 'C = C_1 C_2/(C_1 + C_2)'}
+  electro.circuits.ohm:
+    - {grade: 8, title: 'Сила тока', ask: 'I = q/t'}
+    - {grade: 8, title: 'Закон Ома для участка цепи', ask: 'I = U/R'}
+    - {grade: 8, title: 'Сопротивление проводника', ask: 'R = ρ l/S'}
+    - {grade: 8, title: 'Сопротивление двух проводников, соединённых последовательно', ask: 'R = R_1 + R_2'}
+    - {grade: 8, title: 'Сопротивление двух проводников, соединённых параллельно', ask: 'R = R_1 R_2/(R_1 + R_2)'}
+    - {grade: 10, title: 'Сила тока через скорость носителей заряда', ask: 'I = e n v S'}
+  electro.circuits.emf:
+    - {grade: 10, title: 'ЭДС источника', ask: 'ε = A_ст/q'}
+    - {grade: 10, title: 'Закон Ома для полной цепи', ask: 'I = ε/(R + r)'}
+    - {grade: 10, title: 'Сила тока короткого замыкания', ask: 'I_кз = ε/r'}
+    - {grade: 10, title: 'Напряжение на внешней цепи', ask: 'U = ε - I r'}
+  electro.circuits.power:
+    - {grade: 8, title: 'Работа электрического тока', ask: 'A = U I t'}
+    - {grade: 8, title: 'Мощность электрического тока', ask: 'P = U I'}
+    - {grade: 8, title: 'Мощность тока через силу тока и сопротивление', ask: 'P = I^2 R'}
+    - {grade: 8, title: 'Мощность тока через напряжение и сопротивление', ask: 'P = U^2/R'}
+    - {grade: 8, title: 'Закон Джоуля — Ленца', ask: 'Q = I^2 R t'}
+    - {grade: 10, title: 'КПД источника тока', ask: 'η = R/(R + r)'}
+  electro.magnetic.ampere:
+    - {grade: 11, title: 'Сила Ампера', ask: 'F_А = I B l sin(α)'}
+    - {grade: 11, title: 'Магнитный поток', ask: 'Φ = B S cos(α)'}
+  electro.magnetic.lorentz:
+    - {grade: 11, title: 'Сила Лоренца', ask: 'F_л = q v B sin(α)'}
+    - {grade: 11, title: 'Радиус окружности заряженной частицы в магнитном поле', ask: 'R = m v/(q B)'}
+    - {grade: 11, title: 'Период обращения заряженной частицы в магнитном поле', ask: 'T = 2 π m/(q B)'}
+  electro.induction.faraday:
+    - {grade: 11, title: 'ЭДС индукции (модуль)', ask: 'ε_i = ΔΦ/Δt'}
+    - {grade: 11, title: 'ЭДС индукции в катушке из N витков (модуль)', ask: 'ε_i = N ΔΦ/Δt'}
+    - {grade: 11, title: 'ЭДС индукции в движущемся проводнике', ask: 'ε_i = B v l sin(α)'}
+  electro.induction.self:
+    - {grade: 11, title: 'Магнитный поток через катушку с током', ask: 'Φ = L I'}
+    - {grade: 11, title: 'ЭДС самоиндукции (модуль)', ask: 'ε_si = L ΔI/Δt'}
+    - {grade: 11, title: 'Энергия магнитного поля катушки', ask: 'W = L I^2/2'}
+  electro.oscillations.lc:
+    - {grade: 11, title: 'Формула Томсона', ask: 'T = 2 π sqrt(L C)'}
+    - {grade: 11, title: 'Циклическая частота колебательного контура', ask: 'ω = 1/sqrt(L C)'}
+    - {grade: 11, title: 'Амплитуда силы тока в контуре', ask: 'I_max = q_max ω'}
+    - {grade: 11, title: 'Сохранение энергии в колебательном контуре', ask: 'L I_max^2/2 = C U_max^2/2'}
+  electro.oscillations.waves:
+    - {grade: 11, title: 'Действующее значение напряжения', ask: 'U_д = U_max/sqrt(2)'}
+    - {grade: 11, title: 'Действующее значение силы тока', ask: 'I_д = I_max/sqrt(2)'}
+    - {grade: 11, title: 'Трансформатор', ask: 'U_1/U_2 = N_1/N_2'}
+    - {grade: 11, title: 'Длина электромагнитной волны', ask: 'λ = c/ν'}
+    - {grade: 11, title: 'Длина электромагнитной волны через период', ask: 'λ = c T'}
+  electro.optics.refraction:
+    - {grade: 11, title: 'Закон преломления света', ask: 'n_1 sin(α) = n_2 sin(γ)'}
+    - {grade: 11, title: 'Абсолютный показатель преломления', ask: 'n = c/v'}
+    - {grade: 11, title: 'Относительный показатель преломления', ask: 'n_21 = n_2/n_1'}
+    - {grade: 11, title: 'Предельный угол полного отражения', ask: 'sin(α_пр) = 1/n'}
+  electro.optics.lenses:
+    - {grade: 8, title: 'Оптическая сила линзы', ask: 'D = 1/F'}
+    - {grade: 11, title: 'Формула тонкой линзы', ask: '1/F = 1/d + 1/f'}
+    - {grade: 11, title: 'Фокусное расстояние из формулы тонкой линзы', ask: 'F = d f/(d + f)'}
+    - {grade: 11, title: 'Увеличение линзы', ask: 'Γ = f/d'}
+  electro.optics.wave:
+    - {grade: 11, title: 'Условие интерференционного максимума', ask: 'Δd = k λ'}
+    - {grade: 11, title: 'Условие интерференционного минимума', ask: 'Δd = (2 k + 1) λ/2'}
+    - {grade: 11, title: 'Главные максимумы дифракционной решётки', ask: 'd sin(φ) = k λ'}
+  sr.basics:
+    - {grade: 11, title: 'Энергия покоя', ask: 'E_0 = m c^2'}
+    - {grade: 11, title: 'Полная энергия релятивистской частицы', ask: 'E = m c^2/sqrt(1 - v^2/c^2)'}
+    - {grade: 11, title: 'Релятивистское замедление времени', ask: 't = t_0/sqrt(1 - v^2/c^2)'}
+    - {grade: 11, title: 'Релятивистское сокращение длины', ask: 'l = l_0 sqrt(1 - v^2/c^2)'}
+  quantum.photons:
+    - {grade: 11, title: 'Энергия фотона', ask: 'E = h ν'}
+    - {grade: 11, title: 'Энергия фотона через длину волны', ask: 'E = h c/λ'}
+    - {grade: 11, title: 'Импульс фотона', ask: 'p = h/λ'}
+    - {grade: 11, title: 'Длина волны де Бройля', ask: 'λ = h/(m v)'}
+  quantum.photoeffect:
+    - {grade: 11, title: 'Уравнение Эйнштейна для фотоэффекта', ask: 'h ν = A_вых + E_к'}
+    - {grade: 11, title: 'Красная граница фотоэффекта (частота)', ask: 'ν_min = A_вых/h'}
+    - {grade: 11, title: 'Красная граница фотоэффекта (длина волны)', ask: 'λ_кр = h c/A_вых'}
+    - {grade: 11, title: 'Кинетическая энергия фотоэлектронов через запирающее напряжение', ask: 'E_к = e U_з'}
+  quantum.atom:
+    - {grade: 11, title: 'Частота фотона при переходе атома с уровня n на уровень m', ask: 'ν = (E_n - E_m)/h'}
+  quantum.nucleus:
+    - {grade: 11, title: 'Число нейтронов в ядре', ask: 'N = A - Z'}
+    - {grade: 11, title: 'Дефект масс ядра', ask: 'Δm = Z m_p + N m_n - M_я'}
+    - {grade: 11, title: 'Энергия связи ядра', ask: 'E_св = Δm c^2'}
+  quantum.radioactivity:
+    - {grade: 11, title: 'Закон радиоактивного распада', ask: 'N = N_0 2^(-t/T)'}
+  quantum.nuclear-reactions:
+    - {grade: 11, title: 'Энергетический выход ядерной реакции', ask: 'Q = (m_до - m_после) c^2'}
+  method.measurement-error:
+    - {grade: 7, title: 'Относительная погрешность', ask: 'δ = Δx/x'}

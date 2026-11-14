@@ -285,3 +285,58 @@ class TheoryPage(Strict):
             return None
         lo, _, hi = self.grade.partition("–")
         return int(lo), int(hi or lo)
+
+
+# --- formulas («Блиц») ----------------------------------------------------------------------
+
+# Characters an `ask` line may hold (syntax in content/<exam>/formulas.yaml and
+# web/src/lib/blitz/expr.ts, which parses and checks it; the web tests parse every line).
+FORMULA_CHARS = re.compile(r"^[\w\s+\-*/^()=.{}·π]+$")
+
+
+def _formula_side(v: str) -> str:
+    if not FORMULA_CHARS.match(v):
+        raise ValueError(f"unexpected character in «{v}»")
+    depth = 0
+    for c in v:
+        depth += {"(": 1, ")": -1}.get(c, 0)
+        if depth < 0:
+            break
+    if depth != 0:
+        raise ValueError(f"unbalanced parentheses in «{v}»")
+    return v
+
+
+class Formula(Strict):
+    """A formula for the blitz game: the player sees `title` and the left side of `ask`
+    and types the right side; `also` holds other right sides that count as correct."""
+
+    grade: int = Field(ge=7, le=11)
+    title: str = Field(min_length=1)
+    ask: str
+    also: list[str] = Field(default_factory=list)
+
+    @field_validator("ask")
+    @classmethod
+    def _ask(cls, v: str) -> str:
+        if v.count("=") != 1:
+            raise ValueError(f"«{v}»: exactly one «=» expected")
+        lhs, rhs = v.split("=")
+        if not lhs.strip() or not rhs.strip():
+            raise ValueError(f"«{v}»: both sides must be non-empty")
+        return _formula_side(v)
+
+    @field_validator("also")
+    @classmethod
+    def _also(cls, v: list[str]) -> list[str]:
+        for s in v:
+            if "=" in s:
+                raise ValueError(f"«{s}»: `also` holds right sides only")
+            _formula_side(s)
+        return v
+
+
+class FormulaBank(Strict):
+    """`formulas.yaml`: roadmap topic id → its formulas, in the order they are taught."""
+
+    topics: dict[Id, list[Formula]]
