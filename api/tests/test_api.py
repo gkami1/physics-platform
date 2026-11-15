@@ -25,7 +25,10 @@ def test_health(client: TestClient) -> None:
         ("kin-0002", "31", "correct", 2),
         ("kin-0002", "14", "partial", 1),
         ("meas-0001", "2,4 0,2", "correct", 1),
+        ("meas-0001", "(2,4 ± 0,2)", "correct", 1),  # the form shown on reveal
         ("kin-0001", "двенадцать", "invalid", 0),
+        ("kin-0001", "1e999999999", "invalid", 0),  # was decimal.Overflow → HTTP 500
+        ("meas-0001", "1e999999999 0,2", "invalid", 0),
         ("ks-accel-03", "-4", "correct", 1),  # step task: scored by exam.yaml `practice`
         ("ks-accel-03", "4", "wrong", 0),
     ],

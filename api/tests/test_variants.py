@@ -35,6 +35,12 @@ def test_variant_is_scored_on_the_server(client: TestClient) -> None:
     assert "4,1" not in str(run)  # Part 2 final answer is not revealed by scoring
 
 
+def test_absurd_numbers_are_invalid_not_500(client: TestClient) -> None:
+    run = submit(client, {"kin-0001": "1e999999999", "meas-0001": "(1e999999999 ± 0,2)"})
+    outcomes = {r["task_id"]: r["outcome"] for r in run["results"]}  # type: ignore[attr-defined]
+    assert (outcomes["kin-0001"], outcomes["meas-0001"]) == ("invalid", "invalid")
+
+
 def test_checked_answers_become_attempts(client: TestClient) -> None:
     submit(client, {"kin-0001": "12,5", "dyn-0001": "5"})
     statuses = client.get("/api/tasks/status").json()["tasks"]
