@@ -111,10 +111,26 @@ def format_answer(spec: AnswerSpec) -> str | None:
             return spec.final
 
 
-def _unwrap(raw: str) -> str:
-    """Drop the parentheses of "(2,4 ± 0,2)", the form format_answer() shows on reveal."""
+_PARENS = re.compile(r"\((.*)\)([^)]*)", re.DOTALL)
+
+
+def _unit_key(unit: str) -> str:
+    # A Russian keyboard types "°С" with a Cyrillic С; content uses the Latin "°C".
+    return _SPACES.sub("", unit).replace("С", "C")
+
+
+def _unwrap(raw: str, unit: str | None) -> str:
+    """Strip "(…)" or "(…) unit", the form format_answer() reveals: "(2,4 ± 0,2) Н".
+
+    Only the task's own unit is accepted; anything else keeps the parentheses and so
+    fails to parse (INVALID, the student retries) rather than being silently ignored.
+    """
     s = raw.strip()
-    return s[1:-1] if s.startswith("(") and s.endswith(")") else s
+    if m := _PARENS.fullmatch(s):
+        tail = m.group(2).strip()
+        if not tail or (unit and _unit_key(tail) == _unit_key(unit)):
+            return m.group(1)
+    return s
 
 
 def sequence_errors(student: str, reference: str, *, ordered: bool) -> int:
@@ -159,7 +175,7 @@ def check(spec: AnswerSpec, scoring: TaskNumberSpec, raw: str) -> Verdict:
             return Verdict(outcome, pts, mp, normalized=digits)
 
         case MeasurementAnswer():
-            parts = [p for p in re.split(r"(?:\+/?-|[;±|\s])+", _unwrap(raw)) if p]
+            parts = [p for p in re.split(r"(?:\+/?-|[;±|\s])+", _unwrap(raw, spec.unit)) if p]
             nums = [n for p in parts if (n := parse_number(p)) is not None]
             if len(parts) != 2 or len(nums) != 2:
                 return Verdict(Outcome.INVALID, 0, mp)

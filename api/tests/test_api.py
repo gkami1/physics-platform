@@ -26,6 +26,8 @@ def test_health(client: TestClient) -> None:
         ("kin-0002", "14", "partial", 1),
         ("meas-0001", "2,4 0,2", "correct", 1),
         ("meas-0001", "(2,4 ± 0,2)", "correct", 1),  # the form shown on reveal
+        ("meas-0001", "(2,4 ± 0,2) Н", "correct", 1),  # ...with its unit
+        ("meas-0001", "(2,4 ± 0,2) мН", "invalid", 0),
         ("kin-0001", "двенадцать", "invalid", 0),
         ("kin-0001", "1e999999999", "invalid", 0),  # was decimal.Overflow → HTTP 500
         ("meas-0001", "1e999999999 0,2", "invalid", 0),

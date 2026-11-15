@@ -6,6 +6,7 @@ from content_schema.checking import (
     NotAutoCheckableError,
     Outcome,
     check,
+    format_answer,
     parse_number,
     sequence_errors,
 )
@@ -168,11 +169,36 @@ def test_sequence_scoring(raw: str, scoring: TaskNumberSpec, outcome: Outcome, p
         ("2,4 0,2 0,1", Outcome.INVALID),
         ("2,4 0,1", Outcome.WRONG),
         ("2,4", Outcome.INVALID),
+        ("(2,4 ± 0,2) Н", Outcome.INVALID),  # this spec has no unit
     ],
 )
 def test_measurement(raw: str, outcome: Outcome) -> None:
     spec = MeasurementAnswer.model_validate({"type": "measurement", "value": 2.4, "error": 0.2})
     assert check(spec, EXACT, raw).outcome is outcome
+
+
+@pytest.mark.parametrize(
+    ("unit", "raw", "outcome"),
+    [
+        ("Н", "(2,4 ± 0,2) Н", Outcome.CORRECT),  # format_answer() verbatim
+        ("Н", "(2,4 ± 0,2)Н", Outcome.CORRECT),
+        ("Н", "(2,4 ± 0,2)", Outcome.CORRECT),
+        ("Н", "(2,4 ± 0,1) Н", Outcome.WRONG),
+        ("Н", "(2,4 ± 0,2) мН", Outcome.INVALID),  # another unit: retry, not silently ignored
+        ("Н", "(2,4 ± 0,2) Н Н", Outcome.INVALID),
+        ("Н", "2,4 ± 0,2 Н", Outcome.INVALID),  # units only after the parentheses
+        ("Н", "(2,4 ± 0,2) Н)", Outcome.INVALID),
+        ("мм рт. ст.", "(2,4 ± 0,2) мм рт.ст.", Outcome.CORRECT),
+        ("°C", "(2,4 ± 0,2) °С", Outcome.CORRECT),  # Cyrillic С from a Russian keyboard
+        ("°C", "(2,4 ± 0,2) °C", Outcome.CORRECT),
+    ],
+)
+def test_measurement_with_unit(unit: str, raw: str, outcome: Outcome) -> None:
+    spec = MeasurementAnswer.model_validate(
+        {"type": "measurement", "value": 2.4, "error": 0.2, "unit": unit}
+    )
+    assert check(spec, EXACT, raw).outcome is outcome
+    assert check(spec, EXACT, format_answer(spec) or "").outcome is Outcome.CORRECT
 
 
 def test_extended_is_not_auto_checkable() -> None:
@@ -195,7 +221,6 @@ def test_extended_is_not_auto_checkable() -> None:
 def test_format_answer(spec: dict[str, object], expected: str | None) -> None:
     from pydantic import TypeAdapter
 
-    from content_schema.checking import format_answer
     from content_schema.models import AnswerSpec
 
     assert format_answer(TypeAdapter(AnswerSpec).validate_python(spec)) == expected
