@@ -6,6 +6,7 @@ from content_schema.checking import (
     NotAutoCheckableError,
     Outcome,
     check,
+    format_answer,
     parse_number,
     sequence_errors,
 )
@@ -46,6 +47,21 @@ SEQ1 = TaskNumberSpec(
         ("abc", None),
         ("1.2.3", None),
         ("12 м/с", None),
+        ("6,63·10^-34", "6.63e-34"),
+        ("1e99", "1e99"),
+        ("1e-99", "1e-99"),
+        ("1e60·10^-60", "1"),
+        ("9" * 60, "9" * 60),  # exact, not rounded to 28 digits (that would give 1e60)
+        ("0." + "0" * 58 + "1", "1e-59"),
+        # Absurd exponents are not numbers (and must not raise decimal.Overflow).
+        ("1e999999999", None),
+        ("0e999999999", None),
+        ("1·10^999999999", None),
+        ("1e100", None),
+        ("1e-100", None),
+        ("1e60·10^60", None),
+        ("1e-50·10^99999", None),  # an out-of-range part does not cancel out
+        ("1e" + "9" * 5000, None),
     ],
 )
 def test_parse_number(raw: str, expected: str | None) -> None:
@@ -65,6 +81,7 @@ def test_parse_number(raw: str, expected: str | None) -> None:
         (1234, 10, "1230", Outcome.CORRECT),
         (0.1, None, "0,1", Outcome.CORRECT),  # no float artefacts
         (3, None, "три", Outcome.INVALID),
+        (3, None, "1e999999999", Outcome.INVALID),
     ],
 )
 def test_numeric(value: float, precision: float | None, raw: str, outcome: Outcome) -> None:
@@ -72,6 +89,11 @@ def test_numeric(value: float, precision: float | None, raw: str, outcome: Outco
     v = check(spec, EXACT, raw)
     assert v.outcome is outcome
     assert v.points == (1 if outcome is Outcome.CORRECT else 0)
+
+
+def test_numeric_normalized_is_exact() -> None:
+    spec = NumericAnswer.model_validate({"type": "numeric", "value": 1})
+    assert check(spec, EXACT, "9" * 60 + ",000").normalized == "9" * 60
 
 
 def test_precision_must_be_power_of_ten() -> None:
@@ -135,14 +157,48 @@ def test_sequence_scoring(raw: str, scoring: TaskNumberSpec, outcome: Outcome, p
         ("2,4; 0,2", Outcome.CORRECT),
         ("2.4 +- 0.2", Outcome.CORRECT),
         ("2.4 +/- 0.2", Outcome.CORRECT),
+        ("2,4+-0,2", Outcome.CORRECT),
+        ("(2,4 ± 0,2)", Outcome.CORRECT),  # exactly what format_answer() reveals
+        (" (2.4±0.2) ", Outcome.CORRECT),
+        ("(2,4 0,2)", Outcome.CORRECT),
+        ("(2,4 ± 0,1)", Outcome.WRONG),
+        ("(2,4 ± 0,2", Outcome.INVALID),
+        ("((2,4 ± 0,2))", Outcome.INVALID),
+        ("()", Outcome.INVALID),
+        ("1e999999999 ± 0,2", Outcome.INVALID),
         ("2,4 0,2 0,1", Outcome.INVALID),
         ("2,4 0,1", Outcome.WRONG),
         ("2,4", Outcome.INVALID),
+        ("(2,4 ± 0,2) Н", Outcome.INVALID),  # this spec has no unit
     ],
 )
 def test_measurement(raw: str, outcome: Outcome) -> None:
     spec = MeasurementAnswer.model_validate({"type": "measurement", "value": 2.4, "error": 0.2})
     assert check(spec, EXACT, raw).outcome is outcome
+
+
+@pytest.mark.parametrize(
+    ("unit", "raw", "outcome"),
+    [
+        ("Н", "(2,4 ± 0,2) Н", Outcome.CORRECT),  # format_answer() verbatim
+        ("Н", "(2,4 ± 0,2)Н", Outcome.CORRECT),
+        ("Н", "(2,4 ± 0,2)", Outcome.CORRECT),
+        ("Н", "(2,4 ± 0,1) Н", Outcome.WRONG),
+        ("Н", "(2,4 ± 0,2) мН", Outcome.INVALID),  # another unit: retry, not silently ignored
+        ("Н", "(2,4 ± 0,2) Н Н", Outcome.INVALID),
+        ("Н", "2,4 ± 0,2 Н", Outcome.INVALID),  # units only after the parentheses
+        ("Н", "(2,4 ± 0,2) Н)", Outcome.INVALID),
+        ("мм рт. ст.", "(2,4 ± 0,2) мм рт.ст.", Outcome.CORRECT),
+        ("°C", "(2,4 ± 0,2) °С", Outcome.CORRECT),  # Cyrillic С from a Russian keyboard
+        ("°C", "(2,4 ± 0,2) °C", Outcome.CORRECT),
+    ],
+)
+def test_measurement_with_unit(unit: str, raw: str, outcome: Outcome) -> None:
+    spec = MeasurementAnswer.model_validate(
+        {"type": "measurement", "value": 2.4, "error": 0.2, "unit": unit}
+    )
+    assert check(spec, EXACT, raw).outcome is outcome
+    assert check(spec, EXACT, format_answer(spec) or "").outcome is Outcome.CORRECT
 
 
 def test_extended_is_not_auto_checkable() -> None:
@@ -165,7 +221,6 @@ def test_extended_is_not_auto_checkable() -> None:
 def test_format_answer(spec: dict[str, object], expected: str | None) -> None:
     from pydantic import TypeAdapter
 
-    from content_schema.checking import format_answer
     from content_schema.models import AnswerSpec
 
     assert format_answer(TypeAdapter(AnswerSpec).validate_python(spec)) == expected

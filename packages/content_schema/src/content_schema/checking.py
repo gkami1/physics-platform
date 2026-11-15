@@ -9,7 +9,7 @@ from __future__ import annotations
 import re
 from collections import Counter
 from dataclasses import dataclass
-from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
+from decimal import ROUND_HALF_UP, Context, Decimal
 from enum import StrEnum
 
 from content_schema.models import (
@@ -44,25 +44,42 @@ class NotAutoCheckableError(ValueError):
 
 _SPACES = re.compile(r"[\s  ]+")
 _POW10 = re.compile(r"^(.+?)[·*×xх]10\^?\(?([+\-−]?\d+)\)?$")
+_DECIMAL = re.compile(r"([+-]?(?:\d+\.?\d*|\.\d+))(?:[eE]([+-]?\d+))?")
+# Far beyond any physical answer (Planck's constant is ~1e-34), and small enough that
+# the plain form of the number stays short.
+MAX_EXPONENT = 99
 
 
 def parse_number(raw: str) -> Decimal | None:
     s = _SPACES.sub("", raw).replace(",", ".").replace("−", "-")
     if not s:
         return None
-    exp = 0
+    pow10 = None
     if m := _POW10.match(s):
-        s, exp = m.group(1), int(m.group(2).replace("−", "-"))
-    if not re.fullmatch(r"[+-]?(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?", s):
+        s, pow10 = m.group(1), m.group(2)
+    if not (m := _DECIMAL.fullmatch(s)):
         return None
-    try:
-        return Decimal(s).scaleb(exp)
-    except InvalidOperation:
+    e1, e2 = _exponent(pow10), _exponent(m.group(2))
+    if e1 is None or e2 is None or abs(e1 + e2) > MAX_EXPONENT:
         return None
+    # The constructor is exact; scaleb() would round to the context's 28 digits.
+    return Decimal(f"{m.group(1)}E{e1 + e2}")
+
+
+def _exponent(s: str | None) -> int | None:
+    """The exponent (0 if absent), or None if it is beyond ±MAX_EXPONENT."""
+    if s is None:
+        return 0
+    if len(s.lstrip("+-").lstrip("0")) > len(str(MAX_EXPONENT)):  # int() of huge strings is slow
+        return None
+    n = int(s)
+    return n if abs(n) <= MAX_EXPONENT else None
 
 
 def _plain(d: Decimal) -> str:
-    return format(d.normalize(), "f")
+    # normalize() rounds to the context precision; give it exactly enough digits.
+    exact = Context(prec=max(len(d.as_tuple().digits), 1))
+    return format(d.normalize(exact), "f")
 
 
 def _rounded(reference: Decimal, precision: Decimal | None) -> Decimal:
@@ -92,6 +109,28 @@ def format_answer(spec: AnswerSpec) -> str | None:
             return f"{s} {spec.unit}" if spec.unit else s
         case ExtendedAnswer():
             return spec.final
+
+
+_PARENS = re.compile(r"\((.*)\)([^)]*)", re.DOTALL)
+
+
+def _unit_key(unit: str) -> str:
+    # A Russian keyboard types "°С" with a Cyrillic С; content uses the Latin "°C".
+    return _SPACES.sub("", unit).replace("С", "C")
+
+
+def _unwrap(raw: str, unit: str | None) -> str:
+    """Strip "(…)" or "(…) unit", the form format_answer() reveals: "(2,4 ± 0,2) Н".
+
+    Only the task's own unit is accepted; anything else keeps the parentheses and so
+    fails to parse (INVALID, the student retries) rather than being silently ignored.
+    """
+    s = raw.strip()
+    if m := _PARENS.fullmatch(s):
+        tail = m.group(2).strip()
+        if not tail or (unit and _unit_key(tail) == _unit_key(unit)):
+            return m.group(1)
+    return s
 
 
 def sequence_errors(student: str, reference: str, *, ordered: bool) -> int:
@@ -136,7 +175,7 @@ def check(spec: AnswerSpec, scoring: TaskNumberSpec, raw: str) -> Verdict:
             return Verdict(outcome, pts, mp, normalized=digits)
 
         case MeasurementAnswer():
-            parts = [p for p in re.split(r"(?:\+/?-|[;±|\s])+", raw.strip()) if p]
+            parts = [p for p in re.split(r"(?:\+/?-|[;±|\s])+", _unwrap(raw, spec.unit)) if p]
             nums = [n for p in parts if (n := parse_number(p)) is not None]
             if len(parts) != 2 or len(nums) != 2:
                 return Verdict(Outcome.INVALID, 0, mp)
