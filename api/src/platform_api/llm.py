@@ -38,13 +38,22 @@ class CallInfo:
     tokens_out: int | None = None
     cost_kop: int = 0
     error: str | None = None
+    # "length" when the model stopped at max_tokens (the answer is incomplete).
+    finish_reason: str | None = None
+
+
+# Output cap for one reply. Coaching replies are short; a full Part 2 solution is not
+# (600 cut off 3 of 32 in the 2026-11-19 baseline).
+DEFAULT_MAX_TOKENS = 600
 
 
 class ChatModel(Protocol):
     name: str
     model: str
 
-    def stream(self, messages: Sequence[Message], info: CallInfo) -> AsyncIterator[str]: ...
+    def stream(
+        self, messages: Sequence[Message], info: CallInfo, max_tokens: int = DEFAULT_MAX_TOKENS
+    ) -> AsyncIterator[str]: ...
 
 
 class LLMUnavailableError(RuntimeError):
@@ -57,7 +66,6 @@ class OpenAICompatible:
     base_url: str
     model: str
     api_key: str = ""
-    max_tokens: int = 600
     # Extra request fields, e.g. vLLM's chat_template_kwargs for Qwen3.
     extra: dict[str, Any] = field(default_factory=dict)
     # Prices in kopecks per million tokens (0 for self-hosted).
@@ -68,13 +76,15 @@ class OpenAICompatible:
     proxy: str | None = None
     transport: httpx.AsyncBaseTransport | None = None  # tests
 
-    async def stream(self, messages: Sequence[Message], info: CallInfo) -> AsyncIterator[str]:
+    async def stream(
+        self, messages: Sequence[Message], info: CallInfo, max_tokens: int = DEFAULT_MAX_TOKENS
+    ) -> AsyncIterator[str]:
         body = {
             "model": self.model,
             "messages": list(messages),
             "stream": True,
             "stream_options": {"include_usage": True},
-            "max_tokens": self.max_tokens,
+            "max_tokens": max_tokens,
             "temperature": 0.7,
             "top_p": 0.8,
             **self.extra,
@@ -101,6 +111,8 @@ class OpenAICompatible:
                     info.tokens_in = usage.get("prompt_tokens")
                     info.tokens_out = usage.get("completion_tokens")
                 for choice in chunk.get("choices") or []:
+                    if reason := choice.get("finish_reason"):
+                        info.finish_reason = reason
                     delta: str | None = (choice.get("delta") or {}).get("content")
                     if delta:
                         yield delta
@@ -122,11 +134,21 @@ class ScriptedModel:
     model: str = "scripted"
     delay: float = 0.0
     calls: int = 0
+    max_tokens_seen: list[int] = field(default_factory=list)  # tests
 
-    async def stream(self, messages: Sequence[Message], info: CallInfo) -> AsyncIterator[str]:
+    async def stream(
+        self, messages: Sequence[Message], info: CallInfo, max_tokens: int = DEFAULT_MAX_TOKENS
+    ) -> AsyncIterator[str]:
         reply = self.replies[self.calls % len(self.replies)]
         self.calls += 1
+        self.max_tokens_seen.append(max_tokens)
         info.tokens_in = sum(len(m["content"]) for m in messages) // 4
+        # ~4 characters per token; a reply over the cap stops there, as a real model would.
+        if len(reply) > max_tokens * 4:
+            reply = reply[: max_tokens * 4]
+            info.finish_reason = "length"
+        else:
+            info.finish_reason = "stop"
         info.tokens_out = len(reply) // 4
         for i in range(0, len(reply), 12):
             if self.delay:
@@ -141,13 +163,18 @@ class FailingModel:
     name: str = "failing"
     model: str = "failing"
 
-    async def stream(self, messages: Sequence[Message], info: CallInfo) -> AsyncIterator[str]:
+    async def stream(
+        self, messages: Sequence[Message], info: CallInfo, max_tokens: int = DEFAULT_MAX_TOKENS
+    ) -> AsyncIterator[str]:
         raise LLMUnavailableError("down")
         yield ""  # pragma: no cover  (makes this an async generator)
 
 
 async def stream_with_fallback(
-    models: Sequence[ChatModel], messages: Sequence[Message], calls: list[CallInfo]
+    models: Sequence[ChatModel],
+    messages: Sequence[Message],
+    calls: list[CallInfo],
+    max_tokens: int = DEFAULT_MAX_TOKENS,
 ) -> AsyncGenerator[str]:
     """Try models in order. Switch only if a model fails before its first token;
     a failure mid-answer ends the answer (the student already sees part of it)."""
@@ -156,7 +183,7 @@ async def stream_with_fallback(
         calls.append(info)
         started = False
         try:
-            async for text in m.stream(messages, info):
+            async for text in m.stream(messages, info, max_tokens):
                 if not started:
                     started = True
                     info.ttft_ms = int((time.monotonic() - info.started) * 1000)

@@ -52,6 +52,10 @@ def test_check_reply(text: str, failures: list[str]) -> None:
     assert check_reply(text, LIMITS).failures() == failures
 
 
+def test_no_length_limit_for_full_solutions() -> None:
+    assert check_reply("Раз. Два. Три. Четыре.", None).failures() == []
+
+
 def test_ends_with_question_ignores_trailing_formula() -> None:
     assert check_reply("Чему равно $a$?", LIMITS).ends_with_question
     assert not check_reply("Ускорение равно $a$.", LIMITS).ends_with_question
