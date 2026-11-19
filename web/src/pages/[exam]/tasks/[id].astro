@@ -93,10 +93,13 @@ const statementHtml = await renderMarkdown(task.statement);
   // Came here through «Случайная задача»: offer another one from the same filtered pool.
   try {
     const raw = sessionStorage.getItem('pp:practice-pool');
-    const pool = raw ? (JSON.parse(raw) as { back: string; hrefs: string[] }) : null;
+    const pool = raw
+      ? (JSON.parse(raw) as { back: string; backLabel?: string; hrefs: string[] })
+      : null;
     if (pool?.hrefs.includes(location.pathname)) {
       const back = document.querySelector<HTMLAnchorElement>('.crumbs .back')!;
       back.href = pool.back;
+      if (pool.backLabel) back.textContent = `← ${pool.backLabel}`;
       const others = pool.hrefs.filter((h) => h !== location.pathname);
       const more = document.querySelector<HTMLAnchorElement>('.crumbs .more')!;
       if (others.length > 0) {

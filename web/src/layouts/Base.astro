@@ -18,7 +18,8 @@ const {
 const exam = 'ege-physics';
 const path = Astro.url.pathname;
 const tabs = [
-  { href: '/', label: 'Роадмап', active: path === '/' || path.includes('/theory/') },
+  { href: '/', label: 'Траектория', active: path === '/' || path.includes('/theory/') },
+  { href: `/${exam}/catalog/`, label: 'Каталог', active: path.includes('/catalog') },
   {
     href: `/${exam}/practice/`,
     label: 'Практика',
@@ -259,22 +260,32 @@ const tabs = [
       grid-row: 2;
       justify-content: stretch;
       padding-bottom: 0.4rem;
+      /* Five tabs barely fit a 360px phone; scroll the row rather than the page. */
+      overflow-x: auto;
+      scrollbar-width: none;
     }
     .tabs a {
-      flex: 1;
+      flex: 1 0 auto;
       text-align: center;
       padding-inline: 0.3rem;
+      white-space: nowrap;
     }
     .email {
       display: none;
     }
   }
+  @media (max-width: 26rem) {
+    .tabs {
+      gap: 0;
+    }
+    .tabs a {
+      font-size: 0.82rem;
+      padding-inline: 0.25rem;
+    }
+  }
   @media (max-width: 22rem) {
     .name {
       display: none;
-    }
-    .tabs a {
-      font-size: 0.85rem;
     }
   }
 </style>
