@@ -5,6 +5,7 @@ description = "Physics platform HTTP API"
 requires-python = ">=3.13"
 dependencies = [
     "alembic>=1.14",
+    "anyio>=4",
     "asyncpg>=0.30",
     "content-schema",
     "fastapi>=0.115",
