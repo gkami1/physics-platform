@@ -4,6 +4,7 @@
 #   infra/backup.sh                       # dump to $BACKUP_DIR
 #   infra/backup.sh --restore FILE.sql.gz # restore a dump (stops the API meanwhile)
 set -euo pipefail
+umask 077  # dumps hold personal data: owner-only
 
 APP_DIR="${APP_DIR:-/opt/physics-platform}"
 BACKUP_DIR="${BACKUP_DIR:-/var/backups/physics-platform}"
