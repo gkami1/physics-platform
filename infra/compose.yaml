@@ -24,6 +24,9 @@ services:
     build:
       context: ..
       dockerfile: api/Dockerfile
+    # Lets LLM_BASE_URL point at a service on the host (e.g. the SSH tunnel to vLLM, DEPLOY.md §2).
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
       API_ENV: ${API_ENV:-prod}
       API_LOG_LEVEL: ${API_LOG_LEVEL:-INFO}
