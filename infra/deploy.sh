@@ -23,7 +23,8 @@ echo "  at \$(git log --oneline -1)"
 test -f infra/.env || { echo "infra/.env missing (copy infra/.env.example)"; exit 1; }
 docker compose -f infra/compose.yaml up -d --build --wait --remove-orphans
 docker image prune -f >/dev/null
-SITE=\$(grep -E '^SITE_ADDRESS=' infra/.env | cut -d= -f2-)
+# First address of a possibly quoted, comma-separated list ("a.ru, www.a.ru").
+SITE=\$(grep -E '^SITE_ADDRESS=' infra/.env | cut -d= -f2- | tr -d "\"' " | cut -d, -f1)
 for i in \$(seq 1 30); do
   if curl -fsS "https://\${SITE}/api/health" >/dev/null 2>&1; then
     echo "  healthy: https://\${SITE}/api/health"; exit 0
