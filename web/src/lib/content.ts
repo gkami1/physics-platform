@@ -165,6 +165,18 @@ export function tasksUrl(examId: string, topic?: string): string {
   return `/${examId}/practice/${topic ? `?topic=${encodeURIComponent(topic)}` : ''}`;
 }
 
+/** «Каталог заданий»: the EGE numbers, or one number's tasks. */
+export function catalogUrl(examId: string, n?: number): string {
+  return `/${examId}/catalog/${n === undefined ? '' : `${n}/`}`;
+}
+
+/** Tasks that count as EGE number `n` this season, easiest first (the catalog's order). */
+export function tasksOfNumber(b: PublicBundle, n: number): PublicTask[] {
+  return b.tasks
+    .filter((t) => t.ege_task === n && inSeason(b, t))
+    .sort((x, y) => x.difficulty - y.difficulty || x.id.localeCompare(y.id));
+}
+
 export function variantsUrl(examId: string): string {
   return `/${examId}/variants/`;
 }
