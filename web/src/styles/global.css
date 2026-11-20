@@ -461,11 +461,9 @@ blockquote {
   color: var(--ok);
 }
 
-/* The display rules above would otherwise beat the `hidden` attribute. */
-.form[hidden],
-.form [hidden],
-.form-msg[hidden] {
-  display: none;
+/* Class display rules (.btn, .form, …) would otherwise beat the `hidden` attribute. */
+[hidden] {
+  display: none !important;
 }
 
 .field:focus,

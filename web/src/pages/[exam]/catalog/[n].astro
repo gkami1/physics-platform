@@ -111,9 +111,7 @@ const points = `${spec.max_points} балл${spec.max_points === 1 ? 'а' : 'о�
 
 <script>
   import { api } from '../../../lib/api';
-
-  /** Read by the task page: its back link returns here and «Ещё задача» stays in this number. */
-  const POOL_KEY = 'pp:practice-pool';
+  import { savePool } from '../../../lib/taskPool';
 
   class NumberProgress extends HTMLElement {
     connectedCallback() {
@@ -121,14 +119,10 @@ const points = `${spec.max_points} балл${spec.max_points === 1 ? 'а' : 'о�
       const hrefs = [...document.querySelectorAll<HTMLAnchorElement>('.item .solve')].map(
         (a) => a.pathname,
       );
+      // The task page's back link returns here and its pager walks this number's list.
       document.querySelector('.list')?.addEventListener('click', (e) => {
         if (!(e.target as Element).closest('a.solve')) return;
-        try {
-          sessionStorage.setItem(POOL_KEY, JSON.stringify({ back: location.pathname, backLabel: this.dataset.label, hrefs }),
-          );
-        } catch {
-          // Storage off: the task page falls back to its default back link.
-        }
+        savePool({ back: location.pathname, backLabel: this.dataset.label, hrefs });
       });
       void api.taskStatuses().then(
         ({ tasks }) => {
