@@ -124,9 +124,11 @@ h1 {
   font-size: 1.05em;
 }
 
-/* Tables in theory text: scroll sideways inside their own box on narrow screens. */
-.prose table {
+/* Tables in theory, task statements and solutions: a full grid like the exam's, scrolling
+   sideways inside their own box on narrow screens. */
+:is(.prose, .statement, .solution-body) table {
   display: block;
+  width: max-content;
   max-width: 100%;
   overflow-x: auto;
   border-collapse: collapse;
@@ -134,16 +136,15 @@ h1 {
   font-size: 0.925rem;
 }
 
-.prose th,
-.prose td {
+:is(.prose, .statement, .solution-body) :is(th, td) {
   padding: 0.4rem 0.65rem;
-  border-bottom: 1px solid var(--border);
+  border: 1px solid var(--border-strong);
   text-align: left;
   vertical-align: top;
 }
 
-.prose th {
-  border-bottom-color: var(--border-strong);
+:is(.prose, .statement, .solution-body) th {
+  background: var(--surface-2);
   font-weight: 600;
   white-space: nowrap;
 }
