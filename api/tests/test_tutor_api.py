@@ -12,7 +12,14 @@ from platform_api.db import LlmCall, User, make_engine
 from platform_api.hints import LadderState
 from platform_api.llm import CallInfo, FailingModel, LLMUnavailableError, Message, ScriptedModel
 from platform_api.turn import plan_theory_turn
-from platform_api.tutor import LEAK_NOTE, THEORY_LEAK_NOTE, TRUNCATED_NOTE, _PendingTurn, _save_turn
+from platform_api.tutor import (
+    CUT_AT_LIMIT_NOTE,
+    LEAK_NOTE,
+    THEORY_LEAK_NOTE,
+    TRUNCATED_NOTE,
+    _PendingTurn,
+    _save_turn,
+)
 
 
 def events(body: str) -> list[tuple[str, dict[str, object]]]:
@@ -123,9 +130,11 @@ class RecordingModel(ScriptedModel):
         super().__init__(replies=(reply,))
         self.systems: list[str] = []
 
-    def stream(self, messages: Sequence[Message], info: CallInfo) -> AsyncIterator[str]:
+    def stream(
+        self, messages: Sequence[Message], info: CallInfo, max_tokens: int = 600
+    ) -> AsyncIterator[str]:
         self.systems.append(messages[0]["content"])
-        return super().stream(messages, info)
+        return super().stream(messages, info, max_tokens)
 
 
 def test_lesson_has_its_own_thread_and_context(signed_in: TestClient) -> None:
@@ -204,7 +213,9 @@ def test_daily_limit(signed_in: TestClient, monkeypatch: pytest.MonkeyPatch) -> 
 class DyingModel(ScriptedModel):
     """Streams part of a reply, then fails (e.g. the GPU host drops the connection)."""
 
-    async def stream(self, messages: Sequence[Message], info: CallInfo) -> AsyncIterator[str]:
+    async def stream(
+        self, messages: Sequence[Message], info: CallInfo, max_tokens: int = 600
+    ) -> AsyncIterator[str]:
         yield "Сначала подумай. Что дано"
         raise LLMUnavailableError("connection reset")
 
@@ -220,6 +231,16 @@ def test_reply_cut_mid_stream_says_so(signed_in: TestClient) -> None:
     assert (thread["hint_level"], thread["messages_left"]) == (1, 49)
 
 
+def test_reply_cut_at_output_cap_says_so(signed_in: TestClient) -> None:
+    long = "Сначала запишем закон сохранения энергии. " * 80  # > 600 tokens
+    model = ScriptedModel(replies=(long,))
+    use_model(signed_in, model)
+    evs = ask(signed_in)
+    assert model.max_tokens_seen == [600]  # coaching level
+    assert reply_text(evs).endswith(CUT_AT_LIMIT_NOTE)
+    assert evs[-1][0] == "done"
+
+
 class HistoryModel(ScriptedModel):
     """Keeps the dialogue (everything after the system prompt) of every call."""
 
@@ -227,9 +248,11 @@ class HistoryModel(ScriptedModel):
         super().__init__(replies=("Подумай.",))
         self.dialogues: list[list[str]] = []
 
-    def stream(self, messages: Sequence[Message], info: CallInfo) -> AsyncIterator[str]:
+    def stream(
+        self, messages: Sequence[Message], info: CallInfo, max_tokens: int = 600
+    ) -> AsyncIterator[str]:
         self.dialogues.append([m["content"] for m in messages[1:]])
-        return super().stream(messages, info)
+        return super().stream(messages, info, max_tokens)
 
 
 def test_student_who_left_mid_stream(signed_in: TestClient) -> None:

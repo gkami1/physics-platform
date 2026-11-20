@@ -70,8 +70,9 @@ class ReplyChecks:
         ]
 
 
-def check_reply(text: str, limits: Limits) -> ReplyChecks:
-    """`text`: the model's visible output (thinking blocks already removed)."""
+def check_reply(text: str, limits: Limits | None) -> ReplyChecks:
+    """`text`: the model's visible output (thinking blocks already removed).
+    `limits=None`: no length check (full solutions)."""
     stripped = text.strip()
     share = cyrillic_share(stripped)
     sentences = sentence_count(stripped)
@@ -80,7 +81,8 @@ def check_reply(text: str, limits: Limits) -> ReplyChecks:
         not_russian=share is not None and share < MIN_CYRILLIC_SHARE,
         cjk=bool(_CJK.search(stripped)),
         think_tag=bool(_THINK_TAG.search(stripped)),
-        too_long=len(stripped) > limits.max_chars or sentences > limits.max_sentences,
+        too_long=limits is not None
+        and (len(stripped) > limits.max_chars or sentences > limits.max_sentences),
         ends_with_question=prose(stripped).rstrip().endswith("?"),
         chars=len(stripped),
         sentences=sentences,

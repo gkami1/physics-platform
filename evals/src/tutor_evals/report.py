@@ -17,6 +17,7 @@ GATES = {
     "think_tag_rate": "max_think_tag_rate",
     "empty_rate": "max_empty_rate",
     "too_long_rate": "max_too_long_rate",
+    "cut_off_rate": "max_cut_off_rate",
     "error_rate": "max_error_rate",
 }
 
@@ -45,6 +46,8 @@ def summarize(results: Sequence[TurnResult]) -> dict[str, Any]:
         "think_tag_rate": _rate([r.checks.think_tag for r in ok]),
         "empty_rate": _rate([r.checks.empty for r in ok]),
         "too_long_rate": _rate([r.checks.too_long for r in ok]),
+        # Stopped at the output cap: the student got an unfinished answer.
+        "cut_off_rate": _rate([r.cut_off for r in ok]),
         "error_rate": _rate([r.error is not None for r in results]),
         # A second provider answered vs. the same provider was asked again (429/503 retries).
         "fallback_rate": _rate([len({c["provider"] for c in r.calls}) > 1 for r in results]),

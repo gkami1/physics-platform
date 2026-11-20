@@ -14,11 +14,11 @@ from typing import Any
 
 from content_schema.checking import format_answer
 from platform_api.content import ContentStore, PrivateTask, Theory
-from platform_api.hints import LadderState
+from platform_api.hints import MAX_LEVEL, LadderState
 from platform_api.leak import Detector, OutputGuard, visible_text
 from platform_api.llm import CallInfo, ChatModel, LLMUnavailableError, stream_with_fallback
 from platform_api.prompt import Turn, build_messages
-from platform_api.turn import HINT_REQUEST_TEXT, plan_task_turn, plan_theory_turn
+from platform_api.turn import HINT_REQUEST_TEXT, max_reply_tokens, plan_task_turn, plan_theory_turn
 from platform_api.tutor import leak_note
 from tutor_evals.checks import Limits, ReplyChecks, check_reply
 from tutor_evals.suite import Persona, Suite
@@ -39,11 +39,14 @@ class TurnResult:
     checks: ReplyChecks
     error: str | None = None
     calls: list[dict[str, Any]] = field(default_factory=list)
+    cut_off: bool = False  # the model stopped at the output cap
 
     def failures(self) -> list[str]:
         out = self.checks.failures()
         if self.leak:
             out.insert(0, "leak")
+        if self.cut_off:
+            out.append("cut_off")
         if self.error:
             out.append("error")
         return out
@@ -70,6 +73,7 @@ async def _reply(
     messages: list[dict[str, str]],
     detector: Detector | None,
     note: str,
+    max_tokens: int,
 ) -> tuple[str, str, bool, str | None, list[CallInfo]]:
     """Returns (raw visible, shown, guard stopped, error, calls). Reads the whole answer
     even after the guard stops, so the raw text can be inspected."""
@@ -78,7 +82,7 @@ async def _reply(
     raw = ""
     error = None
     try:
-        async for chunk in stream_with_fallback(models, messages, calls):
+        async for chunk in stream_with_fallback(models, messages, calls, max_tokens):
             raw += chunk
             guard.feed(chunk)
         guard.finish()
@@ -100,10 +104,13 @@ async def _reply_with_retry(
     detector: Detector | None,
     note: str,
     waits: Sequence[float],
+    max_tokens: int,
 ) -> tuple[str, str, bool, str | None, list[CallInfo]]:
     calls: list[CallInfo] = []
     for wait in (*waits, None):
-        raw, shown, stopped, error, attempt_calls = await _reply(models, messages, detector, note)
+        raw, shown, stopped, error, attempt_calls = await _reply(
+            models, messages, detector, note, max_tokens
+        )
         calls += attempt_calls
         if wait is None or raw or not error or not any(r in error for r in RETRYABLE):
             return raw, shown, stopped, error, calls
@@ -154,7 +161,12 @@ async def run_conversation(
             raise ValueError("run_conversation needs a task or a theory page")
         messages = build_messages(context, history, text, level)
         raw, shown, stopped, error, calls = await _reply_with_retry(
-            models, messages, detector, leak_note(persona.kind), rate_limit_waits
+            models,
+            messages,
+            detector,
+            leak_note(persona.kind),
+            rate_limit_waits,
+            max_reply_tokens(level),
         )
         leak = None if detector is None else stopped or detector.leaks(raw)
         results.append(
@@ -169,9 +181,11 @@ async def run_conversation(
                 raw=raw,
                 shown=shown,
                 leak=leak,
-                checks=check_reply(raw, limits),
+                # A full solution is long by design: no length limit at the top level.
+                checks=check_reply(raw, None if level == MAX_LEVEL else limits),
                 error=error,
                 calls=[{k: v for k, v in asdict(c).items() if k != "started"} for c in calls],
+                cut_off=bool(calls) and calls[-1].finish_reason == "length",
             )
         )
         # As in the API: a turn with no reply shown is not saved and moves nothing.

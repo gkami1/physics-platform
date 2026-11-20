@@ -29,7 +29,12 @@ from platform_api.prompt import (
     Turn,
     build_messages,
 )
-from platform_api.turn import HINT_REQUEST_TEXT, plan_task_turn, plan_theory_turn
+from platform_api.turn import (
+    HINT_REQUEST_TEXT,
+    max_reply_tokens,
+    plan_task_turn,
+    plan_theory_turn,
+)
 
 logger = logging.getLogger("api.tutor")
 
@@ -44,6 +49,8 @@ THEORY_LEAK_NOTE = (
 
 # The model failed after part of the reply was shown.
 TRUNCATED_NOTE = "\n\n*Ответ оборвался: репетитор перестал отвечать. Спроси ещё раз.*"
+# The model stopped at the output cap: the history holds the text so far, so it can go on.
+CUT_AT_LIMIT_NOTE = "\n\n*Ответ не поместился целиком. Напиши «продолжи», и я закончу.*"
 
 
 def leak_note(kind: str) -> str:
@@ -325,7 +332,7 @@ async def post_message(
             yield _sse("meta", {"hint_level": level, "messages_left": left - 1})
             error: str | None = None
             try:
-                stream = stream_with_fallback(models, messages, calls)
+                stream = stream_with_fallback(models, messages, calls, max_reply_tokens(level))
                 async with aclosing(stream) as chunks:
                     async for chunk in chunks:
                         if out := guard.feed(chunk):
@@ -344,6 +351,8 @@ async def post_message(
                 logger.warning("tutor answer leak stopped", extra={"context_id": body.id})
             elif error and shown.strip():
                 note = TRUNCATED_NOTE  # the model died mid-answer
+            elif calls and calls[-1].finish_reason == "length":
+                note = CUT_AT_LIMIT_NOTE
             if note:
                 shown += note
                 yield _sse("delta", {"text": note})
@@ -352,6 +361,8 @@ async def post_message(
                 reply_flags["leak"] = True
             if note == TRUNCATED_NOTE:
                 reply_flags["truncated"] = True
+            if note == CUT_AT_LIMIT_NOTE:
+                reply_flags["cut_at_limit"] = True
             saved = True
             with anyio.CancelScope(shield=True):
                 message_id = await _save_turn(
