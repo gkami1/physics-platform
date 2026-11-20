@@ -1,4 +1,4 @@
-"""Outgoing email. Only login codes for now."""
+"""Outgoing email. Only one-time codes for now."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ import asyncio
 import logging
 import smtplib
 from email.message import EmailMessage
-from typing import Protocol
+from typing import Literal, Protocol
 
 from platform_api.settings import Settings
 
@@ -70,11 +70,22 @@ def make_mailer(settings: Settings) -> Mailer:
     return LogMailer()
 
 
-def login_code_email(code: str, valid_minutes: int) -> tuple[str, str]:
-    subject = f"Код для входа: {code}"
+CodePurpose = Literal["login", "signup", "reset"]
+
+# purpose -> (subject prefix, what the code is for, what the reader may not have asked for)
+_CODE_TEXTS: dict[str, tuple[str, str, str]] = {
+    "login": ("Код для входа", "для входа на «Физика ЕГЭ»", "вход"),
+    "signup": ("Код подтверждения", "для завершения регистрации на «Физика ЕГЭ»", "регистрацию"),
+    "reset": ("Код для смены пароля", "для смены пароля на «Физика ЕГЭ»", "смену пароля"),
+}
+
+
+def code_email(code: str, valid_minutes: int, purpose: CodePurpose = "login") -> tuple[str, str]:
+    prefix, what, asked = _CODE_TEXTS[purpose]
+    subject = f"{prefix}: {code}"
     body = (
-        f"Ваш код для входа на «Физика ЕГЭ»: {code}\n\n"
+        f"Ваш код {what}: {code}\n\n"
         f"Код действует {valid_minutes} мин. "
-        "Если вы не запрашивали вход, просто проигнорируйте это письмо.\n"
+        f"Если вы не запрашивали {asked}, просто проигнорируйте это письмо.\n"
     )
     return subject, body

@@ -1,8 +1,8 @@
 import pytest
 
-from platform_api.auth import normalize_email
 from platform_api.mastery import Evidence, compute_mastery
 from platform_api.policy import same_origin
+from platform_api.profile import normalize_email, normalize_name, normalize_phone, password_ok
 
 T = ("topic",)
 
@@ -77,3 +77,65 @@ def test_same_origin(origin: str | None, host: str | None, ok: bool) -> None:
 )
 def test_normalize_email(raw: str, email: str | None) -> None:
     assert normalize_email(raw) == email
+
+
+@pytest.mark.parametrize(
+    ("raw", "name"),
+    [
+        ("Анна", "Анна"),
+        ("  анна  ", "анна"),  # case is the user's choice
+        ("Анна-Мария", "Анна-Мария"),
+        ("Мария   Луиза", "Мария Луиза"),
+        ("д'Артаньян", "д'Артаньян"),
+        ("Ёж", "Ёж"),
+        ("John", "John"),
+        ("", None),
+        ("   ", None),
+        ("R2D2", None),
+        ("Анна_", None),
+        ("-Анна", None),
+        ("Анна--Мария", None),
+        ("<script>", None),
+        ("Я" * 51, None),
+    ],
+)
+def test_normalize_name(raw: str, name: str | None) -> None:
+    assert normalize_name(raw) == name
+
+
+@pytest.mark.parametrize(
+    ("raw", "phone"),
+    [
+        ("+7 916 123-45-67", "+79161234567"),
+        ("8 (916) 123-45-67", "+79161234567"),
+        ("79161234567", "+79161234567"),
+        ("9161234567", "+79161234567"),
+        ("+375 29 123-45-67", "+375291234567"),
+        ("+44 20 7946 0958", "+442079460958"),
+        ("+7 916 123-45-6", None),  # Russian numbers are 11 digits
+        ("12345", None),
+        ("4161234567", None),  # bare 10 digits only for Russian mobiles
+        ("+0123456789", None),
+        ("+1234567890123456", None),
+        ("+7916123456a", None),
+        ("+7 916 123 45 6²", None),
+        ("", None),
+    ],
+)
+def test_normalize_phone(raw: str, phone: str | None) -> None:
+    assert normalize_phone(raw) == phone
+
+
+@pytest.mark.parametrize(
+    ("password", "ok"),
+    [
+        ("12345678", True),
+        ("пароль из слов", True),
+        ("1234567", False),
+        ("        ", False),
+        ("x" * 128, True),
+        ("x" * 129, False),
+    ],
+)
+def test_password_ok(password: str, ok: bool) -> None:
+    assert password_ok(password) is ok

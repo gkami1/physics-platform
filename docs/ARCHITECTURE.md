@@ -123,10 +123,12 @@ Dark-first app shell (light theme toggle, `pp:theme` in localStorage), four tabs
 
 | Table | Key fields |
 |---|---|
-| `users` | id, email (normalised, unique), consented_at, created_at; more consent flags and birth year in M7 |
+| `users` | id, email (normalised, unique, always verified), first_name, last_name, phone (E.164, optional), password_hash (argon2id, null for code-only accounts), consented_at, marketing_consent_at, created_at; birth year and the parental path in M7 |
+| `consent_events` | user_id, kind (personal_data/marketing), granted, ip, created_at — append-only proof of consents given and withdrawn |
 | `auth_identities` | user_id, provider (yandex/vk/telegram), subject — *added with the first OAuth provider; email sign-in uses `users.email`* |
 | `sessions` | id (sha256 of the cookie token), user_id, expires_at |
-| `login_codes` | email, code_hash, ip, tries, expires_at, used_at (also the rate-limit ledger) |
+| `login_codes` | email, code_hash, ip, tries, signup (the waiting sign-up form, cleared once used or expired), expires_at, used_at (also the rate-limit ledger) |
+| `password_failures` | email, ip, created_at — ledger for sign-in rate limits |
 | `tasks` | public metadata mirrored from content on API start; `active=false` when removed |
 | `attempts` | anon_id (M2) / user_id (M3), task_id, outcome (correct/partial/wrong/revealed), raw_answer, points, max_points, content_version, created_at |
 | `topic_mastery` | *not a table yet:* computed on read from `attempts` (see §7). Materialise if `/api/progress` gets slow |
@@ -195,13 +197,17 @@ SSE from FastAPI. Client renders Markdown + KaTeX incrementally, deferring unclo
 
 ## 9. Auth
 
-Email one-time code now (M3); Yandex ID / VK ID (OAuth) and optional Telegram Login later, as `auth_identities`. No SMS, no passwords.
+Email + password, with the email one-time code as the second way in and the way to reset a password; Yandex ID / VK ID (OAuth) next, optional Telegram Login later, as `auth_identities`. No SMS. *(2026-11-20: passwords added. Code-only sign-in (M3) confused users who expect a password field. The code machinery stays: it confirms the address at sign-up, signs in without a password and resets one.)*
 
-- **Codes:** 6 digits, 10 min, single use, 5 wrong tries per code; at most 1/min and 5/hour per address and 20/hour per IP. The same response for new and existing addresses (no enumeration). Stored as sha256(email:code).
+- **Sign-up:** first name, last name, email, phone (optional), password (≥ 8 characters, a show/hide toggle instead of a repeat field), the personal-data consent (required) and the advertising consent (optional, unticked). `POST /api/auth/signup` validates the form, hashes the password and emails a code. The form waits in that code row (`login_codes.signup`), and the account is created only when the code is typed (`/auth/verify`). A second sign-up for the same address issues a newer code, so the earlier code stops working and nobody can slip their password in under someone else's code. Waiting forms are cleared once used or expired.
+- **Passwords:** argon2id (`argon2-cffi`, library defaults: 64 MiB, 3 passes), hashed in a worker thread, re-hashed on sign-in when the defaults change. A missing account, an account without a password and a wrong password get the same `wrong_credentials` answer after the same work (a dummy hash). At most 10 wrong passwords per address and 50 per IP in 15 min (`password_failures`). A reset (`/auth/reset`, code + new password) signs out every other device. Accounts made before 2026-11-20 have no password; they sign in by code or set one through «Забыли пароль?».
+- **Codes:** 6 digits, 10 min, single use, 5 wrong tries per code; at most 1/min and 5/hour per address and 20/hour per IP. Stored as sha256(email:code). `/auth/code` (sign-in or reset) answers `no_account` for unknown addresses and sign-up answers `email_taken`: the common sign-in UX wins over hiding which addresses have accounts.
+- **Profile:** `/account/` page; `PATCH /api/me` edits the names, phone and advertising consent (email changes are not supported yet). Names and phone are for marketing and greetings; they never reach LLM prompts (opaque ids only).
+- **Marketing consent (38-ФЗ art. 18, 152-ФЗ):** a separate purpose with its own checkbox; `users.marketing_consent_at` holds the current state, `consent_events` the history with IPs. Withdrawable in the profile. The privacy policy (M7) must list marketing as a purpose, and the parental path covers it for minors.
 - **Mail:** plain SMTP via a Russian provider (e.g. Yandex 360). Without `API_SMTP_HOST` the code is written to the API log (local runs).
 - **Sessions:** opaque token in an `HttpOnly; SameSite=Lax` cookie (`Secure` in prod), `path=/api`; only its sha256 stored; 60 days, renewed when used in the second half.
 - **Anonymous practice:** an opaque `pp_anon` cookie (HttpOnly, `path=/api`) keys server-side attempts. On sign-in those rows get the user_id and the cookie is cleared; anonymous queries exclude merged rows, so signing out on a shared device hides the account's history. *(Changed in M2 from localStorage: one code path for history, nothing to merge client-side.)*
-- **Consent:** sign-in requires the personal-data consent checkbox; `users.consented_at` records it. Legal texts and the parental path come in M7.
+- **Consent:** sign-up requires the personal-data consent checkbox; `users.consented_at` and a `consent_events` row record it. Legal texts and the parental path come in M7.
 - **CSRF:** state-changing requests with an `Origin` that doesn't match `Host` are rejected (on top of SameSite=Lax). Requires the proxy to keep `Host` (Caddy does; the Vite dev proxy is set to).
 - **Abuse:** 30 graded attempts per minute per actor.
 

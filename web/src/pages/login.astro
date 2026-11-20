@@ -1,66 +1,212 @@
 ---
+import PasswordField from '../components/PasswordField.astro';
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="Вход — Физика ЕГЭ" description="Вход по коду из письма">
-  <h1>Вход</h1>
-  <p class="muted">
-    Войдите, чтобы прогресс сохранялся и был виден на всех ваших устройствах. Пароль не нужен —
-    пришлём код на почту.
-  </p>
-
-  <login-form>
-    <form class="step email-step" novalidate>
-      <label for="email">Электронная почта</label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        autocomplete="email"
-        inputmode="email"
-        maxlength="254"
-        placeholder="name@example.ru"
-        required
-      />
-      <label class="consent">
-        <input type="checkbox" name="consent" required />
-        <span>Я согласен(а) на обработку моего адреса электронной почты для входа на сайт</span>
+<Base title="Вход — Физика ЕГЭ" description="Вход и регистрация на «Физика ЕГЭ»">
+  <auth-flow class="card form-card">
+    <!-- Sign in by password (the default view). -->
+    <form class="form" data-mode="signin" novalidate>
+      <h1>Вход</h1>
+      <p class="muted lead">Прогресс сохраняется в аккаунте и виден на всех ваших устройствах.</p>
+      <label>
+        Электронная почта
+        <input
+          class="field"
+          name="email"
+          type="email"
+          autocomplete="username"
+          inputmode="email"
+          maxlength="254"
+          placeholder="name@example.ru"
+          required
+        />
       </label>
-      <button type="submit">Получить код</button>
+      <div class="label">
+        <span class="label-row">
+          <label for="signin-password">Пароль</label>
+          <button type="button" class="link-btn" data-go="reset">Забыли пароль?</button>
+        </span>
+        <PasswordField name="password" id="signin-password" autocomplete="current-password" />
+      </div>
+      <button type="submit" class="btn">Войти</button>
+      <button type="button" class="link-btn" data-go="code">Войти по коду из письма</button>
+      <p class="switch muted">
+        Нет аккаунта? <a href="?mode=signup" data-go="signup">Зарегистрироваться</a>
+      </p>
     </form>
 
-    <form class="step code-step" novalidate hidden>
+    <form class="form" data-mode="signup" novalidate hidden>
+      <h1>Регистрация</h1>
+      <div class="pair">
+        <label>
+          Имя
+          <input
+            class="field"
+            name="first_name"
+            autocomplete="given-name"
+            maxlength="50"
+            required
+          />
+        </label>
+        <label>
+          Фамилия
+          <input
+            class="field"
+            name="last_name"
+            autocomplete="family-name"
+            maxlength="50"
+            required
+          />
+        </label>
+      </div>
+      <label>
+        Электронная почта
+        <input
+          class="field"
+          name="email"
+          type="email"
+          autocomplete="email"
+          inputmode="email"
+          maxlength="254"
+          placeholder="name@example.ru"
+          required
+        />
+      </label>
+      <label>
+        <span>Телефон <span class="optional">— необязательно</span></span>
+        <input
+          class="field"
+          name="phone"
+          type="tel"
+          autocomplete="tel"
+          inputmode="tel"
+          maxlength="32"
+          placeholder="+7 900 000-00-00"
+        />
+      </label>
+      <div class="label">
+        <label for="signup-password">Пароль</label>
+        <PasswordField name="password" id="signup-password" autocomplete="new-password" />
+        <span class="hint">Не меньше 8 символов</span>
+      </div>
+      <label class="check">
+        <input type="checkbox" name="consent" required />
+        <span>
+          Я согласен(а) на обработку моих персональных данных (имя, фамилия, почта, телефон) для
+          работы сайта
+        </span>
+      </label>
+      <label class="check">
+        <input type="checkbox" name="marketing" />
+        <span>
+          Хочу получать новости, подборки заданий и предложения по почте, SMS и в мессенджерах.
+          Можно отписаться в профиле
+        </span>
+      </label>
+      <button type="submit" class="btn">Зарегистрироваться</button>
+      <p class="switch muted">
+        Уже есть аккаунт? <a href="?mode=signin" data-go="signin">Войти</a>
+      </p>
+    </form>
+
+    <!-- Ask for a code: to sign in without a password, or to set a new one. -->
+    <form class="form" data-mode="code" novalidate hidden>
+      <h1>Вход по коду</h1>
+      <p class="muted lead">Пришлём на почту код из 6 цифр.</p>
+      <label>
+        Электронная почта
+        <input
+          class="field"
+          name="email"
+          type="email"
+          autocomplete="email"
+          inputmode="email"
+          maxlength="254"
+          required
+        />
+      </label>
+      <button type="submit" class="btn">Получить код</button>
+      <button type="button" class="link-btn" data-go="signin">← Войти с паролем</button>
+    </form>
+
+    <form class="form" data-mode="reset" novalidate hidden>
+      <h1>Новый пароль</h1>
+      <p class="muted lead">Пришлём на почту код, после него можно задать новый пароль.</p>
+      <label>
+        Электронная почта
+        <input
+          class="field"
+          name="email"
+          type="email"
+          autocomplete="email"
+          inputmode="email"
+          maxlength="254"
+          required
+        />
+      </label>
+      <button type="submit" class="btn">Получить код</button>
+      <button type="button" class="link-btn" data-go="signin">← Вернуться ко входу</button>
+    </form>
+
+    <!-- Type the code: confirms a sign-up, signs in, or sets a new password. -->
+    <form class="form" data-mode="verify" novalidate hidden>
+      <h1 class="verify-title">Подтвердите почту</h1>
       <p class="sent"></p>
-      <label for="code">Код из письма</label>
-      <input
-        id="code"
-        name="code"
-        autocomplete="one-time-code"
-        inputmode="numeric"
-        pattern="[0-9]*"
-        maxlength="6"
-        placeholder="123456"
-        required
-      />
-      <button type="submit">Войти</button>
-      <button type="button" class="link back">Изменить адрес или отправить код ещё раз</button>
+      <label>
+        Код из письма
+        <input
+          class="field code"
+          name="code"
+          autocomplete="one-time-code"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          maxlength="6"
+          placeholder="123456"
+          required
+        />
+      </label>
+      <div class="label new-password" hidden>
+        <label for="reset-password">Новый пароль</label>
+        <PasswordField name="password" id="reset-password" autocomplete="new-password" />
+        <span class="hint">Не меньше 8 символов. Остальные устройства выйдут из аккаунта</span>
+      </div>
+      <button type="submit" class="btn">Подтвердить</button>
+      <button type="button" class="link-btn back">Изменить адрес или отправить код ещё раз</button>
     </form>
 
-    <p class="message" role="status" aria-live="polite" hidden></p>
-  </login-form>
+    <p class="form-msg" role="status" aria-live="polite" hidden></p>
+  </auth-flow>
 </Base>
 
 <script>
   import { ApiError, api } from '../lib/api';
 
+  type Mode = 'signin' | 'signup' | 'code' | 'reset' | 'verify';
+  type CodeFor = 'signup' | 'login' | 'reset';
+
   const ERRORS: Record<string, string> = {
     invalid_email: 'Проверьте адрес почты',
-    consent_required: 'Нужно согласие на обработку адреса почты',
+    invalid_name: 'Имя и фамилия — только буквы, пробел, дефис или апостроф',
+    invalid_phone: 'Проверьте номер телефона, например +7 900 123-45-67',
+    weak_password: 'Пароль — не меньше 8 символов',
+    consent_required: 'Нужно согласие на обработку персональных данных',
+    email_taken: 'Эта почта уже зарегистрирована. Войдите или восстановите пароль',
+    no_account: 'Аккаунта с этой почтой нет. Зарегистрируйтесь',
+    wrong_credentials:
+      'Неверная почта или пароль. Если раньше вы входили по коду из письма, задайте пароль через «Забыли пароль?»',
+    too_many_attempts: 'Слишком много попыток. Подождите 15 минут или войдите по коду',
     too_many_codes: 'Код уже отправлен. Подождите минуту и попробуйте снова',
     mail_failed: 'Не получилось отправить письмо. Попробуйте позже',
     wrong_code: 'Неверный код',
     code_expired: 'Код устарел. Запросите новый',
     too_many_tries: 'Слишком много попыток. Запросите новый код',
+  };
+
+  const VERIFY_TITLES: Record<CodeFor, string> = {
+    signup: 'Подтвердите почту',
+    login: 'Вход по коду',
+    reset: 'Новый пароль',
   };
 
   /** Only same-site paths: never redirect to another origin after sign-in. */
@@ -69,60 +215,153 @@ import Base from '../layouts/Base.astro';
     return next.startsWith('/') && !next.startsWith('//') ? next : '/';
   }
 
-  class LoginForm extends HTMLElement {
+  function value(f: HTMLFormElement, name: string): string {
+    return (f.elements.namedItem(name) as HTMLInputElement).value.trim();
+  }
+
+  function checked(f: HTMLFormElement, name: string): boolean {
+    return (f.elements.namedItem(name) as HTMLInputElement).checked;
+  }
+
+  class AuthFlow extends HTMLElement {
     private email = '';
+    private codeFor: CodeFor = 'signup';
+    /** Where «back» from the code step goes. */
+    private codeFrom: Mode = 'signup';
 
     connectedCallback() {
-      this.form('.email-step').addEventListener('submit', (e) => {
+      for (const f of this.querySelectorAll<HTMLFormElement>('form')) {
+        f.addEventListener('submit', (e) => {
+          e.preventDefault();
+          void this.submit(f.dataset.mode as Mode, f);
+        });
+      }
+      this.addEventListener('click', (e) => {
+        const go = (e.target as Element).closest<HTMLElement>('[data-go]');
+        if (!go) return;
         e.preventDefault();
-        void this.requestCode();
+        this.show(go.dataset.go as Mode);
       });
-      this.form('.code-step').addEventListener('submit', (e) => {
-        e.preventDefault();
-        void this.verify();
-      });
-      this.querySelector('.back')?.addEventListener('click', () => this.showStep('email'));
+      this.querySelector('.back')?.addEventListener('click', () => this.show(this.codeFrom));
+
+      const params = new URLSearchParams(location.search);
+      const email = params.get('email');
+      if (email) this.syncEmail(email);
+      const mode = params.get('mode');
+      this.show(mode === 'signup' || mode === 'code' || mode === 'reset' ? mode : 'signin', false);
+
       void api.me().then(
-        (m) => m.user && location.replace(nextUrl()),
+        (m) => m.user && params.get('mode') !== 'reset' && location.replace(nextUrl()),
         () => {},
       );
     }
 
-    private form(sel: string): HTMLFormElement {
-      return this.querySelector(sel) as HTMLFormElement;
+    private form(mode: Mode): HTMLFormElement {
+      return this.querySelector(`form[data-mode="${mode}"]`) as HTMLFormElement;
     }
 
-    private showStep(step: 'email' | 'code') {
-      this.form('.email-step').hidden = step !== 'email';
-      this.form('.code-step').hidden = step !== 'code';
+    /** Copy the address typed in one form into the others. */
+    private syncEmail(email: string) {
+      for (const input of this.querySelectorAll<HTMLInputElement>('input[name="email"]')) {
+        if (!input.value.trim()) input.value = email;
+      }
+    }
+
+    private show(mode: Mode, focus = true) {
+      const current = this.querySelector<HTMLFormElement>('form:not([hidden])');
+      const typed = current?.querySelector<HTMLInputElement>('input[name="email"]')?.value.trim();
+      if (typed) this.syncEmail(typed);
+      for (const f of this.querySelectorAll<HTMLFormElement>('form')) {
+        f.hidden = f.dataset.mode !== mode;
+      }
       this.message('');
-      (this.querySelector(step === 'email' ? '#email' : '#code') as HTMLInputElement).focus();
+      if (mode !== 'verify') {
+        const url = new URL(location.href);
+        if (mode === 'signin') url.searchParams.delete('mode');
+        else url.searchParams.set('mode', mode);
+        url.searchParams.delete('email');
+        history.replaceState(null, '', url);
+      }
+      if (focus) {
+        const f = this.form(mode);
+        const first = [...f.querySelectorAll<HTMLInputElement>('input.field')].find(
+          (i) => !i.value && !i.closest('[hidden]'),
+        );
+        (first ?? f.querySelector<HTMLInputElement>('input.field'))?.focus();
+      }
     }
 
-    private async requestCode() {
-      const f = this.form('.email-step');
-      const email = (f.elements.namedItem('email') as HTMLInputElement).value.trim();
-      const consent = (f.elements.namedItem('consent') as HTMLInputElement).checked;
-      if (!email.includes('@')) return this.message(ERRORS.invalid_email, true);
-      if (!consent) return this.message(ERRORS.consent_required, true);
-      await this.busy(f, async () => {
-        await api.requestCode(email, consent);
-        this.email = email;
-        (this.querySelector('.sent') as HTMLElement).textContent =
-          `Отправили код на ${email}. Если письма нет, проверьте «Спам».`;
-        (this.querySelector('#code') as HTMLInputElement).value = '';
-        this.showStep('code');
-      });
+    private async submit(mode: Mode, f: HTMLFormElement) {
+      switch (mode) {
+        case 'signin': {
+          const email = value(f, 'email');
+          const password = (f.elements.namedItem('password') as HTMLInputElement).value;
+          if (!email.includes('@')) return this.message(ERRORS.invalid_email, true);
+          if (!password) return this.message('Введите пароль', true);
+          return this.busy(f, async () => {
+            await api.login(email, password);
+            location.replace(nextUrl());
+          });
+        }
+        case 'signup': {
+          const password = (f.elements.namedItem('password') as HTMLInputElement).value;
+          const form = {
+            first_name: value(f, 'first_name'),
+            last_name: value(f, 'last_name'),
+            email: value(f, 'email'),
+            phone: value(f, 'phone') || null,
+            password,
+            consent: checked(f, 'consent'),
+            marketing: checked(f, 'marketing'),
+          };
+          if (!form.first_name || !form.last_name) return this.message('Укажите имя и фамилию', true);
+          if (!form.email.includes('@')) return this.message(ERRORS.invalid_email, true);
+          if (password.length < 8) return this.message(ERRORS.weak_password, true);
+          if (!form.consent) return this.message(ERRORS.consent_required, true);
+          return this.busy(f, async () => {
+            await api.signup(form);
+            this.toCode(form.email, 'signup', 'signup');
+          });
+        }
+        case 'code':
+        case 'reset': {
+          const email = value(f, 'email');
+          if (!email.includes('@')) return this.message(ERRORS.invalid_email, true);
+          const purpose = mode === 'code' ? 'login' : 'reset';
+          return this.busy(f, async () => {
+            await api.requestCode(email, purpose);
+            this.toCode(email, purpose, mode);
+          });
+        }
+        case 'verify': {
+          const code = value(f, 'code').replace(/\D/g, '');
+          if (code.length !== 6) return this.message('Код — 6 цифр', true);
+          const password = (f.elements.namedItem('password') as HTMLInputElement).value;
+          if (this.codeFor === 'reset' && password.length < 8) {
+            return this.message(ERRORS.weak_password, true);
+          }
+          return this.busy(f, async () => {
+            if (this.codeFor === 'reset') await api.resetPassword(this.email, code, password);
+            else await api.verifyCode(this.email, code);
+            location.replace(nextUrl());
+          });
+        }
+      }
     }
 
-    private async verify() {
-      const f = this.form('.code-step');
-      const code = (f.elements.namedItem('code') as HTMLInputElement).value.replace(/\D/g, '');
-      if (code.length !== 6) return this.message('Код — 6 цифр', true);
-      await this.busy(f, async () => {
-        await api.verifyCode(this.email, code);
-        location.replace(nextUrl());
-      });
+    private toCode(email: string, codeFor: CodeFor, from: Mode) {
+      this.email = email;
+      this.codeFor = codeFor;
+      this.codeFrom = from;
+      const f = this.form('verify');
+      (f.querySelector('.verify-title') as HTMLElement).textContent = VERIFY_TITLES[codeFor];
+      (f.querySelector('.sent') as HTMLElement).textContent =
+        `Отправили код на ${email}. Если письма нет, проверьте «Спам».`;
+      (f.elements.namedItem('code') as HTMLInputElement).value = '';
+      const pw = f.querySelector('.new-password') as HTMLElement;
+      pw.hidden = codeFor !== 'reset';
+      (pw.querySelector('input') as HTMLInputElement).required = codeFor === 'reset';
+      this.show('verify');
     }
 
     private async busy(f: HTMLFormElement, fn: () => Promise<void>) {
@@ -139,90 +378,43 @@ import Base from '../layouts/Base.astro';
     }
 
     private message(text: string, error = false) {
-      const m = this.querySelector('.message') as HTMLElement;
+      const m = this.querySelector('.form-msg') as HTMLElement;
       m.textContent = text;
       m.dataset.kind = error ? 'error' : '';
       m.hidden = !text;
+      // Long forms on phones: the message sits below the button, out of view.
+      if (text) m.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     }
   }
 
-  customElements.define('login-form', LoginForm);
+  customElements.define('auth-flow', AuthFlow);
 </script>
 
 <style>
-  login-form {
+  auth-flow {
     display: block;
-    max-width: 26rem;
-    padding: 1rem;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--surface);
+    margin: 1.5rem auto 0;
   }
-  .step {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
+  .lead {
+    margin: -0.35rem 0 0;
+    font-size: 0.925rem;
   }
-  label {
-    font-weight: 600;
-  }
-  input:not([type='checkbox']) {
-    font: inherit;
-    font-size: 1.1rem; /* ≥16px stops iOS zooming on focus */
-    padding: 0.55rem 0.7rem;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--bg);
-    color: var(--text);
-  }
-  #code {
-    letter-spacing: 0.3em;
-    font-variant-numeric: tabular-nums;
-  }
-  .consent {
-    display: flex;
-    gap: 0.5rem;
-    align-items: flex-start;
-    font-weight: 400;
-    font-size: 0.875rem;
-    color: var(--muted);
-  }
-  .consent input {
-    margin-top: 0.2rem;
-    width: 1.1rem;
-    height: 1.1rem;
-    flex: none;
-  }
-  button {
-    font: inherit;
-    font-weight: 600;
-    padding: 0.6rem 1rem;
-    border: 0;
-    border-radius: 8px;
-    background: var(--accent);
-    color: var(--surface);
-    cursor: pointer;
-  }
-  button:disabled {
-    opacity: 0.6;
-  }
-  button.link {
-    background: none;
-    color: var(--accent);
-    font-weight: 400;
-    font-size: 0.875rem;
-    padding: 0.25rem 0;
-    text-align: left;
+  .switch {
+    margin: 0.25rem 0 0;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.925rem;
+    text-align: center;
   }
   .sent {
     margin: 0;
     font-size: 0.925rem;
   }
-  .message {
-    margin: 0.75rem 0 0;
-    font-weight: 600;
+  .code {
+    letter-spacing: 0.3em;
+    font-variant-numeric: tabular-nums;
   }
-  .message[data-kind='error'] {
-    color: var(--bad);
+  .form-msg {
+    margin-top: 0.85rem;
   }
 </style>
