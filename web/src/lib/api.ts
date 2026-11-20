@@ -159,7 +159,11 @@ export type TutorEvent =
   | { event: 'meta'; data: { hint_level: number | null; messages_left: number } }
   | { event: 'delta'; data: { text: string } }
   | { event: 'done'; data: { message_id: number | null; leak: boolean } }
-  | { event: 'error'; data: { detail: string } };
+  | {
+      event: 'error';
+      // A failed turn is not counted: the level and counter to show again.
+      data: { detail: string; hint_level?: number | null; messages_left?: number };
+    };
 
 export const tutor = {
   thread: (kind: TutorKind, id: string) =>

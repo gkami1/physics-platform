@@ -4,11 +4,13 @@ from __future__ import annotations
 
 import json
 import logging
-from collections.abc import AsyncIterator
+from collections.abc import AsyncIterator, Sequence
 from contextlib import aclosing
+from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Literal
 
+import anyio
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
@@ -39,6 +41,9 @@ THEORY_LEAK_NOTE = (
     "\n\n*Дальше я чуть не назвал ответ задачи. Попробуй дойти до него сам"
     " и проверь в поле ответа под задачей.*"
 )
+
+# The model failed after part of the reply was shown.
+TRUNCATED_NOTE = "\n\n*Ответ оборвался: репетитор перестал отвечать. Спроси ещё раз.*"
 
 
 def leak_note(kind: str) -> str:
@@ -148,6 +153,107 @@ def _sse(event: str, data: object) -> str:
     return f"event: {event}\ndata: {json.dumps(data, ensure_ascii=False)}\n\n"
 
 
+@dataclass(frozen=True)
+class _PendingTurn:
+    """Everything a turn writes, decided before the model answers and saved after."""
+
+    user_id: int
+    kind: str
+    context_id: str
+    text: str
+    intent: str
+    level: int | None
+    # New ladder state (task threads); applied only once the student got a reply.
+    state: LadderState | None
+
+
+async def _save_turn(
+    maker: async_sessionmaker[AsyncSession],
+    turn: _PendingTurn,
+    *,
+    reply: str,
+    reply_flags: dict[str, object],
+    calls: Sequence[CallInfo],
+    client_gone: bool,
+) -> int | None:
+    """Saves a finished turn; returns the assistant message id.
+
+    A turn counts (quota, ladder step, history) only if the student saw a reply. When
+    every model failed before answering, only the call traces are kept, so an outage
+    costs the student neither a message nor a hint level. A student who left mid-reply
+    still spent a model call: their message counts, without a ladder step if nothing
+    was shown, and is marked `no_reply` so the next prompt skips it.
+    """
+    replied = bool(reply.strip())
+    async with maker() as s:
+        message_id: int | None = None
+        if replied or client_gone:
+            thread = await s.scalar(
+                select(TutorThread).where(
+                    TutorThread.user_id == turn.user_id,
+                    TutorThread.context_kind == turn.kind,
+                    TutorThread.context_id == turn.context_id,
+                )
+            )
+            if thread is None:
+                thread = TutorThread(
+                    user_id=turn.user_id,
+                    context_kind=turn.kind,
+                    context_id=turn.context_id,
+                    hint_level=0,
+                    turns_at_level=0,
+                )
+                s.add(thread)
+                await s.flush()
+            if replied and turn.state is not None:
+                thread.hint_level = turn.state.level
+                thread.turns_at_level = turn.state.turns_at_level
+            flags: dict[str, object] = {"intent": turn.intent}
+            if not replied:
+                flags["no_reply"] = True
+            s.add(
+                TutorMessage(
+                    thread_id=thread.id,
+                    user_id=turn.user_id,
+                    role="user",
+                    content=turn.text,
+                    hint_level=turn.level,
+                    flags=flags,
+                    created_at=now(),
+                )
+            )
+            if replied:
+                msg = TutorMessage(
+                    thread_id=thread.id,
+                    user_id=turn.user_id,
+                    role="assistant",
+                    content=reply,
+                    hint_level=turn.level,
+                    flags=reply_flags,
+                    created_at=now(),
+                )
+                s.add(msg)
+                await s.flush()
+                message_id = msg.id
+        for c in calls:
+            s.add(
+                LlmCall(
+                    message_id=message_id,
+                    provider=c.provider,
+                    model=c.model,
+                    prompt_version=PROMPT_VERSION,
+                    ttft_ms=c.ttft_ms,
+                    latency_ms=c.latency_ms,
+                    tokens_in=c.tokens_in,
+                    tokens_out=c.tokens_out,
+                    cost_kop=c.cost_kop,
+                    error=c.error,
+                )
+            )
+        await s.commit()
+    return message_id
+
+
 @router.post("/messages")
 async def post_message(
     body: MessageIn, request: Request, store: Store, db: Db, user: SessionUser
@@ -159,31 +265,26 @@ async def post_message(
     models: list[ChatModel] = request.app.state.llm
     if not models:
         raise HTTPException(503, "tutor_unavailable")
-    if await _messages_left(db, request, u) <= 0:
+    left = await _messages_left(db, request, u)
+    if left <= 0:
         raise HTTPException(429, "daily_limit")
 
     thread = await _thread(db, u, body.kind, body.id)
-    if thread is None:
-        thread = TutorThread(
-            user_id=u.id, context_kind=body.kind, context_id=body.id, hint_level=0, turns_at_level=0
+    history: list[Turn] = []
+    if thread is not None:
+        recent = await db.scalars(
+            select(TutorMessage)
+            .where(TutorMessage.thread_id == thread.id)
+            .order_by(TutorMessage.id.desc())
+            .limit(HISTORY_TURNS)
         )
-        db.add(thread)
-        await db.flush()
-    history = [
-        Turn(m.role, m.content)
-        for m in reversed(
-            list(
-                await db.scalars(
-                    select(TutorMessage)
-                    .where(TutorMessage.thread_id == thread.id)
-                    .order_by(TutorMessage.id.desc())
-                    .limit(HISTORY_TURNS)
-                )
-            )
-        )
-    ]
+        history = [
+            Turn(m.role, m.content) for m in reversed(list(recent)) if not m.flags.get("no_reply")
+        ]
 
     level: int | None = None
+    prev_level: int | None = None
+    state: LadderState | None = None
     detector: Detector | None = None
     if body.kind == "task":
         task = store.task(body.id)
@@ -194,13 +295,13 @@ async def post_message(
                 select(Attempt.outcome).where(Attempt.user_id == u.id, Attempt.task_id == task.id)
             )
         )
-        turn = plan_task_turn(
-            task,
-            LadderState(thread.hint_level, thread.turns_at_level),
-            asked_for_hint=body.intent == "hint",
-            outcomes=outcomes,
+        current = (
+            LadderState(thread.hint_level, thread.turns_at_level) if thread else LadderState(0, 0)
         )
-        thread.hint_level, thread.turns_at_level = turn.state.level, turn.state.turns_at_level
+        turn = plan_task_turn(
+            task, current, asked_for_hint=body.intent == "hint", outcomes=outcomes
+        )
+        prev_level, state = current.level, turn.state
         level, context, detector = turn.level, turn.context, turn.detector
     else:
         page = store.theory(body.id)
@@ -208,82 +309,85 @@ async def post_message(
             raise HTTPException(404, "context not found")
         theory_turn = plan_theory_turn(page, store.theory_steps(page))
         context, detector = theory_turn.context, theory_turn.detector
+    # Nothing is written yet: the turn is saved once the reply is known (`_save_turn`).
+    await db.close()
 
-    db.add(
-        TutorMessage(
-            thread_id=thread.id,
-            user_id=u.id,
-            role="user",
-            content=text,
-            hint_level=level,
-            flags={"intent": body.intent},
-            created_at=now(),
-        )
-    )
-    await db.commit()
     messages = build_messages(context, history, text, level)
-    left = await _messages_left(db, request, u)
+    pending = _PendingTurn(u.id, body.kind, body.id, text, body.intent, level, state)
+    maker: async_sessionmaker[AsyncSession] = request.app.state.sessionmaker
 
     async def events() -> AsyncIterator[str]:
-        yield _sse("meta", {"hint_level": level, "messages_left": left})
         guard = OutputGuard(detector)
         calls: list[CallInfo] = []
-        error: str | None = None
+        shown = ""  # everything sent to the student
+        saved = False
         try:
-            stream = stream_with_fallback(models, messages, calls)
-            async with aclosing(stream) as chunks:
-                async for chunk in chunks:
-                    if out := guard.feed(chunk):
-                        yield _sse("delta", {"text": out})
-                    if guard.leaked:
-                        break
-            if tail := guard.finish():
-                yield _sse("delta", {"text": tail})
-        except LLMUnavailableError as e:
-            error = str(e)
-        content = guard.text
-        if guard.leaked:
-            note = leak_note(body.kind)
-            content += note
-            yield _sse("delta", {"text": note})
-            logger.warning("tutor answer leak stopped", extra={"thread_id": thread.id})
-
-        maker: async_sessionmaker[AsyncSession] = request.app.state.sessionmaker
-        async with maker() as s:
-            message_id: int | None = None
-            if content.strip():
-                msg = TutorMessage(
-                    thread_id=thread.id,
-                    user_id=u.id,
-                    role="assistant",
-                    content=content,
-                    hint_level=level,
-                    flags={"leak": True} if guard.leaked else {},
-                    created_at=now(),
+            yield _sse("meta", {"hint_level": level, "messages_left": left - 1})
+            error: str | None = None
+            try:
+                stream = stream_with_fallback(models, messages, calls)
+                async with aclosing(stream) as chunks:
+                    async for chunk in chunks:
+                        if out := guard.feed(chunk):
+                            shown += out
+                            yield _sse("delta", {"text": out})
+                        if guard.leaked:
+                            break
+                if tail := guard.finish():
+                    shown += tail
+                    yield _sse("delta", {"text": tail})
+            except LLMUnavailableError as e:
+                error = str(e)
+            note = ""
+            if guard.leaked:
+                note = leak_note(body.kind)
+                logger.warning("tutor answer leak stopped", extra={"context_id": body.id})
+            elif error and shown.strip():
+                note = TRUNCATED_NOTE  # the model died mid-answer
+            if note:
+                shown += note
+                yield _sse("delta", {"text": note})
+            reply_flags: dict[str, object] = {}
+            if guard.leaked:
+                reply_flags["leak"] = True
+            if note == TRUNCATED_NOTE:
+                reply_flags["truncated"] = True
+            saved = True
+            with anyio.CancelScope(shield=True):
+                message_id = await _save_turn(
+                    maker,
+                    pending,
+                    reply=shown,
+                    reply_flags=reply_flags,
+                    calls=calls,
+                    client_gone=False,
                 )
-                s.add(msg)
-                await s.flush()
-                message_id = msg.id
-            for c in calls:
-                s.add(
-                    LlmCall(
-                        message_id=message_id,
-                        provider=c.provider,
-                        model=c.model,
-                        prompt_version=PROMPT_VERSION,
-                        ttft_ms=c.ttft_ms,
-                        latency_ms=c.latency_ms,
-                        tokens_in=c.tokens_in,
-                        tokens_out=c.tokens_out,
-                        cost_kop=c.cost_kop,
-                        error=c.error,
+            if message_id is None:
+                # Nothing was counted: let the client restore its level and counter.
+                yield _sse(
+                    "error",
+                    {
+                        "detail": "tutor_unavailable",
+                        "hint_level": prev_level,
+                        "messages_left": left,
+                    },
+                )
+            else:
+                yield _sse("done", {"message_id": message_id, "leak": guard.leaked})
+        finally:
+            if not saved:
+                # The student left mid-stream (cancelled or closed generator). The model
+                # call already happened, so the turn still counts; save it unshielded
+                # from the cancellation.
+                with anyio.CancelScope(shield=True):
+                    await _save_turn(
+                        maker,
+                        pending,
+                        reply=shown,
+                        reply_flags={"interrupted": True},
+                        calls=calls,
+                        client_gone=True,
                     )
-                )
-            await s.commit()
-        if error and message_id is None:
-            yield _sse("error", {"detail": "tutor_unavailable"})
-        else:
-            yield _sse("done", {"message_id": message_id, "leak": guard.leaked})
 
     return StreamingResponse(
         events(),

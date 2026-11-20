@@ -136,11 +136,17 @@ async def run_conversation(
             outcomes.append(st.attempt)
         level: int | None = None
         detector: Detector | None = None
+        new_state = state
         if task is not None:
             plan = plan_task_turn(
                 task, state, asked_for_hint=st.intent == "hint", outcomes=outcomes
             )
-            state, level, context, detector = plan.state, plan.level, plan.context, plan.detector
+            new_state, level, context, detector = (
+                plan.state,
+                plan.level,
+                plan.context,
+                plan.detector,
+            )
         elif theory is not None:
             tplan = plan_theory_turn(theory, steps)
             context, detector = tplan.context, tplan.detector
@@ -168,7 +174,10 @@ async def run_conversation(
                 calls=[{k: v for k, v in asdict(c).items() if k != "started"} for c in calls],
             )
         )
-        history += [Turn("user", text), Turn("assistant", shown)]
+        # As in the API: a turn with no reply shown is not saved and moves nothing.
+        if shown.strip():
+            state = new_state
+            history += [Turn("user", text), Turn("assistant", shown)]
     return results
 
 
