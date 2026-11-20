@@ -1,0 +1,249 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '../../../layouts/Base.astro';
+import {
+  bundles,
+  catalogUrl,
+  difficultyLabel,
+  type PublicBundle,
+  taskUrl,
+  tasksOfNumber,
+  theoryUrl,
+  topicsById,
+} from '../../../lib/content';
+import { renderMarkdown } from '../../../lib/markdown';
+
+export const getStaticPaths = (() =>
+  bundles().flatMap((b) =>
+    Object.keys(b.exam.tasks).map((n) => ({
+      params: { exam: b.exam.id, n },
+      props: { b, n: Number(n) },
+    })),
+  )) satisfies GetStaticPaths;
+
+interface Props {
+  b: PublicBundle;
+  n: number;
+}
+
+const { b, n } = Astro.props;
+const exam = b.exam.id;
+const spec = b.exam.tasks[String(n)]!;
+const all = Object.keys(b.exam.tasks)
+  .map(Number)
+  .sort((x, y) => x - y);
+const prev = all[all.indexOf(n) - 1];
+const next = all[all.indexOf(n) + 1];
+const topics = topicsById(b);
+const theoryTopics = new Set(b.theory.map((t) => t.topic));
+const items = await Promise.all(
+  tasksOfNumber(b, n).map(async (t) => ({ t, html: await renderMarkdown(t.statement) })),
+);
+const points = `${spec.max_points} балл${spec.max_points === 1 ? 'а' : 'ов'}`;
+---
+
+<Base title={`Задание № ${n}: ${spec.title} — каталог — ${b.exam.title}`} narrow>
+  <nav class="crumbs"><a href={catalogUrl(exam)}>← Каталог заданий</a></nav>
+
+  <header class="head">
+    <div class="eyebrow">Часть {spec.part} · до {points}</div>
+    <h1>Задание № {n}</h1>
+    <p class="subtitle">{spec.title}</p>
+    <number-progress class="meta muted" data-label={`№ ${n} в каталоге`} data-ids={items.map((x) => x.t.id).join(' ')}>
+      <span>Задач в банке: {items.length}</span>
+      <span class="solved" hidden></span>
+    </number-progress>
+  </header>
+
+  {items.length === 0 && <p class="card empty muted">Задачи к этому номеру скоро появятся.</p>}
+
+  <ol class="list">
+    {
+      items.map(({ t, html }, i) => (
+        <li class="card item" data-id={t.id}>
+          <div class="item-head">
+            <span class="status" title="Не решена" />
+            <span class="idx">Задача {i + 1}</span>
+            <span class={`diff diff-${t.difficulty}`}>{difficultyLabel(t.difficulty)}</span>
+            {t.status === 'draft' && <span class="badge draft">черновик</span>}
+          </div>
+          <div class="statement reading" set:html={html} />
+          <div class="item-foot">
+            <span class="topics muted">
+              {t.topics.map((id, k) => {
+                const title = topics.get(id)?.title ?? id;
+                return (
+                  <>
+                    {k > 0 && ', '}
+                    {theoryTopics.has(id) ? <a href={theoryUrl(exam, id)}>{title}</a> : title}
+                  </>
+                );
+              })}
+            </span>
+            <a class="btn small solve" href={taskUrl(exam, t.id)}>
+              Решить →
+            </a>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+
+  <nav class="pager" aria-label="Соседние номера">
+    {
+      prev !== undefined ? (
+        <a class="btn ghost small" href={catalogUrl(exam, prev)}>
+          ← № {prev}
+        </a>
+      ) : (
+        <span />
+      )
+    }
+    {
+      next !== undefined && (
+        <a class="btn ghost small" href={catalogUrl(exam, next)}>
+          № {next} →
+        </a>
+      )
+    }
+  </nav>
+</Base>
+
+<script>
+  import { api } from '../../../lib/api';
+
+  /** Read by the task page: its back link returns here and «Ещё задача» stays in this number. */
+  const POOL_KEY = 'pp:practice-pool';
+
+  class NumberProgress extends HTMLElement {
+    connectedCallback() {
+      const ids = (this.dataset.ids ?? '').split(' ').filter(Boolean);
+      const hrefs = [...document.querySelectorAll<HTMLAnchorElement>('.item .solve')].map(
+        (a) => a.pathname,
+      );
+      document.querySelector('.list')?.addEventListener('click', (e) => {
+        if (!(e.target as Element).closest('a.solve')) return;
+        try {
+          sessionStorage.setItem(POOL_KEY, JSON.stringify({ back: location.pathname, backLabel: this.dataset.label, hrefs }),
+          );
+        } catch {
+          // Storage off: the task page falls back to its default back link.
+        }
+      });
+      void api.taskStatuses().then(
+        ({ tasks }) => {
+          let solved = 0;
+          for (const item of document.querySelectorAll<HTMLElement>('.item')) {
+            const s = tasks[item.dataset.id ?? ''];
+            const el = item.querySelector<HTMLElement>('.status')!;
+            el.dataset.status = s ?? '';
+            el.title = s === 'solved' ? 'Решена' : s === 'attempted' ? 'Есть попытки' : 'Не решена';
+            if (s === 'solved') solved++;
+          }
+          if (solved > 0) {
+            const el = this.querySelector<HTMLElement>('.solved')!;
+            el.textContent = `Решено: ${solved} из ${ids.length}`;
+            el.hidden = false;
+          }
+        },
+        () => {},
+      );
+    }
+  }
+
+  customElements.define('number-progress', NumberProgress);
+</script>
+
+<style>
+  .crumbs {
+    margin-top: 1.25rem;
+    font-size: 0.875rem;
+  }
+  .crumbs a {
+    text-decoration: none;
+  }
+  .head {
+    margin: 1rem 0 1.25rem;
+  }
+  .head h1 {
+    margin: 0.2rem 0 0;
+  }
+  .subtitle {
+    margin: 0.25rem 0 0.5rem;
+    font-size: 1.05rem;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    font-size: 0.875rem;
+  }
+  .solved {
+    color: var(--ok);
+    font-weight: 600;
+  }
+  .empty {
+    padding: 1rem 1.25rem;
+  }
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .item {
+    padding: 0.9rem 1.25rem 1rem;
+    min-width: 0;
+  }
+  .item-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.7rem;
+    font-size: 0.85rem;
+  }
+  .idx {
+    font-weight: 700;
+  }
+  .diff {
+    font-weight: 600;
+  }
+  .status {
+    display: inline-block;
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+    border: 2px solid var(--border-strong);
+  }
+  .status[data-status='attempted'] {
+    border-color: var(--warn);
+  }
+  .status[data-status='solved'] {
+    border-color: var(--ok);
+    background: var(--ok);
+  }
+  .statement {
+    overflow-x: auto;
+  }
+  .item-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+  }
+  .topics {
+    font-size: 0.85rem;
+  }
+  .solve {
+    margin-left: auto;
+  }
+  .pager {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+  }
+</style>

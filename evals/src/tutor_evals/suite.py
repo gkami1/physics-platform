@@ -46,6 +46,7 @@ class Thresholds(_Strict):
     max_think_tag_rate: float = 0.0
     max_empty_rate: float = 0.0
     max_too_long_rate: float = 0.1
+    max_cut_off_rate: float = 0.01
     max_error_rate: float = 0.0
 
 

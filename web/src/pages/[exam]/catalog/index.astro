@@ -1,0 +1,199 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '../../../layouts/Base.astro';
+import { bundles, catalogUrl, type PublicBundle, tasksOfNumber } from '../../../lib/content';
+
+export const getStaticPaths = (() =>
+  bundles().map((b) => ({ params: { exam: b.exam.id }, props: { b } }))) satisfies GetStaticPaths;
+
+interface Props {
+  b: PublicBundle;
+}
+
+const { b } = Astro.props;
+const exam = b.exam.id;
+const numbers = Object.entries(b.exam.tasks)
+  .map(([n, spec]) => ({ n: Number(n), spec, ids: tasksOfNumber(b, Number(n)).map((t) => t.id) }))
+  .sort((x, y) => x.n - y.n);
+const parts = [1, 2].map((part) => ({ part, items: numbers.filter((x) => x.spec.part === part) }));
+
+function tasksWord(k: number): string {
+  const d = k % 10;
+  const dd = k % 100;
+  if (d === 1 && dd !== 11) return 'задача';
+  if (d >= 2 && d <= 4 && (dd < 12 || dd > 14)) return 'задачи';
+  return 'задач';
+}
+---
+
+<Base title={`Каталог заданий — ${b.exam.title}`}>
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">{b.exam.title} · {b.exam.season}</div>
+      <h1>Каталог заданий</h1>
+      <p class="muted">
+        Все {numbers.length} номеров ЕГЭ. Выберите номер — откроются все задачи банка к нему.
+      </p>
+    </div>
+  </header>
+
+  <catalog-grid>
+    {
+      parts.map(({ part, items }) => (
+        <section class="part">
+          <h2>
+            Часть {part} <span class="muted count">№ {items[0]?.n}–{items.at(-1)?.n}</span>
+          </h2>
+          <ol class="grid">
+            {items.map(({ n, spec, ids }) => (
+              <li>
+                <a
+                  class:list={['card', 'tile', { p2: part === 2, empty: ids.length === 0 }]}
+                  href={catalogUrl(exam, n)}
+                  data-ids={ids.join(' ')}
+                >
+                  <span class="num">{n}</span>
+                  <span class="title">{spec.title}</span>
+                  <span class="foot muted">
+                    <span class="total">
+                      {ids.length > 0 ? `${ids.length} ${tasksWord(ids.length)}` : 'скоро'}
+                    </span>
+                    <span class="solved" hidden />
+                  </span>
+                  <span class="meter" aria-hidden="true">
+                    <span />
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ))
+    }
+  </catalog-grid>
+</Base>
+
+<script>
+  import { api } from '../../../lib/api';
+
+  // Static tiles; solved counts arrive from the API for signed-in (or anonymous) students.
+  class CatalogGrid extends HTMLElement {
+    connectedCallback() {
+      void api.taskStatuses().then(
+        ({ tasks }) => {
+          for (const tile of this.querySelectorAll<HTMLElement>('.tile')) {
+            const ids = (tile.dataset.ids ?? '').split(' ').filter(Boolean);
+            const solved = ids.filter((id) => tasks[id] === 'solved').length;
+            if (ids.length === 0 || solved === 0) continue;
+            const el = tile.querySelector<HTMLElement>('.solved')!;
+            el.textContent = `решено ${solved}`;
+            el.hidden = false;
+            tile.querySelector<HTMLElement>('.meter > span')!.style.width =
+              `${Math.round((solved / ids.length) * 100)}%`;
+          }
+        },
+        () => {},
+      );
+    }
+  }
+
+  customElements.define('catalog-grid', CatalogGrid);
+</script>
+
+<style>
+  .part + .part {
+    margin-top: 2rem;
+  }
+  .part h2 {
+    font-size: 1.15rem;
+    margin: 0 0 0.75rem;
+  }
+  .count {
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-left: 0.35rem;
+  }
+  .grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr));
+    gap: 0.75rem;
+  }
+  .tile {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr auto;
+    gap: 0.35rem 0.8rem;
+    height: 100%;
+    padding: 0.9rem 1rem 1.1rem;
+    overflow: hidden;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .tile:hover {
+    border-color: var(--accent);
+  }
+  .tile.empty {
+    opacity: 0.6;
+  }
+  .num {
+    grid-row: 1 / span 2;
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: var(--radius-sm);
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 1.2rem;
+    font-weight: 800;
+  }
+  .p2 .num {
+    background: var(--ok-soft);
+    color: var(--ok);
+  }
+  .title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+  .foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem 0.6rem;
+    font-size: 0.8rem;
+  }
+  .solved {
+    color: var(--ok);
+    font-weight: 600;
+  }
+  .meter {
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 3px;
+    background: transparent;
+  }
+  .meter > span {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--ok);
+  }
+  @media (max-width: 30rem) {
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+    .tile {
+      padding: 0.65rem 0.8rem 0.8rem;
+    }
+    .num {
+      width: 2.3rem;
+      height: 2.3rem;
+      font-size: 1.05rem;
+    }
+  }
+</style>

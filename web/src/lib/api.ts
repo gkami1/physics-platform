@@ -1,5 +1,5 @@
 // Typed client for the platform API. Shapes mirror api/src/platform_api/main.py.
-export type Outcome = "correct" | "partial" | "wrong" | "invalid";
+export type Outcome = 'correct' | 'partial' | 'wrong' | 'invalid';
 
 export interface AttemptResponse {
   outcome: Outcome;
@@ -11,7 +11,7 @@ export interface AttemptResponse {
 
 export interface TaskState {
   attempts: {
-    outcome: Outcome | "revealed";
+    outcome: Outcome | 'revealed';
     points: number;
     max_points: number;
     answer: string | null;
@@ -51,10 +51,7 @@ export interface SignupForm {
   marketing: boolean;
 }
 
-export type ProfileUpdate = Pick<
-  User,
-  "first_name" | "last_name" | "phone" | "marketing"
->;
+export type ProfileUpdate = Pick<User, 'first_name' | 'last_name' | 'phone' | 'marketing'>;
 
 export interface Progress {
   topics: { exam_id: string; topic_id: string; score: number; n: number }[];
@@ -65,7 +62,7 @@ export interface VariantTaskResult {
   ege_task: number;
   part: number;
   /** Checker outcome, or "self" (Part 2, to self-assess) / "skipped" (left empty). */
-  outcome: Outcome | "self" | "skipped";
+  outcome: Outcome | 'self' | 'skipped';
   points: number;
   max_points: number;
   answer: string | null;
@@ -87,16 +84,10 @@ export interface VariantRun {
 
 export type VariantRunSummary = Pick<
   VariantRun,
-  | "id"
-  | "exam_id"
-  | "variant"
-  | "total_points"
-  | "max_points"
-  | "pending"
-  | "created_at"
+  'id' | 'exam_id' | 'variant' | 'total_points' | 'max_points' | 'pending' | 'created_at'
 >;
 
-export type TaskStatus = "solved" | "attempted";
+export type TaskStatus = 'solved' | 'attempted';
 
 export class ApiError extends Error {
   constructor(
@@ -110,22 +101,19 @@ export class ApiError extends Error {
 
 async function call<T>(path: string, init?: RequestInit): Promise<T> {
   const r = await fetch(`/api${path}`, {
-    credentials: "same-origin",
-    headers: { "Content-Type": "application/json" },
+    credentials: 'same-origin',
+    headers: { 'Content-Type': 'application/json' },
     ...init,
   });
   if (!r.ok) {
     const body = (await r.json().catch(() => ({}))) as { detail?: unknown };
-    throw new ApiError(
-      r.status,
-      typeof body.detail === "string" ? body.detail : "",
-    );
+    throw new ApiError(r.status, typeof body.detail === 'string' ? body.detail : '');
   }
   return (r.status === 204 ? undefined : await r.json()) as T;
 }
 
 const post = (body?: unknown): RequestInit => ({
-  method: "POST",
+  method: 'POST',
   body: body === undefined ? undefined : JSON.stringify(body),
 });
 
@@ -147,48 +135,42 @@ export const api = {
     call<AttemptResponse>(`${task(id)}/attempts`, post({ answer })),
   state: (id: string) => call<TaskState>(`${task(id)}/state`),
   reveal: (id: string) => call<Solution>(`${task(id)}/reveal`, post()),
-  progress: () => call<Progress>("/progress"),
-  me: () => call<Me>("/me"),
-  signup: (form: SignupForm) =>
-    call<{ expires_in: number }>("/auth/signup", post(form)),
-  login: (email: string, password: string) =>
-    call<Me>("/auth/login", post({ email, password })),
+  progress: () => call<Progress>('/progress'),
+  me: () => call<Me>('/me'),
+  signup: (form: SignupForm) => call<{ expires_in: number }>('/auth/signup', post(form)),
+  login: (email: string, password: string) => call<Me>('/auth/login', post({ email, password })),
   /** A code to sign in, or to set a new password; existing accounts only. */
-  requestCode: (email: string, purpose: "login" | "reset") =>
-    call<{ expires_in: number }>("/auth/code", post({ email, purpose })),
-  verifyCode: (email: string, code: string) =>
-    call<Me>("/auth/verify", post({ email, code })),
+  requestCode: (email: string, purpose: 'login' | 'reset') =>
+    call<{ expires_in: number }>('/auth/code', post({ email, purpose })),
+  verifyCode: (email: string, code: string) => call<Me>('/auth/verify', post({ email, code })),
   resetPassword: (email: string, code: string, password: string) =>
-    call<Me>("/auth/reset", post({ email, code, password })),
+    call<Me>('/auth/reset', post({ email, code, password })),
   updateProfile: (body: ProfileUpdate) =>
-    call<Me>("/me", { method: "PATCH", body: JSON.stringify(body) }),
-  logout: () => call<void>("/auth/logout", post()),
-  taskStatuses: () =>
-    call<{ tasks: Record<string, TaskStatus> }>("/tasks/status"),
+    call<Me>('/me', { method: 'PATCH', body: JSON.stringify(body) }),
+  logout: () => call<void>('/auth/logout', post()),
+  taskStatuses: () => call<{ tasks: Record<string, TaskStatus> }>('/tasks/status'),
   submitVariant: (body: {
     exam_id: string;
     variant: number;
     tasks: string[];
     answers: Record<string, string>;
     duration_s: number;
-  }) => call<VariantRun>("/variants/runs", post(body)),
+  }) => call<VariantRun>('/variants/runs', post(body)),
   selfAssess: (runId: number, points: Record<string, number>) =>
     call<VariantRun>(`/variants/runs/${runId}/self-assessment`, {
-      method: "PUT",
+      method: 'PUT',
       body: JSON.stringify({ points }),
     }),
   variantRun: (runId: number) => call<VariantRun>(`/variants/runs/${runId}`),
   variantRuns: (examId: string) =>
-    call<VariantRunSummary[]>(
-      `/variants/runs?exam_id=${encodeURIComponent(examId)}`,
-    ),
+    call<VariantRunSummary[]>(`/variants/runs?exam_id=${encodeURIComponent(examId)}`),
 };
 
-export type TutorKind = "task" | "theory";
+export type TutorKind = 'task' | 'theory';
 
 export interface TutorMessage {
   id: number;
-  role: "user" | "assistant";
+  role: 'user' | 'assistant';
   content: string;
   hint_level: number | null;
   leak: boolean;
@@ -203,19 +185,18 @@ export interface TutorThread {
 }
 
 export type TutorEvent =
+  | { event: 'meta'; data: { hint_level: number | null; messages_left: number } }
+  | { event: 'delta'; data: { text: string } }
+  | { event: 'done'; data: { message_id: number | null; leak: boolean } }
   | {
-      event: "meta";
-      data: { hint_level: number | null; messages_left: number };
-    }
-  | { event: "delta"; data: { text: string } }
-  | { event: "done"; data: { message_id: number | null; leak: boolean } }
-  | { event: "error"; data: { detail: string } };
+      event: 'error';
+      // A failed turn is not counted: the level and counter to show again.
+      data: { detail: string; hint_level?: number | null; messages_left?: number };
+    };
 
 export const tutor = {
   thread: (kind: TutorKind, id: string) =>
-    call<TutorThread>(
-      `/tutor/thread?kind=${kind}&id=${encodeURIComponent(id)}`,
-    ),
+    call<TutorThread>(`/tutor/thread?kind=${kind}&id=${encodeURIComponent(id)}`),
 
   /** POST a message and read the SSE reply (EventSource can't POST). */
   async send(
@@ -223,41 +204,37 @@ export const tutor = {
       kind: TutorKind;
       id: string;
       text: string;
-      intent: "message" | "hint";
+      intent: 'message' | 'hint';
     },
     onEvent: (e: TutorEvent) => void,
   ): Promise<void> {
-    const r = await fetch("/api/tutor/messages", {
-      method: "POST",
-      credentials: "same-origin",
-      headers: { "Content-Type": "application/json" },
+    const r = await fetch('/api/tutor/messages', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
     if (!r.ok || !r.body) {
       const err = (await r.json().catch(() => ({}))) as { detail?: unknown };
-      throw new ApiError(
-        r.status,
-        typeof err.detail === "string" ? err.detail : "",
-      );
+      throw new ApiError(r.status, typeof err.detail === 'string' ? err.detail : '');
     }
     const reader = r.body.pipeThrough(new TextDecoderStream()).getReader();
-    let buf = "";
+    let buf = '';
     for (;;) {
       const { value, done } = await reader.read();
       if (done) break;
       buf += value;
       let end: number;
-      while ((end = buf.indexOf("\n\n")) !== -1) {
+      while ((end = buf.indexOf('\n\n')) !== -1) {
         const block = buf.slice(0, end);
         buf = buf.slice(end + 2);
-        let event = "";
-        let data = "";
-        for (const line of block.split("\n")) {
-          if (line.startsWith("event: ")) event = line.slice(7);
-          else if (line.startsWith("data: ")) data += line.slice(6);
+        let event = '';
+        let data = '';
+        for (const line of block.split('\n')) {
+          if (line.startsWith('event: ')) event = line.slice(7);
+          else if (line.startsWith('data: ')) data += line.slice(6);
         }
-        if (event && data)
-          onEvent({ event, data: JSON.parse(data) } as TutorEvent);
+        if (event && data) onEvent({ event, data: JSON.parse(data) } as TutorEvent);
       }
     }
   },

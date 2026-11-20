@@ -12,10 +12,18 @@ from dataclasses import dataclass
 from platform_api.content import PrivateTask, Theory
 from platform_api.hints import MAX_LEVEL, LadderState, next_level
 from platform_api.leak import AnyLeak, Detector, LeakDetector
+from platform_api.llm import DEFAULT_MAX_TOKENS
 from platform_api.policy import can_reveal_solution
 from platform_api.prompt import hints_for_level, task_context, theory_context
 
 HINT_REQUEST_TEXT = "Дай, пожалуйста, подсказку."
+# A full Part 2 solution runs to several hundred tokens of prose and LaTeX.
+FULL_SOLUTION_MAX_TOKENS = 1500
+
+
+def max_reply_tokens(level: int | None) -> int:
+    """Output cap for the coming reply; `level=None` on theory pages."""
+    return FULL_SOLUTION_MAX_TOKENS if level == MAX_LEVEL else DEFAULT_MAX_TOKENS
 
 
 @dataclass(frozen=True)

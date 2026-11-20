@@ -37,7 +37,7 @@ const { Content } = await render(entry);
     page.kind === 'intro' ? (
       <>
         <nav class="crumbs">
-          <a href="/">← Роадмап</a>
+          <a href="/">← Траектория</a>
         </nav>
         <h1>
           {entry.data.title}
@@ -84,7 +84,7 @@ const { Content } = await render(entry);
     ) : (
       <TheoryWithChat contextId={topic}>
         <nav class="crumbs">
-          <a href="/">← Роадмап</a>
+          <a href="/">← Траектория</a>
         </nav>
         <h1>
           {entry.data.title}

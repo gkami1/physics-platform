@@ -8,10 +8,18 @@ from sqlalchemy import select
 
 from content_schema.checking import format_answer
 from platform_api.content import ContentStore
-from platform_api.db import LlmCall, make_engine
-from platform_api.llm import CallInfo, FailingModel, Message, ScriptedModel
+from platform_api.db import LlmCall, User, make_engine
+from platform_api.hints import LadderState
+from platform_api.llm import CallInfo, FailingModel, LLMUnavailableError, Message, ScriptedModel
 from platform_api.turn import plan_theory_turn
-from platform_api.tutor import LEAK_NOTE, THEORY_LEAK_NOTE
+from platform_api.tutor import (
+    CUT_AT_LIMIT_NOTE,
+    LEAK_NOTE,
+    THEORY_LEAK_NOTE,
+    TRUNCATED_NOTE,
+    _PendingTurn,
+    _save_turn,
+)
 
 
 def events(body: str) -> list[tuple[str, dict[str, object]]]:
@@ -122,9 +130,11 @@ class RecordingModel(ScriptedModel):
         super().__init__(replies=(reply,))
         self.systems: list[str] = []
 
-    def stream(self, messages: Sequence[Message], info: CallInfo) -> AsyncIterator[str]:
+    def stream(
+        self, messages: Sequence[Message], info: CallInfo, max_tokens: int = 600
+    ) -> AsyncIterator[str]:
         self.systems.append(messages[0]["content"])
-        return super().stream(messages, info)
+        return super().stream(messages, info, max_tokens)
 
 
 def test_lesson_has_its_own_thread_and_context(signed_in: TestClient) -> None:
@@ -173,10 +183,18 @@ def test_fallback_is_traced(signed_in: TestClient, migrated_db: str) -> None:
     assert calls[0][2] == calls[1][2] is not None  # both attempts linked to the message
 
 
-def test_all_models_down(signed_in: TestClient) -> None:
+def test_all_models_down(signed_in: TestClient, migrated_db: str) -> None:
     use_model(signed_in, FailingModel())
-    evs = ask(signed_in)
-    assert evs[-1] == ("error", {"detail": "tutor_unavailable"})
+    evs = ask(signed_in, intent="hint")
+    assert evs[0] == ("meta", {"hint_level": 1, "messages_left": 49})
+    # Nothing counted: the client restores the level and the counter.
+    assert evs[-1] == (
+        "error",
+        {"detail": "tutor_unavailable", "hint_level": 0, "messages_left": 50},
+    )
+    thread = signed_in.get("/api/tutor/thread?kind=task&id=kin-0001").json()
+    assert (thread["messages"], thread["hint_level"], thread["messages_left"]) == ([], 0, 50)
+    assert llm_calls(migrated_db) == [("failing", "LLMUnavailableError: down", None)]
     use_model(signed_in)
     r = signed_in.post("/api/tutor/messages", json={"kind": "task", "id": "kin-0001", "text": "?"})
     assert r.status_code == 503
@@ -190,3 +208,137 @@ def test_daily_limit(signed_in: TestClient, monkeypatch: pytest.MonkeyPatch) -> 
     r = signed_in.post("/api/tutor/messages", json={"kind": "task", "id": "kin-0001", "text": "?"})
     assert r.status_code == 429
     assert r.json()["detail"] == "daily_limit"
+
+
+class DyingModel(ScriptedModel):
+    """Streams part of a reply, then fails (e.g. the GPU host drops the connection)."""
+
+    async def stream(
+        self, messages: Sequence[Message], info: CallInfo, max_tokens: int = 600
+    ) -> AsyncIterator[str]:
+        yield "Сначала подумай. Что дано"
+        raise LLMUnavailableError("connection reset")
+
+
+def test_reply_cut_mid_stream_says_so(signed_in: TestClient) -> None:
+    use_model(signed_in, DyingModel())
+    evs = ask(signed_in, intent="hint")
+    assert reply_text(evs) == "Сначала подумай." + TRUNCATED_NOTE
+    assert evs[-1][0] == "done"
+    thread = signed_in.get("/api/tutor/thread?kind=task&id=kin-0001").json()
+    # The student got (part of) a reply: the turn counts.
+    assert thread["messages"][-1]["content"] == "Сначала подумай." + TRUNCATED_NOTE
+    assert (thread["hint_level"], thread["messages_left"]) == (1, 49)
+
+
+def test_reply_cut_at_output_cap_says_so(signed_in: TestClient) -> None:
+    long = "Сначала запишем закон сохранения энергии. " * 80  # > 600 tokens
+    model = ScriptedModel(replies=(long,))
+    use_model(signed_in, model)
+    evs = ask(signed_in)
+    assert model.max_tokens_seen == [600]  # coaching level
+    assert reply_text(evs).endswith(CUT_AT_LIMIT_NOTE)
+    assert evs[-1][0] == "done"
+
+
+class HistoryModel(ScriptedModel):
+    """Keeps the dialogue (everything after the system prompt) of every call."""
+
+    def __init__(self) -> None:
+        super().__init__(replies=("Подумай.",))
+        self.dialogues: list[list[str]] = []
+
+    def stream(
+        self, messages: Sequence[Message], info: CallInfo, max_tokens: int = 600
+    ) -> AsyncIterator[str]:
+        self.dialogues.append([m["content"] for m in messages[1:]])
+        return super().stream(messages, info, max_tokens)
+
+
+def test_student_who_left_mid_stream(signed_in: TestClient) -> None:
+    """A disconnect saves the turn from the stream's cleanup (`client_gone`)."""
+    maker = signed_in.app.state.sessionmaker  # type: ignore[attr-defined]
+
+    async def left(reply: str) -> None:
+        async with maker() as s:
+            user_id = await s.scalar(select(User.id))  # the only user
+        turn = _PendingTurn(user_id, "task", "kin-0001", "Ну?", "hint", 1, LadderState(1, 1))
+        await _save_turn(
+            maker, turn, reply=reply, reply_flags={"interrupted": True}, calls=(), client_gone=True
+        )
+
+    assert signed_in.portal is not None
+    signed_in.portal.call(left, "")  # gone before the first sentence
+    thread = signed_in.get("/api/tutor/thread?kind=task&id=kin-0001").json()
+    # The model call happened, so the message counts, but no ladder step.
+    assert [m["role"] for m in thread["messages"]] == ["user"]
+    assert (thread["hint_level"], thread["messages_left"]) == (0, 49)
+
+    model = HistoryModel()
+    use_model(signed_in, model)
+    ask(signed_in, "Второй вопрос")
+    # The unanswered message stays out of the prompt: no two student turns in a row.
+    assert len(model.dialogues[0]) == 1
+
+    signed_in.portal.call(left, "Подумай, что дано.")  # gone after a sentence
+    thread = signed_in.get("/api/tutor/thread?kind=task&id=kin-0001").json()
+    assert thread["messages"][-1]["content"] == "Подумай, что дано."
+    assert thread["hint_level"] == 1
+
+
+def test_disconnect_mid_stream_saves_the_shown_part(signed_in: TestClient) -> None:
+    """Real wiring: the ASGI server reports `http.disconnect` while the reply streams;
+    Starlette cancels the response and the shielded cleanup still saves the turn."""
+    use_model(signed_in, ScriptedModel(replies=("Подумай, что дано. " * 40,), delay=0.01))
+    cookie = "; ".join(f"{k}={v}" for k, v in signed_in.cookies.items())
+    body = json.dumps({"kind": "task", "id": "kin-0001", "text": "Ну?"}).encode()
+    scope = {
+        "type": "http",
+        "asgi": {"version": "3.0", "spec_version": "2.3"},  # Starlette listens for disconnect
+        "http_version": "1.1",
+        "method": "POST",
+        "scheme": "http",
+        "path": "/api/tutor/messages",
+        "raw_path": b"/api/tutor/messages",
+        "query_string": b"",
+        "root_path": "",
+        "headers": [
+            (b"host", b"testserver"),
+            (b"content-type", b"application/json"),
+            (b"cookie", cookie.encode()),
+        ],
+        "client": ("127.0.0.1", 1),
+        "server": ("testserver", 80),
+    }
+    deltas: list[str] = []
+
+    async def run() -> None:
+        import anyio
+
+        delta_seen = anyio.Event()
+        sent_body = False
+
+        async def receive() -> dict[str, object]:
+            nonlocal sent_body
+            if not sent_body:
+                sent_body = True
+                return {"type": "http.request", "body": body, "more_body": False}
+            await delta_seen.wait()
+            return {"type": "http.disconnect"}
+
+        async def send(message: dict[str, object]) -> None:
+            chunk = message.get("body", b"")
+            assert isinstance(chunk, bytes)
+            if b"event: delta" in chunk:
+                deltas.append(chunk.decode())
+                delta_seen.set()
+
+        await signed_in.app(scope, receive, send)  # type: ignore[arg-type]
+
+    assert signed_in.portal is not None
+    signed_in.portal.call(run)
+    assert 0 < len(deltas) < 40  # stopped early
+    thread = signed_in.get("/api/tutor/thread?kind=task&id=kin-0001").json()
+    assert [m["role"] for m in thread["messages"]] == ["user", "assistant"]
+    assert thread["messages"][1]["content"].startswith("Подумай, что дано.")
+    assert thread["messages_left"] == 49

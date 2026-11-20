@@ -81,6 +81,23 @@ def test_ladder_reaches_full_solution_without_leak_check(store: ContentStore) ->
     assert results[1].student  # hint with no text gets the canned request
 
 
+def test_full_solution_gets_a_larger_cap_and_no_length_check(store: ContentStore) -> None:
+    # ~3000 chars: over the coaching cap (600 tokens ≈ 2400 chars), under the full one.
+    model = ScriptedModel(replies=("Запишем второй закон Ньютона для бруска. " * 75,))
+    turns = [
+        StudentTurn(text="Где ошибка?", attempt="wrong"),
+        StudentTurn(intent="hint"),
+        StudentTurn(intent="hint"),
+        StudentTurn(intent="hint"),
+    ]
+    results = run(store, model, persona(*turns))
+    assert model.max_tokens_seen == [600, 600, 600, 1500]
+    assert [r.cut_off for r in results] == [True, True, True, False]
+    assert [r.checks.too_long for r in results] == [True, True, True, False]
+    assert results[0].failures() == ["too_long", "cut_off"]
+    assert results[3].failures() == []
+
+
 def test_answer_placeholder_and_history(store: ContentStore) -> None:
     model = ScriptedModel(replies=("Как ты получил это число?", "Покажи ход решения."))
     results = run(
@@ -173,7 +190,9 @@ class RateLimitedOnce:
     model: str = "flaky"
     calls: int = 0
 
-    async def stream(self, messages: Sequence[Message], info: CallInfo) -> AsyncIterator[str]:
+    async def stream(
+        self, messages: Sequence[Message], info: CallInfo, max_tokens: int = 600
+    ) -> AsyncIterator[str]:
         self.calls += 1
         if self.calls == 1:
             raise LLMUnavailableError("HTTP 429: quota")

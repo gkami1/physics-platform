@@ -302,7 +302,8 @@ const docked = variant === 'docked';
         return;
       }
       this.notice('');
-      this.addMessage('user', text || 'Дай, пожалуйста, подсказку.');
+      const asked = this.addMessage('user', text || 'Дай, пожалуйста, подсказку.');
+      let failed = false;
       input.value = '';
       const md = this.md;
       const target = this.addMessage('assistant', '');
@@ -326,7 +327,10 @@ const docked = variant === 'docked';
             reply += ev.data.text;
             frame ||= requestAnimationFrame(paint);
           } else if (ev.event === 'error') {
+            failed = true;
             this.notice(ERRORS[ev.data.detail] ?? ERRORS.tutor_unavailable!);
+            if (ev.data.hint_level !== undefined) this.showLevel(ev.data.hint_level);
+            if (ev.data.messages_left !== undefined) this.showLeft(ev.data.messages_left);
           }
         });
         if (frame) cancelAnimationFrame(frame);
@@ -335,8 +339,14 @@ const docked = variant === 'docked';
         if (follow) this.scrollLog();
         if (!reply) target.parentElement?.remove();
         else this.rememberThread();
+        if (failed && !reply) {
+          // The server kept nothing of this turn: let the student resend it.
+          asked.parentElement?.remove();
+          input.value = text;
+        }
       } catch (e) {
         target.parentElement?.remove();
+        if (!reply) asked.parentElement?.remove(); // a turn cut mid-stream is saved
         const detail = e instanceof ApiError ? e.detail : '';
         this.notice(ERRORS[detail] ?? 'Нет связи с сервером. Попробуйте ещё раз.');
         if (!text) return;
