@@ -71,8 +71,10 @@ const tabs = [
           <site-account>
             <a href="/login/" class="btn small login">Войти</a>
             <span class="who" hidden>
-              <span class="avatar" aria-hidden="true"></span>
-              <span class="email"></span>
+              <a href="/account/" class="profile" title="Профиль">
+                <span class="avatar" aria-hidden="true"></span>
+                <span class="email"></span>
+              </a>
               <button type="button" class="logout">Выйти</button>
             </span>
           </site-account>
@@ -116,11 +118,12 @@ const tabs = [
       void session().then(
         ({ user }) => {
           if (!user) return;
-          const email = this.querySelector('.email') as HTMLElement;
-          email.textContent = user.email;
-          email.title = user.email;
-          (this.querySelector('.avatar') as HTMLElement).textContent =
-            user.email.charAt(0).toUpperCase();
+          const shown = user.first_name ?? user.email;
+          (this.querySelector('.email') as HTMLElement).textContent = shown;
+          (this.querySelector('.profile') as HTMLElement).title = `Профиль: ${user.email}`;
+          (this.querySelector('.avatar') as HTMLElement).textContent = shown
+            .charAt(0)
+            .toUpperCase();
           login.hidden = true;
           (this.querySelector('.who') as HTMLElement).hidden = false;
         },
@@ -191,6 +194,7 @@ const tabs = [
   }
   .tools,
   site-account,
+  .profile,
   .who:not([hidden]) {
     display: inline-flex;
     align-items: center;
@@ -220,6 +224,21 @@ const tabs = [
   }
   .logout:hover {
     color: var(--accent);
+  }
+  /* .btn's display would beat the hidden attribute. */
+  .login[hidden] {
+    display: none;
+  }
+  .profile {
+    color: inherit;
+    text-decoration: none;
+    border-radius: 999px;
+  }
+  .profile:hover .avatar {
+    border-color: var(--accent);
+  }
+  .profile:hover .email {
+    color: var(--text);
   }
   .avatar {
     display: grid;

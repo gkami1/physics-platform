@@ -21,6 +21,7 @@ Each milestone has a **definition of done**; a milestone is not finished until i
 
 ## M3 — Accounts and progress (week 3) — code done 2026-10-25; pending: SMTP mailbox, deploy
 - Email one-time code; sessions; anonymous → account merge. *Yandex ID deferred until an OAuth client is registered.*
+- *2026-11-20 (`feat/password-auth`):* sign-up form (name, surname, email, optional phone, password, personal-data and optional advertising consent), email + password sign-in, code sign-in and password reset by code, `/account/` profile; see ARCHITECTURE §9. Next: Yandex ID, then VK ID (the author registers the OAuth apps); the privacy policy must name marketing as a purpose before the first campaign.
 - Attempt history; mastery rule (computed on read, no `topic_mastery` table yet); mastery badges on the roadmap.
 - CSRF Origin check; rate limits on codes and attempts.
 - **Done:** progress persists across devices.

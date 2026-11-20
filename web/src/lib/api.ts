@@ -27,9 +27,31 @@ export interface Solution {
   solution: string;
 }
 
-export interface Me {
-  user: { email: string } | null;
+export interface User {
+  email: string;
+  first_name: string | null;
+  last_name: string | null;
+  phone: string | null;
+  /** Agreed to advertising messages (38-ФЗ), withdrawable in the profile. */
+  marketing: boolean;
+  has_password: boolean;
 }
+
+export interface Me {
+  user: User | null;
+}
+
+export interface SignupForm {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string | null;
+  password: string;
+  consent: boolean;
+  marketing: boolean;
+}
+
+export type ProfileUpdate = Pick<User, 'first_name' | 'last_name' | 'phone' | 'marketing'>;
 
 export interface Progress {
   topics: { exam_id: string; topic_id: string; score: number; n: number }[];
@@ -115,9 +137,16 @@ export const api = {
   reveal: (id: string) => call<Solution>(`${task(id)}/reveal`, post()),
   progress: () => call<Progress>('/progress'),
   me: () => call<Me>('/me'),
-  requestCode: (email: string, consent: boolean) =>
-    call<{ expires_in: number }>('/auth/code', post({ email, consent })),
+  signup: (form: SignupForm) => call<{ expires_in: number }>('/auth/signup', post(form)),
+  login: (email: string, password: string) => call<Me>('/auth/login', post({ email, password })),
+  /** A code to sign in, or to set a new password; existing accounts only. */
+  requestCode: (email: string, purpose: 'login' | 'reset') =>
+    call<{ expires_in: number }>('/auth/code', post({ email, purpose })),
   verifyCode: (email: string, code: string) => call<Me>('/auth/verify', post({ email, code })),
+  resetPassword: (email: string, code: string, password: string) =>
+    call<Me>('/auth/reset', post({ email, code, password })),
+  updateProfile: (body: ProfileUpdate) =>
+    call<Me>('/me', { method: 'PATCH', body: JSON.stringify(body) }),
   logout: () => call<void>('/auth/logout', post()),
   taskStatuses: () => call<{ tasks: Record<string, TaskStatus> }>('/tasks/status'),
   submitVariant: (body: {
@@ -171,7 +200,12 @@ export const tutor = {
 
   /** POST a message and read the SSE reply (EventSource can't POST). */
   async send(
-    body: { kind: TutorKind; id: string; text: string; intent: 'message' | 'hint' },
+    body: {
+      kind: TutorKind;
+      id: string;
+      text: string;
+      intent: 'message' | 'hint';
+    },
     onEvent: (e: TutorEvent) => void,
   ): Promise<void> {
     const r = await fetch('/api/tutor/messages', {
