@@ -158,6 +158,7 @@ const tabs = [
     font-weight: 700;
     color: var(--text);
     text-decoration: none;
+    white-space: nowrap;
   }
   .logo {
     display: grid;
@@ -221,6 +222,7 @@ const tabs = [
   .logout {
     font-size: 0.85rem;
     padding: 0;
+    white-space: nowrap;
   }
   .logout:hover {
     color: var(--accent);
@@ -268,8 +270,9 @@ const tabs = [
     border-top: 1px solid var(--border);
     font-size: 0.85rem;
   }
-  /* Phones: tabs move to their own row under the brand. */
-  @media (max-width: 44rem) {
+  /* Brand + five tabs + the user's name need ~60rem on one row; below that the
+     tabs move to their own row so the name never wraps or pushes «Выйти» off. */
+  @media (max-width: 60rem) {
     .bar {
       grid-template-columns: 1fr auto;
       padding-top: 0.4rem;
@@ -289,11 +292,11 @@ const tabs = [
       padding-inline: 0.3rem;
       white-space: nowrap;
     }
+  }
+  @media (max-width: 26rem) {
     .email {
       display: none;
     }
-  }
-  @media (max-width: 26rem) {
     .tabs {
       gap: 0;
     }
