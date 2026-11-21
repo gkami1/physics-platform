@@ -1,0 +1,168 @@
+# thermo-0077: p–T cycle 1 (T0, p0) -> 2 (3T0, 3p0) -> 3 (6T0, 3p0) -> 4 (2T0, p0); 1–2 and 3–4 on lines through the origin.
+kind: diagram
+size:
+- 420
+- 240
+items:
+- arrow:
+  - - 66
+    - 214
+  - - 396
+    - 214
+  width: 1.5
+- arrow:
+  - - 66
+    - 214
+  - - 66
+    - 20
+  width: 1.5
+- text: '*T*'
+  at:
+  - 394
+  - 232
+  anchor: end
+  size: 14
+- text: '*p*'
+  at:
+  - 76
+  - 30
+  anchor: start
+  size: 14
+- text: '0'
+  at:
+  - 60
+  - 229
+  size: 12
+  anchor: end
+- line:
+  - - 112
+    - 164
+  - - 112
+    - 214
+  width: 1
+  dashed: true
+- text: '*T*_{0}'
+  at:
+  - 112
+  - 232
+  size: 13
+- line:
+  - - 158
+    - 164
+  - - 158
+    - 214
+  width: 1
+  dashed: true
+- text: 2*T*_{0}
+  at:
+  - 158
+  - 232
+  size: 13
+- line:
+  - - 204
+    - 64
+  - - 204
+    - 214
+  width: 1
+  dashed: true
+- text: 3*T*_{0}
+  at:
+  - 204
+  - 232
+  size: 13
+- line:
+  - - 342
+    - 64
+  - - 342
+    - 214
+  width: 1
+  dashed: true
+- text: 6*T*_{0}
+  at:
+  - 342
+  - 232
+  size: 13
+- line:
+  - - 66
+    - 164
+  - - 112
+    - 164
+  width: 1
+  dashed: true
+- text: '*p*_{0}'
+  at:
+  - 60
+  - 169
+  size: 13
+  anchor: end
+- line:
+  - - 66
+    - 64
+  - - 204
+    - 64
+  width: 1
+  dashed: true
+- text: 3*p*_{0}
+  at:
+  - 60
+  - 69
+  size: 13
+  anchor: end
+- path: M112 164L204 64L342 64L158 164Z
+  width: 3
+  tone: accent
+- arrow:
+  - - 141.9
+    - 112.6
+  - - 154.1
+    - 99.4
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 264.0
+    - 53.0
+  - - 282.0
+    - 53.0
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 267.9
+    - 117.7
+  - - 252.1
+    - 126.3
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 144.0
+    - 175.0
+  - - 126.0
+    - 175.0
+  tone: accent
+  width: 1.5
+- dots:
+  - - 112
+    - 164
+  - - 204
+    - 64
+  - - 342
+    - 64
+  - - 158
+    - 164
+  r: 4
+  tone: accent
+- text: '1'
+  at:
+  - 98
+  - 181
+- text: '2'
+  at:
+  - 194
+  - 56
+- text: '3'
+  at:
+  - 352
+  - 56
+- text: '4'
+  at:
+  - 170
+  - 168
