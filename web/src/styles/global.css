@@ -519,6 +519,11 @@ blockquote {
   opacity: 1;
 }
 
+/* Tick labels drawn over the data line: the halo matches what the figure sits on. */
+.fig .fig-halo {
+  stroke: var(--fig-bg, var(--surface));
+}
+
 .fig .fig-guide {
   stroke: var(--muted);
 }
