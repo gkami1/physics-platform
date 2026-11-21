@@ -79,17 +79,28 @@ def _axis_paths(svg: str) -> list[str]:
     return [p.get("d", "") for p in root.iter(f"{SVG}path") if p.get("class") == "fig-axis"]
 
 
-def test_negative_values_fill_to_the_zero_line() -> None:
+def test_negative_values_put_the_t_axis_at_zero() -> None:
     # y from −4 to 8: value 0 is at screen y = 26 + 194 · 8/12 ≈ 155.3
     y = {"var": "v", "unit": "м/с", "min": -4, "max": 8, "step": 2}
-    svg = render_graph(graph(y=y, series=[{"points": [[0, 6], [5, -4]], "fill": True}]))
+    spec = graph(y=y, series=[{"points": [[0, 6], [5, -4]], "fill": True}], guides=[[4, -2]])
+    svg = render_graph(spec)
     zero = "155.3"
-    assert any(d == f"M52 {zero}H372" for d in _axis_paths(svg))
+    axes, heads = _axis_paths(svg)  # one horizontal axis, at zero; none at the bottom
+    assert axes == f"M52 {zero}H392M52 220V8"
+    assert heads.startswith(f"M396 {zero}")
     (shade,) = re.findall(r'stroke="none" d="(M[^"]*Z)"', svg)
     assert shade.startswith(f"M52 {zero}")
     assert shade.endswith(f"{zero}Z")
-    # all values non-negative: no extra line, the area sits on the t axis
-    assert len(_axis_paths(render_graph(graph()))) == 2  # the axes and their arrowheads
+    # t labels sit under the zero axis, drawn over the data; the origin's «0» is the y axis's
+    halo = svg[svg.index('class="fig-text fig-halo"') :]
+    assert svg.index("fig-line") < svg.index("fig-halo")
+    assert re.findall(r'<text x="[\d.]+" y="173.3"[^>]*>([^<]*)</text>', halo) == list("12345")
+    assert re.search(rf'<text x="45" y="{float(zero) + 4.5:g}"[^>]*>0</text>', svg)
+    assert re.search(rf'd="M308 {zero}V', svg)  # guides drop to the axis
+    # all values non-negative: the t axis stays at the bottom, labels below it, no halo
+    plain = render_graph(graph())
+    assert _axis_paths(plain)[0].startswith("M52 220H392")
+    assert "fig-halo" not in plain
 
 
 def test_qualitative_graph_with_negative_values_puts_the_t_axis_at_zero() -> None:

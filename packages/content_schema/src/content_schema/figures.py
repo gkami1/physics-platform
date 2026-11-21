@@ -193,8 +193,8 @@ def render_graph(spec: GraphSpec) -> str:
         f'height="{H}" class="fig-svg" font-size="13" fill="none" stroke="currentColor">'
     ]
 
-    # The value-zero line: the axes stay at (x.min, y.min), but with negative values a line
-    # at y = 0 is where vₓ(t) changes sign, and shaded areas (paths) are measured from it.
+    # The value-zero level: with negative values the horizontal axis runs here (see below),
+    # and shaded areas (paths) are measured from it.
     zero = _f(sy(min(max(0.0, spec.y.min), spec.y.max)))
 
     # shaded areas go under everything else
@@ -211,9 +211,9 @@ def render_graph(spec: GraphSpec) -> str:
     if grid:
         out.append(f'<path class="fig-grid" stroke-width="1" opacity="0.35" d="{" ".join(grid)}"/>')
 
-    # A qualitative graph has no tick labels to show where zero is, so when its values change
-    # sign the horizontal axis itself (arrow, name, «0») runs at the zero level.
-    mid_axis = not spec.y.numbers and spec.y.min < 0 < spec.y.max
+    # When values change sign the horizontal axis itself (arrow, name, tick labels) runs at
+    # the zero level, as in exam graphs: no second line at the bottom of the grid.
+    mid_axis = spec.y.min < 0 < spec.y.max
     ax = zero if mid_axis else str(y0)
 
     # axes with arrowheads
@@ -223,17 +223,22 @@ def render_graph(spec: GraphSpec) -> str:
         f'd="M{W - 4} {ax}l-9 -4v8zM{x0} 4l-4 9h8z"/>'
     )
 
-    if spec.y.min < 0 < spec.y.max and not mid_axis:
-        out.append(f'<path class="fig-axis" stroke-width="1.5" d="M{x0} {zero}H{x0 + pw}"/>')
-
     # tick labels
     labels: list[str] = []
+    xlabels: list[str] = []
     if spec.x.numbers:
         for i, t in enumerate(_ticks(spec.x)):
-            if i % spec.x.label_every == 0:
-                labels.append(
-                    f'<text x="{_f(sx(t))}" y="{y0 + 18}" text-anchor="middle">{_num(t)}</text>'
-                )
+            if i % spec.x.label_every:
+                continue
+            tx, anchor = _f(sx(t)), "middle"
+            if mid_axis and i == 0:
+                # The y axis runs on below the origin, through where this label would sit.
+                if t == 0 and spec.y.numbers:
+                    continue  # the y axis «0» already labels the origin
+                tx, anchor = (str(x0 - 7), "end") if t == 0 else (str(x0 + 4), "start")
+            xlabels.append(
+                f'<text x="{tx}" y="{float(ax) + 18:g}" text-anchor="{anchor}">{_num(t)}</text>'
+            )
     if spec.y.numbers:
         for i, t in enumerate(_ticks(spec.y)):
             # One shared "0" at the origin: the x axis already labels it.
@@ -243,6 +248,8 @@ def render_graph(spec: GraphSpec) -> str:
                 )
     if not spec.x.numbers and not spec.y.numbers:
         labels.append(f'<text x="{x0 - 7}" y="{float(ax) + 16:g}" text-anchor="end">0</text>')
+    if not mid_axis:
+        labels = xlabels + labels
     out.append(f'<g class="fig-text" fill="currentColor" stroke="none">{"".join(labels)}')
 
     # axis names: italic symbol, upright unit
@@ -255,7 +262,7 @@ def render_graph(spec: GraphSpec) -> str:
 
     # dashed guides
     if spec.guides:
-        d = " ".join(f"M{_f(sx(gx))} {y0}V{_f(sy(gy))}H{x0}" for gx, gy in spec.guides)
+        d = " ".join(f"M{_f(sx(gx))} {ax}V{_f(sy(gy))}H{x0}" for gx, gy in spec.guides)
         out.append(f'<path class="fig-guide" stroke-width="1" stroke-dasharray="4 3" d="{d}"/>')
 
     # data
@@ -267,6 +274,14 @@ def render_graph(spec: GraphSpec) -> str:
             f'points="{coords}"/>'
         )
         out.append(line if s.tone == "accent" else _tone(s.tone, line))
+
+    # Under a mid axis the data line can cross the t labels: draw them on top, with a halo
+    # in the background colour (`fig-halo` in CSS; white is the fallback outside the site).
+    if mid_axis and xlabels:
+        out.append(
+            '<g class="fig-text fig-halo" fill="currentColor" stroke="white" stroke-width="4" '
+            f'stroke-linejoin="round" paint-order="stroke">{"".join(xlabels)}</g>'
+        )
 
     for n in spec.notes:
         out.append(_text((sx(n.at[0]), sy(n.at[1])), n.text, size=13, anchor=n.anchor))
