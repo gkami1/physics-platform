@@ -1,0 +1,122 @@
+# el-0063: source -> K -> ammeter -> R1 -> (R2 || C), voltmeter across C.
+kind: diagram
+size:
+- 480
+- 230
+items:
+- element: battery
+  at:
+  - 40
+  - 120
+  vertical: true
+- line:
+  - - 40
+    - 100
+  - - 40
+    - 40
+  - - 80
+    - 40
+  width: 1.6
+- element: switch
+  at:
+  - 100
+  - 40
+  label: K
+- line:
+  - - 120
+    - 40
+  - - 150
+    - 40
+  width: 1.6
+- element: ammeter
+  at:
+  - 170
+  - 40
+- line:
+  - - 190
+    - 40
+  - - 220
+    - 40
+  width: 1.6
+- element: resistor
+  at:
+  - 240
+  - 40
+  label: '*R*_{1}'
+- line:
+  - - 260
+    - 40
+  - - 440
+    - 40
+  width: 1.6
+- line:
+  - - 40
+    - 140
+  - - 40
+    - 200
+  - - 440
+    - 200
+  width: 1.6
+- line:
+  - - 300
+    - 40
+  - - 300
+    - 100
+  width: 1.6
+- element: resistor
+  at:
+  - 300
+  - 120
+  vertical: true
+  label: '*R*_{2}'
+- line:
+  - - 300
+    - 140
+  - - 300
+    - 200
+  width: 1.6
+- line:
+  - - 370
+    - 40
+  - - 370
+    - 100
+  width: 1.6
+- element: capacitor
+  at:
+  - 370
+  - 120
+  vertical: true
+  label: '*C*'
+- line:
+  - - 370
+    - 140
+  - - 370
+    - 200
+  width: 1.6
+- line:
+  - - 440
+    - 40
+  - - 440
+    - 100
+  width: 1.6
+- element: voltmeter
+  at:
+  - 440
+  - 120
+  vertical: true
+- line:
+  - - 440
+    - 140
+  - - 440
+    - 200
+  width: 1.6
+- dots:
+  - - 300
+    - 40
+  - - 370
+    - 40
+  - - 300
+    - 200
+  - - 370
+    - 200
+  r: 3

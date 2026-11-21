@@ -1,0 +1,142 @@
+# el-0059: terminals 1/2, voltmeter across; ammeter -> (D1 down + R1) || (D2 up + R2).
+kind: diagram
+size:
+- 400
+- 240
+items:
+- dots:
+  - - 40
+    - 40
+  - - 40
+    - 210
+  r: 4.5
+  fill: none
+- text: '1'
+  at:
+  - 26
+  - 45
+- text: '2'
+  at:
+  - 26
+  - 215
+- line:
+  - - 44.5
+    - 40
+  - - 150
+    - 40
+  width: 1.6
+- line:
+  - - 44.5
+    - 210
+  - - 350
+    - 210
+  width: 1.6
+- line:
+  - - 90
+    - 40
+  - - 90
+    - 105
+  width: 1.6
+- element: voltmeter
+  at:
+  - 90
+  - 125
+  vertical: true
+- line:
+  - - 90
+    - 145
+  - - 90
+    - 210
+  width: 1.6
+- element: ammeter
+  at:
+  - 170
+  - 40
+- line:
+  - - 190
+    - 40
+  - - 350
+    - 40
+  width: 1.6
+- line:
+  - - 250
+    - 40
+  - - 250
+    - 70
+  width: 1.6
+- path: M250 70V82M250 98V110
+  width: 1.6
+- path: M241 82L259 82L250 98Z
+  width: 1.6
+  fill: solid
+- path: M241 98H259
+  width: 2.2
+- text: '*D*_{1}'
+  at:
+  - 266
+  - 95
+  anchor: start
+- line:
+  - - 250
+    - 110
+  - - 250
+    - 140
+  width: 1.6
+- element: resistor
+  at:
+  - 250
+  - 160
+  vertical: true
+  label: '*R*_{1}'
+- line:
+  - - 250
+    - 180
+  - - 250
+    - 210
+  width: 1.6
+- line:
+  - - 350
+    - 40
+  - - 350
+    - 70
+  width: 1.6
+- path: M350 70V82M350 98V110
+  width: 1.6
+- path: M341 98L359 98L350 82Z
+  width: 1.6
+  fill: solid
+- path: M341 82H359
+  width: 2.2
+- text: '*D*_{2}'
+  at:
+  - 366
+  - 95
+  anchor: start
+- line:
+  - - 350
+    - 110
+  - - 350
+    - 140
+  width: 1.6
+- element: resistor
+  at:
+  - 350
+  - 160
+  vertical: true
+  label: '*R*_{2}'
+- line:
+  - - 350
+    - 180
+  - - 350
+    - 210
+  width: 1.6
+- dots:
+  - - 90
+    - 40
+  - - 90
+    - 210
+  - - 250
+    - 40
+  - - 250
+    - 210
+  r: 3
