@@ -1,0 +1,153 @@
+# thermo-0079: 1 (V0, p0) -> 2 (V0, 3p0) isochore -> 3 (3V0, 3p0) isobar -> 1 along p ~ V.
+kind: diagram
+size:
+- 400
+- 240
+items:
+- arrow:
+  - - 70
+    - 214
+  - - 400
+    - 214
+  width: 1.5
+- arrow:
+  - - 70
+    - 214
+  - - 70
+    - 9
+  width: 1.5
+- text: '*V*'
+  at:
+  - 398
+  - 232
+  anchor: end
+  size: 14
+- text: '*p*'
+  at:
+  - 80
+  - 19
+  anchor: start
+  size: 14
+- text: '0'
+  at:
+  - 64
+  - 229
+  size: 12
+  anchor: end
+- line:
+  - - 162
+    - 214
+  - - 162
+    - 218
+  width: 1.2
+- text: '*V*_{0}'
+  at:
+  - 162
+  - 233
+  size: 13
+- line:
+  - - 346
+    - 214
+  - - 346
+    - 218
+  width: 1.2
+- text: 3*V*_{0}
+  at:
+  - 346
+  - 233
+  size: 13
+- line:
+  - - 66
+    - 156
+  - - 70
+    - 156
+  width: 1.2
+- text: '*p*_{0}'
+  at:
+  - 63
+  - 161
+  size: 13
+  anchor: end
+- line:
+  - - 66
+    - 40
+  - - 70
+    - 40
+  width: 1.2
+- text: 3*p*_{0}
+  at:
+  - 63
+  - 45
+  size: 13
+  anchor: end
+- line:
+  - - 162
+    - 214
+  - - 162
+    - 156
+  - - 70
+    - 156
+  width: 1
+  dashed: true
+  tone: muted
+- line:
+  - - 346
+    - 214
+  - - 346
+    - 40
+  - - 70
+    - 40
+  width: 1
+  dashed: true
+  tone: muted
+- path: M162 156L162 40L346 40L162 156Z
+  width: 3
+  tone: accent
+- arrow:
+  - - 151.0
+    - 107.0
+  - - 151.0
+    - 89.0
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 245.0
+    - 29.0
+  - - 263.0
+    - 29.0
+  tone: accent
+  width: 1.5
+- arrow:
+  - - 271.6
+    - 102.2
+  - - 256.4
+    - 111.8
+  tone: accent
+  width: 1.5
+- dots:
+  - - 162
+    - 156
+  - - 162
+    - 40
+  - - 346
+    - 40
+  r: 4
+  tone: accent
+- text: '1'
+  at:
+  - 174
+  - 170
+  anchor: middle
+  size: 14
+- text: '2'
+  at:
+  - 150
+  - 32
+  anchor: middle
+  size: 14
+- text: '3'
+  at:
+  - 358
+  - 32
+  anchor: middle
+  size: 14
