@@ -108,16 +108,28 @@ const docked = variant === 'docked';
       )
     }
     <form class="compose" novalidate>
-      <textarea
-        name="text"
-        rows="2"
-        maxlength="2000"
-        placeholder={docked ? 'Что здесь непонятно?' : 'Ваш вопрос'}
-        aria-label="Ваш вопрос"></textarea>
+      <div class="box">
+        <textarea
+          name="text"
+          rows="2"
+          maxlength="2000"
+          placeholder={docked ? 'Что здесь непонятно?' : 'Ваш вопрос'}
+          aria-label="Ваш вопрос"></textarea>
+        <button type="submit" class="send" aria-label="Отправить" title="Отправить" disabled>
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path
+              d="M12 19V5M6 11l6-6 6 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </button>
+      </div>
       <div class="actions">
         {kind === 'task' && <button type="button" class="hint secondary">Подсказка</button>}
         <span class="left muted"></span>
-        <button type="submit">Отправить</button>
       </div>
     </form>
   </section>
@@ -160,12 +172,17 @@ const docked = variant === 'docked';
         void this.send('message');
       });
       this.querySelector('.hint')?.addEventListener('click', () => void this.send('hint'));
-      this.input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
-          e.preventDefault();
-          void this.send('message');
-        }
-      });
+      this.input.addEventListener('keydown', this.onKey);
+      this.input.addEventListener('input', this.syncInput);
+      // Refit when the box changes width (the docked panel widens as typing starts), so
+      // a question measured in the narrow column doesn't leave empty lines below it.
+      let width = 0;
+      new ResizeObserver(([entry]) => {
+        const w = entry?.contentRect.width ?? 0;
+        if (w === width) return;
+        width = w;
+        this.syncInput();
+      }).observe(this.input);
       if (this.docked) this.setUpDocked();
     }
 
@@ -199,7 +216,6 @@ const docked = variant === 'docked';
         else this.setExpanded(false);
       });
       this.setUpExpand();
-      this.input.addEventListener('input', this.fitInput);
       // The header already asks who is signed in; reuse its answer. A student who has
       // talked on this page before sees the thread straight away (wide screens only: on
       // narrow ones it loads when the sheet opens).
@@ -281,12 +297,27 @@ const docked = variant === 'docked';
       requestAnimationFrame(keep);
     }
 
-    /** Grows the box with the question, up to a cap set in CSS (then it scrolls). */
-    private fitInput = () => {
-      if (!this.docked) return;
+    /**
+     * Grows the box with the question, up to a cap set in CSS (then it scrolls), and lets
+     * the send button through only when there is something to send.
+     */
+    private syncInput = () => {
       const input = this.input;
       input.style.height = 'auto';
       input.style.height = `${input.scrollHeight + input.offsetHeight - input.clientHeight}px`;
+      this.q<HTMLButtonElement>('.send').disabled = this.busy || !input.value.trim();
+    };
+
+    /**
+     * Enter sends and Shift+Enter breaks the line, as in common chat apps. On touch
+     * screens Enter breaks the line (the button sends). Ctrl/Cmd+Enter always sends.
+     */
+    private onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Enter' || e.isComposing) return;
+      const mod = e.ctrlKey || e.metaKey;
+      if (!mod && (e.shiftKey || e.altKey || matchMedia('(pointer: coarse)').matches)) return;
+      e.preventDefault();
+      void this.send('message');
     };
 
     /** Keeps the sheet above the on-screen keyboard (iOS does not shrink the layout). */
@@ -395,7 +426,7 @@ const docked = variant === 'docked';
       const asked = this.addMessage('user', text || 'Дай, пожалуйста, подсказку.');
       let failed = false;
       input.value = '';
-      this.fitInput();
+      this.syncInput();
       const md = this.md;
       const target = this.addMessage('assistant', '');
       target.parentElement?.classList.add('streaming');
@@ -434,7 +465,7 @@ const docked = variant === 'docked';
           // The server kept nothing of this turn: let the student resend it.
           asked.parentElement?.remove();
           input.value = text;
-          this.fitInput();
+          this.syncInput();
         }
       } catch (e) {
         target.parentElement?.remove();
@@ -443,7 +474,7 @@ const docked = variant === 'docked';
         this.notice(ERRORS[detail] ?? 'Нет связи с сервером. Попробуйте ещё раз.');
         if (!text) return;
         input.value = text; // let the student resend
-        this.fitInput();
+        this.syncInput();
       } finally {
         target.parentElement?.classList.remove('streaming');
         this.setBusy(false);
@@ -453,9 +484,9 @@ const docked = variant === 'docked';
 
     private setBusy(busy: boolean) {
       this.busy = busy;
-      this.querySelectorAll<HTMLButtonElement>('.compose button').forEach((b) => {
-        b.disabled = busy;
-      });
+      const hint = this.querySelector<HTMLButtonElement>('.hint');
+      if (hint) hint.disabled = busy;
+      this.syncInput();
     }
 
     private showLevel(level: number | null) {
@@ -574,25 +605,81 @@ const docked = variant === 'docked';
   .compose {
     margin-top: 0.75rem;
   }
+  /* One bordered composer: the growing question box with the send button in its corner.
+     The button sits beside the text, not over it, so a long question never runs under it. */
+  .box {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.25rem;
+    padding: 0.3rem;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--bg);
+  }
+  .box:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
   textarea {
-    width: 100%;
+    flex: 1 1 auto;
+    min-width: 0;
     font: inherit;
     font-size: 1rem; /* ≥16px stops iOS zooming on focus */
-    padding: 0.5rem 0.7rem;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--bg);
+    padding: 0.3rem 0.4rem 0.3rem 0.45rem;
+    border: 0;
+    outline: none; /* the box shows focus */
+    background: transparent;
     color: var(--text);
-    resize: vertical;
+    resize: none;
+    max-height: 10rem; /* ~6 lines, then it scrolls */
+    overflow-y: auto;
+  }
+  .send {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+  .send:hover:not(:disabled) {
+    background: var(--accent-strong);
+  }
+  .send:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .send:disabled {
+    opacity: 1;
+    background: var(--surface-2);
+    color: var(--muted);
+    cursor: default;
+  }
+  @media (pointer: coarse) {
+    .send {
+      width: 2.75rem; /* ≥40px tap target */
+      height: 2.75rem;
+    }
   }
   .actions {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin-top: 0.5rem;
+    margin-top: 0.4rem;
+  }
+  /* Theory pages: nothing to show until the counter appears. */
+  .actions:not(:has(.hint)):has(.left:empty) {
+    display: none;
   }
   .actions .left {
     margin-left: auto;
+  }
+  .actions .hint {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.875rem;
   }
 
   /* --- docked (theory pages) ------------------------------------------------------- */
@@ -629,11 +716,6 @@ const docked = variant === 'docked';
   }
   .signin .btn {
     width: 100%;
-  }
-  [data-variant='docked'] textarea {
-    resize: none;
-    max-height: 10rem; /* ~6 lines, then it scrolls */
-    overflow-y: auto;
   }
   /* A wide chat must not stretch a reply into one long line. */
   [data-variant='docked'] .log :global(li) {
