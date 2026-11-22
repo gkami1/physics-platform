@@ -702,14 +702,16 @@ const docked = variant === 'docked';
   .panel:has(.log li) .intro {
     display: none;
   }
+  /* A tagline, not a message: no box or fill (bubbles have both), centred under the
+     header and set off from the conversation by a hairline. */
   .motto {
-    margin: 0.5rem 0 0.25rem;
-    padding: 0.5rem 0.75rem;
-    border-left: 3px solid var(--accent);
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    background: var(--accent-soft);
-    font-weight: 600;
-    font-size: 0.95rem;
+    margin: 0.35rem 0 0.75rem;
+    padding: 0 0.5rem 0.6rem;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    font-style: italic;
+    font-size: 0.875rem;
+    color: var(--muted);
   }
   .signin {
     margin: 0.75rem 0 0;
