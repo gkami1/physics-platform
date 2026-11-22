@@ -48,6 +48,38 @@ const docked = variant === 'docked';
       <span class="level muted" hidden></span>
       {
         docked && (
+          <button
+            type="button"
+            class="widen"
+            aria-pressed="false"
+            aria-label="Развернуть чат"
+            title="Развернуть чат"
+          >
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path
+                class="out"
+                d="M10 4H4v6M4 4l6 6M14 20h6v-6M20 20l-6-6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                class="in"
+                d="M4 10h6V4M10 10 4 4M20 14h-6v6M14 14l6 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        )
+      }
+      {
+        docked && (
           <button type="button" class="close" aria-label="Закрыть">
             ✕
           </button>
@@ -158,11 +190,16 @@ const docked = variant === 'docked';
       this.q('.close').addEventListener('click', () => this.setSheet(false));
       this.q('.backdrop').addEventListener('click', () => this.setSheet(false));
       this.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && this.hasAttribute('data-open')) this.setSheet(false);
+        if (e.key !== 'Escape') return;
+        if (this.hasAttribute('data-open')) this.setSheet(false);
+        else if (this.hasAttribute('data-expanded')) this.setExpanded(false);
       });
       matchMedia(WIDE).addEventListener('change', (e) => {
         if (e.matches) this.setSheet(false);
+        else this.setExpanded(false);
       });
+      this.setUpExpand();
+      this.input.addEventListener('input', this.fitInput);
       // The header already asks who is signed in; reuse its answer. A student who has
       // talked on this page before sees the thread straight away (wide screens only: on
       // narrow ones it loads when the sheet opens).
@@ -198,6 +235,59 @@ const docked = variant === 'docked';
         if (wasOpen && !matchMedia(WIDE).matches) fab.focus();
       }
     }
+
+    /**
+     * Wide screens: the column widens over the text while the student works in the chat
+     * (click, focus or typing in it, or the header button) and narrows again on a click
+     * anywhere else, Esc or the button. A drag that selects text doesn't count as a click.
+     */
+    private setUpExpand() {
+      const widen = this.q('.widen');
+      const panel = this.q('.panel');
+      const engage = (e: Event) => {
+        if (!widen.contains(e.target as Node)) this.setExpanded(true);
+      };
+      panel.addEventListener('pointerdown', engage);
+      panel.addEventListener('focusin', engage);
+      this.input.addEventListener('input', () => this.setExpanded(true));
+      widen.addEventListener('click', () => {
+        const open = !this.hasAttribute('data-expanded');
+        this.setExpanded(open);
+        if (open) this.input.focus();
+      });
+      document.addEventListener('click', (e) => {
+        if (!this.hasAttribute('data-expanded') || this.contains(e.target as Node)) return;
+        if (!(window.getSelection()?.isCollapsed ?? true)) return;
+        this.setExpanded(false);
+      });
+    }
+
+    private setExpanded(open: boolean) {
+      if (open && !matchMedia(WIDE).matches) return;
+      if (open === this.hasAttribute('data-expanded')) return;
+      const follow = this.nearLogEnd();
+      this.toggleAttribute('data-expanded', open);
+      const widen = this.q('.widen');
+      const label = open ? 'Свернуть чат' : 'Развернуть чат';
+      widen.setAttribute('aria-pressed', String(open));
+      widen.setAttribute('aria-label', label);
+      widen.title = label;
+      if (!follow) return;
+      // Messages re-wrap as the width animates: keep the newest one in view throughout.
+      const panel = this.q('.panel');
+      const keep = () => this.scrollLog();
+      keep();
+      panel.addEventListener('transitionend', keep, { once: true });
+      requestAnimationFrame(keep);
+    }
+
+    /** Grows the box with the question, up to a cap set in CSS (then it scrolls). */
+    private fitInput = () => {
+      if (!this.docked) return;
+      const input = this.input;
+      input.style.height = 'auto';
+      input.style.height = `${input.scrollHeight + input.offsetHeight - input.clientHeight}px`;
+    };
 
     /** Keeps the sheet above the on-screen keyboard (iOS does not shrink the layout). */
     private fitViewport = () => {
@@ -305,6 +395,7 @@ const docked = variant === 'docked';
       const asked = this.addMessage('user', text || 'Дай, пожалуйста, подсказку.');
       let failed = false;
       input.value = '';
+      this.fitInput();
       const md = this.md;
       const target = this.addMessage('assistant', '');
       target.parentElement?.classList.add('streaming');
@@ -343,6 +434,7 @@ const docked = variant === 'docked';
           // The server kept nothing of this turn: let the student resend it.
           asked.parentElement?.remove();
           input.value = text;
+          this.fitInput();
         }
       } catch (e) {
         target.parentElement?.remove();
@@ -351,6 +443,7 @@ const docked = variant === 'docked';
         this.notice(ERRORS[detail] ?? 'Нет связи с сервером. Попробуйте ещё раз.');
         if (!text) return;
         input.value = text; // let the student resend
+        this.fitInput();
       } finally {
         target.parentElement?.classList.remove('streaming');
         this.setBusy(false);
@@ -539,7 +632,14 @@ const docked = variant === 'docked';
   }
   [data-variant='docked'] textarea {
     resize: none;
+    max-height: 10rem; /* ~6 lines, then it scrolls */
+    overflow-y: auto;
   }
+  /* A wide chat must not stretch a reply into one long line. */
+  [data-variant='docked'] .log :global(li) {
+    max-width: min(92%, 40rem);
+  }
+  .widen,
   .close {
     margin-left: auto;
     padding: 0.2rem 0.55rem;
@@ -563,7 +663,30 @@ const docked = variant === 'docked';
   }
 
   /* Narrow screens: a bottom sheet behind the floating button. */
+  .widen {
+    display: inline-flex;
+    padding: 0.3rem;
+    background: transparent;
+    color: var(--muted);
+  }
+  .widen svg {
+    display: block;
+  }
+  .widen .in,
+  [data-expanded] .widen .out {
+    display: none;
+  }
+  [data-expanded] .widen .in {
+    display: inline;
+  }
+  .widen:hover {
+    color: var(--text);
+  }
+
   @media (max-width: 63.99rem) {
+    .widen {
+      display: none;
+    }
     [data-variant='docked']:not([data-open]) .panel {
       display: none;
     }
@@ -603,8 +726,34 @@ const docked = variant === 'docked';
       top: calc(var(--header-h) + 1rem);
       height: calc(100dvh - var(--header-h) - 2rem);
     }
+    /* The panel sits on top of its column so it can widen leftwards over the text
+       without the text re-wrapping underneath. */
+    [data-variant='docked'] {
+      z-index: 15; /* above the text, below the site header */
+    }
     [data-variant='docked'] .panel {
+      position: absolute;
+      top: 0;
+      right: 0;
       height: 100%;
+      width: 100%;
+    }
+    [data-variant='docked'][data-expanded] .panel {
+      width: max(100%, min(46rem, 50vw));
+      box-shadow: var(--shadow);
+    }
+    :global(.theory-grid:has(> tutor-chat[data-expanded]) .text-col) {
+      opacity: 0.55;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      [data-variant='docked'] .panel {
+        transition:
+          width 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+      :global(.theory-grid > .text-col) {
+        transition: opacity 0.2s ease;
+      }
     }
     .fab,
     .close,
