@@ -173,6 +173,30 @@ class Attempt(Base):
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
 
 
+class TheoryVisit(Base):
+    """Reading evidence for one actor and theory page: visits, active seconds, reached the end.
+
+    One row per actor and page while it is written; merging anonymous rows on sign-in may
+    leave a user with two rows for a page, so readers sum them."""
+
+    __tablename__ = "theory_visits"
+    __table_args__ = (
+        Index("ix_theory_visits_user", "user_id", "page_id"),
+        Index("ix_theory_visits_anon", "anon_id", "page_id"),
+    )
+
+    id: Mapped[int] = mapped_column(BigId, primary_key=True, autoincrement=True)
+    # Same ownership as attempts: anonymous rows get user_id on sign-in.
+    anon_id: Mapped[str | None] = mapped_column(String(32))
+    user_id: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    page_id: Mapped[str] = mapped_column(String(120))  # topic id or `<topic>/<lesson>`
+    visits: Mapped[int] = mapped_column(Integer, default=1)
+    active_s: Mapped[int] = mapped_column(Integer, default=0)
+    first_at: Mapped[datetime]
+    last_at: Mapped[datetime]
+    finished_at: Mapped[datetime | None]
+
+
 class TutorThread(Base):
     """One dialogue per user and page (a task or a theory topic)."""
 

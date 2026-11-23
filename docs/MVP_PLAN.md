@@ -187,9 +187,13 @@ Each milestone has a **definition of done**; a milestone is not finished until i
 - Part 2 self-assessment against criteria.
 - **Done:** a student can navigate by roadmap and gets a next-step suggestion.
 
-## M7 — Money and compliance (week 7)
-- Payment provider integration (webhooks, idempotency), entitlements, plans.
-- Daily caps (free), fair-use token budget (paid), "messages left" UI.
+## M7 — Premium, money and compliance (planned 2026-11-23, ARCHITECTURE §10)
+- Phase 1: `theory_visits` — reading evidence (active time, finished) collected now, so profiles have history at launch.
+- Phase 2: `insights.py` + `GET /api/insights` + «Мой профиль»: topic statuses, weak-spot practice, mistakes notebook, predicted score (conversion table in `exam.yaml`). Behind the premium check; teaser for free users.
+- Phase 3: entitlements, `usage_daily`, free cap 20 messages/24 h, hidden fair-use cap for premium, «messages left» UI, manual-grant CLI.
+- Phase 4: Robokassa (самозанятый, «Мой налог» receipts): orders, signed form, `ResultURL` (idempotent), success page polling; 30-day pass 790 ₽, season pass price TBD.
+- Phase 5 (blocks real payments): offer, privacy policy, refund terms, consent incl. minors/paying parent, Roskomnadzor notification.
+- Before selling «безлимит»: measure the production tutor's real cost per message (`llm_calls`) and set the fair-use cap from it.
 - Legal pages (offer, privacy policy, consent incl. parental), Roskomnadzor notification.
 - **Done:** a real payment unlocks the paid tier; limits enforced.
 
