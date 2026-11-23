@@ -193,7 +193,7 @@ Each milestone has a **definition of done**; a milestone is not finished until i
 - Phase 3: entitlements, `usage_daily`, free cap 20 messages/24 h, hidden fair-use cap for premium, «messages left» UI, manual-grant CLI.
 - Phase 4: Robokassa (самозанятый, «Мой налог» receipts): orders, signed form, `ResultURL` (idempotent), success page polling; 30-day pass 790 ₽, season pass price TBD.
 - Phase 5 (blocks real payments): offer, privacy policy, refund terms, consent incl. minors/paying parent, Roskomnadzor notification.
-- Prerequisite for selling: the production tutor model chosen by evals and switched on.
+- Before selling «безлимит»: measure the production tutor's real cost per message (`llm_calls`) and set the fair-use cap from it.
 - Legal pages (offer, privacy policy, consent incl. parental), Roskomnadzor notification.
 - **Done:** a real payment unlocks the paid tier; limits enforced.
 

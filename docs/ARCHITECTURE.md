@@ -230,6 +230,8 @@ Free users see a teaser of the profile (the first weak topic, the rest blurred).
 
 **Provider: Robokassa**, seller is самозанятый, receipts through «Мой налог» (Robokassa's fiscalisation for НПД). Flow: `POST /api/billing/orders` creates a pending `orders` row (its integer id is `InvId`, amount stored in kopecks, sent as rubles `"790.00"`) and returns the signed payment-form fields → Robokassa → server-to-server `ResultURL`: check the signature (Password #2), mark the order paid once (repeated callbacks change nothing), extend `entitlements.valid_until`, answer `OK{InvId}`. `SuccessURL` only shows «оплата обрабатывается» and polls the order: the browser redirect never grants access. Test mode (`IsTest=1`) in dev. Field names and signature format to be checked against Robokassa's current docs when implemented. Watch the самозанятый cap (§14).
 
+**Reading evidence** (`theory_visits`, since 2026-11-23): theory pages and lessons ping `POST /api/theory/visits` (`web/src/lib/reading.ts`) on load, every minute and when hidden or closed, with active seconds (tab visible, input in the last 2 min; ≤ 300 per ping) and «finished» (the end of the text was on screen after ≥ 30 active seconds; the first time is kept).
+
 **Metering:** one `is_premium(actor)` check; before each tutor call the free cap or the fair-use cap; after it, actual tokens and cost into `usage_daily`. A CLI grants premium by hand (beta testers, support).
 
 ## 11. Compliance (152-ФЗ) — summary

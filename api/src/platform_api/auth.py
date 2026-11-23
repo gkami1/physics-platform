@@ -35,6 +35,7 @@ from platform_api.db import (
     ConsentEvent,
     LoginCode,
     PasswordFailure,
+    TheoryVisit,
     User,
     VariantRun,
 )
@@ -260,7 +261,7 @@ async def _sign_in(
     anon = request.cookies.get(ANON_COOKIE)
     if anon:
         # Practice done before signing in moves into the account.
-        for model in (Attempt, VariantRun):
+        for model in (Attempt, VariantRun, TheoryVisit):
             await db.execute(
                 update(model)
                 .where(model.anon_id == anon, model.user_id.is_(None))
