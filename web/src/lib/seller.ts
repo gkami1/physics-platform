@@ -1,15 +1,14 @@
 // Who sells the passes. A самозанятый must show their name and ИНН to buyers, and the legal
-// pages quote them. Set at build time (infra/.env → compose build args → PUBLIC_*); an unset
-// value shows a bracketed placeholder so a missing setting is obvious on the page.
+// pages quote them. Deployments can override these public details at build time.
 const env = import.meta.env;
 
 export const seller = {
-  name: (env.PUBLIC_SELLER_NAME as string | undefined) || '[ФИО продавца]',
-  inn: (env.PUBLIC_SELLER_INN as string | undefined) || '[ИНН]',
-  email: (env.PUBLIC_CONTACT_EMAIL as string | undefined) || '[email для связи]',
+  name: (env.PUBLIC_SELLER_NAME as string | undefined) || 'Габдулхаков Булат Фанисович',
+  inn: (env.PUBLIC_SELLER_INN as string | undefined) || '165810943388',
+  email: (env.PUBLIC_CONTACT_EMAIL as string | undefined) || 'traektoriateam@yandex.ru',
   site: (env.PUBLIC_SITE_NAME as string | undefined) || 'Физика ЕГЭ',
 };
 
 /** Bump with any change to the legal texts; payments and sign-ups record the version. */
-export const LEGAL_VERSION = '2026-11-23';
+export const LEGAL_VERSION = '2026-11-23.2';
 export const LEGAL_DATE = '23 ноября 2026 г.';

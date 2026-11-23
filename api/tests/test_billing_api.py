@@ -61,7 +61,7 @@ def checkout(client: TestClient, plan: str = "month") -> int:
 
 
 def result(
-    client: TestClient, inv_id: int, out_sum: str = "690.000000", password: str = PASS2
+    client: TestClient, inv_id: int, out_sum: str = "790.000000", password: str = PASS2
 ) -> Response:
     sig = md5(f"{out_sum}:{inv_id}:{password}").upper()
     return client.post(
@@ -75,7 +75,7 @@ def test_plans_are_public(client: TestClient) -> None:
     assert r.status_code == 200
     body = r.json()
     assert [(p["id"], p["price_kop"]) for p in body["plans"]] == [
-        ("month", 69000),
+        ("month", 79000),
         ("season", 299000),
     ]
     assert body["enabled"] is False
@@ -199,7 +199,7 @@ def test_unknown_invoice(shop: TestClient) -> None:
 def test_malformed_callback_is_rejected(shop: TestClient) -> None:
     bad_signature = shop.post(
         "/api/billing/robokassa/result",
-        data={"OutSum": "690.00", "InvId": "1", "SignatureValue": "не подпись"},
+        data={"OutSum": "790.00", "InvId": "1", "SignatureValue": "не подпись"},
     )
     assert bad_signature.status_code == 400
     assert result(shop, 2**63).status_code == 400
@@ -211,10 +211,10 @@ def test_callback_without_shop_is_refused(client: TestClient) -> None:
 
 def test_get_callback(shop: TestClient, signed_in: TestClient) -> None:
     inv = checkout(signed_in)
-    sig = md5(f"690.00:{inv}:{PASS2}")
+    sig = md5(f"790.00:{inv}:{PASS2}")
     r = signed_in.get(
         "/api/billing/robokassa/result",
-        params={"OutSum": "690.00", "InvId": str(inv), "SignatureValue": sig},
+        params={"OutSum": "790.00", "InvId": str(inv), "SignatureValue": sig},
     )
     assert (r.status_code, r.text) == (200, f"OK{inv}")
 

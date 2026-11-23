@@ -58,7 +58,7 @@ class Settings(BaseSettings):
     # Must match «Алгоритм расчёта хеша» in the shop's technical settings.
     robokassa_hash: Literal["md5", "sha256", "sha384", "sha512"] = "md5"
     # Positive prices in kopecks, bounded by the payments.amount_kop INTEGER column.
-    price_month_kop: int = Field(default=69000, gt=0, le=2**31 - 1)
+    price_month_kop: int = Field(default=79000, gt=0, le=2**31 - 1)
     price_season_kop: int = Field(default=299000, gt=0, le=2**31 - 1)
 
     @property

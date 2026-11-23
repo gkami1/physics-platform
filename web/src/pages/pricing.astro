@@ -1,5 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
+import { formatRub } from '../lib/api';
+import { pricesKop } from '../lib/prices';
+import { seller } from '../lib/seller';
 ---
 
 <Base title="Тарифы — Физика ЕГЭ" description="Бесплатно и с доступом: что входит, цены">
@@ -32,7 +35,7 @@ import Base from '../layouts/Base.astro';
 
       <section class="card tier featured" data-plan="month">
         <h2>30 дней</h2>
-        <p class="price"><span class="amount">…</span></p>
+        <p class="price"><span class="amount">{formatRub(pricesKop.month)}</span></p>
         <ul>
           <li>Всё, что в бесплатном</li>
           <li><strong>100 сообщений</strong> репетитору в сутки</li>
@@ -43,12 +46,12 @@ import Base from '../layouts/Base.astro';
 
       <section class="card tier" data-plan="season">
         <h2>До конца сезона</h2>
-        <p class="price"><span class="amount">…</span></p>
+        <p class="price"><span class="amount">{formatRub(pricesKop.season)}</span></p>
         <p class="until muted"></p>
         <ul>
           <li>Всё, что в бесплатном</li>
           <li><strong>100 сообщений</strong> репетитору в сутки</li>
-          <li>До ЕГЭ одним платежом, без автопродления</li>
+          <li>До 30 июня указанного сезона одним платежом</li>
         </ul>
         <button type="button" class="btn buy" disabled>Оплатить</button>
       </section>
@@ -72,20 +75,22 @@ import Base from '../layouts/Base.astro';
 
     <section class="faq">
       <h2>Вопросы</h2>
-      <h3>Это подписка?</h3>
+      <h3>Как получить доступ?</h3>
       <p>
-        Нет. Вы платите один раз и получаете доступ до указанной даты. Деньги сами не списываются.
-        Если купить доступ, пока действует прежний, срок продлится от его окончания.
+        Войдите в аккаунт, выберите тариф и оплатите его через Robokassa. Обычно доступ открывается
+        в течение нескольких минут после подтверждения оплаты. Дата окончания появится в аккаунте.
+        Для продления 30-дневного доступа нужно оплатить его снова.
       </p>
       <h3>Как получить чек?</h3>
       <p>
         Чек приходит на почту автоматически после оплаты: исполнитель — самозанятый, чек
         формируется в приложении «Мой налог».
       </p>
-      <h3>Можно вернуть деньги?</h3>
+      <h3>Как отказаться от услуги и получить возврат?</h3>
       <p>
-        Да, за неиспользованные дни — напишите на почту, указанную внизу страницы. Порядок описан
-        в <a href="/legal/offer/">оферте</a>.
+        Напишите на <a href={`mailto:${seller.email}`}>{seller.email}</a> и укажите почту аккаунта.
+        Укажите номер счёта, если он у вас есть. Сроки и правила расчёта указаны в
+        <a href="/legal/offer/#refunds">условиях возврата</a>.
       </p>
     </section>
   </pricing-page>

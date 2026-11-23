@@ -149,9 +149,11 @@ registers each receipt in «Мой налог» and emails it to the buyer.
 | Hash algorithm | the same as `ROBOKASSA_HASH` (default MD5) |
 | Passwords #1 and #2 | into `ROBOKASSA_PASSWORD1/2`; test and live passwords differ |
 
-Then in `infra/.env`: `ROBOKASSA_LOGIN`, the passwords, `SELLER_NAME`, `SELLER_INN`,
-`CONTACT_EMAIL` (the seller block is baked into the static site: rebuild the web image after
-changing it). Apply the settings with
+Set `ROBOKASSA_LOGIN` and the passwords in `infra/.env`. The site uses the public seller details
+in `web/src/lib/seller.ts` by default. `SELLER_NAME`, `SELLER_INN` and `CONTACT_EMAIL` override
+them at build time. `PRICE_MONTH_KOP` and `PRICE_SEASON_KOP` set the amounts for both the web
+build and the API. Rebuild the web image after changing seller details or prices. Apply the
+settings with
 `docker compose --env-file infra/.env -f infra/compose.yaml up -d --build`.
 
 **«Мой налог».** Connect Robokassa as a partner in «Мой налог» (Прочее → Партнёры) and turn on
@@ -172,15 +174,16 @@ For the live deployment, set `ROBOKASSA_TEST=false` with the live passwords. See
 laptop run the checkout, take `InvId` from the redirect URL and post the callback yourself):
 
 ```bash
-INV=1; SUM=690.000000; PASS2=<password #2>
+INV=1; SUM=790.000000; PASS2=<password #2>
 SIG=$(printf '%s' "$SUM:$INV:$PASS2" | md5sum | cut -d' ' -f1)
 curl -d "OutSum=$SUM&InvId=$INV&SignatureValue=$SIG" http://localhost:8000/api/billing/robokassa/result
 # → OK1
 ```
 
-**Refunds** (offer §5: unused full days, within 10 days). Refund in the Robokassa cabinet,
-annul the receipt in «Мой налог», then shorten the access:
-`UPDATE entitlements SET valid_until = now() WHERE user_id = …;` (`docker compose exec db psql -U physics`).
+**Refunds (offer §5).** Record when the request arrived and identify the invoice. Calculate
+the refund under the offer and applicable law. Process it in the Robokassa cabinet and adjust
+the receipt in «Мой налог». Update `entitlements.valid_until` in Postgres after checking for
+other paid periods. If there is no remaining paid access, set the expiry to `now()`.
 
 **Who paid:** `SELECT id, user_id, plan, amount_kop, status, paid_at FROM payments ORDER BY id DESC LIMIT 20;`
 A `pending` row is a checkout that was opened but not paid; it is never charged.

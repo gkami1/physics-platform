@@ -97,8 +97,8 @@ const tabs = [
         <a href="/legal/consent/">Согласие на обработку данных</a>
       </nav>
       <span class="seller">
-        Исполнитель: {seller.name}, плательщик налога на профессиональный доход, ИНН {seller.inn}
-        · {seller.email}
+        Исполнитель: {seller.name}, самозанятый (НПД), ИНН {seller.inn}
+        · <a href={`mailto:${seller.email}`}>{seller.email}</a>
       </span>
     </footer>
   </body>

@@ -188,7 +188,7 @@ Each milestone has a **definition of done**; a milestone is not finished until i
 - **Done:** a student can navigate by roadmap and gets a next-step suggestion.
 
 ## M7 — Premium, money and compliance
-- Implemented: theory reading history (`theory_visits`), Robokassa checkout and invoice polling, paid entitlements, the free and paid tutor caps, and the paid fair-use budget. Current one-off passes are 30 days (690 ₽) and season (2990 ₽).
+- Implemented: theory reading history (`theory_visits`), Robokassa checkout and invoice polling, paid entitlements, the free and paid tutor caps, and the paid fair-use budget. Current one-off passes are 30 days (790 ₽) and season (2990 ₽).
 - Planned: `insights.py` and `GET /api/insights` for the premium profile, weak-spot practice, mistakes notebook, and predicted score.
 - Before enabling live payments: configure the Robokassa shop and «Мой налог», complete the seller details, review the offer, privacy policy and consent drafts, submit the Roskomnadzor notification, and verify a real payment and refund (DEPLOY §6).
 - **Done:** a real payment unlocks the paid tier; limits enforced.

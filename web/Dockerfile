@@ -26,10 +26,14 @@ COPY web .
 COPY content /app/content
 # Only the public bundle crosses into the site build.
 COPY --from=content /app/build/public /app/build/public
-# Seller details for the legal pages (public by law for a самозанятый; see infra/.env).
+# Public seller details and prices for the static pricing and legal pages.
 ARG PUBLIC_SELLER_NAME="" PUBLIC_SELLER_INN="" PUBLIC_CONTACT_EMAIL=""
+ARG PUBLIC_PRICE_MONTH_KOP="" PUBLIC_PRICE_SEASON_KOP=""
+ARG PUBLIC_TUTOR_PAID_MONTHLY_BUDGET_KOP=""
 ENV PUBLIC_SELLER_NAME=$PUBLIC_SELLER_NAME PUBLIC_SELLER_INN=$PUBLIC_SELLER_INN \
-    PUBLIC_CONTACT_EMAIL=$PUBLIC_CONTACT_EMAIL
+    PUBLIC_CONTACT_EMAIL=$PUBLIC_CONTACT_EMAIL PUBLIC_PRICE_MONTH_KOP=$PUBLIC_PRICE_MONTH_KOP \
+    PUBLIC_PRICE_SEASON_KOP=$PUBLIC_PRICE_SEASON_KOP \
+    PUBLIC_TUTOR_PAID_MONTHLY_BUDGET_KOP=$PUBLIC_TUTOR_PAID_MONTHLY_BUDGET_KOP
 RUN npm run build:site
 
 
