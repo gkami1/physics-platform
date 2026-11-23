@@ -10,10 +10,12 @@ import re
 import subprocess
 import sys
 import time
+from pathlib import Path
 
 import httpx
 
 BASE, PROJECT = sys.argv[1], sys.argv[2]
+COMPOSE_FILE = Path(__file__).with_name("compose.yaml").resolve()
 ok = True
 
 
@@ -40,9 +42,18 @@ for p in [
     "/ege-physics/tasks/kin-0001/",
     "/ege-physics/theory/mech.kinematics.basics/",
     "/login/",
+    "/account/",
+    "/pricing/",
+    "/pay/success/",
 ]:
     r = c.get(p)
     check(f"GET {p}", r.status_code == 200, r.status_code)
+r = c.get("/api/billing/plans")
+check(
+    "billing tiers available",
+    r.status_code == 200 and {plan["id"] for plan in r.json()["plans"]} == {"month", "season"},
+    r.status_code,
+)
 r = c.get("/ege-physics/tasks/")
 check("old /tasks/ redirects to practice", "url=/ege-physics/practice" in r.text, r.status_code)
 check("404 page", c.get("/nope/").status_code == 404)
@@ -94,7 +105,18 @@ r = c.post("/api/auth/signup", json=form | {"consent": True})
 check("sign-up code requested", r.status_code == 202, r.text[:120])
 time.sleep(1)
 logs = subprocess.run(  # noqa: S603  (fixed docker command, project name from argv)
-    ["docker", "compose", "-p", PROJECT, "logs", "api", "--since", "2m"],  # noqa: S607
+    [  # noqa: S607
+        "docker",
+        "compose",
+        "-f",
+        str(COMPOSE_FILE),
+        "-p",
+        PROJECT,
+        "logs",
+        "api",
+        "--since",
+        "2m",
+    ],
     capture_output=True,
     text=True,
     encoding="utf-8",
