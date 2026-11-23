@@ -110,11 +110,12 @@ Rollback = deploy the previous commit. Migrations are written to be backward com
 ## 4. Backups
 
 ```bash
-crontab -e   # as deploy
-30 3 * * * /opt/physics-platform/infra/backup.sh >> /var/backups/physics-platform/backup.log 2>&1
+crontab -e   # as deploy; the server clock is UTC, so 00:30 = 03:30 MSK
+30 0 * * * /opt/physics-platform/infra/backup.sh >> /var/backups/physics-platform/backup.log 2>&1
+chmod 700 /var/backups/physics-platform   # dumps hold personal data
 ```
 
-Nightly `pg_dump`, gzip, 14 days kept in `/var/backups/physics-platform`. Copy them off the VM too (the provider's object storage, e.g. Yandex Object Storage with `rclone`); a backup on the same disk does not survive losing the VM.
+Nightly `pg_dump`, gzip, 14 days kept in `/var/backups/physics-platform` (files are owner-only). Copy them off the VM too (the provider's object storage, e.g. Yandex Object Storage with `rclone`); a backup on the same disk does not survive losing the VM.
 
 Restore (replaces the database; the API is stopped meanwhile):
 
@@ -122,7 +123,7 @@ Restore (replaces the database; the API is stopped meanwhile):
 infra/backup.sh --restore /var/backups/physics-platform/physics-YYYYMMDDTHHMMSSZ.sql.gz
 ```
 
-Tested 2026-10-28 on a local stack: dump → wipe → restore brought users, attempts and variant runs back. Repeat the drill on the server after the first deploy (M8).
+Tested 2026-10-28 on a local stack: dump → wipe → restore brought users, attempts and variant runs back. On the server (2026-11-19) the drill restores the latest dump into a scratch database (`CREATE DATABASE restore_drill`, load, compare per-table row counts with `physics`, drop it), which checks the dump without touching live data. Repeat it after schema changes and once real data exists.
 
 ## 5. Day to day
 
