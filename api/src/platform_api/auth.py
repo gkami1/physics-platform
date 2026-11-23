@@ -1,4 +1,9 @@
-"""Sign-in by one-time email code. OAuth providers (Yandex ID, VK ID) come later."""
+"""Accounts: sign-up, sign-in by password or by one-time email code, password reset.
+
+An account is created only after its email is confirmed: the sign-up form waits in the
+code row (`login_codes.signup`) until the code is typed. OAuth providers (Yandex ID,
+VK ID) come later as `auth_identities`.
+"""
 
 from __future__ import annotations
 
@@ -8,10 +13,12 @@ import logging
 import re
 import secrets
 from datetime import datetime, timedelta
+from typing import Any, Literal
 
 from fastapi import APIRouter, HTTPException, Request, Response
 from pydantic import BaseModel, Field
-from sqlalchemy import ColumnElement, func, select, update
+from sqlalchemy import ColumnElement, delete, func, null, select, update
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from platform_api.access import paid_until
 from platform_api.actor import (
@@ -23,25 +30,35 @@ from platform_api.actor import (
     start_session,
     token_hash,
 )
-from platform_api.db import Attempt, AuthSession, LoginCode, User, VariantRun
+from platform_api.db import (
+    Attempt,
+    AuthSession,
+    ConsentEvent,
+    LoginCode,
+    PasswordFailure,
+    TheoryVisit,
+    User,
+    VariantRun,
+)
 from platform_api.deps import Db
-from platform_api.mail import Mailer, login_code_email
+from platform_api.mail import CodePurpose, Mailer, code_email
+from platform_api.passwords import hash_password, needs_rehash, verify_password
+from platform_api.profile import normalize_email, normalize_name, normalize_phone, password_ok
 
 logger = logging.getLogger("api.auth")
 
 CODE_TTL = timedelta(minutes=10)
 MAX_TRIES_PER_CODE = 5
-# (window, max codes) — per address, then per client IP.
-EMAIL_LIMITS = ((timedelta(minutes=1), 1), (timedelta(hours=1), 5))
-IP_LIMITS = ((timedelta(hours=1), 20),)
+# (window, max) pairs.
+Limits = tuple[tuple[timedelta, int], ...]
+# Codes sent per address, then per client IP.
+EMAIL_LIMITS: Limits = ((timedelta(minutes=1), 1), (timedelta(hours=1), 5))
+IP_LIMITS: Limits = ((timedelta(hours=1), 20),)
+# Wrong passwords per address, then per client IP.
+PASSWORD_EMAIL_LIMITS: Limits = ((timedelta(minutes=15), 10),)
+PASSWORD_IP_LIMITS: Limits = ((timedelta(minutes=15), 50),)
 
-_EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 _CODE_RE = re.compile(r"^\d{6}$")
-
-
-def normalize_email(raw: str) -> str | None:
-    email = raw.strip().lower()
-    return email if len(email) <= 254 and _EMAIL_RE.fullmatch(email) else None
 
 
 def new_code() -> str:
@@ -52,22 +69,65 @@ def code_hash(email: str, code: str) -> str:
     return hashlib.sha256(f"{email}:{code}".encode()).hexdigest()
 
 
+class SignupRequest(BaseModel):
+    first_name: str = Field(max_length=100)
+    last_name: str = Field(max_length=100)
+    email: str = Field(max_length=254)
+    phone: str | None = Field(default=None, max_length=32)
+    password: str = Field(max_length=256)
+    consent: bool
+    consent_version: str | None = Field(default=None, max_length=32)
+    marketing: bool = False
+
+
 class CodeRequest(BaseModel):
     email: str = Field(max_length=254)
-    consent: bool
+    purpose: Literal["login", "reset"] = "login"
 
 
 class VerifyRequest(BaseModel):
     email: str = Field(max_length=254)
     code: str = Field(max_length=16)
-    # Version of the personal-data consent text shown next to the checkbox.
-    consent_version: str | None = Field(default=None, max_length=32)
+
+
+class LoginRequest(BaseModel):
+    email: str = Field(max_length=254)
+    password: str = Field(max_length=256)
+
+
+class ResetRequest(BaseModel):
+    email: str = Field(max_length=254)
+    code: str = Field(max_length=16)
+    password: str = Field(max_length=256)
+
+
+class ProfileUpdate(BaseModel):
+    first_name: str = Field(max_length=100)
+    last_name: str = Field(max_length=100)
+    phone: str | None = Field(default=None, max_length=32)
+    marketing: bool
 
 
 class Me(BaseModel):
     email: str
-    # End of paid access, if any is active now.
-    paid_until: datetime | None = None
+    first_name: str | None
+    last_name: str | None
+    phone: str | None
+    marketing: bool
+    has_password: bool
+    paid_until: datetime | None
+
+    @classmethod
+    async def of(cls, db: AsyncSession, user: User) -> Me:
+        return cls(
+            email=user.email,
+            first_name=user.first_name,
+            last_name=user.last_name,
+            phone=user.phone,
+            marketing=user.marketing_consent_at is not None,
+            has_password=user.password_hash is not None,
+            paid_until=await paid_until(db, user),
+        )
 
 
 class MeResponse(BaseModel):
@@ -84,59 +144,96 @@ def _email_or_422(raw: str) -> str:
     return email
 
 
-@router.post("/auth/code", status_code=202)
-async def request_code(body: CodeRequest, request: Request, db: Db) -> dict[str, int]:
-    if not body.consent:
-        raise HTTPException(422, "consent_required")
-    email = _email_or_422(body.email)
-    ip = request.client.host if request.client else None
+def _name_or_422(raw: str) -> str:
+    name = normalize_name(raw)
+    if name is None:
+        raise HTTPException(422, "invalid_name")
+    return name
+
+
+def _phone_or_422(raw: str | None) -> str | None:
+    if raw is None or not raw.strip():
+        return None
+    phone = normalize_phone(raw)
+    if phone is None:
+        raise HTTPException(422, "invalid_phone")
+    return phone
+
+
+def _password_or_422(password: str) -> str:
+    if not password_ok(password):
+        raise HTTPException(422, "weak_password")
+    return password
+
+
+def _ip(request: Request) -> str | None:
+    return request.client.host if request.client else None
+
+
+async def _over_limit(
+    db: AsyncSession,
+    model: type[LoginCode] | type[PasswordFailure],
+    checks: list[tuple[ColumnElement[bool], Limits]],
+) -> bool:
     t = now()
+    for where, limits in checks:
+        for window, limit in limits:
+            q = select(func.count()).select_from(model).where(where, model.created_at > t - window)
+            if ((await db.scalar(q)) or 0) >= limit:
+                return True
+    return False
 
-    async def recent(where: ColumnElement[bool], window: timedelta) -> int:
-        q = (
-            select(func.count())
-            .select_from(LoginCode)
-            .where(where, LoginCode.created_at > t - window)
-        )
-        return (await db.scalar(q)) or 0
 
-    for window, limit in EMAIL_LIMITS:
-        if await recent(LoginCode.email == email, window) >= limit:
-            raise HTTPException(429, "too_many_codes")
+async def _check_code_limits(db: AsyncSession, email: str, ip: str | None) -> None:
+    checks = [(LoginCode.email == email, EMAIL_LIMITS)]
     if ip:
-        for window, limit in IP_LIMITS:
-            if await recent(LoginCode.ip == ip, window) >= limit:
-                raise HTTPException(429, "too_many_codes")
+        checks.append((LoginCode.ip == ip, IP_LIMITS))
+    if await _over_limit(db, LoginCode, checks):
+        raise HTTPException(429, "too_many_codes")
 
+
+async def _send_code(
+    db: AsyncSession,
+    request: Request,
+    email: str,
+    purpose: CodePurpose,
+    signup: dict[str, Any] | None = None,
+) -> dict[str, int]:
+    """Store and email a new code. Call `_check_code_limits` first."""
+    t = now()
+    # Sign-up forms nobody confirmed hold personal data: drop them once their code expires.
+    await db.execute(
+        update(LoginCode)
+        .where(LoginCode.signup.is_not(None), LoginCode.expires_at <= t)
+        .values(signup=null())
+    )
     code = new_code()
     db.add(
         LoginCode(
             email=email,
             code_hash=code_hash(email, code),
-            ip=ip,
+            ip=_ip(request),
             tries=0,
+            signup=signup,
             created_at=t,
             expires_at=t + CODE_TTL,
         )
     )
     await db.commit()
     mailer: Mailer = request.app.state.mailer
-    subject, text = login_code_email(code, int(CODE_TTL.total_seconds() // 60))
+    subject, text = code_email(code, int(CODE_TTL.total_seconds() // 60), purpose)
     try:
         await mailer.send(email, subject, text)
     except Exception:
-        logger.exception("login code email failed")
+        logger.exception("code email failed")
         raise HTTPException(503, "mail_failed") from None
-    # Same answer for new and existing addresses: no account enumeration.
     return {"expires_in": int(CODE_TTL.total_seconds())}
 
 
-@router.post("/auth/verify")
-async def verify_code(
-    body: VerifyRequest, request: Request, response: Response, db: Db
-) -> MeResponse:
-    email = _email_or_422(body.email)
-    code = body.code.strip()
+async def _consume_code(db: AsyncSession, email: str, raw_code: str) -> LoginCode:
+    """The address's latest live code, marked used if `raw_code` matches it. Wrong tries
+    are committed; the caller commits the success."""
+    code = raw_code.strip()
     t = now()
     row = await db.scalar(
         select(LoginCode)
@@ -155,17 +252,20 @@ async def verify_code(
         await db.commit()
         raise HTTPException(400, "wrong_code")
     row.used_at = t
+    return row
 
-    user = await db.scalar(select(User).where(User.email == email))
-    if user is None:
-        user = User(email=email, consented_at=t, consent_version=body.consent_version, created_at=t)
-        db.add(user)
-        await db.flush()
 
+async def _user_by_email(db: AsyncSession, email: str) -> User | None:
+    return await db.scalar(select(User).where(User.email == email))
+
+
+async def _sign_in(
+    db: AsyncSession, request: Request, response: Response, user: User
+) -> MeResponse:
     anon = request.cookies.get(ANON_COOKIE)
     if anon:
         # Practice done before signing in moves into the account.
-        for model in (Attempt, VariantRun):
+        for model in (Attempt, VariantRun, TheoryVisit):
             await db.execute(
                 update(model)
                 .where(model.anon_id == anon, model.user_id.is_(None))
@@ -174,7 +274,135 @@ async def verify_code(
         clear_cookie(response, ANON_COOKIE)
     await start_session(db, request, response, user)
     await db.commit()
-    return MeResponse(user=Me(email=user.email, paid_until=await paid_until(db, user)))
+    return MeResponse(user=await Me.of(db, user))
+
+
+def _consent_event(
+    user: User,
+    kind: Literal["personal_data", "marketing"],
+    granted: bool,
+    ip: str | None,
+    at: datetime,
+) -> ConsentEvent:
+    return ConsentEvent(user_id=user.id, kind=kind, granted=granted, ip=ip, created_at=at)
+
+
+@router.post("/auth/signup", status_code=202)
+async def signup(body: SignupRequest, request: Request, db: Db) -> dict[str, int]:
+    """Check the form and email a code; the account appears when the code is typed."""
+    if not body.consent:
+        raise HTTPException(422, "consent_required")
+    first_name = _name_or_422(body.first_name)
+    last_name = _name_or_422(body.last_name)
+    email = _email_or_422(body.email)
+    phone = _phone_or_422(body.phone)
+    password = _password_or_422(body.password)
+    ip = _ip(request)
+    if await _user_by_email(db, email) is not None:
+        raise HTTPException(409, "email_taken")
+    await _check_code_limits(db, email, ip)  # before hashing: that costs CPU
+    form = {
+        "first_name": first_name,
+        "last_name": last_name,
+        "phone": phone,
+        "password_hash": await hash_password(password),
+        "marketing": body.marketing,
+        "consented_at": now().isoformat(),
+        "consent_version": body.consent_version,
+        "ip": ip,
+    }
+    return await _send_code(db, request, email, "signup", form)
+
+
+@router.post("/auth/code", status_code=202)
+async def request_code(body: CodeRequest, request: Request, db: Db) -> dict[str, int]:
+    """A code to sign in (`login`) or to set a new password (`reset`), existing accounts
+    only: new ones go through /auth/signup."""
+    email = _email_or_422(body.email)
+    await _check_code_limits(db, email, _ip(request))
+    if await _user_by_email(db, email) is None:
+        raise HTTPException(404, "no_account")
+    return await _send_code(db, request, email, body.purpose)
+
+
+@router.post("/auth/verify")
+async def verify_code(
+    body: VerifyRequest, request: Request, response: Response, db: Db
+) -> MeResponse:
+    email = _email_or_422(body.email)
+    row = await _consume_code(db, email, body.code)
+    form, row.signup = row.signup, None
+    user = await _user_by_email(db, email)
+    if user is None:
+        if form is None:
+            await db.commit()
+            raise HTTPException(400, "no_account")
+        user = await _create_user(db, email, form)
+    return await _sign_in(db, request, response, user)
+
+
+async def _create_user(db: AsyncSession, email: str, form: dict[str, Any]) -> User:
+    consented_at = datetime.fromisoformat(form["consented_at"])
+    user = User(
+        email=email,
+        first_name=form["first_name"],
+        last_name=form["last_name"],
+        phone=form["phone"],
+        password_hash=form["password_hash"],
+        consented_at=consented_at,
+        consent_version=form.get("consent_version"),
+        marketing_consent_at=consented_at if form["marketing"] else None,
+        created_at=now(),
+    )
+    db.add(user)
+    await db.flush()
+    db.add(_consent_event(user, "personal_data", True, form["ip"], consented_at))
+    if form["marketing"]:
+        db.add(_consent_event(user, "marketing", True, form["ip"], consented_at))
+    return user
+
+
+@router.post("/auth/login")
+async def login(body: LoginRequest, request: Request, response: Response, db: Db) -> MeResponse:
+    email = normalize_email(body.email)
+    if email is None:
+        raise HTTPException(400, "wrong_credentials")
+    ip = _ip(request)
+    checks = [(PasswordFailure.email == email, PASSWORD_EMAIL_LIMITS)]
+    if ip:
+        checks.append((PasswordFailure.ip == ip, PASSWORD_IP_LIMITS))
+    if await _over_limit(db, PasswordFailure, checks):
+        raise HTTPException(429, "too_many_attempts")
+    user = await _user_by_email(db, email)
+    stored = user.password_hash if user else None
+    # Same answer, and about the same time (a dummy hash is checked), for a missing
+    # account, an account without a password and a wrong password.
+    ok = await verify_password(stored, body.password)
+    if user is None or stored is None or not ok:
+        db.add(PasswordFailure(email=email, ip=ip, created_at=now()))
+        await db.commit()
+        raise HTTPException(400, "wrong_credentials")
+    if needs_rehash(stored):
+        user.password_hash = await hash_password(body.password)
+    return await _sign_in(db, request, response, user)
+
+
+@router.post("/auth/reset")
+async def reset_password(
+    body: ResetRequest, request: Request, response: Response, db: Db
+) -> MeResponse:
+    """Set a new password with a code from /auth/code. Signs out every other device."""
+    email = _email_or_422(body.email)
+    password = _password_or_422(body.password)
+    row = await _consume_code(db, email, body.code)
+    row.signup = None
+    user = await _user_by_email(db, email)
+    if user is None:
+        await db.commit()
+        raise HTTPException(400, "no_account")
+    user.password_hash = await hash_password(password)
+    await db.execute(delete(AuthSession).where(AuthSession.user_id == user.id))
+    return await _sign_in(db, request, response, user)
 
 
 @router.post("/auth/logout", status_code=204)
@@ -191,6 +419,19 @@ async def logout(request: Request, response: Response, db: Db) -> None:
 
 @router.get("/me")
 async def me(user: SessionUser, db: Db) -> MeResponse:
+    return MeResponse(user=await Me.of(db, user) if user else None)
+
+
+@router.patch("/me")
+async def update_me(body: ProfileUpdate, request: Request, user: SessionUser, db: Db) -> MeResponse:
     if user is None:
-        return MeResponse(user=None)
-    return MeResponse(user=Me(email=user.email, paid_until=await paid_until(db, user)))
+        raise HTTPException(401, "sign_in_required")
+    user.first_name = _name_or_422(body.first_name)
+    user.last_name = _name_or_422(body.last_name)
+    user.phone = _phone_or_422(body.phone)
+    if body.marketing != (user.marketing_consent_at is not None):
+        t = now()
+        user.marketing_consent_at = t if body.marketing else None
+        db.add(_consent_event(user, "marketing", body.marketing, _ip(request), t))
+    await db.commit()
+    return MeResponse(user=await Me.of(db, user))

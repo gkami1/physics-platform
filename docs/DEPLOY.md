@@ -37,6 +37,63 @@ chmod 600 infra/.env
 
 `POSTGRES_PASSWORD` is used when the database volume is first created; changing it later needs `ALTER USER` inside Postgres.
 
+Once key login works for both `root` and `deploy`, turn off SSH passwords (a file early in `sshd_config.d/` wins over cloud-init's `50-cloud-init.conf`), and reboot if `/var/run/reboot-required` exists:
+
+```bash
+printf 'PasswordAuthentication no\nKbdInteractiveAuthentication no\nPermitRootLogin prohibit-password\n' > /etc/ssh/sshd_config.d/01-hardening.conf
+sshd -t && systemctl reload ssh
+```
+
+Email: any Russian SMTP mailbox works (152-ФЗ: the provider sees students' addresses). A free `@mail.ru`/`@yandex.ru` box with an app password is fine to start (`smtp.mail.ru:465`, `MAIL_FROM` = that same address, or it lands in spam); it has daily sending limits, so move to a mailbox on the domain as users grow.
+
+### vLLM on a private network (SSH tunnel)
+
+When the GPU host is only reachable through a jump host, the VPS keeps an SSH tunnel to it. The VPS key may only forward to the vLLM port, so a compromised VPS cannot reach anything else behind the jump host.
+
+On the VPS (root): `ssh-keygen -t ed25519 -N "" -C pp-vps-tunnel -f /root/.ssh/pp_tunnel`; add the jump host's key to `/root/.ssh/known_hosts` after checking its fingerprint.
+
+On the jump host (root), with the public key from above:
+
+```bash
+adduser --system --group --shell /usr/sbin/nologin --home /home/pptunnel pptunnel
+mkdir -p /home/pptunnel/.ssh
+echo 'restrict,port-forwarding,permitopen="<gpu-ip>:8010",command="/bin/false" ssh-ed25519 AAAA... pp-vps-tunnel' > /home/pptunnel/.ssh/authorized_keys
+chown -R pptunnel: /home/pptunnel/.ssh && chmod 700 /home/pptunnel/.ssh && chmod 600 /home/pptunnel/.ssh/authorized_keys
+cat >> /etc/ssh/sshd_config <<'EOF'
+
+Match User pptunnel
+    AllowTcpForwarding local
+    PermitOpen <gpu-ip>:8010
+    PermitTTY no
+    X11Forwarding no
+    AllowAgentForwarding no
+    ForceCommand /bin/false
+EOF
+sshd -t && systemctl reload ssh
+```
+
+The `Match` block must stay last in `sshd_config`: anything appended after it applies only to `pptunnel`.
+
+On the VPS, `/etc/systemd/system/pp-tunnel.service` (`systemctl enable --now pp-tunnel`), listening only on the docker bridge:
+
+```ini
+[Unit]
+Description=SSH tunnel to vLLM for the tutor
+After=network-online.target docker.service
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+ExecStart=/usr/bin/ssh -N -i /root/.ssh/pp_tunnel -o BatchMode=yes -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -L 172.17.0.1:8010:<gpu-ip>:8010 pptunnel@<jump-host>
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+```
+
+ufw blocks containers → host by default: `ufw allow in from 172.16.0.0/12 to 172.17.0.1 port 8010 proto tcp`. Then in `infra/.env`: `LLM_BASE_URL=http://host.docker.internal:8010/v1` and `LLM_MODEL=<served model id>` (compose maps `host.docker.internal` to the host). If the tunnel is down the tutor answers «недоступен»; `journalctl -u pp-tunnel` shows why.
+
 ## 3. Deploy
 
 From your machine (SSH access as `deploy`):

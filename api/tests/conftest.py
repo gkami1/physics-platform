@@ -1,7 +1,7 @@
 import asyncio
 import os
 import re
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from pathlib import Path
 
 import pytest
@@ -88,14 +88,37 @@ def outbox(client: TestClient) -> MemoryMailer:
     return box
 
 
+PASSWORD = "correct horse battery"
+
+
+def signup_form(email: str, **fields: object) -> dict[str, object]:
+    form: dict[str, object] = {
+        "first_name": "Анна",
+        "last_name": "Иванова",
+        "email": email,
+        "password": PASSWORD,
+        "consent": True,
+    }
+    return form | fields
+
+
 @pytest.fixture
-def signed_in(client: TestClient, outbox: MemoryMailer) -> TestClient:
+def sign_up(client: TestClient, outbox: MemoryMailer) -> Callable[[str], None]:
+    """Register `email` on `client` and confirm it with the mailed code (signs in)."""
+
+    def run(email: str) -> None:
+        r = client.post("/api/auth/signup", json=signup_form(email))
+        assert r.status_code == 202, r.text
+        code = re.search(r"\d{6}", outbox.sent[-1][1])
+        assert code
+        r = client.post("/api/auth/verify", json={"email": email, "code": code.group()})
+        assert r.status_code == 200, r.text
+
+    return run
+
+
+@pytest.fixture
+def signed_in(client: TestClient, sign_up: Callable[[str], None]) -> TestClient:
     """`client` with a signed-in student session."""
-    email = "student@example.ru"
-    r = client.post("/api/auth/code", json={"email": email, "consent": True})
-    assert r.status_code == 202
-    code = re.search(r"\d{6}", outbox.sent[-1][1])
-    assert code
-    r = client.post("/api/auth/verify", json={"email": email, "code": code.group()})
-    assert r.status_code == 200
+    sign_up("student@example.ru")
     return client

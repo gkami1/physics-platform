@@ -12,8 +12,8 @@ interface Props {
 const { contextId } = Astro.props;
 ---
 
-<div class="theory-grid">
-  <div class="text-col"><slot /></div>
+<div class="theory-grid" data-page-id={contextId}>
+  <div class="text-col"><slot /><div data-read-end aria-hidden="true"></div></div>
   <TutorChat kind="theory" contextId={contextId} variant="docked" />
 </div>
 
@@ -71,6 +71,14 @@ const { contextId } = Astro.props;
   for (const [tag, load] of Object.entries(sims)) if (document.querySelector(tag)) void load();
   // Step tasks: the answer form is static HTML; checking needs the element's code.
   if (document.querySelector('task-answer')) void import('../../lib/task-answer');
+  // Reading time and «reached the end», for the profile.
+  const grid = document.querySelector<HTMLElement>('.theory-grid[data-page-id]');
+  const pageId = grid?.dataset.pageId;
+  if (grid && pageId) {
+    void import('../../lib/reading').then(({ trackReading }) =>
+      trackReading(pageId, grid.querySelector('[data-read-end]')),
+    );
+  }
 </script>
 
 <style>

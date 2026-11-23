@@ -11,6 +11,8 @@ import {
   type PublicBundle,
   type PublicTask,
   specFor,
+  taskUrl,
+  tasksOfNumber,
   tasksUrl,
   theoryUrl,
   topicsById,
@@ -40,6 +42,12 @@ const heading =
       : `Задание № ${task.ege_task} (ЕГЭ ${task.last_season})`;
 const theoryTopics = new Set(b.theory.map((t) => t.topic));
 const statementHtml = await renderMarkdown(task.statement);
+// Default pager without a saved list: the neighbours within this EGE number, catalog order.
+const siblings =
+  task.ege_task !== null && inSeason(b, task) ? tasksOfNumber(b, task.ege_task) : [];
+const pos = siblings.findIndex((t) => t.id === task.id);
+const prevTask = pos > 0 ? siblings[pos - 1] : undefined;
+const nextTask = pos >= 0 ? siblings[pos + 1] : undefined;
 ---
 
 <Base title={`${heading} · ${task.id} — ${b.exam.title}`} narrow>
@@ -70,6 +78,17 @@ const statementHtml = await renderMarkdown(task.statement);
   <article class="card statement reading" set:html={statementHtml} />
 
   <TaskAnswer taskId={task.id} kind={task.answer_input.type} unit={task.answer_input.unit} />
+
+  <nav class="pager" aria-label="Соседние задачи" hidden={!prevTask && !nextTask}>
+    <a class="btn ghost small prev" href={prevTask && taskUrl(b.exam.id, prevTask.id)} hidden={!prevTask}>
+      ← Предыдущая
+    </a>
+    <span class="pos muted">{pos >= 0 && `${pos + 1} из ${siblings.length}`}</span>
+    <a class="btn small next" href={nextTask && taskUrl(b.exam.id, nextTask.id)} hidden={!nextTask}>
+      Следующая →
+    </a>
+  </nav>
+
   <TutorChat kind="task" contextId={task.id} />
 
   <aside class="topics muted">
@@ -90,22 +109,30 @@ const statementHtml = await renderMarkdown(task.statement);
 </Base>
 
 <script>
-  // Came here through «Случайная задача»: offer another one from the same filtered pool.
-  try {
-    const raw = sessionStorage.getItem('pp:practice-pool');
-    const pool = raw ? (JSON.parse(raw) as { back: string; hrefs: string[] }) : null;
-    if (pool?.hrefs.includes(location.pathname)) {
-      const back = document.querySelector<HTMLAnchorElement>('.crumbs .back')!;
-      back.href = pool.back;
-      const others = pool.hrefs.filter((h) => h !== location.pathname);
-      const more = document.querySelector<HTMLAnchorElement>('.crumbs .more')!;
-      if (others.length > 0) {
-        more.href = others[Math.floor(Math.random() * others.length)]!;
-        more.hidden = false;
-      }
-    }
-  } catch {
-    // Storage off or malformed: plain page.
+  import { normalizePath, poolFor } from '../../../lib/taskPool';
+
+  // Opened from a list (practice table, catalog number, «Случайная задача»): back returns
+  // to it with its filters, and the pager and «Ещё задача» walk that list instead.
+  const here = normalizePath(location.pathname);
+  const pool = poolFor(here);
+  if (pool) {
+    const back = document.querySelector<HTMLAnchorElement>('.crumbs .back')!;
+    back.href = pool.back;
+    if (pool.backLabel) back.textContent = `← ${pool.backLabel}`;
+
+    const i = pool.hrefs.indexOf(here);
+    const link = (sel: string, href: string | undefined) => {
+      const a = document.querySelector<HTMLAnchorElement>(sel)!;
+      if (href) a.href = href;
+      a.hidden = !href;
+    };
+    link('.pager .prev', pool.hrefs[i - 1]);
+    link('.pager .next', pool.hrefs[i + 1]);
+    document.querySelector('.pager .pos')!.textContent = `${i + 1} из ${pool.hrefs.length}`;
+    document.querySelector<HTMLElement>('.pager')!.hidden = pool.hrefs.length < 2;
+
+    const others = pool.hrefs.filter((h) => h !== here);
+    link('.crumbs .more', others[Math.floor(Math.random() * others.length)]);
   }
 </script>
 
@@ -138,5 +165,31 @@ const statementHtml = await renderMarkdown(task.statement);
   }
   .topics {
     font-size: 0.875rem;
+  }
+  .pager {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1.25rem 0;
+  }
+  .pager .prev {
+    grid-column: 1;
+    justify-self: start;
+  }
+  .pager .pos {
+    grid-column: 2;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+  .pager .next {
+    grid-column: 3;
+    justify-self: end;
+  }
+  /* 320px phones: both buttons plus the counter don't fit one row. */
+  @media (max-width: 22rem) {
+    .pager .pos {
+      display: none;
+    }
   }
 </style>

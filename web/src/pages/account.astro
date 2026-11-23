@@ -1,0 +1,160 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Профиль — Физика ЕГЭ" description="Профиль и настройки аккаунта">
+  <account-profile class="card form-card">
+    <p class="muted loading">Загружаем профиль…</p>
+    <form class="form" novalidate hidden>
+      <h1>Профиль</h1>
+      <div class="pair">
+        <label>
+          Имя
+          <input class="field" name="first_name" autocomplete="given-name" maxlength="50" />
+        </label>
+        <label>
+          Фамилия
+          <input class="field" name="last_name" autocomplete="family-name" maxlength="50" />
+        </label>
+      </div>
+      <div class="label">
+        Электронная почта
+        <span class="email-value"></span>
+      </div>
+      <label>
+        <span>Телефон <span class="optional">— необязательно</span></span>
+        <input
+          class="field"
+          name="phone"
+          type="tel"
+          autocomplete="tel"
+          inputmode="tel"
+          maxlength="32"
+          placeholder="+7 900 000-00-00"
+        />
+      </label>
+      <label class="check">
+        <input type="checkbox" name="marketing" />
+        <span>Получать новости, подборки заданий и предложения по почте, SMS и в мессенджерах</span>
+      </label>
+      <button type="submit" class="btn">Сохранить</button>
+      <p class="form-msg" role="status" aria-live="polite" hidden></p>
+      <div class="password">
+        <span class="label">Пароль</span>
+        <p class="muted password-state"></p>
+        <a class="btn ghost small password-link" href="/login/?mode=reset">Сменить пароль</a>
+      </div>
+    </form>
+  </account-profile>
+</Base>
+
+<script>
+  import { ApiError, api } from '../lib/api';
+
+  const ERRORS: Record<string, string> = {
+    invalid_name: 'Имя и фамилия — только буквы, пробел, дефис или апостроф',
+    invalid_phone: 'Проверьте номер телефона, например +7 900 123-45-67',
+    sign_in_required: 'Сессия закончилась. Войдите снова',
+  };
+
+  class AccountProfile extends HTMLElement {
+    connectedCallback() {
+      const f = this.querySelector('form') as HTMLFormElement;
+      f.addEventListener('submit', (e) => {
+        e.preventDefault();
+        void this.save(f);
+      });
+      void api.me().then(
+        ({ user }) => {
+          if (!user) {
+            location.replace('/login/?next=/account/');
+            return;
+          }
+          this.input('first_name').value = user.first_name ?? '';
+          this.input('last_name').value = user.last_name ?? '';
+          this.input('phone').value = user.phone ?? '';
+          this.input('marketing').checked = user.marketing;
+          (this.querySelector('.email-value') as HTMLElement).textContent = user.email;
+          (this.querySelector('.password-state') as HTMLElement).textContent = user.has_password
+            ? 'Новый пароль задаётся по коду из письма; остальные устройства выйдут из аккаунта.'
+            : 'Пароля пока нет: вы входите по коду из письма. Задайте пароль, чтобы входить быстрее.';
+          const link = this.querySelector('.password-link') as HTMLAnchorElement;
+          link.textContent = user.has_password ? 'Сменить пароль' : 'Задать пароль';
+          link.href = `/login/?mode=reset&email=${encodeURIComponent(user.email)}&next=/account/`;
+          (this.querySelector('.loading') as HTMLElement).hidden = true;
+          f.hidden = false;
+        },
+        () => this.fail('Нет связи с сервером. Обновите страницу'),
+      );
+    }
+
+    private input(name: string): HTMLInputElement {
+      return this.querySelector(`[name="${name}"]`) as HTMLInputElement;
+    }
+
+    private fail(text: string) {
+      (this.querySelector('.loading') as HTMLElement).textContent = text;
+    }
+
+    private async save(f: HTMLFormElement) {
+      const body = {
+        first_name: this.input('first_name').value.trim(),
+        last_name: this.input('last_name').value.trim(),
+        phone: this.input('phone').value.trim() || null,
+        marketing: this.input('marketing').checked,
+      };
+      if (!body.first_name || !body.last_name) return this.message('Укажите имя и фамилию', true);
+      const button = f.querySelector('button[type=submit]') as HTMLButtonElement;
+      button.disabled = true;
+      try {
+        const { user } = await api.updateProfile(body);
+        if (user) this.input('phone').value = user.phone ?? '';
+        this.message('Сохранено');
+      } catch (e) {
+        const text = e instanceof ApiError ? ERRORS[e.detail] : undefined;
+        this.message(text ?? 'Нет связи с сервером. Попробуйте ещё раз', true);
+      } finally {
+        button.disabled = false;
+      }
+    }
+
+    private message(text: string, error = false) {
+      const m = this.querySelector('.form-msg') as HTMLElement;
+      m.textContent = text;
+      m.dataset.kind = error ? 'error' : 'ok';
+      m.hidden = !text;
+      // Long forms on phones: the message sits below the button, out of view.
+      if (text) m.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+  }
+
+  customElements.define('account-profile', AccountProfile);
+</script>
+
+<style>
+  account-profile {
+    display: block;
+    margin: 1.5rem auto 0;
+  }
+  .email-value {
+    font-weight: 400;
+    color: var(--muted);
+    overflow-wrap: anywhere;
+  }
+  .password {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--border);
+  }
+  .password .label {
+    font-weight: 600;
+    font-size: 0.925rem;
+  }
+  .password-state {
+    margin: 0;
+    font-size: 0.875rem;
+  }
+</style>

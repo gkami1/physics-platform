@@ -1,6 +1,5 @@
 import asyncio
 import hashlib
-import re
 from collections.abc import Awaitable, Callable
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta
@@ -24,7 +23,6 @@ from platform_api.db import (
     make_engine,
     make_sessionmaker,
 )
-from platform_api.mail import MemoryMailer
 
 PASS2 = "pass-two"
 
@@ -158,7 +156,7 @@ def test_concurrent_payments_and_retries_grant_access_once_per_invoice(
 
 
 def test_status_checks_the_specific_invoice_and_requires_its_owner(
-    shop: TestClient, signed_in: TestClient, outbox: MemoryMailer
+    shop: TestClient, signed_in: TestClient, sign_up: Callable[[str], None]
 ) -> None:
     result(shop, checkout(signed_in))
     inv = checkout(signed_in)
@@ -175,13 +173,7 @@ def test_status_checks_the_specific_invoice_and_requires_its_owner(
     assert signed_in.post("/api/auth/logout").status_code == 204
     assert signed_in.get(path).status_code == 401
 
-    email = "other@example.ru"
-    requested = signed_in.post("/api/auth/code", json={"email": email, "consent": True})
-    assert requested.status_code == 202
-    code = re.search(r"\d{6}", outbox.sent[-1][1])
-    assert code
-    verified = signed_in.post("/api/auth/verify", json={"email": email, "code": code[0]})
-    assert verified.status_code == 200
+    sign_up("other@example.ru")
     assert signed_in.get(path).status_code == 404
 
 

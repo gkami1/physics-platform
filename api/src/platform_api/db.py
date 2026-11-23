@@ -77,11 +77,49 @@ class User(Base):
     __tablename__ = "users"
 
     id: Mapped[int] = mapped_column(BigId, primary_key=True, autoincrement=True)
-    # Normalised (lower-cased) address; the only sign-in method until OAuth providers land.
+    # Normalised (lower-cased) address, always verified: an account is created only once
+    # the owner has typed a code sent to it.
     email: Mapped[str] = mapped_column(String(254), unique=True)
-    # 152-FZ: when the user ticked the personal-data consent box, and which text they saw.
+    # Names and phone: null for accounts made before the sign-up form (2026-11-20).
+    first_name: Mapped[str | None] = mapped_column(String(50))
+    last_name: Mapped[str | None] = mapped_column(String(50))
+    phone: Mapped[str | None] = mapped_column(String(16))  # E.164
+    # argon2id (see passwords.py); null: the account signs in by email code only.
+    password_hash: Mapped[str | None] = mapped_column(String(255))
+    # 152-FZ: when the user ticked the personal-data consent box.
     consented_at: Mapped[datetime]
     consent_version: Mapped[str | None] = mapped_column(String(32))
+    # 38-FZ art. 18: advertising consent, null when never given or withdrawn.
+    # The history (who, when, from which IP) is in consent_events.
+    marketing_consent_at: Mapped[datetime | None]
+    created_at: Mapped[datetime] = mapped_column(server_default=func.now())
+
+
+class ConsentEvent(Base):
+    """Append-only record of consents given and withdrawn: proof if ever asked."""
+
+    __tablename__ = "consent_events"
+
+    id: Mapped[int] = mapped_column(BigId, primary_key=True, autoincrement=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    kind: Mapped[str] = mapped_column(String(16))  # personal_data | marketing
+    granted: Mapped[bool]
+    ip: Mapped[str | None] = mapped_column(String(45))
+    created_at: Mapped[datetime] = mapped_column(server_default=func.now())
+
+
+class PasswordFailure(Base):
+    """Wrong passwords, the ledger for sign-in rate limits. Old rows can be deleted freely."""
+
+    __tablename__ = "password_failures"
+    __table_args__ = (
+        Index("ix_password_failures_email_created", "email", "created_at"),
+        Index("ix_password_failures_ip_created", "ip", "created_at"),
+    )
+
+    id: Mapped[int] = mapped_column(BigId, primary_key=True, autoincrement=True)
+    email: Mapped[str] = mapped_column(String(254))
+    ip: Mapped[str | None] = mapped_column(String(45))
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
 
 
@@ -107,6 +145,9 @@ class LoginCode(Base):
     code_hash: Mapped[str] = mapped_column(String(64))
     ip: Mapped[str | None] = mapped_column(String(45))
     tries: Mapped[int] = mapped_column(SmallInteger, default=0)
+    # Sign-up form (names, phone, password hash, consents) waiting for this code; the
+    # account is created from it on verification. Cleared once used or expired.
+    signup: Mapped[dict[str, Any] | None] = mapped_column(JSON(none_as_null=True))
     expires_at: Mapped[datetime]
     used_at: Mapped[datetime | None]
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
@@ -131,6 +172,30 @@ class Attempt(Base):
     max_points: Mapped[int] = mapped_column(SmallInteger)
     content_version: Mapped[str] = mapped_column(String(32))
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
+
+
+class TheoryVisit(Base):
+    """Reading evidence for one actor and theory page: visits, active seconds, reached the end.
+
+    One row per actor and page while it is written; merging anonymous rows on sign-in may
+    leave a user with two rows for a page, so readers sum them."""
+
+    __tablename__ = "theory_visits"
+    __table_args__ = (
+        Index("ix_theory_visits_user", "user_id", "page_id"),
+        Index("ix_theory_visits_anon", "anon_id", "page_id"),
+    )
+
+    id: Mapped[int] = mapped_column(BigId, primary_key=True, autoincrement=True)
+    # Same ownership as attempts: anonymous rows get user_id on sign-in.
+    anon_id: Mapped[str | None] = mapped_column(String(32))
+    user_id: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    page_id: Mapped[str] = mapped_column(String(120))  # topic id or `<topic>/<lesson>`
+    visits: Mapped[int] = mapped_column(Integer, default=1)
+    active_s: Mapped[int] = mapped_column(Integer, default=0)
+    first_at: Mapped[datetime]
+    last_at: Mapped[datetime]
+    finished_at: Mapped[datetime | None]
 
 
 class TutorThread(Base):

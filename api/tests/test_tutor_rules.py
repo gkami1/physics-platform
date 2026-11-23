@@ -40,7 +40,7 @@ from platform_api.prompt import (
     wrap_student,
 )
 from platform_api.settings import Settings
-from platform_api.turn import plan_theory_turn
+from platform_api.turn import max_reply_tokens, plan_theory_turn
 
 NUM = NumericAnswer(type="numeric", value=Decimal("12.5"), unit="м/с", precision=Decimal("0.1"))
 STATEMENT = "Начальная скорость $2{,}5$ м/с, ускорение 2 м/с², время 5 с."
@@ -176,9 +176,10 @@ def sse_body(*chunks: dict[str, object]) -> bytes:
     return ("".join(lines) + "data: [DONE]\n\n").encode()
 
 
-def collect(model: object, info: CallInfo) -> str:
+def collect(model: object, info: CallInfo, max_tokens: int = 600) -> str:
     async def run() -> str:
-        return "".join([t async for t in model.stream([{"role": "user", "content": "x"}], info)])  # type: ignore[attr-defined]
+        msgs = [{"role": "user", "content": "x"}]
+        return "".join([t async for t in model.stream(msgs, info, max_tokens)])  # type: ignore[attr-defined]
 
     return asyncio.run(run())
 
@@ -211,7 +212,37 @@ def test_openai_compatible_stream_skips_reasoning_and_reads_usage() -> None:
     assert (info.tokens_in, info.tokens_out) == (1000, 20)
     assert info.cost_kop == 3  # ceil((1000*2700 + 20*11000) / 1e6)
     assert seen["stream"] is True
+    assert seen["max_tokens"] == 600
+    assert info.finish_reason is None
     assert seen["auth"] == "Bearer k"
+
+
+def test_openai_compatible_records_stop_at_cap() -> None:
+    seen: dict[str, object] = {}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        seen.update(json.loads(request.content))
+        body = sse_body(
+            {"choices": [{"delta": {"content": "Запишем"}, "finish_reason": None}]},
+            {"choices": [{"delta": {}, "finish_reason": "length"}]},
+        )
+        return httpx.Response(200, content=body, headers={"content-type": "text/event-stream"})
+
+    m = OpenAICompatible(
+        name="primary",
+        base_url="http://vllm.test/v1",
+        model="q",
+        transport=httpx.MockTransport(handler),
+    )
+    info = CallInfo(provider="primary", model="q")
+    assert collect(m, info, max_tokens=1500) == "Запишем"
+    assert seen["max_tokens"] == 1500
+    assert info.finish_reason == "length"
+
+
+@pytest.mark.parametrize(("level", "cap"), [(None, 600), (0, 600), (2, 600), (3, 1500)])
+def test_max_reply_tokens(level: int | None, cap: int) -> None:
+    assert max_reply_tokens(level) == cap
 
 
 def test_openai_compatible_http_error() -> None:

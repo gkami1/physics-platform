@@ -181,9 +181,7 @@ const rows = await Promise.all(
 
 <script>
   import { api, type TaskStatus } from '../../../lib/api';
-
-  /** Read by the task page's «Ещё задача» button. */
-  const POOL_KEY = 'pp:practice-pool';
+  import { savePool } from '../../../lib/taskPool';
 
   class PracticeBoard extends HTMLElement {
     private form!: HTMLFormElement;
@@ -201,6 +199,10 @@ const rows = await Promise.all(
       }
       this.form.addEventListener('change', () => this.apply(true));
       this.querySelector('.random')!.addEventListener('click', () => this.random());
+      // Opening a task from the table: the task page steps through the visible rows.
+      this.querySelector('tbody')!.addEventListener('click', (e) => {
+        if ((e.target as Element).closest('a.preview')) this.savePool();
+      });
       this.apply(false);
       void api.taskStatuses().then(
         ({ tasks }) => {
@@ -273,18 +275,15 @@ const rows = await Promise.all(
       const from = fresh.length > 0 ? fresh : pool;
       const pick = from[Math.floor(Math.random() * from.length)];
       if (!pick?.dataset.href) return;
-      try {
-        sessionStorage.setItem(
-          POOL_KEY,
-          JSON.stringify({
-            back: location.pathname + location.search,
-            hrefs: pool.map((r) => r.dataset.href),
-          }),
-        );
-      } catch {
-        // Storage off: «Ещё задача» just won't appear.
-      }
+      this.savePool();
       location.href = pick.dataset.href;
+    }
+
+    private savePool() {
+      savePool({
+        back: location.pathname + location.search,
+        hrefs: this.visible().flatMap((r) => (r.dataset.href ? [r.dataset.href] : [])),
+      });
     }
   }
 

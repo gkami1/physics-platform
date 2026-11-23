@@ -24,7 +24,7 @@ from platform_api.settings import Settings
 logger = logging.getLogger("api.payments")
 
 # Bump with LEGAL_VERSION in web/src/lib/seller.ts when web/src/pages/legal/offer.astro changes.
-OFFER_VERSION = "2026-11-15"
+OFFER_VERSION = "2026-11-23"
 PENDING_PER_HOUR = 10
 MAX_INVOICE_ID = 2**63 - 1  # payments.id is a signed BIGINT
 

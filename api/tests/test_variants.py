@@ -1,9 +1,7 @@
-import re
+from collections.abc import Callable
 
 import pytest
 from fastapi.testclient import TestClient
-
-from platform_api.mail import MemoryMailer
 
 VARIANT = ["kin-0001", "dyn-0001", "kin-0002", "meas-0001", "dyn-0002"]
 
@@ -33,6 +31,12 @@ def test_variant_is_scored_on_the_server(client: TestClient) -> None:
     assert (run["auto_points"], run["total_points"], run["pending"]) == (2, 2, 1)
     assert run["max_points"] == 1 + 1 + 2 + 1 + 3
     assert "4,1" not in str(run)  # Part 2 final answer is not revealed by scoring
+
+
+def test_absurd_numbers_are_invalid_not_500(client: TestClient) -> None:
+    run = submit(client, {"kin-0001": "1e999999999", "meas-0001": "(1e999999999 ± 0,2)"})
+    outcomes = {r["task_id"]: r["outcome"] for r in run["results"]}  # type: ignore[attr-defined]
+    assert (outcomes["kin-0001"], outcomes["meas-0001"]) == ("invalid", "invalid")
 
 
 def test_checked_answers_become_attempts(client: TestClient) -> None:
@@ -76,7 +80,9 @@ def test_bad_task_lists_are_rejected(client: TestClient, tasks: list[str], detai
     assert (r.status_code, r.json()["detail"]) == (422, detail)
 
 
-def test_runs_are_private_and_merge_on_sign_in(client: TestClient, outbox: MemoryMailer) -> None:
+def test_runs_are_private_and_merge_on_sign_in(
+    client: TestClient, sign_up: Callable[[str], None]
+) -> None:
     run = submit(client, {"kin-0001": "12,5"})
     anon = client.cookies.get("pp_anon")
     client.cookies.clear()
@@ -84,11 +90,7 @@ def test_runs_are_private_and_merge_on_sign_in(client: TestClient, outbox: Memor
     assert client.get("/api/variants/runs").json() == []
 
     client.cookies.set("pp_anon", anon or "")
-    email = "variant@example.ru"
-    client.post("/api/auth/code", json={"email": email, "consent": True})
-    code = re.search(r"\d{6}", outbox.sent[-1][1])
-    assert code
-    assert client.post("/api/auth/verify", json={"email": email, "code": code.group()}).is_success
+    sign_up("variant@example.ru")
     assert [x["id"] for x in client.get("/api/variants/runs").json()] == [run["id"]]
 
 

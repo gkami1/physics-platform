@@ -19,7 +19,8 @@ const {
 const exam = 'ege-physics';
 const path = Astro.url.pathname;
 const tabs = [
-  { href: '/', label: 'Роадмап', active: path === '/' || path.includes('/theory/') },
+  { href: '/', label: 'Траектория', active: path === '/' || path.includes('/theory/') },
+  { href: `/${exam}/catalog/`, label: 'Каталог', active: path.includes('/catalog') },
   {
     href: `/${exam}/practice/`,
     label: 'Практика',
@@ -74,8 +75,10 @@ const tabs = [
             </a>
             <a href="/login/" class="btn small login">Войти</a>
             <span class="who" hidden>
-              <span class="avatar" aria-hidden="true"></span>
-              <span class="email"></span>
+              <a href="/account/" class="profile" title="Профиль">
+                <span class="avatar" aria-hidden="true"></span>
+                <span class="email"></span>
+              </a>
               <button type="button" class="logout">Выйти</button>
             </span>
           </site-account>
@@ -135,11 +138,12 @@ const tabs = [
       void session().then(
         ({ user }) => {
           if (!user) return;
-          const email = this.querySelector('.email') as HTMLElement;
-          email.textContent = user.email;
-          email.title = user.email;
-          (this.querySelector('.avatar') as HTMLElement).textContent =
-            user.email.charAt(0).toUpperCase();
+          const shown = user.first_name ?? user.email;
+          (this.querySelector('.email') as HTMLElement).textContent = shown;
+          (this.querySelector('.profile') as HTMLElement).title = `Профиль: ${user.email}`;
+          (this.querySelector('.avatar') as HTMLElement).textContent = shown
+            .charAt(0)
+            .toUpperCase();
           login.hidden = true;
           (this.querySelector('.who') as HTMLElement).hidden = false;
           if (user.paid_until) {
@@ -181,6 +185,7 @@ const tabs = [
     font-weight: 700;
     color: var(--text);
     text-decoration: none;
+    white-space: nowrap;
   }
   .logo {
     display: grid;
@@ -217,6 +222,7 @@ const tabs = [
   }
   .tools,
   site-account,
+  .profile,
   .who:not([hidden]) {
     display: inline-flex;
     align-items: center;
@@ -243,9 +249,25 @@ const tabs = [
   .logout {
     font-size: 0.85rem;
     padding: 0;
+    white-space: nowrap;
   }
   .logout:hover {
     color: var(--accent);
+  }
+  /* .btn's display would beat the hidden attribute. */
+  .login[hidden] {
+    display: none;
+  }
+  .profile {
+    color: inherit;
+    text-decoration: none;
+    border-radius: 999px;
+  }
+  .profile:hover .avatar {
+    border-color: var(--accent);
+  }
+  .profile:hover .email {
+    color: var(--text);
   }
   .avatar {
     display: grid;
@@ -310,8 +332,9 @@ const tabs = [
   .seller {
     font-size: 0.8rem;
   }
-  /* Phones: tabs move to their own row under the brand. */
-  @media (max-width: 44rem) {
+  /* Brand + five tabs + the user's name need ~60rem on one row; below that the
+     tabs move to their own row so the name never wraps or pushes «Выйти» off. */
+  @media (max-width: 60rem) {
     .bar {
       grid-template-columns: 1fr auto;
       padding-top: 0.4rem;
@@ -321,23 +344,33 @@ const tabs = [
       grid-row: 2;
       justify-content: stretch;
       padding-bottom: 0.4rem;
+      /* Five tabs barely fit a 360px phone; scroll the row rather than the page. */
+      overflow-x: auto;
+      scrollbar-width: none;
     }
     .tabs a {
-      flex: 1;
+      flex: 1 0 auto;
       text-align: center;
       padding-inline: 0.3rem;
+      white-space: nowrap;
     }
+  }
+  @media (max-width: 26rem) {
     .email {
       display: none;
+    }
+    .tabs {
+      gap: 0;
+    }
+    .tabs a {
+      font-size: 0.82rem;
+      padding-inline: 0.25rem;
     }
   }
   @media (max-width: 22rem) {
     .name,
     .plan:not(.paid) {
       display: none;
-    }
-    .tabs a {
-      font-size: 0.85rem;
     }
   }
 </style>

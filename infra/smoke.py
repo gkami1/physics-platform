@@ -86,10 +86,12 @@ check("self-assessment", r.status_code == 200 and r.json()["total_points"] == 5,
 r = c.post("/api/tasks/dyn-0002/reveal")
 check("Part 2 solution reveal", r.status_code == 200 and r.json()["solution"], r.status_code)
 
-# Sign in (code from the API log: no SMTP configured)
+# Sign up (code from the API log: no SMTP configured)
 email = f"smoke{int(time.time())}@example.ru"
-r = c.post("/api/auth/code", json={"email": email, "consent": True})
-check("code requested", r.status_code == 202, r.text[:120])
+password = "smoke test password"  # noqa: S105
+form = {"first_name": "Смоук", "last_name": "Тест", "email": email, "password": password}
+r = c.post("/api/auth/signup", json=form | {"consent": True})
+check("sign-up code requested", r.status_code == 202, r.text[:120])
 time.sleep(1)
 logs = subprocess.run(  # noqa: S603  (fixed docker command, project name from argv)
     ["docker", "compose", "-p", PROJECT, "logs", "api", "--since", "2m"],  # noqa: S607
@@ -97,10 +99,10 @@ logs = subprocess.run(  # noqa: S603  (fixed docker command, project name from a
     text=True,
     encoding="utf-8",
 ).stdout
-codes = re.findall(r"Код для входа: (\d{6})", logs)
+codes = re.findall(r"Код подтверждения: (\d{6})", logs)
 check("code found in API log", bool(codes))
 r = c.post("/api/auth/verify", json={"email": email, "code": codes[-1] if codes else "000000"})
-check("signed in", r.status_code == 200 and r.json()["user"]["email"] == email, r.text[:120])
+check("signed up", r.status_code == 200 and r.json()["user"]["email"] == email, r.text[:120])
 runs = c.get("/api/variants/runs?exam_id=ege-physics").json()
 check("anonymous variant run merged into account", [x["id"] for x in runs] == [run["id"]], runs)
 check(
@@ -108,6 +110,9 @@ check(
     c.get("/api/tasks/status").json()["tasks"].get("kin-0001") == "solved",
 )
 check("progress has mastery", len(c.get("/api/progress").json()["topics"]) > 0)
+c.post("/api/auth/logout")
+r = c.post("/api/auth/login", json={"email": email, "password": password})
+check("password sign-in", r.status_code == 200, r.text[:120])
 
 # Tutor (scripted dev model in this stack)
 with c.stream(

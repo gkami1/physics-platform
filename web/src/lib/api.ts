@@ -29,10 +29,33 @@ export interface Solution {
   solution: string;
 }
 
-export interface Me {
-  /** `paid_until`: end of paid access (ISO, UTC), null without an active pass. */
-  user: { email: string; paid_until: string | null } | null;
+export interface User {
+  email: string;
+  first_name: string | null;
+  last_name: string | null;
+  phone: string | null;
+  /** Agreed to advertising messages (38-ФЗ), withdrawable in the profile. */
+  marketing: boolean;
+  has_password: boolean;
+  /** End of active paid access (ISO, UTC). */
+  paid_until: string | null;
 }
+
+export interface Me {
+  user: User | null;
+}
+
+export interface SignupForm {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string | null;
+  password: string;
+  consent: boolean;
+  marketing: boolean;
+}
+
+export type ProfileUpdate = Pick<User, 'first_name' | 'last_name' | 'phone' | 'marketing'>;
 
 export type PlanId = 'month' | 'season';
 
@@ -46,13 +69,9 @@ export interface Plan {
 
 export interface Plans {
   plans: Plan[];
-  /** False until the shop is configured on the server. */
   enabled: boolean;
   paid_until: string | null;
 }
-
-/** Version of the personal-data consent text shown on the login page. */
-export const CONSENT_VERSION = LEGAL_VERSION;
 
 export interface Progress {
   topics: { exam_id: string; topic_id: string; score: number; n: number }[];
@@ -138,10 +157,17 @@ export const api = {
   reveal: (id: string) => call<Solution>(`${task(id)}/reveal`, post()),
   progress: () => call<Progress>('/progress'),
   me: () => call<Me>('/me'),
-  requestCode: (email: string, consent: boolean) =>
-    call<{ expires_in: number }>('/auth/code', post({ email, consent })),
-  verifyCode: (email: string, code: string) =>
-    call<Me>('/auth/verify', post({ email, code, consent_version: CONSENT_VERSION })),
+  signup: (form: SignupForm) =>
+    call<{ expires_in: number }>('/auth/signup', post({ ...form, consent_version: LEGAL_VERSION })),
+  login: (email: string, password: string) => call<Me>('/auth/login', post({ email, password })),
+  /** A code to sign in, or to set a new password; existing accounts only. */
+  requestCode: (email: string, purpose: 'login' | 'reset') =>
+    call<{ expires_in: number }>('/auth/code', post({ email, purpose })),
+  verifyCode: (email: string, code: string) => call<Me>('/auth/verify', post({ email, code })),
+  resetPassword: (email: string, code: string, password: string) =>
+    call<Me>('/auth/reset', post({ email, code, password })),
+  updateProfile: (body: ProfileUpdate) =>
+    call<Me>('/me', { method: 'PATCH', body: JSON.stringify(body) }),
   plans: () => call<Plans>('/billing/plans'),
   checkout: (plan: PlanId) =>
     call<{ url: string }>('/billing/checkout', post({ plan, accept_offer: true })),
@@ -216,7 +242,11 @@ export type TutorEvent =
   | { event: 'meta'; data: { hint_level: number | null } & Allowance }
   | { event: 'delta'; data: { text: string } }
   | { event: 'done'; data: { message_id: number | null; leak: boolean } }
-  | { event: 'error'; data: { detail: string } };
+  | {
+      event: 'error';
+      // A failed turn is not counted: the level and counter to show again.
+      data: { detail: string; hint_level: number | null } & Allowance;
+    };
 
 export const tutor = {
   thread: (kind: TutorKind, id: string) =>
@@ -224,7 +254,12 @@ export const tutor = {
 
   /** POST a message and read the SSE reply (EventSource can't POST). */
   async send(
-    body: { kind: TutorKind; id: string; text: string; intent: 'message' | 'hint' },
+    body: {
+      kind: TutorKind;
+      id: string;
+      text: string;
+      intent: 'message' | 'hint';
+    },
     onEvent: (e: TutorEvent) => void,
   ): Promise<void> {
     const r = await fetch('/api/tutor/messages', {

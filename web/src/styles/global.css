@@ -29,7 +29,7 @@
   color-scheme: dark;
 }
 
-:root[data-theme='light'] {
+:root[data-theme="light"] {
   --bg: #f6f7fb;
   --surface: #ffffff;
   --surface-2: #eef0f6;
@@ -68,7 +68,7 @@ body {
   font:
     16px/1.6 system-ui,
     -apple-system,
-    'Segoe UI',
+    "Segoe UI",
     Roboto,
     sans-serif;
 }
@@ -124,9 +124,11 @@ h1 {
   font-size: 1.05em;
 }
 
-/* Tables in theory text: scroll sideways inside their own box on narrow screens. */
-.prose table {
+/* Tables in theory, task statements and solutions: a full grid like the exam's, scrolling
+   sideways inside their own box on narrow screens. */
+:is(.prose, .statement, .solution-body) table {
   display: block;
+  width: max-content;
   max-width: 100%;
   overflow-x: auto;
   border-collapse: collapse;
@@ -134,16 +136,15 @@ h1 {
   font-size: 0.925rem;
 }
 
-.prose th,
-.prose td {
+:is(.prose, .statement, .solution-body) :is(th, td) {
   padding: 0.4rem 0.65rem;
-  border-bottom: 1px solid var(--border);
+  border: 1px solid var(--border-strong);
   text-align: left;
   vertical-align: top;
 }
 
-.prose th {
-  border-bottom-color: var(--border-strong);
+:is(.prose, .statement, .solution-body) th {
+  background: var(--surface-2);
   font-weight: 600;
   white-space: nowrap;
 }
@@ -289,15 +290,15 @@ blockquote {
   color: var(--bad);
 }
 
-.mastery[data-level='high'] {
+.mastery[data-level="high"] {
   background: var(--ok-soft);
   color: var(--ok);
 }
-.mastery[data-level='mid'] {
+.mastery[data-level="mid"] {
   background: var(--warn-soft);
   color: var(--warn);
 }
-.mastery[data-level='low'] {
+.mastery[data-level="low"] {
   background: var(--bad-soft);
   color: var(--bad);
 }
@@ -326,6 +327,144 @@ blockquote {
   border-radius: var(--radius-sm);
   background: var(--bg);
   color: var(--text);
+}
+
+/* Account forms (login, profile): a column of labelled fields. */
+.form-card {
+  max-width: 28rem;
+  padding: 1.25rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.form h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.form label,
+.form .label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-weight: 600;
+  font-size: 0.925rem;
+}
+
+.form .label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.form .optional,
+.form .hint {
+  font-weight: 400;
+  font-size: 0.825rem;
+  color: var(--muted);
+}
+
+.form .pair {
+  display: grid;
+  gap: 0.85rem;
+}
+
+@media (min-width: 30rem) {
+  .form .pair {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form .field {
+  width: 100%;
+  font-size: 1.05rem;
+  padding: 0.6rem 0.75rem;
+}
+
+.form label.check {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-weight: 400;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.form .check input {
+  flex: none;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0.1rem 0 0;
+  accent-color: var(--accent);
+}
+
+/* Password with a show/hide toggle inside the field. */
+.pw {
+  position: relative;
+  display: block;
+}
+
+.pw .field {
+  padding-right: 2.9rem;
+}
+
+.pw button {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 2.75rem;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.pw button:hover,
+.pw button[aria-pressed="true"] {
+  color: var(--text);
+}
+
+.link-btn {
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 400;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  cursor: pointer;
+  text-align: left;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
+}
+
+.form-msg {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.925rem;
+}
+
+.form-msg[data-kind="error"] {
+  color: var(--bad);
+}
+
+.form-msg[data-kind="ok"] {
+  color: var(--ok);
+}
+
+/* Class display rules (.btn, .form, …) would otherwise beat the `hidden` attribute. */
+[hidden] {
+  display: none !important;
 }
 
 .field:focus,
@@ -378,6 +517,11 @@ blockquote {
 .fig .fig-grid {
   stroke: var(--border-strong);
   opacity: 1;
+}
+
+/* Tick labels drawn over the data line: the halo matches what the figure sits on. */
+.fig .fig-halo {
+  stroke: var(--fig-bg, var(--surface));
 }
 
 .fig .fig-guide {
@@ -2567,14 +2711,14 @@ task-answer .verdict {
   font-weight: 600;
   margin: 0.75rem 0 0.25rem;
 }
-task-answer .verdict[data-kind='correct'] {
+task-answer .verdict[data-kind="correct"] {
   color: var(--ok);
 }
-task-answer .verdict[data-kind='partial'] {
+task-answer .verdict[data-kind="partial"] {
   color: var(--warn-text);
 }
-task-answer .verdict[data-kind='wrong'],
-task-answer .verdict[data-kind='error'] {
+task-answer .verdict[data-kind="wrong"],
+task-answer .verdict[data-kind="error"] {
   color: var(--bad);
 }
 task-answer .history {
