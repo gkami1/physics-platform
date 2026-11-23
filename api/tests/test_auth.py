@@ -59,11 +59,11 @@ def test_sign_in_flow(client: TestClient, outbox: MemoryMailer, migrated_db: str
 
     r = client.post("/api/auth/verify", json={"email": " STUDENT@example.ru ", "code": code})
     assert r.status_code == 200
-    assert r.json() == {"user": {"email": "student@example.ru"}}
+    assert r.json() == {"user": {"email": "student@example.ru", "paid_until": None}}
     set_cookie = r.headers["set-cookie"].lower()
     assert "httponly" in set_cookie
     assert "samesite=lax" in set_cookie
-    assert me(client) == {"email": "student@example.ru"}
+    assert me(client) == {"email": "student@example.ru", "paid_until": None}
 
     # Only the token's hash is stored.
     token = client.cookies.get(SESSION_COOKIE)

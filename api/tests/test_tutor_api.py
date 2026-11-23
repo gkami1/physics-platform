@@ -63,7 +63,10 @@ def test_tutor_requires_sign_in(client: TestClient) -> None:
 def test_conversation_is_streamed_and_saved(signed_in: TestClient, migrated_db: str) -> None:
     use_model(signed_in, ScriptedModel(replies=("Что известно? Что нужно найти?",)))
     evs = ask(signed_in)
-    assert evs[0] == ("meta", {"hint_level": 0, "messages_left": 49})
+    assert evs[0] == (
+        "meta",
+        {"hint_level": 0, "messages_left": 19, "daily_limit": 20, "paid": False},
+    )
     assert reply_text(evs) == "Что известно? Что нужно найти?"
     assert evs[-1][0] == "done"
 
@@ -72,7 +75,7 @@ def test_conversation_is_streamed_and_saved(signed_in: TestClient, migrated_db: 
         ("user", "С чего начать?"),
         ("assistant", "Что известно? Что нужно найти?"),
     ]
-    assert thread["messages_left"] == 49
+    assert thread["messages_left"] == 19
     assert llm_calls(migrated_db) == [("scripted", None, thread["messages"][1]["id"])]
 
 

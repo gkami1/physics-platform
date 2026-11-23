@@ -26,6 +26,10 @@ COPY web .
 COPY content /app/content
 # Only the public bundle crosses into the site build.
 COPY --from=content /app/build/public /app/build/public
+# Seller details for the legal pages (public by law for a самозанятый; see infra/.env).
+ARG PUBLIC_SELLER_NAME="" PUBLIC_SELLER_INN="" PUBLIC_CONTACT_EMAIL=""
+ENV PUBLIC_SELLER_NAME=$PUBLIC_SELLER_NAME PUBLIC_SELLER_INN=$PUBLIC_SELLER_INN \
+    PUBLIC_CONTACT_EMAIL=$PUBLIC_CONTACT_EMAIL
 RUN npm run build:site
 
 

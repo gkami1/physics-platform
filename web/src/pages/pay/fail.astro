@@ -1,0 +1,25 @@
+---
+// Robokassa's FailURL (method GET in the shop settings).
+import Base from '../../layouts/Base.astro';
+---
+
+<Base title="Оплата не прошла — Физика ЕГЭ" description="Оплата не прошла">
+  <h1>Оплата не прошла</h1>
+  <p class="muted">
+    Платёж отменён или не завершён. Можно попробовать ещё раз или выбрать другой способ оплаты.
+    Если деньги всё же списались, напишите нам — адрес внизу страницы.
+  </p>
+  <p class="actions">
+    <a class="btn" href="/pricing/">Попробовать снова</a>
+    <a class="btn ghost" href="/">К роадмапу</a>
+  </p>
+</Base>
+
+<style>
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+</style>

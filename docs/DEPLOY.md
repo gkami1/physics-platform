@@ -76,9 +76,72 @@ docker compose -f infra/compose.yaml logs -f api        # JSON logs; login codes
 docker compose -f infra/compose.yaml exec db psql -U physics
 ```
 
-## 6. Before real students
+## 6. Robokassa and the legal pages
 
-- Legal pages, consent texts, Roskomnadzor notification (M7).
+Passes are one-off payments (no recurring charges). The seller is a самозанятый: Robokassa
+registers each receipt in «Мой налог» and emails it to the buyer.
+
+**Shop settings** (Robokassa cabinet → the shop → «Технические настройки»):
+
+| Setting | Value |
+|---|---|
+| Result URL | `https://<domain>/api/billing/robokassa/result`, method **POST** |
+| Success URL | `https://<domain>/pay/success/`, method **GET** (Caddy serves static pages on GET only) |
+| Fail URL | `https://<domain>/pay/fail/`, method **GET** |
+| Hash algorithm | the same as `ROBOKASSA_HASH` (default MD5) |
+| Passwords #1 and #2 | into `ROBOKASSA_PASSWORD1/2`; test and live passwords differ |
+
+Then in `infra/.env`: `ROBOKASSA_LOGIN`, the passwords, `SELLER_NAME`, `SELLER_INN`,
+`CONTACT_EMAIL` (the seller block is baked into the static site: rebuild the web image after
+changing it). Apply the settings with
+`docker compose --env-file infra/.env -f infra/compose.yaml up -d --build`.
+
+**«Мой налог».** Connect Robokassa as a partner in «Мой налог» (Прочее → Партнёры) and turn on
+receipts for самозанятые («Робочеки СМЗ») in the Robokassa cabinet. The checkout sends one
+`Receipt` item with `payment_object: service` and `tax: none`. Check the line item on the
+payment form and verify receipt delivery on the first live payment. See the
+[Robokassa fiscalization guide](https://docs.robokassa.ru/ru/fiscalization).
+
+**Test mode.** Use `ROBOKASSA_TEST=true` and the test passwords in a deployment with a separate
+database. Test callbacks grant access there so you can check the full flow. Sign in, choose a
+pass at `/pricing/`, and complete a test payment. Check that `/pay/success/` confirms that
+invoice and shows the access date, and that the tutor shows «из 100». Repeat while the account
+already has paid access. The new invoice should show as pending until its own callback arrives.
+For the live deployment, set `ROBOKASSA_TEST=false` with the live passwords. See the
+[Robokassa guide to notifications and redirects](https://docs.robokassa.ru/ru/notifications-and-redirects).
+
+**Faking the callback locally** (the Result URL must be reachable from the internet, so on a
+laptop run the checkout, take `InvId` from the redirect URL and post the callback yourself):
+
+```bash
+INV=1; SUM=690.000000; PASS2=<password #2>
+SIG=$(printf '%s' "$SUM:$INV:$PASS2" | md5sum | cut -d' ' -f1)
+curl -d "OutSum=$SUM&InvId=$INV&SignatureValue=$SIG" http://localhost:8000/api/billing/robokassa/result
+# → OK1
+```
+
+**Refunds** (offer §5: unused full days, within 10 days). Refund in the Robokassa cabinet,
+annul the receipt in «Мой налог», then shorten the access:
+`UPDATE entitlements SET valid_until = now() WHERE user_id = …;` (`docker compose exec db psql -U physics`).
+
+**Who paid:** `SELECT id, user_id, plan, amount_kop, status, paid_at FROM payments ORDER BY id DESC LIMIT 20;`
+A `pending` row is a checkout that was opened but not paid; it is never charged.
+
+**Legal pages** (`/legal/offer/`, `/legal/privacy/`, `/legal/consent/`) are drafts written
+without a lawyer: have them reviewed before the first real payment. When a text changes, bump
+`LEGAL_VERSION`/`LEGAL_DATE` in `web/src/lib/seller.ts` and `OFFER_VERSION` in
+`api/src/platform_api/payments.py`; payments and sign-ups record the version they accepted.
+
+**Roskomnadzor.** Before collecting personal data from real users, file the operator
+notification at pd.rkn.gov.ru (a manual step, no code). Keep its number with these notes.
+
+**Income cap.** Самозанятый income is capped at 2.4 M ₽ a year (ARCHITECTURE §14): watch
+`SELECT sum(amount_kop)/100 FROM payments WHERE status = 'paid' AND paid_at >= date_trunc('year', now());`
+
+## 7. Before real students
+
+- Legal pages reviewed by a lawyer, Roskomnadzor notification filed (§6).
+- Robokassa in live mode, a real payment and a refund tried end to end (§6).
 - SMTP configured, so codes are emailed instead of logged.
 - A production tutor model (vLLM / DeepSeek), not the dev free tier.
 - Backups copied off the VM; restore drill done on the server.

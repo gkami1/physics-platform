@@ -7,12 +7,13 @@ import hmac
 import logging
 import re
 import secrets
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 from fastapi import APIRouter, HTTPException, Request, Response
 from pydantic import BaseModel, Field
 from sqlalchemy import ColumnElement, func, select, update
 
+from platform_api.access import paid_until
 from platform_api.actor import (
     ANON_COOKIE,
     SESSION_COOKIE,
@@ -59,10 +60,14 @@ class CodeRequest(BaseModel):
 class VerifyRequest(BaseModel):
     email: str = Field(max_length=254)
     code: str = Field(max_length=16)
+    # Version of the personal-data consent text shown next to the checkbox.
+    consent_version: str | None = Field(default=None, max_length=32)
 
 
 class Me(BaseModel):
     email: str
+    # End of paid access, if any is active now.
+    paid_until: datetime | None = None
 
 
 class MeResponse(BaseModel):
@@ -153,7 +158,7 @@ async def verify_code(
 
     user = await db.scalar(select(User).where(User.email == email))
     if user is None:
-        user = User(email=email, consented_at=t, created_at=t)
+        user = User(email=email, consented_at=t, consent_version=body.consent_version, created_at=t)
         db.add(user)
         await db.flush()
 
@@ -169,7 +174,7 @@ async def verify_code(
         clear_cookie(response, ANON_COOKIE)
     await start_session(db, request, response, user)
     await db.commit()
-    return MeResponse(user=Me(email=user.email))
+    return MeResponse(user=Me(email=user.email, paid_until=await paid_until(db, user)))
 
 
 @router.post("/auth/logout", status_code=204)
@@ -185,5 +190,7 @@ async def logout(request: Request, response: Response, db: Db) -> None:
 
 
 @router.get("/me")
-async def me(user: SessionUser) -> MeResponse:
-    return MeResponse(user=Me(email=user.email) if user else None)
+async def me(user: SessionUser, db: Db) -> MeResponse:
+    if user is None:
+        return MeResponse(user=None)
+    return MeResponse(user=Me(email=user.email, paid_until=await paid_until(db, user)))

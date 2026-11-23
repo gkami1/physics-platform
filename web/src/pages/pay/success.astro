@@ -1,0 +1,84 @@
+---
+// Robokassa's SuccessURL (method GET in the shop settings: Caddy serves static files on GET).
+import Base from '../../layouts/Base.astro';
+---
+
+<Base title="Оплата — Физика ЕГЭ" description="Результат оплаты">
+  <pay-success>
+    <h1>Статус оплаты</h1>
+    <p class="state" role="status">Проверяем платёж…</p>
+    <p class="actions">
+      <a class="btn sign-in" href="/login/" hidden>Войти</a>
+      <a class="btn" href="/">К роадмапу</a>
+      <a class="btn ghost" href="/pricing/">Тарифы</a>
+    </p>
+  </pay-success>
+</Base>
+
+<script>
+  import { ApiError, api, formatDate } from '../../lib/api';
+
+  const POLL_MS = 2000;
+  const POLL_FOR_MS = 30000;
+
+  class PaySuccess extends HTMLElement {
+    connectedCallback() {
+      void this.poll();
+    }
+
+    /** Robokassa's server callback may arrive after the browser does: wait for it. */
+    private async poll() {
+      const state = this.querySelector('.state') as HTMLElement;
+      const invoiceId = new URLSearchParams(location.search).get('InvId');
+      if (!invoiceId || !/^[1-9][0-9]{0,18}$/.test(invoiceId)) {
+        state.textContent = 'Не удалось найти номер платежа. Если деньги списались, напишите нам.';
+        return;
+      }
+      const started = Date.now();
+      for (;;) {
+        try {
+          const payment = await api.payment(invoiceId);
+          if (payment.status === 'paid') {
+            state.textContent = payment.paid_until
+              ? `Оплата подтверждена. Доступ действует до ${formatDate(payment.paid_until)}. Чек придёт на почту.`
+              : 'Оплата подтверждена. Срок доступа истёк.';
+            return;
+          }
+        } catch (error) {
+          if (error instanceof ApiError && error.status === 401) {
+            state.textContent =
+              'Войдите в аккаунт, с которого оплачивали, чтобы проверить платёж.';
+            const signIn = this.querySelector<HTMLAnchorElement>('.sign-in')!;
+            signIn.href = `/login/?next=${encodeURIComponent(`/pay/success/?InvId=${invoiceId}`)}`;
+            signIn.hidden = false;
+            return;
+          }
+          if (error instanceof ApiError && (error.status === 404 || error.status === 422)) {
+            state.textContent = 'Платёж не найден в этом аккаунте. Проверьте, с какой почтой вы вошли.';
+            return;
+          }
+        }
+        if (Date.now() - started > POLL_FOR_MS) {
+          state.textContent =
+            'Платёж ещё обрабатывается. Обычно это занимает до нескольких минут — обновите страницу позже. Если доступ не появится, напишите нам: адрес внизу страницы.';
+          return;
+        }
+        await new Promise((r) => setTimeout(r, POLL_MS));
+      }
+    }
+  }
+
+  customElements.define('pay-success', PaySuccess);
+</script>
+
+<style>
+  .sign-in[hidden] {
+    display: none;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+</style>

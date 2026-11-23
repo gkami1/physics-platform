@@ -79,8 +79,9 @@ class User(Base):
     id: Mapped[int] = mapped_column(BigId, primary_key=True, autoincrement=True)
     # Normalised (lower-cased) address; the only sign-in method until OAuth providers land.
     email: Mapped[str] = mapped_column(String(254), unique=True)
-    # 152-FZ: when the user ticked the personal-data consent box.
+    # 152-FZ: when the user ticked the personal-data consent box, and which text they saw.
     consented_at: Mapped[datetime]
+    consent_version: Mapped[str | None] = mapped_column(String(32))
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
 
 
@@ -185,6 +186,39 @@ class LlmCall(Base):
     cost_kop: Mapped[int] = mapped_column(default=0)
     error: Mapped[str | None] = mapped_column(String(300))
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
+
+
+class Payment(Base):
+    """One checkout. The row id is Robokassa's InvId, so a callback names its row directly."""
+
+    __tablename__ = "payments"
+    __table_args__ = (Index("ix_payments_user_created", "user_id", "created_at"),)
+
+    id: Mapped[int] = mapped_column(BigId, primary_key=True, autoincrement=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    provider: Mapped[str] = mapped_column(String(16))  # robokassa
+    plan: Mapped[str] = mapped_column(String(16))  # month | season
+    amount_kop: Mapped[int] = mapped_column(Integer)
+    status: Mapped[str] = mapped_column(String(16))  # pending | paid
+    # Which public offer the payer accepted (the checkbox on the pricing page).
+    offer_version: Mapped[str] = mapped_column(String(32))
+    # The provider's callback as received, for disputes and refunds.
+    raw: Mapped[dict[str, Any]] = mapped_column(default=dict)
+    created_at: Mapped[datetime] = mapped_column(server_default=func.now())
+    paid_at: Mapped[datetime | None]
+
+
+class Entitlement(Base):
+    """Paid access, one row per user. Payments only ever move valid_until forward."""
+
+    __tablename__ = "entitlements"
+
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE"), primary_key=True
+    )
+    plan: Mapped[str] = mapped_column(String(16))  # the last plan bought
+    valid_until: Mapped[datetime]
+    updated_at: Mapped[datetime] = mapped_column(server_default=func.now(), onupdate=func.now())
 
 
 def make_engine(url: str) -> AsyncEngine:

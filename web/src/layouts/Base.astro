@@ -1,6 +1,7 @@
 ---
 import 'katex/dist/katex.min.css';
 import '../styles/global.css';
+import { seller } from '../lib/seller';
 
 interface Props {
   title: string;
@@ -68,6 +69,9 @@ const tabs = [
             <span aria-hidden="true">◐</span>
           </button>
           <site-account>
+            <a href="/pricing/" class="plan" aria-current={path.startsWith('/pricing') ? 'page' : undefined}>
+              Тарифы
+            </a>
             <a href="/login/" class="btn small login">Войти</a>
             <span class="who" hidden>
               <span class="avatar" aria-hidden="true"></span>
@@ -83,12 +87,28 @@ const tabs = [
     </main>
     <footer class="wrap site-footer muted">
       <span>Физика ЕГЭ · задания по структуре ФИПИ</span>
+      <nav class="legal" aria-label="Документы">
+        <a href="/pricing/">Тарифы</a>
+        <a href="/legal/offer/">Публичная оферта</a>
+        <a href="/legal/privacy/">Политика конфиденциальности</a>
+        <a href="/legal/consent/">Согласие на обработку данных</a>
+      </nav>
+      <span class="seller">
+        Исполнитель: {seller.name}, плательщик налога на профессиональный доход, ИНН {seller.inn}
+        · {seller.email}
+      </span>
     </footer>
   </body>
 </html>
 
 <script>
   import { api, session } from '../lib/api';
+
+  const SHORT_DATE: Intl.DateTimeFormatOptions = {
+    day: 'numeric',
+    month: 'short',
+    timeZone: 'Europe/Moscow',
+  };
 
   document.querySelector('.theme')?.addEventListener('click', () => {
     const root = document.documentElement;
@@ -122,6 +142,13 @@ const tabs = [
             user.email.charAt(0).toUpperCase();
           login.hidden = true;
           (this.querySelector('.who') as HTMLElement).hidden = false;
+          if (user.paid_until) {
+            const plan = this.querySelector('.plan') as HTMLAnchorElement;
+            const date = new Date(user.paid_until).toLocaleDateString('ru-RU', SHORT_DATE);
+            plan.textContent = `Доступ до ${date}`;
+            plan.title = 'Ваш тариф — продлить';
+            plan.classList.add('paid');
+          }
         },
         () => {}, // API down: keep the «Войти» link.
       );
@@ -243,10 +270,45 @@ const tabs = [
     padding-bottom: 3rem;
     min-height: calc(100vh - 8rem);
   }
+  .plan {
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .plan:hover,
+  .plan[aria-current='page'] {
+    color: var(--text);
+  }
+  .plan.paid {
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
   .site-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     padding: 1.5rem var(--gutter) 2rem;
     border-top: 1px solid var(--border);
     font-size: 0.85rem;
+  }
+  .legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1rem;
+  }
+  .legal a {
+    color: var(--muted);
+  }
+  .legal a:hover {
+    color: var(--accent);
+  }
+  .seller {
+    font-size: 0.8rem;
   }
   /* Phones: tabs move to their own row under the brand. */
   @media (max-width: 44rem) {
@@ -270,7 +332,8 @@ const tabs = [
     }
   }
   @media (max-width: 22rem) {
-    .name {
+    .name,
+    .plan:not(.paid) {
       display: none;
     }
     .tabs a {

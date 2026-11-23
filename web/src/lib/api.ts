@@ -1,4 +1,6 @@
 // Typed client for the platform API. Shapes mirror api/src/platform_api/main.py.
+import { LEGAL_VERSION } from './seller';
+
 export type Outcome = 'correct' | 'partial' | 'wrong' | 'invalid';
 
 export interface AttemptResponse {
@@ -28,8 +30,29 @@ export interface Solution {
 }
 
 export interface Me {
-  user: { email: string } | null;
+  /** `paid_until`: end of paid access (ISO, UTC), null without an active pass. */
+  user: { email: string; paid_until: string | null } | null;
 }
+
+export type PlanId = 'month' | 'season';
+
+export interface Plan {
+  id: PlanId;
+  title: string;
+  price_kop: number;
+  /** What buying it now gives someone without access. */
+  valid_until: string;
+}
+
+export interface Plans {
+  plans: Plan[];
+  /** False until the shop is configured on the server. */
+  enabled: boolean;
+  paid_until: string | null;
+}
+
+/** Version of the personal-data consent text shown on the login page. */
+export const CONSENT_VERSION = LEGAL_VERSION;
 
 export interface Progress {
   topics: { exam_id: string; topic_id: string; score: number; n: number }[];
@@ -117,7 +140,16 @@ export const api = {
   me: () => call<Me>('/me'),
   requestCode: (email: string, consent: boolean) =>
     call<{ expires_in: number }>('/auth/code', post({ email, consent })),
-  verifyCode: (email: string, code: string) => call<Me>('/auth/verify', post({ email, code })),
+  verifyCode: (email: string, code: string) =>
+    call<Me>('/auth/verify', post({ email, code, consent_version: CONSENT_VERSION })),
+  plans: () => call<Plans>('/billing/plans'),
+  checkout: (plan: PlanId) =>
+    call<{ url: string }>('/billing/checkout', post({ plan, accept_offer: true })),
+  payment: (invoiceId: string) =>
+    call<{ status: 'pending' | 'paid'; paid_until: string | null }>(
+      `/billing/payments/${encodeURIComponent(invoiceId)}`,
+      { cache: 'no-store' },
+    ),
   logout: () => call<void>('/auth/logout', post()),
   taskStatuses: () => call<{ tasks: Record<string, TaskStatus> }>('/tasks/status'),
   submitVariant: (body: {
@@ -153,10 +185,35 @@ export interface TutorThread {
   hint_level: number | null;
   max_hint_level: number;
   messages_left: number;
+  daily_limit: number;
+  /** Has an active pass (the cap may still be the free one under fair use). */
+  paid: boolean;
+}
+
+export interface Allowance {
+  messages_left: number;
+  daily_limit: number;
+  paid: boolean;
+}
+
+/** «до 30 июня 2027» style date in Moscow time. */
+export function formatDate(iso: string): string {
+  return new Date(iso).toLocaleDateString('ru-RU', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'Europe/Moscow',
+  });
+}
+
+/** 69000 → «690 ₽». */
+export function formatRub(kop: number): string {
+  const rub = kop / 100;
+  return `${rub.toLocaleString('ru-RU', { maximumFractionDigits: 2 })} ₽`;
 }
 
 export type TutorEvent =
-  | { event: 'meta'; data: { hint_level: number | null; messages_left: number } }
+  | { event: 'meta'; data: { hint_level: number | null } & Allowance }
   | { event: 'delta'; data: { text: string } }
   | { event: 'done'; data: { message_id: number | null; leak: boolean } }
   | { event: 'error'; data: { detail: string } };

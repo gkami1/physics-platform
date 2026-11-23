@@ -24,8 +24,15 @@ import Base from '../layouts/Base.astro';
       />
       <label class="consent">
         <input type="checkbox" name="consent" required />
-        <span>Я согласен(а) на обработку моего адреса электронной почты для входа на сайт</span>
+        <span>
+          Я даю <a href="/legal/consent/" target="_blank">согласие на обработку персональных данных</a>
+          и принимаю <a href="/legal/privacy/" target="_blank">политику конфиденциальности</a>
+        </span>
       </label>
+      <p class="minors muted">
+        Если вам меньше 14 лет, зарегистрироваться можно только с согласия родителя или законного
+        представителя: попросите его отметить согласие вместе с вами.
+      </p>
       <button type="submit">Получить код</button>
     </form>
 
@@ -186,6 +193,10 @@ import Base from '../layouts/Base.astro';
     font-weight: 400;
     font-size: 0.875rem;
     color: var(--muted);
+  }
+  .minors {
+    margin: 0;
+    font-size: 0.8rem;
   }
   .consent input {
     margin-top: 0.2rem;

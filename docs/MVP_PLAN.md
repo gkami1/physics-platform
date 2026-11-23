@@ -174,7 +174,8 @@ Each milestone has a **definition of done**; a milestone is not finished until i
 - Part 2 self-assessment against criteria.
 - **Done:** a student can navigate by roadmap and gets a next-step suggestion.
 
-## M7 — Money and compliance (week 7)
+## M7 — Money and compliance (week 7) — code done 2026-11-15 (`feat/billing-robokassa`); pending: Robokassa shop + «Мой налог» link, legal review of the drafts, Roskomnadzor notification, a real payment and refund on the server (DEPLOY §6)
+- Robokassa, one-off passes: 30 days 690 ₽, season 2990 ₽; tutor 20 → 100 messages a day; fair-use budget; offer/privacy/consent drafts (ARCHITECTURE §10).
 - Payment provider integration (webhooks, idempotency), entitlements, plans.
 - Daily caps (free), fair-use token budget (paid), "messages left" UI.
 - Legal pages (offer, privacy policy, consent incl. parental), Roskomnadzor notification.

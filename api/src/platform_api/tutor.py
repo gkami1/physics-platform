@@ -6,6 +6,7 @@ import json
 import logging
 from collections.abc import AsyncIterator
 from contextlib import aclosing
+from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Literal
 
@@ -15,6 +16,7 @@ from pydantic import BaseModel, Field
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
+from platform_api.access import tutor_limit
 from platform_api.actor import SessionUser, as_utc, now
 from platform_api.db import Attempt, LlmCall, TutorMessage, TutorThread, User
 from platform_api.deps import Db, Store
@@ -64,6 +66,8 @@ class ThreadOut(BaseModel):
     hint_level: int | None
     max_hint_level: int
     messages_left: int
+    daily_limit: int
+    paid: bool
 
 
 class MessageIn(BaseModel):
@@ -95,7 +99,14 @@ async def _thread(db: AsyncSession, user: User, kind: str, context_id: str) -> T
     )
 
 
-async def _messages_left(db: AsyncSession, request: Request, user: User) -> int:
+@dataclass(frozen=True)
+class Allowance:
+    left: int
+    daily_limit: int
+    paid: bool
+
+
+async def _allowance(db: AsyncSession, request: Request, user: User) -> Allowance:
     used = await db.scalar(
         select(func.count())
         .select_from(TutorMessage)
@@ -105,8 +116,8 @@ async def _messages_left(db: AsyncSession, request: Request, user: User) -> int:
             TutorMessage.created_at > now() - timedelta(days=1),
         )
     )
-    limit: int = request.app.state.settings.tutor_daily_messages
-    return max(limit - (used or 0), 0)
+    limit = await tutor_limit(db, request.app.state.settings, user)
+    return Allowance(max(limit.daily - (used or 0), 0), limit.daily, limit.paid)
 
 
 def _out(m: TutorMessage) -> MessageOut:
@@ -136,11 +147,14 @@ async def get_thread(
                 .order_by(TutorMessage.id)
             )
         )
+    allowance = await _allowance(db, request, u)
     return ThreadOut(
         messages=[_out(m) for m in messages],
         hint_level=(thread.hint_level if thread else 0) if kind == "task" else None,
         max_hint_level=MAX_LEVEL,
-        messages_left=await _messages_left(db, request, u),
+        messages_left=allowance.left,
+        daily_limit=allowance.daily_limit,
+        paid=allowance.paid,
     )
 
 
@@ -159,7 +173,7 @@ async def post_message(
     models: list[ChatModel] = request.app.state.llm
     if not models:
         raise HTTPException(503, "tutor_unavailable")
-    if await _messages_left(db, request, u) <= 0:
+    if (await _allowance(db, request, u)).left <= 0:
         raise HTTPException(429, "daily_limit")
 
     thread = await _thread(db, u, body.kind, body.id)
@@ -222,10 +236,18 @@ async def post_message(
     )
     await db.commit()
     messages = build_messages(context, history, text, level)
-    left = await _messages_left(db, request, u)
+    allowance = await _allowance(db, request, u)
 
     async def events() -> AsyncIterator[str]:
-        yield _sse("meta", {"hint_level": level, "messages_left": left})
+        yield _sse(
+            "meta",
+            {
+                "hint_level": level,
+                "messages_left": allowance.left,
+                "daily_limit": allowance.daily_limit,
+                "paid": allowance.paid,
+            },
+        )
         guard = OutputGuard(detector)
         calls: list[CallInfo] = []
         error: str | None = None

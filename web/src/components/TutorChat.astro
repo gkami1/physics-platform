@@ -85,6 +85,7 @@ const docked = variant === 'docked';
       <div class="actions">
         {kind === 'task' && <button type="button" class="hint secondary">Подсказка</button>}
         <span class="left muted"></span>
+        <a class="more" href="/pricing/" hidden>Больше сообщений</a>
         <button type="submit">Отправить</button>
       </div>
     </form>
@@ -93,7 +94,7 @@ const docked = variant === 'docked';
 </tutor-chat>
 
 <script>
-  import { ApiError, session, tutor, type TutorKind } from '../lib/api';
+  import { ApiError, session, tutor, type Allowance, type TutorKind } from '../lib/api';
 
   type Render = typeof import('../lib/client-markdown');
 
@@ -101,6 +102,9 @@ const docked = variant === 'docked';
     daily_limit: 'На сегодня сообщения закончились. Возвращайтесь завтра.',
     tutor_unavailable: 'Репетитор сейчас недоступен. Попробуйте чуть позже.',
   };
+  const FREE_LIMIT_REACHED =
+    'На сегодня бесплатные сообщения закончились. Возвращайтесь завтра — или ' +
+    '<a href="/pricing/">подключите доступ</a>: 100 сообщений в день.';
 
   /** Same breakpoint as the theory page grid: from here the chat is a column, not a sheet. */
   const WIDE = '(min-width: 64rem)';
@@ -113,6 +117,7 @@ const docked = variant === 'docked';
     private loading?: Promise<boolean>;
     private busy = false;
     private maxLevel = 3;
+    private paid = false;
 
     connectedCallback() {
       this.kind = (this.dataset.kind as TutorKind) ?? 'task';
@@ -254,7 +259,7 @@ const docked = variant === 'docked';
         for (const m of thread.messages) this.addMessage(m.role, m.content);
         this.maxLevel = thread.max_hint_level;
         this.showLevel(thread.hint_level);
-        this.showLeft(thread.messages_left);
+        this.showLeft(thread);
         this.scrollLog();
         return true;
       } catch (e) {
@@ -321,7 +326,7 @@ const docked = variant === 'docked';
         await tutor.send({ kind: this.kind, id: this.contextId, text, intent }, (ev) => {
           if (ev.event === 'meta') {
             this.showLevel(ev.data.hint_level);
-            this.showLeft(ev.data.messages_left);
+            this.showLeft(ev.data);
           } else if (ev.event === 'delta') {
             reply += ev.data.text;
             frame ||= requestAnimationFrame(paint);
@@ -338,7 +343,8 @@ const docked = variant === 'docked';
       } catch (e) {
         target.parentElement?.remove();
         const detail = e instanceof ApiError ? e.detail : '';
-        this.notice(ERRORS[detail] ?? 'Нет связи с сервером. Попробуйте ещё раз.');
+        if (detail === 'daily_limit' && !this.paid) this.notice(FREE_LIMIT_REACHED);
+        else this.notice(ERRORS[detail] ?? 'Нет связи с сервером. Попробуйте ещё раз.');
         if (!text) return;
         input.value = text; // let the student resend
       } finally {
@@ -364,8 +370,12 @@ const docked = variant === 'docked';
       if (hint) hint.hidden = level !== null && level >= max;
     }
 
-    private showLeft(left: number) {
-      this.q('.left').textContent = left <= 10 ? `осталось ${left}` : '';
+    private showLeft({ messages_left: left, daily_limit: limit, paid }: Allowance) {
+      this.paid = paid;
+      const el = this.q('.left');
+      el.textContent = left <= 10 || !paid ? `осталось ${left} из ${limit}` : '';
+      el.title = 'Сообщений репетитору на ближайшие сутки';
+      this.q('.more').hidden = paid;
     }
 
     /** Fixed HTML only (no model output). */
@@ -488,8 +498,15 @@ const docked = variant === 'docked';
     gap: 0.5rem;
     margin-top: 0.5rem;
   }
+  .actions {
+    flex-wrap: wrap;
+  }
   .actions .left {
     margin-left: auto;
+  }
+  .more {
+    font-size: 0.8rem;
+    color: var(--accent);
   }
 
   /* --- docked (theory pages) ------------------------------------------------------- */

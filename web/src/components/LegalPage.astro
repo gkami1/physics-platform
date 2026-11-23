@@ -1,0 +1,30 @@
+---
+// Shared frame of the legal pages. The texts are DRAFTS written without a lawyer: have them
+// reviewed before taking real payments (docs/DEPLOY.md, «Robokassa и юридические страницы»).
+import Base from '../layouts/Base.astro';
+import { LEGAL_DATE, LEGAL_VERSION } from '../lib/seller';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<Base title={`${title} — Физика ЕГЭ`} description={title} narrow>
+  <article class="prose legal">
+    <h1>{title}</h1>
+    <p class="muted">Редакция от {LEGAL_DATE} (версия {LEGAL_VERSION})</p>
+    <slot />
+  </article>
+</Base>
+
+<style>
+  .legal :global(h2) {
+    font-size: 1.15rem;
+    margin-top: 1.75rem;
+  }
+  .legal :global(li) {
+    margin: 0.3rem 0;
+  }
+</style>

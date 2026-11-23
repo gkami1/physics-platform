@@ -1,6 +1,7 @@
 from pathlib import Path
 from typing import Any, Literal
 
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -41,8 +42,28 @@ class Settings(BaseSettings):
     # Kopecks per million tokens, for cost tracking.
     llm_fallback_price_in: int = 0
     llm_fallback_price_out: int = 0
-    # Messages per signed-in user per 24 h (free tier; plans come in M7).
-    tutor_daily_messages: int = 50
+    # Tutor messages per signed-in user per 24 h: free, and with an active pass.
+    tutor_daily_messages: int = 20
+    tutor_paid_daily_messages: int = 100
+    # Fair use for passes: model spend over the last 30 days above this (kopecks) drops the
+    # user back to the free daily cap until it falls under again. 0 disables the check.
+    tutor_paid_monthly_budget_kop: int = 40000
+
+    # Payments: Robokassa (it issues «Мой налог» receipts for самозанятые). An empty login
+    # turns checkout off (503). Test mode sends IsTest=1: use the shop's test passwords then.
+    robokassa_login: str = ""
+    robokassa_password1: str = ""
+    robokassa_password2: str = ""
+    robokassa_test: bool = True
+    # Must match «Алгоритм расчёта хеша» in the shop's technical settings.
+    robokassa_hash: Literal["md5", "sha256", "sha384", "sha512"] = "md5"
+    # Positive prices in kopecks, bounded by the payments.amount_kop INTEGER column.
+    price_month_kop: int = Field(default=69000, gt=0, le=2**31 - 1)
+    price_season_kop: int = Field(default=299000, gt=0, le=2**31 - 1)
+
+    @property
+    def payments_enabled(self) -> bool:
+        return bool(self.robokassa_login and self.robokassa_password1 and self.robokassa_password2)
 
     @property
     def secure_cookies(self) -> bool:

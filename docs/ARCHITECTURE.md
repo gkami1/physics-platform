@@ -123,7 +123,7 @@ Dark-first app shell (light theme toggle, `pp:theme` in localStorage), four tabs
 
 | Table | Key fields |
 |---|---|
-| `users` | id, email (normalised, unique), consented_at, created_at; more consent flags and birth year in M7 |
+| `users` | id, email (normalised, unique), consented_at, consent_version, created_at *(M7: no birth year — data minimisation; minors are handled by the consent text)* |
 | `auth_identities` | user_id, provider (yandex/vk/telegram), subject — *added with the first OAuth provider; email sign-in uses `users.email`* |
 | `sessions` | id (sha256 of the cookie token), user_id, expires_at |
 | `login_codes` | email, code_hash, ip, tries, expires_at, used_at (also the rate-limit ledger) |
@@ -132,9 +132,9 @@ Dark-first app shell (light theme toggle, `pp:theme` in localStorage), four tabs
 | `topic_mastery` | *not a table yet:* computed on read from `attempts` (see §7). Materialise if `/api/progress` gets slow |
 | `tutor_threads` | user_id, context_kind (theory/task), context_id, hint_level, created_at |
 | `tutor_messages` | thread_id, role, content, model, tokens_in/out, cost_kop, flags |
-| `plans`, `entitlements` | user_id, plan, valid_until |
-| `payments` | provider, provider_payment_id (unique), status, amount_kop, raw |
-| `usage_daily` | user_id, date, messages, tokens_in/out, cost_kop |
+| `entitlements` | user_id (PK), plan (last bought), valid_until — *plans live in code/settings, not a table* |
+| `payments` | id (= Robokassa InvId), user_id, provider, plan, amount_kop, status (pending/paid), offer_version, raw (callback), paid_at |
+| `usage_daily` | *not a table (M7):* daily messages are counted from `tutor_messages`, the 30-day spend from `llm_calls` joined to `tutor_messages`. Materialise if those queries get slow |
 | `llm_calls` | trace of every LLM call (request hash, model, latency, tokens, cost, error) |
 
 Money is stored as integer kopecks. All timestamps are `timestamptz`, UTC.
@@ -180,7 +180,7 @@ Cheap model by default; strong model for flagged-hard theory explanations, Part 
 While building, the tutor and the evals run on a **free tier**: first Google AI Studio (Gemini Flash; needed a proxy from Russia), since 2026-11-03 **OpenRouter free models**, pinned to one model (`nvidia/nemotron-3-ultra-550b-a55b:free`, not the random `openrouter/free` router) so eval runs stay comparable (`.env.example`). The free quota (~50 requests/day) fits `evals/suite-theory-quick.yaml` or `--persona` subsets, not the full suite. Allowed because prompts hold only content and the developer's own test messages; never configured for a deployment with real students (free-tier prompts may be used for training; servers outside Russia). Production stays vLLM/Qwen + DeepSeek fallback; the final choice still comes from evals. Provider-specific request fields go in `API_LLM_EXTRA_BODY` (JSON).
 
 ### Access (M4)
-Signed-in users only; one thread per user and page (`tutor_threads`), 50 messages per 24 h (`API_TUTOR_DAILY_MESSAGES`) until plans arrive in M7. The chat island renders model output through DOMPurify (`renderUntrusted`).
+Signed-in users only; one thread per user and page (`tutor_threads`), 20 messages per 24 h free (`API_TUTOR_DAILY_MESSAGES`), 100 with a pass (§10). The chat island renders model output through DOMPurify (`renderUntrusted`).
 
 ### Theory chat (decided 2026-11-03)
 On theory pages the chat is always at hand (`TutorChat variant="docked"`; task pages keep the inline button). From 64rem: a 42rem reading column plus a sticky chat column of viewport height whose log scrolls on its own; below 64rem a floating «Спросить» button opens it as a bottom sheet kept above the on-screen keyboard (`visualViewport`). A line encourages questions («Глупые вопросы рождают глубокое понимание»). Cost per page view is zero tutor requests: the sign-in state comes from the header's `/api/me` answer (`session()`), and the thread loads on the first focus — or at once on wide screens if this browser has talked on the page before (`pp:tutor:theory:<topic>` in localStorage). Signed-out readers see the panel with a «Войти, чтобы спросить» button instead of the compose box. Follow-up: select text → «Спросить об этом» quotes it into the chat.
@@ -207,7 +207,14 @@ Email one-time code now (M3); Yandex ID / VK ID (OAuth) and optional Telegram Lo
 
 ## 10. Payments and metering
 
-Provider: YooKassa or Robokassa (Robokassa can auto-issue «Мой налог» receipts for самозанятые). Webhook → `payments` (idempotent on provider id) → extend `entitlements.valid_until`. Plans: 30-day pass, season pass (until end of June). Before each tutor call: check daily message cap (free) / monthly token budget (paid, fair use); after: record actual tokens and cost in `usage_daily`.
+*(Decided and built 2026-11-15, M7.)*
+
+- **Provider: Robokassa** — the seller is a самозанятый, and Robokassa registers receipts in «Мой налог» («Робочеки СМЗ»).
+- **One-off passes, no recurring billing.** «30 дней» (690 ₽) and «До конца сезона» (2990 ₽, until 30 June 23:59 MSK; from 1 June on it is next year's season). Prices are settings (`API_PRICE_*_KOP`). Why not subscriptions: the season ends with the exam, payers are often parents, an unexpected June charge invites chargebacks, and recurring payments need a separate Robokassa approval, a scheduler, reminder emails and a cancellation flow. The data model allows adding them later.
+- **What a pass buys:** the tutor's cap goes from 20 to 100 messages per 24 h. All content (theory, tasks, variants, blitz) stays free: it is static by design (§1, §5).
+- **Flow.** `POST /api/billing/checkout` requires sign-in and acceptance of the offer. It snapshots the server-side price in a `pending` payment and returns the signed Robokassa URL. The server verifies the signature and stored amount on `/api/billing/robokassa/result`, then claims the invoice and extends `entitlements.valid_until` in a single transaction. The user row serializes concurrent payments, including the first purchase. Repeated callbacks return the same `OK<InvId>` acknowledgment without extending access again. `/pay/success/` polls `GET /api/billing/payments/{invoice_id}` for that invoice's status. Only the invoice owner can read it. Signatures, sums and access periods live in `billing.py`, and the routes live in `payments.py`.
+- **Fair use:** with a pass, if model spend over the last 30 days reaches `API_TUTOR_PAID_MONTHLY_BUDGET_KOP` (default 400 ₽), the free cap applies until it falls under again (`access.daily_limit`). The offer states this.
+- **Consent:** the offer checkbox and «18+ or with a parent's consent» on the pricing page; `payments.offer_version` and `users.consent_version` record the texts accepted. Legal pages are drafts (`web/src/pages/legal/`), seller name/ИНН/email come from build-time `PUBLIC_*` variables. Runbook: DEPLOY.md §6.
 
 ## 11. Compliance (152-ФЗ) — summary
 
@@ -249,5 +256,5 @@ Assumptions: active tutor user ≈ 100 msgs/month × 6k tokens ≈ 600k tokens; 
 4. Part 2: paper photos or typed?
 5. Beta cohort size; who pays (parents?); consent flow.
 6. Tolerance for TypeScript in islands.
-7. Recurring billing at launch vs one-off passes.
+7. ~~Recurring billing at launch vs one-off passes.~~ One-off passes (2026-11-15, §10).
 8. Diagram tooling (TikZ/GeoGebra/SVG); interactive sims later?

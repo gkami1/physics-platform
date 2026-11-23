@@ -1,0 +1,275 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Тарифы — Физика ЕГЭ" description="Бесплатно и с доступом: что входит, цены">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Тарифы</div>
+      <h1>Учитесь бесплатно. Доступ — для тех, кто много спрашивает</h1>
+      <p class="muted">
+        Теория, задачи с проверкой, варианты под таймер и блиц бесплатны для всех. Доступ
+        увеличивает число сообщений ИИ-репетитору.
+      </p>
+    </div>
+  </header>
+
+  <pricing-page>
+    <p class="current badge" hidden></p>
+
+    <div class="grid">
+      <section class="card tier">
+        <h2>Бесплатно</h2>
+        <p class="price">0 ₽</p>
+        <ul>
+          <li>Вся теория и все задачи</li>
+          <li>Автопроверка ответов, разборы решений</li>
+          <li>Варианты ЕГЭ под таймер, блиц</li>
+          <li>Прогресс на всех устройствах</li>
+          <li><strong>20 сообщений</strong> репетитору в сутки</li>
+        </ul>
+      </section>
+
+      <section class="card tier featured" data-plan="month">
+        <h2>30 дней</h2>
+        <p class="price"><span class="amount">…</span></p>
+        <ul>
+          <li>Всё, что в бесплатном</li>
+          <li><strong>100 сообщений</strong> репетитору в сутки</li>
+          <li>Разовый платёж, без автопродления</li>
+        </ul>
+        <button type="button" class="btn buy" disabled>Оплатить</button>
+      </section>
+
+      <section class="card tier" data-plan="season">
+        <h2>До конца сезона</h2>
+        <p class="price"><span class="amount">…</span></p>
+        <p class="until muted"></p>
+        <ul>
+          <li>Всё, что в бесплатном</li>
+          <li><strong>100 сообщений</strong> репетитору в сутки</li>
+          <li>До ЕГЭ одним платежом, без автопродления</li>
+        </ul>
+        <button type="button" class="btn buy" disabled>Оплатить</button>
+      </section>
+    </div>
+
+    <fieldset class="terms">
+      <legend class="visually-hidden">Условия оплаты</legend>
+      <label>
+        <input type="checkbox" name="offer" />
+        <span>
+          Принимаю условия <a href="/legal/offer/" target="_blank">публичной оферты</a>
+        </span>
+      </label>
+      <label>
+        <input type="checkbox" name="adult" />
+        <span>Мне есть 18 лет, или я оплачиваю с согласия родителя (законного представителя)</span>
+      </label>
+    </fieldset>
+
+    <p class="message" role="status" aria-live="polite" hidden></p>
+
+    <section class="faq">
+      <h2>Вопросы</h2>
+      <h3>Это подписка?</h3>
+      <p>
+        Нет. Вы платите один раз и получаете доступ до указанной даты. Деньги сами не списываются.
+        Если купить доступ, пока действует прежний, срок продлится от его окончания.
+      </p>
+      <h3>Как получить чек?</h3>
+      <p>
+        Чек приходит на почту автоматически после оплаты: исполнитель — самозанятый, чек
+        формируется в приложении «Мой налог».
+      </p>
+      <h3>Можно вернуть деньги?</h3>
+      <p>
+        Да, за неиспользованные дни — напишите на почту, указанную внизу страницы. Порядок описан
+        в <a href="/legal/offer/">оферте</a>.
+      </p>
+    </section>
+  </pricing-page>
+</Base>
+
+<script>
+  import { ApiError, api, formatDate, formatRub, session, type PlanId } from '../lib/api';
+
+  const ERRORS: Record<string, string> = {
+    payments_unavailable: 'Оплата пока не подключена. Попробуйте позже.',
+    too_many_checkouts: 'Слишком много попыток оплаты. Подождите час и попробуйте снова.',
+    offer_required: 'Нужно принять условия оферты.',
+  };
+
+  class PricingPage extends HTMLElement {
+    private signedIn = false;
+    private enabled = false;
+
+    connectedCallback() {
+      this.querySelectorAll<HTMLButtonElement>('.buy').forEach((b) =>
+        b.addEventListener('click', () => {
+          const plan = b.closest<HTMLElement>('[data-plan]')?.dataset.plan as PlanId;
+          void this.buy(plan);
+        }),
+      );
+      void this.load();
+    }
+
+    private async load() {
+      try {
+        const [plans, me] = await Promise.all([api.plans(), session()]);
+        this.signedIn = me.user !== null;
+        this.enabled = plans.enabled;
+        for (const p of plans.plans) {
+          const card = this.querySelector<HTMLElement>(`[data-plan="${p.id}"]`);
+          if (!card) continue;
+          (card.querySelector('.amount') as HTMLElement).textContent = formatRub(p.price_kop);
+          const until = card.querySelector<HTMLElement>('.until');
+          if (until) until.textContent = `Доступ до ${formatDate(p.valid_until)}`;
+        }
+        const current = this.querySelector('.current') as HTMLElement;
+        if (plans.paid_until) {
+          current.textContent = `Ваш доступ действует до ${formatDate(plans.paid_until)}. Новая оплата продлит его.`;
+          current.hidden = false;
+        }
+        this.querySelectorAll<HTMLButtonElement>('.buy').forEach((b) => {
+          b.disabled = !this.enabled;
+          b.textContent = this.signedIn ? 'Оплатить' : 'Войти и оплатить';
+        });
+        if (!plans.enabled) this.message(ERRORS.payments_unavailable!, true);
+      } catch {
+        this.message('Нет связи с сервером. Обновите страницу.', true);
+      }
+    }
+
+    private checked(name: string): boolean {
+      return (this.querySelector(`input[name="${name}"]`) as HTMLInputElement).checked;
+    }
+
+    private async buy(plan: PlanId) {
+      if (!this.signedIn) {
+        location.href = `/login/?next=${encodeURIComponent('/pricing/')}`;
+        return;
+      }
+      if (!this.enabled) return this.message(ERRORS.payments_unavailable!, true);
+      if (!this.checked('offer')) return this.message(ERRORS.offer_required!, true);
+      if (!this.checked('adult')) {
+        return this.message('Подтвердите возраст или согласие родителя.', true);
+      }
+      const buttons = this.querySelectorAll<HTMLButtonElement>('.buy');
+      buttons.forEach((b) => (b.disabled = true));
+      this.message('');
+      try {
+        const { url } = await api.checkout(plan);
+        location.href = url;
+      } catch (e) {
+        const detail = e instanceof ApiError ? e.detail : '';
+        if (e instanceof ApiError && e.status === 401) {
+          location.href = `/login/?next=${encodeURIComponent('/pricing/')}`;
+          return;
+        }
+        this.message(ERRORS[detail] ?? 'Нет связи с сервером. Попробуйте ещё раз.', true);
+        buttons.forEach((b) => (b.disabled = false));
+      }
+    }
+
+    private message(text: string, error = false) {
+      const m = this.querySelector('.message') as HTMLElement;
+      m.textContent = text;
+      m.dataset.kind = error ? 'error' : '';
+      m.hidden = !text;
+    }
+  }
+
+  customElements.define('pricing-page', PricingPage);
+</script>
+
+<style>
+  pricing-page {
+    display: block;
+  }
+  .current {
+    margin: 0 0 1rem;
+    white-space: normal;
+    font-size: 0.875rem;
+    padding: 0.4rem 0.8rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1rem;
+  }
+  .tier {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.25rem;
+  }
+  .tier.featured {
+    border-color: var(--accent);
+  }
+  .tier h2 {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+  .price {
+    margin: 0;
+    font-size: 1.9rem;
+    font-weight: 800;
+  }
+  .until {
+    margin: 0;
+    font-size: 0.875rem;
+  }
+  .tier ul {
+    margin: 0.25rem 0 0.75rem;
+    padding-left: 1.1rem;
+    flex: 1;
+  }
+  .tier li {
+    margin: 0.25rem 0;
+  }
+  .buy {
+    width: 100%;
+  }
+  .terms {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    border: 0;
+  }
+  .terms label {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    font-size: 0.925rem;
+  }
+  .terms input {
+    margin-top: 0.2rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    flex: none;
+  }
+  .message {
+    margin: 0.75rem 0 0;
+    font-weight: 600;
+  }
+  .message[data-kind='error'] {
+    color: var(--bad);
+  }
+  .faq {
+    margin-top: 2.5rem;
+    max-width: 42rem;
+  }
+  .faq h2 {
+    font-size: 1.2rem;
+  }
+  .faq h3 {
+    font-size: 1rem;
+    margin: 1.25rem 0 0.25rem;
+  }
+  .faq p {
+    margin: 0;
+  }
+</style>
