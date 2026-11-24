@@ -56,7 +56,8 @@ def test_empty_profile(client: TestClient) -> None:
     pred = body["prediction"]
     assert pred["enough_data"] is False
     assert pred["primary"] is None
-    assert pred["test"] is None
+    assert pred["test"] is None  # not enough evidence yet
+    assert pred["scale_season"] == 2026
     assert pred["max_primary"] == 45
 
 
