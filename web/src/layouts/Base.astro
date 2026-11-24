@@ -75,7 +75,7 @@ const tabs = [
             </a>
             <a href="/login/" class="btn small login">Войти</a>
             <span class="who" hidden>
-              <a href="/account/" class="profile" title="Профиль">
+              <a href={`/${exam}/profile/`} class="profile" title="Мой профиль">
                 <span class="avatar" aria-hidden="true"></span>
                 <span class="email"></span>
               </a>
@@ -140,7 +140,7 @@ const tabs = [
           if (!user) return;
           const shown = user.first_name ?? user.email;
           (this.querySelector('.email') as HTMLElement).textContent = shown;
-          (this.querySelector('.profile') as HTMLElement).title = `Профиль: ${user.email}`;
+          (this.querySelector('.profile') as HTMLElement).title = `Мой профиль: ${user.email}`;
           (this.querySelector('.avatar') as HTMLElement).textContent = shown
             .charAt(0)
             .toUpperCase();
