@@ -6,6 +6,7 @@ for every file in `content/`.
 
 from __future__ import annotations
 
+import itertools
 import re
 from decimal import Decimal
 from enum import StrEnum
@@ -78,10 +79,33 @@ class ExamSpec(Strict):
     tasks: dict[int, TaskNumberSpec]
     # Step tasks embedded in theory pages: not an exam task number, never in variants.
     practice: TaskNumberSpec | None = None
+    # Official primary -> test (100-point) score conversion, for the predicted score. Only
+    # values copied from a published Rosobrnadzor table; absent until one is verified.
+    score_scale: dict[int, int] | None = None
+    score_scale_source: str | None = None  # document, year and where it was published
+    score_scale_season: int | None = None  # the exam year the table was published for
 
     @property
     def max_score(self) -> int:
         return sum(t.max_points for t in self.tasks.values())
+
+    @model_validator(mode="after")
+    def _scale_is_complete(self) -> ExamSpec:
+        scale = self.score_scale
+        if scale is None:
+            if self.score_scale_source is not None or self.score_scale_season is not None:
+                raise ValueError("score_scale_source/season given without score_scale")
+            return self
+        if not self.score_scale_source or self.score_scale_season is None:
+            raise ValueError("score_scale needs score_scale_source and score_scale_season")
+        if sorted(scale) != list(range(self.max_score + 1)):
+            raise ValueError(f"score_scale must list every primary score 0..{self.max_score}")
+        values = [scale[p] for p in range(self.max_score + 1)]
+        if any(not 0 <= v <= 100 for v in values):
+            raise ValueError("score_scale test scores must be within 0..100")
+        if any(b < a for a, b in itertools.pairwise(values)):
+            raise ValueError("score_scale must not decrease")
+        return self
 
     def spec_for(self, ege_task: int | None) -> TaskNumberSpec | None:
         """Scoring for a task: its EGE number's spec, or `practice` for step tasks."""

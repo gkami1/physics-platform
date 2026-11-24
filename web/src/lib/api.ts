@@ -1,4 +1,5 @@
 // Typed client for the platform API. Shapes mirror api/src/platform_api/main.py.
+import type { Insights } from './insights';
 import { LEGAL_VERSION } from './seller';
 
 export type Outcome = 'correct' | 'partial' | 'wrong' | 'invalid';
@@ -156,6 +157,8 @@ export const api = {
   state: (id: string) => call<TaskState>(`${task(id)}/state`),
   reveal: (id: string) => call<Solution>(`${task(id)}/reveal`, post()),
   progress: () => call<Progress>('/progress'),
+  insights: (examId: string) =>
+    call<Insights>(`/insights?exam=${encodeURIComponent(examId)}`, { cache: 'no-store' }),
   me: () => call<Me>('/me'),
   signup: (form: SignupForm) =>
     call<{ expires_in: number }>('/auth/signup', post({ ...form, consent_version: LEGAL_VERSION })),

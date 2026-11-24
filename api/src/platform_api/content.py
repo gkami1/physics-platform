@@ -14,7 +14,13 @@ from pydantic import TypeAdapter
 from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from content_schema.models import AnswerSpec, ExamSpec, TaskNumberSpec, embedded_task_ids
+from content_schema.models import (
+    AnswerSpec,
+    ExamSpec,
+    Roadmap,
+    TaskNumberSpec,
+    embedded_task_ids,
+)
 from platform_api.db import Task
 
 _answer = TypeAdapter[AnswerSpec](AnswerSpec)
@@ -33,6 +39,15 @@ class PrivateTask:
     hints: tuple[str, ...]
     tutor_notes: str | None
     content_version: str
+    difficulty: int = 1
+    published: bool = True
+    last_season: int | None = None  # see TaskMeta.last_season
+
+    def in_season(self, season: int) -> bool:
+        """Whether this task counts as its EGE number in the given season."""
+        if self.ege_task is None:
+            return False
+        return self.last_season is None or season <= self.last_season
 
 
 @dataclass(frozen=True)
@@ -60,10 +75,16 @@ class ContentStore:
         tasks: dict[str, PrivateTask],
         versions: dict[str, str],
         theory: dict[str, Theory] | None = None,
+        exams: dict[str, tuple[ExamSpec, Roadmap]] | None = None,
     ) -> None:
         self._tasks = tasks
         self._theory = theory or {}
+        self._exams = exams or {}
         self.versions = versions
+
+    def exam(self, exam_id: str) -> tuple[ExamSpec, Roadmap] | None:
+        """The exam's spec (points, scoring, score scale) and roadmap."""
+        return self._exams.get(exam_id)
 
     def task(self, task_id: str) -> PrivateTask | None:
         return self._tasks.get(task_id)
@@ -89,11 +110,13 @@ class ContentStore:
         tasks: dict[str, PrivateTask] = {}
         theory: dict[str, Theory] = {}
         versions: dict[str, str] = {}
+        exams: dict[str, tuple[ExamSpec, Roadmap]] = {}
         for f in sorted(private_dir.glob("*.json")):
             data = json.loads(f.read_text("utf-8"))
             exam = ExamSpec.model_validate(data["exam"])
             version = data["content_version"]
             versions[exam.id] = version
+            exams[exam.id] = (exam, Roadmap.model_validate(data["roadmap"]))
             for t in data["tasks"]:
                 if t["id"] in tasks:
                     raise ValueError(f"task id {t['id']} appears in more than one exam")
@@ -112,6 +135,9 @@ class ContentStore:
                     hints=tuple(t["hints"]),
                     tutor_notes=t["tutor_notes"],
                     content_version=version,
+                    difficulty=t["difficulty"],
+                    published=t["status"] == "published",
+                    last_season=t["last_season"],
                 )
             for page in data.get("theory", []):
                 theory[page["id"]] = Theory(
@@ -125,7 +151,7 @@ class ContentStore:
                     number=page["number"],
                     lessons=tuple(page["lessons"]),
                 )
-        return cls(tasks, versions, theory)
+        return cls(tasks, versions, theory, exams)
 
 
 async def sync_tasks(session: AsyncSession, store: ContentStore) -> None:

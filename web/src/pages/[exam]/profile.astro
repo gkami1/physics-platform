@@ -1,0 +1,651 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '../../layouts/Base.astro';
+import { bundles, orderedTopics, type PublicBundle, theoryUrl, tasksUrl } from '../../lib/content';
+
+export const getStaticPaths = (() =>
+  bundles().map((b) => ({ params: { exam: b.exam.id }, props: { b } }))) satisfies GetStaticPaths;
+
+interface Props {
+  b: PublicBundle;
+}
+
+const { b } = Astro.props;
+const exam = b.exam.id;
+const withTheory = new Set(b.theory.map((p) => p.topic));
+// Titles and links for the ids the API returns; nothing private, all of it is on the site.
+const meta = {
+  exam,
+  topics: Object.fromEntries(
+    orderedTopics(b).map((t) => [
+      t.id,
+      { title: t.title, href: withTheory.has(t.id) ? theoryUrl(exam, t.id) : tasksUrl(exam, t.id) },
+    ]),
+  ),
+};
+---
+
+<Base
+  title={`Мой профиль — ${b.exam.title}`}
+  description="Что получается, что подтянуть и чем заняться сегодня: разбор по вашим решениям"
+>
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">{b.exam.title} · {b.exam.season}</div>
+      <h1>Мой профиль</h1>
+      <p class="muted">
+        Разбор по вашим решениям: что уже получается, что подтянуть и чем заняться сегодня.
+      </p>
+    </div>
+    <a class="btn ghost small settings" href="/account/" hidden>Настройки аккаунта</a>
+  </header>
+
+  <student-profile>
+    <script type="application/json" class="profile-meta" set:html={JSON.stringify(meta)} />
+    <p class="muted status">Собираем профиль…</p>
+    <div class="body" hidden></div>
+  </student-profile>
+</Base>
+
+<script>
+  import { api, session } from '../../lib/api';
+  import {
+    ago,
+    count,
+    daysBetween,
+    decimal,
+    type Insights,
+    type Mistake,
+    missingEvidence,
+    type PracticeItem,
+    type Prediction,
+    pct,
+    STATUS_ORDER,
+    type TopicInsight,
+    type TopicStatus,
+    tutorSummary,
+  } from '../../lib/insights';
+  import { savePool } from '../../lib/taskPool';
+
+  interface Meta {
+    exam: string;
+    topics: Record<string, { title: string; href: string }>;
+  }
+
+  const GROUP_TITLE: Record<TopicStatus, string> = {
+    weak: 'Слабые темы',
+    shaky: 'Решаются с трудом',
+    review_due: 'Пора повторить',
+    in_progress: 'В работе',
+    strong: 'Уверенно',
+    not_started: 'Ещё не начаты',
+  };
+  const REASON: Partial<Record<TopicStatus, string>> = {
+    weak: 'слабая тема',
+    shaky: 'с трудом',
+    review_due: 'повторить',
+    in_progress: 'в работе',
+  };
+  const FOLDED = new Set<TopicStatus>(['in_progress', 'strong', 'not_started']);
+  const DATE: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long', timeZone: 'UTC' };
+
+  /** Tiny DOM builder: text is always set as text, never parsed as HTML. */
+  function h<K extends keyof HTMLElementTagNameMap>(
+    tag: K,
+    props: Partial<Record<string, string>> = {},
+    ...children: (Node | string | null | false)[]
+  ): HTMLElementTagNameMap[K] {
+    const el = document.createElement(tag);
+    for (const [k, v] of Object.entries(props)) if (v !== undefined) el.setAttribute(k, v);
+    for (const c of children) if (c) el.append(c);
+    return el;
+  }
+
+  class StudentProfile extends HTMLElement {
+    private meta!: Meta;
+
+    connectedCallback() {
+      const raw = this.querySelector('.profile-meta')?.textContent ?? '{}';
+      this.meta = JSON.parse(raw) as Meta;
+      void session().then(
+        ({ user }) => {
+          if (user) (document.querySelector('.settings') as HTMLElement).hidden = false;
+        },
+        () => {},
+      );
+      void api.insights(this.meta.exam).then(
+        (data) => this.render(data),
+        () => {
+          (this.querySelector('.status') as HTMLElement).textContent =
+            'Не удалось загрузить профиль. Обновите страницу чуть позже.';
+        },
+      );
+    }
+
+    private topicTitle(id: string): string {
+      return this.meta.topics[id]?.title ?? id;
+    }
+
+    private taskHref(id: string): string {
+      return `/${this.meta.exam}/tasks/${id}/`;
+    }
+
+    private titles(): Record<string, string> {
+      return Object.fromEntries(Object.entries(this.meta.topics).map(([k, v]) => [k, v.title]));
+    }
+
+    private render(data: Insights) {
+      const body = this.querySelector('.body') as HTMLElement;
+      body.replaceChildren(
+        this.forecast(data.prediction, data.teaser),
+        this.summary(data),
+        this.topics(data),
+        data.practice
+          ? this.practice(data.practice)
+          : this.locked(
+              'Тренировка слабых мест',
+              count(data.counts.practice, ['задача', 'задачи', 'задач']),
+            ),
+        data.mistakes
+          ? this.mistakes(data.mistakes)
+          : this.locked(
+              'Работа над ошибками',
+              count(data.counts.mistakes, ['задача', 'задачи', 'задач']),
+            ),
+      );
+      if (data.teaser) body.append(this.unlock());
+      (this.querySelector('.status') as HTMLElement).hidden = true;
+      body.hidden = false;
+    }
+
+    // --- forecast -------------------------------------------------------------------------
+
+    private forecast(p: Prediction | null, teaser: boolean): HTMLElement {
+      const card = h(
+        'section',
+        { class: 'card forecast' },
+        h('span', { class: 'chip' }, 'прогноз'),
+      );
+      if (!p) {
+        card.append(h('div', { class: 'big blur', 'aria-hidden': 'true' }, '00–00'));
+        card.classList.add('is-locked');
+        return card;
+      }
+      if (!p.enough_data || !p.primary) {
+        card.append(
+          h('div', { class: 'big muted' }, '—'),
+          h('p', { class: 'lead' }, missingEvidence(p)),
+        );
+      } else if (p.test) {
+        card.append(
+          h('div', { class: 'big' }, `${p.test.low}–${p.test.high}`),
+          h(
+            'p',
+            { class: 'lead' },
+            `тестовых баллов из 100, вероятнее всего около ${p.test.expected}`,
+          ),
+          h(
+            'p',
+            { class: 'muted note' },
+            `Первичных ${p.primary.low}–${p.primary.high} из ${p.max_primary}. ` +
+              `Перевод по шкале Рособрнадзора ${p.scale_season ?? ''} г. Это оценка по вашим ` +
+              'решениям и вариантам, а не гарантия результата.',
+          ),
+        );
+      } else {
+        card.append(
+          h('div', { class: 'big' }, `${p.primary.low}–${p.primary.high}`),
+          h(
+            'p',
+            { class: 'lead' },
+            `первичных баллов из ${p.max_primary}, вероятнее всего около ${p.primary.expected}`,
+          ),
+          h(
+            'p',
+            { class: 'muted note' },
+            'Перевод в 100-балльную шкалу появится, когда мы добавим официальную таблицу ' +
+              'Рособрнадзора. Это оценка по вашим решениям и вариантам, а не гарантия результата.',
+          ),
+        );
+      }
+      card.append(this.numbers(p));
+      if (teaser) card.classList.add('is-locked');
+      return card;
+    }
+
+    private numbers(p: Prediction): HTMLElement {
+      const grid = h('ol', { class: 'numbers', 'aria-label': 'Ожидаемые баллы по номерам' });
+      for (const n of p.per_number) {
+        const share = n.expected === null ? null : n.expected / n.max_points;
+        const label =
+          n.expected === null
+            ? `№ ${n.number}: нет данных`
+            : `№ ${n.number}: около ${decimal(n.expected)} из ${n.max_points}`;
+        const cell = h(
+          'li',
+          { class: share === null ? 'none' : '', title: label, 'aria-label': label },
+          String(n.number),
+        );
+        if (share !== null) cell.style.setProperty('--fill', `${Math.round(share * 100)}%`);
+        grid.append(cell);
+      }
+      return grid;
+    }
+
+    // --- summary --------------------------------------------------------------------------
+
+    private summary(data: Insights): HTMLElement {
+      return h(
+        'section',
+        { class: 'card summary' },
+        h('h2', {}, 'Что думает репетитор'),
+        h('p', {}, tutorSummary(data, this.titles()).join(' ')),
+      );
+    }
+
+    // --- topics ---------------------------------------------------------------------------
+
+    private reasons(t: TopicInsight): HTMLElement {
+      const r = t.reasons;
+      const chips: string[] = [];
+      if (r.first_try_accuracy !== null) chips.push(`с 1-й попытки ${pct(r.first_try_accuracy)}`);
+      if (r.graded_tasks)
+        chips.push(`решали ${count(r.graded_tasks, ['задачу', 'задачи', 'задач'])}`);
+      if (r.attempts_per_solved !== null && r.solved_tasks)
+        chips.push(`попыток на задачу ${decimal(r.attempts_per_solved)}`);
+      if (r.heavy_help_share) chips.push(`после подсказок ${pct(r.heavy_help_share)}`);
+      if (r.reveals) chips.push(`смотрели решение ${r.reveals}`);
+      if (r.lessons.total) chips.push(`теория ${r.lessons.finished} из ${r.lessons.total}`);
+      if (r.reading_minutes) chips.push(`читали ${r.reading_minutes} мин`);
+      const asked = r.theory_questions + r.task_questions;
+      if (asked) chips.push(`вопросов репетитору ${asked}`);
+      if (r.last_practised)
+        chips.push(`практика ${ago(daysBetween(r.last_practised, new Date().toISOString()))}`);
+      return h('ul', { class: 'reasons' }, ...chips.map((c) => h('li', {}, c)));
+    }
+
+    private topicRow(t: TopicInsight): HTMLElement {
+      const meta = this.meta.topics[t.topic_id];
+      return h(
+        'li',
+        { class: `topic ${t.status}` },
+        h('a', { href: meta?.href ?? '#' }, this.topicTitle(t.topic_id)),
+        t.status === 'not_started' ? null : this.reasons(t),
+      );
+    }
+
+    private topics(data: Insights): HTMLElement {
+      const section = h('section', { class: 'topics' }, h('h2', {}, 'Темы'));
+      for (const status of STATUS_ORDER) {
+        const items = data.topics.filter((t) => t.status === status);
+        const total = data.counts[status];
+        if (!total) continue;
+        const head = h(
+          'h3',
+          {},
+          GROUP_TITLE[status],
+          h('span', { class: 'muted n' }, ` · ${total}`),
+        );
+        const list = h('ul', { class: 'topic-list' }, ...items.map((t) => this.topicRow(t)));
+        if (FOLDED.has(status) && !data.teaser) {
+          // Long, less urgent lists stay folded so practice and mistakes are within reach.
+          section.append(h('details', { class: `group ${status}` }, h('summary', {}, head), list));
+        } else {
+          const group = h('div', { class: `group ${status}` }, head, list);
+          if (items.length < total) {
+            group.append(
+              h('p', { class: 'muted blur-note' }, `Ещё ${total - items.length} — в Премиум`),
+            );
+          }
+          section.append(group);
+        }
+      }
+      return section;
+    }
+
+    // --- practice and mistakes ------------------------------------------------------------
+
+    /** Opening a task from a list keeps «Ещё задача» inside that list (as Практика does). */
+    private pooled(hrefs: string[], label: string): (e: Event) => void {
+      return () => savePool({ back: `/${this.meta.exam}/profile/`, backLabel: label, hrefs });
+    }
+
+    private taskLabel(ege: number | null, topicId: string | undefined): (Node | string)[] {
+      return [
+        h('span', { class: 'num' }, ege === null ? 'теория' : `№ ${ege}`),
+        h('span', { class: 'what' }, topicId ? this.topicTitle(topicId) : ''),
+      ];
+    }
+
+    private practice(items: PracticeItem[]): HTMLElement {
+      const section = h(
+        'section',
+        { class: 'card practice' },
+        h('h2', {}, 'Тренировка слабых мест'),
+      );
+      if (!items.length) {
+        section.append(
+          h(
+            'p',
+            { class: 'muted' },
+            'Слабых мест пока не видно. Набор появится, когда наберётся статистика; он обновляется раз в день.',
+          ),
+        );
+        return section;
+      }
+      const hrefs = items.map((i) => this.taskHref(i.task_id));
+      const onOpen = this.pooled(hrefs, 'Мой профиль');
+      const left = items.filter((i) => !i.done).length;
+      const next = items.find((i) => !i.done);
+      section.append(
+        h(
+          'p',
+          { class: 'muted' },
+          left
+            ? `Набор на сегодня: осталось ${count(left, ['задача', 'задачи', 'задач'])} из ${items.length}.`
+            : 'Набор на сегодня решён. Завтра будет новый.',
+        ),
+      );
+      const list = h('ol', { class: 'tasks' });
+      for (const i of items) {
+        const a = h(
+          'a',
+          { href: this.taskHref(i.task_id) },
+          ...this.taskLabel(i.ege_task, i.topic_id),
+        );
+        a.addEventListener('click', onOpen);
+        list.append(
+          h(
+            'li',
+            { class: i.done ? 'done' : '' },
+            a,
+            h('span', { class: 'why muted' }, i.done ? '✓ решено' : (REASON[i.reason] ?? '')),
+          ),
+        );
+      }
+      section.append(list);
+      if (next) {
+        const start = h(
+          'a',
+          { class: 'btn', href: this.taskHref(next.task_id) },
+          left === items.length ? 'Начать тренировку' : 'Продолжить',
+        );
+        start.addEventListener('click', onOpen);
+        section.append(start);
+      }
+      return section;
+    }
+
+    private mistakes(items: Mistake[]): HTMLElement {
+      const section = h('section', { class: 'card mistakes' }, h('h2', {}, 'Работа над ошибками'));
+      if (!items.length) {
+        section.append(
+          h(
+            'p',
+            { class: 'muted' },
+            'Здесь появятся задачи, решённые неверно с первой попытки. Через несколько дней их стоит решить снова.',
+          ),
+        );
+        return section;
+      }
+      const due = items.filter((m) => m.due);
+      const later = items.filter((m) => !m.due);
+      if (due.length) {
+        const hrefs = due.map((m) => this.taskHref(m.task_id));
+        const onOpen = this.pooled(hrefs, 'Работа над ошибками');
+        const list = h('ol', { class: 'tasks' });
+        for (const m of due) {
+          const a = h(
+            'a',
+            { href: this.taskHref(m.task_id) },
+            ...this.taskLabel(m.ege_task, m.topic_ids[0]),
+          );
+          a.addEventListener('click', onOpen);
+          const made = new Date(`${m.mistake_on}T00:00:00Z`).toLocaleDateString('ru-RU', DATE);
+          list.append(h('li', {}, a, h('span', { class: 'why muted' }, `ошибка ${made}`)));
+        }
+        section.append(
+          h(
+            'p',
+            { class: 'muted' },
+            'Пора решить снова: задача уйдёт из списка, когда вы решите её верно в другой день.',
+          ),
+          list,
+        );
+      }
+      if (later.length) {
+        const list = h('ul', { class: 'later' });
+        for (const m of later) {
+          const when = new Date(`${m.due_on}T00:00:00Z`).toLocaleDateString('ru-RU', DATE);
+          list.append(
+            h(
+              'li',
+              {},
+              ...this.taskLabel(m.ege_task, m.topic_ids[0]),
+              h('span', { class: 'why muted' }, `вернётся ${when}`),
+            ),
+          );
+        }
+        section.append(h('h3', {}, 'Вернутся позже'), list);
+      }
+      return section;
+    }
+
+    // --- teaser (only while the profile is premium; off for now) --------------------------
+
+    private locked(title: string, what: string): HTMLElement {
+      return h(
+        'section',
+        { class: 'card is-locked' },
+        h('h2', {}, title),
+        h('p', { class: 'blur', 'aria-hidden': 'true' }, `${what} · `.repeat(6)),
+      );
+    }
+
+    private unlock(): HTMLElement {
+      // Placeholder: no payment link until the offer lists the profile.
+      return h(
+        'div',
+        { class: 'card unlock' },
+        h('strong', {}, 'Полный профиль — в Премиум'),
+        h(
+          'p',
+          { class: 'muted' },
+          'Все темы с разбором, тренировка слабых мест, работа над ошибками и прогноз балла.',
+        ),
+        h('button', { class: 'btn', type: 'button', disabled: '' }, 'Открыть с Премиум — скоро'),
+      );
+    }
+  }
+
+  customElements.define('student-profile', StudentProfile);
+</script>
+
+<style>
+  .page-head {
+    align-items: flex-start;
+  }
+  student-profile {
+    display: block;
+  }
+  .body {
+    display: grid;
+    gap: 1rem;
+  }
+  .body :global(h2) {
+    font-size: 1.15rem;
+    margin: 0 0 0.6rem;
+  }
+  .body :global(h3) {
+    font-size: 1rem;
+    margin: 1rem 0 0.5rem;
+  }
+  .body :global(.card) {
+    padding: 1.1rem 1.2rem;
+    min-width: 0;
+  }
+
+  /* forecast */
+  .body :global(.forecast .big) {
+    font-size: clamp(2.4rem, 9vw, 3.4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-top: 0.5rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .body :global(.forecast .lead) {
+    margin: 0.25rem 0 0;
+  }
+  .body :global(.forecast .note) {
+    font-size: 0.85rem;
+    margin: 0.5rem 0 0;
+  }
+  .body :global(.numbers) {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(2.1rem, 1fr));
+    gap: 0.3rem;
+  }
+  .body :global(.numbers li) {
+    display: grid;
+    place-items: center;
+    height: 2.1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: linear-gradient(
+      to top,
+      color-mix(in srgb, var(--accent) 45%, var(--surface-2)) var(--fill, 0%),
+      var(--surface-2) var(--fill, 0%)
+    );
+    border: 1px solid var(--border);
+  }
+  .body :global(.numbers li.none) {
+    color: var(--muted);
+    border-style: dashed;
+    background: transparent;
+  }
+
+  /* summary */
+  .body :global(.summary p) {
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* topics */
+  .body :global(.topics h3 .n) {
+    font-weight: 500;
+  }
+  .body :global(.group summary) {
+    cursor: pointer;
+  }
+  .body :global(.group summary h3) {
+    display: inline;
+  }
+  .body :global(.topic-list) {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .body :global(.topic) {
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--border);
+    border-left-width: 4px;
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+  }
+  .body :global(.topic.weak) {
+    border-left-color: var(--bad);
+  }
+  .body :global(.topic.shaky),
+  .body :global(.topic.review_due) {
+    border-left-color: var(--warn);
+  }
+  .body :global(.topic.strong) {
+    border-left-color: var(--ok);
+  }
+  .body :global(.topic.in_progress) {
+    border-left-color: var(--accent);
+  }
+  .body :global(.topic > a) {
+    font-weight: 600;
+    color: var(--text);
+  }
+  .body :global(.reasons) {
+    list-style: none;
+    margin: 0.45rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+  .body :global(.reasons li) {
+    font-size: 0.8rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    background: var(--surface-2);
+    color: var(--muted);
+  }
+
+  /* practice and mistakes */
+  .body :global(.tasks),
+  .body :global(.later) {
+    list-style: none;
+    margin: 0.5rem 0 0.9rem;
+    padding: 0;
+    display: grid;
+    gap: 0.35rem;
+  }
+  .body :global(.tasks li),
+  .body :global(.later li) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.2rem 0.6rem;
+  }
+  .body :global(.tasks a) {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: baseline;
+    color: var(--text);
+    min-width: 0;
+  }
+  .body :global(.num) {
+    flex: none;
+    font-weight: 700;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .body :global(.what) {
+    overflow-wrap: anywhere;
+  }
+  .body :global(.why) {
+    font-size: 0.85rem;
+  }
+  .body :global(.tasks li.done a) {
+    color: var(--muted);
+    text-decoration: line-through;
+  }
+
+  /* teaser */
+  .body :global(.is-locked) {
+    position: relative;
+  }
+  .body :global(.blur) {
+    filter: blur(6px);
+    user-select: none;
+  }
+  .body :global(.unlock) {
+    display: grid;
+    gap: 0.5rem;
+    justify-items: start;
+    border-color: var(--accent);
+  }
+  .body :global(.unlock p) {
+    margin: 0;
+  }
+</style>

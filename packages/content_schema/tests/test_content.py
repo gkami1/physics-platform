@@ -109,6 +109,42 @@ def test_last_season_marks_a_task_out_of_later_seasons(scratch: Path) -> None:
     assert other.in_season(2027)
 
 
+def _append_scale(root: Path, scale: dict[int, int], extra: str = "") -> None:
+    """Append a score scale to the scratch exam.yaml. Synthetic values: shape tests only."""
+    lines = "".join(f"  {p}: {v}\n" for p, v in scale.items())
+    with (root / "exam.yaml").open("a", encoding="utf-8") as f:
+        f.write(f"\nscore_scale:\n{lines}{extra}")
+
+
+LINEAR = {p: round(p * 100 / 45) for p in range(46)}  # not a real table
+SCALE_META = "score_scale_source: test\nscore_scale_season: 2026\n"
+
+
+def test_score_scale_accepts_a_complete_table(scratch: Path) -> None:
+    _append_scale(scratch, LINEAR, SCALE_META)
+    res = load_exam_dir(scratch)
+    assert res.errors == []
+    assert res.bundle is not None
+    assert res.bundle.exam.score_scale == LINEAR
+
+
+@pytest.mark.parametrize(
+    ("scale", "extra", "message"),
+    [
+        (LINEAR, "", "needs score_scale_source and score_scale_season"),
+        ({p: v for p, v in LINEAR.items() if p != 30}, SCALE_META, "every primary score 0..45"),
+        (LINEAR | {46: 100}, SCALE_META, "every primary score 0..45"),
+        (LINEAR | {20: 10}, SCALE_META, "must not decrease"),
+        (LINEAR | {45: 101}, SCALE_META, "within 0..100"),
+    ],
+)
+def test_score_scale_validation(
+    scratch: Path, scale: dict[int, int], extra: str, message: str
+) -> None:
+    _append_scale(scratch, scale, extra)
+    assert message in _errors(scratch)
+
+
 def test_unknown_topic(scratch: Path) -> None:
     _edit(scratch / "tasks/1/kin-0001.md", "mech.kinematics.uniform-accel", "mech.nope")
     assert "unknown topic 'mech.nope'" in _errors(scratch)

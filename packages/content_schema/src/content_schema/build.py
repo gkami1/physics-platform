@@ -51,6 +51,9 @@ def private_task(t: Task) -> dict[str, Any]:
         "id": t.meta.id,
         "ege_task": t.meta.ege_task,
         "topics": t.meta.topics,
+        "difficulty": t.meta.difficulty,
+        "status": t.meta.status,
+        "last_season": t.meta.last_season,
         "statement": t.statement,
         "answer": t.meta.answer.model_dump(mode="json"),
         "solution": t.solution,
@@ -160,6 +163,8 @@ def build(bundle: ContentBundle, out: Path) -> str:
     private = {
         "content_version": version,
         "exam": exam_public,
+        # The profile (insights) needs topic order, prerequisites and EGE numbers.
+        "roadmap": roadmap,
         "tasks": [private_task(t) for t in tasks],
         # Tutor context for theory pages (the text itself is public).
         "theory": theory_private,

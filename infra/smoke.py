@@ -43,11 +43,14 @@ for p in [
     "/ege-physics/theory/mech.kinematics.basics/",
     "/login/",
     "/account/",
+    "/ege-physics/profile/",
     "/pricing/",
     "/pay/success/",
 ]:
     r = c.get(p)
     check(f"GET {p}", r.status_code == 200, r.status_code)
+r = c.get("/api/insights?exam=ege-physics")
+check("insights for a new visitor", r.status_code == 200 and "topics" in r.json(), r.status_code)
 r = c.get("/api/billing/plans")
 check(
     "billing tiers available",
