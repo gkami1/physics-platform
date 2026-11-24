@@ -10,5 +10,5 @@ export const seller = {
 };
 
 /** Bump with any change to the legal texts; payments and sign-ups record the version. */
-export const LEGAL_VERSION = '2026-11-23.2';
-export const LEGAL_DATE = '23 ноября 2026 г.';
+export const LEGAL_VERSION = '2026-11-24.1';
+export const LEGAL_DATE = '24 ноября 2026 г.';

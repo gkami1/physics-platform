@@ -130,7 +130,7 @@ const docked = variant === 'docked';
       <div class="actions">
         {kind === 'task' && <button type="button" class="hint secondary">Подсказка</button>}
         <span class="left muted"></span>
-        <a class="more" href="/pricing/" hidden>Больше сообщений</a>
+        <a class="more" href="/account/#subscription" hidden>Больше сообщений</a>
       </div>
     </form>
   </section>
@@ -148,7 +148,7 @@ const docked = variant === 'docked';
   };
   const FREE_LIMIT_REACHED =
     'На сегодня бесплатные сообщения закончились. Возвращайтесь завтра — или ' +
-    '<a href="/pricing/">подключите доступ</a>: 100 сообщений в день.';
+    '<a href="/account/#subscription">подключите Премиум</a>: 100 сообщений в день.';
 
   /** Same breakpoint as the theory page grid: from here the chat is a column, not a sheet. */
   const WIDE = '(min-width: 64rem)';
