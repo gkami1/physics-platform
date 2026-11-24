@@ -25,10 +25,9 @@ from platform_api.deps import Db, Store
 
 router = APIRouter(prefix="/api")
 
-# Decided 2026-11-24 (plan A): the profile is free while the offer sells only the tutor's
-# message limit. Turning this on shows free users the teaser; do it together with the
-# pricing page and offer, which must then list the profile.
-PROFILE_REQUIRES_PASS = False
+# Decided 2026-11-24: the full profile is part of the paid plan (offer §2.2 lists it); free
+# users get the teaser. Switching this off again needs the pricing page and offer updated.
+PROFILE_REQUIRES_PASS = True
 
 
 class Insights(BaseModel):

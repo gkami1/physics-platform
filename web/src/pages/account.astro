@@ -1,8 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
+import PlanPicker from '../components/PlanPicker.astro';
 ---
 
-<Base title="Настройки аккаунта — Физика ЕГЭ" description="Имя, телефон, пароль и согласия">
+<Base title="Настройки аккаунта — Физика ЕГЭ" description="Имя, телефон, пароль и подписка">
   <account-profile class="card form-card">
     <p class="muted loading">Загружаем профиль…</p>
     <form class="form" novalidate hidden>
@@ -46,6 +47,16 @@ import Base from '../layouts/Base.astro';
       </div>
     </form>
   </account-profile>
+
+  <section id="subscription" class="subscription">
+    <h2>Подписка</h2>
+    <p class="muted">
+      Премиум открывает полный «Мой профиль»: прогноз балла ЕГЭ, разбор всех тем, тренировку
+      слабых мест и работу над ошибками, а репетитору можно задать больше вопросов.
+      <a href="/pricing/">Подробнее о тарифах</a>
+    </p>
+    <PlanPicker />
+  </section>
 </Base>
 
 <script>
@@ -67,7 +78,9 @@ import Base from '../layouts/Base.astro';
       void api.me().then(
         ({ user }) => {
           if (!user) {
-            location.replace('/login/?next=/account/');
+            location.replace(
+              `/login/?next=${encodeURIComponent(location.pathname + location.hash)}`,
+            );
             return;
           }
           this.input('first_name').value = user.first_name ?? '';
@@ -83,6 +96,10 @@ import Base from '../layouts/Base.astro';
           link.href = `/login/?mode=reset&email=${encodeURIComponent(user.email)}&next=/account/`;
           (this.querySelector('.loading') as HTMLElement).hidden = true;
           f.hidden = false;
+          // The form above just grew: land on «Подписка» again when that's what was linked.
+          if (location.hash === '#subscription') {
+            document.getElementById('subscription')?.scrollIntoView();
+          }
         },
         () => this.fail('Нет связи с сервером. Обновите страницу'),
       );
@@ -135,6 +152,18 @@ import Base from '../layouts/Base.astro';
   account-profile {
     display: block;
     margin: 1.5rem auto 0;
+  }
+  .subscription {
+    max-width: 60rem;
+    margin: 2.5rem auto 0;
+    scroll-margin-top: 4.5rem; /* below the sticky header */
+  }
+  .subscription h2 {
+    font-size: 1.3rem;
+    margin: 0 0 0.25rem;
+  }
+  .subscription > p {
+    margin: 0 0 1rem;
   }
   .email-value {
     font-weight: 400;

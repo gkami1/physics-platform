@@ -70,11 +70,11 @@ const tabs = [
             <span aria-hidden="true">◐</span>
           </button>
           <site-account>
-            <a href="/pricing/" class="plan" aria-current={path.startsWith('/pricing') ? 'page' : undefined}>
-              Тарифы
-            </a>
             <a href="/login/" class="btn small login">Войти</a>
             <span class="who" hidden>
+              <a href="/account/#subscription" class="plan" title="Подписка: тарифы и оплата">
+                Подписка
+              </a>
               <a href={`/${exam}/profile/`} class="profile" title="Мой профиль">
                 <span class="avatar" aria-hidden="true"></span>
                 <span class="email"></span>
@@ -149,8 +149,8 @@ const tabs = [
           if (user.paid_until) {
             const plan = this.querySelector('.plan') as HTMLAnchorElement;
             const date = new Date(user.paid_until).toLocaleDateString('ru-RU', SHORT_DATE);
-            plan.textContent = `Доступ до ${date}`;
-            plan.title = 'Ваш тариф — продлить';
+            plan.textContent = `Премиум до ${date}`;
+            plan.title = 'Ваша подписка — продлить';
             plan.classList.add('paid');
           }
         },
@@ -299,8 +299,7 @@ const tabs = [
     text-decoration: none;
     white-space: nowrap;
   }
-  .plan:hover,
-  .plan[aria-current='page'] {
+  .plan:hover {
     color: var(--text);
   }
   .plan.paid {

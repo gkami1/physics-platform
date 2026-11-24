@@ -31,6 +31,12 @@ def make_weak(client: TestClient) -> None:
         wrong(client, t)
 
 
+@pytest.fixture(autouse=True)
+def full_profile(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Most tests exercise the full profile; `test_teaser_for_free_users` turns the gate on."""
+    monkeypatch.setattr(insights_api, "PROFILE_REQUIRES_PASS", False)
+
+
 def grant_pass(db_url: str, email: str) -> None:
     (user_id,) = rows(db_url, select(User.id).where(User.email == email))[0]  # type: ignore[misc]
     rows(
@@ -115,7 +121,7 @@ def test_profile_is_per_actor(client: TestClient, sign_up: Callable[[str], None]
     assert client.get(URL).json()["counts"]["weak"] == 0
 
 
-def test_teaser_switch(
+def test_teaser_for_free_users(
     client: TestClient,
     sign_up: Callable[[str], None],
     migrated_db: str,

@@ -1,0 +1,239 @@
+---
+// The plan cards with checkout: on /pricing/ (public prices, linked from the footer) and in
+// «Подписка» on /account/. What each tier lists must match offer §2.2.
+import { formatRub } from '../lib/api';
+import { pricesKop } from '../lib/prices';
+
+const PAID = [
+  'Всё, что в бесплатном',
+  '«Мой профиль» целиком: прогноз балла ЕГЭ и разбор всех тем',
+  'Тренировка слабых мест и работа над ошибками',
+];
+---
+
+<plan-picker>
+  <p class="current badge" hidden></p>
+
+  <div class="grid">
+    <section class="card tier" data-tier="free">
+      <h3>Бесплатно</h3>
+      <p class="price">0 ₽</p>
+      <ul>
+        <li>Вся теория и все задачи</li>
+        <li>Автопроверка ответов, разборы решений</li>
+        <li>Варианты ЕГЭ под таймер, блиц</li>
+        <li>Прогресс на всех устройствах</li>
+        <li>«Мой профиль»: сколько слабых тем и ошибок</li>
+        <li><strong>20 сообщений</strong> репетитору в сутки</li>
+      </ul>
+    </section>
+
+    <section class="card tier featured" data-plan="month">
+      <h3>Премиум · 30 дней</h3>
+      <p class="price"><span class="amount">{formatRub(pricesKop.month)}</span></p>
+      <ul>
+        {PAID.map((f) => <li>{f}</li>)}
+        <li><strong>100 сообщений</strong> репетитору в сутки</li>
+        <li>Разовый платёж, без автопродления</li>
+      </ul>
+      <button type="button" class="btn buy" disabled>Оплатить</button>
+    </section>
+
+    <section class="card tier" data-plan="season">
+      <h3>Премиум · до конца сезона</h3>
+      <p class="price"><span class="amount">{formatRub(pricesKop.season)}</span></p>
+      <p class="until muted"></p>
+      <ul>
+        {PAID.map((f) => <li>{f}</li>)}
+        <li><strong>100 сообщений</strong> репетитору в сутки</li>
+        <li>До 30 июня указанного сезона одним платежом</li>
+      </ul>
+      <button type="button" class="btn buy" disabled>Оплатить</button>
+    </section>
+  </div>
+
+  <fieldset class="terms">
+    <legend class="visually-hidden">Условия оплаты</legend>
+    <label>
+      <input type="checkbox" name="offer" />
+      <span>
+        Принимаю условия <a href="/legal/offer/" target="_blank">публичной оферты</a>
+      </span>
+    </label>
+    <label>
+      <input type="checkbox" name="adult" />
+      <span>Мне есть 18 лет, или я оплачиваю с согласия родителя (законного представителя)</span>
+    </label>
+  </fieldset>
+
+  <p class="message" role="status" aria-live="polite" hidden></p>
+</plan-picker>
+
+<script>
+  import { ApiError, api, formatDate, formatRub, session, type PlanId } from '../lib/api';
+
+  const ERRORS: Record<string, string> = {
+    payments_unavailable: 'Оплата пока не подключена. Попробуйте позже.',
+    too_many_checkouts: 'Слишком много попыток оплаты. Подождите час и попробуйте снова.',
+    offer_required: 'Нужно принять условия оферты.',
+  };
+
+  class PlanPicker extends HTMLElement {
+    private signedIn = false;
+    private enabled = false;
+
+    connectedCallback() {
+      this.querySelectorAll<HTMLButtonElement>('.buy').forEach((b) =>
+        b.addEventListener('click', () => {
+          const plan = b.closest<HTMLElement>('[data-plan]')?.dataset.plan as PlanId;
+          void this.buy(plan);
+        }),
+      );
+      void this.load();
+    }
+
+    /** Back to this very spot (e.g. /account/#subscription) after signing in. */
+    private signIn() {
+      const here = location.pathname + location.hash;
+      location.href = `/login/?next=${encodeURIComponent(here)}`;
+    }
+
+    private async load() {
+      try {
+        const [plans, me] = await Promise.all([api.plans(), session()]);
+        this.signedIn = me.user !== null;
+        this.enabled = plans.enabled;
+        for (const p of plans.plans) {
+          const card = this.querySelector<HTMLElement>(`[data-plan="${p.id}"]`);
+          if (!card) continue;
+          (card.querySelector('.amount') as HTMLElement).textContent = formatRub(p.price_kop);
+          const until = card.querySelector<HTMLElement>('.until');
+          if (until) until.textContent = `Доступ до ${formatDate(p.valid_until)}`;
+        }
+        const current = this.querySelector('.current') as HTMLElement;
+        if (plans.paid_until) {
+          current.textContent = `Премиум действует до ${formatDate(plans.paid_until)}. Новая оплата продлит его.`;
+          current.hidden = false;
+        }
+        this.querySelectorAll<HTMLButtonElement>('.buy').forEach((b) => {
+          b.disabled = !this.enabled;
+          b.textContent = this.signedIn ? 'Оплатить' : 'Войти и оплатить';
+        });
+        if (!plans.enabled) this.message(ERRORS.payments_unavailable!, true);
+      } catch {
+        this.message('Нет связи с сервером. Обновите страницу.', true);
+      }
+    }
+
+    private checked(name: string): boolean {
+      return (this.querySelector(`input[name="${name}"]`) as HTMLInputElement).checked;
+    }
+
+    private async buy(plan: PlanId) {
+      if (!this.signedIn) return this.signIn();
+      if (!this.enabled) return this.message(ERRORS.payments_unavailable!, true);
+      if (!this.checked('offer')) return this.message(ERRORS.offer_required!, true);
+      if (!this.checked('adult')) {
+        return this.message('Подтвердите возраст или согласие родителя.', true);
+      }
+      const buttons = this.querySelectorAll<HTMLButtonElement>('.buy');
+      buttons.forEach((b) => (b.disabled = true));
+      this.message('');
+      try {
+        const { url } = await api.checkout(plan);
+        location.href = url;
+      } catch (e) {
+        const detail = e instanceof ApiError ? e.detail : '';
+        if (e instanceof ApiError && e.status === 401) return this.signIn();
+        this.message(ERRORS[detail] ?? 'Нет связи с сервером. Попробуйте ещё раз.', true);
+        buttons.forEach((b) => (b.disabled = false));
+      }
+    }
+
+    private message(text: string, error = false) {
+      const m = this.querySelector('.message') as HTMLElement;
+      m.textContent = text;
+      m.dataset.kind = error ? 'error' : '';
+      m.hidden = !text;
+    }
+  }
+
+  customElements.define('plan-picker', PlanPicker);
+</script>
+
+<style>
+  plan-picker {
+    display: block;
+  }
+  .current {
+    margin: 0 0 1rem;
+    white-space: normal;
+    font-size: 0.875rem;
+    padding: 0.4rem 0.8rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1rem;
+  }
+  .tier {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.25rem;
+  }
+  .tier.featured {
+    border-color: var(--accent);
+  }
+  .tier h3 {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+  .price {
+    margin: 0;
+    font-size: 1.9rem;
+    font-weight: 800;
+  }
+  .until {
+    margin: 0;
+    font-size: 0.875rem;
+  }
+  .tier ul {
+    margin: 0.25rem 0 0.75rem;
+    padding-left: 1.1rem;
+    flex: 1;
+  }
+  .tier li {
+    margin: 0.25rem 0;
+  }
+  .buy {
+    width: 100%;
+  }
+  .terms {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    border: 0;
+  }
+  .terms label {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    font-size: 0.925rem;
+  }
+  .terms input {
+    margin-top: 0.2rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    flex: none;
+  }
+  .message {
+    margin: 0.75rem 0 0;
+    font-weight: 600;
+  }
+  .message[data-kind='error'] {
+    color: var(--bad);
+  }
+</style>

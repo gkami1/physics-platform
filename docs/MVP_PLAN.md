@@ -189,7 +189,8 @@ Each milestone has a **definition of done**; a milestone is not finished until i
 
 ## M7 — Premium, money and compliance
 - Implemented: theory reading history (`theory_visits`), Robokassa checkout and invoice polling, paid entitlements, the free and paid tutor caps, and the paid fair-use budget. Current one-off passes are 30 days (790 ₽) and season (2990 ₽).
-- Implemented 2026-11-24: «Мой профиль» (`insights.py`, `GET /api/insights`, `/<exam>/profile/`): topic statuses with their numbers, weak-spot practice, mistakes notebook, predicted score, rule-based tutor summary. Free for now (the offer sells only the tutor limit); `PROFILE_REQUIRES_PASS` turns on the teaser together with an offer/pricing update.
+- Implemented 2026-11-24: «Мой профиль» (`insights.py`, `GET /api/insights`, `/<exam>/profile/`): topic statuses with their numbers, weak-spot practice, mistakes notebook, predicted score, rule-based tutor summary. Premium since 2026-11-24 (`PROFILE_REQUIRES_PASS`, offer §2.2 updated); free users see a teaser that links to «Подписка».
+- Implemented 2026-11-24: «Тарифы» removed from the header; plans live in «Подписка» on `/account/` (shared `PlanPicker` with `/pricing/`, which stays in the footer).
 - Score table: Rosobrnadzor's official 2026 primary→test table in `exam.yaml: score_scale` (added 2026-11-24); replace with the 2027 table when it is published.
 - Before enabling live payments: configure the Robokassa shop and «Мой налог», complete the seller details, review the offer, privacy policy and consent drafts, submit the Roskomnadzor notification, and verify a real payment and refund (DEPLOY §6).
 - **Done:** a real payment unlocks the paid tier; limits enforced.

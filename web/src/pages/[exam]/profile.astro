@@ -48,7 +48,7 @@ const meta = {
 </Base>
 
 <script>
-  import { api, session } from '../../lib/api';
+  import { api, formatDate, session } from '../../lib/api';
   import {
     ago,
     count,
@@ -87,6 +87,7 @@ const meta = {
     in_progress: 'в работе',
   };
   const FOLDED = new Set<TopicStatus>(['in_progress', 'strong', 'not_started']);
+  const SUBSCRIPTION = '/account/#subscription';
   const DATE: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long', timeZone: 'UTC' };
 
   /** Tiny DOM builder: text is always set as text, never parsed as HTML. */
@@ -103,18 +104,20 @@ const meta = {
 
   class StudentProfile extends HTMLElement {
     private meta!: Meta;
+    private paidUntil: string | null = null;
 
     connectedCallback() {
       const raw = this.querySelector('.profile-meta')?.textContent ?? '{}';
       this.meta = JSON.parse(raw) as Meta;
-      void session().then(
+      const me = session().then(
         ({ user }) => {
           if (user) (document.querySelector('.settings') as HTMLElement).hidden = false;
+          this.paidUntil = user?.paid_until ?? null;
         },
         () => {},
       );
-      void api.insights(this.meta.exam).then(
-        (data) => this.render(data),
+      void Promise.all([api.insights(this.meta.exam), me]).then(
+        ([data]) => this.render(data),
         () => {
           (this.querySelector('.status') as HTMLElement).textContent =
             'Не удалось загрузить профиль. Обновите страницу чуть позже.';
@@ -137,6 +140,7 @@ const meta = {
     private render(data: Insights) {
       const body = this.querySelector('.body') as HTMLElement;
       body.replaceChildren(
+        this.plan(data.teaser),
         this.forecast(data.prediction, data.teaser),
         this.summary(data),
         this.topics(data),
@@ -167,7 +171,11 @@ const meta = {
         h('span', { class: 'chip' }, 'прогноз'),
       );
       if (!p) {
-        card.append(h('div', { class: 'big blur', 'aria-hidden': 'true' }, '00–00'));
+        card.append(
+          h('div', { class: 'big blur', 'aria-hidden': 'true' }, '00–00'),
+          h('p', { class: 'lead' }, 'Прогноз баллов ЕГЭ по вашим решениям и вариантам'),
+          this.upsell('Узнать свой балл — в Премиум'),
+        );
         card.classList.add('is-locked');
         return card;
       }
@@ -240,6 +248,14 @@ const meta = {
         { class: 'card summary' },
         h('h2', {}, 'Что думает репетитор'),
         h('p', {}, tutorSummary(data, this.titles()).join(' ')),
+        data.teaser &&
+          h(
+            'p',
+            { class: 'muted' },
+            'Это вывод по одной теме. Разбор всех тем и план на каждый день — ',
+            h('a', { href: SUBSCRIPTION }, 'в Премиум'),
+            '.',
+          ),
       );
     }
 
@@ -294,7 +310,12 @@ const meta = {
           const group = h('div', { class: `group ${status}` }, head, list);
           if (items.length < total) {
             group.append(
-              h('p', { class: 'muted blur-note' }, `Ещё ${total - items.length} — в Премиум`),
+              h(
+                'p',
+                { class: 'muted blur-note' },
+                `Ещё ${total - items.length} — `,
+                h('a', { href: SUBSCRIPTION }, 'в Премиум'),
+              ),
             );
           }
           section.append(group);
@@ -431,7 +452,30 @@ const meta = {
       return section;
     }
 
-    // --- teaser (only while the profile is premium; off for now) --------------------------
+    // --- plan and teaser (PROFILE_REQUIRES_PASS: free users see counts, not the lists) ----
+
+    private plan(teaser: boolean): HTMLElement {
+      if (this.paidUntil) {
+        return h(
+          'p',
+          { class: 'plan-strip' },
+          h('span', { class: 'chip' }, 'Премиум'),
+          ` действует до ${formatDate(this.paidUntil)} · `,
+          h('a', { href: SUBSCRIPTION }, 'Продлить'),
+        );
+      }
+      return h(
+        'p',
+        { class: 'plan-strip' },
+        h('span', { class: 'chip' }, 'Бесплатный план'),
+        h('span', { class: 'muted' }, teaser ? ' Часть профиля скрыта. ' : ' '),
+        h('a', { href: SUBSCRIPTION }, 'Подключить Премиум'),
+      );
+    }
+
+    private upsell(label: string): HTMLElement {
+      return h('a', { class: 'btn small upsell', href: SUBSCRIPTION }, label);
+    }
 
     private locked(title: string, what: string): HTMLElement {
       return h(
@@ -439,11 +483,11 @@ const meta = {
         { class: 'card is-locked' },
         h('h2', {}, title),
         h('p', { class: 'blur', 'aria-hidden': 'true' }, `${what} · `.repeat(6)),
+        this.upsell('Открыть в Премиум'),
       );
     }
 
     private unlock(): HTMLElement {
-      // Placeholder: no payment link until the offer lists the profile.
       return h(
         'div',
         { class: 'card unlock' },
@@ -451,9 +495,10 @@ const meta = {
         h(
           'p',
           { class: 'muted' },
-          'Все темы с разбором, тренировка слабых мест, работа над ошибками и прогноз балла.',
+          'Прогноз балла ЕГЭ, разбор всех тем, ежедневная тренировка слабых мест и работа над ' +
+            'ошибками. И больше вопросов репетитору.',
         ),
-        h('button', { class: 'btn', type: 'button', disabled: '' }, 'Открыть с Премиум — скоро'),
+        h('a', { class: 'btn', href: SUBSCRIPTION }, 'Подключить Премиум'),
       );
     }
   }
@@ -647,5 +692,12 @@ const meta = {
   }
   .body :global(.unlock p) {
     margin: 0;
+  }
+  .body :global(.upsell) {
+    align-self: flex-start;
+  }
+  .body :global(.plan-strip) {
+    margin: 0;
+    font-size: 0.9rem;
   }
 </style>
