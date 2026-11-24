@@ -1,0 +1,102 @@
+# dyn-0051: block on a table, thread over a pulley at the edge, load h above the floor.
+kind: diagram
+size:
+- 400
+- 280
+items:
+- hatch:
+  - - 10
+    - 260
+  - - 390
+    - 260
+  side: 1
+- rect:
+  - 20
+  - 120
+  - 260
+  - 12
+  fill: surface
+  width: 1.6
+- rect:
+  - 30
+  - 132
+  - 10
+  - 128
+  fill: surface
+  width: 1.4
+- rect:
+  - 260
+  - 132
+  - 10
+  - 128
+  fill: surface
+  width: 1.4
+- rect:
+  - 110
+  - 92
+  - 54
+  - 28
+  fill: surface
+  width: 1.6
+- line:
+  - - 280
+    - 120
+  - - 292.0
+    - 108.0
+  width: 2
+- circle:
+  - 292.0
+  - 108.0
+  r: 12.0
+  width: 1.6
+- dots:
+  - - 292.0
+    - 108.0
+  r: 2.5
+- line:
+  - - 164
+    - 96.0
+  - - 292.0
+    - 96.0
+  width: 1.4
+- line:
+  - - 304.0
+    - 108.0
+  - - 304.0
+    - 180
+  width: 1.4
+- rect:
+  - 288.0
+  - 180
+  - 32
+  - 34
+  fill: surface
+  width: 1.6
+- arrow:
+  - - 350
+    - 236
+  - - 350
+    - 214
+  width: 1
+  tone: muted
+- arrow:
+  - - 350
+    - 238
+  - - 350
+    - 260
+  width: 1
+  tone: muted
+- line:
+  - - 322.0
+    - 214
+  - - 358
+    - 214
+  width: 1
+  dashed: true
+  tone: muted
+- text: '*h*'
+  at:
+  - 362
+  - 242
+  size: 14
+  anchor: start

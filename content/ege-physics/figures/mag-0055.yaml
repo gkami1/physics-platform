@@ -1,0 +1,181 @@
+# mag-0055: square frame at height h above the upper boundary of a field region (crosses).
+kind: diagram
+size:
+- 400
+- 250
+items:
+- rect:
+  - 160
+  - 30
+  - 80
+  - 80
+  width: 2.4
+- line:
+  - - 20
+    - 150
+  - - 380
+    - 150
+  width: 1.2
+  dashed: true
+- line:
+  - - 300
+    - 110
+  - - 300
+    - 150
+  width: 1
+  tone: muted
+- line:
+  - - 240
+    - 110
+  - - 310
+    - 110
+  width: 1
+  dashed: true
+  tone: muted
+- text: '*h*'
+  at:
+  - 314
+  - 135
+  size: 14
+  anchor: start
+- text: ×
+  at:
+  - 40
+  - 178
+  size: 16
+- text: ×
+  at:
+  - 80
+  - 178
+  size: 16
+- text: ×
+  at:
+  - 120
+  - 178
+  size: 16
+- text: ×
+  at:
+  - 160
+  - 178
+  size: 16
+- text: ×
+  at:
+  - 200
+  - 178
+  size: 16
+- text: ×
+  at:
+  - 240
+  - 178
+  size: 16
+- text: ×
+  at:
+  - 280
+  - 178
+  size: 16
+- text: ×
+  at:
+  - 320
+  - 178
+  size: 16
+- text: ×
+  at:
+  - 360
+  - 178
+  size: 16
+- text: ×
+  at:
+  - 40
+  - 210
+  size: 16
+- text: ×
+  at:
+  - 80
+  - 210
+  size: 16
+- text: ×
+  at:
+  - 120
+  - 210
+  size: 16
+- text: ×
+  at:
+  - 160
+  - 210
+  size: 16
+- text: ×
+  at:
+  - 200
+  - 210
+  size: 16
+- text: ×
+  at:
+  - 240
+  - 210
+  size: 16
+- text: ×
+  at:
+  - 280
+  - 210
+  size: 16
+- text: ×
+  at:
+  - 320
+  - 210
+  size: 16
+- text: ×
+  at:
+  - 360
+  - 210
+  size: 16
+- text: ×
+  at:
+  - 40
+  - 242
+  size: 16
+- text: ×
+  at:
+  - 80
+  - 242
+  size: 16
+- text: ×
+  at:
+  - 120
+  - 242
+  size: 16
+- text: ×
+  at:
+  - 160
+  - 242
+  size: 16
+- text: ×
+  at:
+  - 200
+  - 242
+  size: 16
+- text: ×
+  at:
+  - 240
+  - 242
+  size: 16
+- text: ×
+  at:
+  - 280
+  - 242
+  size: 16
+- text: ×
+  at:
+  - 320
+  - 242
+  size: 16
+- text: ×
+  at:
+  - 360
+  - 242
+  size: 16
+- text: '*B*'
+  at:
+  - 372
+  - 178
+  size: 14
+  anchor: start

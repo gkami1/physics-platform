@@ -1,0 +1,45 @@
+# dyn-0053: block at a wall, force F at angle α to the vertical, up and towards the wall.
+kind: diagram
+size:
+- 300
+- 260
+items:
+- hatch:
+  - - 220
+    - 20
+  - - 220
+    - 250
+  side: -1
+- rect:
+  - 170
+  - 90
+  - 50
+  - 46
+  fill: surface
+  width: 1.6
+- arrow:
+  - - 116.0
+    - 208.0
+  - - 170
+    - 136
+  tone: force
+  width: 2.2
+  label: '*F*'
+  label_at:
+  - 160.0
+  - 194.0
+- line:
+  - - 116.0
+    - 208.0
+  - - 116.0
+    - 138.0
+  width: 1
+  dashed: true
+  tone: muted
+- angle:
+  - 116.0
+  - 208.0
+  start: 53.13
+  end: 90
+  r: 34
+  label: '*α*'
