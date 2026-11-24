@@ -58,8 +58,9 @@ class TaskInfo:
     ege_task: int | None  # None: a step task of a theory page
     topics: tuple[str, ...]
     difficulty: int = 1
-    published: bool = True  # False for drafts and tasks removed from content
+    published: bool = True  # status: published tasks come first (drafts are on the site too)
     in_season: bool = True  # counts as its EGE number this season (see TaskMeta.last_season)
+    active: bool = True  # False once removed from content: still evidence, never offered
 
 
 @dataclass(frozen=True)
@@ -409,7 +410,8 @@ def practice_set(roadmap: Roadmap, ev: EvidenceBundle, now: datetime) -> list[Pr
 
     Unsolved tasks of weak and shaky topics first, then tasks of review-due topics (unsolved
     first), topping up from in-progress topics when that gives fewer than PRACTICE_MIN.
-    Within a group: study order (prerequisites first), easiest first, then a per-day shuffle.
+    Within a group: study order (prerequisites first), published before drafts (as the
+    site's pools), easiest first, then a per-day shuffle. Removed tasks are never offered.
     """
     today = now.date()
     start = datetime.combine(today, datetime.min.time(), tzinfo=now.tzinfo)
@@ -425,9 +427,9 @@ def practice_set(roadmap: Roadmap, ev: EvidenceBundle, now: datetime) -> list[Pr
     solved_before = {t for t, f in facts_before.items() if f.solved_at is not None}
     solved_today = {a.task_id for a in ev.attempts if a.at >= start and _full(a)}
 
-    ranked: list[tuple[tuple[int, int, int, int, str], PracticeItem]] = []
+    ranked: list[tuple[tuple[int, int, int, int, int, str], PracticeItem]] = []
     for info in ev.tasks.values():
-        if info.ege_task is None or not info.published:
+        if info.ege_task is None or not info.active:
             continue
         options = [
             (_GROUP[statuses[t]], order[t], t)
@@ -441,7 +443,15 @@ def practice_set(roadmap: Roadmap, ev: EvidenceBundle, now: datetime) -> list[Pr
         if solved and group != 1:
             continue
         item = PracticeItem(info.id, topic, info.ege_task, statuses[topic], info.id in solved_today)
-        ranked.append(((group, idx, int(solved), info.difficulty, _day_hash(today, info.id)), item))
+        key = (
+            group,
+            idx,
+            int(solved),
+            int(not info.published),
+            info.difficulty,
+            _day_hash(today, info.id),
+        )
+        ranked.append((key, item))
     ranked.sort(key=lambda r: r[0])
 
     picked: list[PracticeItem] = []
@@ -466,7 +476,7 @@ def mistakes(ev: EvidenceBundle, today: date) -> list[Mistake]:
     out: list[Mistake] = []
     for tid, f in task_facts(ev.attempts).items():
         info = ev.tasks.get(tid)
-        if info is None or not info.published or f.first is None or _full(f.first):
+        if info is None or not info.active or f.first is None or _full(f.first):
             continue
         made = f.first.at.date()
         if f.last_full_at is not None and f.last_full_at.date() > made:

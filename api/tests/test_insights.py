@@ -85,8 +85,9 @@ def task(
     difficulty: int = 1,
     published: bool = True,
     in_season: bool = True,
+    active: bool = True,
 ) -> TaskInfo:
-    return TaskInfo(tid, ege, (topic,), difficulty, published, in_season)
+    return TaskInfo(tid, ege, (topic,), difficulty, published, in_season, active)
 
 
 def att(
@@ -281,11 +282,11 @@ def test_practice_prefers_weak_topics_prereqs_first_easiest_first() -> None:
     assert all(i.reason == "weak" for i in items)
 
 
-def test_practice_skips_step_tasks_drafts_and_solved_but_keeps_old_season() -> None:
+def test_practice_skips_step_tasks_removed_and_solved_but_keeps_old_season() -> None:
     tasks, attempts = _weak_a_one(
         [
             task("step", ege=None),
-            task("draft", published=False),
+            task("gone", active=False),
             task("solved"),
             task("old", in_season=False),
         ]
@@ -293,9 +294,18 @@ def test_practice_skips_step_tasks_drafts_and_solved_but_keeps_old_season() -> N
     attempts += [att("solved", "wrong", 2), att("solved", "correct", 2)]
     ids = {i.task_id for i in practice_set(ROADMAP, bundle(tasks, attempts), NOW)}
     assert "step" not in ids
-    assert "draft" not in ids
+    assert "gone" not in ids
     assert "solved" not in ids
     assert "old" in ids
+
+
+def test_practice_prefers_published_tasks_over_drafts() -> None:
+    tasks, attempts = _weak_a_one(
+        [task("draft", difficulty=1, published=False), task("pub", difficulty=2)]
+    )
+    ids = [i.task_id for i in practice_set(ROADMAP, bundle(tasks, attempts), NOW)]
+    assert ids[0] == "pub"  # though the draft is easier
+    assert "draft" not in ids  # published tasks filled the topic's slots
 
 
 def test_practice_review_due_includes_solved_after_unsolved() -> None:
@@ -355,12 +365,12 @@ def test_mistakes(attempts: list[AttemptRow], listed: bool, due: bool) -> None:
 
 
 def test_mistakes_due_first_and_step_tasks_included() -> None:
-    tasks = [task("late"), task("early"), task("step", ege=None), task("draft", published=False)]
+    tasks = [task("late"), task("early"), task("step", ege=None), task("gone", active=False)]
     attempts = [
         att("late", "wrong", 0),
         att("early", "wrong", 6),
         att("step", "wrong", 4),
-        att("draft", "wrong", 6),
+        att("gone", "wrong", 6),
     ]
     got = mistakes(bundle(tasks, attempts), TODAY)
     assert [m.task_id for m in got] == ["early", "step", "late"]
