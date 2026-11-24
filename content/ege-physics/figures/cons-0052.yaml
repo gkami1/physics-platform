@@ -1,0 +1,82 @@
+# cons-0052: suspension O, thread horizontal with the ball, peg on the vertical below O at x.
+kind: diagram
+size:
+- 400
+- 230
+items:
+- hatch:
+  - - 130
+    - 18
+  - - 190
+    - 18
+  side: -1
+- line:
+  - - 160
+    - 18
+  - - 160
+    - 40
+  width: 2
+- line:
+  - - 160
+    - 40
+  - - 310
+    - 40
+  width: 1.4
+- circle:
+  - 310
+  - 40
+  r: 9
+  fill: solid
+- dots:
+  - - 160
+    - 40
+  r: 3
+- text: '*O*'
+  at:
+  - 148
+  - 58
+  size: 14
+  anchor: end
+- line:
+  - - 160
+    - 40
+  - - 160
+    - 210
+  width: 1
+  dashed: true
+  tone: muted
+- dots:
+  - - 160
+    - 112.0
+  r: 4.5
+- text: гвоздь
+  at:
+  - 172
+  - 117.0
+  size: 13
+  anchor: start
+- line:
+  - - 130
+    - 40
+  - - 130
+    - 112.0
+  width: 1
+  tone: muted
+- line:
+  - - 124
+    - 112.0
+  - - 156
+    - 112.0
+  width: 1
+  tone: muted
+- text: '*x*'
+  at:
+  - 122
+  - 81.0
+  size: 14
+  anchor: end
+- text: '*l*'
+  at:
+  - 235.0
+  - 58
+  size: 14
