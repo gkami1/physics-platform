@@ -49,3 +49,18 @@ tasks:
 # Step tasks embedded in theory pages (tasks/steps/): no EGE number, never in variants.
 # They count toward topic mastery like any other attempt.
 practice: {part: 1, answer_kind: numeric, max_points: 1, scoring: exact, title: "Задача к теории"}
+
+# Primary → test score (100-point) conversion, used only for the profile's forecast. Copied from
+# Rosobrnadzor's official 2026 conversion table for physics, as supplied by the project owner on
+# 2026-11-24 (obrnadzor.gov.ru was unreachable from here, so not cross-checked). The 2027 table is
+# published after the exam; replace this one with it and update the season.
+score_scale_source: "Rosobrnadzor, official primary-to-test score table, EGE 2026 (physics)"
+score_scale_season: 2026
+score_scale: {
+  0: 0, 1: 5, 2: 9, 3: 14, 4: 18, 5: 23, 6: 27, 7: 32,
+  8: 36, 9: 39, 10: 41, 11: 43, 12: 44, 13: 46, 14: 48, 15: 49,
+  16: 51, 17: 53, 18: 54, 19: 56, 20: 58, 21: 59, 22: 61, 23: 62,
+  24: 64, 25: 65, 26: 67, 27: 68, 28: 70, 29: 71, 30: 73, 31: 74,
+  32: 76, 33: 77, 34: 79, 35: 80, 36: 82, 37: 84, 38: 86, 39: 88,
+  40: 90, 41: 92, 42: 94, 43: 96, 44: 98, 45: 100
+}

@@ -110,10 +110,22 @@ def test_last_season_marks_a_task_out_of_later_seasons(scratch: Path) -> None:
 
 
 def _append_scale(root: Path, scale: dict[int, int], extra: str = "") -> None:
-    """Append a score scale to the scratch exam.yaml. Synthetic values: shape tests only."""
+    """Replace the scratch exam.yaml's score scale. Synthetic values: shape tests only."""
+    path = root / "exam.yaml"
+    kept: list[str] = []
+    skipping = False
+    for line in path.read_text(encoding="utf-8").splitlines(keepends=True):
+        if skipping:  # inside the real table's flow map
+            skipping = line.strip() != "}"
+            continue
+        if line.startswith(("score_scale_source:", "score_scale_season:")):
+            continue
+        if line.startswith("score_scale:"):
+            skipping = line.rstrip().endswith("{")
+            continue
+        kept.append(line)
     lines = "".join(f"  {p}: {v}\n" for p, v in scale.items())
-    with (root / "exam.yaml").open("a", encoding="utf-8") as f:
-        f.write(f"\nscore_scale:\n{lines}{extra}")
+    path.write_text("".join(kept) + f"\nscore_scale:\n{lines}{extra}", encoding="utf-8")
 
 
 LINEAR = {p: round(p * 100 / 45) for p in range(46)}  # not a real table
