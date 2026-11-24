@@ -1,0 +1,145 @@
+# el-0068: bridge: R1/R2 and R3/R4 branches, R0 + C between the midpoints, key across R2.
+kind: diagram
+size:
+- 390
+- 285
+items:
+- element: battery
+  at:
+  - 50
+  - 150
+  vertical: true
+  label: ℰ
+- line:
+  - - 50
+    - 130
+  - - 50
+    - 40
+  - - 330
+    - 40
+  - - 330
+    - 75
+  width: 1.6
+- line:
+  - - 50
+    - 170
+  - - 50
+    - 260
+  - - 330
+    - 260
+  - - 330
+    - 225
+  width: 1.6
+- line:
+  - - 190
+    - 40
+  - - 190
+    - 75
+  width: 1.6
+- element: resistor
+  at:
+  - 190
+  - 95
+  vertical: true
+  label: '*R*_{1}'
+- line:
+  - - 190
+    - 115
+  - - 190
+    - 185
+  width: 1.6
+- element: resistor
+  at:
+  - 190
+  - 205
+  vertical: true
+  label: '*R*_{2}'
+  label_side: 1
+- line:
+  - - 190
+    - 225
+  - - 190
+    - 260
+  width: 1.6
+- element: resistor
+  at:
+  - 330
+  - 95
+  vertical: true
+  label: '*R*_{3}'
+  label_side: 1
+- line:
+  - - 330
+    - 115
+  - - 330
+    - 185
+  width: 1.6
+- element: resistor
+  at:
+  - 330
+  - 205
+  vertical: true
+  label: '*R*_{4}'
+  label_side: 1
+- line:
+  - - 190
+    - 150
+  - - 215
+    - 150
+  width: 1.6
+- element: resistor
+  at:
+  - 235
+  - 150
+  label: '*R*_{0}'
+- line:
+  - - 255
+    - 150
+  - - 270
+    - 150
+  width: 1.6
+- element: capacitor
+  at:
+  - 290
+  - 150
+  label: '*C*'
+- line:
+  - - 310
+    - 150
+  - - 330
+    - 150
+  width: 1.6
+- line:
+  - - 190
+    - 170
+  - - 120
+    - 170
+  - - 120
+    - 185
+  width: 1.6
+- element: switch
+  at:
+  - 120
+  - 205
+  vertical: true
+  label: К
+- line:
+  - - 120
+    - 225
+  - - 120
+    - 260
+  width: 1.6
+- dots:
+  - - 190
+    - 40
+  - - 190
+    - 150
+  - - 190
+    - 170
+  - - 190
+    - 260
+  - - 330
+    - 150
+  - - 120
+    - 260
+  r: 3

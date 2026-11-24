@@ -145,7 +145,7 @@ sections:
         title: Ток, сопротивление и закон Ома для участка цепи
         codifier: ["3.2.1", "3.2.3", "3.2.4", "3.2.7"]
         prereqs: [electro.field.strength]
-        ege_tasks: [11, 14, 15, 21]
+        ege_tasks: [11, 14, 15, 21, 25]
       - id: electro.circuits.emf
         title: ЭДС и закон Ома для полной цепи
         codifier: ["3.2.2", "3.2.5", "3.2.6"]
@@ -175,7 +175,7 @@ sections:
         title: Самоиндукция и энергия магнитного поля
         codifier: ["3.4.6", "3.4.7"]
         prereqs: [electro.induction.faraday]
-        ege_tasks: [12, 14, 15, 21]
+        ege_tasks: [12, 14, 15, 21, 25]
       - id: electro.oscillations.lc
         title: Колебательный контур
         codifier: ["3.5.1", "3.5.2"]
