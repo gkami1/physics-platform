@@ -84,6 +84,7 @@ def test_weak_topic_practice_and_mistakes(
     practice = [p for p in body["practice"] if p["topic_id"] == TOPIC]
     assert 1 <= len(practice) <= 3
     assert all(p["reason"] == "weak" for p in practice)
+    assert all(p["ege_task"] <= 20 for p in body["practice"])  # auto-checked only
     assert body["counts"]["weak"] == 1
     assert body["counts"]["mistakes"] == 3
 

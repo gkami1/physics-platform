@@ -61,6 +61,7 @@ class TaskInfo:
     published: bool = True  # status: published tasks come first (drafts are on the site too)
     in_season: bool = True  # counts as its EGE number this season (see TaskMeta.last_season)
     active: bool = True  # False once removed from content: still evidence, never offered
+    checkable: bool = True  # auto-checked answer; Part 2 is only self-assessed in variants
 
 
 @dataclass(frozen=True)
@@ -410,8 +411,10 @@ def practice_set(roadmap: Roadmap, ev: EvidenceBundle, now: datetime) -> list[Pr
 
     Unsolved tasks of weak and shaky topics first, then tasks of review-due topics (unsolved
     first), topping up from in-progress topics when that gives fewer than PRACTICE_MIN.
-    Within a group: study order (prerequisites first), published before drafts (as the
-    site's pools), easiest first, then a per-day shuffle. Removed tasks are never offered.
+    Only auto-checked bank tasks: a Part 2 task is never «solved» outside a variant, so it
+    would never leave the set. Removed tasks are never offered. Within a group: study order
+    (prerequisites first), published before drafts (as the site's pools), easiest first,
+    then a per-day shuffle.
     """
     today = now.date()
     start = datetime.combine(today, datetime.min.time(), tzinfo=now.tzinfo)
@@ -429,7 +432,7 @@ def practice_set(roadmap: Roadmap, ev: EvidenceBundle, now: datetime) -> list[Pr
 
     ranked: list[tuple[tuple[int, int, int, int, int, str], PracticeItem]] = []
     for info in ev.tasks.values():
-        if info.ege_task is None or not info.active:
+        if info.ege_task is None or not info.active or not info.checkable:
             continue
         options = [
             (_GROUP[statuses[t]], order[t], t)

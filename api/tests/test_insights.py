@@ -86,8 +86,9 @@ def task(
     published: bool = True,
     in_season: bool = True,
     active: bool = True,
+    checkable: bool = True,
 ) -> TaskInfo:
-    return TaskInfo(tid, ege, (topic,), difficulty, published, in_season, active)
+    return TaskInfo(tid, ege, (topic,), difficulty, published, in_season, active, checkable)
 
 
 def att(
@@ -287,6 +288,7 @@ def test_practice_skips_step_tasks_removed_and_solved_but_keeps_old_season() -> 
         [
             task("step", ege=None),
             task("gone", active=False),
+            task("part2", ege=24, checkable=False),
             task("solved"),
             task("old", in_season=False),
         ]
@@ -295,6 +297,7 @@ def test_practice_skips_step_tasks_removed_and_solved_but_keeps_old_season() -> 
     ids = {i.task_id for i in practice_set(ROADMAP, bundle(tasks, attempts), NOW)}
     assert "step" not in ids
     assert "gone" not in ids
+    assert "part2" not in ids
     assert "solved" not in ids
     assert "old" in ids
 

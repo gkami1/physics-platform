@@ -15,6 +15,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from sqlalchemy import and_, func, select
 
+from content_schema.models import AnswerKind
 from platform_api import insights as ins
 from platform_api.access import paid_until
 from platform_api.actor import Actor, CurrentActor, as_utc, now
@@ -46,7 +47,13 @@ async def _evidence(
 ) -> ins.EvidenceBundle:
     tasks = {
         t.id: ins.TaskInfo(
-            t.id, t.ege_task, t.topics, t.difficulty, t.published, t.in_season(season)
+            t.id,
+            t.ege_task,
+            t.topics,
+            t.difficulty,
+            t.published,
+            t.in_season(season),
+            checkable=t.scoring.answer_kind is not AnswerKind.EXTENDED,
         )
         for t in store.all()
         if t.exam_id == exam_id
