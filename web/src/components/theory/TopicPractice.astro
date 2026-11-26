@@ -15,18 +15,39 @@ const tasks = b.tasks
 
 {
   tasks.length > 0 && (
-    <section class="practice">
-      <h2>Практика</h2>
-      <ol>
-        {tasks.map((t, i) => (
-          <li>
-            <a href={taskUrl(b.exam.id, t.id)}>
-              Задача {i + 1}
-              {t.ege_task === null ? ' · к теории' : ` · задание № ${t.ege_task}`}
-            </a>
-          </li>
-        ))}
-      </ol>
-    </section>
+    <topic-practice>
+      <section class="practice" id="practice">
+        <h2>Практика</h2>
+        <ol>
+          {tasks.map((t, i) => (
+            <li>
+              <a href={taskUrl(b.exam.id, t.id)}>
+                Задача {i + 1}
+                {t.ege_task === null ? ' · к теории' : ` · задание № ${t.ege_task}`}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
+    </topic-practice>
   )
 }
+
+<script>
+  import { savePool } from '../../lib/taskPool';
+
+  // Opening a task from this list: the task page's «Назад» returns here and its pager
+  // walks this topic's tasks, not the whole EGE number.
+  class TopicPractice extends HTMLElement {
+    connectedCallback() {
+      const links = [...this.querySelectorAll<HTMLAnchorElement>('ol a')];
+      const hrefs = links.map((a) => a.pathname);
+      this.addEventListener('click', (e) => {
+        if (!(e.target as Element).closest('ol a')) return;
+        savePool({ back: `${location.pathname}#practice`, hrefs });
+      });
+    }
+  }
+
+  customElements.define('topic-practice', TopicPractice);
+</script>

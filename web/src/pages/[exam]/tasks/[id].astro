@@ -58,8 +58,8 @@ const nextTask = pos >= 0 ? siblings[pos + 1] : undefined;
           ← {stepOf.number ? `${stepOf.number} ${stepOf.title}` : stepOf.title}
         </a>
       ) : (
-        <a href={tasksUrl(b.exam.id)} class="back">
-          ← Практика
+        <a href={tasksUrl(b.exam.id)} class="back" data-referrer>
+          ← Назад
         </a>
       )
     }
@@ -115,8 +115,20 @@ const nextTask = pos >= 0 ? siblings[pos + 1] : undefined;
   // to it with its filters, and the pager and «Ещё задача» walk that list instead.
   const here = normalizePath(location.pathname);
   const pool = poolFor(here);
+  const back = document.querySelector<HTMLAnchorElement>('.crumbs .back')!;
+  // No saved list (a link from the home page, a topic link…): «Назад» returns to the page
+  // the student came from on this site; the practice table only for a direct visit.
+  if (!pool && back.hasAttribute('data-referrer')) {
+    try {
+      const from = new URL(document.referrer);
+      if (from.origin === location.origin && normalizePath(from.pathname) !== here) {
+        back.href = from.pathname + from.search + from.hash;
+      }
+    } catch {
+      // No referrer: keep the default.
+    }
+  }
   if (pool) {
-    const back = document.querySelector<HTMLAnchorElement>('.crumbs .back')!;
     back.href = pool.back;
     if (pool.backLabel) back.textContent = `← ${pool.backLabel}`;
 
