@@ -19,12 +19,13 @@ from platform_api.actor import SessionUser, as_utc, now
 from platform_api.billing import PlanId
 from platform_api.db import Entitlement, Payment, User
 from platform_api.deps import Db
+from platform_api.profile import normalize_email
 from platform_api.settings import Settings
 
 logger = logging.getLogger("api.payments")
 
 # Bump with LEGAL_VERSION in web/src/lib/seller.ts when web/src/pages/legal/offer.astro changes.
-OFFER_VERSION = "2026-11-24.1"
+OFFER_VERSION = "2026-11-27"
 PENDING_PER_HOUR = 10
 MAX_INVOICE_ID = 2**63 - 1  # payments.id is a signed BIGINT
 
@@ -63,14 +64,18 @@ def _settings(request: Request) -> Settings:
     return s
 
 
-def _plans(s: Settings) -> dict[PlanId, billing.Plan]:
-    return billing.plans(s.price_month_kop, s.price_season_kop)
+def _plans(s: Settings, user: User | None) -> dict[PlanId, billing.Plan]:
+    month_price = s.price_month_kop
+    if user is not None and user.email == normalize_email(s.price_month_override_email):
+        month_price = s.price_month_override_kop
+    return billing.plans(month_price, s.price_season_kop)
 
 
 @router.get("/plans")
-async def get_plans(request: Request, db: Db, user: SessionUser) -> PlansOut:
+async def get_plans(request: Request, response: Response, db: Db, user: SessionUser) -> PlansOut:
     s = _settings(request)
     t = now()
+    response.headers["Cache-Control"] = "private, no-store"
     return PlansOut(
         plans=[
             PlanOut(
@@ -79,7 +84,7 @@ async def get_plans(request: Request, db: Db, user: SessionUser) -> PlansOut:
                 price_kop=p.price_kop,
                 valid_until=billing.extend(None, p.id, t),
             )
-            for p in _plans(s).values()
+            for p in _plans(s, user).values()
         ],
         enabled=s.payments_enabled,
         paid_until=await paid_until(db, user) if user else None,
@@ -110,7 +115,7 @@ async def checkout(body: CheckoutIn, request: Request, db: Db, user: SessionUser
     if (pending or 0) >= PENDING_PER_HOUR:
         raise HTTPException(429, "too_many_checkouts")
 
-    plan = _plans(s)[body.plan]
+    plan = _plans(s, user)[body.plan]
     payment = Payment(
         user_id=user.id,
         provider="robokassa",

@@ -114,6 +114,40 @@ def test_checkout_locks_in_the_configured_price(
     assert result(shop, inv, out_sum="745.500000").text == f"OK{inv}"
 
 
+def test_month_price_override_is_private_and_only_applies_to_new_invoices(
+    shop: TestClient,
+    signed_in: TestClient,
+    sign_up: Callable[[str], None],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    old_invoice = checkout(signed_in)
+    settings = signed_in.app.state.settings  # type: ignore[attr-defined]
+    monkeypatch.setattr(settings, "price_month_override_email", " Student@EXAMPLE.RU ")
+    monkeypatch.setattr(settings, "price_month_override_kop", 5000)
+
+    plans = signed_in.get("/api/billing/plans")
+    assert plans.headers["cache-control"] == "private, no-store"
+    assert {p["id"]: p["price_kop"] for p in plans.json()["plans"]} == {
+        "month": 5000,
+        "season": 299000,
+    }
+    response = signed_in.post("/api/billing/checkout", json={"plan": "month", "accept_offer": True})
+    params = parse_qs(urlsplit(response.json()["url"]).query)
+    assert params["OutSum"] == ["50.00"]
+    discounted_invoice = int(params["InvId"][0])
+    assert result(shop, discounted_invoice).status_code == 400
+    assert result(shop, discounted_invoice, out_sum="50.00").text == f"OK{discounted_invoice}"
+    assert result(shop, old_invoice).text == f"OK{old_invoice}"
+
+    assert signed_in.post("/api/auth/logout").status_code == 204
+    assert signed_in.get("/api/billing/plans").json()["plans"][0]["price_kop"] == 79000
+    sign_up("other@example.ru")
+    assert signed_in.get("/api/billing/plans").json()["plans"][0]["price_kop"] == 79000
+    response = signed_in.post("/api/billing/checkout", json={"plan": "month", "accept_offer": True})
+    params = parse_qs(urlsplit(response.json()["url"]).query)
+    assert params["OutSum"] == ["790.00"]
+
+
 def test_payment_grants_access_once(shop: TestClient, signed_in: TestClient) -> None:
     inv = checkout(signed_in)
     assert signed_in.get("/api/me").json()["user"]["paid_until"] is None

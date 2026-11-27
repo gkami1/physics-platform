@@ -60,6 +60,8 @@ class Settings(BaseSettings):
     # Positive prices in kopecks, bounded by the payments.amount_kop INTEGER column.
     price_month_kop: int = Field(default=79000, gt=0, le=2**31 - 1)
     price_season_kop: int = Field(default=299000, gt=0, le=2**31 - 1)
+    price_month_override_email: str = ""
+    price_month_override_kop: int = Field(default=5000, gt=0, le=2**31 - 1)
 
     @property
     def payments_enabled(self) -> bool:
